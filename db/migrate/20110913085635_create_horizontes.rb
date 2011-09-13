@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateHorizontes < ActiveRecord::Migration
   def change
     create_table :horizontes do |t|

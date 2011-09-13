@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateObservaciones < ActiveRecord::Migration
   def change
     create_table :observaciones do |t|
