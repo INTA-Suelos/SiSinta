@@ -7,7 +7,7 @@ class ObservacionTest < ActiveSupport::TestCase
 
   test "la fecha no puede ser del futuro" do
     o = Observacion.new :fecha => Date.today + 2
-    assert_nil(o, "se guardó una fecha que no ha llegado")
+    assert(!o.valid?, "se guardó una fecha que no ha llegado")
   end
 
 end
