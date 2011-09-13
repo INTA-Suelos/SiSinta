@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fecha: 2011-09-13
+  numero: MyString
+  modal: false
+
+two:
+  fecha: 2011-09-13
+  numero: MyString
+  modal: false
