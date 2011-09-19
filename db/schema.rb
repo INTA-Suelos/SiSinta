@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110919175358) do
+ActiveRecord::Schema.define(:version => 20110919210816) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20110919175358) do
     t.date     "fecha"
     t.string   "numero"
     t.boolean  "modal"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "usuarios", :force => true do |t|
+    t.string   "nombre"
+    t.boolean  "ficha_simple"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

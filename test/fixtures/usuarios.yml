@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nombre: MyString
+  ficha_simple: false
+  password_digest: MyString
+
+two:
+  nombre: MyString
+  ficha_simple: false
+  password_digest: MyString
