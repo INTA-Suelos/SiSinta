@@ -1,4 +1,6 @@
 class ObservacionController < ApplicationController
+  layout :ficha_observacion
+
   # GET /observacion
   # GET /observacion.json
   def index
@@ -80,4 +82,9 @@ class ObservacionController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+    def ficha_observacion
+      @current_user.usar_ficha_simple? ? 'observacion_simple' : 'observacion_completa'
+    end
 end
