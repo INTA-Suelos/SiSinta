@@ -1,0 +1,27 @@
+<h1>Listing observacion</h1>
+
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Número</th>
+    <th>Modal</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @observacion.each do |observacion| %>
+  <tr>
+    <td><%= observacion.fecha %></td>
+    <td><%= observacion.numero %></td>
+    <td><%= observacion.modal %></td>
+    <td><%= link_to 'Show', observacion %></td>
+    <td><%= link_to 'Edit', edit_observacion_path(observacion) %></td>
+    <td><%= link_to 'Destroy', observacion, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New observacion', new_observacion_path %>
