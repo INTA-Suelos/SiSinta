@@ -13,4 +13,5 @@
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'horizonte', 'horizontes'
   inflect.irregular 'observacion', 'observaciones'
+  inflect.irregular 'analisis', 'analisis'
 end

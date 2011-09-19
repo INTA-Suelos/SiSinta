@@ -1,0 +1,65 @@
+<%= form_for(@analisis) do |f| %>
+  <% if @analisis.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@analisis.errors.count, "error") %> prohibited this analisis from being saved:</h2>
+
+      <ul>
+      <% @analisis.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :registro %><br />
+    <%= f.number_field :registro %>
+  </div>
+  <div class="field">
+    <%= f.label :humedad %><br />
+    <%= f.text_field :humedad %>
+  </div>
+  <div class="field">
+    <%= f.label :s %><br />
+    <%= f.text_field :s %>
+  </div>
+  <div class="field">
+    <%= f.label :t %><br />
+    <%= f.text_field :t %>
+  </div>
+  <div class="field">
+    <%= f.label :ph_pasta %><br />
+    <%= f.text_field :ph_pasta %>
+  </div>
+  <div class="field">
+    <%= f.label :ph_h2o %><br />
+    <%= f.text_field :ph_h2o %>
+  </div>
+  <div class="field">
+    <%= f.label :ph_kcl %><br />
+    <%= f.text_field :ph_kcl %>
+  </div>
+  <div class="field">
+    <%= f.label :resistencia_pasta %><br />
+    <%= f.text_field :resistencia_pasta %>
+  </div>
+  <div class="field">
+    <%= f.label :base_ca %><br />
+    <%= f.text_field :base_ca %>
+  </div>
+  <div class="field">
+    <%= f.label :base_mg %><br />
+    <%= f.text_field :base_mg %>
+  </div>
+  <div class="field">
+    <%= f.label :base_k %><br />
+    <%= f.text_field :base_k %>
+  </div>
+  <div class="field">
+    <%= f.label :base_na %><br />
+    <%= f.text_field :base_na %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

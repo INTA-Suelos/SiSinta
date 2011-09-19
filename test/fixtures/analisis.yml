@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  registro: 1
+  humedad: 9.99
+  s: 9.99
+  t: 9.99
+  ph_pasta: 9.99
+  ph_h2o: 9.99
+  ph_kcl: 9.99
+  resistencia_pasta: 9.99
+  base_ca: 9.99
+  base_mg: 9.99
+  base_k: 9.99
+  base_na: 9.99
+
+two:
+  registro: 1
+  humedad: 9.99
+  s: 9.99
+  t: 9.99
+  ph_pasta: 9.99
+  ph_h2o: 9.99
+  ph_kcl: 9.99
+  resistencia_pasta: 9.99
+  base_ca: 9.99
+  base_mg: 9.99
+  base_k: 9.99
+  base_na: 9.99

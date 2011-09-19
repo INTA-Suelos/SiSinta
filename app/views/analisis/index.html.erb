@@ -1,0 +1,45 @@
+<h1>Listing analisis</h1>
+
+<table>
+  <tr>
+    <th>Registro</th>
+    <th>Humedad</th>
+    <th>S</th>
+    <th>T</th>
+    <th>Ph pasta</th>
+    <th>Ph h2o</th>
+    <th>Ph kcl</th>
+    <th>Resistencia pasta</th>
+    <th>Base ca</th>
+    <th>Base mg</th>
+    <th>Base k</th>
+    <th>Base na</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @analisis.each do |analisis| %>
+  <tr>
+    <td><%= analisis.registro %></td>
+    <td><%= analisis.humedad %></td>
+    <td><%= analisis.s %></td>
+    <td><%= analisis.t %></td>
+    <td><%= analisis.ph_pasta %></td>
+    <td><%= analisis.ph_h2o %></td>
+    <td><%= analisis.ph_kcl %></td>
+    <td><%= analisis.resistencia_pasta %></td>
+    <td><%= analisis.base_ca %></td>
+    <td><%= analisis.base_mg %></td>
+    <td><%= analisis.base_k %></td>
+    <td><%= analisis.base_na %></td>
+    <td><%= link_to 'Show', analisis %></td>
+    <td><%= link_to 'Edit', edit_analisis_path(analisis) %></td>
+    <td><%= link_to 'Destroy', analisis, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Analisis', new_analisis_path %>
