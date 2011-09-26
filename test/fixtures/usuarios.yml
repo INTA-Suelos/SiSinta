@@ -9,3 +9,8 @@ completo:
   nombre: completo
   ficha_simple: false
   password_digest: 12345612
+
+one:
+  nombre: completo
+  ficha_simple: false
+  password_digest: 12345612

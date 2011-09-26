@@ -1,19 +1,19 @@
-class ObservacionController < ApplicationController
+class ObservacionesController < ApplicationController
   layout :ficha_observacion
 
-  # GET /observacion
-  # GET /observacion.json
+  # GET /observaciones
+  # GET /observaciones.json
   def index
-    @observacion = Observacion.all
+    @observaciones = Observacion.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @observacion }
+      format.json { render json: @observaciones }
     end
   end
 
-  # GET /observacion/1
-  # GET /observacion/1.json
+  # GET /observaciones/1
+  # GET /observaciones/1.json
   def show
     @observacion = Observacion.find(params[:id])
 
@@ -23,8 +23,8 @@ class ObservacionController < ApplicationController
     end
   end
 
-  # GET /observacion/new
-  # GET /observacion/new.json
+  # GET /observaciones/new
+  # GET /observaciones/new.json
   def new
     @observacion = Observacion.new
 
@@ -34,19 +34,19 @@ class ObservacionController < ApplicationController
     end
   end
 
-  # GET /observacion/1/edit
+  # GET /observaciones/1/edit
   def edit
     @observacion = Observacion.find(params[:id])
   end
 
-  # POST /observacion
-  # POST /observacion.json
+  # POST /observaciones
+  # POST /observaciones.json
   def create
     @observacion = Observacion.new(params[:observacion])
 
     respond_to do |format|
       if @observacion.save
-        format.html { redirect_to @observacion, notice: 'observacion was successfully created.' }
+        format.html { redirect_to @observacion, notice: 'Observacion was successfully created.' }
         format.json { render json: @observacion, status: :created, location: @observacion }
       else
         format.html { render action: "new" }
@@ -55,14 +55,14 @@ class ObservacionController < ApplicationController
     end
   end
 
-  # PUT /observacion/1
-  # PUT /observacion/1.json
+  # PUT /observaciones/1
+  # PUT /observaciones/1.json
   def update
     @observacion = Observacion.find(params[:id])
 
     respond_to do |format|
       if @observacion.update_attributes(params[:observacion])
-        format.html { redirect_to @observacion, notice: 'observacion was successfully updated.' }
+        format.html { redirect_to @observacion, notice: 'Observacion was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -71,14 +71,14 @@ class ObservacionController < ApplicationController
     end
   end
 
-  # DELETE /observacion/1
-  # DELETE /observacion/1.json
+  # DELETE /observaciones/1
+  # DELETE /observaciones/1.json
   def destroy
     @observacion = Observacion.find(params[:id])
     @observacion.destroy
 
     respond_to do |format|
-      format.html { redirect_to observacion_index_url }
+      format.html { redirect_to observaciones_url }
       format.json { head :ok }
     end
   end
