@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Suelos::Application.routes.draw do
+  devise_for :usuarios
+
   resources :analisis
 
   # The priority is based upon order of creation:

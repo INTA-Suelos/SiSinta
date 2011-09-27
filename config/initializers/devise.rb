@@ -70,6 +70,7 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   # config.pepper = "bed0182e013e86ff32efec21c19663596e93ae62ff8a39505d4716fb2492bdab025fd65a7a1de0ea7a5dac937ed9db5d9d98eca46d344a9ef16a9a763906275e"
+  config.pepper = "827ab93f92e9d9c82a9534f93dc929b16f615e716a849d82e92b2b2b482d828222aa12s0982bcd827def828abcd82ed92f78372a829109fbc829dbca712e0192"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -77,7 +78,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming his account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming his account.
-  # config.confirm_within = 2.days
+  config.confirm_within = 2.days
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -99,6 +100,7 @@ Devise.setup do |config|
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
   # config.cookie_options = {}
+  config.cookie_options = {:secure => true}
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
@@ -171,7 +173,7 @@ Devise.setup do |config|
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
-  # config.default_scope = :user
+  config.default_scope = :usuario
 
   # Configure sign_out behavior.
   # Sign_out action can be scoped (i.e. /users/sign_out affects only :user scope).
