@@ -5,6 +5,8 @@ Suelos::Application.routes.draw do
   devise_for :usuarios
 
   resources :analisis
+  resources :observaciones
+  resources :usuarios
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
