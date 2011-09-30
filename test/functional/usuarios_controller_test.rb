@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class UsuariosControllerTest < ActionController::TestCase
+
   setup do
     @usuario = usuarios(:one)
+    sign_in @usuario
   end
 
   test "should get index" do
@@ -18,7 +20,10 @@ class UsuariosControllerTest < ActionController::TestCase
 
   test "should create usuario" do
     assert_difference('Usuario.count') do
-      post :create, usuario: @usuario.attributes
+      @nuevo = usuarios(:simple)
+      @nuevo.password = "a ver si anda"
+      @nuevo.password_confirmation = "a ver si anda"
+      post :create, usuario: @nuevo.attributes
     end
 
     assert_redirected_to usuario_path(assigns(:usuario))

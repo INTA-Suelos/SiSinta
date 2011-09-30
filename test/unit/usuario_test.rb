@@ -5,7 +5,7 @@ class UsuarioTest < ActiveSupport::TestCase
 
   fixtures :all
 
-  test "preferencias de ficha del usuario" do
+  test "debería tener en cuenta preferencias de ficha del usuario" do
     simple = usuarios(:simple)
     completo = usuarios(:completo)
     assert_equal usuarios(:simple).ficha_simple, simple.usa_ficha_simple?, 'el método ? no devuelve el valor correcto de la variable'

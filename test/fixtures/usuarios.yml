@@ -1,16 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 simple:
+  id: 1
   nombre: simple
   ficha_simple: true
-  email: sarasa@uno
+  email: sarasa@uno.com
 
 completo:
+  id: 2
   nombre: completo
   ficha_simple: false
-  email: sarasa@dos
+  email: sarasa@dos.com
 
 one:
+  id: 3
   nombre: completo
   ficha_simple: false
-  email: sarasa@tres
+  email: sarasa@tres.com
