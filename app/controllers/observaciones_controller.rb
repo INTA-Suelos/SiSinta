@@ -1,5 +1,4 @@
 class ObservacionesController < ApplicationController
-  layout :ficha_observacion
 
   # GET /observaciones
   # GET /observaciones.json
@@ -83,8 +82,4 @@ class ObservacionesController < ApplicationController
     end
   end
 
-  private
-    def ficha_observacion
-      self.current_usuario.usa_ficha_simple? ? 'observacion_simple' : 'observacion_completa'
-    end
 end
