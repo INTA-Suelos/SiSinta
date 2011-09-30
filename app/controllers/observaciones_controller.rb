@@ -85,6 +85,6 @@ class ObservacionesController < ApplicationController
 
   private
     def ficha_observacion
-      self.usuario_activo.usar_ficha_simple? ? 'observacion_simple' : 'observacion_completa'
+      self.usuario_activo.usa_ficha_simple? ? 'observacion_simple' : 'observacion_completa'
     end
 end

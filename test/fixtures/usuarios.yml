@@ -3,11 +3,14 @@
 simple:
   nombre: simple
   ficha_simple: true
+  email: sarasa@uno
 
 completo:
   nombre: completo
   ficha_simple: false
+  email: sarasa@dos
 
 one:
   nombre: completo
   ficha_simple: false
+  email: sarasa@tres

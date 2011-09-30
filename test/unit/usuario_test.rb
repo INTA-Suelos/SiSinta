@@ -1,16 +1,19 @@
+# -*- encoding : utf-8 -*-
 require 'test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
 
   fixtures :all
 
-  test "preferencia de ficha del usuario" do
+  test "preferencias de ficha del usuario" do
     simple = usuarios(:simple)
     completo = usuarios(:completo)
-    nuevo = Usuario.new :ficha_simple => true
-    assert_equal usuarios(:simple).ficha_simple, simple.usar_ficha_simple?
-    assert_equal usuarios(:completo).ficha_simple, completo.usar_ficha_simple?
-    assert nuevo.usar_ficha_simple?
+    assert_equal usuarios(:simple).ficha_simple, simple.usa_ficha_simple?, 'el método ? no devuelve el valor correcto de la variable'
+    assert_equal usuarios(:completo).ficha_simple, completo.usa_ficha_simple?, 'el método ? no devuelve el valor correcto de la variable'
+    nuevo = Usuario.new
+    assert !nuevo.usa_ficha_simple?, 'el valor por omisión debería ser la ficha completa'
+    nuevo = Usuario.new ficha_simple: true
+    assert nuevo.usa_ficha_simple?, 'no se puede pasar la preferencia en la creación'
   end
 
 end
