@@ -1,2 +1,7 @@
-<h1>Inicio#index</h1>
-<p>Find me in app/views/inicio/index.html.erb</p>
+<h1>Sistema de Bases de datos de Suelos</h1>
+
+<h2>Usuarios</h2>
+
+<% @usuarios.each do |u| %>
+  <p>Usuario: <%= u.nombre %> </p>
+<% end %>
