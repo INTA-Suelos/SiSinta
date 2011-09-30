@@ -2,8 +2,11 @@
 class Observacion < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
 
-  has_many :horizontes, :dependent => :destroy
-  has_many :analisis, :through => :horizontes
+  has_many :horizontes,   :dependent => :destroy
+  has_many :analisis,     :through => :horizontes
+  has_many :estructura,   :through => :horizontes
+  has_many :color,        :through => :horizontes
+  has_many :consistencia, :through => :horizontes
 
 # == Validaciones
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930141329) do
+ActiveRecord::Schema.define(:version => 20110930142500) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(:version => 20110930141329) do
     t.integer  "horizonte_id"
     t.string   "mojado_adhesividad"
     t.string   "mojado_plasticidad"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "estructuras", :force => true do |t|
+    t.string   "tipo"
+    t.string   "clase"
+    t.string   "grado"
+    t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
