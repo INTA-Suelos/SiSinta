@@ -15,4 +15,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'observacion', 'observaciones'
   inflect.irregular 'analisis', 'analisis'
   inflect.irregular 'usuario', 'usuarios'
+  inflect.irregular 'color', 'colores'
 end
