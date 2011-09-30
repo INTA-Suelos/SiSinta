@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930145401) do
+ActiveRecord::Schema.define(:version => 20110930160814) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -32,6 +32,27 @@ ActiveRecord::Schema.define(:version => 20110930145401) do
     t.decimal  "carbono",           :precision => 4, :scale => 2
     t.decimal  "nitrogeno",         :precision => 4, :scale => 3
     t.decimal  "arcilla",           :precision => 3, :scale => 1
+  end
+
+  create_table "calicatas", :force => true do |t|
+    t.date     "fecha"
+    t.string   "numero"
+    t.boolean  "modal"
+    t.integer  "drenaje"
+    t.integer  "escurrimiento"
+    t.integer  "permeabilidad"
+    t.string   "napa"
+    t.float    "profundidad_napa"
+    t.integer  "anegamiento"
+    t.boolean  "uniforme"
+    t.decimal  "cobertura_vegetal"
+    t.string   "uso_tierra"
+    t.string   "vegetacion"
+    t.integer  "desarrollo"
+    t.string   "posicion"
+    t.integer  "serie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "colores", :force => true do |t|
@@ -67,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20110930145401) do
     t.string   "textura"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "observacion_id"
+    t.integer  "calicata_id"
     t.integer  "position"
     t.string   "humedad"
     t.string   "raices"
@@ -82,14 +103,6 @@ ActiveRecord::Schema.define(:version => 20110930145401) do
     t.string   "tipo"
     t.string   "forma"
     t.integer  "horizonte_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "observaciones", :force => true do |t|
-    t.date     "fecha"
-    t.string   "numero"
-    t.boolean  "modal"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

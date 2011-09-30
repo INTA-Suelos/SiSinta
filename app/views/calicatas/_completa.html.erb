@@ -1,0 +1,17 @@
+# -*- encoding : utf-8 -*-
+<%= form_for(@calicata) do |f| %>
+  <% if @calicata.errors.any? %>
+    <div id="mensaje_de_error">
+      <h2><%= pluralize(@calicata.errors.count, "error") %> impide(n) que se guarde esta calicata:</h2>
+      <ul>
+        <% @calicata.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="acciones">
+    <%= f.submit %>
+  </div>
+<% end %>

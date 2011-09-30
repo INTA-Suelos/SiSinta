@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Observacion < ActiveRecord::Base
+class Calicata < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
 
   has_many :horizontes,     :dependent => :destroy

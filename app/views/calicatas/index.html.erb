@@ -1,0 +1,21 @@
+<h1>Listing calicatas</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @calicatas.each do |calicata| %>
+  <tr>
+    <td><%= link_to 'Show', calicata %></td>
+    <td><%= link_to 'Edit', edit_calicata_path(calicata) %></td>
+    <td><%= link_to 'Destroy', calicata, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Calicata', new_calicata_path %>
