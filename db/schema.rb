@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930135040) do
+ActiveRecord::Schema.define(:version => 20110930141329) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(:version => 20110930135040) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "horizonte_id"
+  end
+
+  create_table "colores", :force => true do |t|
+    t.string   "seco"
+    t.string   "humedo"
+    t.integer  "horizonte_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "consistencias", :force => true do |t|
+    t.string   "seco"
+    t.string   "humedo"
+    t.integer  "horizonte_id"
+    t.string   "mojado_adhesividad"
+    t.string   "mojado_plasticidad"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "horizontes", :force => true do |t|
