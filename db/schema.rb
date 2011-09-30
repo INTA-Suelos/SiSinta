@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930160814) do
+ActiveRecord::Schema.define(:version => 20110930161946) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(:version => 20110930160814) do
     t.string   "tipo"
     t.string   "forma"
     t.integer  "horizonte_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "series", :force => true do |t|
+    t.string   "provincia"
+    t.string   "partido"
+    t.string   "simbolo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

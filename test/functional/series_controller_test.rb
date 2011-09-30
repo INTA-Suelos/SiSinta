@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SeriesControllerTest < ActionController::TestCase
   setup do
-    @series = series(:one)
+    @serie = series(:one)
   end
 
   test "should get index" do
@@ -16,32 +16,32 @@ class SeriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create series" do
+  test "should create serie" do
     assert_difference('Serie.count') do
-      post :create, series: @series.attributes
+      post :create, serie: @serie.attributes
     end
 
-    assert_redirected_to series_path(assigns(:series))
+    assert_redirected_to serie_path(assigns(:serie))
   end
 
-  test "should show series" do
-    get :show, id: @series.to_param
+  test "should show serie" do
+    get :show, id: @serie.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @series.to_param
+    get :edit, id: @serie.to_param
     assert_response :success
   end
 
   test "should update series" do
-    put :update, id: @series.to_param, series: @series.attributes
-    assert_redirected_to series_path(assigns(:series))
+    put :update, id: @serie.to_param, serie: @serie.attributes
+    assert_redirected_to serie_path(assigns(:serie))
   end
 
   test "should destroy series" do
     assert_difference('Serie.count', -1) do
-      delete :destroy, id: @series.to_param
+      delete :destroy, id: @serie.to_param
     end
 
     assert_redirected_to series_path

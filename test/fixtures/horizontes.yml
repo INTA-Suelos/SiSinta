@@ -2,20 +2,10 @@
 
 one:
   profundidad: 1
-  color_seco: MyString
-  color_humedo: MyString
-  tipo: MyString
-  clase: MyString
-  grado: MyString
   ph: 1.5
   textura: MyString
 
 two:
   profundidad: 1
-  color_seco: MyString
-  color_humedo: MyString
-  tipo: MyString
-  clase: MyString
-  grado: MyString
   ph: 1.5
   textura: MyString

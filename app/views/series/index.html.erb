@@ -10,18 +10,18 @@
     <th></th>
   </tr>
 
-<% @series.each do |series| %>
+<% @series.each do |serie| %>
   <tr>
-    <td><%= series.provincia %></td>
-    <td><%= series.partido %></td>
-    <td><%= series.simbolo %></td>
-    <td><%= link_to 'Show', series %></td>
-    <td><%= link_to 'Edit', edit_series_path(series) %></td>
-    <td><%= link_to 'Destroy', series, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= serie.provincia %></td>
+    <td><%= serie.partido %></td>
+    <td><%= serie.simbolo %></td>
+    <td><%= link_to 'Show', serie %></td>
+    <td><%= link_to 'Edit', edit_serie_path(serie) %></td>
+    <td><%= link_to 'Destroy', serie, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Serie', new_series_path %>
+<%= link_to 'New Serie', new_serie_path %>

@@ -20,4 +20,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'limite', 'limites'
   inflect.irregular 'textura', 'texturas'
   inflect.irregular 'calicata', 'calicatas'
+  inflect.irregular 'serie', 'series'
 end

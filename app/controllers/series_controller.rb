@@ -1,4 +1,5 @@
 class SeriesController < ApplicationController
+
   # GET /series
   # GET /series.json
   def index
@@ -13,42 +14,42 @@ class SeriesController < ApplicationController
   # GET /series/1
   # GET /series/1.json
   def show
-    @series = Serie.find(params[:id])
+    @serie = Serie.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @series }
+      format.json { render json: @serie }
     end
   end
 
   # GET /series/new
   # GET /series/new.json
   def new
-    @series = Serie.new
+    @serie = Serie.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @series }
+      format.json { render json: @serie }
     end
   end
 
   # GET /series/1/edit
   def edit
-    @series = Serie.find(params[:id])
+    @serie = Serie.find(params[:id])
   end
 
   # POST /series
   # POST /series.json
   def create
-    @series = Serie.new(params[:series])
+    @serie = Serie.new(params[:series])
 
     respond_to do |format|
-      if @series.save
-        format.html { redirect_to @series, notice: 'Serie was successfully created.' }
-        format.json { render json: @series, status: :created, location: @series }
+      if @serie.save
+        format.html { redirect_to @serie, notice: 'Serie was successfully created.' }
+        format.json { render json: @serie, status: :created, location: @serie }
       else
         format.html { render action: "new" }
-        format.json { render json: @series.errors, status: :unprocessable_entity }
+        format.json { render json: @serie.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,15 +57,15 @@ class SeriesController < ApplicationController
   # PUT /series/1
   # PUT /series/1.json
   def update
-    @series = Serie.find(params[:id])
+    @serie = Serie.find(params[:id])
 
     respond_to do |format|
-      if @series.update_attributes(params[:series])
-        format.html { redirect_to @series, notice: 'Serie was successfully updated.' }
+      if @serie.update_attributes(params[:serie])
+        format.html { redirect_to @serie, notice: 'Serie was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @series.errors, status: :unprocessable_entity }
+        format.json { render json: @serie.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +73,8 @@ class SeriesController < ApplicationController
   # DELETE /series/1
   # DELETE /series/1.json
   def destroy
-    @series = Serie.find(params[:id])
-    @series.destroy
+    @serie = Serie.find(params[:id])
+    @serie.destroy
 
     respond_to do |format|
       format.html { redirect_to series_url }

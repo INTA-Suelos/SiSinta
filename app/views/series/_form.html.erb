@@ -1,10 +1,10 @@
-<%= form_for(@series) do |f| %>
-  <% if @series.errors.any? %>
+<%= form_for(@serie) do |f| %>
+  <% if @serie.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved:</h2>
+      <h2><%= pluralize(@serie.errors.count, "error") %> prohibited this series from being saved:</h2>
 
       <ul>
-      <% @series.errors.full_messages.each do |msg| %>
+      <% @serie.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
