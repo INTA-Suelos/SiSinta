@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 Suelos::Application.routes.draw do
+  get "inicio/index"
+
+  devise_for :usuarios
+
   resources :analisis
 
   # The priority is based upon order of creation:
@@ -51,7 +55,7 @@ Suelos::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'inicio#index'
 
   # See how all your routes lay out with "rake routes"
 
