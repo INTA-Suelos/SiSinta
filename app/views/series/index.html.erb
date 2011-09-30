@@ -1,0 +1,27 @@
+<h1>Listing series</h1>
+
+<table>
+  <tr>
+    <th>Provincia</th>
+    <th>Partido</th>
+    <th>Simbolo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @series.each do |series| %>
+  <tr>
+    <td><%= series.provincia %></td>
+    <td><%= series.partido %></td>
+    <td><%= series.simbolo %></td>
+    <td><%= link_to 'Show', series %></td>
+    <td><%= link_to 'Edit', edit_series_path(series) %></td>
+    <td><%= link_to 'Destroy', series, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Serie', new_series_path %>

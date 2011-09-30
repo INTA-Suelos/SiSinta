@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 Suelos::Application.routes.draw do
+
   get "inicio/index"
 
   devise_for :usuarios
@@ -7,6 +8,7 @@ Suelos::Application.routes.draw do
   resources :analisis
   resources :calicatas
   resources :usuarios
+  resources :series
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
