@@ -3,14 +3,11 @@
 simple:
   nombre: simple
   ficha_simple: true
-  password_digest: abcdefab
 
 completo:
   nombre: completo
   ficha_simple: false
-  password_digest: 12345612
 
 one:
   nombre: completo
   ficha_simple: false
-  password_digest: 12345612

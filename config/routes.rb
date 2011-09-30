@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 Suelos::Application.routes.draw do
+  get "inicio/index"
+
+  devise_for :usuarios
+
   resources :analisis
   resources :observaciones
   resources :usuarios
@@ -53,7 +57,7 @@ Suelos::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'observaciones#new'
+  root :to => 'inicio#index'
 
   # See how all your routes lay out with "rake routes"
 
