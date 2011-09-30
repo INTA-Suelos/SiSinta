@@ -18,4 +18,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'color', 'colores'
   inflect.irregular 'consistencia', 'consistencias'
   inflect.irregular 'estructura', 'estructuras'
+  inflect.irregular 'limite', 'limites'
+  inflect.irregular 'textura', 'texturas'
 end
