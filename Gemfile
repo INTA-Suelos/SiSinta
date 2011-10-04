@@ -8,6 +8,7 @@ gem 'rails', '3.1.0'
 gem 'pg'
 gem 'acts_as_list'
 gem 'devise'
+gem 'postgis_adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
