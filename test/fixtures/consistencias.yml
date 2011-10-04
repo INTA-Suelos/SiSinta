@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  seco: MyString
+  humedo: MyString
+  horizonte_id: 1
+  mojado_adhesividad: MyString
+  mojado_plasticidad: MyString
+
+two:
+  seco: MyString
+  humedo: MyString
+  horizonte_id: 1
+  mojado_adhesividad: MyString
+  mojado_plasticidad: MyString

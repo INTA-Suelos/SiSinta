@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  arcilla: 9.99
+  limo_2_20: 9.99
+  limo_2_50: 9.99
+  arena_muy_fina: 9.99
+  arena_fina: 9.99
+  arena_media: 9.99
+  arena_gruesa: 9.99
+  arena_muy_gruesa: 9.99
+  analisis_id: 1
+
+two:
+  arcilla: 9.99
+  limo_2_20: 9.99
+  limo_2_50: 9.99
+  arena_muy_fina: 9.99
+  arena_fina: 9.99
+  arena_media: 9.99
+  arena_gruesa: 9.99
+  arena_muy_gruesa: 9.99
+  analisis_id: 1
