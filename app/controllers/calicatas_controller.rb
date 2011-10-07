@@ -1,5 +1,7 @@
 class CalicatasController < ApplicationController
 
+  before_filter :authenticate_usuario!
+
   # GET /calicatas
   # GET /calicatas.json
   def index
