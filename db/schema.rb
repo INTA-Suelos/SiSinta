@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930161946) do
+ActiveRecord::Schema.define(:version => 20111006004238) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(:version => 20110930161946) do
     t.integer  "serie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "referencia"
+    t.string   "ubicacion"
+    t.integer  "numero_fotos"
+    t.string   "unidad_geomorfologica"
+    t.string   "pendiente"
+    t.string   "cobertura"
+    t.string   "material_original"
+    t.string   "taxonomia"
+    t.string   "esquema"
   end
 
   create_table "colores", :force => true do |t|
@@ -97,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20110930161946) do
     t.string   "barnices"
     t.string   "concreciones"
     t.string   "co3"
+    t.string   "tipo"
   end
 
   create_table "limites", :force => true do |t|
