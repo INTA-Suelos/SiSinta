@@ -1,0 +1,15 @@
+form.simple {
+  input { width: inherit !important; }
+
+  input[type="number"] {
+    margin: 0.5em 0;
+    border: 1px solid #BBBBBB;
+    color: #000000;
+  }
+
+  .campo_suelto {
+    padding-top: 0;
+    padding-left: 659px;
+  }
+
+}
