@@ -7,16 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="logo"><%= image_tag "inta.jpg", :alt => 'INTA' %></div>
-  <ul class="menu_horizontal">
-    <%= render 'devise/menu/registration_items' %>
-    <%= render 'devise/menu/login_items' %>
-  </ul>
-  <%- flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-  <%- end -%>
+  <div class="container showgrid">
+    <%= render 'layouts/cabecera' %>
 
-<%= yield %>
+    <div id="principal" class="span-24">
+      <%= yield %>
+    </div>
 
+  </div>
 </body>
 </html>
