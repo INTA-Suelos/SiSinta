@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111006004238) do
+ActiveRecord::Schema.define(:version => 20111008013328) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(:version => 20111006004238) do
     t.string   "material_original"
     t.string   "taxonomia"
     t.string   "esquema"
+    t.string   "mosaico"
+    t.string   "recorrido"
+    t.string   "aerofoto"
+    t.string   "fase"
+    t.string   "simbolo"
+    t.string   "limitaciones"
+    t.string   "gran_grupo"
+    t.string   "relieve"
+    t.string   "humedad"
+    t.string   "sales"
+    t.string   "pedregosidad"
+    t.string   "erosion"
+    t.string   "paisaje"
   end
 
   create_table "colores", :force => true do |t|
