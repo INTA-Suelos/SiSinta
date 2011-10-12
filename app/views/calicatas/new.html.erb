@@ -1,5 +1,5 @@
 <h1>Nueva calicata</h1>
 
-<%= render partial: 'simple', locals: {calicata: @calicata} %>
+<%= render partial: current_usuario.ficha, locals: {calicata: @calicata} %>
 
 <%= link_to 'Volver', calicatas_path %>

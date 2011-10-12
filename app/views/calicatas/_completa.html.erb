@@ -1,7 +1,7 @@
-# -*- encoding : utf-8 -*-
-<%= form_for(@calicata) do |f| %>
-  <% if @calicata.errors.any? %>
-    <div id="mensaje_de_error">
+<%= form_for(calicata, html: { class: 'completa span-24' }) do |f| %>
+
+  <% if calicata.errors.any? %>
+    <div id="mensaje_de_error" class="span-23">
       <h2><%= pluralize(@calicata.errors.count, "error") %> impide(n) que se guarde esta calicata:</h2>
       <ul>
         <% @calicata.errors.full_messages.each do |msg| %>
@@ -11,7 +11,187 @@
     </div>
   <% end %>
 
-  <div class="acciones">
-    <%= f.submit %>
-  </div>
+  <%= field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do %>
+
+    <%= field_set_tag 'Descripción del sitio', :class => 'plegable span-22 last' do %>
+
+      <div class="span-5">
+        <div class="span-2"><%= f.label :mosaico %></div>
+        <div class="span-3 last"><%= f.text_field :mosaico %></div>
+      </div>
+      <div class="span-5">
+        <div class="span-2"><%= f.label :recorrido %></div>
+        <div class="span-3 last"><%= f.text_field :recorrido %></div>
+      </div>
+      <div class="span-4">
+        <div class="span-2"><%= f.label :aerofoto %></div>
+        <div class="span-2 last"><%= f.text_field :aerofoto %></div>
+      </div>
+      <div class="span-4">
+        <div class="span-2"><%= f.label :fecha %></div>
+        <div class="span-2 last"><%= f.text_field :fecha %></div>
+      </div>
+      <div class="span-4 last">
+        <div class="span-2"><%= f.label :numero %></div>
+        <div class="span-2 last"><%= f.text_field :numero %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :serie_id %></div>
+        <div class="span-9 last"><%= f.text_field :serie_id %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :fase %></div>
+        <div class="span-9 last"><%= f.text_field :fase %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :simbolo %></div>
+        <div class="span-9 last"><%= f.text_field :simbolo %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :gran_grupo %></div>
+        <div class="span-9 last"><%= f.text_field :gran_grupo %></div>
+      </div>
+
+      <%= field_set_tag 'Clasificación utilitaria', :class => 'span-21 last' do %>
+
+        <div class="span-10">
+          <div class="span-2"><%= f.label :simbolo %></div>
+          <div class="span-8 last"><%= f.text_field :simbolo %></div>
+        </div>
+        <div class="span-11 last">
+          <div class="span-2"><%= f.label :limitaciones %></div>
+          <div class="span-9 last"><%= f.text_field :limitaciones %></div>
+        </div>
+
+      <% end %>
+
+      <div class="span-22 last">
+        <div class="span-2"><%= f.label :ubicacion %></div>
+        <div class="span-20 last"><%= f.text_field :ubicacion %></div>
+      </div>
+
+      <div class="span-22 last">
+        <div class="span-2"><%= f.label :paisaje %></div>
+        <div class="span-20 last"><%= f.text_field :paisaje %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :material_original %></div>
+        <div class="span-9 last"><%= f.text_field :material_original %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :drenaje %></div>
+        <div class="span-9 last"><%= f.text_field :drenaje %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :relieve %></div>
+        <div class="span-9 last"><%= f.text_field :relieve %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :anegamiento %></div>
+        <div class="span-9 last"><%= f.text_field :anegamiento %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :posicion %></div>
+        <div class="span-9 last"><%= f.text_field :posicion %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :humedad %></div>
+        <div class="span-9 last"><%= f.text_field :humedad %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :pendiente %></div>
+        <div class="span-9 last"><%= f.text_field :pendiente %></div>
+      </div>
+      <div class="span-5">
+        <div class="span-2"><%= f.label :cobertura_vegetal %></div>
+        <div class="span-3 last"><%= f.text_field :cobertura_vegetal %></div>
+      </div>
+      <div class="span-5 last">
+        <div class="span-2"><%= f.label :profundidad_napa %></div>
+        <div class="span-3 last"><%= f.text_field :profundidad_napa %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :escurrimiento %></div>
+        <div class="span-9 last"><%= f.text_field :escurrimiento %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :sales %></div>
+        <div class="span-9 last"><%= f.text_field :sales %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :permeabilidad %></div>
+        <div class="span-9 last"><%= f.text_field :permeabilidad %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :pedregosidad %></div>
+        <div class="span-9 last"><%= f.text_field :pedregosidad %></div>
+      </div>
+
+      <div class="span-11">
+        <div class="span-2"><%= f.label :erosion %></div>
+        <div class="span-9 last"><%= f.text_field :erosion %></div>
+      </div>
+      <div class="span-11 last">
+        <div class="span-2"><%= f.label :uso_tierra %></div>
+        <div class="span-9 last"><%= f.text_field :uso_tierra %></div>
+      </div>
+
+    <% end %>
+
+    <%= field_set_tag 'Descripción de los horizontes', :class => 'plegable span-22 last' do %>
+
+      <div class="campo span-22 last">
+        <div class="span-1"><%= label_tag :tipo_n, 'Hz' %></div>
+        <div class="span-1"><%= label_tag :profundidad_n, 'Prof. (cm)' %></div>
+        <div class="span-1"><%= label_tag :limite_n, 'Límite' %></div>
+        <div class="span-2"><%= label_tag :color_n, 'Color' %></div>
+        <div class="span-1"><%= label_tag :textura_n, 'Textura' %></div>
+        <div class="span-3"><%= label_tag :estructura_n, 'Estructura' %></div>
+        <div class="span-3"><%= label_tag :consistencia_n, 'Consistencia' %></div>
+        <div class="span-1"><%= label_tag :ph_n, 'pH' %></div>
+        <div class="span-1"><label for="co3_n">CO<sub>3</sub></label></div>
+        <div class="span-1"><%= label_tag :concreciones_n, 'Concr.' %></div>
+        <div class="span-1"><%= label_tag :barnices_n, 'Barnices' %></div>
+        <div class="span-1"><%= label_tag :moteados_n, 'Moteados' %></div>
+      </div>
+      <% @calicata.horizontes.each do |horizonte| %>
+        <div class="span-22 last">
+        <%= f.fields_for horizonte, :index => horizonte do |horizonte_f|%>
+          <div class="span-2"><%= horizonte_f.number_field :tipo %></div>
+          <div class="span-2"><%= horizonte_f.number_field :profundidad %></div>
+          <div class="span-5"><%= horizonte_f.text_field :estructura %></div>
+          <div class="span-2"><%= horizonte_f.text_field :consistencia %></div>
+          <div class="span-2"><%= horizonte_f.text_field :consistencia %></div>
+          <div class="span-2"><%= horizonte_f.text_field :co3 %></div>
+          <div class="span-3"><%= horizonte_f.text_field :concreciones %></div>
+          <div class="span-3 last"><%= horizonte_f.text_field :barnices %></div>
+        <% end %>
+        </div>
+      <% end %>
+      <div id="horizonte_vacio" class="span-22 last">
+        <div class="span-2"><%= number_field_tag :tipo_n %></div>
+        <div class="span-2"><%= number_field_tag :profundidad_n %></div>
+        <div class="span-5"><%= text_field_tag :estructura_n %></div>
+        <div class="span-2"><%= text_field_tag :consistencia_s_n %></div>
+        <div class="span-2"><%= text_field_tag :consistencia_h_n %></div>
+        <div class="span-2"><%= text_field_tag :co3_n %></div>
+        <div class="span-3"><%= text_field_tag :concreciones_n %></div>
+        <div class="span-3 last"><%= text_field_tag :barnices_n %></div>
+      </div>
+    <% end %>
+
+    <div class="acciones span-4 last">
+      <%= f.submit %>
+    </div>
+
+  <% end %>
+
 <% end %>
