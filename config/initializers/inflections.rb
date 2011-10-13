@@ -12,7 +12,13 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'horizonte', 'horizontes'
-  inflect.irregular 'observacion', 'observaciones'
   inflect.irregular 'analisis', 'analisis'
   inflect.irregular 'usuario', 'usuarios'
+  inflect.irregular 'color', 'colores'
+  inflect.irregular 'consistencia', 'consistencias'
+  inflect.irregular 'estructura', 'estructuras'
+  inflect.irregular 'limite', 'limites'
+  inflect.irregular 'textura', 'texturas'
+  inflect.irregular 'calicata', 'calicatas'
+  inflect.irregular 'serie', 'series'
 end

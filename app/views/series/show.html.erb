@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Provincia:</b>
+  <%= @serie.provincia %>
+</p>
+
+<p>
+  <b>Partido:</b>
+  <%= @serie.partido %>
+</p>
+
+<p>
+  <b>Simbolo:</b>
+  <%= @serie.simbolo %>
+</p>
+
+
+<%= link_to 'Edit', edit_serie_path(@serie) %> |
+<%= link_to 'Back', series_path %>

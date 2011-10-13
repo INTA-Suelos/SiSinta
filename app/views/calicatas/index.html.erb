@@ -1,0 +1,25 @@
+<h1>Lista de calicatas</h1>
+
+<%= link_to 'Nueva Calicata', new_calicata_path %>
+
+<table>
+  <tr>
+    <th>Número</th>
+    <th>Fecha</th>
+    <th>Ubicación</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @calicatas.each do |calicata| %>
+  <tr>
+    <td><%= calicata.numero %></td>
+    <td><%= calicata.fecha %></td>
+    <td><%= calicata.ubicacion %></td>
+    <td><%= link_to 'Mostrar', calicata %></td>
+    <td><%= link_to 'Editar', edit_calicata_path(calicata) %></td>
+    <td><%= link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
