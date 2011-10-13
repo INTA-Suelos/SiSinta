@@ -1,4 +1,8 @@
 form {
+  $altura-linea:  18px;
+
+  line-height: $altura-linea;
+
   input { width: inherit !important; }
 
   input[type="number"] {
@@ -7,9 +11,18 @@ form {
     color: #000000;
   }
 
-  .campo_suelto {
+  .campo-suelto {
     padding-top: 0;
     padding-left: 659px;
   }
 
+  label { font-size: x-small; }
+
+  .subtitulo { text-decoration: underline; }
+
+  .texto-corto { height: $altura-linea * 2 + 1;  }
+
 }
+
+.prepend-media      { padding-left: 20px; }
+.prepend-unaymedia  { padding-left: 60px; }
