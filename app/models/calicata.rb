@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
+  @@valores_escurrimiento = ['estancado','muy lento','lento','medio','rápido','muy rápido']
+  @@valores_pendiente = ['0 - 1%','1 - 3%','3 - 10%','10 - 25%','25 - 45%','45%']
+
   validate :la_fecha_no_puede_ser_futura
   validates :escurrimiento, :inclusion => { :in => @@valores_escurrimiento,
     :message => "%{value} no es un grado de escurrimiento válido" }
@@ -25,6 +28,4 @@ class Calicata < ActiveRecord::Base
     end
   end
 
-  @@valores_escurrimiento = ['estancado','muy lento','lento','medio','rápido','muy rápido']
-  @@valores_pendiente = ['0 - 1%','1 - 3%','3 - 10%','10 - 25%','25 - 45%','45%']
 end
