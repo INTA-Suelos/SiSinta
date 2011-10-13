@@ -1,0 +1,35 @@
+form {
+  $altura-linea:  18px;
+
+  line-height: $altura-linea;
+
+  input { width: inherit !important; }
+
+  input[type="number"] {
+    margin: 0.5em 0;
+    border: 1px solid #BBBBBB;
+    color: #000000;
+  }
+
+  .campo-suelto {
+    padding-top: 0;
+    padding-left: 659px;
+  }
+
+  label { font-size: x-small; }
+
+  .subtitulo { text-decoration: underline; }
+
+  .texto-corto { height: $altura-linea * 2 + 1;  }
+
+  #observaciones {
+    width: 670px;
+    height: $altura-linea * 3;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+.prepend-media      { padding-left: 20px; }
+.prepend-unaymedia  { padding-left: 60px; }

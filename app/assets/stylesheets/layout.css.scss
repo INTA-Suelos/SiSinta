@@ -1,3 +1,25 @@
+$alto_cabecera: 82px;
+$azul_inta: #02567b;
+$rojo_inta: #d82918;
+$azul_claro: lighten($azul_inta, 70%);
+
+#cabecera {
+  height: $alto_cabecera;
+  background-color: $azul_inta;
+
+  #logo {
+    float: left;
+  }
+
+  a {
+    color: white;
+    &:hover {
+      color: $rojo_inta;
+    }
+  }
+
+}
+
 ul.menu_horizontal {
   list-style: none; 
   margin: 0 0 2em;
@@ -6,4 +28,8 @@ ul.menu_horizontal {
   li {
     display: inline
   }
+}
+
+#principal {
+  background-color: $azul_claro;
 }
