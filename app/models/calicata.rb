@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
-  validates :escurrimiento, :inclusion => { :in => @@valores_escurriemiento,
+  validates :escurrimiento, :inclusion => { :in => @@valores_escurrimiento,
     :message => "%{value} no es un grado de escurrimiento válido" }
   validates :pendiente, :inclusion => { :in => @@valores_pendiente,
     :message => "%{value} no es una clase de pendiente válida" }
