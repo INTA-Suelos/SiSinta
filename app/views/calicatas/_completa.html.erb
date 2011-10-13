@@ -58,12 +58,12 @@
         <%= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo' %>
       </div>
       <div class="span-7">
-        <div class="span-2"><%= f.label :simbolo, 'Símbolo' %></div>
-        <div class="span-5 last"><%= f.text_field :simbolo %></div>
+        <div class="span-2"><%= f.label :clasificacion, 'Símbolo' %></div>
+        <div class="span-5 last"><%= f.text_field :clasificacion %></div>
       </div>
       <div class="span-11 last">
-        <div class="span-2"><%= f.label :limitaciones %></div>
-        <div class="span-8 last"><%= f.text_field :limitaciones %></div>
+        <div class="span-2"><%= f.label :clasificacion, 'Limitaciones principales' %></div>
+        <div class="span-8 last"><%= f.text_field :clasificacion %></div>
       </div>
 
       <div class="span-22 last">
@@ -71,10 +71,22 @@
         <div class="span-19 last"><%= f.text_field :ubicacion %></div>
       </div>
 
-      <div class="span-22 last">
-        <div class="span-2"><%= f.label :paisaje %></div>
-        <div class="span-19 last"><%= f.text_field :paisaje %></div>
+      <div class="span-4">
+        <%= label_tag nil, 'Paisaje', :class => 'subtitulo' %>
       </div>
+      <div class="span-7">
+        <div class="span-2"><%= f.label :paisaje, 'Tipo' %></div>
+        <div class="span-5 last"><%= f.text_field :paisaje %></div>
+      </div>
+      <div class="span-5">
+        <div class="span-2"><%= f.label :paisaje, 'Forma' %></div>
+        <div class="span-3 last"><%= f.text_field :paisaje %></div>
+      </div>
+      <div class="span-6 last">
+        <div class="span-2"><%= f.label :paisaje, 'Símbolos' %></div>
+        <div class="span-3 last"><%= f.text_field :paisaje %></div>
+      </div>
+
 
       <div class="span-11">
         <div class="span-2"><%= f.label :material_original %></div>
@@ -222,12 +234,12 @@
         </div>
       </div>
 
-      <div class="span-21 last">
-        <div class="span-2"><%= f.label :observaciones %></div>
-        <div class="span-19 last"><%= f.text_field :observaciones %></div>
-      </div>
-
     <% end %>
+
+    <div class="prepend-media span-22 last">
+      <div class="span-2"><%= f.label :observaciones %></div>
+      <div class="span-19 last"><%= f.text_field :observaciones %></div>
+    </div>
 
     <div class="acciones span-4 last">
       <%= f.submit %>

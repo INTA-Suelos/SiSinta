@@ -13,30 +13,30 @@
 
   <%= field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do %>
 
-    <div class="campo-suelto span-6 prepend-16 last">
+    <div class="campo-suelto span-6 last">
       <div class="span-2"><%= f.label :numero, 'Sitio N°' %></div>
       <div class="span-3 append-1 last"><%= f.text_field :numero %></div>
     </div>
 
     <%= field_set_tag 'Ubicación', :class => 'span-22 last' do %>
       <div id="referencia" class="span-22 last">
-        <div class="span-4"><%= f.label :referencia %></div>
-        <div class="span-17 last"><%= f.text_field :referencia %></div>
+        <div class="span-4"><%= f.label :ubicacion, 'Referencia' %></div>
+        <div class="span-17 last"><%= f.text_field :ubicacion %></div>
       </div>
       <div id="ubicacion" class="span-16">
         <div class="span-4"><%= f.label :ubicacion, 'Latitud Longitud Altura (m)' %></div>
         <div class="span-12 last"><%= f.text_field :ubicacion %></div>
       </div>
       <div id="fotos" class="span-6 last">
-        <div class="span-2"><%= f.label :numero_fotos, 'N° de fotos' %></div>
-        <div class="span-3 last"><%= f.number_field :numero_fotos %></div>
+        <div class="span-2"><%= f.label :fotos, 'Fotos' %></div>
+        <div class="span-3 last"><%= f.number_field :fotos %></div>
       </div>
     <% end %>
 
     <%= field_set_tag 'Paisaje', :class => 'span-22 last' do %>
       <div id="unidad_geomorfologica" class="span-22 last">
-        <div class="span-4"><%= f.label :unidad_geomorfologica %></div>
-        <div class="span-17 last"><%= f.text_field :unidad_geomorfologica %></div>
+        <div class="span-4"><%= f.label :paisaje %></div>
+        <div class="span-17 last"><%= f.text_field :paisaje %></div>
       </div>
       <div id="posicion" class="span-16">
         <div class="span-4"><%= f.label :posicion %></div>
@@ -127,12 +127,12 @@
         </div>
       </div>
 
-      <div id="observaciones" class="span-22 last">
-        <div class="span-4"><%= f.label :observaciones %></div>
-        <div class="span-17 last"><%= f.text_field :observaciones %></div>
-      </div>
-
     <% end %>
+
+    <div id="observaciones" class="prepend-media span-22 last">
+      <div class="span-4"><%= f.label :observaciones %></div>
+      <div class="span-17 last"><%= f.text_area :observaciones, :size => '40x3' %></div>
+    </div>
 
     <div class="acciones span-4 last">
       <%= f.submit %>

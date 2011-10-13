@@ -3,12 +3,16 @@ class Calicata < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
 
   has_many :horizontes,     :dependent => :destroy
+  has_many :fotos,          :dependent => :destroy
+
   has_many :analisis,       :through => :horizontes
   has_many :estructuras,    :through => :horizontes
   has_many :colores,        :through => :horizontes
   has_many :consistencias,  :through => :horizontes
   has_many :limites,        :through => :horizontes
 
+  has_one :clasificacion,   :dependent => :destroy
+  has_one :paisaje,         :dependent => :destroy
 # == Validaciones
 
   def la_fecha_no_puede_ser_futura
