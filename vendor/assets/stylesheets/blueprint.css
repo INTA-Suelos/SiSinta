@@ -8,3 +8,7 @@
  *= require_self
 */
 .showgrid { background: url(blueprint/grid.png) }
+
+tbody tr:nth-child(2n) td, tbody tr.even td {
+    background: none repeat scroll 0 0 white;
+}
