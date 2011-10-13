@@ -1,5 +1,7 @@
 $alto_cabecera: 82px;
 $azul_inta: #02567b;
+$rojo_inta: #d82918;
+$azul_claro: lighten($azul_inta, 70%);
 
 #cabecera {
   height: $alto_cabecera;
@@ -7,6 +9,13 @@ $azul_inta: #02567b;
 
   #logo {
     float: left;
+  }
+
+  a {
+    color: white;
+    &:hover {
+      color: $rojo_inta;
+    }
   }
 
 }
@@ -22,5 +31,5 @@ ul.menu_horizontal {
 }
 
 #principal {
-  background-color: lighten($azul_inta, 70%);
+  background-color: $azul_claro;
 }
