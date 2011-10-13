@@ -1,15 +1,22 @@
 $alto_cabecera: 82px;
 $azul_inta: #02567b;
-$rojo_inta: #d82918;
 $azul_claro: lighten($azul_inta, 70%);
+$rojo_inta: #d82918;
+$rojo_claro: lighten($rojo_inta, 50%);
+$rojo_medio: lighten($rojo_inta, 10%);
+
+@mixin mensaje($color) {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid #ddd;
+  background: none repeat scroll 0 0 lighten($color, 50%);
+  border-color: lighten($color, 10%);
+  color: $color;
+}
 
 #cabecera {
   height: $alto_cabecera;
   background-color: $azul_inta;
-
-  #logo {
-    float: left;
-  }
 
   a {
     color: white;
@@ -18,6 +25,13 @@ $azul_claro: lighten($azul_inta, 70%);
     }
   }
 
+  #flash_alert {
+    @include mensaje($rojo_inta);
+  }
+
+  #flash_notice {
+    @include mensaje(rgb(0, green($azul_inta), 0));
+  }
 }
 
 ul.menu_horizontal {

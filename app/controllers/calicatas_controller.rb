@@ -5,7 +5,7 @@ class CalicatasController < ApplicationController
   # GET /calicatas
   # GET /calicatas.json
   def index
-    @calicatas = Calicata.all
+    @calicatas = Calicata.all(:order => 'fecha ASC')
 
     respond_to do |format|
       format.html # index.html.erb
