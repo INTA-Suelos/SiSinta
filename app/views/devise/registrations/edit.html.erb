@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Editar <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -9,20 +9,21 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <div><%= f.label :password %> <i>(dejalo vacío si no querés cambiarlo)</i><br />
   <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div><%= f.label :password_confirmation, 'Confirmación del password' %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+  <div><%= f.label :password_actual, 'Password actual' %> <i>(necesitamos tu password actual para confirmar los cambios)</i><br />
+  <%= f.password_field :password_actual %></div>
 
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.submit "Actualizar" %></div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Cancelar mi cuenta</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p>¿Querés eliminar tu cuenta? <%= link_to "Sí",
+registration_path(resource_name), :confirm => "¿Definitivamente?", :method => :delete %>.</p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Volver", :back %>
