@@ -4,6 +4,7 @@
   <title>Sistema de base de datos de Suelos | INTA</title>
   <%= stylesheet_link_tag    "application", :media => 'screen, print' %>
   <%= stylesheet_link_tag    "blueprint/print", :media => 'print' %>
+  <%= stylesheet_link_tag    "blueprint/ie" if browser_is?('ie') %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
