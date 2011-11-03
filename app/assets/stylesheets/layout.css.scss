@@ -6,7 +6,7 @@ $rojo_claro: lighten($rojo_inta, 50%);
 $rojo_medio: lighten($rojo_inta, 10%);
 
 @mixin mensaje($color) {
-  padding: 0.8em;
+  padding: 0.2em;
   margin-bottom: 1em;
   border: 2px solid #ddd;
   background: none repeat scroll 0 0 lighten($color, 50%);
