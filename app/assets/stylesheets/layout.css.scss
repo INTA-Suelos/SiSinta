@@ -18,6 +18,11 @@ $rojo_medio: lighten($rojo_inta, 10%);
   height: $alto_cabecera;
   background-color: $azul_inta;
 
+  h1 {
+    color: white;
+    margin-bottom: 0;
+  }
+
   a {
     color: white;
     &:hover {
