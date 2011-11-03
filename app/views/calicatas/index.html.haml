@@ -1,0 +1,27 @@
+%h1 Lista de calicatas
+
+= link_to 'Nueva Calicata', new_calicata_path
+
+%table
+  %tr
+    %th Número
+    %th Fecha
+    %th Ubicación
+    %th
+    %th
+    %th
+
+  - @calicatas.each do |calicata|
+    %tr
+      %td
+        = calicata.numero
+      %td
+        = calicata.fecha
+      %td
+        = calicata.ubicacion
+      %td
+        = link_to 'Mostrar', calicata
+      %td
+        = link_to 'Editar', edit_calicata_path(calicata)
+      %td
+        = link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete
