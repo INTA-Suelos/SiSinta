@@ -10,6 +10,7 @@ gem 'acts_as_list'
 gem 'devise'
 gem 'dynamic_form'
 gem 'browser_detect'
+gem 'haml'
 
 # Gems used only for assets and not required
 # in production environments by default.
