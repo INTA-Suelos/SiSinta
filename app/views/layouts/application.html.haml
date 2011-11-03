@@ -1,0 +1,15 @@
+!!! xml
+<!DOCTYPE html>
+%html{'xml:lang' => 'es_AR',  'xmlns' => 'http://www.w3.org/1999/xhtml'}
+  %head
+    %title Sistema de base de datos de Suelos | INTA
+    = stylesheet_link_tag     "application", :media => 'screen, print'
+    = stylesheet_link_tag     "blueprint/print", :media => 'print'
+    = stylesheet_link_tag     "blueprint/ie" if browser_is?('ie')
+    = javascript_include_tag  "application"
+    = csrf_meta_tags
+  %body
+    .container
+      = render 'layouts/cabecera'
+      #principal.span-24
+        = yield

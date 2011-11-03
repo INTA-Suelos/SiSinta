@@ -1,0 +1,10 @@
+#cabecera.span-24
+  #logo.span-4
+    = image_tag "logo.jpg", :alt => 'INTA saras'
+  .span-20.last
+    %h1 Sistema de Bases de datos de suelos
+    %ul.menu_horizontal
+      = render 'devise/menu/registration_items'
+      = render 'devise/menu/login_items'
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :class => 'mensaje', :id => "flash_#{name}" if msg.is_a?(String)
