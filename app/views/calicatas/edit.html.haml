@@ -2,4 +2,6 @@
 
 = render partial: current_usuario.ficha, locals: {calicata: @calicata}
 
-= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"
+= link_to 'Mostrar', @calicata
+|
+= link_to 'Volver', calicatas_path
