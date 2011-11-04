@@ -9,8 +9,10 @@ class Calicata < ActiveRecord::Base
   validates :pendiente, :inclusion => { :in => @@valores_pendiente,
     :message => "%{value} no es una clase de pendiente válida" }
 
-  has_many :horizontes,     :dependent => :destroy
-  has_many :fotos,          :dependent => :destroy
+  has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
+  has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
+  has_one :clasificacion, :dependent => :destroy, :inverse_of => :calicata
+  has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
 
   has_many :analisis,       :through => :horizontes
   has_many :estructuras,    :through => :horizontes
@@ -18,12 +20,9 @@ class Calicata < ActiveRecord::Base
   has_many :consistencias,  :through => :horizontes
   has_many :limites,        :through => :horizontes
 
-  has_one :clasificacion,   :dependent => :destroy
-  has_one :paisaje,         :dependent => :destroy
-
   accepts_nested_attributes_for :clasificacion, :paisaje, :horizontes,
-                                :analisis, :estructuras, :colores,
-                                :consistencias, :limites
+                                :fotos
+
 # == Validaciones
 
   def la_fecha_no_puede_ser_futura
