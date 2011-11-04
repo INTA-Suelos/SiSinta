@@ -21,4 +21,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'textura', 'texturas'
   inflect.irregular 'calicata', 'calicatas'
   inflect.irregular 'serie', 'series'
+  inflect.irregular 'clasificacion', 'clasificaciones'
+  inflect.irregular 'paisaje', 'paisajes'
 end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tipo: 
+  forma: 
+  simbolo: MyString
+
+two:
+  tipo: 
+  forma: 
+  simbolo: MyString
