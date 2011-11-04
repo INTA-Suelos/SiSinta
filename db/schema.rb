@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111013035123) do
+ActiveRecord::Schema.define(:version => 20111104021845) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(:version => 20111013035123) do
     t.boolean  "modal",             :default => false
     t.date     "fecha",                                :null => false
     t.string   "observaciones"
+    t.boolean  "publico",           :default => true
+  end
+
+  create_table "clasificaciones", :force => true do |t|
+    t.string   "simbolo"
+    t.string   "limitaciones"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "colores", :force => true do |t|
@@ -122,6 +130,25 @@ ActiveRecord::Schema.define(:version => 20111013035123) do
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "paisajes", :force => true do |t|
+    t.string   "tipo"
+    t.string   "forma"
+    t.string   "simbolo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "nombre"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_usuarios", :id => false, :force => true do |t|
+    t.integer "rol_id"
+    t.integer "usuario_id"
   end
 
   create_table "series", :force => true do |t|
