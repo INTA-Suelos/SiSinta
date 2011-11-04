@@ -1,0 +1,182 @@
+= form_for(calicata, html: { class: 'completa span-24' }) do |f|
+
+  - if calicata.errors.any?
+    #mensaje_de_error.span-23
+      %h2 = "#{pluralize(@calicata.errors.count, "error")} impide(n) que se guarde esta calicata:"
+      %ul
+        - @calicata.errors.full_messages.each do |msg|
+          %li = msg
+
+  = field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do
+
+    = field_set_tag 'Descripción del sitio', :class => 'plegable span-22 last' do
+
+      .span-5
+        .span-2= f.label :mosaico
+        .span-3.last= f.text_field :mosaico
+      .span-4
+        .span-2= f.label :recorrido
+        .span-2.last= f.text_field :recorrido
+      .span-4
+        .span-2= f.label :aerofoto
+        .span-2.last= f.text_field :aerofoto
+      .span-4
+        .span-2= f.label :fecha
+        .span-2.last= f.text_field :fecha
+      .span-5.last
+        .span-2= f.label :numero
+        .span-2.last= f.text_field :numero
+
+      .span-11
+        .span-2= f.label :serie_id
+        .span-9.last= f.text_field :serie_id
+      .span-11.last
+        .span-2= f.label :fase
+        .span-8.last= f.text_field :fase
+
+      .span-11
+        .span-2= f.label :simbolo
+        .span-9.last= f.text_field :simbolo
+      .span-11.last
+        .span-2= f.label :gran_grupo
+        .span-8.last= f.text_field :gran_grupo
+
+      .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
+      .span-7
+        .span-2= f.label :clasificacion, 'Símbolo'
+        .span-5.last= f.text_field :clasificacion
+      .span-11.last
+        .span-2= f.label :clasificacion, 'Limitaciones principales'
+        .span-8.last= f.text_field :clasificacion
+
+      .span-22.last
+        .span-2= f.label :ubicacion
+        .span-19.last= f.text_field :ubicacion
+
+      .span-4= label_tag nil, 'Paisaje', :class => 'subtitulo'
+      .span-7
+        .span-2= f.label :paisaje, 'Tipo'
+        .span-5.last= f.text_field :paisaje
+      .span-5
+        .span-2= f.label :paisaje, 'Forma'
+        .span-3.last= f.text_field :paisaje
+      .span-6.last
+        .span-2= f.label :paisaje, 'Símbolos'
+        .span-3.last= f.text_field :paisaje
+
+      .span-11
+        .span-2= f.label :material_original
+        .span-9.last= f.text_field :material_original
+      .span-11.last
+        .span-2= f.label :drenaje
+        .span-8.last= f.text_field :drenaje
+
+      .span-11
+        .span-2= f.label :relieve
+        .span-9.last= f.text_field :relieve
+      .span-11.last
+        .span-2= f.label :anegamiento
+        .span-8.last= f.text_field :anegamiento
+
+      .span-11
+        .span-2= f.label :posicion
+        .span-9.last= f.text_field :posicion
+      .span-11.last
+        .span-2= f.label :humedad
+        .span-8.last= f.text_field :humedad
+
+      .span-11
+        .span-2= f.label :pendiente
+        .span-9.last= f.text_field :pendiente
+      .span-5
+        .span-2= f.label :cobertura_vegetal
+        .span-3.last= f.text_field :cobertura_vegetal
+      .span-6.last
+        .span-2= f.label :profundidad_napa
+        .span-3.last= f.text_field :profundidad_napa
+
+      .span-11
+        .span-2= f.label :escurrimiento
+        .span-9.last= f.text_field :escurrimiento
+      .span-11.last
+        .span-2= f.label :sales
+        .span-8.last= f.text_field :sales
+
+      .span-11
+        .span-2= f.label :permeabilidad
+        .span-9.last= f.text_field :permeabilidad
+      .span-11.last
+        .span-2= f.label :pedregosidad
+        .span-8.last= f.text_field :pedregosidad
+
+      .span-11
+        .span-2= f.label :erosion
+        .span-9.last= f.text_field :erosion
+      .span-11.last
+        .span-2= f.label :uso_tierra
+        .span-8.last= f.text_field :uso_tierra
+
+    = field_set_tag 'Descripción de los horizontes', :class => 'plegable span-22 last' do
+
+      .span-1
+        .span-1.last= label_tag :tipo_n, 'Clase Hz'
+        .span-1.last= text_field_tag :tipo_n
+
+      .span-1
+        .span-1.last= label_tag :profundidad_n, 'Prof. (cm)'
+        .span-1 last= text_field_tag :profundidad_n
+
+      .span-2
+        .prepend-media.span-2.last= label_tag nil, 'Límite', :class=> 'subtitulo'
+        .span-1
+          .span-1.last= label_tag :limite_t_n, 'Tipo'
+          .span-1.last= text_field_tag :limite_t_n
+        .span-1.last
+          .span-1.last= label_tag :limite_f_n, 'Forma'
+          .span-1.last= text_field_tag :limite_f_n
+
+      .span-4
+        .prepend-unaymedia.span-2.last= label_tag nil, 'Color', :class=> 'subtitulo'
+        .span-2
+          .span-2.last= label_tag :color_s_n, 'En seco'
+          .span-2.last= text_field_tag :color_s_n
+        .span-2.last
+          .span-2.last= label_tag :color_h_n, 'En húmedo'
+          .span-2.last= text_field_tag :color_h_n
+
+      .span-1
+        .span-1.texto-corto= label_tag :textura_n, 'Textura'
+        .span-1= text_field_tag :textura_n
+
+      .span-6
+        .prepend-2.span-4.last= label_tag nil, 'Estructura', :class=> 'subtitulo'
+        .span-2
+          .span-2.last= label_tag :estructura_t_n, 'Tipo'
+          .span-2.last= text_field_tag :estructura_t_n
+        .span-2
+          .span-2.last= label_tag :estructura_c_n, 'Clase'
+          .span-2 last= text_field_tag :estructura_c_n
+        .span-2.last
+          .span-2.last= label_tag :estructura_g_n, 'Grado'
+          .span-2 last= text_field_tag :estructura_g_n
+
+      .span-6.last
+        .prepend-2.span-4.last= label_tag nil, 'Consistencia', :class=> 'subtitulo'
+        .span-2
+          .span-2.last= label_tag :consistencia_s_n, 'S'
+          .span-2.last= text_field_tag :consistencia_s_n
+        .span-2
+          .span-2.last= label_tag :consistencia_h_n, 'H'
+          .span-2.last= text_field_tag :consistencia_h_n
+        .span-1
+          .span-1.last= label_tag :consistencia_m_p_n, 'plast.'
+          .span-1.last= text_field_tag :consistencia_m_p_n
+        .span-1.last
+          .span-1.last= label_tag :consistencia_m_a_n, 'adhes.'
+          .span-1.last= text_field_tag :consistencia_m_a_n
+
+    .prepend-media.span-22.last
+      .span-2= f.label :observaciones
+      .span-19.last= f.text_field :observaciones
+
+    .acciones.span-4.last= f.submit
