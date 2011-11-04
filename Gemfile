@@ -11,6 +11,7 @@ gem 'devise'
 gem 'dynamic_form'
 gem 'browser_detect'
 gem 'haml'
+gem 'postgis_adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
