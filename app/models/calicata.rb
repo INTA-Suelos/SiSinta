@@ -20,6 +20,10 @@ class Calicata < ActiveRecord::Base
 
   has_one :clasificacion,   :dependent => :destroy
   has_one :paisaje,         :dependent => :destroy
+
+  accepts_nested_attributes_for :clasificacion, :paisaje, :horizontes,
+                                :analisis, :estructuras, :colores,
+                                :consistencias, :limites
 # == Validaciones
 
   def la_fecha_no_puede_ser_futura
