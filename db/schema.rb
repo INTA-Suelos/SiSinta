@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104032312) do
+ActiveRecord::Schema.define(:version => 20111105002439) do
 
   create_table "analisis", :force => true do |t|
     t.column "registro", :integer
@@ -105,6 +105,11 @@ ActiveRecord::Schema.define(:version => 20111104032312) do
     t.column "horizonte_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+  end
+
+  create_table "fases", :force => true do |t|
+    t.column "codigo", :string, :limit => 2
+    t.column "nombre", :string, :limit => 15
   end
 
   create_table "horizontes", :force => true do |t|

@@ -23,4 +23,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'serie', 'series'
   inflect.irregular 'clasificacion', 'clasificaciones'
   inflect.irregular 'paisaje', 'paisajes'
+  inflect.irregular 'fase', 'fases'
 end
