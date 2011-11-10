@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111105002439) do
+ActiveRecord::Schema.define(:version => 20111110102624) do
 
   create_table "analisis", :force => true do |t|
     t.column "registro", :integer
@@ -149,13 +149,11 @@ ActiveRecord::Schema.define(:version => 20111105002439) do
 
   create_table "roles", :force => true do |t|
     t.column "nombre", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
   end
 
   create_table "roles_usuarios", :id => false, :force => true do |t|
-    t.column "rol_id", :integer
     t.column "usuario_id", :integer
+    t.column "rol_id", :integer
   end
 
   create_table "series", :force => true do |t|
