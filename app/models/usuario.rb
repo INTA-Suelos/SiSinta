@@ -10,4 +10,9 @@ class Usuario < ActiveRecord::Base
   def usa_ficha_simple?
     self.ficha == 'simple' ? true : false
   end
+
+  def admin?
+    self.roles.exists?({nombre: 'admin'})
+  end
+
 end
