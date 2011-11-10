@@ -27,13 +27,14 @@ class Ability
 
     usuario ||= Usuario.new # guest user (not logged in)
 
+    basicos = [Calicata, Horizonte, Analisis]
+
     if usuario.admin?
       can :manage, :all
+    elsif
+      can :manage, basicos, :usuario_id => usuario.id
     else
-      # TODO configurar que pueda manejar sólo lo suyo
-      can :manage, :all
-    else
-      can :read, :all, :publico => true
+      can :read, basicos, :publico => true
     end
 
   end

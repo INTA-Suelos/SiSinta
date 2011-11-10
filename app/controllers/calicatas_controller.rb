@@ -1,6 +1,4 @@
-class CalicatasController < ApplicationController
-
-  before_filter :authenticate_usuario!
+class CalicatasController < AutorizadoController
 
   # GET /calicatas
   # GET /calicatas.json
