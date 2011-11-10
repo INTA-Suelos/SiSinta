@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110110821) do
+ActiveRecord::Schema.define(:version => 20111110112916) do
 
   create_table "analisis", :force => true do |t|
     t.column "registro", :integer
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20111110110821) do
     t.column "fecha", :date, :null => false
     t.column "observaciones", :string
     t.column "publico", :boolean, :default => false
+    t.column "usuario_id", :integer
   end
 
   create_table "clasificaciones", :force => true do |t|
