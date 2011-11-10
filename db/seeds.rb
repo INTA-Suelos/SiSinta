@@ -13,6 +13,7 @@ def cargar(datos)
   YAML::load(ERB.new(IO.read("#{Rails.root}/db/semillas/#{datos}.yml")).result)
 end
 
-cargar('fases').each do |fase|
-  Fase.find_or_create_by_codigo_and_nombre(fase['codigo'], fase['nombre'])
-end
+admin = Rol.find_or_create_by_nombre('admin')
+usuario = Usuario.create( :nombre => 'Administrador', :email =>
+'email@falso.com', :password => 'administrador')
+usuario.roles << admin
