@@ -7,7 +7,6 @@ Suelos::Application.routes.draw do
 
   resources :analisis
   resources :calicatas
-  resources :usuarios
   resources :series
 
   # The priority is based upon order of creation:
