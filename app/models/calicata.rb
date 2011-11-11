@@ -22,7 +22,8 @@ class Calicata < ActiveRecord::Base
   has_many :limites,        :through => :horizontes
 
   belongs_to :usuario, :inverse_of => :calicatas
-  belongs_to :fase, :inverse_of => :calicatas
+  belongs_to :fase
+#, :inverse_of => :calicatas
 
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes,
                                 :fotos, :fase

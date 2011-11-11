@@ -1,4 +1,4 @@
-= form_for(calicata, html: { class: 'completa span-24' }) do |f|
+= form_for @calicata, html: { class: 'completa span-24' } do |f|
 
   - if calicata.errors.any?
     #mensaje_de_error.span-23
@@ -33,7 +33,6 @@
       .span-11.last
         .span-2= f.label :fase
         .span-8.last= f.text_field :fase
-
       .span-11
         .span-2= f.label :simbolo
         .span-9.last= f.text_field :simbolo
