@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110112916) do
+ActiveRecord::Schema.define(:version => 20111111032611) do
 
   create_table "analisis", :force => true do |t|
     t.column "registro", :integer
@@ -73,12 +73,27 @@ ActiveRecord::Schema.define(:version => 20111110112916) do
     t.column "usuario_id", :integer
   end
 
-  create_table "clasificaciones", :force => true do |t|
-    t.column "simbolo", :string
-    t.column "limitaciones", :string
+  create_table "capacidad_clases", :force => true do |t|
+    t.column "codigo", :string
+    t.column "descripcion", :string
+    t.column "agrupamiento", :string
+  end
+
+  create_table "capacidad_subclase_capacidad", :id => false, :force => true do |t|
+    t.column "capacidad_id", :integer, :null => false
+    t.column "capacidad_subclase_id", :integer, :null => false
+  end
+
+  create_table "capacidad_subclases", :force => true do |t|
+    t.column "codigo", :string
+    t.column "descripcion", :string
+  end
+
+  create_table "capacidades", :force => true do |t|
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "calicata_id", :integer
+    t.column "capacidad_clase_id", :integer
   end
 
   create_table "colores", :force => true do |t|
