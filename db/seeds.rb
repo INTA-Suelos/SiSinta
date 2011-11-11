@@ -13,6 +13,13 @@ def cargar(datos)
   YAML::load(ERB.new(IO.read("#{Rails.root}/db/semillas/#{datos}.yml")).result)
 end
 
-cargar('fases').each do |fase|
-  Fase.find_or_create_by_codigo_and_nombre(fase['codigo'], fase['nombre'])
+# Carga de las tablas de Capacidad de uso
+c = cargar('capacidad')
+c['clases'].each_pair do |agrupamiento, clases|
+  clases.each_pair do |codigo, descripcion|
+    CapacidadClase.find_or_create_by_codigo(codigo).update_attributes :agrupamiento => agrupamiento, :descripcion => descripcion
+  end
+end
+c['subclases'].each_pair do |codigo, descripcion|
+  CapacidadSubclase.find_or_create_by_codigo(codigo).update_attribute(:descripcion, descripcion)
 end

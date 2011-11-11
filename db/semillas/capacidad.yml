@@ -1,0 +1,20 @@
+# Clasificación utilitaria o Capacidad de uso, del 
+# Sistema de codificación de suelos, Anexo 5
+
+clases:
+  'tierras aptas para todo tipo de cultivo':
+    i:    sin limitaciones
+    ii:   ligeras limitaciones
+    iii:  moderadas limitaciones
+  'tierras aptas para cultivos limitados':
+    iv:   severas limitaciones
+  'tierras generalmente no aptas para cultivos':
+    v:    dificultad de maquinaria
+    vi:   praderas naturales con posibles mejoras
+    vii:  pasturas naturales
+    viii: fauna, vida silvestre
+subclases:
+  e:  erosión
+  s:  limitaciones en la zona radicular
+  c:  limitaciones climáticas
+  w:  drenaje deficiente
