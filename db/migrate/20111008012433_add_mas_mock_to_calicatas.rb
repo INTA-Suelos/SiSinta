@@ -3,7 +3,7 @@ class AddMasMockToCalicatas < ActiveRecord::Migration
     add_column :calicatas, :mosaico, :string
     add_column :calicatas, :recorrido, :string
     add_column :calicatas, :aerofoto, :string
-    add_column :calicatas, :fase, :string
+    add_column :calicatas, :fase_id, :integer
     add_column :calicatas, :simbolo, :string
     add_column :calicatas, :limitaciones, :string
     add_column :calicatas, :gran_grupo, :string

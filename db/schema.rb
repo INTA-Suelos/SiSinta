@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20111111032611) do
     t.column "mosaico", :string
     t.column "recorrido", :string
     t.column "aerofoto", :string
-    t.column "fase", :string
+    t.column "fase_id", :integer
     t.column "simbolo", :string
     t.column "gran_grupo", :string
     t.column "relieve", :string
