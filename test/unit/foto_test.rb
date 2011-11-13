@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ClasificacionTest < ActiveSupport::TestCase
+class FotoTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -11,205 +11,211 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111032611) do
+ActiveRecord::Schema.define(:version => 20111113001241) do
 
   create_table "analisis", :force => true do |t|
-    t.column "registro", :integer
-    t.column "humedad", :decimal
-    t.column "s", :decimal
-    t.column "t", :decimal
-    t.column "ph_pasta", :decimal
-    t.column "ph_h2o", :decimal
-    t.column "ph_kcl", :decimal
-    t.column "resistencia_pasta", :decimal
-    t.column "base_ca", :decimal
-    t.column "base_mg", :decimal
-    t.column "base_k", :decimal
-    t.column "base_na", :decimal
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "horizonte_id", :integer
-    t.column "carbono", :decimal, :precision => 4, :scale => 2
-    t.column "nitrogeno", :decimal, :precision => 4, :scale => 3
-    t.column "arcilla", :decimal, :precision => 3, :scale => 1
+    t.integer  "registro"
+    t.decimal  "humedad"
+    t.decimal  "s"
+    t.decimal  "t"
+    t.decimal  "ph_pasta"
+    t.decimal  "ph_h2o"
+    t.decimal  "ph_kcl"
+    t.decimal  "resistencia_pasta"
+    t.decimal  "base_ca"
+    t.decimal  "base_mg"
+    t.decimal  "base_k"
+    t.decimal  "base_na"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "horizonte_id"
+    t.decimal  "carbono",           :precision => 4, :scale => 2
+    t.decimal  "nitrogeno",         :precision => 4, :scale => 3
+    t.decimal  "arcilla",           :precision => 3, :scale => 1
   end
 
   create_table "calicatas", :force => true do |t|
-    t.column "numero", :string
-    t.column "drenaje", :integer
-    t.column "escurrimiento", :integer
-    t.column "permeabilidad", :integer
-    t.column "profundidad_napa", :float
-    t.column "anegamiento", :integer
-    t.column "humedad_uniforme", :boolean
-    t.column "cobertura_vegetal", :decimal
-    t.column "uso_tierra", :string
-    t.column "vegetacion", :string
-    t.column "posicion", :string
-    t.column "serie_id", :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "ubicacion", :string
-    t.column "pendiente", :string
-    t.column "cobertura", :string
-    t.column "material_original", :string
-    t.column "taxonomia", :string
-    t.column "esquema", :string
-    t.column "mosaico", :string
-    t.column "recorrido", :string
-    t.column "aerofoto", :string
-    t.column "fase_id", :integer
-    t.column "simbolo", :string
-    t.column "gran_grupo", :string
-    t.column "relieve", :string
-    t.column "humedad", :string
-    t.column "sales", :string
-    t.column "pedregosidad", :string
-    t.column "erosion", :string
-    t.column "modal", :boolean, :default => false
-    t.column "fecha", :date, :null => false
-    t.column "observaciones", :string
-    t.column "publico", :boolean, :default => false
-    t.column "usuario_id", :integer
+    t.string   "numero"
+    t.integer  "drenaje"
+    t.integer  "escurrimiento"
+    t.integer  "permeabilidad"
+    t.float    "profundidad_napa"
+    t.integer  "anegamiento"
+    t.boolean  "humedad_uniforme"
+    t.decimal  "cobertura_vegetal"
+    t.string   "uso_tierra"
+    t.string   "vegetacion"
+    t.string   "posicion"
+    t.integer  "serie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ubicacion"
+    t.string   "pendiente"
+    t.string   "cobertura"
+    t.string   "material_original"
+    t.string   "taxonomia"
+    t.string   "esquema"
+    t.string   "mosaico"
+    t.string   "recorrido"
+    t.string   "aerofoto"
+    t.string   "fase"
+    t.string   "simbolo"
+    t.string   "gran_grupo"
+    t.string   "relieve"
+    t.string   "humedad"
+    t.string   "sales"
+    t.string   "pedregosidad"
+    t.string   "erosion"
+    t.boolean  "modal",             :default => false
+    t.date     "fecha",                                :null => false
+    t.string   "observaciones"
+    t.boolean  "publico",           :default => false
+    t.integer  "usuario_id"
   end
 
   create_table "capacidad_clases", :force => true do |t|
-    t.column "codigo", :string
-    t.column "descripcion", :string
-    t.column "agrupamiento", :string
+    t.string "codigo"
+    t.string "descripcion"
+    t.string "agrupamiento"
   end
 
   create_table "capacidad_subclase_capacidad", :id => false, :force => true do |t|
-    t.column "capacidad_id", :integer, :null => false
-    t.column "capacidad_subclase_id", :integer, :null => false
+    t.integer "capacidad_id",          :null => false
+    t.integer "capacidad_subclase_id", :null => false
   end
 
   create_table "capacidad_subclases", :force => true do |t|
-    t.column "codigo", :string
-    t.column "descripcion", :string
+    t.string "codigo"
+    t.string "descripcion"
   end
 
   create_table "capacidades", :force => true do |t|
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "calicata_id", :integer
-    t.column "capacidad_clase_id", :integer
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "calicata_id"
+    t.integer  "capacidad_clase_id"
   end
 
   create_table "colores", :force => true do |t|
-    t.column "seco", :string
-    t.column "humedo", :string
-    t.column "horizonte_id", :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.string   "seco"
+    t.string   "humedo"
+    t.integer  "horizonte_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "consistencias", :force => true do |t|
-    t.column "seco", :string
-    t.column "humedo", :string
-    t.column "horizonte_id", :integer
-    t.column "mojado_adhesividad", :string
-    t.column "mojado_plasticidad", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.string   "seco"
+    t.string   "humedo"
+    t.integer  "horizonte_id"
+    t.string   "mojado_adhesividad"
+    t.string   "mojado_plasticidad"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "estructuras", :force => true do |t|
-    t.column "tipo", :string
-    t.column "clase", :string
-    t.column "grado", :string
-    t.column "horizonte_id", :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.string   "tipo"
+    t.string   "clase"
+    t.string   "grado"
+    t.integer  "horizonte_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "fases", :force => true do |t|
-    t.column "codigo", :string, :limit => 2
-    t.column "nombre", :string, :limit => 15
+    t.string "codigo", :limit => 2
+    t.string "nombre", :limit => 15
+  end
+
+  create_table "fotos", :force => true do |t|
+    t.integer  "calicata_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "horizontes", :force => true do |t|
-    t.column "profundidad", :integer
-    t.column "ph", :float
-    t.column "textura", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "calicata_id", :integer
-    t.column "position", :integer
-    t.column "humedad", :string
-    t.column "raices", :string
-    t.column "formaciones_especiales", :string
-    t.column "moteados", :string
-    t.column "barnices", :string
-    t.column "concreciones", :string
-    t.column "co3", :string
-    t.column "tipo", :string
+    t.integer  "profundidad"
+    t.float    "ph"
+    t.string   "textura"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "calicata_id"
+    t.integer  "position"
+    t.string   "humedad"
+    t.string   "raices"
+    t.string   "formaciones_especiales"
+    t.string   "moteados"
+    t.string   "barnices"
+    t.string   "concreciones"
+    t.string   "co3"
+    t.string   "tipo"
   end
 
   create_table "limites", :force => true do |t|
-    t.column "tipo", :string
-    t.column "forma", :string
-    t.column "horizonte_id", :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.string   "tipo"
+    t.string   "forma"
+    t.integer  "horizonte_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "paisajes", :force => true do |t|
-    t.column "tipo", :string
-    t.column "forma", :string
-    t.column "simbolo", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "calicata_id", :integer
+    t.string   "tipo"
+    t.string   "forma"
+    t.string   "simbolo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "calicata_id"
   end
 
   create_table "roles", :force => true do |t|
-    t.column "nombre", :string
+    t.string "nombre"
   end
 
   create_table "roles_usuarios", :id => false, :force => true do |t|
-    t.column "usuario_id", :integer
-    t.column "rol_id", :integer
+    t.integer "usuario_id"
+    t.integer "rol_id"
   end
 
   create_table "series", :force => true do |t|
-    t.column "provincia", :string
-    t.column "partido", :string
-    t.column "simbolo", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.string   "provincia"
+    t.string   "partido"
+    t.string   "simbolo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "texturas", :force => true do |t|
-    t.column "arcilla", :decimal, :precision => 3, :scale => 1
-    t.column "limo_2_20", :decimal, :precision => 3, :scale => 1
-    t.column "limo_2_50", :decimal, :precision => 3, :scale => 1
-    t.column "arena_muy_fina", :decimal, :precision => 3, :scale => 1
-    t.column "arena_fina", :decimal, :precision => 3, :scale => 1
-    t.column "arena_media", :decimal, :precision => 3, :scale => 1
-    t.column "arena_gruesa", :decimal, :precision => 3, :scale => 1
-    t.column "arena_muy_gruesa", :decimal, :precision => 3, :scale => 1
-    t.column "analisis_id", :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
+    t.decimal  "arcilla",          :precision => 3, :scale => 1
+    t.decimal  "limo_2_20",        :precision => 3, :scale => 1
+    t.decimal  "limo_2_50",        :precision => 3, :scale => 1
+    t.decimal  "arena_muy_fina",   :precision => 3, :scale => 1
+    t.decimal  "arena_fina",       :precision => 3, :scale => 1
+    t.decimal  "arena_media",      :precision => 3, :scale => 1
+    t.decimal  "arena_gruesa",     :precision => 3, :scale => 1
+    t.decimal  "arena_muy_gruesa", :precision => 3, :scale => 1
+    t.integer  "analisis_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "usuarios", :force => true do |t|
-    t.column "nombre", :string
-    t.column "password_digest", :string
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "email", :string, :default => "", :null => false
-    t.column "encrypted_password", :string, :limit => 128, :default => "", :null => false
-    t.column "reset_password_token", :string
-    t.column "reset_password_sent_at", :datetime
-    t.column "remember_created_at", :datetime
-    t.column "sign_in_count", :integer, :default => 0
-    t.column "current_sign_in_at", :datetime
-    t.column "last_sign_in_at", :datetime
-    t.column "current_sign_in_ip", :string
-    t.column "last_sign_in_ip", :string
-    t.column "ficha", :string, :default => "completa"
+    t.string   "nombre"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",                                 :default => "",         :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",         :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                         :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "ficha",                                 :default => "completa"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
