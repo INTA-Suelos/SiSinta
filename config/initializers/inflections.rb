@@ -26,4 +26,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'fase', 'fases'
   inflect.irregular 'rol', 'roles'
   inflect.irregular 'capacidad', 'capacidades'
+  inflect.irregular 'escurrimiento', 'escurrimientos'
 end

@@ -29,10 +29,13 @@ class CalicatasController < AutorizadoController
     @calicata.capacidad ||= Capacidad.new
     @calicata.fase ||= Fase.new
     @calicata.serie ||= Serie.new
+    @calicata.paisaje ||= Paisaje.new
+    @calicata.escurrimiento ||= Escurrimiento.new
 
-    # Para los dropbox de Capacidad
+    # Para los dropbox
     @clases = CapacidadClase.all
     @subclases = CapacidadSubclase.all
+    @escurrimientos = Escurrimiento.all
 
     respond_to do |format|
       format.html # new.html.erb

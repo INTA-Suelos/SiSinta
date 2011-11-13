@@ -43,10 +43,10 @@
         .span-2= f.label :gran_grupo
         .span-8.last= f.text_field :gran_grupo
 
-      .span-3= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
+      .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
       = f.fields_for :capacidad do |f_c|
-        .span-2= f_c.label :subclase, 'Simbolo'
-        .span-6
+        .span-2= f_c.label :subclase, 'Simbolos'
+        .span-5
           = f_c.fields_for :subclase do |f_c_s|
             - @subclases.each do |s|
               .span-1
@@ -54,21 +54,24 @@
                 .last= f_c_s.check_box s.codigo
         .span-11.last
           .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
-          .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion, :prompt => true
+          .span-8.last= f_c.collection_select :capacidad_clase_id,
+            @clases, :id, :descripcion, :prompt => true
+
       .span-22.last
         .span-2= f.label :ubicacion
         .span-19.last= f.text_field :ubicacion
 
-      .span-3= label_tag nil, 'Paisaje', :class => 'subtitulo'
-      .span-8
-        .span-2= f.label :paisaje, 'Tipo'
-        .span-4.last= f.text_field :paisaje
-      .span-5
-        .span-2= f.label :paisaje, 'Forma'
-        .span-3.last= f.text_field :paisaje
-      .span-6.last
-        .span-2= f.label :paisaje, 'Símbolos'
-        .span-3.last= f.text_field :paisaje
+      .span-4= label_tag nil, 'Paisaje', :class => 'subtitulo'
+      = f.fields_for :paisaje do |f_p|
+        .span-7
+          .span-2= f_p.label :tipo
+          .span-5.last= f_p.text_field :tipo
+        .span-5
+          .span-2= f_p.label :forma
+          .span-3.last= f_p.text_field :forma
+        .span-6.last
+          .span-2= f_p.label :simbolo, 'Símbolo'
+          .span-3.last= f_p.text_field :simbolo
 
       .span-11
         .span-2= f.label :material_original
@@ -102,8 +105,10 @@
         .span-3.last= f.text_field :profundidad_napa
 
       .span-11
-        .span-2= f.label :escurrimiento
-        .span-9.last= f.text_field :escurrimiento
+        = f.fields_for :escurrimiento do |f_e|
+          .span-2= f_e.label :escurrimiento_id
+          .span-9.last= f_e.collection_select :escurrimiento_id,
+            @escurrimientos, :id, :valor, :prompt => true
       .span-11.last
         .span-2= f.label :sales
         .span-8.last= f.text_field :sales

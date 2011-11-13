@@ -29,3 +29,8 @@ end
 c['subclases'].each_pair do |codigo, descripcion|
   CapacidadSubclase.find_or_create_by_codigo(codigo).update_attribute(:descripcion, descripcion)
 end
+
+# Carga la tabla de escurrimientos
+cargar('escurrimiento')['valores'].each do |v|
+  Escurrimiento.find_or_create_by_valor(v)
+end
