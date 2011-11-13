@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113195829) do
+ActiveRecord::Schema.define(:version => 20111113201834) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -181,6 +181,10 @@ ActiveRecord::Schema.define(:version => 20111113195829) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calicata_id"
+  end
+
+  create_table "pendientes", :force => true do |t|
+    t.string "valor"
   end
 
   create_table "roles", :force => true do |t|

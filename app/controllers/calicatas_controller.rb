@@ -31,11 +31,13 @@ class CalicatasController < AutorizadoController
     @calicata.serie ||= Serie.new
     @calicata.paisaje ||= Paisaje.new
     @calicata.escurrimiento ||= Escurrimiento.new
+    @calicata.pendiente ||= Pendiente.new
 
     # Para los dropbox
     @clases = CapacidadClase.all
     @subclases = CapacidadSubclase.all
     @escurrimientos = Escurrimiento.all
+    @pendientes = Pendiente.all
 
     respond_to do |format|
       format.html # new.html.erb

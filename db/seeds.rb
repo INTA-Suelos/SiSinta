@@ -34,3 +34,8 @@ end
 cargar('escurrimiento')['valores'].each do |v|
   Escurrimiento.find_or_create_by_valor(v)
 end
+
+# Carga la tabla de pendientes
+cargar('pendiente')['valores'].each do |v|
+  Pendiente.find_or_create_by_valor(v)
+end

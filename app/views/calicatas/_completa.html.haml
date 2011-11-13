@@ -95,8 +95,10 @@
         .span-8.last= f.text_field :humedad
 
       .span-11
-        .span-2= f.label :pendiente
-        .span-9.last= f.text_field :pendiente
+        = f.fields_for :pendiente do |f_p|
+          .span-2= f_p.label :pendiente_id
+          .span-9.last= f_p.collection_select :pendiente_id, @pendientes,
+            :id, :valor, :prompt => true
       .span-5
         .span-2= f.label :cobertura_vegetal
         .span-3.last= f.text_field :cobertura_vegetal
