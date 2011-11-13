@@ -26,7 +26,13 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new.json
   def new
     @calicata = Calicata.new
-    @calicata.capacidad = Capacidad.new
+    @calicata.capacidad ||= Capacidad.new
+    @calicata.fase ||= Fase.new
+    @calicata.serie ||= Serie.new
+
+    # Para los dropbox de Capacidad
+    @clases = CapacidadClase.all
+    @subclases = CapacidadSubclase.all
 
     respond_to do |format|
       format.html # new.html.erb

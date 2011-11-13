@@ -28,34 +28,41 @@
         .span-2.last= f.text_field :numero
 
       .span-11
-        .span-2= f.label :serie_id
-        .span-9.last= f.text_field :serie_id
+        = f.fields_for :serie do |f_s|
+          .span-2= f_s.label :nombre, 'Serie'
+          .span-9.last= f_s.text_field :nombre
       .span-11.last
-        .span-2= f.label :fase
-        .span-8.last= f.text_field :fase
+        = f.fields_for :fase do |f_f|
+          .span-2= f_f.label :nombre, 'Fase'
+          .span-8.last= f_f.text_field :nombre
       .span-11
-        .span-2= f.label :simbolo
-        .span-9.last= f.text_field :simbolo
+        = f.fields_for :serie do |f_s|
+          .span-2= f_s.label :simbolo
+          .span-9.last= f_s.text_field :simbolo
       .span-11.last
         .span-2= f.label :gran_grupo
         .span-8.last= f.text_field :gran_grupo
 
-      .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
-      .span-7
-        .span-2= f.label :clasificacion, 'Símbolo'
-        .span-5.last= f.text_field :clasificacion
-      .span-11.last
-        .span-2= f.label :clasificacion, 'Limitaciones principales'
-        .span-8.last= f.text_field :clasificacion
-
+      .span-3= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
+      = f.fields_for :capacidad do |f_c|
+        .span-2= f_c.label :subclase, 'Simbolo'
+        .span-6
+          = f_c.fields_for :subclase do |f_c_s|
+            - @subclases.each do |s|
+              .span-1
+                .span-1= f_c_s.label s.codigo
+                .last= f_c_s.check_box s.codigo
+        .span-11.last
+          .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
+          .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion, :prompt => true
       .span-22.last
         .span-2= f.label :ubicacion
         .span-19.last= f.text_field :ubicacion
 
-      .span-4= label_tag nil, 'Paisaje', :class => 'subtitulo'
-      .span-7
+      .span-3= label_tag nil, 'Paisaje', :class => 'subtitulo'
+      .span-8
         .span-2= f.label :paisaje, 'Tipo'
-        .span-5.last= f.text_field :paisaje
+        .span-4.last= f.text_field :paisaje
       .span-5
         .span-2= f.label :paisaje, 'Forma'
         .span-3.last= f.text_field :paisaje
