@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113001241) do
+ActiveRecord::Schema.define(:version => 20111113051354) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20111113001241) do
     t.string   "simbolo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nombre"
   end
 
   create_table "spatial_ref_sys", :id => false, :force => true do |t|
