@@ -1,7 +1,9 @@
 class Capacidad < ActiveRecord::Base
   belongs_to :calicata, :inverse_of => :capacidad
-  belongs_to :capacidad_clase, :inverse_of => :capacidades
-  has_and_belongs_to_many :capacidad_subclases
+  belongs_to :clase, :inverse_of => :capacidades, :class_name => 'CapacidadClase'
+  has_and_belongs_to_many :subclases, :class_name => 'CapacidadSubclase'
 
-  validates_presence_of :calicata, :capacidad_clase
+  accepts_nested_attributes_for :clase, :subclases
+
+  validates_presence_of :calicata, :clase
 end
