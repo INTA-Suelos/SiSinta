@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113201834) do
+ActiveRecord::Schema.define(:version => 20111114075938) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -34,43 +34,47 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.decimal  "arcilla",           :precision => 3, :scale => 1
   end
 
+  create_table "anegamientos", :force => true do |t|
+    t.string "valor"
+  end
+
   create_table "calicatas", :force => true do |t|
     t.string   "numero"
     t.integer  "drenaje"
-    t.integer  "escurrimiento"
-    t.integer  "permeabilidad"
     t.float    "profundidad_napa"
-    t.integer  "anegamiento"
     t.boolean  "humedad_uniforme"
     t.decimal  "cobertura_vegetal"
     t.string   "uso_tierra"
     t.string   "vegetacion"
-    t.string   "posicion"
     t.integer  "serie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ubicacion"
-    t.string   "pendiente"
     t.string   "cobertura"
     t.string   "material_original"
     t.string   "taxonomia"
     t.string   "esquema"
     t.string   "mosaico"
+    t.string   "pedregosidad"
+    t.string   "gran_grupo"
     t.string   "recorrido"
     t.string   "aerofoto"
-    t.string   "fase"
     t.string   "simbolo"
-    t.string   "gran_grupo"
-    t.string   "relieve"
     t.string   "humedad"
     t.string   "sales"
-    t.string   "pedregosidad"
     t.string   "erosion"
+    t.integer  "fase_id"
     t.boolean  "modal",             :default => false
     t.date     "fecha",                                :null => false
     t.string   "observaciones"
     t.boolean  "publico",           :default => false
     t.integer  "usuario_id"
+    t.integer  "relieve_id"
+    t.integer  "posicion_id"
+    t.integer  "pendiente_id"
+    t.integer  "escurrimiento_id"
+    t.integer  "permeabilidad_id"
+    t.integer  "anegamiento_id"
   end
 
   create_table "capacidad_clases", :force => true do |t|
@@ -90,10 +94,8 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
   end
 
   create_table "capacidades", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "calicata_id"
-    t.integer  "capacidad_clase_id"
+    t.integer "calicata_id"
+    t.integer "capacidad_clase_id"
   end
 
   create_table "colores", :force => true do |t|
@@ -112,6 +114,10 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.string   "mojado_plasticidad"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "drenajes", :force => true do |t|
+    t.string "valor"
   end
 
   create_table "escurrimientos", :force => true do |t|
@@ -138,16 +144,6 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.datetime "updated_at"
   end
 
-  create_table "geometry_columns", :id => false, :force => true do |t|
-    t.string  "f_table_catalog",   :limit => 256, :null => false
-    t.string  "f_table_schema",    :limit => 256, :null => false
-    t.string  "f_table_name",      :limit => 256, :null => false
-    t.string  "f_geometry_column", :limit => 256, :null => false
-    t.integer "coord_dimension",                  :null => false
-    t.integer "srid",                             :null => false
-    t.string  "type",              :limit => 30,  :null => false
-  end
-
   create_table "horizontes", :force => true do |t|
     t.integer  "profundidad"
     t.float    "ph"
@@ -155,7 +151,6 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calicata_id"
-    t.integer  "position"
     t.string   "humedad"
     t.string   "raices"
     t.string   "formaciones_especiales"
@@ -187,6 +182,18 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.string "valor"
   end
 
+  create_table "permeabilidades", :force => true do |t|
+    t.string "valor"
+  end
+
+  create_table "posiciones", :force => true do |t|
+    t.string "valor"
+  end
+
+  create_table "relieves", :force => true do |t|
+    t.string "valor"
+  end
+
   create_table "roles", :force => true do |t|
     t.string "nombre"
   end
@@ -205,14 +212,6 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
     t.string   "nombre"
   end
 
-  create_table "spatial_ref_sys", :id => false, :force => true do |t|
-    t.integer "srid",                      :null => false
-    t.string  "auth_name", :limit => 256
-    t.integer "auth_srid"
-    t.string  "srtext",    :limit => 2048
-    t.string  "proj4text", :limit => 2048
-  end
-
   create_table "texturas", :force => true do |t|
     t.decimal  "arcilla",          :precision => 3, :scale => 1
     t.decimal  "limo_2_20",        :precision => 3, :scale => 1
@@ -229,7 +228,6 @@ ActiveRecord::Schema.define(:version => 20111113201834) do
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
-    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                                 :default => "",         :null => false

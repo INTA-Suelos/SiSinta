@@ -3,7 +3,7 @@ class CreateLimites < ActiveRecord::Migration
     create_table :limites do |t|
       t.string :tipo
       t.string :forma
-      t.integer :horizonte_id
+      t.references :horizonte
 
       t.timestamps
     end

@@ -37,6 +37,15 @@ class CalicataTest < ActiveSupport::TestCase
     assert_not_nil c.capacidad, "no se creó la capacidad"
     assert_match /alguna serie/, c.serie.simbolo
     assert_match /codigo/, c.capacidad.clase.codigo
+    assert_difference 'Calicata.count' do
+      c.save
+    end
   end
 
+  test "deberia guardar la relacion con la serie y su relación" do
+    c = calicatas(:con_serie)
+    assert_difference 'Serie.count' do
+      c.save
+    end
+  end
 end

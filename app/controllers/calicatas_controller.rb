@@ -25,19 +25,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new
-    @calicata.capacidad ||= Capacidad.new
-    @calicata.fase ||= Fase.new
-    @calicata.serie ||= Serie.new
-    @calicata.paisaje ||= Paisaje.new
-    @calicata.escurrimiento ||= Escurrimiento.new
-    @calicata.pendiente ||= Pendiente.new
-
-    # Para los dropbox
-    @clases = CapacidadClase.all
-    @subclases = CapacidadSubclase.all
-    @escurrimientos = Escurrimiento.all
-    @pendientes = Pendiente.all
+    preparar_nueva_calicata
 
     respond_to do |format|
       format.html # new.html.erb
@@ -92,6 +80,34 @@ class CalicatasController < AutorizadoController
       format.html { redirect_to calicatas_url }
       format.json { head :ok }
     end
+  end
+
+protected
+
+  def preparar_nueva_calicata
+    @calicata = Calicata.new
+    @calicata.capacidad ||= Capacidad.new
+    @calicata.fase ||= Fase.new
+    @calicata.serie ||= Serie.new
+    @calicata.paisaje ||= Paisaje.new
+    @calicata.escurrimiento ||= Escurrimiento.new
+    @calicata.pendiente ||= Pendiente.new
+    @calicata.permeabilidad ||= Permeabilidad.new
+    @calicata.relieve ||= Relieve.new
+    @calicata.anegamiento ||= Anegamiento.new
+    @calicata.posicion ||= Posicion.new
+    @calicata.drenaje ||= Drenaje.new
+
+    # Para los dropbox
+    @clases = CapacidadClase.all
+    @subclases = CapacidadSubclase.all
+    @escurrimientos = Escurrimiento.all
+    @pendientes = Pendiente.all
+    @permeabilidades = Permeabilidad.all
+    @posiciones = Posicion.all
+    @relieves = Relieve.all
+    @anegamientos = Anegamiento.all
+    @drenajes = Drenaje.all
   end
 
 end

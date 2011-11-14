@@ -1,7 +1,7 @@
 class CreateFotos < ActiveRecord::Migration
   def change
     create_table :fotos do |t|
-      t.integer :calicata_id
+      t.references :calicata
       t.timestamps
     end
   end

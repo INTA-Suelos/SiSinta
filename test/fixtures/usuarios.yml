@@ -1,17 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
+admin:
+  nombre: Administrador
+  email: email@falso.com
+  password: administrador
+  roles: administrador
+
 simple:
-  id: 1
   nombre: simple
   ficha: 'simple'
   email: sarasa@uno.com
 
 completo:
-  id: 2
   nombre: completo
   email: sarasa@dos.com
 
 uno:
-  id: 3
   nombre: completo
   email: sarasa@tres.com
+
+nuevo_rol:
+  nombre: Joaquín Lavado
+  email: quino@tres.com
+  roles: mendocino

@@ -16,4 +16,10 @@ class UsuarioTest < ActiveSupport::TestCase
     assert nuevo.usa_ficha_simple?, 'no se puede pasar la preferencia en la creación'
   end
 
+  test "debería crear un nuevo rol" do
+    u = usuarios(:nuevo_rol)
+    assert_difference 'Rol.count' do
+      u.save
+    end
+  end
 end

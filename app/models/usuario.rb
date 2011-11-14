@@ -10,6 +10,8 @@ class Usuario < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation, :remember_me, :ficha
 
+  accepts_nested_attributes_for :roles
+
   def usa_ficha_simple?
     self.ficha == 'simple' ? true : false
   end

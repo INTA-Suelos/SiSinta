@@ -54,8 +54,8 @@
                 .last= f_c_s.check_box s.codigo
         .span-11.last
           .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
-          .span-8.last= f_c.collection_select :capacidad_clase_id,
-            @clases, :id, :descripcion, :prompt => true
+          .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
+            :prompt => true
 
       .span-22.last
         .span-2= f.label :ubicacion
@@ -77,19 +77,25 @@
         .span-2= f.label :material_original
         .span-9.last= f.text_field :material_original
       .span-11.last
-        .span-2= f.label :drenaje
-        .span-8.last= f.text_field :drenaje
+        = f.fields_for :drenaje do |f_d|
+          .span-2= f_d.label :drenaje_id
+          .span-8.last= f_d.collection_select :drenaje_id, @drenajes, :id, :valor, :prompt => true
 
       .span-11
-        .span-2= f.label :relieve
-        .span-9.last= f.text_field :relieve
+        = f.fields_for :relieve do |f_r|
+          .span-2= f_r.label :relieve_id
+          .span-9.last= f_r.collection_select :relieve_id, @relieves, :id, :valor, :prompt => true
       .span-11.last
-        .span-2= f.label :anegamiento
-        .span-8.last= f.text_field :anegamiento
+        = f.fields_for :anegamiento do |f_a|
+          .span-2= f_a.label :anegamiento_id
+          .span-8.last= f_a.collection_select :anegamiento_id, @anegamientos, :id, :valor,
+            :prompt => true
 
       .span-11
-        .span-2= f.label :posicion
-        .span-9.last= f.text_field :posicion
+        = f.fields_for :posicion do |f_p|
+          .span-2= f_p.label :posicion_id
+          .span-9.last= f_p.collection_select :posicion_id, @posiciones, :id, :valor,
+            :prompt => true
       .span-11.last
         .span-2= f.label :humedad
         .span-8.last= f.text_field :humedad
@@ -97,8 +103,8 @@
       .span-11
         = f.fields_for :pendiente do |f_p|
           .span-2= f_p.label :pendiente_id
-          .span-9.last= f_p.collection_select :pendiente_id, @pendientes,
-            :id, :valor, :prompt => true
+          .span-9.last= f_p.collection_select :pendiente_id, @pendientes, :id, :valor,
+            :prompt => true
       .span-5
         .span-2= f.label :cobertura_vegetal
         .span-3.last= f.text_field :cobertura_vegetal
@@ -116,8 +122,10 @@
         .span-8.last= f.text_field :sales
 
       .span-11
-        .span-2= f.label :permeabilidad
-        .span-9.last= f.text_field :permeabilidad
+        = f.fields_for :permeabilidad do |f_p|
+          .span-2= f_p.label :permeabilidad_id
+          .span-9.last= f_p.collection_select :permeabilidad_id,
+            @permeabilidades, :id, :valor, :prompt => true
       .span-11.last
         .span-2= f.label :pedregosidad
         .span-8.last= f.text_field :pedregosidad

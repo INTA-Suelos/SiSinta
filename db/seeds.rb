@@ -16,17 +16,18 @@ def cargar(datos)
 end
 
 #
-# Carga el usuario administrador inicial
+# Carga los roles predefinidos
 #
-admin = Rol.find_or_create_by_nombre('admin')
-usuario = Usuario.create( :nombre => 'Administrador', :email =>
-'email@falso.com', :password => 'administrador')
-usuario.roles << admin
+cargar('roles').each do |campo|
+  campo.last.each do |v|
+    Rol.send("find_or_create_by_#{campo.first}", v)
+  end
+end
 
 #
 # Carga de las tablas de Capacidad de uso
 #
-c = cargar('capacidad')
+c = cargar('capacidades')
 c['clases'].each_pair do |agrupamiento, clases|
   clases.each_pair do |codigo, descripcion|
     CapacidadClase.find_or_create_by_codigo(codigo).update_attributes :agrupamiento => agrupamiento, :descripcion => descripcion
@@ -47,3 +48,12 @@ cargar('lookup').each do |modelo|
     Kernel.const_get(modelo.first.camelcase).find_or_create_by_valor(v)
   end
 end
+
+#
+# Carga el usuario administrador inicial
+#
+u = Usuario.create( :nombre => 'Administrador',
+                    :email => 'email@falso.com',
+                    :password => 'administrador',
+                    :roles_attributes => [{
+                      :nombre => 'administrador'}] )

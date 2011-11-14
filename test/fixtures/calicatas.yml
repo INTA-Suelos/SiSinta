@@ -5,3 +5,10 @@ uno:
 
 dos:
   fecha: 2011-09-30
+
+nuevo_rol:
+  fecha: 2011-09-30
+
+con_serie:
+  fecha: 2011-09-30
+  serie: carabelas

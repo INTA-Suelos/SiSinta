@@ -21,7 +21,7 @@ class CalicatasControllerTest < ActionController::TestCase
   test "should create calicata" do
     @request.env['HTTP_REFERER'] = 'http://localhost:3000/calicatas/'
 
-    assert_difference('Calicata.count', 1, @calicata.errores) do
+    assert_difference('Calicata.count', 1) do
       post :create, calicata: @calicata.attributes
     end
 
