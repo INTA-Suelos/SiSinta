@@ -18,6 +18,12 @@ class UsuarioTest < ActiveSupport::TestCase
 
   test "debería crear un nuevo rol" do
     @u = usuarios(:nuevo_rol)
-    assert_equal @u.roles.size, Rol.count
+    assert @u.roles.include?('mendocino'), "el fixture no carga el rol"
+    assert_nothing_raised do
+      assert_difference 'Rol.count' do
+        @u.save
+      end
+    end
   end
+
 end
