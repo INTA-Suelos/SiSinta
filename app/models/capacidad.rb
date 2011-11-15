@@ -4,4 +4,6 @@ class Capacidad < ActiveRecord::Base
   has_and_belongs_to_many :subclases, :class_name => 'CapacidadSubclase'
 
   accepts_nested_attributes_for :clase, :subclases
+
+  validates_presence_of :calicata
 end

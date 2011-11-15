@@ -4,7 +4,7 @@ require 'test_helper'
 class CapacidadTest < ActiveSupport::TestCase
 
   setup do
-    @atributos = {}
+    @atributos = { :calicata_id => Calicata.first.id }
   end
 
   test "debería cargar la clase asociada" do
@@ -23,6 +23,11 @@ class CapacidadTest < ActiveSupport::TestCase
         Capacidad.create(@atributos)
       end
     end
+  end
+
+  test "debería negarse a cargar capacidad sin calicata" do
+    @atributos = { :capacidad_clase_id => CapacidadClase.first.id }
+    assert Capacidad.new(@atributos).invalid?, "una capacidad sin calicata es válida"
   end
 
 end

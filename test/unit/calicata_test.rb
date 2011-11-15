@@ -11,8 +11,7 @@ class CalicataTest < ActiveSupport::TestCase
 
   test "debería prohibir guardar calicatas sin fecha" do
     c = Calicata.new
-    assert c.invalid?, "falta definir la fecha"
-    assert !c.save, "no se puede guardar sin la fecha"
+    assert c.invalid?, "no se puede guardar sin la fecha"
   end
 
   test "debería prohibir fechas del futuro" do
