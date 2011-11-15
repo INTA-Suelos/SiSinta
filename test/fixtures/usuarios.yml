@@ -3,7 +3,6 @@
 admin:
   nombre: Administrador
   email: email@falso.com
-  password: administrador
   roles: administrador
 
 simple:

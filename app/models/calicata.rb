@@ -9,12 +9,13 @@ class Calicata < ActiveRecord::Base
   has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :inverse_of => :calicata
 
+  #
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
   #   has_one => lookup tiene calicata_id
   # Como los valores de estas tablas son un conjunto definido, se comparten
   # entre todas las calicatas, aunque suene raro un belongs_to acá.
-
+  #
   belongs_to :escurrimiento,  :inverse_of => :calicatas
   belongs_to :pendiente,      :inverse_of => :calicatas
   belongs_to :permeabilidad,  :inverse_of => :calicatas

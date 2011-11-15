@@ -5,7 +5,7 @@ carabela:
   partido: carabela
   simbolo: ca
 
-two:
+one:
   provincia: MyString
   partido: MyString
   simbolo: MyString

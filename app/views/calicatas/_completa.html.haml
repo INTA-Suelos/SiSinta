@@ -45,13 +45,13 @@
 
       .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
       = f.fields_for :capacidad do |f_c|
-        .span-2= f_c.label :subclase, 'Simbolos'
+        .span-2= f_c.label :subclases, 'Simbolos'
         .span-5
-          = f_c.fields_for :subclase do |f_c_s|
-            - @subclases.each do |s|
-              .span-1
-                .span-1= f_c_s.label s.codigo
-                .last= f_c_s.check_box s.codigo
+          - @subclases.each do |s|
+            .span-1
+              .span-1= label_tag s.codigo
+              .last= check_box_tag "calicata[capacidad_attributes][subclase_ids][]",
+                s.id, tildada?(s)
         .span-11.last
           .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
           .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,

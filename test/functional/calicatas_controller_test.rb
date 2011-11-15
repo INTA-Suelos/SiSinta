@@ -4,7 +4,7 @@ class CalicatasControllerTest < ActionController::TestCase
 
   setup do
     @calicata = calicatas(:uno)
-    sign_in usuarios(:uno)
+    sign_in usuarios(:admin)
   end
 
   test "should get index" do
@@ -19,8 +19,8 @@ class CalicatasControllerTest < ActionController::TestCase
   end
 
   test "should create calicata" do
-    @request.env['HTTP_REFERER'] = 'http://localhost:3000/calicatas/'
 
+    @request.env['HTTP_REFERER'] = '/'
     assert_difference('Calicata.count', 1) do
       post :create, calicata: @calicata.attributes
     end
@@ -29,7 +29,7 @@ class CalicatasControllerTest < ActionController::TestCase
   end
 
   test "should show calicata" do
-    @request.env['HTTP_REFERER'] = '/calicatas'
+    @request.env['HTTP_REFERER'] = '/calicatas/'
 
     get :show, id: @calicata.to_param
 
@@ -37,7 +37,7 @@ class CalicatasControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    @request.env['HTTP_REFERER'] = "http://localhost:3000/calicatas/edit/#{@calicata.to_param}"
+    @request.env['HTTP_REFERER'] = "/calicatas/#{@calicata.to_param}"
 
     get :edit, id: @calicata.to_param
 
@@ -45,7 +45,7 @@ class CalicatasControllerTest < ActionController::TestCase
   end
 
   test "should update calicata" do
-    @request.env['HTTP_REFERER'] = "http://localhost:3000/calicatas/#{@calicata.to_param}"
+    @request.env['HTTP_REFERER'] = "/calicatas/#{@calicata.to_param}"
 
     put :update, id: @calicata.to_param, calicata: @calicata.attributes
 
@@ -53,7 +53,7 @@ class CalicatasControllerTest < ActionController::TestCase
   end
 
   test "should destroy calicata" do
-    @request.env['HTTP_REFERER'] = 'http://localhost:3000/calicatas/'
+    @request.env['HTTP_REFERER'] = '/calicatas/'
 
     assert_difference('Calicata.count', -1) do
       delete :destroy, id: @calicata.to_param

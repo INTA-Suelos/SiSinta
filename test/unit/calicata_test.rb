@@ -5,9 +5,14 @@ class CalicataTest < ActiveSupport::TestCase
 
   fixtures :all
 
+  setup do
+    @atributos = {  :fecha => Date.today }
+  end
+
   test "debería prohibir guardar calicatas sin fecha" do
     c = Calicata.new
     assert c.invalid?, "falta definir la fecha"
+    assert !c.save, "no se puede guardar sin la fecha"
   end
 
   test "debería prohibir fechas del futuro" do
@@ -15,37 +20,31 @@ class CalicataTest < ActiveSupport::TestCase
     assert c.invalid?, "la fecha es del futuro"
   end
 
-  test "debería crear la calicata y objetos asociados" do
-    atributos = { :fecha => Date.today,
-                  :serie_attributes => {
-                    :simbolo => "alguna serie" },
-                  :paisaje_attributes => {},
-                  :horizontes_attributes => [{}],
-                  :fotos_attributes => [{}],
-                  :capacidad_attributes => {
-                    :subclases_attributes => [
-                      {:codigo => 's'}],
-                    :clase_attributes => {
-                      :codigo => 'codigo'}}
-                }
-    c = Calicata.new(atributos)
-    assert c.valid?, c.errors.full_messages.join(', ')
-    assert_not_nil c.serie, "no se creó la serie"
-    assert_not_nil c.paisaje, "no se creó el paisaje"
-    assert_not_nil c.fotos, "no se crearon fotos"
-    assert_not_nil c.horizontes, "no se crearon la horizontes"
-    assert_not_nil c.capacidad, "no se creó la capacidad"
-    assert_match /alguna serie/, c.serie.simbolo
-    assert_match /codigo/, c.capacidad.clase.codigo
-    assert_difference 'Calicata.count' do
-      c.save
+  test "debería cargar el paisaje asociado" do
+    @atributos[:paisaje_attributes] = { :simbolo => "Ps" }
+    assert_difference 'Paisaje.count' do
+      Calicata.create(@atributos)
     end
   end
 
-  test "deberia guardar la relacion con la serie y su relación" do
-    c = calicatas(:con_serie)
+  test "debería cargar y crear la serie asociada" do
+    @atributos[:serie_attributes] = { :simbolo => 'As' }
     assert_difference 'Serie.count' do
-      c.save
+      Calicata.create(@atributos)
     end
   end
+
+  test "debería cargar y crear la capacidad asociada" do
+    @atributos[:capacidad_attributes] =
+      { :subclases_attributes => [ { :codigo => 's' } ],
+        :clase_attributes => { :codigo => 'clase' } }
+    assert_difference 'Capacidad.count' do
+      assert_difference 'CapacidadClase.count' do
+        assert_difference 'CapacidadSubclase.count' do
+          assert Calicata.create(@atributos)
+        end
+      end
+    end
+  end
+
 end

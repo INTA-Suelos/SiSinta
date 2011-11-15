@@ -6,8 +6,8 @@ uno:
 dos:
   fecha: 2011-09-30
 
-nuevo_rol:
-  fecha: 2011-09-30
+valida:
+  fecha: 2010-12-03
 
 con_serie:
   fecha: 2011-09-30
