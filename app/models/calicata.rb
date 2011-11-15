@@ -34,8 +34,9 @@ class Calicata < ActiveRecord::Base
   belongs_to :fase, :inverse_of => :calicatas
   belongs_to :serie, :inverse_of => :calicatas
 
-  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes,
-                                :fotos, :fase, :serie
+  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :usuario, :serie, :fase,
+                                :escurrimiento, :pendiente, :relieve, :anegamiento, :permeabilidad,
+                                :posicion, :drenaje
 
 # == Validaciones
 

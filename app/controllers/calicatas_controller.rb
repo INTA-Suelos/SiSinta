@@ -92,17 +92,17 @@ protected
 
   def preparar_nueva_calicata
     @calicata = Calicata.new
-    @calicata.capacidad ||= Capacidad.new
-    @calicata.fase ||= Fase.new
-    @calicata.serie ||= Serie.new
-    @calicata.paisaje ||= Paisaje.new
-    @calicata.escurrimiento ||= Escurrimiento.new
-    @calicata.pendiente ||= Pendiente.new
-    @calicata.permeabilidad ||= Permeabilidad.new
-    @calicata.relieve ||= Relieve.new
-    @calicata.anegamiento ||= Anegamiento.new
-    @calicata.posicion ||= Posicion.new
-    @calicata.drenaje ||= Drenaje.new
+    @calicata.build_capacidad
+    @calicata.build_fase
+    @calicata.build_serie
+    @calicata.build_paisaje
+    @calicata.build_escurrimiento
+    @calicata.build_pendiente
+    @calicata.build_permeabilidad
+    @calicata.build_relieve
+    @calicata.build_anegamiento
+    @calicata.build_posicion
+    @calicata.build_drenaje
 
     # Para los dropbox
     @clases = CapacidadClase.all
