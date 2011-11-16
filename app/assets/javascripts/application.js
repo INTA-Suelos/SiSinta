@@ -7,4 +7,4 @@
 //= require jquery.min
 //= require jquery-ui.min
 //= require jquery_ujs
-//= require_tree .
+//= require_tree ./comunes

@@ -1,0 +1,2 @@
+$ ->
+ $('.fecha').datepicker();

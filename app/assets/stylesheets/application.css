@@ -5,5 +5,5 @@
  *= require blueprint/reset
  *= require_self
  *= require blueprint
- *= require_tree . 
+ *= require_tree ./comunes
 */
