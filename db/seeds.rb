@@ -52,8 +52,7 @@ end
 #
 # Carga el usuario administrador inicial
 #
-u = Usuario.create( :nombre => 'Administrador',
-                    :email => 'email@falso.com',
-                    :password => 'administrador',
-                    :roles_attributes => [{
-                      :nombre => 'administrador'}] )
+Usuario.create( :nombre => 'Administrador',
+                :email => 'email@falso.com',
+                :password => 'administrador',
+                :rol_ids => [ Rol.find_by_nombre('administrador').id ] )
