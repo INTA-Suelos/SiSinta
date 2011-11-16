@@ -17,7 +17,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def admin?
-    self.roles.exists?({nombre: 'admin'})
+    self.roles.exists?({:nombre => 'administrador'})
   end
 
 end
