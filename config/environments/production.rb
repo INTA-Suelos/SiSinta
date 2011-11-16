@@ -22,7 +22,7 @@ Suelos::Application.configure do
   config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
-  config.assets.manifest = Rails.root.join('public', config.assets.prefix)
+  config.assets.manifest = Rails.root.join('public/estaticos')
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -44,11 +44,11 @@ Suelos::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( ie.css, print.css )
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
-  config.action_mailer.default_url_options = { :host => 'suelos.maquinarodante.com.ar' }
+  config.action_mailer.default_url_options = { :host => 'sisinta.maquinarodante.com.ar' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   # Disable delivery errors, bad email addresses will be ignored
