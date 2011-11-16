@@ -54,5 +54,4 @@ end
 #
 Usuario.create( :nombre => 'Administrador',
                 :email => 'email@falso.com',
-                :password => 'administrador',
-                :rol_ids => [ Rol.find_by_nombre('administrador').id ] )
+                :password => 'administrador').roles << Rol.find_by_nombre('administrador')

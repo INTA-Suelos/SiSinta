@@ -37,16 +37,15 @@ class CalicataTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería cargar y crear la capacidad asociada" do
+  test "debería cargar la capacidad asociada" do
     assert_nothing_raised do
-      @atributos[:capacidad_attributes] =
-        { :subclases_attributes => [ { :codigo => 's' } ],
-          :clase_attributes => { :codigo => 'clase' } }
-      assert_difference 'Capacidad.count' do
-        assert_difference 'CapacidadClase.count' do
-          assert_difference 'CapacidadSubclase.count' do
-            assert Calicata.create(@atributos)
-          end
+      @c = Calicata.create(@atributos)
+      assert_difference 'CapacidadClase.first.calicatas.count' do
+        assert_difference 'CapacidadSubclase.first.calicatas.count' do
+          @c.capacidad = Capacidad.new(:capacidad_clase_id => CapacidadClase.first.id,
+                                       :calicata_id => @c.id)
+          assert @c.save
+          @c.capacidad.subclases << CapacidadSubclase.first
         end
       end
     end
@@ -54,49 +53,49 @@ class CalicataTest < ActiveSupport::TestCase
 
   test "debería cargar el drenaje de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:drenaje_attributes] = { :valor => 'drenaje' }
+      @atributos[:drenaje_id] = Drenaje.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el posicion de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:posicion_attributes] = { :valor => 'posicion' }
+      @atributos[:posicion_id] = Posicion.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el anegamiento de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:anegamiento_attributes] = { :valor => 'anegamiento' }
+      @atributos[:anegamiento_id] = Anegamiento.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el relieve de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:relieve_attributes] = { :valor => 'relieve' }
+      @atributos[:relieve_id] = Relieve.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el permeabilidad de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:permeabilidad_attributes] = { :valor => 'permeabilidad' }
+      @atributos[:permeabilidad_id] = Permeabilidad.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el pendiente de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:pendiente_attributes] = { :valor => 'pendiente' }
+      @atributos[:pendiente_id] = Pendiente.first.id
       Calicata.create(@atributos)
     end
   end
 
   test "debería cargar el escurrimiento de la tabla de lookup" do
     assert_nothing_raised do
-      @atributos[:escurrimiento_attributes] = { :valor => 'escurrimiento' }
+      @atributos[:escurrimiento_id] = Escurrimiento.first.id
       Calicata.create(@atributos)
     end
   end
