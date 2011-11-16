@@ -1,0 +1,23 @@
+// Dimensiones
+$alto_cabecera: 82px;
+
+// Colores
+$azul_inta: #02567b;
+$azul_claro:  lighten($azul_inta, 70%);
+$celeste:     lighten($azul_claro, 3%);
+
+$rojo_inta: #d82918;
+$rojo_claro:  lighten($rojo_inta, 50%);
+$rojo_medio:  lighten($rojo_inta, 10%);
+
+$verde:       rgb(0, green($azul_inta), 0);
+
+// Mixins
+@mixin mensaje($color) {
+  padding: 0.2em;
+  margin-bottom: 1em;
+  border: 2px solid #ddd;
+  background: none repeat scroll 0 0 lighten($color, 50%);
+  border-color: lighten($color, 10%);
+  color: $color;
+}

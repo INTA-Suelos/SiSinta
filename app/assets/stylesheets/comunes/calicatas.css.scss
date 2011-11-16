@@ -1,9 +1,15 @@
+@import "constantes";
+
 form {
   $altura-linea:  18px;
 
+  #principal { margin-left: 10px; }
+
   line-height: $altura-linea;
 
-  input { width: inherit !important; }
+  input {
+    width: inherit !important;
+  }
 
   input[type="number"] {
     margin: 0.5em 0;
@@ -24,17 +30,23 @@ form {
     padding-left: 659px;
   }
 
-  label { font-size: x-small; }
+  label {
+    font-size: x-small;
+  }
 
   .subtitulo { text-decoration: underline; }
 
   .texto-corto { height: $altura-linea * 2 + 1;  }
 
-  #observaciones {
-    width: 670px;
-    height: $altura-linea * 3;
+  #calicata_observaciones {
+    width: 100%;
+    height: $altura-linea * 4;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .fecha {
+    text-align: center;
   }
 
 }

@@ -8,8 +8,8 @@
     = stylesheet_link_tag     "ie" if @ie
     = javascript_include_tag  "application"
     = csrf_meta_tags
-  %body
+  %body.celeste
+    #cabecera= render 'layouts/cabecera'
     .container
-      = render 'layouts/cabecera'
       #principal.span-24
         = yield

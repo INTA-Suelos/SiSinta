@@ -2,23 +2,23 @@
 
   = f.error_messages
 
-  = field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do
+  = field_set_tag 'Ficha de descripción edafológica', :class => 'azul_claro span-23 last' do
 
-    = field_set_tag 'Descripción del sitio', :class => 'plegable span-22 last' do
+    = field_set_tag 'Descripción del sitio', :class => 'celeste plegable span-22 last' do
 
-      .span-5
+      .span-4
         .span-2= f.label :mosaico
-        .span-3.last= f.text_field :mosaico
+        .span-2.last= f.text_field :mosaico
       .span-4
         .span-2= f.label :recorrido
         .span-2.last= f.text_field :recorrido
       .span-4
         .span-2= f.label :aerofoto
         .span-2.last= f.text_field :aerofoto
-      .span-4
+      .span-5
         .span-2= f.label :fecha
-        .fecha.span-2.last= f.text_field :fecha
-      .span-5.last
+        .span-3.last= f.text_field :fecha, :class => 'fecha'
+      .span-4.last
         .span-2= f.label :numero
         .span-2.last= f.text_field :numero
 
@@ -40,8 +40,8 @@
 
       .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
       = f.fields_for :capacidad do |f_c|
-        .span-2= f_c.label :subclases, 'Simbolos'
-        .span-5
+        .span-7
+          .span-2= f_c.label :subclases, 'Simbolos'
           - @subclases.each do |s|
             .span-1
               .span-1= label_tag s.codigo
@@ -125,7 +125,7 @@
         .span-2= f.label :uso_tierra
         .span-8.last= f.text_field :uso_tierra
 
-    = field_set_tag 'Descripción de los horizontes', :class => 'plegable span-22 last' do
+    = field_set_tag 'Descripción de los horizontes', :class => 'celeste plegable span-22 last' do
 
       .span-1
         .span-1.last= label_tag :tipo_n, 'Clase Hz'
@@ -184,8 +184,7 @@
           .span-1.last= label_tag :consistencia_m_a_n, 'adhes.'
           .span-1.last= text_field_tag :consistencia_m_a_n
 
-    .prepend-media.span-22.last
-      .span-2= f.label :observaciones
-      .span-19.last= f.text_field :observaciones
+    = field_set_tag 'Observaciones', :class => 'celeste plegable span-22 last' do
+      .span-21.last= f.text_area :observaciones
 
     .acciones.span-4.last= f.submit
