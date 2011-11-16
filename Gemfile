@@ -14,9 +14,11 @@ gem 'cancan'
 
 ## Presentación
 gem 'dynamic_form'
-gem 'browser_detect'
 gem 'formtastic'
 gem 'haml'
+
+# No funciona la inclusión automática, asique la copié a vendor
+#gem 'browser_detect'
 
 ## Modelos
 gem 'acts_as_list'
