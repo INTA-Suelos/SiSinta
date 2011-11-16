@@ -3,4 +3,9 @@
 Instalación
 ===========
 
+$ RAILS_ENV=production
+$ rake db:create
+$ rake db:setup
+$ rake assets:precompile
+
 El usuario default es Administrador, y se loguea con email@falso.com y el password *administrador*
