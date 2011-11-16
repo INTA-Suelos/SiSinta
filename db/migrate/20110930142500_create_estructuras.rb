@@ -4,7 +4,7 @@ class CreateEstructuras < ActiveRecord::Migration
       t.string :tipo
       t.string :clase
       t.string :grado
-      t.integer :horizonte_id
+      t.references :horizonte
 
       t.timestamps
     end

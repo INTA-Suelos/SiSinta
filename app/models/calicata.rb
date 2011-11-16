@@ -1,19 +1,28 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
-  @@valores_escurrimiento = ['estancado','muy lento','lento','medio','rápido','muy rápido']
-  @@valores_pendiente = ['0 - 1%','1 - 3%','3 - 10%','10 - 25%','25 - 45%','45%']
 
   validate :la_fecha_no_puede_ser_futura
-  validates :escurrimiento, :inclusion => { :in => @@valores_escurrimiento,
-    :message => "%{value} no es un grado de escurrimiento válido" }
-  validates :pendiente, :inclusion => { :in => @@valores_pendiente,
-    :message => "%{value} no es una clase de pendiente válida" }
+  validates_presence_of :fecha
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
-  has_one :clasificacion, :dependent => :destroy, :inverse_of => :calicata
-  has_one :capacidad,   :dependent => :destroy, :inverse_of => :calicata
-  has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
+  has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
+  has_one :paisaje,       :inverse_of => :calicata
+
+  #
+  # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
+  #   belongs_to => calicata tiene lookup_id
+  #   has_one => lookup tiene calicata_id
+  # Como los valores de estas tablas son un conjunto definido, se comparten
+  # entre todas las calicatas, aunque suene raro un belongs_to acá.
+  #
+  belongs_to :escurrimiento,  :inverse_of => :calicatas
+  belongs_to :pendiente,      :inverse_of => :calicatas
+  belongs_to :permeabilidad,  :inverse_of => :calicatas
+  belongs_to :relieve,        :inverse_of => :calicatas
+  belongs_to :anegamiento,    :inverse_of => :calicatas
+  belongs_to :posicion,       :inverse_of => :calicatas
+  belongs_to :drenaje,        :inverse_of => :calicatas
 
   has_many :analisis,       :through => :horizontes
   has_many :estructuras,    :through => :horizontes
@@ -22,9 +31,12 @@ class Calicata < ActiveRecord::Base
   has_many :limites,        :through => :horizontes
 
   belongs_to :usuario, :inverse_of => :calicatas
+  belongs_to :fase, :inverse_of => :calicatas
+  belongs_to :serie, :inverse_of => :calicatas
 
-  accepts_nested_attributes_for :clasificacion, :paisaje, :horizontes,
-                                :fotos
+  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :usuario, :serie, :fase,
+                                :escurrimiento, :pendiente, :relieve, :anegamiento, :permeabilidad,
+                                :posicion, :drenaje
 
 # == Validaciones
 

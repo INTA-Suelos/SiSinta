@@ -3,7 +3,7 @@ class CreateConsistencias < ActiveRecord::Migration
     create_table :consistencias do |t|
       t.string :seco
       t.string :humedo
-      t.integer :horizonte_id
+      t.references :horizonte
       t.string :mojado_adhesividad
       t.string :mojado_plasticidad
 

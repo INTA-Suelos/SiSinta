@@ -1,5 +1,7 @@
 class CalicatasController < AutorizadoController
 
+  before_filter :armar_lookups
+
   # GET /calicatas
   # GET /calicatas.json
   def index
@@ -25,7 +27,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new
+    preparar_nueva_calicata
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,6 +59,12 @@ class CalicatasController < AutorizadoController
   # PUT /calicatas/1
   # PUT /calicatas/1.json
   def update
+    #
+    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo que forzar que
+    # haya un arreglo vacío cuando es nil. El formulario devuelve nil por la especificación de html
+    #
+    params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
+
     @calicata = Calicata.find(params[:id])
 
     respond_to do |format|
@@ -82,4 +90,50 @@ class CalicatasController < AutorizadoController
     end
   end
 
+protected
+
+  # Construye los objetos asociados a la calicata, para usar con el +FormHelper+
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
+  def preparar_nueva_calicata
+    @calicata = Calicata.new
+    @calicata.build_capacidad
+    @calicata.build_fase
+    @calicata.build_serie
+    @calicata.build_paisaje
+    @calicata.build_escurrimiento
+    @calicata.build_pendiente
+    @calicata.build_permeabilidad
+    @calicata.build_relieve
+    @calicata.build_anegamiento
+    @calicata.build_posicion
+    @calicata.build_drenaje
+  end
+
+  # Prepara las variables para acceder desde la vista y armar las tablas de lookup
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
+  def armar_lookups
+    @subclases = CapacidadSubclase.all
+    @clases = CapacidadClase.all
+    @drenajes = Drenaje.all
+    @relieves = Relieve.all
+    @anegamientos = Anegamiento.all
+    @posiciones = Posicion.all
+    @pendientes = Pendiente.all
+    @escurrimientos = Escurrimiento.all
+    @permeabilidades = Permeabilidad.all
+  end
 end

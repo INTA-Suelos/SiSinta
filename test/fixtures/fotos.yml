@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  simbolo: 
-  limitaciones: MyString
+  calicata_id: 1
 
 two:
-  simbolo: 
-  limitaciones: MyString
+  calicata_id: 1

@@ -1,37 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
+uno:
   fecha: 2011-09-30
-  numero: MyString
-  modal: false
-  drenaje: 1
-  escurrimiento: 1
-  permeabilidad: 1
-  napa: MyString
-  profundidad_napa: 1.5
-  anegamiento: 1
-  uniforme: false
-  cobertura_vegetal: 9.99
-  uso_tierra: MyString
-  vegetacion: MyString
-  desarrollo: 1
-  posicion: MyString
-  serie_id: 1
 
-two:
+dos:
   fecha: 2011-09-30
-  numero: MyString
-  modal: false
-  drenaje: 1
-  escurrimiento: 1
-  permeabilidad: 1
-  napa: MyString
-  profundidad_napa: 1.5
-  anegamiento: 1
-  uniforme: false
-  cobertura_vegetal: 9.99
-  uso_tierra: MyString
-  vegetacion: MyString
-  desarrollo: 1
-  posicion: MyString
-  serie_id: 1
+
+valida:
+  fecha: 2010-12-03
+
+con_serie:
+  fecha: 2011-09-30
+  serie: carabelas

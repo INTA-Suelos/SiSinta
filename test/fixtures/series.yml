@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
-  provincia: MyString
-  partido: MyString
-  simbolo: MyString
+carabela:
+  provincia: buenos aires
+  partido: carabela
+  simbolo: ca
 
-two:
+one:
   provincia: MyString
   partido: MyString
   simbolo: MyString

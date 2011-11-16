@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ClasificacionTest < ActiveSupport::TestCase
+class PosicionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

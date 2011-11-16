@@ -1,9 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  codigo: MyString
-  descripcion: MyString
-
-two:
-  codigo: MyString
-  descripcion: MyString
+e:
+  codigo:       e
+  descripcion:  erosión
+s:
+  codigo:       s
+  descripcion:  limitaciones en la zona radicular
+c:
+  codigo:       c
+  descripcion:  limitaciones climáticas
+w:
+  codigo:       w
+  descripcion:  drenaje deficiente

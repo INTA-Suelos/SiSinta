@@ -11,6 +11,14 @@ form {
     color: #000000;
   }
 
+  select {  width: 100%;  }
+
+  input[type="checkbox"] {
+    margin-left: -2px;
+  }
+
+  .centrado { text-align: center; }
+
   .campo-suelto {
     padding-top: 0;
     padding-left: 659px;

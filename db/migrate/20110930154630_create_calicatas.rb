@@ -16,7 +16,7 @@ class CreateCalicatas < ActiveRecord::Migration
       t.string :vegetacion
       t.integer :desarrollo
       t.string :posicion
-      t.integer :serie_id
+      t.references :serie
 
       t.timestamps
     end
