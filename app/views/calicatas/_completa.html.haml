@@ -1,11 +1,6 @@
 = form_for @calicata, html: { class: 'completa span-24' } do |f|
 
-  - if calicata.errors.any?
-    #mensaje_de_error.span-23
-      %h2 = "#{pluralize(@calicata.errors.count, "error")} impide(n) que se guarde esta calicata:"
-      %ul
-        - @calicata.errors.full_messages.each do |msg|
-          %li = msg
+  = f.error_messages
 
   = field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do
 
@@ -77,34 +72,29 @@
         .span-2= f.label :material_original
         .span-9.last= f.text_field :material_original
       .span-11.last
-        = f.fields_for :drenaje do |f_d|
-          .span-2= f_d.label :drenaje_id
-          .span-8.last= f_d.collection_select :drenaje_id, @drenajes, :id, :valor, :prompt => true
+        .span-2= f.label :drenaje_id
+        .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor, :prompt => true
 
       .span-11
-        = f.fields_for :relieve do |f_r|
-          .span-2= f_r.label :relieve_id
-          .span-9.last= f_r.collection_select :relieve_id, @relieves, :id, :valor, :prompt => true
+        .span-2= f.label :relieve_id
+        .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor, :prompt => true
       .span-11.last
-        = f.fields_for :anegamiento do |f_a|
-          .span-2= f_a.label :anegamiento_id
-          .span-8.last= f_a.collection_select :anegamiento_id, @anegamientos, :id, :valor,
-            :prompt => true
+        .span-2= f.label :anegamiento_id
+        .span-8.last= f.collection_select :anegamiento_id, @anegamientos, :id, :valor,
+          :prompt => true
 
       .span-11
-        = f.fields_for :posicion do |f_p|
-          .span-2= f_p.label :posicion_id
-          .span-9.last= f_p.collection_select :posicion_id, @posiciones, :id, :valor,
-            :prompt => true
+        .span-2= f.label :posicion_id
+        .span-9.last= f.collection_select :posicion_id, @posiciones, :id, :valor,
+          :prompt => true
       .span-11.last
         .span-2= f.label :humedad
         .span-8.last= f.text_field :humedad
 
       .span-11
-        = f.fields_for :pendiente do |f_p|
-          .span-2= f_p.label :pendiente_id
-          .span-9.last= f_p.collection_select :pendiente_id, @pendientes, :id, :valor,
-            :prompt => true
+        .span-2= f.label :pendiente_id
+        .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
+          :prompt => true
       .span-5
         .span-2= f.label :cobertura_vegetal
         .span-3.last= f.text_field :cobertura_vegetal
@@ -113,19 +103,17 @@
         .span-3.last= f.text_field :profundidad_napa
 
       .span-11
-        = f.fields_for :escurrimiento do |f_e|
-          .span-2= f_e.label :escurrimiento_id
-          .span-9.last= f_e.collection_select :escurrimiento_id,
-            @escurrimientos, :id, :valor, :prompt => true
+        .span-2= f.label :escurrimiento_id
+        .span-9.last= f.collection_select :escurrimiento_id,
+          @escurrimientos, :id, :valor, :prompt => true
       .span-11.last
         .span-2= f.label :sales
         .span-8.last= f.text_field :sales
 
       .span-11
-        = f.fields_for :permeabilidad do |f_p|
-          .span-2= f_p.label :permeabilidad_id
-          .span-9.last= f_p.collection_select :permeabilidad_id,
-            @permeabilidades, :id, :valor, :prompt => true
+        .span-2= f.label :permeabilidad_id
+        .span-9.last= f.collection_select :permeabilidad_id,
+          @permeabilidades, :id, :valor, :prompt => true
       .span-11.last
         .span-2= f.label :pedregosidad
         .span-8.last= f.text_field :pedregosidad

@@ -1,5 +1,7 @@
 class CalicatasController < AutorizadoController
 
+  before_filter :armar_lookups
+
   # GET /calicatas
   # GET /calicatas.json
   def index
@@ -90,6 +92,15 @@ class CalicatasController < AutorizadoController
 
 protected
 
+  # Construye los objetos asociados a la calicata, para usar con el +FormHelper+
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
   def preparar_nueva_calicata
     @calicata = Calicata.new
     @calicata.build_capacidad
@@ -103,17 +114,26 @@ protected
     @calicata.build_anegamiento
     @calicata.build_posicion
     @calicata.build_drenaje
-
-    # Para los dropbox
-    @clases = CapacidadClase.all
-    @subclases = CapacidadSubclase.all
-    @escurrimientos = Escurrimiento.all
-    @pendientes = Pendiente.all
-    @permeabilidades = Permeabilidad.all
-    @posiciones = Posicion.all
-    @relieves = Relieve.all
-    @anegamientos = Anegamiento.all
-    @drenajes = Drenaje.all
   end
 
+  # Prepara las variables para acceder desde la vista y armar las tablas de lookup
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
+  def armar_lookups
+    @subclases = CapacidadSubclase.all
+    @clases = CapacidadClase.all
+    @drenajes = Drenaje.all
+    @relieves = Relieve.all
+    @anegamientos = Anegamiento.all
+    @posiciones = Posicion.all
+    @pendientes = Pendiente.all
+    @escurrimientos = Escurrimiento.all
+    @permeabilidades = Permeabilidad.all
+  end
 end

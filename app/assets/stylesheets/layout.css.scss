@@ -52,3 +52,32 @@ ul.menu_horizontal {
 #principal {
   background-color: $azul_claro;
 }
+
+// estilo para los campos y etiquetas con error en los formularios
+.field_with_errors {
+  @include mensaje($rojo_inta);
+  color: black;
+}
+
+// div con mensajes de error
+#errorExplanation {
+  @include mensaje($rojo_inta);
+  padding: 1em;
+  color: black;
+
+  // título del div
+  h2 {
+    color: $rojo_inta;
+    font-weight: bold;
+  }
+
+  // mensaje sobre los errores en general
+  p { font-weight: bold;}
+
+  ul {
+
+    // cada mensaje de error independiente
+    li {
+    }
+  }
+}
