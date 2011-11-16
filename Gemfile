@@ -35,6 +35,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery_datepicker'
 
 # Use unicorn as the web server
 # gem 'unicorn'
