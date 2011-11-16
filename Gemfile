@@ -14,7 +14,6 @@ gem 'cancan'
 
 ## Presentación
 gem 'dynamic_form'
-gem 'formtastic'
 gem 'haml'
 
 # No funciona la inclusión automática, asique la copié a vendor
