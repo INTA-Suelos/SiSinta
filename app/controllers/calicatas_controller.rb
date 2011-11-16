@@ -1,6 +1,6 @@
 class CalicatasController < AutorizadoController
 
-  before_filter :armar_lookups
+  before_filter :armar_lookups, :descubrir_browser
 
   # GET /calicatas
   # GET /calicatas.json
