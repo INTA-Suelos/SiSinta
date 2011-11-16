@@ -55,8 +55,15 @@ ul.menu_horizontal {
 
 // estilo para los campos y etiquetas con error en los formularios
 .field_with_errors {
-  @include mensaje($rojo_inta);
-  color: black;
+
+  width: inherit !important;
+
+  label, input {
+    @include mensaje($rojo_inta);
+    color: black;
+    border-width: 1px;
+    margin-bottom: 0;
+  }
 }
 
 // div con mensajes de error
