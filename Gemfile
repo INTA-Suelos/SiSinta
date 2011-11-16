@@ -17,7 +17,7 @@ gem 'dynamic_form'
 gem 'haml'
 
 # No funciona la inclusión automática, asique la copié a vendor
-#gem 'browser_detect'
+gem 'browser_detect'
 
 ## Modelos
 gem 'acts_as_list'
