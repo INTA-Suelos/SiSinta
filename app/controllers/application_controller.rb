@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
+  include BrowserDetect
+
   protect_from_forgery
+
+  before_filter :descubrir_browser
 
   # CanCan necesita un método *current_user* y Devise genera la función
   # en base al nombre del modelo, que en nuestro caso es Usuario
