@@ -3,6 +3,16 @@
 Instalación
 ===========
 
+Base de datos
+-------------
+
+1. PostgreSQL
+2. PostGIS
+3. template1 con las funciones y tablas de PostGIS
+
+Producción
+----------
+
 $ RAILS_ENV=production
 $ rake db:create
 $ rake db:setup
