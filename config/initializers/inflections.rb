@@ -37,4 +37,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'anegamiento', 'anegamientos'
   inflect.irregular 'posicion', 'posiciones'
   inflect.irregular 'drenaje', 'drenajes'
+  inflect.irregular 'ubicacion', 'ubicaciones'
 end

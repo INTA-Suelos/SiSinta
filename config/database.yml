@@ -12,6 +12,11 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+# Usamos activerecord-postgis-adapter como adaptador, que maneja la información geoespacial. Se crea
+# una aplicación normal con postgresql y se cambia de adaptador.
+# El template es un template especial a usar cuando se crean las bases de datos (en vez del default
+# template1, que tiene cargadas las tablas de PostGIS, cuyo propietario tiene que ser el mismo
+# username de la aplicación rails (o sea lo mismo que username en esta configuración).
 development:
   adapter: postgis
   encoding: unicode
@@ -19,6 +24,7 @@ development:
   pool: 5
   username: suelos
   password: carl friedrich gauss
+  template: template_postgis
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -45,6 +51,7 @@ test:
   pool: 5
   username: suelos
   password: carl friedrich gauss
+  template: template_postgis
 
 production:
   adapter: postgis
@@ -53,3 +60,4 @@ production:
   pool: 5
   username: suelos
   password: carl friedrich gauss
+  template: template_postgis

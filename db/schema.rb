@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116011048) do
+ActiveRecord::Schema.define(:version => 20111117011733) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20111116011048) do
     t.string   "pedregosidad"
     t.string   "gran_grupo"
     t.string   "recorrido"
-    t.string   "aerofoto"
     t.string   "simbolo"
     t.string   "humedad"
     t.string   "sales"
@@ -75,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20111116011048) do
     t.integer  "escurrimiento_id"
     t.integer  "permeabilidad_id"
     t.integer  "anegamiento_id"
+    t.integer  "aerofoto"
+    t.integer  "ubicacion_id"
   end
 
   create_table "capacidad_clases", :force => true do |t|
@@ -225,6 +226,15 @@ ActiveRecord::Schema.define(:version => 20111116011048) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ubicaciones", :force => true do |t|
+    t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "lat_lon",     :limit => {:srid=>4326, :type=>"point"}
+  end
+
+  add_index "ubicaciones", ["lat_lon"], :name => "index_ubicaciones_on_lat_lon", :spatial => true
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
