@@ -15,7 +15,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: suelos
+  database: suelos_dev
   pool: 5
   username: suelos
   password: carl friedrich gauss
@@ -49,7 +49,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: suelos_production
+  database: suelos
   pool: 5
   username: suelos
   password: carl friedrich gauss
