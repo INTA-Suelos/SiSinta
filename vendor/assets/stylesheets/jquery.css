@@ -1,7 +1,7 @@
 /*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
+ * Manifiesto para los estilos de jQuery.
+ * Si se actualiza el archivo hay que modificar las url(images/...) a
+ * url(/estaticos/jquery/images/...) para que encuentren los assets.
  *= require jquery/jquery-ui
  *= require_self
 */
