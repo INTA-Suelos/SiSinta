@@ -1,8 +1,8 @@
 #menu.span-24
   #logo.span-4
-    = image_tag "logo.jpg", :alt => 'INTA saras'
+    = link_to image_tag("logo.jpg", :alt => 'INTA'), 'http://inta.gov.ar/'
   .span-20.last
-    %h1 Sistema de información de Suelos del INTA
+    %h1.inicio= link_to "Sistema de información de Suelos del INTA", inicio_index_path
     %ul.menu_horizontal
       = render 'devise/menu/registration_items'
       = render 'devise/menu/login_items'

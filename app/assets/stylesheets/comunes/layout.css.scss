@@ -5,9 +5,12 @@
   float: none;
   margin: auto;
 
-  h1 {
+  .inicio {
     color: white;
     margin-bottom: 0;
+    a {
+      text-decoration: none;
+    }
   }
 
   a {
