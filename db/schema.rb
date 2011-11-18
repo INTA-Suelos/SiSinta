@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117231910) do
+ActiveRecord::Schema.define(:version => 20111118010513) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -230,11 +230,11 @@ ActiveRecord::Schema.define(:version => 20111117231910) do
     t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "lat_lon",     :limit => {:srid=>4326, :type=>"point"}
+    t.spatial  "coordenadas", :limit => {:no_constraints=>true}
     t.integer  "calicata_id"
   end
 
-  add_index "ubicaciones", ["lat_lon"], :name => "index_ubicaciones_on_lat_lon", :spatial => true
+  add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_lat_lon", :spatial => true
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"

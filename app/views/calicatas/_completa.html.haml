@@ -52,9 +52,14 @@
           .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
             :prompt => true
 
-      .span-22.last
-        .span-2= f.label :ubicacion
-        .span-19.last= f.text_field :ubicacion
+      .span-4= label_tag nil, 'Ubicación', :class => 'subtitulo'
+      = f.fields_for :ubicacion do |f_u|
+        .span-9
+          .span-2= f_u.label :coordenadas
+          .span-7.last= f_u.text_field :coordenadas
+        .span-9
+          .span-2= f_u.label :descripcion
+          .span-7= f_u.text_field :descripcion
 
       .span-4= label_tag nil, 'Paisaje', :class => 'subtitulo'
       = f.fields_for :paisaje do |f_p|
