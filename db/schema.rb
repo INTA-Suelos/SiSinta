@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
     t.integer  "calicata_id"
   end
 
-  add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_lat_lon", :spatial => true
+  add_index "ubicaciones", ["coordenadas"], :name => "por_coordenadas", :spatial => true
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
