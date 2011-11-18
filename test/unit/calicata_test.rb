@@ -28,6 +28,15 @@ class CalicataTest < ActiveSupport::TestCase
     end
   end
 
+  test "debería cargar la ubicación asociada" do
+    assert_nothing_raised do
+      @atributos[:ubicacion_attributes] = { :descripcion => "Somewhere over the rainbow" }
+      assert_difference 'Ubicacion.count' do
+        Calicata.create(@atributos)
+      end
+    end
+  end
+
   test "debería cargar y crear la serie asociada" do
     assert_nothing_raised do
       @atributos[:serie_attributes] = { :simbolo => 'As' }

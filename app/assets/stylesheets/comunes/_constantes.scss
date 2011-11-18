@@ -21,3 +21,10 @@ $verde:       rgb(0, green($azul_inta), 0);
   border-color: lighten($color, 10%);
   color: $color;
 }
+
+@mixin centrado() {
+  text-align: center;
+  th, td {
+    text-align: inherit;
+  }
+}

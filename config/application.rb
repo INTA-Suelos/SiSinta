@@ -3,6 +3,11 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+# PostGIS adapter includes a special railtie that provides support for PostGIS databases
+# in ActiveRecord’s rake tasks. This railtie is required in order to run, e.g., rake test. To
+# install this railtie, you should add this line to your config/application.rb:
+require 'active_record/connection_adapters/postgis_adapter/railtie'
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require *Rails.groups(:assets => %w(development test))

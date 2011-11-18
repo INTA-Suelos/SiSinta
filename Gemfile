@@ -48,6 +48,8 @@ gem 'jquery-rails'
 
 group :development do
   gem 'pry'
+  gem 'pry-rails'
+  gem 'hirb'
 end
 
 group :test do

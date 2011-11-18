@@ -47,9 +47,15 @@ ul.menu_horizontal {
   background-color: $azul_claro;
 }
 
-#principal h1 { text-align: center; }
+#principal h1 {
+  @include centrado;
+}
 
 #cabecera {
   width: 100%;
   background-color: $azul_inta;
+}
+
+.centrado {
+  @include centrado;
 }
