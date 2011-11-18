@@ -33,11 +33,10 @@ class Calicata < ActiveRecord::Base
 
   belongs_to :usuario, :inverse_of => :calicatas
   belongs_to :fase, :inverse_of => :calicatas
-  belongs_to :serie, :inverse_of => :calicatas
+  belongs_to :serie, :inverse_of => :calicatas, :validate => true
 
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :usuario, :serie, :fase,
-                                :escurrimiento, :pendiente, :relieve, :anegamiento, :permeabilidad,
-                                :posicion, :drenaje, :ubicacion
+                                :ubicacion, :reject_if => :all_blank
 
 # == Validaciones
 
