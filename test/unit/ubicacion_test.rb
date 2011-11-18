@@ -12,7 +12,7 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "debería negarse a guardar un punto mal formado" do
-    assert Ubicacion.new(:lat_lon => "sarasa").invalid?, "permite guardar 'sarasa' como latitud/longitud"
+    assert Ubicacion.new(:coordenadas => "sarasa").invalid?, "permite guardar 'sarasa' como latitud/longitud"
   end
 
 end

@@ -1,7 +1,16 @@
+# -*- encoding : utf-8 -*-
 require 'test_helper'
 
 class PaisajeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  fixtures :calicatas
+
+  test "debería negarse a guardarla si los campos son nulos" do
+    assert !Paisaje.new.save, "permite guardar un paisaje vacío"
+  end
+
+  test "debería negarse a guardar un paisaje sin datos" do
+    assert !Paisaje.new(:calicata => calicatas(:uno)).save, "permite guardar un paisaje en blanco"
+  end
+
 end
