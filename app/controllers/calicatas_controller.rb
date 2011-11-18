@@ -63,7 +63,10 @@ class CalicatasController < AutorizadoController
     # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo que forzar que
     # haya un arreglo vacío cuando es nil. El formulario devuelve nil por la especificación de html
     #
-    params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
+    begin
+      params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
+    rescue
+    end
 
     @calicata = Calicata.find(params[:id])
 
@@ -113,6 +116,7 @@ protected
     @calicata.build_relieve
     @calicata.build_anegamiento
     @calicata.build_posicion
+    @calicata.build_ubicacion
     @calicata.build_drenaje
   end
 
