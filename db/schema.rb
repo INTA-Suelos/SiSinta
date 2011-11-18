@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117011733) do
+ActiveRecord::Schema.define(:version => 20111117231910) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20111117011733) do
     t.integer  "permeabilidad_id"
     t.integer  "anegamiento_id"
     t.integer  "aerofoto"
-    t.integer  "ubicacion_id"
   end
 
   create_table "capacidad_clases", :force => true do |t|
@@ -232,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20111117011733) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.spatial  "lat_lon",     :limit => {:srid=>4326, :type=>"point"}
+    t.integer  "calicata_id"
   end
 
   add_index "ubicaciones", ["lat_lon"], :name => "index_ubicaciones_on_lat_lon", :spatial => true

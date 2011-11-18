@@ -7,8 +7,9 @@ class Calicata < ActiveRecord::Base
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
   has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
-  has_one :paisaje,       :inverse_of => :calicata
+  has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
 
+  has_one :paisaje,       :inverse_of => :calicata
   #
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
@@ -36,7 +37,7 @@ class Calicata < ActiveRecord::Base
 
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :usuario, :serie, :fase,
                                 :escurrimiento, :pendiente, :relieve, :anegamiento, :permeabilidad,
-                                :posicion, :drenaje
+                                :posicion, :drenaje, :ubicacion
 
 # == Validaciones
 
