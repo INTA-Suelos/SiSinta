@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SeriesControllerTest < ActionController::TestCase
   setup do
-    @serie = series(:one)
+    @serie = series(:carabela)
   end
 
   test "should get index" do

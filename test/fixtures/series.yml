@@ -4,8 +4,9 @@ carabela:
   provincia: buenos aires
   partido: carabela
   simbolo: ca
+  nombre: carabela
 
-one:
-  provincia: MyString
-  partido: MyString
-  simbolo: MyString
+anonima:
+  provincia: buenos aires
+  partido: carabela
+  simbolo: ca
