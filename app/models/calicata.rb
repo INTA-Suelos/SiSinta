@@ -3,6 +3,8 @@ class Calicata < ActiveRecord::Base
 
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
+  validates_numericality_of :cobertura_vegetal, :only_integer => true, :allow_nil => true,
+                            :greater_than => 0, :less_than => 101
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata

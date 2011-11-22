@@ -103,7 +103,7 @@
         .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
           :prompt => true, :include_blank => "Ninguna"
       .span-5
-        .span-2= f.label :cobertura_vegetal
+        .span-2= f.label :cobertura_vegetal, "Cobertura vegetal (%)"
         .span-3.last= f.text_field :cobertura_vegetal
       .span-6.last
         .span-2= f.label :profundidad_napa
