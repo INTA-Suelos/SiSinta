@@ -27,7 +27,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    preparar_nueva_calicata
+    @calicata.preparar
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +38,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1/edit
   def edit
     @calicata = Calicata.find(params[:id])
+    @calicata.preparar
   end
 
   # POST /calicatas
@@ -94,31 +95,6 @@ class CalicatasController < AutorizadoController
   end
 
 protected
-
-  # Construye los objetos asociados a la calicata, para usar con el +FormHelper+
-  #
-  # * *Args*    :
-  #   - ++ ->
-  # * *Returns* :
-  #   -
-  # * *Raises* :
-  #   - ++ ->
-  #
-  def preparar_nueva_calicata
-    @calicata = Calicata.new
-    @calicata.build_capacidad
-    @calicata.build_fase
-    @calicata.build_serie
-    @calicata.build_paisaje
-    @calicata.build_escurrimiento
-    @calicata.build_pendiente
-    @calicata.build_permeabilidad
-    @calicata.build_relieve
-    @calicata.build_anegamiento
-    @calicata.build_posicion
-    @calicata.build_ubicacion
-    @calicata.build_drenaje
-  end
 
   # Prepara las variables para acceder desde la vista y armar las tablas de lookup
   #

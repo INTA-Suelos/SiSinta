@@ -39,7 +39,7 @@ class CalicataTest < ActiveSupport::TestCase
 
   test "debería cargar y crear la serie asociada" do
     assert_nothing_raised do
-      @atributos[:serie_attributes] = { :simbolo => 'As' }
+      @atributos[:serie_attributes] = { :simbolo => 'As', :nombre => 'Ascasubi' }
       assert_difference 'Serie.count' do
         Calicata.create(@atributos)
       end
