@@ -1,0 +1,8 @@
+es:
+  activerecord:
+    errors:
+      models:
+        ubicacion:
+          attributes:
+            lat_lon:
+              invalid: "Las coordenadas 'latitud longitud' ingresadas son incorrectas"
