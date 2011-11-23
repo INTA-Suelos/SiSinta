@@ -7,7 +7,7 @@ class Ubicacion < ActiveRecord::Base
   #   WGS84 Bounds: -180.0000, -90.0000, 180.0000, 90.0000
   #   Projected Bounds: -180.0000, -90.0000, 180.0000, 90.0000
   #
-  EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)?; (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
+  EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)? (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
 
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326,
                                 :wkt_parser => :geos, :wkb_parserm => :geos,
@@ -16,7 +16,7 @@ class Ubicacion < ActiveRecord::Base
   belongs_to :calicata, :inverse_of => :ubicacion, :validate => true
 
   validates_presence_of :calicata
-  validates_format_of :lat_lon, :with => EPSG_4326, :allow_nil => true
+  validates_format_of :lat_lon, :with => EPSG_4326, :allow_blank => true
 
 # == Accesors
 
