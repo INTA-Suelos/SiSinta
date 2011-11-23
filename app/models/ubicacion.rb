@@ -20,11 +20,11 @@ class Ubicacion < ActiveRecord::Base
 
 # == Accesors
 
-  def coordenadas=(lat_lon)
+  def lat_lon=(lat_lon)
     write_attribute :coordenadas, "POINT(#{lat_lon})"
   end
 
-  def coordenadas
+  def lat_lon
     read_attribute(:coordenadas).to_s.gsub(/POINT\s?\(/, '').gsub(')', '')
   end
 
