@@ -45,6 +45,7 @@ class CalicatasController < AutorizadoController
   # POST /calicatas.json
   def create
     @calicata = Calicata.new(params[:calicata])
+    @calicata.preparar
 
     respond_to do |format|
       if @calicata.save
@@ -70,6 +71,7 @@ class CalicatasController < AutorizadoController
     end
 
     @calicata = Calicata.find(params[:id])
+    @calicata.preparar
 
     respond_to do |format|
       if @calicata.update_attributes(params[:calicata])

@@ -41,6 +41,10 @@ class Calicata < ActiveRecord::Base
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :serie, :fase,
                                 :ubicacion, :reject_if => :all_blank
 
+  @@asociaciones = %w{capacidad fase serie paisaje escurrimiento pendiente permeabilidad relieve anegamiento
+                      posicion ubicacion drenaje}
+
+  #
   # Construye los objetos asociados a la calicata, para usar con el +FormHelper+, si es que no
   # existen ya.
   #
@@ -50,9 +54,7 @@ class Calicata < ActiveRecord::Base
   #   - la calicata con las asociaciones preparadas
   #
   def preparar
-    %w{ capacidad fase serie paisaje escurrimiento pendiente permeabilidad relieve
-        anegamiento posicion ubicacion drenaje
-    }.each do |asociacion|
+    @@asociaciones.each do |asociacion|
       self.send("build_#{asociacion}") if self.send(asociacion).nil?
     end
     return self
