@@ -228,13 +228,13 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
 
   create_table "ubicaciones", :force => true do |t|
     t.string   "descripcion"
+    t.integer  "calicata_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "coordenadas", :limit => {:no_constraints=>true}
-    t.integer  "calicata_id"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
-  add_index "ubicaciones", ["coordenadas"], :name => "por_coordenadas", :spatial => true
+  add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
