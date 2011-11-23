@@ -16,7 +16,7 @@ class Ubicacion < ActiveRecord::Base
   belongs_to :calicata, :inverse_of => :ubicacion, :validate => true
 
   validates_presence_of :calicata
-  validates_format_of :coordenadas, :with => EPSG_4326
+  validates_format_of :lat_lon, :with => EPSG_4326, :allow_nil => true
 
 # == Accesors
 
