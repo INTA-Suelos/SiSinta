@@ -9,9 +9,23 @@ class Ubicacion < ActiveRecord::Base
   #
   EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)?; (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
 
+  self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326,
+                                :wkt_parser => :geos, :wkb_parserm => :geos,
+                                :wkt_generator => :geos, :wkb_generator => :geos)
+
   belongs_to :calicata, :inverse_of => :ubicacion, :validate => true
 
   validates_presence_of :calicata
   validates_format_of :coordenadas, :with => EPSG_4326
+
+# == Accesors
+
+  def coordenadas=(lat_lon)
+    write_attribute :coordenadas, "POINT(#{lat_lon})"
+  end
+
+  def coordenadas
+    read_attribute(:coordenadas).to_s.gsub(/POINT\s?\(/, '').gsub(')', '')
+  end
 
 end

@@ -35,8 +35,8 @@ class Calicata < ActiveRecord::Base
   has_many :limites,        :through => :horizontes
 
   belongs_to :usuario, :inverse_of => :calicatas
-  belongs_to :fase, :inverse_of => :calicatas, :validate => true, :autosave => true
-  belongs_to :serie, :inverse_of => :calicatas, :validate => true, :autosave => true
+  belongs_to :fase, :inverse_of => :calicatas, :autosave => true
+  belongs_to :serie, :inverse_of => :calicatas, :autosave => true
 
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :serie, :fase,
                                 :ubicacion, :reject_if => :all_blank
@@ -58,6 +58,25 @@ class Calicata < ActiveRecord::Base
       self.send("build_#{asociacion}") if self.send(asociacion).nil?
     end
     return self
+  end
+
+  # Este método se llama cuando se intenta guardar la serie asociada a la calicata.
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
+  def autosave_associated_records_for_serie
+    if not serie.nil?
+      if serie_existente = Serie.find_by_nombre(serie.nombre) then
+        self.serie = serie_existente
+      else
+        self.serie.save!
+      end
+    end
   end
 
 # == Validaciones

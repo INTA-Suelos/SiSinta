@@ -5,6 +5,7 @@ class UbicacionTest < ActiveSupport::TestCase
 
   setup do
     @atributos = {}
+    @u = ubicaciones(:one)
   end
 
   test "debería negarse a cargar la ubicación sin calicata" do
@@ -21,6 +22,10 @@ class UbicacionTest < ActiveSupport::TestCase
     assert_match regex, '89.000000;120.000000', "no permite 89.000000;120.000000"
     assert_match regex, '181.00;120.00', "permite 181.00;120.00"
     assert_match regex, '-90.00001;-180.0000', "permite -90.00001;-180.0000"
+  end
+
+  test "las coordenadas deberían estar en SRID 4326" do
+    assert_match /4326/, @u.coordenadas.srid
   end
 
 end
