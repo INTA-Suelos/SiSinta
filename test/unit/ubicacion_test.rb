@@ -28,4 +28,12 @@ class UbicacionTest < ActiveSupport::TestCase
     assert_match /4326/, @u.coordenadas.srid
   end
 
+  test "lat_lon debería guardar coordenadas correctamente" do
+    flunk
+  end
+
+  test "lat_lon debería cargar coordenadas en forma de 'lat lon'" do
+    flunk
+  end
+
 end
