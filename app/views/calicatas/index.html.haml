@@ -14,7 +14,7 @@
   - @calicatas.each do |calicata|
     %tr
       %td= calicata.fecha
-      %td= calicata.ubicacion.nil? ? '---' : calicata.ubicacion.coordenadas
+      %td= calicata.ubicacion.nil? ? 'desconocida' : calicata.ubicacion.lat_lon
       %td= calicata.numero
       %td= link_to 'Mostrar', calicata
       %td= link_to 'Editar', edit_calicata_path(calicata)
