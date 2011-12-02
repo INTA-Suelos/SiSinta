@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'test_helper'
 
 class SeriesControllerTest < ActionController::TestCase
@@ -46,4 +47,9 @@ class SeriesControllerTest < ActionController::TestCase
 
     assert_redirected_to series_path
   end
+
+  test "debería routear a nombre" do
+    assert_generates '/series/ajax/nombre', { :controller => 'series', :action => 'ajax', :atributo => 'nombre' }
+  end
+
 end

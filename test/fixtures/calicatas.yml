@@ -2,13 +2,17 @@
 
 uno:
   fecha: 2011-09-30
+  numero: abcd-34
 
 dos:
   fecha: 2011-09-30
+  numero: apoi-12
 
 valida:
   fecha: 2010-12-03
+  numero: abcd-98
 
 con_serie:
   fecha: 2011-09-30
   serie: carabelas
+  numero: cara-89

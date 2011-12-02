@@ -96,6 +96,11 @@ class CalicatasController < AutorizadoController
     end
   end
 
+  # GET /calicatas/ajax/:atributo
+  def ajax
+    render json: lista_para_autocompletar(Calicata, params[:atributo])
+  end
+
 protected
 
   # Prepara las variables para acceder desde la vista y armar las tablas de lookup

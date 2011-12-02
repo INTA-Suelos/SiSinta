@@ -5,6 +5,12 @@ Suelos::Application.routes.draw do
 
   devise_for :usuarios
 
+  # Podría matchear con
+  #   get ':controller/:action/:atributo', :constraints => {:action => /ajax/}
+  # pero tendría que filtrar específicamente los atributos que permito en cada modelo
+  get 'series/ajax/:atributo' => 'series#ajax'
+  get 'calicatas/ajax/:atributo' => 'calicatas#ajax'
+
   resources :analisis
   resources :calicatas
   resources :series

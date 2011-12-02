@@ -81,4 +81,10 @@ class SeriesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  # GET /series/ajax/:atributo
+  def ajax
+    render json: lista_para_autocompletar(Serie, params[:atributo])
+  end
+
 end
