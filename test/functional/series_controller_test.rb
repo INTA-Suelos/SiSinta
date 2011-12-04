@@ -4,6 +4,7 @@ require 'test_helper'
 class SeriesControllerTest < ActionController::TestCase
   setup do
     @serie = series(:carabela)
+    @nueva = Serie.new nombre: 'nueva serie', simbolo: 'ns'
   end
 
   test "should get index" do
@@ -19,7 +20,7 @@ class SeriesControllerTest < ActionController::TestCase
 
   test "should create serie" do
     assert_difference('Serie.count') do
-      post :create, serie: @serie.attributes
+      post :create, serie: @nueva.attributes
     end
 
     assert_redirected_to serie_path(assigns(:serie))

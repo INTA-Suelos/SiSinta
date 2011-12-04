@@ -41,7 +41,7 @@ class SeriesController < ApplicationController
   # POST /series
   # POST /series.json
   def create
-    @serie = Serie.new(params[:series])
+    @serie = Serie.new(params[:serie])
 
     respond_to do |format|
       if @serie.save
