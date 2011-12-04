@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111118010513) do
+ActiveRecord::Schema.define(:version => 20111204193858) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -32,10 +32,6 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
     t.decimal  "carbono",           :precision => 4, :scale => 2
     t.decimal  "nitrogeno",         :precision => 4, :scale => 3
     t.decimal  "arcilla",           :precision => 3, :scale => 1
-  end
-
-  create_table "anegamientos", :force => true do |t|
-    t.string "valor"
   end
 
   create_table "calicatas", :force => true do |t|
@@ -116,14 +112,6 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
     t.datetime "updated_at"
   end
 
-  create_table "drenajes", :force => true do |t|
-    t.string "valor"
-  end
-
-  create_table "escurrimientos", :force => true do |t|
-    t.string "valor"
-  end
-
   create_table "estructuras", :force => true do |t|
     t.string   "tipo"
     t.string   "clase"
@@ -169,6 +157,12 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
     t.datetime "updated_at"
   end
 
+  create_table "lookups", :force => true do |t|
+    t.string "type"
+    t.string "valor"
+    t.string "simbolo"
+  end
+
   create_table "paisajes", :force => true do |t|
     t.string   "tipo"
     t.string   "forma"
@@ -176,22 +170,6 @@ ActiveRecord::Schema.define(:version => 20111118010513) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calicata_id"
-  end
-
-  create_table "pendientes", :force => true do |t|
-    t.string "valor"
-  end
-
-  create_table "permeabilidades", :force => true do |t|
-    t.string "valor"
-  end
-
-  create_table "posiciones", :force => true do |t|
-    t.string "valor"
-  end
-
-  create_table "relieves", :force => true do |t|
-    t.string "valor"
   end
 
   create_table "roles", :force => true do |t|

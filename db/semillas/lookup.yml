@@ -15,8 +15,8 @@ drenaje:
   [clase 0, clase 1, clase 2, clase 3, clase 4, clase 5, clase 6]
 anegamiento:
   [clase 1, clase 2, clase 3, clase 4, clase 5]
-#sales:
-#  [no salino, débilmente salino, moderadamente salino, fuertemente salino]
-#uso_tierra:
-#  [agrícola, ganadero, frutícola, hortícola, bosque/monte, natural, bosque implantado,
-#   tierra improductiva, miscelánea]
+sal:
+  [no salino, débilmente salino, moderadamente salino, fuertemente salino]
+uso_tierra:
+  [agrícola, ganadero, frutícola, hortícola, bosque/monte, natural, bosque implantado,
+   tierra improductiva, miscelánea]

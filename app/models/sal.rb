@@ -1,0 +1,2 @@
+class Sal < Lookup
+end

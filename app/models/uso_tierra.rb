@@ -1,0 +1,2 @@
+class UsoTierra < Lookup
+end

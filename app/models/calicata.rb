@@ -71,8 +71,7 @@ class Calicata < ActiveRecord::Base
   #
   def autosave_associated_records_for_serie
     if not serie.nil?
-      if serie_existente = Serie.find_or_create_by_nombre(:nombre => serie.nombre,
-                                                          :simbolo => serie.simbolo) then
+      if serie_existente = (Serie.find_by_nombre(serie.nombre) or Serie.find_by_simbolo(serie.simbolo)) then
         self.serie = serie_existente
       else
         self.serie.save!
