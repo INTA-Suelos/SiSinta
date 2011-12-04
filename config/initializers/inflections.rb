@@ -38,4 +38,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'posicion', 'posiciones'
   inflect.irregular 'drenaje', 'drenajes'
   inflect.irregular 'ubicacion', 'ubicaciones'
+  inflect.irregular 'sal', 'sales'
+  inflect.irregular 'uso_tierra', 'usos_tierra'
 end
