@@ -1,20 +1,20 @@
-<p id="notice"><%= notice %></p>
+%p#notice= notice
 
-<p>
-  <b>Provincia:</b>
-  <%= @serie.provincia %>
-</p>
+%h1 Serie #{@serie.nombre}
 
-<p>
-  <b>Partido:</b>
-  <%= @serie.partido %>
-</p>
+%dl
+  %dt Símbolo
+  %dd= @serie.simbolo
+  %dt Provincia
+  %dd= @serie.provincia
+  %dt Partido
+  %dd= @serie.partido
+  - if modal = @serie.calicatas.modal.first
+    %dt Calicata modal
+    %dd.boton= link_to 'Mostrar', modal
 
-<p>
-  <b>Simbolo:</b>
-  <%= @serie.simbolo %>
-</p>
+= render partial: 'calicatas/lista', locals: { calicatas: @serie.calicatas }
 
-
-<%= link_to 'Edit', edit_serie_path(@serie) %> |
-<%= link_to 'Back', series_path %>
+= link_to 'Editar', edit_serie_path(@serie)
+|
+= link_to 'Volver', series_path

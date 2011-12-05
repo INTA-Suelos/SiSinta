@@ -59,3 +59,7 @@ ul.menu_horizontal {
 .centrado {
   @include centrado;
 }
+
+.flotado {
+  float: left;
+}

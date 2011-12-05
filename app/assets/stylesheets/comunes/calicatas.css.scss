@@ -1,40 +1,10 @@
 @import "constantes";
 
-form {
-  $altura-linea:  18px;
-
-  #principal { margin-left: 10px; }
-
-  line-height: $altura-linea;
-
-  input {
-    width: inherit !important;
-  }
-
-  input[type="number"] {
-    margin: 0.5em 0;
-    border: 1px solid #BBBBBB;
-    color: #000000;
-  }
-
-  select {  width: 100%;  }
-
-  input[type="checkbox"] {
-    margin-left: -2px;
-  }
-
+form.completa {
   .campo-suelto {
     padding-top: 0;
     padding-left: 659px;
   }
-
-  label {
-    font-size: x-small;
-  }
-
-  .subtitulo { text-decoration: underline; }
-
-  .texto-corto { height: $altura-linea * 2 + 1;  }
 
   #calicata_observaciones {
     width: 100%;
@@ -43,16 +13,12 @@ form {
     padding-right: 0;
   }
 
+  label {
+    font-size: x-small;
+  }
+
   .fecha {
     text-align: center;
   }
 
-}
-
-.prepend-media      { padding-left: 20px; }
-.prepend-unaymedia  { padding-left: 60px; }
-
-.boton {
-  padding: 0;
-  font-size: x-small;
 }

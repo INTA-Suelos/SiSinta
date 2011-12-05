@@ -1,5 +1,7 @@
 %h1 Nueva calicata
 
+.flotado= link_to 'Volver', calicatas_path
+
 = render partial: current_usuario.ficha, locals: {calicata: @calicata}
 
-= link_to 'Volver', calicatas_path
+.flotado= link_to 'Volver', calicatas_path

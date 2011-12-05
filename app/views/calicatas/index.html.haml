@@ -2,22 +2,4 @@
 
 = link_to 'Nueva Calicata', new_calicata_path
 
-%table.centrado
-  %tr
-    %th Fecha
-    %th Ubicación
-    %th Número
-    %th Serie
-    %th
-    %th
-    %th
-
-  - @calicatas.each do |calicata|
-    %tr
-      %td= calicata.fecha
-      %td= calicata.ubicacion.nil? ? 'sin descripción' : calicata.ubicacion.descripcion
-      %td= calicata.numero
-      %td= calicata.serie.nil? ? '' : calicata.serie.nombre
-      %td.boton= link_to 'Mostrar', calicata
-      %td.boton= link_to 'Editar', edit_calicata_path(calicata)
-      %td.boton= link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete
+= render partial: 'lista', locals: {calicatas: @calicatas}

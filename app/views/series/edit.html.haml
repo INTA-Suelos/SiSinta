@@ -1,6 +1,7 @@
-<h1>Editing series</h1>
+%h1 Editar serie #{@serie.simbolo}
 
-<%= render 'form' %>
+.flotado!= "#{link_to 'Mostrar', @serie} | #{link_to 'Volver', series_path}"
 
-<%= link_to 'Show', @serie %> |
-<%= link_to 'Back', series_path %>
+= render 'form'
+
+.flotado!= "#{link_to 'Mostrar', @serie} | #{link_to 'Volver', series_path}"
