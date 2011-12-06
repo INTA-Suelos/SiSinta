@@ -2,6 +2,8 @@
 
 %h1 Serie #{@serie.nombre}
 
+.flotado!= "#{link_to 'Editar', edit_serie_path(@serie)} | #{link_to 'Volver', series_path}"
+
 %dl
   %dt Símbolo
   %dd= @serie.simbolo
@@ -9,12 +11,12 @@
   %dd= @serie.provincia
   %dt Partido
   %dd= @serie.partido
-  - if modal = @serie.calicatas.modal.first
-    %dt Calicata modal
+  %dt Calicata modal
+  - if modal = @serie.calicatas.modal
     %dd.boton= link_to 'Mostrar', modal
+  - elsif
+    %dd.boton= link_to 'Crear', new_calicata_path(:calicata => {:serie_id => @serie})
 
 = render partial: 'calicatas/lista', locals: { calicatas: @serie.calicatas }
 
-= link_to 'Editar', edit_serie_path(@serie)
-|
-= link_to 'Volver', series_path
+.flotado!= "#{link_to 'Editar', edit_serie_path(@serie)} | #{link_to 'Volver', series_path}"
