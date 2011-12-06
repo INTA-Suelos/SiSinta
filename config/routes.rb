@@ -11,9 +11,10 @@ Suelos::Application.routes.draw do
   get 'series/ajax/:atributo' => 'series#ajax'
   get 'calicatas/ajax/:atributo' => 'calicatas#ajax'
 
-  resources :analisis
   resources :calicatas
   resources :series
+  resources :horizontes
+  resources :analisis
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

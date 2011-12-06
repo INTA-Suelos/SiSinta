@@ -1,10 +1,14 @@
-#menu.span-24
+#titulo.span-24
   #logo.span-4
     = link_to image_tag("logo.jpg", :alt => 'INTA'), 'http://inta.gov.ar/'
   .span-20.last
     %h1.inicio= link_to "Sistema de información de Suelos del INTA", inicio_index_path
-    %ul.menu_horizontal
+    %ul.menu_usuarios
       = render 'devise/menu/registration_items'
       = render 'devise/menu/login_items'
       - flash.each do |name, msg|
         = content_tag :div, msg, :class => 'mensaje', :id => "flash_#{name}" if msg.is_a?(String)
+#botonera.span-24
+  %ul.botones.span-12
+    %li= link_to 'Series', series_path
+    %li= link_to 'Calicatas', calicatas_path

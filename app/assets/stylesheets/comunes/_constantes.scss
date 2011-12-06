@@ -1,5 +1,5 @@
 // Dimensiones
-$alto_cabecera: 82px;
+$alto_cabecera: 87px;
 $altura-linea:  18px;
 
 // Colores
@@ -27,5 +27,13 @@ $verde:       rgb(0, green($azul_inta), 0);
   text-align: center;
   th, td {
     text-align: inherit;
+  }
+}
+
+@mixin menu_horizontal(){
+  list-style: none;
+
+  li {
+    display: inline
   }
 }

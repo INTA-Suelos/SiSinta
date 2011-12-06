@@ -1,6 +1,6 @@
 @import "constantes";
 
-#menu {
+#titulo {
   height: $alto_cabecera;
   float: none;
   margin: auto;
@@ -29,13 +29,33 @@
   }
 }
 
-ul.menu_horizontal {
-  list-style: none;
+ul.menu_usuarios {
+  @include menu_horizontal;
   margin: 0 0 2em;
   padding: 0;
+}
 
-  li {
-    display: inline
+#botonera {
+  float: none;
+  margin: auto;
+  height: 35px;
+  .botones {
+    @include menu_horizontal;
+    li {
+      width: 50px;
+      font-size: large;
+      background-color: $azul_inta;
+      a {
+        width: 100%;
+        padding: 5px;
+        text-decoration: none;
+        background-color: $azul_claro;
+        &:hover {
+          color: $rojo_inta;
+        }
+      }
+    }
+    padding: 0;
   }
 }
 
