@@ -25,7 +25,17 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def lat_lon
-    read_attribute(:coordenadas).to_s.gsub(/POINT\s?\(/, '').gsub(')', '')
+    if c = read_attribute(:coordenadas)
+      "#{c.x} #{c.y}"
+    end
+  end
+
+  def latitud
+    coordenadas.x if coordenadas
+  end
+
+  def longitud
+    coordenadas.y if coordenadas
   end
 
 end
