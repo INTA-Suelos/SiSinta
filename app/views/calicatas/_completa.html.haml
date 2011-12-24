@@ -48,7 +48,7 @@
         .span-11.last
           .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
           .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
-            :prompt => true, :include_blank => true
+            :include_blank => true
 
       .span-2= label_tag nil, 'Ubicación', :class => 'subtitulo'
       = f.fields_for :ubicacion do |f_u|
@@ -76,22 +76,22 @@
         .span-9.last= f.text_field :material_original
       .span-11.last
         .span-2= f.label :drenaje_id
-        .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor, :prompt => true,
+        .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor,
           :include_blank => true
 
       .span-11
         .span-2= f.label :relieve_id
-        .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor, :prompt => true,
+        .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor,
           :include_blank => true
       .span-11.last
         .span-2= f.label :anegamiento_id
         .span-8.last= f.collection_select :anegamiento_id, @anegamientos, :id, :valor,
-          :prompt => true, :include_blank => true
+          :include_blank => true
 
       .span-11
         .span-2= f.label :posicion_id
         .span-9.last= f.collection_select :posicion_id, @posiciones, :id, :valor,
-          :prompt => true, :include_blank => true
+          :include_blank => true
       .span-11.last
         .span-2= f.label :humedad
         .span-8.last= f.text_field :humedad
@@ -99,7 +99,7 @@
       .span-11
         .span-2= f.label :pendiente_id
         .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
-          :prompt => true, :include_blank => "Ninguna"
+          :include_blank => true
       .span-5
         .span-2= f.label :cobertura_vegetal, "Cobertura vegetal (%)"
         .span-3.last= f.text_field :cobertura_vegetal
@@ -110,7 +110,7 @@
       .span-11
         .span-2= f.label :escurrimiento_id
         .span-9.last= f.collection_select :escurrimiento_id,
-          @escurrimientos, :id, :valor, :prompt => true, :include_blank => true
+          @escurrimientos, :id, :valor, :include_blank => true
       .span-11.last
         .span-2= f.label :sales
         .span-8.last= f.text_field :sales
@@ -118,7 +118,7 @@
       .span-11
         .span-2= f.label :permeabilidad_id
         .span-9.last= f.collection_select :permeabilidad_id,
-          @permeabilidades, :id, :valor, :prompt => true, :include_blank => true
+          @permeabilidades, :id, :valor, :include_blank => true
       .span-11.last
         .span-2= f.label :pedregosidad
         .span-8.last= f.text_field :pedregosidad
