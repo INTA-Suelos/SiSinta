@@ -39,9 +39,9 @@ class CalicataTest < ActiveSupport::TestCase
 
   test "debería cargar y crear la serie asociada" do
     assert_nothing_raised do
-      @atributos[:serie_attributes] = { :simbolo => 'As', :nombre => 'Ascasubi' }
-      assert_difference 'Serie.count' do
-        Calicata.create(@atributos)
+      assert_difference 'Calicata.series.count' do
+        Calicata.create :modal => true, :simbolo => 'As', :nombre => 'Ascasubi',
+                        :fecha => Date.today
       end
     end
   end
@@ -107,6 +107,15 @@ class CalicataTest < ActiveSupport::TestCase
       @atributos[:escurrimiento_id] = Escurrimiento.first.id
       Calicata.create(@atributos)
     end
+  end
+
+  test "debería requerir el nombre" do
+    assert Calicata.new(calicatas(:anonima).attributes).invalid?, "valida sin nombre"
+  end
+
+  test "no debería permitir nombres duplicados" do
+    Calicata.create(calicatas(:carabela).attributes)
+    assert Calicata.new(calicatas(:carabela).attributes).invalid?, "permite nombres duplicados"
   end
 
 end

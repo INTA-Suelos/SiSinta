@@ -14,5 +14,20 @@ valida:
 
 con_serie:
   fecha: 2011-09-30
-  serie: carabelas
+  numero: cara-89
+  modal: true
+  nombre: carabela
+  simbolo: ca
+
+carabela:
+  fecha: 2011-09-30
+  simbolo: ca
+  modal: true
+  nombre: carabela
+  numero: cara-89
+
+anonima:
+  fecha: 2011-09-30
+  modal: true
+  simbolo: sc
   numero: cara-89

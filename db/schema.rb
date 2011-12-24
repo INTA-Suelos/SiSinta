@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111204193858) do
+ActiveRecord::Schema.define(:version => 20111224010520) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20111204193858) do
     t.decimal  "cobertura_vegetal"
     t.string   "uso_tierra"
     t.string   "vegetacion"
-    t.integer  "serie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ubicacion"
@@ -71,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20111204193858) do
     t.integer  "permeabilidad_id"
     t.integer  "anegamiento_id"
     t.integer  "aerofoto"
+    t.string   "nombre"
   end
 
   create_table "capacidad_clases", :force => true do |t|
@@ -179,15 +179,6 @@ ActiveRecord::Schema.define(:version => 20111204193858) do
   create_table "roles_usuarios", :id => false, :force => true do |t|
     t.integer "usuario_id"
     t.integer "rol_id"
-  end
-
-  create_table "series", :force => true do |t|
-    t.string   "provincia"
-    t.string   "partido"
-    t.string   "simbolo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "nombre"
   end
 
   create_table "texturas", :force => true do |t|

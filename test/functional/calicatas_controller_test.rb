@@ -85,4 +85,8 @@ class CalicatasControllerTest < ActionController::TestCase
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end
 
+  test "debería routear a nombre" do
+    assert_generates '/calicatas/ajax/nombre', { :controller => 'calicatas', :action => 'ajax', :atributo => 'nombre' }
+  end
+
 end

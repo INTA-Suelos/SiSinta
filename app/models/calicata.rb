@@ -1,8 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
 
+  scope :series, where(:modal => 'true')
+
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
+  validates_uniqueness_of :nombre, :allow_blank => true
+  validates_presence_of :nombre, :simbolo, :if => Proc.new { |c| c.modal? }
   validates_numericality_of :cobertura_vegetal, :only_integer => true, :allow_nil => true,
                             :greater_than => 0, :less_than => 101
 
@@ -36,12 +40,11 @@ class Calicata < ActiveRecord::Base
 
   belongs_to :usuario, :inverse_of => :calicatas
   belongs_to :fase, :inverse_of => :calicatas, :autosave => true
-  belongs_to :serie, :inverse_of => :calicatas, :autosave => true, :validate => false
 
-  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :serie, :fase,
-                                :ubicacion, :reject_if => :all_blank
+  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :fase, :ubicacion,
+                                :reject_if => :all_blank
 
-  @@asociaciones = %w{capacidad fase serie paisaje escurrimiento pendiente permeabilidad relieve anegamiento
+  @@asociaciones = %w{capacidad fase paisaje escurrimiento pendiente permeabilidad relieve anegamiento
                       posicion ubicacion drenaje}
 
   #
@@ -58,25 +61,6 @@ class Calicata < ActiveRecord::Base
       self.send("build_#{asociacion}") if self.send(asociacion).nil?
     end
     return self
-  end
-
-  # Este método se llama cuando se intenta guardar la serie asociada a la calicata.
-  #
-  # * *Args*    :
-  #   - ++ ->
-  # * *Returns* :
-  #   -
-  # * *Raises* :
-  #   - ++ ->
-  #
-  def autosave_associated_records_for_serie
-    if not serie.nil?
-      if serie_existente = (Serie.find_by_nombre(serie.nombre) or Serie.find_by_simbolo(serie.simbolo)) then
-        self.serie = serie_existente
-      else
-        self.serie.save!
-      end
-    end
   end
 
 # == Validaciones

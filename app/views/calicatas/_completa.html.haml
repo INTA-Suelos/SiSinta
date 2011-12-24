@@ -23,17 +23,15 @@
         .span-2.last= f.text_field :numero
 
       .span-11
-        = f.fields_for :serie do |f_s|
-          .span-2= f_s.label :nombre, 'Serie'
-          .span-9.last= f_s.text_field :nombre
+        .span-2= f.label :nombre, 'Serie'
+        .span-9.last= f.text_field :nombre
       .span-11.last
         = f.fields_for :fase do |f_f|
           .span-2= f_f.label :nombre, 'Fase'
           .span-8.last= f_f.text_field :nombre
       .span-11
-        = f.fields_for :serie do |f_s|
-          .span-2= f_s.label :simbolo
-          .span-9.last= f_s.text_field :simbolo
+        .span-2= f.label :simbolo
+        .span-9.last= f.text_field :simbolo
       .span-11.last
         .span-2= f.label :gran_grupo
         .span-8.last= f.text_field :gran_grupo

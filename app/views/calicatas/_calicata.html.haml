@@ -2,7 +2,6 @@
   %td= calicata.fecha
   %td= calicata.ubicacion.nil? ? 'Sin descripción' : calicata.ubicacion.descripcion
   %td= calicata.numero
-  %td= calicata.serie.nil? ? '' : calicata.serie.nombre
   %td.boton= link_to 'Mostrar', calicata
   %td.boton= link_to 'Editar', edit_calicata_path(calicata)
   %td.boton= link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete
