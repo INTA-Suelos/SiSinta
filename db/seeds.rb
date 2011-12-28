@@ -25,27 +25,18 @@ cargar('roles').each do |campo|
 end
 
 #
-# Carga de las tablas de Capacidad de uso
-#
-c = cargar('capacidades')
-c['clases'].each_pair do |agrupamiento, clases|
-  clases.each_pair do |codigo, descripcion|
-    CapacidadClase.find_or_create_by_codigo(codigo).update_attributes :agrupamiento => agrupamiento, :descripcion => descripcion
-  end
-end
-c['subclases'].each_pair do |codigo, descripcion|
-  CapacidadSubclase.find_or_create_by_codigo(codigo).update_attribute(:descripcion, descripcion)
-end
-
-#
 # Carga las tablas de lookup. Deben estar en la forma:
 #
 # modelo:
-#   [valor 1, valor 2, valor 3, ...]
+#   - [valor1, valor2, valor3]
+#   - [valor1, valor2, valor3]
+#   ...
 #
+# donde valor1 debe estar presente y ser único para cada modelo.
 cargar('lookup').each do |modelo|
-  modelo.last.each do |v|
-    Kernel.const_get(modelo.first.camelcase).find_or_create_by_valor(v)
+  modelo.last.each do |datos|
+    lookup = Kernel.const_get(modelo.first.camelcase).find_or_create_by_valor1(datos[0])
+    lookup.update_attributes(:valor2 => datos[1], :valor3 => datos[2])
   end
 end
 

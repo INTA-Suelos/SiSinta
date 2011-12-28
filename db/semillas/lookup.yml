@@ -2,21 +2,86 @@
 # Los datos para las tablas de lookup, de la ficha de calicatas
 #
 relieve:
-  [pronunciado, normal, subnormal, cóncavo]
+  - [pronunciado]
+  - [normal]
+  - [subnormal]
+  - [cóncavo]
 posicion:
-  [loma, media loma alta, media loma, media loma baja, pie de loma, bajo]
-pendiente: 
-  [0 - 1%, 1 - 3%, 3 - 10%, 10 - 25%, 25 - 45%, 45%]
+  - [loma]
+  - [media loma alta]
+  - [media loma]
+  - [media loma baja]
+  - [pie de loma]
+  - [bajo]
+pendiente:
+  - [0 - 1%]
+  - [1 - 3%]
+  - [3 - 10%]
+  - [10 - 25%]
+  - [25 - 45%]
+  - [45%]
 escurrimiento: 
-  [estancado, muy lento, lento, medio, rápido, muy rápido]
+  - [estancado]
+  - [muy lento]
+  - [lento]
+  - [medio]
+  - [rápido]
+  - [muy rápido]
 permeabilidad:
-  [muy lenta, lenta, moderadamente lenta, moderada, moderadamente rápida, rápida, muy rápida]
+  - [muy lenta]
+  - [lenta]
+  - [moderadamente lenta]
+  - [moderada]
+  - [moderadamente rápida]
+  - [rápida]
+  - [muy rápida]
 drenaje:
-  [clase 0, clase 1, clase 2, clase 3, clase 4, clase 5, clase 6]
+  - [clase 0]
+  - [clase 1]
+  - [clase 2]
+  - [clase 3]
+  - [clase 4]
+  - [clase 5]
+  - [clase 6]
 anegamiento:
-  [clase 1, clase 2, clase 3, clase 4, clase 5]
+  - [clase 1]
+  - [clase 2]
+  - [clase 3]
+  - [clase 4]
+  - [clase 5]
 sal:
-  [no salino, débilmente salino, moderadamente salino, fuertemente salino]
+  - [no salino]
+  - [débilmente salino]
+  - [moderadamente salino]
+  - [fuertemente salino]
 uso_tierra:
-  [agrícola, ganadero, frutícola, hortícola, bosque/monte, natural, bosque implantado,
-   tierra improductiva, miscelánea]
+  - [agrícola]
+  - [ganadero]
+  - [frutícola]
+  - [hortícola]
+  - [bosque/monte]
+  - [natural]
+  - [bosque implantado]
+  - [tierra improductiva]
+  - [miscelánea]
+
+# Clasificación utilitaria o Capacidad de uso, del Sistema de codificación de
+# suelos, Anexo 5
+capacidad_clase:
+  - [i,    sin limitaciones, tierras aptas para todo tipo de cultivo]
+  - [ii,   ligeras limitaciones, tierras aptas para todo tipo de cultivo]
+  - [iii,  moderadas limitaciones, tierras aptas para todo tipo de cultivo]
+  - [iv,   severas limitaciones, tierras aptas para cultivos limitados]
+  - [v,    dificultad de maquinaria, tierras generalmente no aptas para cultivos]
+  - [vi,   praderas naturales con posibles mejoras, tierras generalmente no aptas para cultivos]
+  - [vii,  pasturas naturales, tierras generalmente no aptas para cultivos]
+  - [viii, fauna, vida silvestre, tierras generalmente no aptas para cultivos]
+capacidad_subclase:
+  - [e, erosión]
+  - [s, limitaciones en la zona radicular]
+  - [c, limitaciones climáticas]
+  - [w, drenaje deficiente]
+
+# Texto de las ayudas contextuales
+ayuda:
+  - [descripcion, campo, modelo]

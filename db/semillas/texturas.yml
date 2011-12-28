@@ -2,7 +2,7 @@
 # Clasificación de los suelos según su textura,
 # de http://www.miliarium.com/Paginas/Prontu/Tablas/Suelos/ClasesTexturales.htm
 #
-#   Textura        Arena%   Limo% Arcilla% Clase textural
+#   | Textura                     | Arena % | Limo % | Arcilla % | Clase textural |
 #
 textura:
   - [textura gruesa,                86-100, 0-14,  0-10, [arenoso,              suelos arenosos]]
