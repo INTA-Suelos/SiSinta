@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111224010520) do
+ActiveRecord::Schema.define(:version => 20111228031532) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -159,8 +159,9 @@ ActiveRecord::Schema.define(:version => 20111224010520) do
 
   create_table "lookups", :force => true do |t|
     t.string "type"
-    t.string "valor"
-    t.string "simbolo"
+    t.string "valor2"
+    t.string "valor1"
+    t.string "valor3"
   end
 
   create_table "paisajes", :force => true do |t|
