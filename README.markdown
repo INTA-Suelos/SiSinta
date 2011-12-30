@@ -1,22 +1,20 @@
-== Sistema de Base de Datos de Suelos
+Sistema de Base de Datos de Suelos
+==================================
 
 Instalación
-===========
+-----------
 
-Base de datos
--------------
+### Base de datos
 
 1. [PostgreSQL]
 2. [PostGIS]
 3. template1 con las funciones y tablas de [PostGIS]
 
-Dependencias opcionales
------------------------
+### Dependencias opcionales
 
 * [Rgeo] puede usar [GEOS] si está instalado.
 
-Producción
-----------
+### Producción
 
     $ RAILS_ENV=production
     $ rake db:create
