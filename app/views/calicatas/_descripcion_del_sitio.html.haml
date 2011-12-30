@@ -1,0 +1,155 @@
+= field_set_tag 'Descripción del sitio', :class => 'celeste plegable span-22 last' do
+
+  .span-4.campo
+    .span-2= f.label :mosaico
+    .span-2.last= f.text_field :mosaico
+    = ayuda_para('modelo', 'campo')
+  .span-4.campo
+    .span-2= f.label :recorrido
+    .span-2.last= f.text_field :recorrido
+    = ayuda_para('modelo', 'campo')
+  .span-4.campo
+    .span-2= f.label :aerofoto
+    .span-2.last= f.text_field :aerofoto
+    = ayuda_para('modelo', 'campo')
+  .span-5.campo
+    .span-2= f.label :fecha
+    .span-3.last= f.text_field :fecha, :class => 'fecha'
+    = ayuda_para('modelo', 'campo')
+  .span-4.last.campo
+    .span-2= f.label :numero, "Número"
+    .span-2.last= f.text_field :numero
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :nombre, 'Serie'
+    .span-9.last= f.text_field :nombre
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    = f.fields_for :fase do |f_f|
+      .span-2= f_f.label :nombre, 'Fase'
+      .span-8.last= f_f.text_field :nombre
+      = ayuda_para('modelo', 'campo')
+  .span-11.campo
+    .span-2= f.label :simbolo, "Símbolo"
+    .span-9.last= f.text_field :simbolo
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :gran_grupo
+    .span-8.last= f.text_field :gran_grupo
+    = ayuda_para('modelo', 'campo')
+
+  .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
+  = f.fields_for :capacidad do |f_c|
+    .span-7.campo
+      .span-2= f_c.label :subclases, 'Símbolos'
+      .span-5.last
+        - @subclases.each do |s|
+          = label_tag s.codigo
+          = check_box_tag "calicata[capacidad_attributes][subclase_ids][]",
+            s.id, tildada?(s)
+      = ayuda_para('modelo', 'campo')
+    .span-11.last.campo
+      .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
+      .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
+        :include_blank => true
+      = ayuda_para('modelo', 'campo')
+
+  .span-2= label_tag nil, 'Ubicación', :class => 'subtitulo'
+  = f.fields_for :ubicacion do |f_u|
+    .span-9.campo
+      .span-2= f_u.label :lat_lon, "Coordenadas"
+      .span-7.last= f_u.text_field :lat_lon
+      = ayuda_para('modelo', 'campo')
+    .span-11.last.campo
+      .span-2= f_u.label :descripcion
+      .span-8.last= f_u.text_field :descripcion
+      = ayuda_para('modelo', 'campo')
+
+  .span-2= label_tag nil, 'Paisaje', :class => 'subtitulo'
+  = f.fields_for :paisaje do |f_p|
+    .span-9.campo
+      .span-2= f_p.label :tipo
+      .span-7.last= f_p.text_field :tipo
+      = ayuda_para('modelo', 'campo')
+    .span-5.campo
+      .span-2= f_p.label :forma
+      .span-3.last= f_p.text_field :forma
+      = ayuda_para('modelo', 'campo')
+    .span-6.last.campo
+      .span-2= f_p.label :simbolo, 'Símbolo'
+      .span-3.last= f_p.text_field :simbolo
+      = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :material_original
+    .span-9.last= f.text_field :material_original
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :drenaje_id
+    .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor,
+      :include_blank => true
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :relieve_id
+    .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor,
+      :include_blank => true
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :anegamiento_id
+    .span-8.last= f.collection_select :anegamiento_id, @anegamientos, :id, :valor,
+      :include_blank => true
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :posicion_id, "Posición"
+    .span-9.last= f.collection_select :posicion_id, @posiciones, :id, :valor,
+      :include_blank => true
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :humedad
+    .span-8.last= f.text_field :humedad
+
+  .span-11.campo
+    .span-2= f.label :pendiente_id
+    .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
+      :include_blank => true
+    = ayuda_para('modelo', 'campo')
+  .span-5.campo
+    .span-2= f.label :cobertura_vegetal, "Cobertura vegetal (%)"
+    .span-3.last= f.text_field :cobertura_vegetal
+    = ayuda_para('modelo', 'campo')
+  .span-6.last.campo
+    .span-2= f.label :profundidad_napa, "Profundidad de la napa"
+    .span-3.last= f.text_field :profundidad_napa
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :escurrimiento_id
+    .span-9.last= f.collection_select :escurrimiento_id,
+      @escurrimientos, :id, :valor, :include_blank => true
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :sales
+    .span-8.last= f.text_field :sales
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :permeabilidad_id
+    .span-9.last= f.collection_select :permeabilidad_id,
+      @permeabilidades, :id, :valor, :include_blank => true
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :pedregosidad
+    .span-8.last= f.text_field :pedregosidad
+    = ayuda_para('modelo', 'campo')
+
+  .span-11.campo
+    .span-2= f.label :erosion, "Erosión"
+    .span-9.last= f.text_field :erosion
+    = ayuda_para('modelo', 'campo')
+  .span-11.last.campo
+    .span-2= f.label :uso_tierra, "Uso de la tierra"
+    .span-8.last= f.text_field :uso_tierra
+    = ayuda_para('modelo', 'campo')

@@ -16,7 +16,8 @@ form {
   select {  width: 100%;  }
 
   input[type="checkbox"] {
-    margin-left: -2px;
+    margin-left: 2px;
+    width: auto !important;
   }
 
   .subtitulo { text-decoration: underline; }
@@ -24,6 +25,23 @@ form {
   .texto-corto { height: $altura-linea * 2 + 1;  }
 
   .campo {
+    .ayuda {
+      display: none;
+      background-color: lightyellow;
+      z-index: 3;
+      position: absolute;
+      left: 1%;
+      min-height: 6%;
+      width: 12%;
+      border: 1px solid black;
+      text: black;
+      padding: 2px;
+    }
+    &:hover {
+      .ayuda {
+        display: block;
+      }
+    }
   }
 }
 
@@ -68,4 +86,8 @@ form {
 .boton {
   padding: 0;
   font-size: x-small;
+}
+
+select {
+  border-color: #bbb;
 }
