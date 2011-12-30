@@ -1,5 +1,9 @@
-Sistema de Base de Datos de Suelos
-==================================
+SiSINTA
+=======
+
+El **Sistema de Información de Suelos del [INTA]** es un SIG, hecho con
+[PostGIS] y [Rails], para almacenar y procesar los datos de muestras de suelos
+del instituto.
 
 Instalación
 -----------
@@ -25,5 +29,6 @@ El usuario default es Administrador, y se loguea con email@falso.com y el passwo
 
 [PostgreSQL]: http://www.postgresql.org/
 [PostGIS]: http://www.postgis.org/
+[Rails]: http://rubyonrails.org/
 [Rgeo]: http://virtuoso.rubyforge.org/rgeo/
 [GEOS]: http://trac.osgeo.org/geos/
