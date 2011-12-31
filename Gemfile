@@ -24,7 +24,9 @@ gem 'acts_as_list'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
-# Esta gema falla con algún cambio de ActiveRecord
+gem 'rgeo'
+gem 'rgeo-geojson', :require => 'rgeo/geo_json'
+# Esta gema falla a partir de algún cambio de ActiveRecord
 #gem 'postgis_adapter'
 
 # Gems used only for assets and not required
