@@ -28,9 +28,10 @@
       .span-9.last= f_f.text_field :nombre
       = ayuda_para('modelo', 'campo')
   .span-11.last.campo
-    .span-2= f.label :gran_grupo
-    .span-8.last= f.text_field :gran_grupo
-    = ayuda_para('modelo', 'campo')
+    = f.fields_for :grupo do |f_g|
+      .span-2= f_g.label :descripcion, 'Gran grupo'
+      .span-8.last= f_g.text_field :descripcion
+      = ayuda_para('modelo', 'campo')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', :class => 'subtitulo'
   = f.fields_for :capacidad do |f_c|
