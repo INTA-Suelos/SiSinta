@@ -21,4 +21,17 @@ form.completa {
     text-align: center;
   }
 
+  #calicata_modal + #serie {
+    visibility: hidden;
+  }
+
+  #calicata_modal:checked + #serie {
+    visibility: visible;
+  }
+
+  #serie {
+    label, input {
+      margin-left: -6px;
+    }
+  }
 }

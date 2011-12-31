@@ -10,6 +10,9 @@ Suelos::Application.routes.draw do
   # pero tendría que filtrar específicamente los atributos que permito en cada modelo
   get 'calicatas/ajax/:atributo' => 'calicatas#ajax'
 
+  # Para limitar las vistas a las calicatas que son modales
+  get '/series' => 'calicatas#index', :as => 'series'
+
   resources :calicatas
   resources :horizontes
   resources :analisis

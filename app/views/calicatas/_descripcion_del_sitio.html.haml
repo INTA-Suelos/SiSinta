@@ -1,5 +1,6 @@
 = field_set_tag 'Descripción del sitio', :class => 'celeste plegable span-22 last' do
 
+
   .span-4.campo
     .span-2= f.label :mosaico
     .span-2.last= f.text_field :mosaico
@@ -22,18 +23,10 @@
     = ayuda_para('modelo', 'campo')
 
   .span-11.campo
-    .span-2= f.label :nombre, 'Serie'
-    .span-9.last= f.text_field :nombre
-    = ayuda_para('modelo', 'campo')
-  .span-11.last.campo
     = f.fields_for :fase do |f_f|
       .span-2= f_f.label :nombre, 'Fase'
-      .span-8.last= f_f.text_field :nombre
+      .span-9.last= f_f.text_field :nombre
       = ayuda_para('modelo', 'campo')
-  .span-11.campo
-    .span-2= f.label :simbolo, "Símbolo"
-    .span-9.last= f.text_field :simbolo
-    = ayuda_para('modelo', 'campo')
   .span-11.last.campo
     .span-2= f.label :gran_grupo
     .span-8.last= f.text_field :gran_grupo

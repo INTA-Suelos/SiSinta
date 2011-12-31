@@ -1,15 +1,29 @@
 class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups
+  skip_before_filter :authenticate_usuario!, :only => :index
 
   # GET /calicatas
   # GET /calicatas.json
+  # GET /series
+  # GET /series.json
   def index
-    @calicatas = Calicata.all(:order => 'fecha ASC')
+    if request.fullpath =~ /^\/series/ then
+      @calicatas = Calicata.series.all(:order => 'fecha ASC')
+      @alias = 'serie'
+    else
+      @calicatas = Calicata.all(:order => 'fecha ASC')
+      @alias = 'calicata'
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @calicatas }
+      format.json { render  json: @calicatas,
+                            only: [ :id,
+                                    :numero,
+                                    :nombre,
+                                    :ubicacion,
+                                    :fecha      ] }
     end
   end
 

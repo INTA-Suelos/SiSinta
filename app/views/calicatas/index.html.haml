@@ -1,5 +1,6 @@
-%h1 Lista de calicatas
+%h1 Lista de #{@alias.pluralize}
 
-= link_to 'Nueva Calicata', new_calicata_path
+- parametros = { :calicata => { :modal => true } } if @alias == 'serie'
+= link_to "Nueva #{@alias.titleize}", new_calicata_path(parametros)
 
 = render partial: 'lista', locals: {calicatas: @calicatas}

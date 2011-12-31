@@ -1,5 +1,9 @@
 class AutorizadoController < ApplicationController
+
+  # Autenticación con Devise
   before_filter :authenticate_usuario!
+
+  # Autorización con CanCan
   check_authorization
   load_and_authorize_resource
 
