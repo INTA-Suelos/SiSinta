@@ -5,3 +5,9 @@ tmp/
 .sass-cache/
 .*swp
 TODO
+
+# Archivos a configurar en cada deploy
+config/database.yml
+config/environments/production.rb
+config/initializers/devise.rb
+config/initializers/secret_token.rb
