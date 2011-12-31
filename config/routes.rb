@@ -16,6 +16,7 @@ Suelos::Application.routes.draw do
   resources :calicatas
   resources :horizontes
   resources :analisis
+  resources :grupos
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
