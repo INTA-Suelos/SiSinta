@@ -20,10 +20,28 @@ Instalación
 
 ### Producción
 
-    $ RAILS_ENV=production
-    $ rake db:create
-    $ rake db:setup
+Hay que configurar los archivos `.dist` y sacarles esa extensión:
+
+* `config/database.yml.dist`
+* `config/environments/production.rb.dist`
+* `config/initializers/devise.rb.dist`
+* `config/initializers/secret_token.rb.dist`
+
+Configuramos el entorno en *producción*
+
+    $ export RAILS_ENV=production
+
+Creamos la base de datos
+
+    $ rake db:reset
+
+Precompilamos los archivos estáticos
+
     $ rake assets:precompile
+
+Instalamos las dependencias
+
+    $ bundle install
 
 El usuario default es Administrador, y se loguea con email@falso.com y el password *administrador*
 
