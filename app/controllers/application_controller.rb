@@ -20,6 +20,16 @@ class ApplicationController < ActionController::Base
     @mobile = browser_is_mobile?
   end
 
+  # GET /:controlador/ajax/:atributo
+  def ajax(modelo)
+    render json: lista_para_autocompletar(modelo, params[:atributo])
+  end
+
+  # Métodos de BrowserDetect
+  helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
+
+protected
+
   # Devuelve una lista de coincidencias con el término de búsqueda para usar en el autocomplete de
   # JQuery-UI. Cada controlador llama al método con un Modelo
   #
@@ -43,6 +53,4 @@ class ApplicationController < ActionController::Base
                                           "#{atributo}" => elemento.send(atributo)]}
   end
 
-  # Métodos de BrowserDetect
-  helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 end
