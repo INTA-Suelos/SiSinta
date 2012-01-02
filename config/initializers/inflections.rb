@@ -41,4 +41,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'sal', 'sales'
   inflect.irregular 'uso_tierra', 'usos_tierra'
   inflect.irregular 'ayuda', 'ayudas'
+  inflect.irregular 'grupo', 'grupos'
 end

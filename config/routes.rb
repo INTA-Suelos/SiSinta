@@ -8,7 +8,8 @@ Suelos::Application.routes.draw do
   # Podría matchear con
   #   get ':controller/:action/:atributo', :constraints => {:action => /ajax/}
   # pero tendría que filtrar específicamente los atributos que permito en cada modelo
-  get 'calicatas/ajax/:atributo' => 'calicatas#ajax'
+  get 'grupos/ajax/:atributo' => 'grupos#ajax'
+  get 'fases/ajax/:atributo' => 'fases#ajax'
 
   # Para limitar las vistas a las calicatas que son modales
   get '/series' => 'calicatas#index', :as => 'series'
@@ -16,6 +17,8 @@ Suelos::Application.routes.draw do
   resources :calicatas
   resources :horizontes
   resources :analisis
+  resources :grupos
+  resources :fases
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

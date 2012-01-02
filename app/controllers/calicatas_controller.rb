@@ -110,9 +110,12 @@ class CalicatasController < AutorizadoController
     end
   end
 
-  # GET /calicatas/ajax/:atributo
+  #
+  # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
+  # consultar.
+  #
   def ajax
-    render json: lista_para_autocompletar(Calicata, params[:atributo])
+    super(Calicata)
   end
 
 protected

@@ -40,11 +40,13 @@ class Calicata < ActiveRecord::Base
 
   belongs_to :usuario, :inverse_of => :calicatas
   belongs_to :fase, :inverse_of => :calicatas, :autosave => true
+  belongs_to :grupo, :inverse_of => :calicatas, :autosave => true
 
   accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :fase, :ubicacion,
+                                :grupo,
                                 :reject_if => :all_blank
 
-  @@asociaciones = %w{capacidad fase paisaje ubicacion horizontes}
+  @@asociaciones = %w{capacidad fase grupo paisaje ubicacion horizontes}
 
   #
   # Construye los objetos asociados a la calicata, para usar con el +FormHelper+, si es que no

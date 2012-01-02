@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111228031532) do
+ActiveRecord::Schema.define(:version => 20111231063325) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20111228031532) do
     t.string   "esquema"
     t.string   "mosaico"
     t.string   "pedregosidad"
-    t.string   "gran_grupo"
     t.string   "recorrido"
     t.string   "simbolo"
     t.string   "humedad"
@@ -71,17 +70,7 @@ ActiveRecord::Schema.define(:version => 20111228031532) do
     t.integer  "anegamiento_id"
     t.integer  "aerofoto"
     t.string   "nombre"
-  end
-
-  create_table "capacidad_clases", :force => true do |t|
-    t.string "codigo"
-    t.string "descripcion"
-    t.string "agrupamiento"
-  end
-
-  create_table "capacidad_subclases", :force => true do |t|
-    t.string "codigo"
-    t.string "descripcion"
+    t.integer  "grupo_id"
   end
 
   create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|
@@ -130,6 +119,11 @@ ActiveRecord::Schema.define(:version => 20111228031532) do
     t.integer  "calicata_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "grupos", :force => true do |t|
+    t.string "codigo"
+    t.string "descripcion"
   end
 
   create_table "horizontes", :force => true do |t|
