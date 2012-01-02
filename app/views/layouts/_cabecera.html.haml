@@ -8,6 +8,3 @@
       = render 'devise/menu/login_items'
       - flash.each do |name, msg|
         = content_tag :div, msg, :class => 'mensaje', :id => "flash_#{name}" if msg.is_a?(String)
-#botonera.span-24
-  %ul.botones.span-12
-    %li= link_to 'Calicatas', calicatas_path
