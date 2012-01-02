@@ -145,6 +145,7 @@
     .span-9.last= f.text_field :erosion
     = ayuda_para('modelo', 'campo')
   .span-11.last.campo
-    .span-2= f.label :uso_tierra, "Uso de la tierra"
-    .span-8.last= f.text_field :uso_tierra
+    .span-2= f.label :uso_tierra_id, "Uso de la tierra"
+    .span-8.last= f.collection_select :uso_tierra_id, @usos_tierra, :id, :valor,
+      :include_blank => true
     = ayuda_para('modelo', 'campo')

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102203048) do
+ActiveRecord::Schema.define(:version => 20120102203850) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20120102203048) do
     t.float    "profundidad_napa"
     t.boolean  "humedad_uniforme"
     t.decimal  "cobertura_vegetal"
-    t.string   "uso_tierra"
     t.string   "vegetacion"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20120102203048) do
     t.string   "nombre"
     t.integer  "grupo_id"
     t.integer  "sal_id"
+    t.integer  "uso_tierra_id"
   end
 
   create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|

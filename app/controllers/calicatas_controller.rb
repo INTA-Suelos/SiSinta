@@ -140,5 +140,6 @@ protected
     @escurrimientos = Escurrimiento.all
     @permeabilidades = Permeabilidad.all
     @sales = Sal.all
+    @usos_tierra = UsoTierra.all
   end
 end
