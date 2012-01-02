@@ -25,7 +25,8 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "las coordenadas deberían estar en SRID 4326" do
-    assert_match /4326/, @u.coordenadas.srid
+    flunk
+    #assert_match /4326/, @u.coordenadas.srid
   end
 
   test "lat_lon debería guardar coordenadas correctamente" do

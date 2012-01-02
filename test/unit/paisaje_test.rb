@@ -10,7 +10,7 @@ class PaisajeTest < ActiveSupport::TestCase
   end
 
   test "debería negarse a guardar un paisaje sin datos" do
-    assert !Paisaje.new(:calicata => calicatas(:uno)).save, "permite guardar un paisaje en blanco"
+    flunk
   end
 
 end
