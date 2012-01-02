@@ -82,6 +82,17 @@ capacidad_subclase:
   - [c, limitaciones climáticas]
   - [w, drenaje deficiente]
 
+limite_tipo:
+  - [abrupto]
+  - [claro]
+  - [gradual]
+  - [difuso]
+limite_forma:
+  - [suave]
+  - [ondulado]
+  - [irregular]
+  - [quebrado]
+
 # Texto de las ayudas contextuales
 ayuda:
   - [descripcion, campo, modelo]

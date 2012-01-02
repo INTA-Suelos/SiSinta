@@ -42,4 +42,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'uso_tierra', 'usos_tierra'
   inflect.irregular 'ayuda', 'ayudas'
   inflect.irregular 'grupo', 'grupos'
+  inflect.irregular 'limite_tipo', 'limite_tipos'
+  inflect.irregular 'limite_forma', 'limite_formas'
 end
