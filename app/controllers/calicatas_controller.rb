@@ -139,5 +139,6 @@ protected
     @pendientes = Pendiente.all
     @escurrimientos = Escurrimiento.all
     @permeabilidades = Permeabilidad.all
+    @sales = Sal.all
   end
 end

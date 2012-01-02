@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111231063325) do
+ActiveRecord::Schema.define(:version => 20120102203048) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20111231063325) do
     t.string   "recorrido"
     t.string   "simbolo"
     t.string   "humedad"
-    t.string   "sales"
     t.string   "erosion"
     t.integer  "fase_id"
     t.boolean  "modal",             :default => false
@@ -71,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20111231063325) do
     t.integer  "aerofoto"
     t.string   "nombre"
     t.integer  "grupo_id"
+    t.integer  "sal_id"
   end
 
   create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|

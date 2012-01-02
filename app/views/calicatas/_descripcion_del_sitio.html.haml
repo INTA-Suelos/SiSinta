@@ -125,8 +125,9 @@
       @escurrimientos, :id, :valor, :include_blank => true
     = ayuda_para('modelo', 'campo')
   .span-11.last.campo
-    .span-2= f.label :sales
-    .span-8.last= f.text_field :sales
+    .span-2= f.label :sal_id, 'Sales'
+    .span-8.last= f.collection_select :sal_id, @sales, :id, :valor,
+      :include_blank => true
     = ayuda_para('modelo', 'campo')
 
   .span-11.campo
