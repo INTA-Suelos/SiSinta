@@ -7,5 +7,6 @@
 //= require jquery.min
 //= require jquery-ui.min
 //= require jquery_ujs
+//= require jquery.nested-fields
 //= require_tree ./jquery
 //= require_tree ./comunes
