@@ -141,5 +141,7 @@ protected
     @permeabilidades = Permeabilidad.all
     @sales = Sal.all
     @usos_tierra = UsoTierra.all
+    @formas_limite = LimiteForma.all
+    @tipos_limite = LimiteTipo.all
   end
 end

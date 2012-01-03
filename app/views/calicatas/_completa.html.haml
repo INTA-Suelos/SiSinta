@@ -20,7 +20,7 @@
             = ayuda_para('modelo', 'campo')
 
     = render partial: 'descripcion_del_sitio', locals: {f: f}
-    = render partial: 'horizonte', collection: @calicata.horizontes, locals: {f: f}
+    = render partial: 'descripcion_de_los_horizontes', locals: {f: f}
     = render partial: 'observaciones', locals: {f: f}
 
     .acciones.span-4.last= f.submit

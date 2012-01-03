@@ -14,4 +14,21 @@ class Horizonte < ActiveRecord::Base
                                 :estructura
 
   validates_presence_of :calicata
+
+  #
+  # Construye los objetos asociados al modelo, para usar con el +FormHelper+, si es que no
+  # existen ya.
+  #
+  # * *Args*    :
+  #   - +calicata+ -> la instancia de calicata sobre la que construir las asociaciones
+  # * *Returns* :
+  #   - el modelo con las asociaciones preparadas
+  #
+  def preparar
+    %w{color limite consistencia estructura analisis}.each do |asociacion|
+      self.send("build_#{asociacion}") if self.send(asociacion).nil?
+    end
+    return self
+  end
+
 end

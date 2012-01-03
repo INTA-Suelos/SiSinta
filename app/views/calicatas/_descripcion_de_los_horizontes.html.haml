@@ -1,58 +1,34 @@
 = field_set_tag 'Descripción de los horizontes', :class => 'celeste plegable span-22 last' do
 
-  .span-1
-    .span-1.last= label_tag :tipo_n, 'Clase Hz'
-    .span-1.last= text_field_tag :tipo_n
-
-  .span-1
-    .span-1.last= label_tag :profundidad_n, 'Prof. inf.'
-    .span-1.last= text_field_tag :profundidad_n
-
+  .span-1= label_tag nil, 'Clase Hz'
+  .span-1= label_tag nil, 'Prof. inf.'
   .span-2
-    .prepend-media.span-2.last= label_tag nil, 'Límite', :class=> 'subtitulo'
-    .span-1
-      .span-1.last= label_tag :limite_t_n, 'Tipo'
-      .span-1.last= text_field_tag :limite_t_n
-    .span-1.last
-      .span-1.last= label_tag :limite_f_n, 'Forma'
-      .span-1.last= text_field_tag :limite_f_n
-
+    .span-2.last= label_tag nil, 'Límite', :class=> 'subtitulo'
+    .span-1= label_tag nil, 'Tipo'
+    .span-1.last= label_tag nil, 'Forma'
+  .span-1.texto-corto= label_tag nil, 'Textura'
   .span-4
-    .prepend-unaymedia.span-2.last= label_tag nil, 'Color', :class=> 'subtitulo'
-    .span-2
-      .span-2.last= label_tag :color_s_n, 'En seco'
-      .span-2.last= text_field_tag :color_s_n
-    .span-2.last
-      .span-2.last= label_tag :color_h_n, 'En húmedo'
-      .span-2.last= text_field_tag :color_h_n
-
-  .span-1
-    .span-1.texto-corto= label_tag :textura_n, 'Textura'
-    .span-1= text_field_tag :textura_n
-
+    .prepend-2.span-2.last= label_tag nil, 'Color', :class=> 'subtitulo'
+    .span-2= label_tag nil, 'En seco'
+    .span-2.last= label_tag nil, 'En húmedo'
   .span-6
-    .prepend-2.span-4.last= label_tag nil, 'Estructura', :class=> 'subtitulo'
-    .span-2
-      .span-2.last= label_tag :estructura_t_n, 'Tipo'
-      .span-2.last= text_field_tag :estructura_t_n
-    .span-2
-      .span-2.last= label_tag :estructura_c_n, 'Clase'
-      .span-2.last= text_field_tag :estructura_c_n
-    .span-2.last
-      .span-2.last= label_tag :estructura_g_n, 'Grado'
-      .span-2.last= text_field_tag :estructura_g_n
+    .prepend-1.span-4.last= label_tag nil, 'Estructura', :class=> 'subtitulo'
+    .span-2= label_tag nil, 'Tipo'
+    .span-2= label_tag nil, 'Clase'
+    .span-2.last= label_tag nil, 'Grado'
+  .span-6
+    .prepend-2.span-4= label_tag nil, 'Consistencia', :class=> 'subtitulo'
+    .span-2.last= label_tag nil, 'S'
+    .span-2.last= label_tag nil, 'H'
+    .span-1.last= label_tag nil, 'plast.'
+    .span-1.last= label_tag nil, 'adhes.'
+  .span-1.last= link_to '+', '#', :class => 'add'
 
-  .span-6.last
-    .prepend-2.span-4.last= label_tag nil, 'Consistencia', :class=> 'subtitulo'
-    .span-2
-      .span-2.last= label_tag :consistencia_s_n, 'S'
-      .span-2.last= text_field_tag :consistencia_s_n
-    .span-2
-      .span-2.last= label_tag :consistencia_h_n, 'H'
-      .span-2.last= text_field_tag :consistencia_h_n
-    .span-1
-      .span-1.last= label_tag :consistencia_m_p_n, 'plast.'
-      .span-1.last= text_field_tag :consistencia_m_p_n
-    .span-1.last
-      .span-1.last= label_tag :consistencia_m_a_n, 'adhes.'
-      .span-1.last= text_field_tag :consistencia_m_a_n
+  .items
+    = f.nested_fields_for :horizontes, show_empty: true, render_template: false do |f_h|
+      - if f_h
+        .item= render partial: 'horizonte', locals: {h: f_h}
+      - else
+        .span-21.empty No hay horizontes cargados
+
+    = nested_fields_templates
