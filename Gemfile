@@ -15,6 +15,7 @@ gem 'cancan'
 ## Presentación
 gem 'dynamic_form'
 gem 'haml'
+gem 'awesome_nested_fields'
 
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'

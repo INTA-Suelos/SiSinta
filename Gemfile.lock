@@ -35,6 +35,8 @@ GEM
     acts_as_list (0.1.4)
     ansi (1.4.1)
     arel (2.2.1)
+    awesome_nested_fields (0.6.0)
+      rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
     browser_detect (0.0.5)
     builder (3.0.0)
@@ -152,6 +154,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter
   acts_as_list
+  awesome_nested_fields
   browser_detect
   cancan
   coffee-rails (~> 3.1.0)
