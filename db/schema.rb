@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102203850) do
+ActiveRecord::Schema.define(:version => 20120104171428) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -144,11 +144,11 @@ ActiveRecord::Schema.define(:version => 20120102203850) do
   end
 
   create_table "limites", :force => true do |t|
-    t.string   "tipo"
-    t.string   "forma"
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "limite_tipo_id"
+    t.integer  "limite_forma_id"
   end
 
   create_table "lookups", :force => true do |t|
