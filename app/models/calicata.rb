@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
+  after_initialize :preparar
 
   scope :series, where(:modal => 'true')
 
@@ -46,24 +47,6 @@ class Calicata < ActiveRecord::Base
                                 :grupo,
                                 :reject_if => :all_blank
 
-  @@asociaciones = %w{capacidad fase grupo paisaje ubicacion horizontes}
-
-  #
-  # Construye los objetos asociados a la calicata, para usar con el +FormHelper+, si es que no
-  # existen ya.
-  #
-  # * *Args*    :
-  #   - +calicata+ -> la instancia de calicata sobre la que construir las asociaciones
-  # * *Returns* :
-  #   - la calicata con las asociaciones preparadas
-  #
-  def preparar
-    @@asociaciones.each do |asociacion|
-      self.send("build_#{asociacion}") if self.send(asociacion).nil?
-    end
-    return self
-  end
-
 # == Validaciones
 
   #
@@ -73,6 +56,10 @@ class Calicata < ActiveRecord::Base
     if !fecha.blank? and fecha > Date.today
       errors.add(:fecha, I18n.t("error por fecha futura"))
     end
+  end
+
+  def preparar
+    super(%w{capacidad paisaje ubicacion fase grupo})
   end
 
 end

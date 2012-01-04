@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Horizonte < ActiveRecord::Base
+  after_initialize :preparar
+
   has_one :analisis,      :dependent => :destroy, :inverse_of => :horizonte
   has_one :color,         :dependent => :destroy, :inverse_of => :horizonte
   has_one :limite,        :dependent => :destroy, :inverse_of => :horizonte
@@ -15,20 +17,8 @@ class Horizonte < ActiveRecord::Base
 
   validates_presence_of :calicata
 
-  #
-  # Construye los objetos asociados al modelo, para usar con el +FormHelper+, si es que no
-  # existen ya.
-  #
-  # * *Args*    :
-  #   - +calicata+ -> la instancia de calicata sobre la que construir las asociaciones
-  # * *Returns* :
-  #   - el modelo con las asociaciones preparadas
-  #
   def preparar
-    %w{color limite consistencia estructura analisis}.each do |asociacion|
-      self.send("build_#{asociacion}") if self.send(asociacion).nil?
-    end
-    return self
+    super(%w{color limite consistencia estructura analisis})
   end
 
 end

@@ -41,8 +41,6 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata.preparar
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @calicata }
@@ -52,14 +50,12 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1/edit
   def edit
     @calicata = Calicata.find(params[:id])
-    @calicata.preparar
   end
 
   # POST /calicatas
   # POST /calicatas.json
   def create
     @calicata = Calicata.new(params[:calicata])
-    @calicata.preparar
 
     respond_to do |format|
       if @calicata.save
@@ -85,7 +81,6 @@ class CalicatasController < AutorizadoController
     end
 
     @calicata = Calicata.find(params[:id])
-    @calicata.preparar
 
     respond_to do |format|
       if @calicata.update_attributes(params[:calicata])
