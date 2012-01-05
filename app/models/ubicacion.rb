@@ -18,25 +18,6 @@ class Ubicacion < ActiveRecord::Base
   validates_presence_of :calicata
   validates_format_of :lat_lon, :with => EPSG_4326, :allow_blank => true
 
-# == Accesors
-
-  def lat_lon=(lat_lon)
-    write_attribute :coordenadas, "POINT(#{lat_lon})"
-  end
-
-  def lat_lon
-    if c = read_attribute(:coordenadas)
-      "#{c.x} #{c.y}"
-    end
-  end
-
-  def latitud
-    coordenadas.x if coordenadas
-  end
-
-  def longitud
-    coordenadas.y if coordenadas
-  end
 
   #
   # Convierte el nombre del mosaico guardardo a coordenadas. Por ejemplo, el
@@ -56,6 +37,40 @@ class Ubicacion < ActiveRecord::Base
   #
   def aproximar
     "no implementado"
+  end
+
+# == Accesors
+
+  #
+  # Sobreescribo el conversor default para que sea llamado por +to_json+ desde
+  # el controlador y devuelva geojson para las coordenadas.
+  #
+  def as_json
+    { :calicata_id => calicata_id,
+      :mosaico => mosaico,
+      :recorrido => recorrido,
+      :aerofoto => aerofoto,
+      :descripcion => descripcion,
+      :id => id,
+      :geojson => RGeo::GeoJSON.encode(coordenadas) }
+  end
+
+  def lat_lon=(lat_lon)
+    write_attribute :coordenadas, "POINT(#{lat_lon})"
+  end
+
+  def lat_lon
+    if c = read_attribute(:coordenadas)
+      "#{c.x} #{c.y}"
+    end
+  end
+
+  def latitud
+    coordenadas.x if coordenadas
+  end
+
+  def longitud
+    coordenadas.y if coordenadas
   end
 
 end
