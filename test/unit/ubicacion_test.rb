@@ -5,15 +5,16 @@ class UbicacionTest < ActiveSupport::TestCase
 
   setup do
     @atributos = {}
-    @u = ubicaciones(:one)
+    @u = Ubicacion.new(:calicata => calicatas(:uno))
   end
 
   test "debería negarse a cargar la ubicación sin calicata" do
     assert Ubicacion.new(@atributos).invalid?, "una ubicación sin calicata es válida"
+    assert @u.valid?, "una ubicación sólo con calicata es válida"
   end
 
   test "debería negarse a guardar un punto mal formado" do
-    assert Ubicacion.new(:coordenadas => "sarasa").invalid?, "permite guardar 'sarasa' como latitud/longitud"
+    assert Ubicacion.new(:coordenadas => 'rms').invalid?, "permite guardar 'rms' como latitud/longitud"
   end
 
   test "debería validar latitud;longitud sólo entre -90/90 y -180/180" do
@@ -25,16 +26,21 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "las coordenadas deberían estar en SRID 4326" do
-    flunk
-    #assert_match /4326/, @u.coordenadas.srid
+    @u.lat_lon= "50 50"
+    srid = @u.coordenadas.srid
+    assert 4326 == srid, "#{srid} es un SRID incorrecto"
   end
 
-  test "lat_lon debería guardar coordenadas correctamente" do
-    flunk
+  test "lat_lon maneja coordenadas correctamente" do
+    u = Ubicacion.new :lat_lon => "22.1 33.2"
+    assert_equal "22.1 33.2", u.lat_lon
+    assert 22.1 == u.latitud
+    assert 33.2 == u.longitud
   end
 
-  test "lat_lon debería cargar coordenadas en forma de 'lat lon'" do
-    flunk
+  test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
+    u = Ubicacion.new mosaico: '3760-2-2'
+    assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
 end
