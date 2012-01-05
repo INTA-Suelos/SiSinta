@@ -1,18 +1,19 @@
 = field_set_tag 'Descripción del sitio', :class => 'celeste plegable span-22 last' do
 
 
-  .span-4.campo
-    .span-2= f.label :mosaico
-    .span-2.last= f.text_field :mosaico
-    = ayuda_para('modelo', 'campo')
-  .span-4.campo
-    .span-2= f.label :recorrido
-    .span-2.last= f.text_field :recorrido
-    = ayuda_para('modelo', 'campo')
-  .span-4.campo
-    .span-2= f.label :aerofoto
-    .span-2.last= f.text_field :aerofoto
-    = ayuda_para('modelo', 'campo')
+  = f.fields_for :ubicacion do |f_u|
+    .span-4.campo
+      .span-2= f_u.label :mosaico
+      .span-2.last= f_u.text_field :mosaico
+      = ayuda_para('modelo', 'campo')
+    .span-4.campo
+      .span-2= f_u.label :recorrido
+      .span-2.last= f_u.text_field :recorrido
+      = ayuda_para('modelo', 'campo')
+    .span-4.campo
+      .span-2= f_u.label :aerofoto
+      .span-2.last= f_u.text_field :aerofoto
+      = ayuda_para('modelo', 'campo')
   .span-5.campo
     .span-2= f.label :fecha
     .span-3.last= f.text_field :fecha, :class => 'fecha'
