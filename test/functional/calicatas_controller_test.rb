@@ -32,6 +32,7 @@ class CalicatasControllerTest < ActionController::TestCase
     sign_in @admin
     assert_difference('Calicata.count', 1) do
       post :create, calicata: @calicata.attributes
+      assert_response :success
     end
 
     assert_redirected_to calicata_path(assigns(:calicata))
@@ -83,10 +84,6 @@ class CalicatasControllerTest < ActionController::TestCase
   test "el usuario logueado debería ser admin" do
     sign_in @admin
     assert @controller.current_usuario.admin?, "el usuario no es admin"
-  end
-
-  test "debería routear a nombre" do
-    assert_generates '/calicatas/ajax/nombre', { :controller => 'calicatas', :action => 'ajax', :atributo => 'nombre' }
   end
 
 end
