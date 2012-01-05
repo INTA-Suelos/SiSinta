@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Ubicacion < ActiveRecord::Base
 
   #
@@ -36,7 +37,7 @@ class Ubicacion < ActiveRecord::Base
   #   - ++ ->
   #
   def aproximar
-    "no implementado"
+    "no implementado todavía"
   end
 
 # == Accesors
