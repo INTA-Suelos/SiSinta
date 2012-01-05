@@ -26,6 +26,7 @@ gem 'acts_as_list'
 gem 'activerecord-postgis-adapter'
 gem 'rgeo'
 gem 'rgeo-geojson', :require => 'rgeo/geo_json'
+
 # Esta gema falla a partir de algún cambio de ActiveRecord
 #gem 'postgis_adapter'
 
