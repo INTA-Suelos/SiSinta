@@ -41,6 +41,8 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
+    @calicata = Calicata.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @calicata }
@@ -139,4 +141,5 @@ protected
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
   end
+
 end

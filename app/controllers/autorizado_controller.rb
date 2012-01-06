@@ -5,7 +5,7 @@ class AutorizadoController < ApplicationController
 
   # Autorización con CanCan
   check_authorization
-  load_and_authorize_resource
+  authorize_resource
 
   rescue_from CanCan::AccessDenied do |e|
     flash[:error] = I18n.t 'unauthorized.default'
