@@ -30,9 +30,9 @@ class CalicatasControllerTest < ActionController::TestCase
 
   test "should create calicata" do
     sign_in @admin
+
     assert_difference('Calicata.count', 1) do
       post :create, calicata: @calicata.attributes
-      assert_response :success
     end
 
     assert_redirected_to calicata_path(assigns(:calicata))

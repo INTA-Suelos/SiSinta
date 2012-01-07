@@ -6,7 +6,7 @@ class CalicataTest < ActiveSupport::TestCase
   fixtures :all
 
   setup do
-    @atributos = {  :fecha => Date.today }
+    @atributos = { fecha: Date.today }
   end
 
   test "debería prohibir guardar calicatas sin fecha" do
@@ -40,8 +40,8 @@ class CalicataTest < ActiveSupport::TestCase
   test "debería cargar y crear la serie asociada" do
     assert_nothing_raised do
       assert_difference 'Calicata.series.count' do
-        Calicata.create :modal => true, :simbolo => 'As', :nombre => 'Ascasubi',
-                        :fecha => Date.today
+        Calicata.create modal: true, simbolo: 'As', nombre: 'Ascasubi',
+                        fecha: Date.today
       end
     end
   end
@@ -67,7 +67,7 @@ class CalicataTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería cargar el posicion de la tabla de lookup" do
+  test "debería cargar la posicion de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:posicion_id] = Posicion.first.id
       Calicata.create(@atributos)
@@ -88,14 +88,14 @@ class CalicataTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería cargar el permeabilidad de la tabla de lookup" do
+  test "debería cargar la permeabilidad de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:permeabilidad_id] = Permeabilidad.first.id
       Calicata.create(@atributos)
     end
   end
 
-  test "debería cargar el pendiente de la tabla de lookup" do
+  test "debería cargar la pendiente de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:pendiente_id] = Pendiente.first.id
       Calicata.create(@atributos)
