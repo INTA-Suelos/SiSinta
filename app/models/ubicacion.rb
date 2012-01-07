@@ -14,7 +14,7 @@ class Ubicacion < ActiveRecord::Base
                                 wkt_parser: :geos, wkt_generator: :geos,
                                 wkb_parser: :geos, wkb_generator: :geos)
 
-  belongs_to :calicata, :inverse_of => :ubicacion, :validate => true
+  belongs_to :calicata, :inverse_of => :ubicacion
 
   validates_presence_of :calicata
   validates_format_of :lat_lon, :with => EPSG_4326, :allow_blank => true
@@ -53,7 +53,7 @@ class Ubicacion < ActiveRecord::Base
       :aerofoto => aerofoto,
       :descripcion => descripcion,
       :id => id,
-      :geojson => RGeo::GeoJSON.encode(coordenadas) }
+      :geojson => coordenadas_en_geojson }
   end
 
   def lat_lon=(lat_lon)
@@ -72,6 +72,10 @@ class Ubicacion < ActiveRecord::Base
 
   def longitud
     coordenadas.y if coordenadas
+  end
+
+  def coordenadas_en_geojson
+    RGeo::GeoJSON.encode(coordenadas) unless coordenadas.nil?
   end
 
 end
