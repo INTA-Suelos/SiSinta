@@ -6,11 +6,11 @@ class PaisajeTest < ActiveSupport::TestCase
   fixtures :calicatas
 
   test "debería negarse a guardarla sin calicata asociada" do
-    assert !Paisaje.new.save, "permite guardar un paisaje sin calicata asociada"
+    assert Paisaje.new.invalid?, "permite guardar un paisaje sin calicata asociada"
   end
 
-  test "debería negarse a guardar un paisaje con datos vacíos" do
-    assert !Paisaje.new(:calicata => calicatas(:uno)).save, "permite guardar un paisaje sin datos"
+  test "debería permitir guardar un paisaje que sólo tiene calicata" do
+    assert Paisaje.new(:calicata => calicatas(:uno)).valid?, "se niega a guardar un paisaje en blanco"
   end
 
 end
