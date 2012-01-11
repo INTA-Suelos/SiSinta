@@ -1,25 +1,25 @@
-.span-1= h.text_field :tipo
-.span-1= h.text_field :profundidad
+.span-1= h.text_field :tipo, :disabled => bloqueado
+.span-1= h.text_field :profundidad, :disabled => bloqueado
 .span-2
   = h.fields_for :limite do |h_l|
     .span-1= h_l.collection_select :limite_tipo_id, @tipos_limite, :id, :valor,
-      :include_blank => true
+      { :include_blank => true }, { :disabled => bloqueado }
     .span-1.last= h_l.collection_select :limite_forma_id, @formas_limite, :id,
-      :valor, :include_blank => true
+      :valor, { :include_blank => true }, { :disabled => bloqueado }
 .span-4
   = h.fields_for :color do |h_c|
-    .span-2= h_c.text_field :seco
-    .span-2.last= h_c.text_field :humedo
-.span-1= h.text_field :textura
+    .span-2= h_c.text_field :seco, :disabled => bloqueado
+    .span-2.last= h_c.text_field :humedo, :disabled => bloqueado
+.span-1= h.text_field :textura, :disabled => bloqueado
 .span-6
   = h.fields_for :estructura do |h_e|
-    .span-2= h_e.text_field :tipo
-    .span-2= h_e.text_field :clase
-    .span-2.last= h_e.text_field :grado
+    .span-2= h_e.text_field :tipo, :disabled => bloqueado
+    .span-2= h_e.text_field :clase, :disabled => bloqueado
+    .span-2.last= h_e.text_field :grado, :disabled => bloqueado
 .span-6
   =h.fields_for :consistencia do |h_c|
-    .span-1= h_c.text_field :seco
-    .span-1= h_c.text_field :humedo
-    .span-2= h_c.text_field :mojado_plasticidad
-    .span-2.last= h_c.text_field :mojado_adhesividad
-.span-1.last= link_to 'X', '#', :class => 'remove'
+    .span-1= h_c.text_field :seco, :disabled => bloqueado
+    .span-1= h_c.text_field :humedo, :disabled => bloqueado
+    .span-2= h_c.text_field :mojado_plasticidad, :disabled => bloqueado
+    .span-2.last= h_c.text_field :mojado_adhesividad, :disabled => bloqueado
+.span-1.last= link_to 'X', '#', :class => 'remove' unless bloqueado
