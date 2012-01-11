@@ -43,6 +43,14 @@ form {
       }
     }
   }
+
+  input, textarea, select {
+    &[disabled] {
+      background-color: #f5f5f5;
+      color: #000;
+    }
+  }
+
 }
 
 // estilo para los campos y etiquetas con error en los formularios
