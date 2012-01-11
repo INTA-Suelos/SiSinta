@@ -37,4 +37,19 @@ form.completa {
 
   .add, .remove { text-decoration: none; }
 
+  .empty {
+    padding-top: 15.3334px;
+  }
+
+  .add {
+    font-size: large;
+  }
+
+  .remove {
+    padding-left: 2px;
+  }
+
+  .empty, .remove, .add {
+    font-weight: bold;
+  }
 }
