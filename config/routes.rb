@@ -3,6 +3,7 @@ Suelos::Application.routes.draw do
 
   get "inicio/index"
 
+  # Autenticación en rack
   devise_for :usuarios
 
   # Podría matchear con
@@ -14,11 +15,17 @@ Suelos::Application.routes.draw do
   # Para limitar las vistas a las calicatas que son modales
   get '/series' => 'calicatas#index', :as => 'series'
 
-  resources :calicatas
-  resources :horizontes
-  resources :analisis
-  resources :grupos
-  resources :fases
+  # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
+  scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
+    resources :horizontes
+    resources :analisis
+    resources :grupos
+  end
+
+  scope(:path_names => { :new => "nueva", :edit => "editar" }) do
+    resources :calicatas
+    resources :fases
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
