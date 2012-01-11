@@ -8,19 +8,19 @@
       .span-2.prepend-media= f.label :modal, 'Es modal?', :class => 'subtitulo'
       .span-20.last.campo
         = ayuda_para('modelo', 'campo')
-        = f.check_box :modal, :class => 'span-1'
+        = f.check_box :modal, :class => 'span-1', :disabled => bloqueado
         #serie
           .span-13.prepend-unaymedia.campo
             .span-2= f.label :nombre, 'Nombre de la serie'
-            .span-11.last= f.text_field :nombre
+            .span-11.last= f.text_field :nombre, :disabled => bloqueado
             = ayuda_para('modelo', 'campo')
           .span-4.last.campo
             .span-2= f.label :simbolo, 'Símbolo de la serie'
-            .span-2.last= f.text_field :simbolo
+            .span-2.last= f.text_field :simbolo, :disabled => bloqueado
             = ayuda_para('modelo', 'campo')
 
-    = render partial: 'descripcion_del_sitio', locals: {f: f}
-    = render partial: 'descripcion_de_los_horizontes', locals: {f: f}
-    = render partial: 'observaciones', locals: {f: f}
+    = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'descripcion_de_los_horizontes', locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'observaciones', locals: {f: f, bloqueado: bloqueado}
 
-    .acciones.span-4.last= f.submit
+    .acciones.span-4.last= f.submit unless bloqueado
