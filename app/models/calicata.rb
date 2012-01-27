@@ -78,4 +78,12 @@ class Calicata < ActiveRecord::Base
     end
   end
 
+  def propiedades_publicas
+    to_json only: [:id, :numero, :nombre, :fecha]
+  end
+
+  def geometria
+    self.ubicacion.try(:coordenadas)
+  end
+
 end

@@ -24,6 +24,9 @@ class CalicatasController < AutorizadoController
                                     :nombre,
                                     :ubicacion,
                                     :fecha      ] }
+      format.geojson { render json: como_geojson(
+                                      @calicatas.reject { |c| c.ubicacion.coordenadas.nil? },
+                                      :geometria) }
     end
   end
 
