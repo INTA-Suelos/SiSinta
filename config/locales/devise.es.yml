@@ -34,14 +34,12 @@ es:
       send_paranoid_instructions: 'Si tu correo existe en nuestra base de datos, vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos pocos minutos.'
       confirmed: 'Tu cuenta fue confirmada. Ya iniciaste sesión.'
     registrations:
+      signed_up_but_unconfirmed: 'Se ha enviado un mensaje con un link de confirmación a tu cuenta de correo. Por favor accede al link para activar tu cuenta.'
+      signed_up_but_inactive: 'Te has registrado exitosamente. Sin embargo, no hemos podido loguearte porque tu cuenta todavía no ha sido activada.'
+      signed_up_but_locked: 'Te has registrado exitosamente. Sin embargo, no hemos podido loguearte porque tu cuenta está bloqueada.'
       signed_up: 'Bienvenido. Tu cuenta fue creada.'
-      inactive_signed_up: 'Tu cuenta fue creada. Sin embargo, no podemos iniciar tu sesión porque tu cuenta está %{reason}.'
       updated: 'Tu cuenta fue actualizada.'
       destroyed: 'Fue grato tenerte con nosotros. Tu cuenta fue cancelada.'
-      reasons:
-        inactive: 'inactiva'
-        unconfirmed: 'sin confirmar'
-        locked: 'bloqueada'
     unlocks:
       send_instructions: 'Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
       unlocked: 'Tu cuenta fue desbloqueada. Ya iniciaste sesión.'
