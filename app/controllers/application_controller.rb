@@ -25,6 +25,26 @@ class ApplicationController < ActionController::Base
     render json: lista_para_autocompletar(modelo, params[:atributo])
   end
 
+  #
+  #
+  # * *Args*    :
+  #   - ++ ->
+  # * *Returns* :
+  #   -
+  # * *Raises* :
+  #   - ++ ->
+  #
+  def como_geojson(objetos, metodo_geom)
+    factory = RGeo::GeoJSON::EntityFactory.instance
+
+    features = []
+    objetos.each do |o|
+      features << factory.feature(o.send(metodo_geom), nil, o.propiedades_publicas)
+    end
+
+    RGeo::GeoJSON.encode factory.feature_collection(features)
+  end
+
   # Métodos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 

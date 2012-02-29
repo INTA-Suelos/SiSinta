@@ -1,21 +1,14 @@
 class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups
-  skip_before_filter :authenticate_usuario!, :only => :index
+  before_filter :cargar_series_y_calicatas, :only => [:index, :geo]
+  skip_before_filter :authenticate_usuario!, :only => [:index, :geo]
 
   # GET /calicatas
   # GET /calicatas.json
   # GET /series
   # GET /series.json
   def index
-    if request.fullpath =~ /^\/series/ then
-      @calicatas = Calicata.series.all(:order => 'fecha ASC')
-      @alias = 'serie'
-    else
-      @calicatas = Calicata.all(:order => 'fecha ASC')
-      @alias = 'calicata'
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render  json: @calicatas,
@@ -24,9 +17,16 @@ class CalicatasController < AutorizadoController
                                     :nombre,
                                     :ubicacion,
                                     :fecha      ] }
-      format.geojson { render json: como_geojson(
-                                      @calicatas.reject { |c| c.ubicacion.coordenadas.nil? },
-                                      :geometria) }
+    end
+  end
+
+  # GET /calicatas/geo.json
+  # GET /series/geo.json
+  def geo
+     respond_to do |format|
+      format.json { render json: como_geojson(
+                              @calicatas.reject { |c| c.ubicacion.coordenadas.nil? },
+                              :geometria)   }
     end
   end
 
@@ -145,4 +145,13 @@ protected
     @tipos_limite = LimiteTipo.all
   end
 
+  def cargar_series_y_calicatas
+    if request.fullpath =~ /^\/series/ then
+      @calicatas = Calicata.series.all(:order => 'fecha ASC')
+      @alias = 'serie'
+    else
+      @calicatas = Calicata.all(:order => 'fecha ASC')
+      @alias = 'calicata'
+    end
+  end
 end

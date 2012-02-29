@@ -10,10 +10,14 @@ Suelos::Application.routes.draw do
   #   get ':controller/:action/:atributo', :constraints => {:action => /ajax/}
   # pero tendría que filtrar específicamente los atributos que permito en cada modelo
   get 'grupos/ajax/:atributo' => 'grupos#ajax'
-  get 'fases/ajax/:atributo' => 'fases#ajax'
+  get 'fases/ajax/:atributo'  => 'fases#ajax'
 
   # Para limitar las vistas a las calicatas que son modales
   get '/series' => 'calicatas#index', :as => 'series'
+
+  # Explicito la ruta para evitar que tome 'geo' como un :id
+  get '/calicatas/geo'  => 'calicatas#geo'
+  get '/series/geo'     => 'calicatas#geo', :as => 'series'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
   scope(:path_names => { :new => "nuevo", :edit => "editar" }) do

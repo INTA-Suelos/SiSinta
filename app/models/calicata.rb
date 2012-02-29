@@ -78,10 +78,19 @@ class Calicata < ActiveRecord::Base
     end
   end
 
+  #
+  # Prepara un hash para que RGeo genere geojson
+  #
   def propiedades_publicas
-    to_json only: [:id, :numero, :nombre, :fecha]
+    [:id, :numero, :nombre, :fecha].inject({}) do |hash, atributo|
+      hash[atributo] = self.try(atributo)
+      hash
+    end
   end
 
+  #
+  # Devuelve el objeto con la geometría para RGeo
+  #
   def geometria
     self.ubicacion.try(:coordenadas)
   end

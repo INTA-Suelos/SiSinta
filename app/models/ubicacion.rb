@@ -46,7 +46,7 @@ class Ubicacion < ActiveRecord::Base
   # Sobreescribo el conversor default para que sea llamado por +to_json+ desde
   # el controlador y devuelva geojson para las coordenadas.
   #
-  def as_json
+  def as_json(options={})
     { :calicata_id => calicata_id,
       :mosaico => mosaico,
       :recorrido => recorrido,
