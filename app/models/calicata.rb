@@ -95,4 +95,14 @@ class Calicata < ActiveRecord::Base
     self.ubicacion.try(:coordenadas)
   end
 
+  #
+  # Este método es llamado para generar el formulario de exportar/importar CSV.
+  # Utiliza los atributos del modelo y sus asociaciones.
+  #
+  # * *Devuelve* : la lista de atributos para exportar/importar como CSV
+  #
+  def self.atributos_para_csv
+    self.attribute_names.reject {|n| n =~ /[Upd|Cre]ated_at$/}
+  end
+
 end

@@ -118,6 +118,16 @@ class CalicatasController < AutorizadoController
     super(Calicata)
   end
 
+  #
+  # Preparar los atributos a exportar/importar en CSV
+  #
+  def preparar_csv
+    @atributos = Calicata.atributos_para_csv
+    respond_to do |format|
+      format.html
+    end
+  end
+
 protected
 
   # Prepara las variables para acceder desde la vista y armar las tablas de lookup
