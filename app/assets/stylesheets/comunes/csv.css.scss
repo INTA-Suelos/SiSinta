@@ -1,0 +1,15 @@
+@import "constantes";
+
+form#csv {
+
+  label {
+    font-size: x-small;
+  }
+
+  #atributos {
+    .campo label {
+      padding-left: 4px;
+    }
+  }
+
+}

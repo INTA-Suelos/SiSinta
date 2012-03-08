@@ -3,6 +3,8 @@ Suelos::Application.routes.draw do
 
   get "inicio/index"
 
+  get   "calicatas/preparar_csv"
+
   # Autenticación en rack
   devise_for :usuarios
 

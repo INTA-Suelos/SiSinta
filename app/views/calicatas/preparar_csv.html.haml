@@ -1,0 +1,23 @@
+= form_tag 'procesar_csv', :class => 'span-24 last', :id => 'csv'
+
+= field_set_tag "#{@accion.try{:titleize}} a CSV", :class => 'azul_claro span-23 last' do
+
+  #controles.span-22.last
+    #marcar.span-4.prepend-media.campo
+      = label_tag "Marcar todo"
+    #desmarcar.span-4.prepend-media.campo.desaparecer
+      = label_tag "Desmarcar todo"
+    .span-2.last.campo
+      = check_box_tag 'check', :id => 'check'
+
+  = field_set_tag nil, :class => 'celeste span-22 last' do
+
+    #atributos.span-21.last
+      - @atributos.each do |a|
+        .span-21.last.campo{:class => cycle('azul_claro', 'celeste')}
+          .span-4
+            = label_tag a
+          .span-2.last
+            = check_box_tag "calicata[#{a}]"
+
+  .acciones.span-4= submit_tag 'Exportar'
