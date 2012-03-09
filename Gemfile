@@ -59,4 +59,5 @@ end
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'minitest'
 end
