@@ -3,21 +3,21 @@
 = field_set_tag "#{@accion.try{:titleize}} a CSV", :class => 'azul_claro span-23 last' do
 
   #controles.span-22.last
-    #marcar.span-4.prepend-media.campo
+    #marcar.span-3.campo
       = label_tag "Marcar todo"
-    #desmarcar.span-4.prepend-media.campo.desaparecer
+    #desmarcar.span-3.campo.desaparecer
       = label_tag "Desmarcar todo"
-    .span-2.last.campo
+    .span-1.last.campo
       = check_box_tag 'check', :id => 'check'
 
   = field_set_tag nil, :class => 'celeste span-22 last' do
 
-    #atributos.span-21.last
+    #atributos.span-22.last
       - @atributos.each do |a|
-        .span-21.last.campo{:class => cycle('azul_claro', 'celeste')}
-          .span-4
+        .span-6.last.campo{:class => cycle('azul_claro', 'celeste')}
+          .span-5
             = label_tag a
-          .span-2.last
+          .span-1.last
             = check_box_tag "calicata[#{a}]"
 
   .acciones.span-4= submit_tag 'Exportar'

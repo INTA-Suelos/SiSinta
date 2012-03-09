@@ -7,8 +7,15 @@ form#csv {
   }
 
   #atributos {
-    .campo label {
-      padding-left: 4px;
+    .campo {
+      margin-left: 30px;
+      margin-right: 30px;
+      label {
+        padding-left: 4px;
+      }
+      input[type='checkbox'] {
+        margin-left: 4px;
+      }
     }
   }
 
