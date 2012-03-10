@@ -105,4 +105,8 @@ class Calicata < ActiveRecord::Base
     self.attribute_names.reject {|n| n =~ /[Upd|Cre]ated_at$/}
   end
 
+  def to_csv(atributos = nil)
+    atributos ||= Calicata.atributos_para_csv
+    atributos.inject([]) { |csv,atributo| csv << self.try(atributo) }
+  end
 end

@@ -4,6 +4,7 @@ Suelos::Application.routes.draw do
   get "inicio/index"
 
   get   "calicatas/preparar_csv"
+  post  "calicatas/procesar_csv"
 
   # Autenticación en rack
   devise_for :usuarios

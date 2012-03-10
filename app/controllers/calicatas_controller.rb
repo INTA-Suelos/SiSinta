@@ -1,3 +1,6 @@
+# encoding: utf-8
+require 'csv'
+
 class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups
@@ -126,6 +129,23 @@ class CalicatasController < AutorizadoController
     respond_to do |format|
       format.html
     end
+  end
+
+  def procesar_csv
+    @calicatas = Calicata.all
+
+    @archivo = "calicatas_#{Date.today.strftime('%d-%m-%Y')}.csv"
+
+    @respuesta = CSV.generate do |csv|
+      @atributos = params[:atributos].keys.flatten
+      csv << @atributos if params[:incluir_encabezado]
+      @calicatas.each do |c|
+        csv << c.to_csv(@atributos)
+      end
+    end
+
+    send_data @respuesta, :filename => @archivo
+
   end
 
 protected
