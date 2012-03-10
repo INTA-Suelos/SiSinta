@@ -74,6 +74,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.1.0)
     orm_adapter (0.0.6)
+    param_protected (4.0.0)
     pg (0.13.1)
     polyglot (0.3.3)
     pry (0.9.8.2)
@@ -156,6 +157,7 @@ DEPENDENCIES
   haml
   hirb
   jquery-rails
+  param_protected
   pg
   pry
   pry-rails

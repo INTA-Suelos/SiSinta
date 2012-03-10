@@ -8,9 +8,10 @@ gem 'rails', '3.1.1'
 ## DB
 gem 'pg'
 
-## Aut{enticación,orización}
+## Aut{enticación,orización}, seguridad en general
 gem 'devise'
 gem 'cancan'
+gem 'param_protected'
 
 ## Presentación
 gem 'dynamic_form'
