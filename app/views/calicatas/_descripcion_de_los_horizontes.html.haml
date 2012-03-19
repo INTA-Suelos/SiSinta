@@ -2,15 +2,15 @@
 
   .span-1= label_tag nil, 'Clase Hz'
   .span-1= label_tag nil, 'Prof. inf.'
-  .span-2
-    .span-2.last= label_tag nil, 'Límite', :class=> 'subtitulo'
-    .span-1= label_tag nil, 'Tipo'
-    .span-1.last= label_tag nil, 'Forma'
-  .span-1.texto-corto= label_tag nil, 'Textura'
   .span-4
-    .prepend-2.span-2.last= label_tag nil, 'Color', :class=> 'subtitulo'
-    .span-2= label_tag nil, 'En seco'
-    .span-2.last= label_tag nil, 'En húmedo'
+    .prepend-1.span-3.last= label_tag nil, 'Límite', :class=> 'subtitulo'
+    .span-2= label_tag nil, 'Tipo'
+    .span-2.last= label_tag nil, 'Forma'
+  .span-1.texto-corto= label_tag nil, 'Textura'
+  .span-2
+    .prepend-media.span-2.last= label_tag nil, 'Color', :class=> 'subtitulo'
+    .span-1= label_tag nil, 'Seco'
+    .span-1.last= label_tag nil, 'Hum.'
   .span-6
     .prepend-1.span-4.last= label_tag nil, 'Estructura', :class=> 'subtitulo'
     .span-2= label_tag nil, 'Tipo'
@@ -18,10 +18,10 @@
     .span-2.last= label_tag nil, 'Grado'
   .span-6
     .prepend-2.span-4.last= label_tag nil, 'Consistencia', :class=> 'subtitulo'
-    .span-1= label_tag nil, 'S'
-    .span-1= label_tag nil, 'H'
-    .span-2= label_tag nil, 'plast.'
-    .span-2.last= label_tag nil, 'adhes.'
+    .span-1= label_tag nil, 'Seco'
+    .span-1= label_tag nil, 'Hum.'
+    .span-2= label_tag nil, 'Plasticidad'
+    .span-2.last= label_tag nil, 'Adhesividad'
   .span-1.last= link_to '+', '#', :class => 'add' unless bloqueado
 
   .items
