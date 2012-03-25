@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105162330) do
+ActiveRecord::Schema.define(:version => 20120310073613) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(:version => 20120105162330) do
     t.string   "vegetacion"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ubicacion"
     t.string   "cobertura"
     t.string   "material_original"
     t.string   "taxonomia"

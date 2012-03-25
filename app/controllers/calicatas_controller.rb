@@ -12,6 +12,7 @@ class CalicatasController < AutorizadoController
   # GET /series
   # GET /series.json
   def index
+    @titulo = "Lista de #{@alias.pluralize}"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render  json: @calicatas,
@@ -37,6 +38,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1.json
   def show
     @calicata = Calicata.find(params[:id])
+    @titulo = "Calicata #{@calicata.numero}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,6 +50,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new.json
   def new
     @calicata = Calicata.new
+    @titulo = 'Nueva calicata'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,6 +61,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1/edit
   def edit
     @calicata = Calicata.find(params[:id])
+    @titulo = "Editando calicata #{@calicata.numero}"
   end
 
   # POST /calicatas

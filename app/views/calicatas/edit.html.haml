@@ -1,7 +1,5 @@
-%h1 Editar calicata #{@calicata.numero}
-
-.flotado!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"
+.botonera!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"
 
 = render partial: current_usuario.ficha, locals: {calicata: @calicata, bloqueado: false}
 
-.flotado!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"
+.botonera!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"

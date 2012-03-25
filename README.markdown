@@ -12,6 +12,15 @@ Instalación
 
 1. [PostgreSQL]
 2. [PostGIS]
+
+        $ createdb -O [usario_db] template_postgis -E UTF-8
+        $ createlang plpgsql template_postgis
+        $ psql -d template_postgis -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
+        $ psql -d template_postgis -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
+        $ psql
+
+            UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_postgis';
+
 3. template1 con las funciones y tablas de [PostGIS]
 
 ### Dependencias opcionales
