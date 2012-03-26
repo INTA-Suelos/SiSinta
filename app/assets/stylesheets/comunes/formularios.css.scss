@@ -44,6 +44,10 @@ form {
     }
   }
 
+  .oculto {
+    display: none;
+  }
+
   input, textarea, select {
     &[disabled] {
       background-color: #f5f5f5;
