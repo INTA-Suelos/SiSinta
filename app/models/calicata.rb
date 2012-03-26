@@ -43,8 +43,9 @@ class Calicata < ActiveRecord::Base
   belongs_to :fase, :inverse_of => :calicatas
   belongs_to :grupo, :inverse_of => :calicatas
 
-  accepts_nested_attributes_for :capacidad, :paisaje, :horizontes, :fase, :ubicacion,
-                                :grupo
+  accepts_nested_attributes_for :capacidad, :paisaje, :fase, :ubicacion, :grupo,
+                                :limit => 1, :allow_destroy => true
+  accepts_nested_attributes_for :horizontes, :allow_destroy => true
 
 # == Validaciones
 

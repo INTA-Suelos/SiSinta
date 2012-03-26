@@ -13,7 +13,7 @@ class Horizonte < ActiveRecord::Base
   belongs_to :calicata, :inverse_of => :horizontes
 
   accepts_nested_attributes_for :analisis, :color, :limite, :consistencia,
-                                :estructura
+                                :estructura, :limit => 1
 
   validates_presence_of :calicata
 
