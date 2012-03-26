@@ -68,7 +68,8 @@ class CalicatasController < AutorizadoController
 
     respond_to do |format|
       if @calicata.save
-        format.html { redirect_to @calicata, notice: 'Calicata was successfully created.' }
+        format.html { redirect_to @calicata,
+                      notice: I18n.t('messages.created', model: 'Calicata') }
         format.json { render json: @calicata, status: :created, location: @calicata }
       else
         format.html { render action: "new" }
@@ -93,7 +94,8 @@ class CalicatasController < AutorizadoController
 
     respond_to do |format|
       if @calicata.update_attributes(params[:calicata])
-        format.html { redirect_to @calicata, notice: 'Calicata was successfully updated.' }
+        format.html { redirect_to @calicata,
+                      notice: I18n.t('messages.updated', model: 'Calicata') }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
