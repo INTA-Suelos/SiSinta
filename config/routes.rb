@@ -1,10 +1,13 @@
 # -*- encoding : utf-8 -*-
 Suelos::Application.routes.draw do
 
-  get "inicio/index"
+  get 'inicio/index'
 
-  get   "calicatas/preparar_csv"
-  post  "calicatas/procesar_csv"
+  # Rutas para exportar a CSV
+  get   'calicatas/preparar_csv'
+  post  'calicatas/procesar_csv'
+  get   'series/preparar_csv' => 'calicatas#preparar_csv'
+  post  'series/procesar_csv' => 'calicatas#procesar_csv'
 
   # Autenticación en rack
   devise_for :usuarios
@@ -16,11 +19,11 @@ Suelos::Application.routes.draw do
   get 'fases/ajax/:atributo'  => 'fases#ajax'
 
   # Para limitar las vistas a las calicatas que son modales
-  get '/series' => 'calicatas#index', :as => 'series'
+  get 'series' => 'calicatas#index', :as => 'series'
 
   # Explicito la ruta para evitar que tome 'geo' como un :id
-  get '/calicatas/geo'  => 'calicatas#geo'
-  get '/series/geo'     => 'calicatas#geo', :as => 'series'
+  get 'calicatas/geo'  => 'calicatas#geo'
+  get 'series/geo'     => 'calicatas#geo', :as => 'series'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
   scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
