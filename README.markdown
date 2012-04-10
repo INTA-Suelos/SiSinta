@@ -40,6 +40,10 @@ Configuramos el entorno en *producción*
 
     $ export RAILS_ENV=production
 
+Instalamos las dependencias
+
+    $ bundle install
+
 Creamos la base de datos
 
     $ rake db:reset
@@ -47,10 +51,6 @@ Creamos la base de datos
 Precompilamos los archivos estáticos
 
     $ rake assets:precompile
-
-Instalamos las dependencias
-
-    $ bundle install
 
 El usuario default es Administrador, y se loguea con email@falso.com y el password *administrador*
 
