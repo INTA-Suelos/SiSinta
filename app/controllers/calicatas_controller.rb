@@ -4,7 +4,8 @@ require 'csv'
 class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups
-  before_filter :cargar_series_y_calicatas, :only => [:index, :geo]
+  before_filter :cargar_series_y_calicatas,
+                :only => [:index, :geo, :preparar_csv, :procesar_csv]
   skip_before_filter :authenticate_usuario!, :only => [:index, :geo]
 
   # GET /calicatas
@@ -83,7 +84,7 @@ class CalicatasController < AutorizadoController
   # PUT /calicatas/1
   # PUT /calicatas/1.json
   def update
-    
+
     # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo que forzar que
     # haya un arreglo vacío cuando es nil. El formulario devuelve nil por la especificación de html.
     # Los tests fallan si no recupero la excepción de los nils.
@@ -129,22 +130,25 @@ class CalicatasController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   #
   def preparar_csv
-    @atributos = Calicata.atributos_para_csv
+    @atributos = Calicata.atributos_y_asociaciones :excepto => [:created_at, :updated_at, :fotos]
+
     respond_to do |format|
       format.html
     end
   end
 
   def procesar_csv
-    @calicatas = Calicata.all
+    @archivo = "#{@alias.pluralize}_#{Date.today.strftime('%Y-%m-%d')}.csv"
 
-    @archivo = "calicatas_#{Date.today.strftime('%d-%m-%Y')}.csv"
+    @encabezado = true if params[:incluir_encabezado]
 
-    @respuesta = CSV.generate do |csv|
-      @atributos = params[:atributos].keys.flatten
-      csv << @atributos if params[:incluir_encabezado]
+    @respuesta = CSV.generate(:headers => @encabezado) do |csv|
+      @atributos = params[:atributos][:calicata].keys.flatten
+
+      csv << @atributos if @encabezado
+
       @calicatas.each do |c|
-        csv << c.to_csv(@atributos)
+        csv << c.como_arreglo(@atributos)
       end
     end
 

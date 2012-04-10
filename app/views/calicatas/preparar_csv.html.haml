@@ -1,6 +1,6 @@
 = form_tag 'procesar_csv', :class => 'span-24 last', :id => 'csv'
 
-= field_set_tag "#{@accion.try{:titleize}} a CSV", :class => 'azul_claro span-23 last' do
+= field_set_tag "Exportar a CSV", :class => 'azul_claro span-23 last' do
 
   #controles.span-22.last
     #marcar.span-4.opcion
@@ -16,14 +16,14 @@
       .span-1.last.campo
         = check_box_tag 'incluir_encabezado', :id => 'incluir_encabezado'
 
-  = field_set_tag nil, :class => 'celeste span-22 last' do
+  = field_set_tag "Atributos de las #{@alias.pluralize}", :class => 'celeste span-22 last plegable' do
 
-    #atributos.span-22.last
+    #calicatas.atributos.span-22.last
       - @atributos.each do |a|
         .span-6.last.campo{:class => cycle('azul_claro', 'celeste')}
           .span-5
             = label_tag a
           .span-1.last
-            = check_box_tag "atributos[#{a}]"
+            = check_box_tag "atributos[calicata][#{a}]"
 
   .acciones.span-4= submit_tag 'Exportar'
