@@ -26,16 +26,17 @@ Suelos::Application.routes.draw do
   get 'series/geo'     => 'calicatas#geo', :as => 'series'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
-  scope(:path_names => { :new => "nuevo", :edit => "editar" }) do
-    resources :horizontes
-    resources :analisis
-    resources :grupos
+  m = { :new => "nuevo", :edit => "editar" }
+  f = { :new => "nueva", :edit => "editar" }
+
+  resources :calicatas, :path_names => f do
+    resources :analisis, :path_names => m do
+    end
   end
 
-  scope(:path_names => { :new => "nueva", :edit => "editar" }) do
-    resources :calicatas
-    resources :fases
-  end
+  resources :horizontes, :path_names => m
+  resources :grupos, :path_names => m
+  resources :fases, :path_names => f 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

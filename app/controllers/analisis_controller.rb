@@ -1,8 +1,11 @@
 class AnalisisController < ApplicationController
+
+  before_filter :cargar_calicata
+
   # GET /analisis
   # GET /analisis.json
   def index
-    @analisis = Analisis.all
+    @analisis = @calicata.analisis
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +83,13 @@ class AnalisisController < ApplicationController
       format.json { head :ok }
     end
   end
+
+protected
+
+  # Carga la calicata a la que pertenecen los análisis
+  #
+  def cargar_calicata
+    @calicata = Calicata.find(params[:calicata_id])
+  end
+
 end
