@@ -1,0 +1,23 @@
+= form_for @calicata, html: { class: 'completa span-24' } do |f|
+
+  =  f.error_messages
+
+  = field_set_tag 'Datos analíticos', :class => 'azul_claro span-23 last' do
+
+    = field_set_tag nil, :class => 'celeste plegable span-22 last' do
+
+      %table#tabla_analisis.span-21.last
+        %colgroup#titulos{span: 2}
+        %colgroup#datos{span: 8}
+        %tr
+          %td.titulo= label_tag nil, 'N° registro'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :registro
+        %tr
+          %td.titulo= label_tag nil, 'Horizonte'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'Profundidad'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte

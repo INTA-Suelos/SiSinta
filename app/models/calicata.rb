@@ -46,7 +46,7 @@ class Calicata < ActiveRecord::Base
 
   accepts_nested_attributes_for :capacidad, :paisaje, :fase, :ubicacion, :grupo,
                                 :limit => 1, :allow_destroy => true
-  accepts_nested_attributes_for :horizontes, :allow_destroy => true
+  accepts_nested_attributes_for :horizontes, :analisis, :allow_destroy => true
 
 # == Validaciones
 
