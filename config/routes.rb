@@ -31,6 +31,7 @@ Suelos::Application.routes.draw do
 
   resources :calicatas, :path_names => f do
     resources :analisis, :path_names => m do
+      get 'cargar', :on => :collection
     end
   end
 

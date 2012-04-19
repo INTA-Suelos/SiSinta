@@ -37,7 +37,11 @@ class AnalisisController < ApplicationController
 
   # GET /analisis/1/edit
   def edit
-    @analisis = Analisis.find(params[:id])
+    @analisis = @calicata.analisis[params[:id]]
+  end
+
+  def cargar
+    @analisis = @calicata.analisis
   end
 
   # POST /analisis
