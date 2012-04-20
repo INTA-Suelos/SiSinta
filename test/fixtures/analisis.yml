@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
+uno:
   registro: 1
   humedad: 9.99
   s: 9.99
@@ -13,8 +13,9 @@ one:
   base_mg: 9.99
   base_k: 9.99
   base_na: 9.99
+  horizonte: uno
 
-two:
+dos:
   registro: 1
   humedad: 9.99
   s: 9.99
@@ -27,3 +28,4 @@ two:
   base_mg: 9.99
   base_k: 9.99
   base_na: 9.99
+  horizonte: dos

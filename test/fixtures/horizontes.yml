@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
+uno:
   profundidad: 1
   ph: 1.5
   textura: MyString
+  calicata: valida
 
-two:
+dos:
   profundidad: 1
   ph: 1.5
   textura: MyString
+  calicata: valida

@@ -33,13 +33,11 @@
     <td><%= analisis.base_mg %></td>
     <td><%= analisis.base_k %></td>
     <td><%= analisis.base_na %></td>
-    <td><%= link_to 'Show', calicata_analisis_url(@calicata, analisis) %></td>
-    <td><%= link_to 'Edit', edit_calicata_analisis_path(@calicata, analisis) %></td>
-    <td><%= link_to 'Destroy', calicata_analisis_url(@calicata, analisis), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@calicata, analisis] %></td>
+    <td><%= link_to 'Edit', edit_calicata_analisis_index_path(@calicata, analisis) %></td>
+    <td><%= link_to 'Destroy', [@calicata, analisis], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Analisis', new_calicata_analisis_path(@calicata) %>
