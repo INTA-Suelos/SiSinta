@@ -26,21 +26,21 @@ class AnalisisController < ApplicationController
 
   # GET /analisis/edit
   def edit
-    @analisis = @calicata.analisis
+    # TODO sort por profundidad de horizonte
+    @analisis = @calicata.analisis.sort
   end
 
-  # PUT /analisis/1
-  # PUT /analisis/1.json
+  # PUT /calicata/1/analisis
+  # PUT /calicata/1/analisis.json
   def update
-    @analisis = Analisis.find(params[:id])
-
     respond_to do |format|
-      if @analisis.update_attributes(params[:analisis])
-        format.html { redirect_to [@calicata, @analisis], notice: 'Analisis was successfully updated.' }
+      if @calicata.update_attributes(params[:calicata])
+        format.html { redirect_to calicata_analisis_index_path(@calicata),
+                      notice: I18n.t('messages.updated', model: 'Analisis') }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @analisis.errors, status: :unprocessable_entity }
+        format.json { render json: @calicata.errors, status: :unprocessable_entity }
       end
     end
   end

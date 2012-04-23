@@ -1,5 +1,7 @@
 .botonera!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"
 
-= render 'tabla'
+= render partial: 'tabla', locals: {  calicata: @calicata,
+                                      analisis: @analisis,
+                                      bloqueado: false }
 
 .botonera!= "#{link_to 'Mostrar', @calicata} | #{link_to 'Volver', calicatas_path}"

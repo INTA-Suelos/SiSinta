@@ -30,8 +30,9 @@ Suelos::Application.routes.draw do
   f = { :new => "nueva", :edit => "editar" }
 
   resources :calicatas, :path_names => f do
-    resources :analisis, :path_names => m, :except => [:create, :edit, :new] do
+    resources :analisis, :path_names => m, :except => [:create, :edit, :new, :update] do
       get 'edit', :on => :collection
+      put 'update', :on => :collection
     end
   end
 
