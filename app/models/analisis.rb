@@ -5,4 +5,8 @@ class Analisis < ActiveRecord::Base
   has_one :calicata, :through => :horizonte
 
   validates_presence_of :horizonte
+
+  def materia_organica_cn
+    (materia_organica_c/materia_organica_n).round
+  end
 end

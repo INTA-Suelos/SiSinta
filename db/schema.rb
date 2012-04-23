@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310073613) do
+ActiveRecord::Schema.define(:version => 20120423085516) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(:version => 20120310073613) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "horizonte_id"
-    t.decimal  "carbono",           :precision => 4, :scale => 2
-    t.decimal  "nitrogeno",         :precision => 4, :scale => 3
-    t.decimal  "arcilla",           :precision => 3, :scale => 1
+    t.decimal  "carbono",            :precision => 4, :scale => 2
+    t.decimal  "nitrogeno",          :precision => 4, :scale => 3
+    t.decimal  "arcilla",            :precision => 3, :scale => 1
+    t.float    "materia_organica_c"
+    t.float    "materia_organica_n"
   end
 
   create_table "calicatas", :force => true do |t|
@@ -191,10 +193,10 @@ ActiveRecord::Schema.define(:version => 20120310073613) do
     t.integer  "calicata_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
