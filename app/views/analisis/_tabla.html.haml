@@ -10,14 +10,133 @@
         %colgroup#titulos{span: 2}
         %colgroup#datos{span: 8}
         %tr
-          %td.titulo= label_tag nil, 'N° registro'
+          %td.titulo{colspan: 2}= label_tag nil, 'N° registro'
           - @analisis.each do |a|
             %td.dato= text_field @a, :registro
         %tr
-          %td.titulo= label_tag nil, 'Horizonte'
+          %td.titulo{colspan: 2}= label_tag nil, 'Horizonte'
           - @analisis.each do |a|
             %td.dato= text_field @a, :horizonte
         %tr
-          %td.titulo= label_tag nil, 'Profundidad'
+          %td.titulo{colspan: 2}= label_tag nil, 'Profundidad'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Materia orgánica'
+          %td.titulo{colspan: 1}= label_tag nil, 'C %'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'N %'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'C/N'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 1, rowspan: 8}= label_tag nil, 'Textura'
+          %td.titulo.largo= label_tag nil, 'Arcilla < 2u'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Limo 2-20u'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Limo 2-50u'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena muy fina'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena fina'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena media'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena gruesa'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena muy gruesa'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}!= "<label>Ca CO<sub>3</sub> %</label>"
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Equiv. de humedad %'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Agua útil %'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'pH en pasta'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'pH en H2O (1:2,5)'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'pH en KCL (1:2,5)'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Resistencia pasta Ω'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Conductiv. (mmhos/cm)'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo.largo{colspan: 1, rowspan: 4}= label_tag nil, 'Bases intercambiables'
+          %td.titulo= label_tag nil, 'Ca++'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'Mg++'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'K+'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo= label_tag nil, 'Na+'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Valor S'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}!= "<label>H.<sup>+</sup> de cambio</label>"
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Valor T'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, '% Satur. (sobre T)'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, '% Satur. (S + H)'
+          - @analisis.each do |a|
+            %td.dato= text_field @a, :horizonte
+        %tr
+          %td.titulo{colspan: 2}= label_tag nil, 'Peso especif. apar.'
           - @analisis.each do |a|
             %td.dato= text_field @a, :horizonte

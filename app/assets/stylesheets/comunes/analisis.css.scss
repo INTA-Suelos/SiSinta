@@ -13,8 +13,22 @@
     margin: 0;
   }
 
-  .dato {
-    width: 90px;
+  .dato * {
+    max-width: 80px;
   }
 
+  #titulos {
+    width: 70px;
+  }
+
+  .largo {
+    min-width: 82px;
+
+    label { font-size: xx-small;}
+  }
+
+  .titulo {
+    border: 1px solid #ccc;
+    padding: 0 5px;
+  }
 }
