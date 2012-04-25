@@ -78,4 +78,10 @@ class Ubicacion < ActiveRecord::Base
     RGeo::GeoJSON.encode(coordenadas) unless coordenadas.nil?
   end
 
+  def to_s
+    return descripcion unless descripcion.blank?
+    return lat_lon unless coordenadas.nil?
+    return aproximar
+  end
+
 end
