@@ -1,7 +1,9 @@
 %tr
   %td= calicata.fecha
-  %td= calicata.ubicacion.nil? ? 'Sin descripción' : calicata.ubicacion.descripcion
+  %td= calicata.ubicacion
   %td= calicata.numero
+  %td= "✓" if calicata.modal?
   %td.boton= link_to 'Mostrar', calicata
   %td.boton= link_to 'Editar', edit_calicata_path(calicata)
+  %td.boton= link_to 'Análisis', calicata_analisis_index_path(calicata)
   %td.boton= link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete

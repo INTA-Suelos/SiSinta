@@ -1,5 +1,5 @@
-.botonera!= "#{link_to 'Editar', edit_calicata_path(@calicata)} | #{link_to 'Volver', calicatas_path}"
+.botonera= render 'botonera_mostrar'
 
 = render partial: current_usuario.ficha, locals: { calicata: @calicata, bloqueado: true }
 
-.botonera!= "#{link_to 'Editar', edit_calicata_path(@calicata)} | #{link_to 'Volver', calicatas_path}"
+.botonera= render 'botonera_mostrar'
