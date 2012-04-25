@@ -15,7 +15,7 @@ class FasesController < AutorizadoController
   # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
   # consultar.
   #
-  def ajax
+  def autocompletar
     super(Fase)
   end
 

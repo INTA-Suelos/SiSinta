@@ -15,7 +15,7 @@ class GruposController < AutorizadoController
   # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
   # consultar.
   #
-  def ajax
+  def autocompletar
     super(Grupo)
   end
 

@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
     @mobile = browser_is_mobile?
   end
 
-  # GET /:controlador/ajax/:atributo
-  def ajax(modelo)
+  # GET /:controlador/autocompletar/:atributo
+  def autocompletar(modelo)
     render json: lista_para_autocompletar(modelo, params[:atributo])
   end
 
