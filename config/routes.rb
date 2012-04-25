@@ -12,33 +12,30 @@ Suelos::Application.routes.draw do
   # Autenticación en rack
   devise_for :usuarios
 
-  # Podría matchear con
-  #   get ':controller/:action/:atributo', :constraints => {:action => /ajax/}
-  # pero tendría que filtrar específicamente los atributos que permito en cada modelo
-  get 'grupos/ajax/:atributo' => 'grupos#ajax'
-  get 'fases/ajax/:atributo'  => 'fases#ajax'
-
   # Para limitar las vistas a las calicatas que son modales
-  get 'series' => 'calicatas#index', :as => 'series'
+  get 'series' => 'calicatas#index', as: 'series'
 
   # Explicito la ruta para evitar que tome 'geo' como un :id
   get 'calicatas/geo'  => 'calicatas#geo'
-  get 'series/geo'     => 'calicatas#geo', :as => 'series'
+  get 'series/geo'     => 'calicatas#geo', as: 'series'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
-  m = { :new => "nuevo", :edit => "editar" }
-  f = { :new => "nueva", :edit => "editar" }
+  m = { new: "nuevo", edit: "editar" }
+  f = { new: "nueva", edit: "editar" }
 
-  resources :calicatas, :path_names => f do
-    resources :analisis, :path_names => m, :except => [:create, :edit, :new, :update] do
-      get 'edit', :on => :collection
-      put 'update', :on => :collection
+  resources :calicatas, path_names: f do
+    resources :analisis, path_names: m, except: [:create, :edit, :new, :update] do
+      get 'edit', on: :collection
+      put 'update', on: :collection
     end
   end
-
-  resources :horizontes, :path_names => m
-  resources :grupos, :path_names => m
-  resources :fases, :path_names => f 
+  resources :horizontes, path_names: m
+  resources :grupos, only: :index, path_names: m do
+    get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
+  end
+  resources :fases, only: :index, path_names: f do
+    get 'autocompletar/:atributo' => 'fases#autocompletar', on: :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -89,7 +86,7 @@ Suelos::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'inicio#index'
+  root to: 'inicio#index'
 
   # See how all your routes lay out with "rake routes"
 
