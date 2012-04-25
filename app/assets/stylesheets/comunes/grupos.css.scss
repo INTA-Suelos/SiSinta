@@ -1,0 +1,19 @@
+#grupos {
+
+  border-spacing: 1px;
+  
+  th, td, caption {
+    padding: 0;
+    background: inherit;
+  }
+
+  td * {
+    margin: 0;
+    width: 200px;
+  }
+
+  span.best_in_place {
+    width: inherit !important;
+  }
+
+}

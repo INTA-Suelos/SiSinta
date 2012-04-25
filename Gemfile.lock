@@ -38,6 +38,9 @@ GEM
     awesome_nested_fields (0.6.0)
       rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
+    best_in_place (1.0.6)
+      jquery-rails
+      rails (~> 3.1)
     browser_detect (0.0.5)
     builder (3.0.0)
     cancan (1.6.7)
@@ -151,6 +154,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   acts_as_list
   awesome_nested_fields
+  best_in_place
   browser_detect
   cancan
   coffee-rails (~> 3.1.0)
