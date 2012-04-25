@@ -1,0 +1,8 @@
+%tr
+  = form_for grupo do |g|
+    %td= g.text_field :descripcion, disabled: true
+    %td= g.text_field :codigo, disabled: true
+    %td.boton= link_to 'Editar', '#habilitar'
+    %td.boton= link_to 'Eliminar',
+      grupo, method: :delete,
+      confirm: '¿Estás seguro? Esto probablemente va a dejar sin grupo a algunas calicatas'
