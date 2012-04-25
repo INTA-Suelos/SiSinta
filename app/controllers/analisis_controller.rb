@@ -1,4 +1,5 @@
-class AnalisisController < ApplicationController
+# encoding: utf-8
+class AnalisisController < AutorizadoController
 
   before_filter :cargar_calicata
 
