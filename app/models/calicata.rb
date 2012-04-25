@@ -10,8 +10,9 @@ class Calicata < ActiveRecord::Base
   validates_presence_of :fecha
   validates_uniqueness_of :nombre, :numero, :allow_blank => true
   validates_presence_of :nombre, :simbolo, :if => Proc.new { |c| c.modal? }
-  validates_numericality_of :cobertura_vegetal, :only_integer => true, :allow_nil => true,
-                            :greater_than => 0, :less_than => 101
+  validates_numericality_of :cobertura_vegetal,
+                            :greater_than_or_equal_to => 0, :less_than => 101,
+                            :allow_nil => true
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
