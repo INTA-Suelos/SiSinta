@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423085516) do
+ActiveRecord::Schema.define(:version => 20120425034215) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20120423085516) do
     t.decimal  "arcilla",            :precision => 3, :scale => 1
     t.float    "materia_organica_c"
     t.float    "materia_organica_n"
+    t.decimal  "limo_2_20",          :precision => 3, :scale => 1
+    t.decimal  "limo_2_50",          :precision => 3, :scale => 1
+    t.decimal  "arena_muy_fina",     :precision => 3, :scale => 1
+    t.decimal  "arena_fina",         :precision => 3, :scale => 1
+    t.decimal  "arena_media",        :precision => 3, :scale => 1
+    t.decimal  "arena_gruesa",       :precision => 3, :scale => 1
+    t.decimal  "arena_muy_gruesa",   :precision => 3, :scale => 1
   end
 
   create_table "calicatas", :force => true do |t|
@@ -172,20 +179,6 @@ ActiveRecord::Schema.define(:version => 20120423085516) do
   create_table "roles_usuarios", :id => false, :force => true do |t|
     t.integer "usuario_id"
     t.integer "rol_id"
-  end
-
-  create_table "texturas", :force => true do |t|
-    t.decimal  "arcilla",          :precision => 3, :scale => 1
-    t.decimal  "limo_2_20",        :precision => 3, :scale => 1
-    t.decimal  "limo_2_50",        :precision => 3, :scale => 1
-    t.decimal  "arena_muy_fina",   :precision => 3, :scale => 1
-    t.decimal  "arena_fina",       :precision => 3, :scale => 1
-    t.decimal  "arena_media",      :precision => 3, :scale => 1
-    t.decimal  "arena_gruesa",     :precision => 3, :scale => 1
-    t.decimal  "arena_muy_gruesa", :precision => 3, :scale => 1
-    t.integer  "analisis_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "ubicaciones", :force => true do |t|
