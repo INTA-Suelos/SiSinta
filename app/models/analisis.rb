@@ -20,7 +20,7 @@ class Analisis < ActiveRecord::Base
     begin
       (materia_organica_c/materia_organica_n).round
     rescue
-      0
+      nil
     end
   end
 end
