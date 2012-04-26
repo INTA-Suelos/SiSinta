@@ -53,17 +53,9 @@ class AnalisisController < AutorizadoController
     @analisis.destroy
 
     respond_to do |format|
-      format.html { redirect_to calicata_analisis_index_url }
+      format.html { redirect_to calicata_analisis_index_path(@calicata) }
       format.json { head :ok }
     end
-  end
-
-protected
-
-  # Carga la calicata a la que pertenecen los análisis
-  #
-  def cargar_calicata
-    @calicata = Calicata.find(params[:calicata_id])
   end
 
 end
