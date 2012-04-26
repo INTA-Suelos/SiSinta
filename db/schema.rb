@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425035826) do
+ActiveRecord::Schema.define(:version => 20120426072330) do
+
+  create_table "adjuntos", :force => true do |t|
+    t.integer  "calicata_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+  end
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
@@ -124,12 +134,6 @@ ActiveRecord::Schema.define(:version => 20120425035826) do
   create_table "fases", :force => true do |t|
     t.string "codigo", :limit => 2
     t.string "nombre", :limit => 15
-  end
-
-  create_table "fotos", :force => true do |t|
-    t.integer  "calicata_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "grupos", :force => true do |t|
