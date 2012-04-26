@@ -15,7 +15,7 @@ gem 'param_protected'
 
 ## Presentación
 gem 'dynamic_form'
-gem 'haml'
+gem 'haml-rails'
 gem 'awesome_nested_fields'
 
 # No funciona la inclusión automática, asique la copié a vendor
