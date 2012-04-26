@@ -23,6 +23,7 @@ gem 'browser_detect'
 
 ## Modelos
 gem 'acts_as_list'
+gem 'paperclip'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
