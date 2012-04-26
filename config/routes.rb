@@ -28,6 +28,7 @@ Suelos::Application.routes.draw do
       get 'edit', on: :collection
       put 'update', on: :collection
     end
+    resources :adjuntos, path_names: m
   end
   resources :horizontes, path_names: m
   resources :grupos, only: :index, path_names: m do
