@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426072330) do
+ActiveRecord::Schema.define(:version => 20120426151752) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120426072330) do
     t.string   "archivo_content_type"
     t.integer  "archivo_file_size"
     t.datetime "archivo_updated_at"
+    t.string   "notas"
   end
 
   create_table "analisis", :force => true do |t|
