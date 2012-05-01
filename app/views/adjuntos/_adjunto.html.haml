@@ -1,0 +1,7 @@
+%tr
+  %td.icono= adjunto.archivo.content_type
+  %td= link_to adjunto.archivo.original_filename, descargar_calicata_adjunto_path(@calicata, adjunto)
+  %td= adjunto.notas
+  %td.boton= link_to 'Mostrar', [@calicata, adjunto]
+  %td.boton= link_to 'Editar', edit_calicata_adjunto_path(@calicata, adjunto)
+  %td.boton= link_to 'Eliminar', [@calicata, adjunto], confirm: '¿Estás seguro?', method: :delete

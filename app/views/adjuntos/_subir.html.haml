@@ -1,0 +1,13 @@
+= form_for [@calicata, @adjunto], html: { class: 'span-24', multipart: true } do |f|
+
+  = f.error_messages
+
+  = field_set_tag nil, :class => 'azul_claro span-23 last' do
+
+    = field_set_tag 'Adjuntos', :class => 'celeste plegable span-22 last' do
+
+      .span-21.last= f.file_field :archivo, disabled: bloqueado
+
+    = render partial: 'anotaciones', locals: { f: f, bloqueado: bloqueado }
+
+    .acciones.span-4.last= f.submit unless bloqueado
