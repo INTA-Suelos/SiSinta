@@ -44,4 +44,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'grupo', 'grupos'
   inflect.irregular 'limite_tipo', 'limite_tipos'
   inflect.irregular 'limite_forma', 'limite_formas'
+  inflect.irregular 'adjunto', 'adjuntos'
 end

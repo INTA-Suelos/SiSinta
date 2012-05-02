@@ -1,6 +1,4 @@
 class Analisis < ActiveRecord::Base
-  has_one :textura, :dependent => :destroy, :inverse_of => :analisis
-
   belongs_to :horizonte, :inverse_of => :analisis
   has_one :calicata, :through => :horizonte
 
@@ -19,6 +17,10 @@ class Analisis < ActiveRecord::Base
                             :allow_nil => true
 
   def materia_organica_cn
-    (materia_organica_c/materia_organica_n).round
+    begin
+      (materia_organica_c/materia_organica_n).round
+    rescue
+      nil
+    end
   end
 end

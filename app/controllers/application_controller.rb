@@ -73,4 +73,10 @@ protected
                                           "#{atributo}" => elemento.send(atributo)]}
   end
 
+  # Carga la calicata a la que pertenecen el modelo anidado
+  #
+  def cargar_calicata
+    @calicata = Calicata.find(params[:calicata_id])
+  end
+
 end

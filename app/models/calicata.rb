@@ -15,7 +15,7 @@ class Calicata < ActiveRecord::Base
                             :allow_nil => true
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
-  has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
+  has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
   has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
   has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata

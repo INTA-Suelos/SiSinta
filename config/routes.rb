@@ -24,9 +24,12 @@ Suelos::Application.routes.draw do
   f = { new: "nueva", edit: "editar" }
 
   resources :calicatas, path_names: f do
-    resources :analisis, path_names: m, except: [:create, :edit, :new, :update] do
+    resources :analisis, only: :index, path_names: m do
       get 'edit', on: :collection
       put 'update', on: :collection
+    end
+    resources :adjuntos, path_names: m do
+      get 'descargar', on: :member
     end
   end
   resources :horizontes, path_names: m

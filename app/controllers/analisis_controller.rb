@@ -14,17 +14,6 @@ class AnalisisController < AutorizadoController
     end
   end
 
-  # GET /analisis/1
-  # GET /analisis/1.json
-  def show
-    @analisis = Analisis.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @analisis }
-    end
-  end
-
   # GET /analisis/edit
   def edit
     # TODO sort por profundidad de horizonte
@@ -44,26 +33,6 @@ class AnalisisController < AutorizadoController
         format.json { render json: @calicata.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # DELETE /analisis/1
-  # DELETE /analisis/1.json
-  def destroy
-    @analisis = Analisis.find(params[:id])
-    @analisis.destroy
-
-    respond_to do |format|
-      format.html { redirect_to calicata_analisis_index_url }
-      format.json { head :ok }
-    end
-  end
-
-protected
-
-  # Carga la calicata a la que pertenecen los análisis
-  #
-  def cargar_calicata
-    @calicata = Calicata.find(params[:calicata_id])
   end
 
 end

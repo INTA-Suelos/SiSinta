@@ -15,7 +15,7 @@ gem 'param_protected'
 
 ## Presentación
 gem 'dynamic_form'
-gem 'haml'
+gem 'haml-rails'
 gem 'awesome_nested_fields'
 
 # No funciona la inclusión automática, asique la copié a vendor
@@ -23,6 +23,7 @@ gem 'browser_detect'
 
 ## Modelos
 gem 'acts_as_list'
+gem 'paperclip'
 
 ## GIS
 gem 'activerecord-postgis-adapter'

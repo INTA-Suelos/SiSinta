@@ -121,18 +121,10 @@ class CalicatasController < AutorizadoController
   end
 
   #
-  # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
-  # consultar.
-  #
-  def ajax
-    super(Calicata)
-  end
-
-  #
   # Preparar los atributos a exportar/importar en CSV
   #
   def preparar_csv
-    @atributos = Calicata.atributos_y_asociaciones :excepto => [:created_at, :updated_at, :fotos]
+    @atributos = Calicata.atributos_y_asociaciones :excepto => [:created_at, :updated_at, :adjuntos]
 
     respond_to do |format|
       format.html
