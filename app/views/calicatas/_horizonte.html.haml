@@ -8,9 +8,10 @@
       :valor, { :include_blank => true }, { :disabled => bloqueado }
 .span-1= h.text_field :textura, :disabled => bloqueado
 .span-2
-  = h.fields_for :color do |h_c|
-    .span-1= h_c.text_field :seco, :disabled => bloqueado
-    .span-1.last= h_c.text_field :humedo, :disabled => bloqueado
+  = h.fields_for :color_seco do |h_c|
+    .span-1= h_c.text_field :hvc, :disabled => bloqueado, :class => 'munsell'
+  = h.fields_for :color_humedo do |h_c|
+    .span-1.last= h_c.text_field :hvc, :disabled => bloqueado, :class => 'munsell'
 .span-6
   = h.fields_for :estructura do |h_e|
     .span-2= h_e.text_field :tipo, :disabled => bloqueado

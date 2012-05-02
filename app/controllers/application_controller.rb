@@ -60,9 +60,10 @@ protected
   #   - La lista de coincidencias mapeada en +json+
   #
   def lista_para_autocompletar(modelo, atributo)
-    # Uso ARel porque me permite ignorar que el LIKE es case-sensitive en PostgreSQL pero
-    # insensitive en otros motores. En PostgreSQL se usa ILIKE
-    # para comparaciones case-insensitive (es una extensión exclusiva de PostgreSQL
+    # Uso ARel porque me permite ignorar que el LIKE es case-sensitive en
+    # PostgreSQL pero insensitive en otros motores. En PostgreSQL se usa ILIKE
+    # para comparaciones case-insensitive (es una extensión exclusiva de
+    # PostgreSQL)
     if params[:term]
       conjunto = modelo.where modelo.arel_table[atributo].matches("%#{params[:term]}%")
     else
