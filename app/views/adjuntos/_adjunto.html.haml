@@ -1,9 +1,9 @@
 %tr
-  %td.icono= image_tag("#{icono_para_extension(adjunto.extension)}",
-    alt: adjunto.extension)
-  %td= link_to adjunto.archivo.original_filename,
+  %td.nombre= link_to adjunto.archivo.original_filename,
     descargar_calicata_adjunto_path(@calicata, adjunto)
-  %td= adjunto.notas
+  %td.icono= icono_para_extension(adjunto.extension)
+  %td= number_to_human_size(adjunto.archivo_file_size)
+  %td.notas= adjunto.notas
   %td.boton= link_to 'Mostrar', [@calicata, adjunto]
   %td.boton= link_to 'Editar', edit_calicata_adjunto_path(@calicata, adjunto)
   %td.boton= link_to('Eliminar', [@calicata, adjunto],

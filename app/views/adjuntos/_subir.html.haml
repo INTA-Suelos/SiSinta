@@ -6,7 +6,13 @@
 
     = field_set_tag 'Adjuntos', :class => 'celeste plegable span-22 last' do
 
-      .span-21.last= f.file_field :archivo, disabled: bloqueado
+      .span-21.last
+        - if bloqueado
+          .span-1.icono= icono_para_extension(@adjunto.extension)
+          .span-18= label_tag :archivo, @adjunto.archivo_file_name
+          .span-2.last= label_tag :mb, number_to_human_size(@adjunto.archivo_file_size)
+        - else
+          = file_field_tag 'adjunto_archivo', size: 89, name: 'adjunto[archivo]'
 
     = render partial: 'anotaciones', locals: { f: f, bloqueado: bloqueado }
 
