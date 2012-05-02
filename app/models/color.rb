@@ -1,5 +1,4 @@
 class Color < ActiveRecord::Base
-  belongs_to :horizonte, :inverse_of => :color
-
-  validates_presence_of :horizonte
+  has_many :horizontes_en_seco, class_name: 'Color', inverse_of: :color_seco
+  has_many :horizontes_en_humedo, class_name: 'Color', inverse_of: :color_humedo
 end
