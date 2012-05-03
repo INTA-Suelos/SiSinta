@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502090930) do
+ActiveRecord::Schema.define(:version => 20120502113204) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120502090930) do
     t.decimal  "saturacion_t",             :precision => 3, :scale => 2
     t.decimal  "saturacion_s_h",           :precision => 3, :scale => 2
     t.decimal  "peso_especifico_aparente"
+    t.integer  "materia_organica_cn"
   end
 
   create_table "calicatas", :force => true do |t|
