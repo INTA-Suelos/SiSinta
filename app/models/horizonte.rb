@@ -23,4 +23,10 @@ class Horizonte < ActiveRecord::Base
     super(%w{color_seco color_humedo limite consistencia estructura analisis})
   end
 
+  def rango_profundidad
+    unless profundidad_superior.blank? or profundidad_inferior.blank?
+      "#{profundidad_superior} - #{profundidad_inferior}"
+    end
+  end
+
 end
