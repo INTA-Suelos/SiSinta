@@ -2,7 +2,7 @@
 class Calicata < ActiveRecord::Base
 
   after_initialize :preparar
-  before_validation :limpiar
+  before_validation :buscar_asociaciones
 
   scope :series, where(:modal => 'true')
 
@@ -60,27 +60,6 @@ class Calicata < ActiveRecord::Base
     end
   end
 
-  def preparar
-    super(%w{capacidad paisaje ubicacion fase grupo})
-  end
-
-  #
-  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
-  #
-  def limpiar
-    if self.grupo.try(:descripcion).present? then
-      self.grupo = Grupo.find_or_create_by_descripcion self.grupo.descripcion
-    else
-      self.grupo = nil
-    end
-
-    if self.fase.try(:nombre).present? then
-      self.fase = Fase.find_or_create_by_nombre self.fase.nombre
-    else
-      self.fase = nil
-    end
-  end
-
   #
   # Prepara un hash para que RGeo genere geojson
   #
@@ -96,6 +75,17 @@ class Calicata < ActiveRecord::Base
   #
   def geometria
     self.ubicacion.try(:coordenadas)
+  end
+
+  protected
+
+  def preparar
+    super(%w{capacidad paisaje ubicacion fase grupo})
+  end
+
+  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
+  def buscar_asociaciones
+    super(grupo: 'descripcion', fase: 'nombre')
   end
 
 end

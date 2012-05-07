@@ -47,6 +47,22 @@ module ExtensionModelos
       end
     end
 
+    def buscar_asociaciones(asociaciones = {})
+      binding.pry
+      asociaciones.each_pair do |modelo,metodo|
+        if self.send(modelo).try(metodo).present? then
+          clase = self.association(modelo).reflection.klass
+          self.send(  "#{modelo}=",
+                      clase.send("find_or_create_by_#{metodo}",
+                        self.send(modelo).send(metodo)
+                      )
+                    )
+        else
+          self.send(modelo).send("#{metodo}=", nil)
+        end
+      end
+    end
+
   end
 
 end
