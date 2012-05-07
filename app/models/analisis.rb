@@ -24,6 +24,14 @@ class Analisis < ActiveRecord::Base
     end
   end
 
+  def profundidad_muestra_before_type_cast
+    read_attribute(:profundidad_muestra) || self.horizonte.rango_profundidad
+  end
+
+  def profundidad_muestra
+    profundidad_muestra_before_type_cast
+  end
+
   def materia_organica_cn
     materia_organica_cn_before_type_cast
   end

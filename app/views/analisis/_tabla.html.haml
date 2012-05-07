@@ -23,8 +23,7 @@
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Profundidad'
           = f.fields_for :analisis, @analisis do |f_a|
-            = f_a.fields_for :horizonte do |f_h|
-              %td.dato= f_h.text_field :profundidad, disabled: true
+            %td.dato= f_a.text_field :profundidad_muestra, disabled: bloqueado
         %tr
           %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Materia orgánica'
           %td.titulo{colspan: 1}= label_tag nil, 'C %'
