@@ -11,8 +11,8 @@ class Analisis < ActiveRecord::Base
                             :densidad_aparente, :materia_organica_cn,
                             :allow_nil => true
   validates_numericality_of :materia_organica_c, :materia_organica_n, :ca_co3,
-                            :humedad, :agua_ret, :agua_util, :saturacion_t,
-                            :saturacion_s_h,
+                            :humedad, :agua_3_atm, :agua_15_atm, :agua_util,
+                            :saturacion_t, :saturacion_s_h,
                             :greater_than_or_equal_to => 0, :less_than => 101,
                             :allow_nil => true
 
