@@ -17,7 +17,7 @@ Suelos::Application.routes.draw do
 
   # Explicito la ruta para evitar que tome 'geo' como un :id
   get 'calicatas/geo'  => 'calicatas#geo'
-  get 'series/geo'     => 'calicatas#geo', as: 'series'
+  get 'series/geo'     => 'calicatas#geo'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
   m = { new: "nuevo", edit: "editar" }

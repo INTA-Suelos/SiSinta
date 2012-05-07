@@ -79,11 +79,16 @@
           = f.fields_for :analisis, @analisis do |f_a|
             %td.dato= f_a.text_field :humedad, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Agua ret.o.3 % 15atm'
+          %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Capacidad de agua'
+          %td.titulo{colspan: 1}= label_tag nil, '3 atm'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :agua_ret, disabled: bloqueado
+            %td.dato= f_a.text_field :agua_3_atm, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Agua útil %'
+          %td.titulo{colspan: 1}= label_tag nil, '15 atm'
+          = f.fields_for :analisis, @analisis do |f_a|
+            %td.dato= f_a.text_field :agua_15_atm, disabled: bloqueado
+        %tr
+          %td.titulo{colspan: 1}= label_tag nil, 'Agua útil'
           = f.fields_for :analisis, @analisis do |f_a|
             %td.dato= f_a.text_field :agua_util, disabled: bloqueado
         %tr
@@ -144,8 +149,8 @@
           = f.fields_for :analisis, @analisis do |f_a|
             %td.dato= f_a.text_field :saturacion_s_h, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Peso especif. apar.'
+          %td.titulo{colspan: 2}= label_tag nil, 'Densidad aparente'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :peso_especifico_aparente, disabled: bloqueado
+            %td.dato= f_a.text_field :densidad_aparente, disabled: bloqueado
 
     .acciones.span-4.last= f.submit 'Actualizar datos'
