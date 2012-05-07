@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426151752) do
+ActiveRecord::Schema.define(:version => 20120507104249) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120426151752) do
 
   create_table "analisis", :force => true do |t|
     t.integer  "registro"
-    t.decimal  "humedad"
+    t.decimal  "humedad",             :precision => 4, :scale => 2
     t.decimal  "s"
     t.decimal  "t"
     t.decimal  "ph_pasta"
@@ -40,24 +40,27 @@ ActiveRecord::Schema.define(:version => 20120426151752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "horizonte_id"
-    t.decimal  "arcilla",                  :precision => 3, :scale => 1
-    t.decimal  "materia_organica_c",       :precision => 3, :scale => 2
-    t.decimal  "materia_organica_n",       :precision => 3, :scale => 2
-    t.decimal  "limo_2_20",                :precision => 3, :scale => 1
-    t.decimal  "limo_2_50",                :precision => 3, :scale => 1
-    t.decimal  "arena_muy_fina",           :precision => 3, :scale => 1
-    t.decimal  "arena_fina",               :precision => 3, :scale => 1
-    t.decimal  "arena_media",              :precision => 3, :scale => 1
-    t.decimal  "arena_gruesa",             :precision => 3, :scale => 1
-    t.decimal  "arena_muy_gruesa",         :precision => 3, :scale => 1
-    t.decimal  "ca_co3",                   :precision => 3, :scale => 2
-    t.decimal  "agua_ret",                 :precision => 3, :scale => 2
-    t.decimal  "agua_util",                :precision => 3, :scale => 2
+    t.decimal  "arcilla",             :precision => 4, :scale => 2
+    t.decimal  "materia_organica_c",  :precision => 4, :scale => 2
+    t.decimal  "materia_organica_n",  :precision => 4, :scale => 2
+    t.decimal  "limo_2_20",           :precision => 4, :scale => 2
+    t.decimal  "limo_2_50",           :precision => 4, :scale => 2
+    t.decimal  "arena_muy_fina",      :precision => 4, :scale => 2
+    t.decimal  "arena_fina",          :precision => 4, :scale => 2
+    t.decimal  "arena_media",         :precision => 4, :scale => 2
+    t.decimal  "arena_gruesa",        :precision => 4, :scale => 2
+    t.decimal  "arena_muy_gruesa",    :precision => 4, :scale => 2
+    t.decimal  "ca_co3",              :precision => 4, :scale => 2
+    t.decimal  "agua_15_atm",         :precision => 4, :scale => 2
+    t.decimal  "agua_util",           :precision => 4, :scale => 2
     t.decimal  "conductividad"
     t.decimal  "h"
-    t.decimal  "saturacion_t",             :precision => 3, :scale => 2
-    t.decimal  "saturacion_s_h",           :precision => 3, :scale => 2
-    t.decimal  "peso_especifico_aparente"
+    t.decimal  "saturacion_t",        :precision => 4, :scale => 2
+    t.decimal  "saturacion_s_h",      :precision => 4, :scale => 2
+    t.decimal  "densidad_aparente"
+    t.integer  "materia_organica_cn"
+    t.string   "profundidad_muestra"
+    t.decimal  "agua_3_atm",          :precision => 4, :scale => 2
   end
 
   create_table "calicatas", :force => true do |t|
@@ -106,12 +109,12 @@ ActiveRecord::Schema.define(:version => 20120426151752) do
   end
 
   create_table "colores", :force => true do |t|
-    t.string   "seco"
-    t.string   "humedo"
-    t.integer  "horizonte_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "hvc", :null => false
+    t.string "rgb", :null => false
   end
+
+  add_index "colores", ["hvc"], :name => "index_colores_on_hvc", :unique => true
+  add_index "colores", ["rgb"], :name => "index_colores_on_rgb", :unique => true
 
   create_table "consistencias", :force => true do |t|
     t.string   "seco"
@@ -143,7 +146,7 @@ ActiveRecord::Schema.define(:version => 20120426151752) do
   end
 
   create_table "horizontes", :force => true do |t|
-    t.integer  "profundidad"
+    t.integer  "profundidad_superior"
     t.float    "ph"
     t.string   "textura"
     t.datetime "created_at"
@@ -157,6 +160,9 @@ ActiveRecord::Schema.define(:version => 20120426151752) do
     t.string   "concreciones"
     t.string   "co3"
     t.string   "tipo"
+    t.integer  "color_seco_id"
+    t.integer  "color_humedo_id"
+    t.integer  "profundidad_inferior"
   end
 
   create_table "limites", :force => true do |t|

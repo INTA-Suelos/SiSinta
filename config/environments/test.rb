@@ -40,4 +40,9 @@ Suelos::Application.configure do
 
   # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
   config.assets.allow_debugging = true
+
+  # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
+  # símbolo :url que está definido en el modelo Adjunto
+  config.adjunto_path = '/var/tmp/sisinta-dev:url'
+
 end

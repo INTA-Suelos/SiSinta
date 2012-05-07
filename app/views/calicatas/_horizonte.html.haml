@@ -1,16 +1,17 @@
 .span-1= h.text_field :tipo, :disabled => bloqueado
-.span-1= h.text_field :profundidad, :disabled => bloqueado
+.span-1= h.text_field :profundidad_superior, :disabled => bloqueado
+.span-1= h.text_field :profundidad_inferior, :disabled => bloqueado
 .span-4
   = h.fields_for :limite do |h_l|
     .span-2= h_l.collection_select :limite_tipo_id, @tipos_limite, :id, :valor,
       { :include_blank => true }, { :disabled => bloqueado }
     .span-2.last= h_l.collection_select :limite_forma_id, @formas_limite, :id,
       :valor, { :include_blank => true }, { :disabled => bloqueado }
-.span-1= h.text_field :textura, :disabled => bloqueado
 .span-2
-  = h.fields_for :color do |h_c|
-    .span-1= h_c.text_field :seco, :disabled => bloqueado
-    .span-1.last= h_c.text_field :humedo, :disabled => bloqueado
+  = h.fields_for :color_seco do |h_c|
+    .span-1= h_c.text_field :hvc, :disabled => bloqueado, :class => 'munsell'
+  = h.fields_for :color_humedo do |h_c|
+    .span-1.last= h_c.text_field :hvc, :disabled => bloqueado, :class => 'munsell'
 .span-6
   = h.fields_for :estructura do |h_e|
     .span-2= h_e.text_field :tipo, :disabled => bloqueado
