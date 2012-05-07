@@ -1,4 +1,15 @@
-%h1 Menú
-%ul
-  %li
-    = link_to 'Administrar Calicatas y Series', calicatas_path
+#arbol_de_contenidos
+  %ul
+    %li= link_to 'Calicatas', calicatas_path
+    %ul
+      %li Exportar
+      %ul
+        %li= link_to 'Calicatas a CSV', calicatas_preparar_csv_path
+        %li= link_to 'Calicatas a GeoJSON', calicatas_geo_path(format: :json)
+
+    %li= link_to 'Series', series_path
+    %ul
+      %li Exportar
+      %ul
+        %li= link_to 'Series a CSV', series_preparar_csv_path
+        %li= link_to 'Series a GeoJSON', series_geo_path(format: :json)
