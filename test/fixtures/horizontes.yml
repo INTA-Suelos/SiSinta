@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 uno:
-  profundidad: 1
+  profundidad_superior: 0
+  profundidad_inferior: 17
   ph: 1.5
   textura: MyString
   calicata: valida
 
 dos:
-  profundidad: 1
+  profundidad_superior: 17
+  profundidad_inferior: 41
   ph: 1.5
   textura: MyString
   calicata: valida
