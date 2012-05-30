@@ -35,11 +35,12 @@ class Calicata < ActiveRecord::Base
   belongs_to :posicion,       :inverse_of => :calicatas
   belongs_to :drenaje,        :inverse_of => :calicatas
 
-  has_many :analisis,       :through => :horizontes
-  has_many :estructuras,    :through => :horizontes
-  has_many :colores,        :through => :horizontes
-  has_many :consistencias,  :through => :horizontes
-  has_many :limites,        :through => :horizontes
+  has_many :analisis,         :through => :horizontes
+  has_many :estructuras,      :through => :horizontes
+  has_many :colores_secos,    :through => :horizontes
+  has_many :colores_humedos,  :through => :horizontes
+  has_many :consistencias,    :through => :horizontes
+  has_many :limites,          :through => :horizontes
 
   belongs_to :usuario, :inverse_of => :calicatas
   belongs_to :fase, :inverse_of => :calicatas
