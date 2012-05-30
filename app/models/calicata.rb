@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
-
   after_initialize :preparar
   before_validation :buscar_asociaciones
 
