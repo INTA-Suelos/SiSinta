@@ -16,7 +16,7 @@ Instalación
     *sisinta*), con password encriptado:
 
         $ createuser -P -E -d sisinta
- 
+
     No hace falta que sea superusuario ni cree otros roles. Ahora configuramos
     los permisos de acceso para poder conectarse con este usuario en
     `pg_hba.conf`, agregando esta línea:

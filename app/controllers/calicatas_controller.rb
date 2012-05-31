@@ -124,7 +124,9 @@ class CalicatasController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   #
   def preparar_csv
-    @atributos = Calicata.atributos_y_asociaciones :excepto => [:created_at, :updated_at, :adjuntos]
+    @atributos = Calicata.atributos_y_asociaciones :excepto =>
+      [ :created_at, :updated_at, :adjuntos, :analisis, :estructuras,
+        :colores_secos, :colores_humedos, :consistencias, :limites ]
 
     respond_to do |format|
       format.html
