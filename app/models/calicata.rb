@@ -85,7 +85,7 @@ class Calicata < ActiveRecord::Base
 
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
   def buscar_asociaciones
-    super(grupo: 'descripcion', fase: 'nombre')
+    super({grupo: 'descripcion', fase: 'nombre'}, true)
   end
 
 end

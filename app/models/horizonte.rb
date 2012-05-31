@@ -15,8 +15,8 @@ class Horizonte < ActiveRecord::Base
   belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco
   belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo
 
-  accepts_nested_attributes_for :analisis, :limite, :consistencia,
-                                :estructura, :color_seco, :color_humedo, :limit => 1
+  accepts_nested_attributes_for :analisis, :limite, :consistencia, :color_seco,
+                                :color_humedo, :estructura, :limit => 1
 
   validates_presence_of :calicata
 
@@ -34,7 +34,7 @@ class Horizonte < ActiveRecord::Base
 
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
   def buscar_asociaciones
-    super(color_seco: 'hvc', color_humedo: 'hvc')
+    super({color_seco: 'hvc', color_humedo: 'hvc'})
   end
 
 end
