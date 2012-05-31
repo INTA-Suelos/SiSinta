@@ -14,6 +14,7 @@ uno:
   base_k: 9.99
   base_na: 9.99
   horizonte: uno
+  profundidad_muestra: "3 - 4"
 
 dos:
   registro: 1
@@ -29,3 +30,4 @@ dos:
   base_k: 9.99
   base_na: 9.99
   horizonte: dos
+  profundidad_muestra: "35 - 40"

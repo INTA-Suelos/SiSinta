@@ -15,7 +15,7 @@ gem 'param_protected'
 
 ## Presentación
 gem 'dynamic_form'
-gem 'haml'
+gem 'haml-rails'
 gem 'awesome_nested_fields'
 gem 'best_in_place'
 
@@ -24,6 +24,7 @@ gem 'browser_detect'
 
 ## Modelos
 gem 'acts_as_list'
+gem 'paperclip'
 
 ## GIS
 gem 'activerecord-postgis-adapter'

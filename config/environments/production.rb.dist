@@ -64,4 +64,9 @@ Suelos::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
+  # símbolo :url que está definido en el modelo Adjunto
+  config.adjunto_path = '/var/tmp/sisinta-prod:url'
+
 end

@@ -17,16 +17,19 @@ Suelos::Application.routes.draw do
 
   # Explicito la ruta para evitar que tome 'geo' como un :id
   get 'calicatas/geo'  => 'calicatas#geo'
-  get 'series/geo'     => 'calicatas#geo', as: 'series'
+  get 'series/geo'     => 'calicatas#geo'
 
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
   m = { new: "nuevo", edit: "editar" }
   f = { new: "nueva", edit: "editar" }
 
   resources :calicatas, path_names: f do
-    resources :analisis, path_names: m, except: [:create, :edit, :new, :update] do
+    resources :analisis, only: :index, path_names: m do
       get 'edit', on: :collection
       put 'update', on: :collection
+    end
+    resources :adjuntos, path_names: m do
+      get 'descargar', on: :member
     end
   end
   resources :horizontes, path_names: m
@@ -35,6 +38,9 @@ Suelos::Application.routes.draw do
   end
   resources :fases, only: :index, path_names: f do
     get 'autocompletar/:atributo' => 'fases#autocompletar', on: :collection
+  end
+  resources :colores, only: [], path_names: m do
+    get 'autocompletar/:atributo' => 'colores#autocompletar', on: :collection
   end
 
   # The priority is based upon order of creation:

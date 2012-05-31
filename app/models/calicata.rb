@@ -1,8 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
-
   after_initialize :preparar
-  before_validation :limpiar
+  before_validation :buscar_asociaciones
 
   scope :series, where(:modal => 'true')
 
@@ -15,7 +14,7 @@ class Calicata < ActiveRecord::Base
                             :allow_nil => true
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
-  has_many :fotos,        :dependent => :destroy, :inverse_of => :calicata
+  has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
   has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
   has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
@@ -35,11 +34,12 @@ class Calicata < ActiveRecord::Base
   belongs_to :posicion,       :inverse_of => :calicatas
   belongs_to :drenaje,        :inverse_of => :calicatas
 
-  has_many :analisis,       :through => :horizontes
-  has_many :estructuras,    :through => :horizontes
-  has_many :colores,        :through => :horizontes
-  has_many :consistencias,  :through => :horizontes
-  has_many :limites,        :through => :horizontes
+  has_many :analisis,         :through => :horizontes
+  has_many :estructuras,      :through => :horizontes
+  has_many :colores_secos,    :through => :horizontes
+  has_many :colores_humedos,  :through => :horizontes
+  has_many :consistencias,    :through => :horizontes
+  has_many :limites,          :through => :horizontes
 
   belongs_to :usuario, :inverse_of => :calicatas
   belongs_to :fase, :inverse_of => :calicatas
@@ -60,27 +60,6 @@ class Calicata < ActiveRecord::Base
     end
   end
 
-  def preparar
-    super(%w{capacidad paisaje ubicacion fase grupo})
-  end
-
-  #
-  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
-  #
-  def limpiar
-    if self.grupo.try(:descripcion).present? then
-      self.grupo = Grupo.find_or_create_by_descripcion self.grupo.descripcion
-    else
-      self.grupo = nil
-    end
-
-    if self.fase.try(:nombre).present? then
-      self.fase = Fase.find_or_create_by_nombre self.fase.nombre
-    else
-      self.fase = nil
-    end
-  end
-
   #
   # Prepara un hash para que RGeo genere geojson
   #
@@ -96,6 +75,17 @@ class Calicata < ActiveRecord::Base
   #
   def geometria
     self.ubicacion.try(:coordenadas)
+  end
+
+  protected
+
+  def preparar
+    super(%w{capacidad paisaje ubicacion fase grupo})
+  end
+
+  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
+  def buscar_asociaciones
+    super({grupo: 'descripcion', fase: 'nombre'}, true)
   end
 
 end
