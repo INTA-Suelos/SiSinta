@@ -1,0 +1,7 @@
+%tr
+  %td{colspan: 4}= grupo.descripcion
+  %td= grupo.codigo
+  %td.boton= link_to 'Editar', edit_grupo_path(grupo)
+  %td.boton= link_to 'Eliminar',
+    grupo, method: :delete,
+    confirm: "¿Estás seguro? #{grupo.calicatas.any? ? "Esto va a dejar sin grupo a #{pluralize(grupo.calicatas.size, 'calicata')}." : nil}"

@@ -33,7 +33,7 @@ Suelos::Application.routes.draw do
     end
   end
   resources :horizontes, path_names: m
-  resources :grupos, only: :index, path_names: m do
+  resources :grupos, path_names: m do
     get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
   end
   resources :fases, only: :index, path_names: f do

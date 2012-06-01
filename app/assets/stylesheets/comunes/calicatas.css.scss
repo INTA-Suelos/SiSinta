@@ -13,14 +13,6 @@ form.completa {
     padding-right: 0;
   }
 
-  label {
-    font-size: x-small;
-  }
-
-  .fecha {
-    text-align: center;
-  }
-
   #calicata_modal + #serie {
     visibility: hidden;
   }
@@ -35,21 +27,4 @@ form.completa {
     }
   }
 
-  .add, .remove { text-decoration: none; }
-
-  .empty {
-    padding-top: 15.3334px;
-  }
-
-  .add {
-    font-size: large;
-  }
-
-  .remove {
-    padding-left: 2px;
-  }
-
-  .empty, .remove, .add {
-    font-weight: bold;
-  }
 }
