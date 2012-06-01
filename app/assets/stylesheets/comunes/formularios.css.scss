@@ -80,6 +80,11 @@ form {
     font-weight: bold;
   }
 
+  // estilos para los placeholder (mozilla y chrome)
+  input:-moz-placeholder {      color: $gris_claro; }
+  ::-webkit-input-placeholder { color: $gris_claro; }
+  input:focus::-webkit-input-placeholder {  color: transparent; }
+
 }
 
 // estilo para los campos y etiquetas con error en los formularios
