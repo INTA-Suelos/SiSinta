@@ -1,12 +1,12 @@
-= form_for @calicata, :url => calicata_analisis_index_path(@calicata),
-                      :method => :put, :html => { class: 'completa span-24' } do |f|
+= form_for @calicata, url: calicata_analisis_index_path(@calicata),
+                      method: :put, html: { class: 'completa span-24' } do |f|
 
 
   =  f.error_messages
 
-  = field_set_tag 'Datos analíticos', :class => 'azul_claro span-23 last' do
+  = field_set_tag 'Datos analíticos', class: 'azul_claro span-23 last' do
 
-    = field_set_tag nil, :class => 'celeste plegable span-22 last' do
+    = field_set_tag nil, class: 'celeste plegable span-22 last' do
 
       %table#tabla_analisis.span-21.last
         %colgroup#titulos{span: 2}
