@@ -28,11 +28,13 @@
           %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Materia orgánica'
           %td.titulo{colspan: 1}= label_tag nil, 'C %'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :materia_organica_c, disabled: bloqueado
+            %td.dato= f_a.text_field :materia_organica_c, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo= label_tag nil, 'N %'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :materia_organica_n, disabled: bloqueado
+            %td.dato= f_a.text_field :materia_organica_n, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo= label_tag nil, 'C/N'
           = f.fields_for :analisis, @analisis do |f_a|
@@ -41,56 +43,69 @@
           %td.titulo{colspan: 1, rowspan: 8}= label_tag nil, 'Textura'
           %td.titulo.largo= label_tag nil, 'Arcilla < 2u'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arcilla, disabled: bloqueado
+            %td.dato= f_a.text_field :arcilla, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Limo 2-20u'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :limo_2_20, disabled: bloqueado
+            %td.dato= f_a.text_field :limo_2_20, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Limo 2-50u'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :limo_2_50, disabled: bloqueado
+            %td.dato= f_a.text_field :limo_2_50, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Arena muy fina'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arena_muy_fina, disabled: bloqueado
+            %td.dato= f_a.text_field :arena_muy_fina, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Arena fina'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arena_fina, disabled: bloqueado
+            %td.dato= f_a.text_field :arena_fina, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Arena media'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arena_media, disabled: bloqueado
+            %td.dato= f_a.text_field :arena_media, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Arena gruesa'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arena_gruesa, disabled: bloqueado
+            %td.dato= f_a.text_field :arena_gruesa, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo.largo= label_tag nil, 'Arena muy gruesa'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :arena_muy_gruesa, disabled: bloqueado
+            %td.dato= f_a.text_field :arena_muy_gruesa, disabled: bloqueado,
+            placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}!= "<label>Ca CO<sub>3</sub> %</label>"
+          %td.titulo{colspan: 2}!= "<label>Ca CO<sub>3</sub></label>"
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :ca_co3, disabled: bloqueado
+            %td.dato= f_a.text_field :ca_co3, disabled: bloqueado,
+            placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Equiv. de humedad %'
+          %td.titulo{colspan: 2}= label_tag nil, 'Equiv. de humedad'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :humedad, disabled: bloqueado
+            %td.dato= f_a.text_field :humedad, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Capacidad de agua'
           %td.titulo{colspan: 1}= label_tag nil, '3 atm'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :agua_3_atm, disabled: bloqueado
+            %td.dato= f_a.text_field :agua_3_atm, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 1}= label_tag nil, '15 atm'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :agua_15_atm, disabled: bloqueado
+            %td.dato= f_a.text_field :agua_15_atm, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 1}= label_tag nil, 'Agua útil'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :agua_util, disabled: bloqueado
+            %td.dato= f_a.text_field :agua_util, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'pH en pasta'
           = f.fields_for :analisis, @analisis do |f_a|
@@ -104,13 +119,15 @@
           = f.fields_for :analisis, @analisis do |f_a|
             %td.dato= f_a.text_field :ph_kcl, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Resistencia pasta Ω'
+          %td.titulo{colspan: 2}= label_tag nil, 'Resistencia pasta'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :resistencia_pasta, disabled: bloqueado
+            %td.dato= f_a.text_field :resistencia_pasta, disabled: bloqueado,
+            placeholder: 'Ω'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Conductiv. (mmhos/cm)'
+          %td.titulo{colspan: 2}= label_tag nil, 'Conductividad'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :conductividad, disabled: bloqueado
+            %td.dato= f_a.text_field :conductividad, disabled: bloqueado,
+            placeholder: 'mmhos/cm'
         %tr
           %td.titulo.largo{colspan: 1, rowspan: 4}= label_tag nil, 'Bases intercambiables'
           %td.titulo= label_tag nil, 'Ca++'
@@ -141,13 +158,15 @@
           = f.fields_for :analisis, @analisis do |f_a|
             %td.dato= f_a.text_field :t, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, '% Satur. (sobre T)'
+          %td.titulo{colspan: 2}= label_tag nil, 'Satur. (sobre T)'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :saturacion_t, disabled: bloqueado
+            %td.dato= f_a.text_field :saturacion_t, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, '% Satur. (S + H)'
           = f.fields_for :analisis, @analisis do |f_a|
-            %td.dato= f_a.text_field :saturacion_s_h, disabled: bloqueado
+            %td.dato= f_a.text_field :saturacion_s_h, disabled: bloqueado,
+            placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Densidad aparente'
           = f.fields_for :analisis, @analisis do |f_a|
