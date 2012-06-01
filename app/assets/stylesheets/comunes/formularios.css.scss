@@ -3,6 +3,10 @@
 form {
   line-height: $altura-linea;
 
+  label {
+    font-size: x-small;
+  }
+
   input {
     width: inherit !important;
   }
@@ -23,6 +27,8 @@ form {
   .subtitulo { text-decoration: underline; }
 
   .texto-corto { height: $altura-linea * 2 + 1;  }
+
+  .fecha { text-align: center; }
 
   .campo {
     .ayuda {
@@ -53,6 +59,25 @@ form {
       background-color: #f5f5f5;
       color: #000;
     }
+  }
+
+  .add, .remove { text-decoration: none; }
+
+  .empty {
+    padding-top: 15.3334px;
+    font-style: italic;
+  }
+
+  .add {
+    font-size: large;
+  }
+
+  .remove {
+    padding-left: 2px;
+  }
+
+  .remove, .add {
+    font-weight: bold;
   }
 
 }
