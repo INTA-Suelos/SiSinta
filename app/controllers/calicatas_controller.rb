@@ -126,8 +126,10 @@ class CalicatasController < AutorizadoController
   def preparar_csv
     @atributos = Calicata.atributos_y_asociaciones :excepto =>
       [ :created_at, :updated_at, :adjuntos, :analisis, :estructuras,
-        :colores_secos, :colores_humedos, :consistencias, :limites ]
+        :colores_secos, :colores_humedos, :consistencias, :limites,
+        :horizontes ]
 
+    binding.pry
     respond_to do |format|
       format.html
     end
@@ -139,7 +141,7 @@ class CalicatasController < AutorizadoController
     @encabezado = true if params[:incluir_encabezado]
 
     @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-      @atributos = params[:atributos][:calicata].keys.flatten
+      @atributos = params[:atributos][:calicatas].keys.flatten
 
       csv << @atributos if @encabezado
 

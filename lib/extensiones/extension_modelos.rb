@@ -14,7 +14,7 @@ module ExtensionModelos
       opciones ||= {}
       excepto = Array.wrap(opciones[:excepto])
 
-      atributos = self.attribute_names.map {|s| s.to_sym}.reject {|n| excepto.include? n}
+      atributos = self.attribute_names.map {|s| s.to_sym}.reject {|n| n =~ /_id$/ or excepto.include? n }
       atributos << self.reflections.keys.reject {|n| excepto.include? n}
       atributos.flatten
     end
