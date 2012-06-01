@@ -50,7 +50,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new
+    @calicata = Calicata.new(params[:calicata])
     @titulo = 'Nueva calicata'
 
     respond_to do |format|
