@@ -77,6 +77,10 @@ class Calicata < ActiveRecord::Base
     self.ubicacion.try(:coordenadas)
   end
 
+  def to_s
+    self.to_param
+  end
+
   protected
 
   def preparar
