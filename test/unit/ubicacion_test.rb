@@ -39,8 +39,9 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
-    u = Ubicacion.new mosaico: '3760-2-2'
-    assert_equal '-60,708333333 -36,083333333', u.aproximar
+    flunk "no implementado todavía"
+    #u = Ubicacion.new mosaico: '3760-2-2'
+    #assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
 end

@@ -36,9 +36,9 @@ class Ubicacion < ActiveRecord::Base
   # * *Raises* :
   #   - ++ ->
   #
-  def aproximar
-    "no implementado todavía"
-  end
+  #def aproximar
+  #  "no implementado todavía"
+  #end
 
 # == Accesors
 
