@@ -78,7 +78,7 @@ class Calicata < ActiveRecord::Base
   end
 
   def to_s
-    numero
+    self.to_param
   end
 
   protected
