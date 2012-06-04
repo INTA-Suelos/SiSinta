@@ -15,8 +15,11 @@ class Horizonte < ActiveRecord::Base
   belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco
   belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo
 
-  accepts_nested_attributes_for :analisis, :limite, :consistencia, :color_seco,
-                                :color_humedo, :estructura, :limit => 1
+  accepts_nested_attributes_for :analisis, :limite, :consistencia,
+                                :estructura,
+                                limit: 1
+  accepts_nested_attributes_for :color_seco, :color_humedo,
+                                reject_if: proc { |a| a['hvc'].blank? }
 
   validates_presence_of :calicata
 
