@@ -12,8 +12,10 @@ class Horizonte < ActiveRecord::Base
 
   belongs_to :calicata, :inverse_of => :horizontes
 
-  belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco
-  belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo
+  belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco,
+                          autosave: false
+  belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo,
+                            autosave: false
 
   accepts_nested_attributes_for :analisis, :limite, :consistencia, :color_seco,
                                 :color_humedo, :estructura, :limit => 1
