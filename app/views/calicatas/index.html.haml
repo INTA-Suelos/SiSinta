@@ -1,4 +1,4 @@
-- parametros = { :calicata => { :modal => true } } if @alias == 'serie'
+- parametros = { calicata: { modal: true } } if @alias == 'serie'
 .botonera= link_to "Nueva #{@alias.titleize}", new_calicata_path(parametros)
 
 = render partial: 'lista', locals: {calicatas: @calicatas}

@@ -125,8 +125,7 @@ class CalicatasController < AutorizadoController
   #
   def preparar_csv
     @atributos = Calicata.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :analisis, :estructuras,
-        :colores_secos, :colores_humedos, :consistencias, :limites ]
+      [ :created_at, :updated_at, :adjuntos, :horizontes ]
 
     respond_to do |format|
       format.html
@@ -134,22 +133,7 @@ class CalicatasController < AutorizadoController
   end
 
   def procesar_csv
-    @archivo = "#{@alias.pluralize}_#{Date.today.strftime('%Y-%m-%d')}.csv"
-
-    @encabezado = true if params[:incluir_encabezado]
-
-    @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-      @atributos = params[:atributos][:calicata].keys.flatten
-
-      csv << @atributos if @encabezado
-
-      @calicatas.each do |c|
-        csv << c.como_arreglo(@atributos)
-      end
-    end
-
-    send_data @respuesta, :filename => @archivo
-
+    super(@calicatas, @alias.pluralize)
   end
 
 protected
