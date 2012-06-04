@@ -14,9 +14,16 @@ module ExtensionModelos
       opciones ||= {}
       excepto = Array.wrap(opciones[:excepto])
 
+      # Selecciono los nombres de atributos que no son obvias llaves externas
+      # (*_id). Si hay llaves externas sin este formato, hay que agregarlas al
+      # hash +:excepto+.
       atributos = self.attribute_names.map {|s| s.to_sym}.reject {|n| n =~ /_id$/ or excepto.include? n }
-      atributos << self.reflections.keys.reject {|n| excepto.include? n}
-      atributos.flatten
+
+      # Rechazo las asociaciones de tipo +:through+
+      atributos << self.reflections.reject do |k,v|
+        not v.instance_of?(ActiveRecord::Reflection::AssociationReflection)
+      end.keys.reject {|n| excepto.include? n}
+      atributos.flatten.sort
     end
 
   end

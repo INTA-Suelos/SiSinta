@@ -18,12 +18,12 @@
 
   = field_set_tag "Atributos de los horizontes", class: 'celeste span-22 last plegable' do
 
-    #calicatas.atributos.span-22.last
+    #horizontes.atributos.span-22.last
       - @atributos.each do |a|
         .span-6.last.campo{class: cycle('azul_claro', 'celeste')}
           .span-5
             = label_tag a
           .span-1.last
-            = check_box_tag "atributos[horizontes][#{a}]"
+            = check_box_tag "atributos[#{a}]"
 
   .acciones.span-4= submit_tag 'Exportar'

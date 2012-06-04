@@ -8,6 +8,8 @@ Suelos::Application.routes.draw do
   post  'calicatas/procesar_csv'
   get   'series/preparar_csv' => 'calicatas#preparar_csv'
   post  'series/procesar_csv' => 'calicatas#procesar_csv'
+  get   'horizontes/preparar_csv'
+  post  'horizontes/procesar_csv'
 
   # Autenticación en rack
   devise_for :usuarios
@@ -32,7 +34,7 @@ Suelos::Application.routes.draw do
       get 'descargar', on: :member
     end
   end
-  resources :horizontes, path_names: m
+  resources :horizontes, only: :index, path_names: m
   resources :grupos, path_names: m do
     get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
   end
