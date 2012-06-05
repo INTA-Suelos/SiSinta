@@ -4,7 +4,7 @@ class Paisaje < ActiveRecord::Base
   validates_presence_of :calicata
 
   def to_s
-    "#{tipo}-#{forma}-#{simbolo}"
+    "#{tipo} #{forma} #{simbolo}".chomp
   end
 
 end

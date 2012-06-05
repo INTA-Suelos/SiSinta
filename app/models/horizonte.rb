@@ -31,6 +31,10 @@ class Horizonte < ActiveRecord::Base
     end
   end
 
+  def to_s
+    self.to_param
+  end
+
   protected
 
   def preparar

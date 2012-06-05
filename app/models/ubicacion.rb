@@ -79,9 +79,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    return descripcion unless descripcion.blank?
-    return lat_lon unless coordenadas.nil?
-    return aproximar
+    self.try(:descripcion) unless self.try(:lat_lon)
   end
 
 end

@@ -6,6 +6,6 @@ class Fase < ActiveRecord::Base
   validates_presence_of :nombre
 
   def to_s
-    nombre
+    self.try(:nombre).to_s
   end
 end
