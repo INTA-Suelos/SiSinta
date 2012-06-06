@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Ubicacion < ActiveRecord::Base
 
-  #
   # Permite "latitud, longitud", con valores de latitud de -90 a 90 y de longitud de -180 a 180
   # De: http://www.dbws.net/blog/2009/10/23/regex-validation-of-latitude-and-longitude/
   # Y según http://spatialreference.org/ref/epsg/4326/
@@ -17,7 +16,7 @@ class Ubicacion < ActiveRecord::Base
   belongs_to :calicata, :inverse_of => :ubicacion
 
   validates_presence_of :calicata
-  validates_format_of :lat_lon, :with => EPSG_4326, :allow_blank => true
+  validates_format_of :punto, :with => EPSG_4326, :allow_blank => true
 
 
   #
@@ -36,9 +35,9 @@ class Ubicacion < ActiveRecord::Base
   # * *Raises* :
   #   - ++ ->
   #
-  def aproximar
-    "no implementado todavía"
-  end
+  #def aproximar
+  #  "no implementado todavía"
+  #end
 
 # == Accesors
 
@@ -56,22 +55,28 @@ class Ubicacion < ActiveRecord::Base
       :geojson => coordenadas_en_geojson }
   end
 
-  def lat_lon=(lat_lon)
-    write_attribute :coordenadas, "POINT(#{lat_lon})"
-  end
-
-  def lat_lon
+  def punto
     if c = read_attribute(:coordenadas)
       "#{c.x} #{c.y}"
     end
   end
 
-  def latitud
+  def x
     coordenadas.x if coordenadas
   end
 
-  def longitud
+  def x=(nuevo_x)
+    @x = nuevo_x
+    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
+  end
+
+  def y
     coordenadas.y if coordenadas
+  end
+
+  def y=(nuevo_y)
+    @y = nuevo_y
+    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
   end
 
   def coordenadas_en_geojson
@@ -79,9 +84,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    return descripcion unless descripcion.blank?
-    return lat_lon unless coordenadas.nil?
-    return aproximar
+    self.try(:descripcion) unless self.try(:punto)
   end
 
 end

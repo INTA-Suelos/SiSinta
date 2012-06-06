@@ -50,7 +50,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new
+    @calicata = Calicata.new(params[:calicata])
     @titulo = 'Nueva calicata'
 
     respond_to do |format|
@@ -124,7 +124,8 @@ class CalicatasController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   #
   def preparar_csv
-    @atributos = Calicata.atributos_y_asociaciones :excepto => [:created_at, :updated_at, :adjuntos]
+    @atributos = Calicata.atributos_y_asociaciones :excepto =>
+      [ :created_at, :updated_at, :adjuntos, :horizontes ]
 
     respond_to do |format|
       format.html
@@ -132,22 +133,7 @@ class CalicatasController < AutorizadoController
   end
 
   def procesar_csv
-    @archivo = "#{@alias.pluralize}_#{Date.today.strftime('%Y-%m-%d')}.csv"
-
-    @encabezado = true if params[:incluir_encabezado]
-
-    @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-      @atributos = params[:atributos][:calicata].keys.flatten
-
-      csv << @atributos if @encabezado
-
-      @calicatas.each do |c|
-        csv << c.como_arreglo(@atributos)
-      end
-    end
-
-    send_data @respuesta, :filename => @archivo
-
+    super(@calicatas, @alias.pluralize)
   end
 
 protected
@@ -175,6 +161,15 @@ protected
     @usos_tierra = UsoTierra.all
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
+    @formatos_coordenada = [
+      ["Geográficas WGS84 (° y ' decimales)", 1],
+      ["Geogradicas WGS84 (°, ' y \" decimales)", 2],
+      ["Planas en Campo Ichauspe", 3],
+      ["Planas en POSGAR94 / POSGAR98", 4],
+      ["Planas en UTM - zona 18S", 5],
+      ["Planas en UTM - zona 19S", 6],
+      ["Planas en UTM - zona 20S", 7],
+      ["Planas en UTM - zona 21S", 8]]
   end
 
   def cargar_series_y_calicatas

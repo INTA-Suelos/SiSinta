@@ -13,6 +13,8 @@ $rojo_medio:  lighten($rojo_inta, 10%);
 
 $verde:       rgb(0, green($azul_inta), 0);
 
+$gris_claro:  #777;
+
 // Mixins
 @mixin mensaje($color) {
   padding: 0.2em;

@@ -13,6 +13,7 @@ end
 # Carga el archivo en formato csv +archivo+,  del directorio +semillas+, que
 # tiene datos iniciales para la base de datos.
 def cargar_csv_de(archivo, configuracion = {})
+  puts "Cargando CSV de #{archivo} ..."
   CSV.foreach "#{Rails.root}/db/semillas/#{archivo}.csv", configuracion do |fila|
     yield fila
   end
@@ -49,7 +50,6 @@ Usuario.create( :nombre => 'Administrador',
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ';') do |color|
-  puts "Cargando colores #{color[0]} #{color[1]}/#{color[2]} ..."
   Color.find_or_create_by_hvc("#{color[0]} #{color[1]}/#{color[2]}") do |nuevo|
     r = [(color[6].to_f * 255).round, 255].min
     g = [(color[7].to_f * 255).round, 255].min

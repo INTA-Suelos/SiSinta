@@ -7,13 +7,13 @@
         - @calicata.errors.full_messages.each do |msg|
           %li= msg
 
-  = field_set_tag 'Ficha de descripción edafológica', :class => 'span-23 last' do
+  = field_set_tag 'Ficha de descripción edafológica', class: 'span-23 last' do
 
     .campo-suelto.span-6.last
       .span-2= f.label :numero, 'Sitio N°'
       .span-3.append-1.last= f.text_field :numero
 
-    = field_set_tag 'Ubicación', :class => 'span-22 last' do
+    = field_set_tag 'Ubicación', class: 'span-22 last' do
       #referencia.span-22.last
         .span-4= f.label :ubicacion, 'Referencia'
         .span-17.last= f.text_field :ubicacion
@@ -24,7 +24,7 @@
         .span-2= f.label :fotos, 'Fotos'
         .span-3.last= f.number_field :fotos
 
-    = field_set_tag 'Paisaje', :class => 'span-22 last' do
+    = field_set_tag 'Paisaje', class: 'span-22 last' do
       #unidad_geomorfologica.span-22.last
         .span-4= f.label :paisaje
         .span-17.last= f.text_field :paisaje
@@ -44,7 +44,7 @@
         .span-4= f.label :material_original
         .span-17.last= f.text_field :material_original
 
-    = field_set_tag 'Perfil', :class => 'span-22 last' do
+    = field_set_tag 'Perfil', class: 'span-22 last' do
       #taxonomia..span-22.last
         .span-4= f.label :taxonomia, 'Clasificación taxonómica'
         .span-17.last= f.text_field :taxonomia
@@ -62,7 +62,7 @@
           .span-2.last= number_field_tag :profundidad_n
 
         .span-6
-          .prepend-2.span-4.last= label_tag nil, 'Estructura', :class => 'subtitulo'
+          .prepend-2.span-4.last= label_tag nil, 'Estructura', class: 'subtitulo'
           .span-2
             .span-2.last= label_tag :estructura_t_n, 'Tipo'
             .span-2.last= text_field_tag :estructura_t_n
@@ -74,7 +74,7 @@
             .span-2.last= text_field_tag :estructura_g_n
 
         .span-4
-          .prepend-1.span-3.last= label_tag nil, 'Consistencia', :class => 'subtitulo'
+          .prepend-1.span-3.last= label_tag nil, 'Consistencia', class: 'subtitulo'
           .span-2
             .span-2.last= label_tag :consistencia_s_n, 'Seco'
             .span-2.last= text_field_tag :consistencia_s_n
@@ -97,6 +97,6 @@
 
     #observaciones.prepend-media.span-22.last
       .span-4= f.label :observaciones
-      .span-17.last= f.text_area :observaciones, :size => '40x3'
+      .span-17.last= f.text_area :observaciones, size: '40x3'
 
     .acciones.span-4.last= f.submit

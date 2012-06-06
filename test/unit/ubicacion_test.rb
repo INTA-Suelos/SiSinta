@@ -26,21 +26,27 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "las coordenadas deberían estar en SRID 4326" do
-    @u.lat_lon= "50 50"
+    @u.x = 50
+    @u.y = 50
     srid = @u.coordenadas.srid
     assert 4326 == srid, "#{srid} es un SRID incorrecto"
   end
 
-  test "lat_lon maneja coordenadas correctamente" do
-    u = Ubicacion.new :lat_lon => "22.1 33.2"
-    assert_equal "22.1 33.2", u.lat_lon
-    assert 22.1 == u.latitud
-    assert 33.2 == u.longitud
+  test "punto, x e y manejan coordenadas correctamente" do
+    u = Ubicacion.new x: 22.1, y: 33.2
+    assert_equal "22.1 33.2", u.punto
+    assert 22.1 == u.x
+    assert 33.2 == u.y
   end
 
   test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
-    u = Ubicacion.new mosaico: '3760-2-2'
-    assert_equal '-60,708333333 -36,083333333', u.aproximar
+    flunk "no implementado todavía"
+    #u = Ubicacion.new mosaico: '3760-2-2'
+    #assert_equal '-60,708333333 -36,083333333', u.aproximar
+  end
+
+  test "debería soportar proj4" do
+    assert RGeo::CoordSys::Proj4::supported?
   end
 
 end

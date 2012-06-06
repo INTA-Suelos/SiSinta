@@ -80,4 +80,32 @@ protected
     @calicata = Calicata.find(params[:calicata_id])
   end
 
+  # Devuelve un csv en base a los atributos del modelo
+  #
+  # * *Args*    :
+  #   - +coleccion+ -> coleccion a convertir en CSV
+  #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
+  # * *Returns* :
+  #   - La lista de coincidencias mapeada en +json+
+
+  def procesar_csv(coleccion = {}, prefijo = 'csv')
+
+    @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
+
+    @encabezado = true if params[:incluir_encabezado]
+
+    @respuesta = CSV.generate(:headers => @encabezado) do |csv|
+      @atributos = params[:atributos].keys.sort
+
+      csv << @atributos if @encabezado
+
+      coleccion.each do |miembro|
+        csv << miembro.como_arreglo(@atributos)
+      end
+    end
+
+    send_data @respuesta, :filename => @archivo
+
+  end
+
 end

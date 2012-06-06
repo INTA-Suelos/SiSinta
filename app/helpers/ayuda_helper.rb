@@ -15,10 +15,10 @@ module AyudaHelper
   #
   def ayuda_para(modelo, campo, html = {})
     # Hay que usar valor3 y valor2 porque AR no detecta los alias, todavía
-    texto = Ayuda.where(:valor3 => modelo, :valor2 => campo).first.descripcion
+    texto = Ayuda.where(:valor3 => modelo, :valor2 => campo).first.try(:descripcion)
     id = html[:id] || "ayuda_#{modelo}_#{campo}"
     clases = html[:clases] || 'ayuda'
 
-    "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe
+    "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe if texto
   end
 end
