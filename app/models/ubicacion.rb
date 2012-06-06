@@ -55,14 +55,6 @@ class Ubicacion < ActiveRecord::Base
       :geojson => coordenadas_en_geojson }
   end
 
-  def coordenadas=
-    binding.pry
-  end
-
-  def punto=(x, y)
-    write_attribute :coordenadas, "POINT(#{x} #{y})"
-  end
-
   def punto
     if c = read_attribute(:coordenadas)
       "#{c.x} #{c.y}"
@@ -92,7 +84,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    self.try(:descripcion) unless self.try(:lat_lon)
+    self.try(:descripcion) unless self.try(:punto)
   end
 
 end
