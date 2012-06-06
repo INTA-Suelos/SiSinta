@@ -6,6 +6,6 @@ class Grupo < ActiveRecord::Base
   validates_presence_of :descripcion
 
   def to_s
-    descripcion
+    self.try(:descripcion).to_s
   end
 end

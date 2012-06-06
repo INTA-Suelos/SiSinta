@@ -44,4 +44,8 @@ class UbicacionTest < ActiveSupport::TestCase
     #assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
+  test "debería soportar proj4" do
+    assert RGeo::CoordSys::Proj4::supported?
+  end
+
 end

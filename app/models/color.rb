@@ -3,6 +3,6 @@ class Color < ActiveRecord::Base
   has_many :horizontes_en_humedo, class_name: 'Color', inverse_of: :color_humedo
 
   def to_s
-    hvc || ''
+    self.try(:hvc).to_s
   end
 end
