@@ -27,4 +27,14 @@ form.completa {
     }
   }
 
+  #horizontes {
+    overflow-x: scroll;
+    padding-bottom: 1em;
+    border-right: 1px $gris_claro dashed;
+    border-left: 1px $gris_claro dashed;
+  }
+
+  #tabla_horizontes {
+    width: 870px;
+  }
 }

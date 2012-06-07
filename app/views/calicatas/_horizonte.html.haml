@@ -1,3 +1,4 @@
+.span-1.centrado= link_to 'x', '#', class: 'remove' unless bloqueado
 .span-1= h.text_field :tipo, disabled: bloqueado
 .span-1= h.text_field :profundidad_superior,
   disabled: bloqueado, placeholder: 'cm'
@@ -19,11 +20,11 @@
     .span-2= h_e.text_field :tipo, disabled: bloqueado
     .span-2= h_e.text_field :clase, disabled: bloqueado
     .span-2.last= h_e.text_field :grado, disabled: bloqueado
-.span-6
+.span-6.last
   =h.fields_for :consistencia do |h_c|
     .span-1= h_c.text_field :seco, disabled: bloqueado
     .span-1= h_c.text_field :humedo, disabled: bloqueado
     .span-2= h_c.text_field :mojado_plasticidad, disabled: bloqueado
     .span-2.last= h_c.text_field :mojado_adhesividad, disabled: bloqueado
-.span-1.last= link_to 'x', '#', class: 'remove' unless bloqueado
+
 .oculto= h.check_box :_destroy
