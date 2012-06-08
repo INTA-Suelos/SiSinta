@@ -27,6 +27,10 @@
   #flash_notice {
     @include mensaje($verde);
   }
+
+  #logo {
+    border-right: 1px solid white;
+  }
 }
 
 ul.menu_usuarios {

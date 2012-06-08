@@ -1,7 +1,7 @@
 #titulo.span-24
-  #logo.span-4
+  #logo.span-4.append-media
     = link_to image_tag("logo.jpg", :alt => 'INTA'), 'http://inta.gov.ar/'
-  .span-20.last
+  .span-19.last
     %h1.inicio= link_to "Sistema de información de Suelos del INTA", inicio_index_path
     %ul.menu_usuarios
       = render 'devise/menu/registration_items'
