@@ -57,14 +57,15 @@
       = ayuda_para('modelo', 'campo')
     .prepend-2.span-20.last
       .span-9.campo
-        .span-2= label_tag :formato_coordenada, 'Formato'
-        .span-7.last= select_tag :formato_coordenada, options_for_select(@formatos_coordenada, 1),
-          disabled: bloqueado
-        = ayuda_para('modelo', 'campo')
-      .span-10.lasto.campo
         .span-2= label_tag :x, 'Coordenadas'
-        .span-4= f_u.text_field :x, disabled: bloqueado
-        .span-4.last= f_u.text_field :y, disabled: bloqueado
+        .span-3.append-1= f_u.text_field :x, disabled: bloqueado
+        .span-3.last= f_u.text_field :y, disabled: bloqueado
+        = ayuda_para('modelo', 'campo')
+      .span-11.last.campo
+        .span-2= label_tag :formato_coordenadas, 'Formato'
+        .span-8.last= select_tag :formato_coordenadas,
+          options_for_select(@formatos_coordenada, 4326),
+          disabled: bloqueado
         = ayuda_para('modelo', 'campo')
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'

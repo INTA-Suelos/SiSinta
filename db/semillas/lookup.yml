@@ -92,6 +92,27 @@ limite_forma:
   - [ondulado]
   - [irregular]
   - [quebrado]
+formato_coordenadas:
+  - ["Geográficas WGS84",                       4326]
+  - ["Planas en Campo Inchauspe / Argentina 1", 22191]
+  - ["Planas en Campo Inchauspe / Argentina 2", 22192]
+  - ["Planas en Campo Inchauspe / Argentina 3", 22193]
+  - ["Planas en Campo Inchauspe / Argentina 4", 22194]
+  - ["Planas en Campo Inchauspe / Argentina 5", 22195]
+  - ["Planas en Campo Inchauspe / Argentina 6", 22196]
+  - ["Planas en Campo Inchauspe / Argentina 7", 22197]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 1",     22171]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 2",     22172]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 3",     22173]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 4",     22174]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 5",     22175]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 6",     22176]
+  - ["POSGAR 94 / POSGAR 98 / Argentina 7",     22177]
+  - ["Planas en UTM - zona 18S",                32718]
+  - ["Planas en UTM - zona 19S",                32719]
+  - ["Planas en UTM - zona 20S",                32720]
+  - ["Planas en UTM - zona 21S",                32721]
+
 
 # Texto de las ayudas contextuales
 ayuda:

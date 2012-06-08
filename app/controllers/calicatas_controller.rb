@@ -5,8 +5,8 @@ class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups
   before_filter :cargar_series_y_calicatas,
-                :only => [:index, :geo, :preparar_csv, :procesar_csv]
-  skip_before_filter :authenticate_usuario!, :only => [:index, :geo]
+                only: [:index, :geo, :preparar_csv, :procesar_csv]
+  skip_before_filter :authenticate_usuario!, only: [:index, :geo]
 
   # GET /calicatas
   # GET /calicatas.json
@@ -161,9 +161,9 @@ protected
     @usos_tierra = UsoTierra.all
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
-    @formatos_coordenada = Ubicacion::FORMATOS.collect do |formato|
-      [formato, Ubicacion::FORMATOS.index(formato)]
-    end
+    @formatos_coordenada = FormatoCoordenadas.all.collect do |formato|
+      [formato.descripcion, formato.epsg]
+    end.sort
   end
 
   def cargar_series_y_calicatas

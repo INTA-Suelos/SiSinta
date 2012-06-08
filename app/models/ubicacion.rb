@@ -9,15 +9,6 @@ class Ubicacion < ActiveRecord::Base
   #
   EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)? (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
 
-  FORMATOS = ["Geográficas WGS84 (° y ' decimales)",
-              "Geograficas WGS84 (°, ' y \" decimales)",
-              "Planas en Campo Ichauspe",
-              "Planas en POSGAR94 / POSGAR98",
-              "Planas en UTM - zona 18S",
-              "Planas en UTM - zona 19S",
-              "Planas en UTM - zona 20S",
-              "Planas en UTM - zona 21S"]
-
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
                                 wkt_parser: :geos, wkt_generator: :geos,
                                 wkb_parser: :geos, wkb_generator: :geos)
