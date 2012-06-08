@@ -45,4 +45,6 @@ Suelos::Application.configure do
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-dev:url'
 
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
 end
