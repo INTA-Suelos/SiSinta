@@ -161,15 +161,9 @@ protected
     @usos_tierra = UsoTierra.all
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
-    @formatos_coordenada = [
-      ["Geográficas WGS84 (° y ' decimales)", 1],
-      ["Geogradicas WGS84 (°, ' y \" decimales)", 2],
-      ["Planas en Campo Ichauspe", 3],
-      ["Planas en POSGAR94 / POSGAR98", 4],
-      ["Planas en UTM - zona 18S", 5],
-      ["Planas en UTM - zona 19S", 6],
-      ["Planas en UTM - zona 20S", 7],
-      ["Planas en UTM - zona 21S", 8]]
+    @formatos_coordenada = Ubicacion::FORMATOS.collect do |formato|
+      [formato, Ubicacion::FORMATOS.index(formato)]
+    end
   end
 
   def cargar_series_y_calicatas
