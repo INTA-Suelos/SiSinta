@@ -38,6 +38,7 @@ gem 'rgeo-geojson', :require => 'rgeo/geo_json'
 group :assets do
   gem 'sass-rails', "  ~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
+  gem 'therubyracer'
   gem 'uglifier'
 end
 
@@ -45,6 +46,7 @@ gem 'jquery-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
+gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano'
