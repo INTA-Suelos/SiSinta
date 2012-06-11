@@ -66,6 +66,11 @@ class UbicacionTest < ActiveSupport::TestCase
     assert 33.2 == u.y
   end
 
+  test "maneja las coordenadas negativas correctamente" do
+    assert_equal Ubicacion.grados_a_decimal("-40 30"), -40.5
+    assert_equal Ubicacion.grados_a_decimal("-179 50 30"), -179.841667
+  end
+
   test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
     flunk "no implementado todavía"
     #u = Ubicacion.new mosaico: '3760-2-2'
