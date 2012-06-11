@@ -17,17 +17,44 @@ class UbicacionTest < ActiveSupport::TestCase
     assert Ubicacion.new(:coordenadas => 'rms').invalid?, "permite guardar 'rms' como latitud/longitud"
   end
 
-  test "debería validar latitud;longitud sólo entre -90/90 y -180/180" do
-    regex = Ubicacion::EPSG_4326
-    assert_match regex, '90;180', "no permite 90;180"
-    assert_match regex, '89.000000;120.000000', "no permite 89.000000;120.000000"
-    assert_match regex, '181.00;120.00', "permite 181.00;120.00"
-    assert_match regex, '-90.00001;-180.0000', "permite -90.00001;-180.0000"
+  test "debería validar la latitud (x) sólo entre -90 y 90" do
+    validos =   [-90, -90.0000, "24° 70'", 0, -89.99999999, 90, "89° 59' 59\"" ]
+    invalidos = [90.000001, -250, "89° 60' 30\""]
+
+    @u.y = 0
+
+    validos.each do |v|
+      @u.x = v
+      assert @u.valid?, "#{v} no pasa la validación"
+    end
+
+    invalidos.each do |v|
+      @u.x = v
+      assert @u.invalid?, "#{v} pasa la validación"
+    end
+  end
+
+  test "debería validar la longitud (y) sólo entre -180 y 180" do
+    validos =   [-180, -180.0000, "-179° 60' 0\"", 0, "180°", -179.99999999, 180]
+    invalidos = [-181, 180.000001, "-179° 60' 1\"", "180° 1'", -250]
+
+    @u.x = 0
+
+    validos.each do |v|
+      @u.y = v
+      assert @u.valid?, "#{v} no pasa la validación por #{@u.errors}"
+    end
+
+    invalidos.each do |v|
+      @u.y = v
+      assert @u.invalid?, "#{v} no pasa la validación por #{@u.errors}"
+    end
   end
 
   test "las coordenadas deberían estar en SRID 4326" do
     @u.x = 50
     @u.y = 50
+    @u.save
     srid = @u.coordenadas.srid
     assert 4326 == srid, "#{srid} es un SRID incorrecto"
   end

@@ -1,25 +1,20 @@
 # -*- encoding : utf-8 -*-
 class Ubicacion < ActiveRecord::Base
-
-  # Permite "latitud, longitud", con valores de latitud de -90 a 90 y de longitud de -180 a 180
-  # De: http://www.dbws.net/blog/2009/10/23/regex-validation-of-latitude-and-longitude/
-  # Y según http://spatialreference.org/ref/epsg/4326/
-  #   WGS84 Bounds: -180.0000, -90.0000, 180.0000, 90.0000
-  #   Projected Bounds: -180.0000, -90.0000, 180.0000, 90.0000
-  #
-  EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)? (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
+  before_save :arreglar_coordenadas
+  after_initialize :cargar_x_y
 
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
                                 wkt_parser: :geos, wkt_generator: :geos,
                                 wkb_parser: :geos, wkb_generator: :geos)
 
+  attr_reader :x, :y
+
   belongs_to :calicata, :inverse_of => :ubicacion
 
   validates_presence_of :calicata
-  validates_format_of :punto, :with => EPSG_4326, :allow_blank => true
+  validates_inclusion_of :x, in: -90..90, allow_blank: true
+  validates_inclusion_of :y, in: -180..180, allow_blank: true
 
-
-  #
   # Convierte el nombre del mosaico guardardo a coordenadas. Por ejemplo, el
   # mosaico +3760-2-2+ resultaría en las coordenadas -60,708333333 -36,083333333
   # según los siguientes cálculos:
@@ -56,28 +51,11 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def punto
-    if c = read_attribute(:coordenadas)
-      "#{c.x} #{c.y}"
-    end
+    "#{@x} #{@y}"
   end
 
-  def x
-    coordenadas.x if coordenadas
-  end
-
-  def x=(nuevo_x)
-    @x = nuevo_x
-    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
-  end
-
-  def y
-    coordenadas.y if coordenadas
-  end
-
-  def y=(nuevo_y)
-    @y = nuevo_y
-    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
-  end
+  def x=(nuevo_x);    @x = a_decimal(nuevo_x)   end
+  def y=(nuevo_y);    @y = a_decimal(nuevo_y)   end
 
   def coordenadas_en_geojson
     RGeo::GeoJSON.encode(coordenadas) unless coordenadas.nil?
@@ -87,4 +65,25 @@ class Ubicacion < ActiveRecord::Base
     self.try(:descripcion) unless self.try(:punto)
   end
 
+  private
+
+  def arreglar_coordenadas
+    self.coordenadas = "POINT(#{a_decimal(@x)} #{a_decimal(@y)})"
+  end
+
+  def a_decimal(coordenada)
+    if coordenada
+      grados, minutos, segundos = coordenada.to_s.split(' ').push(0,0,0).map {|i| i.to_f}
+      if grados < 0
+        minutos *= -1
+        segundos *= -1
+      end
+      grados + minutos/60 + segundos/3600
+    end
+  end
+
+  def cargar_x_y
+    @x = coordenadas.x if coordenadas
+    @y = coordenadas.y if coordenadas
+  end
 end

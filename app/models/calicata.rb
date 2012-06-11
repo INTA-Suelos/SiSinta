@@ -12,6 +12,7 @@ class Calicata < ActiveRecord::Base
   validates_numericality_of :cobertura_vegetal,
                             :greater_than_or_equal_to => 0, :less_than => 101,
                             :allow_nil => true
+  validates_associated :ubicacion
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
