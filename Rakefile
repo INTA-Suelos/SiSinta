@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Suelos::Application.load_tasks
+SiSINTA::Application.load_tasks
