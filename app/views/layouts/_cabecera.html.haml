@@ -1,10 +1,10 @@
 #titulo.span-24
-  #logo.span-4.append-media
-    = link_to image_tag("logo.jpg", :alt => 'INTA'), 'http://inta.gov.ar/'
-  .span-19.last
-    %h1.inicio= link_to "Sistema de información de Suelos del INTA", inicio_index_path
+  #logo.span-8
+    = link_to image_tag("logo.png", :alt => 'INTA'), 'http://inta.gov.ar/'
+  .span-15.last
     %ul.menu_usuarios
       = render 'devise/menu/registration_items'
       = render 'devise/menu/login_items'
       - flash.each do |name, msg|
         = content_tag :div, msg, :class => 'mensaje', :id => "flash_#{name}" if msg.is_a?(String)
+    %h1.inicio= link_to "Sistema de información de Suelos del INTA", inicio_index_path

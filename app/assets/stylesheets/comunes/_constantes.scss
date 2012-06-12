@@ -1,11 +1,14 @@
 // Dimensiones
-$alto_cabecera: 87px;
+$alto_cabecera: 90px;
 $altura-linea:  18px;
 
 // Colores
-$azul_inta: #02567b;
-$azul_claro:  lighten($azul_inta, 70%);
-$celeste:     lighten($azul_claro, 3%);
+//$azul_inta:     #02567b;
+$azul_inta:     #444a56;
+$azul_claro:    lighten($azul_inta, 20%);
+$celeste:       lighten($azul_claro, 23%);
+$tierra:        #a25038;
+$tierra_claro:  lighten($tierra, 15%);
 
 $rojo_inta: #d82918;
 $rojo_claro:  lighten($rojo_inta, 50%);

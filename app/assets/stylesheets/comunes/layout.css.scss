@@ -7,7 +7,7 @@
 
   .inicio {
     color: white;
-    margin-bottom: 0;
+    margin-bottom: 1em;
     a {
       text-decoration: none;
     }
@@ -35,7 +35,7 @@
 
 ul.menu_usuarios {
   @include menu_horizontal;
-  margin: 0 0 2em;
+  margin: 0;
   padding: 0;
 }
 
@@ -59,7 +59,7 @@ ul.menu_usuarios {
 
 #cabecera {
   width: 100%;
-  background-color: $azul_inta;
+  background-color: $azul_claro;
   margin-bottom: 1em;
 }
 
