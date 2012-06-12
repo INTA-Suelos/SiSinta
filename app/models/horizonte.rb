@@ -16,9 +16,10 @@ class Horizonte < ActiveRecord::Base
                           autosave: false
   belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo,
                             autosave: false
+  belongs_to :textura_horizonte, inverse_of: :horizontes
 
   accepts_nested_attributes_for :analisis, :limite, :consistencia,
-                                :estructura,
+                                :estructura, :textura_horizonte,
                                 limit: 1
   accepts_nested_attributes_for :color_seco, :color_humedo,
                                 reject_if: proc { |a| a['hvc'].blank? }
