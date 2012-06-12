@@ -162,7 +162,7 @@ protected
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
     @formatos_coordenada = FormatoCoordenadas.all.collect do |formato|
-      [formato.descripcion, formato.epsg]
+      [formato.descripcion, formato.srid]
     end.sort
   end
 
