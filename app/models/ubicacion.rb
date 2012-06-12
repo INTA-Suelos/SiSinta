@@ -11,7 +11,6 @@ class Ubicacion < ActiveRecord::Base
                                 wkb_parser: :geos, wkb_generator: :geos)
 
   attr_reader :x, :y
-  attr_accessor :srid
 
   belongs_to :calicata, :inverse_of => :ubicacion
 
@@ -38,9 +37,6 @@ class Ubicacion < ActiveRecord::Base
   #  "no implementado todavía"
   #end
 
-# == Accesors
-
-  #
   # Sobreescribo el conversor default para que sea llamado por +to_json+ desde
   # el controlador y devuelva geojson para las coordenadas.
   #
@@ -83,6 +79,15 @@ class Ubicacion < ActiveRecord::Base
       decimal *= -1 if grados < 0
     end
     return decimal.round config.precision
+  end
+
+  def transformar_a_wgs84(srid, x, y)
+    Ubicacion.transformar(srid, 4326, x, y)
+  end
+
+  def self.transformar(origen, destino, x, y, proyectar = true)
+    RGeo::Feature.cast(FormatoCoordenadas.srid(origen).fabrica.point(x, y),
+      factory: FormatoCoordenadas.srid(destino).fabrica, project: proyectar)
   end
 
   private
