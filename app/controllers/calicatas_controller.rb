@@ -162,6 +162,7 @@ protected
     @usos_tierra = UsoTierra.all
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
+    @texturas = TexturaHorizonte.all
     @formatos_coordenada = FormatoCoordenadas.all.sort
   end
 

@@ -20,7 +20,6 @@ class Calicata < ActiveRecord::Base
   has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
 
-  #
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
   #   has_one => lookup tiene calicata_id

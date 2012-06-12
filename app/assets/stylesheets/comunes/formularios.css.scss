@@ -126,6 +126,11 @@ form {
 .prepend-unaymedia  { padding-left: 60px; }
 .append-media       { padding-right: 20px; }
 .append-unaymedia   { padding-right: 60px; }
+.span-unaymedia     {
+  width: 45px;
+  float: left;
+  margin-right: 10px;
+}
 
 .boton {
   padding: 0 2px;
@@ -141,8 +146,4 @@ select {
   padding-bottom: 1em;
   border-right: 1px $gris_claro dashed;
   border-left: 1px $gris_claro dashed;
-}
-
-.scrolleable {
-  width: 870px;
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612081634) do
+ActiveRecord::Schema.define(:version => 20120612102725) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20120612081634) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
+    t.integer  "textura_horizonte_id"
   end
 
   create_table "limites", :force => true do |t|
