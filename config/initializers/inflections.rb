@@ -48,4 +48,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'color_seco', 'colores_secos'
   inflect.irregular 'color_humedo', 'colores_humedos'
   inflect.irregular 'formato_coordenadas', 'formatos_coordenadas'
+  inflect.irregular 'pedregosidad', 'pedregosidades'
 end
