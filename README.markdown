@@ -54,9 +54,9 @@ Instalación
 
         $ psql -c "UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_sisinta';"
 
-### Dependencias opcionales
+3.  [GEOS] 3.2
 
-* [Rgeo] puede usar [GEOS] si está instalado.
+4.  [Proj4]
 
 ### Producción
 
@@ -95,4 +95,5 @@ El usuario default es Administrador, y se loguea con email@falso.com y el passwo
 [Rails]: http://rubyonrails.org/
 [Rgeo]: http://virtuoso.rubyforge.org/rgeo/
 [GEOS]: http://trac.osgeo.org/geos/
+[Proj4]: https://trac.osgeo.org/proj/
 [INTA]: http://inta.gov.ar/
