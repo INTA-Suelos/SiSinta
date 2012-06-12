@@ -12,6 +12,7 @@ class Calicata < ActiveRecord::Base
   validates_numericality_of :cobertura_vegetal,
                             :greater_than_or_equal_to => 0, :less_than => 101,
                             :allow_nil => true
+  validates_associated :ubicacion
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
@@ -19,7 +20,6 @@ class Calicata < ActiveRecord::Base
   has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
 
-  #
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
   #   has_one => lookup tiene calicata_id
@@ -28,6 +28,7 @@ class Calicata < ActiveRecord::Base
   #
   belongs_to :escurrimiento,  :inverse_of => :calicatas
   belongs_to :pendiente,      :inverse_of => :calicatas
+  belongs_to :pedregosidad,   :inverse_of => :calicatas
   belongs_to :permeabilidad,  :inverse_of => :calicatas
   belongs_to :relieve,        :inverse_of => :calicatas
   belongs_to :anegamiento,    :inverse_of => :calicatas

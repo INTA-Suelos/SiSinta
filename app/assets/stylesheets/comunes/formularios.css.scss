@@ -61,23 +61,23 @@ form {
     }
   }
 
-  .add, .remove { text-decoration: none; }
-
   .empty {
     padding-top: 15.3334px;
     font-style: italic;
   }
 
-  .add {
+  .agregar {
     font-size: large;
   }
 
-  .remove {
+  .remover {
     padding-left: 2px;
+    color: $rojo_inta;
   }
 
-  .remove, .add {
+  .remover, .agregar {
     font-weight: bold;
+    text-decoration: none;
   }
 
   // estilos para los placeholder (mozilla y chrome)
@@ -124,6 +124,13 @@ form {
 
 .prepend-media      { padding-left: 20px; }
 .prepend-unaymedia  { padding-left: 60px; }
+.append-media       { padding-right: 20px; }
+.append-unaymedia   { padding-right: 60px; }
+.span-unaymedia     {
+  width: 45px;
+  float: left;
+  margin-right: 10px;
+}
 
 .boton {
   padding: 0 2px;
@@ -132,4 +139,11 @@ form {
 
 select {
   border-color: #bbb;
+}
+
+.contenedor-scroll {
+  overflow-x: scroll;
+  padding-bottom: 1em;
+  border-right: 1px $gris_claro dashed;
+  border-left: 1px $gris_claro dashed;
 }

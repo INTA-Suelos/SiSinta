@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507104249) do
+ActiveRecord::Schema.define(:version => 20120612102725) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -67,16 +67,11 @@ ActiveRecord::Schema.define(:version => 20120507104249) do
     t.string   "numero"
     t.integer  "drenaje_id"
     t.float    "profundidad_napa"
-    t.boolean  "humedad_uniforme"
     t.decimal  "cobertura_vegetal"
-    t.string   "vegetacion"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cobertura"
     t.string   "material_original"
-    t.string   "taxonomia"
     t.string   "esquema"
-    t.string   "pedregosidad"
     t.string   "simbolo"
     t.string   "humedad"
     t.string   "erosion"
@@ -96,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20120507104249) do
     t.integer  "grupo_id"
     t.integer  "sal_id"
     t.integer  "uso_tierra_id"
+    t.integer  "pedregosidad_id"
   end
 
   create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|
@@ -163,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20120507104249) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
+    t.integer  "textura_horizonte_id"
   end
 
   create_table "limites", :force => true do |t|

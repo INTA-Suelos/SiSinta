@@ -20,6 +20,10 @@ class SeedTest < ActiveSupport::TestCase
     assert_not_nil Pendiente.first, "no se cargaron las pendientes"
   end
 
+  test "deberían cargarse las semillas de pedregosidad" do
+    assert_not_nil Pedregosidad.first, "no se cargaron las pedregosidades"
+  end
+
   test "deberían cargarse las semillas de escurrimiento" do
     assert_not_nil Escurrimiento.first, "no se cargaron los escurrimientos"
   end
@@ -38,6 +42,10 @@ class SeedTest < ActiveSupport::TestCase
 
   test "deberían cargarse los roles iniciales" do
     assert_not_nil Rol.first, "no se cargaron los roles"
+  end
+
+  test "deberían cargarse los colores" do
+    assert_not_nil Color.first, "no se cargaron los colores"
   end
 
   test "debería existir un rol de administrador" do

@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Suelos::Application.configure do
+SiSINTA::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's
@@ -45,4 +45,6 @@ Suelos::Application.configure do
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-dev:url'
 
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
 end
