@@ -81,6 +81,10 @@ class UbicacionTest < ActiveSupport::TestCase
     assert RGeo::CoordSys::Proj4::supported?
   end
 
+  test "debería soportar GEOS" do
+    assert RGeo::Geos::supported?
+  end
+
   test "debería hacer alguna transformación" do
     ues = [ Ubicacion.transformar(22177, 4326, '7180428.8164', '7550269.2664'),
             Ubicacion.transformar(4326, 22177, '-54', '-26') ]
@@ -97,4 +101,5 @@ class UbicacionTest < ActiveSupport::TestCase
     assert_equal 4326, @u.srid
     assert @u.coordenadas.present?, "No carga las coordenadas nuevas"
   end
+
 end
