@@ -1,25 +1,28 @@
 # -*- encoding : utf-8 -*-
 class Ubicacion < ActiveRecord::Base
+  before_validation :arreglar_coordenadas
+  after_initialize :cargar_x_y
 
-  # Permite "latitud, longitud", con valores de latitud de -90 a 90 y de longitud de -180 a 180
-  # De: http://www.dbws.net/blog/2009/10/23/regex-validation-of-latitude-and-longitude/
-  # Y según http://spatialreference.org/ref/epsg/4326/
-  #   WGS84 Bounds: -180.0000, -90.0000, 180.0000, 90.0000
-  #   Projected Bounds: -180.0000, -90.0000, 180.0000, 90.0000
-  #
-  EPSG_4326 = /(-?[0-8]?[0-9](\.\d*)?)|-?90(\.[0]*)? (-?([1]?[0-7][1-9]|[1-9]?[0-9])?(\.\d*)?)|-?180(\.[0]*)?/
+  class_attribute :config
+  self.config = Suelos::Application.config
 
-  self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
-                                wkt_parser: :geos, wkt_generator: :geos,
-                                wkb_parser: :geos, wkb_generator: :geos)
+  set_rgeo_factory_for_column  :coordenadas,
+                               FormatoCoordenadas.srid(4326).fabrica
+
+#  self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
+#                                wkt_parser: :geos, wkt_generator: :geos,
+#                                wkb_parser: :geos, wkb_generator: :geos)
+
+  attr_accessor :x, :y, :srid
 
   belongs_to :calicata, :inverse_of => :ubicacion
 
   validates_presence_of :calicata
-  validates_format_of :punto, :with => EPSG_4326, :allow_blank => true
+  validates_inclusion_of :x,  in: config.rango_x, allow_blank: true,
+                              message: "No está dentro del rango permitido"
+  validates_inclusion_of :y,  in: config.rango_y, allow_blank: true,
+                              message: "No está dentro del rango permitido"
 
-
-  #
   # Convierte el nombre del mosaico guardardo a coordenadas. Por ejemplo, el
   # mosaico +3760-2-2+ resultaría en las coordenadas -60,708333333 -36,083333333
   # según los siguientes cálculos:
@@ -39,9 +42,6 @@ class Ubicacion < ActiveRecord::Base
   #  "no implementado todavía"
   #end
 
-# == Accesors
-
-  #
   # Sobreescribo el conversor default para que sea llamado por +to_json+ desde
   # el controlador y devuelva geojson para las coordenadas.
   #
@@ -56,27 +56,16 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def punto
-    if c = read_attribute(:coordenadas)
-      "#{c.x} #{c.y}"
+    "#{@x} #{@y}"
+  end
+
+  def punto=(punto)
+    if punto.instance_of? String then
+      @x, @y = punto.split(' ')
+    else
+      @x = punto.x
+      @y = punto.y
     end
-  end
-
-  def x
-    coordenadas.x if coordenadas
-  end
-
-  def x=(nuevo_x)
-    @x = nuevo_x
-    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
-  end
-
-  def y
-    coordenadas.y if coordenadas
-  end
-
-  def y=(nuevo_y)
-    @y = nuevo_y
-    write_attribute :coordenadas, "POINT(#{@x} #{@y})"
   end
 
   def coordenadas_en_geojson
@@ -87,4 +76,44 @@ class Ubicacion < ActiveRecord::Base
     self.try(:descripcion) unless self.try(:punto)
   end
 
+  def self.grados_a_decimal(coordenada)
+    if coordenada
+      grados, minutos, segundos = coordenada.to_s.split(' ').push(0,0,0).map {|i| i.to_f}
+      decimal = grados.abs + minutos/60 + segundos/3600
+      decimal *= -1 if grados < 0
+      return decimal.round config.precision
+    end
+  end
+
+  def transformar_a_wgs84!(srid, x, y)
+    self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
+  end
+
+  def self.transformar(origen, destino, x, y, proyectar = true)
+    RGeo::Feature.cast(FormatoCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
+      factory: FormatoCoordenadas.srid(destino).fabrica, project: proyectar)
+  end
+
+  def coordenadas=(c)
+    super(c)
+    cargar_x_y
+  end
+
+  private
+
+  def arreglar_coordenadas
+    if @srid.to_i.eql?(4326) or @srid.blank?
+      @x = Ubicacion.grados_a_decimal(@x)
+      @y = Ubicacion.grados_a_decimal(@y)
+    else
+      transformar_a_wgs84!(@srid, @x, @y)
+    end
+    self.coordenadas = "POINT(#{@x} #{@y})"
+  end
+
+  def cargar_x_y
+    @x = coordenadas.x if coordenadas
+    @y = coordenadas.y if coordenadas
+    @srid = 4326
+  end
 end

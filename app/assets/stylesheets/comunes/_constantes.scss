@@ -39,3 +39,8 @@ $gris_claro:  #777;
     display: inline
   }
 }
+
+@mixin grid_span(){
+  float: left;
+  margin-right: 10px;
+}
