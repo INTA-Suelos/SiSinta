@@ -44,6 +44,10 @@ class SeedTest < ActiveSupport::TestCase
     assert_not_nil Rol.first, "no se cargaron los roles"
   end
 
+  test "deberían cargarse los colores" do
+    assert_not_nil Color.first, "no se cargaron los colores"
+  end
+
   test "debería existir un rol de administrador" do
     assert_not_nil Rol.find_by_nombre('administrador'), "no hay un rol administrador"
     assert_match /admin/, Rol.find_by_nombre('administrador').nombre

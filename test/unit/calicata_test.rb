@@ -63,42 +63,48 @@ class CalicataTest < ActiveSupport::TestCase
   test "debería cargar el drenaje de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:drenaje_id] = Drenaje.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Drenaje, c.drenaje
     end
   end
 
   test "debería cargar la posicion de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:posicion_id] = Posicion.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Posicion, c.posicion
     end
   end
 
   test "debería cargar el anegamiento de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:anegamiento_id] = Anegamiento.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Anegamiento, c.anegamiento
     end
   end
 
   test "debería cargar el relieve de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:relieve_id] = Relieve.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Relieve, c.relieve
     end
   end
 
   test "debería cargar la permeabilidad de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:permeabilidad_id] = Permeabilidad.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Permeabilidad, c.permeabilidad
     end
   end
 
   test "debería cargar la pendiente de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:pendiente_id] = Pendiente.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Pendiente, c.pendiente
     end
   end
 
@@ -113,7 +119,8 @@ class CalicataTest < ActiveSupport::TestCase
   test "debería cargar el escurrimiento de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:escurrimiento_id] = Escurrimiento.first.id
-      Calicata.create(@atributos)
+      c = Calicata.create(@atributos)
+      assert_instance_of Escurrimiento, c.escurrimiento
     end
   end
 
