@@ -1,7 +1,7 @@
 = field_set_tag 'Descripción de los horizontes', id: 'horizontes', class: 'celeste plegable span-22 last' do
 
   .contenedor-scroll.span-21.last
-    .scrolleable
+    #scrolleable_horizontes
       .span-1.centrado= link_to '+', '#horizontes', class: "agregar #{'add' unless bloqueado}"
       .span-1= label_tag nil, 'Clase Hz'
       .span-1= label_tag nil, 'Prof. sup.'
@@ -10,10 +10,10 @@
         .prepend-1.span-3.last= label_tag nil, 'Límite', class: 'subtitulo'
         .span-2= label_tag nil, 'Tipo'
         .span-2.last= label_tag nil, 'Forma'
-      .span-2
-        .prepend-media.span-2.last= label_tag nil, 'Color', class: 'subtitulo'
-        .span-1= label_tag nil, 'Seco'
-        .span-1.last= label_tag nil, 'Hum.'
+      .span-4
+        .prepend-unaymedia.span-2.last= label_tag nil, 'Color', class: 'subtitulo'
+        .span-2= label_tag nil, 'Seco'
+        .span-2.last= label_tag nil, 'Húmedo'
       .span-6
         .prepend-1.span-4.last= label_tag nil, 'Estructura', class: 'subtitulo'
         .span-2= label_tag nil, 'Tipo'
