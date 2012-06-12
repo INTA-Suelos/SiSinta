@@ -147,8 +147,9 @@
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('modelo', 'campo')
   .span-11.last.campo
-    .span-2= f.label :pedregosidad
-    .span-8.last= f.text_field :pedregosidad, disabled: bloqueado
+    .span-2= f.label :pedregosidad_id
+    .span-8.last= f.collection_select :pedregosidad_id, @pedregosidades, :id,
+      :valor, { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('modelo', 'campo')
 
   .span-11.campo

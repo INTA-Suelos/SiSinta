@@ -155,6 +155,7 @@ protected
     @anegamientos = Anegamiento.all
     @posiciones = Posicion.all
     @pendientes = Pendiente.all
+    @pedregosidades = Pedregosidad.all
     @escurrimientos = Escurrimiento.all
     @permeabilidades = Permeabilidad.all
     @sales = Sal.all

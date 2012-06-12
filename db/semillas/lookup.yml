@@ -81,7 +81,13 @@ capacidad_subclase:
   - [s, limitaciones en la zona radicular]
   - [c, limitaciones climáticas]
   - [w, drenaje deficiente]
-
+pedregosidad:
+  - [grado 0]
+  - [grado 1]
+  - [grado 2]
+  - [grado 3]
+  - [grado 4]
+  - [grado 5]
 limite_tipo:
   - [abrupto]
   - [claro]

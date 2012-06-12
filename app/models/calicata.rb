@@ -29,6 +29,7 @@ class Calicata < ActiveRecord::Base
   #
   belongs_to :escurrimiento,  :inverse_of => :calicatas
   belongs_to :pendiente,      :inverse_of => :calicatas
+  belongs_to :pedregosidad,   :inverse_of => :calicatas
   belongs_to :permeabilidad,  :inverse_of => :calicatas
   belongs_to :relieve,        :inverse_of => :calicatas
   belongs_to :anegamiento,    :inverse_of => :calicatas

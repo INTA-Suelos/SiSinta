@@ -20,6 +20,10 @@ class SeedTest < ActiveSupport::TestCase
     assert_not_nil Pendiente.first, "no se cargaron las pendientes"
   end
 
+  test "deberían cargarse las semillas de pedregosidad" do
+    assert_not_nil Pedregosidad.first, "no se cargaron las pedregosidades"
+  end
+
   test "deberían cargarse las semillas de escurrimiento" do
     assert_not_nil Escurrimiento.first, "no se cargaron los escurrimientos"
   end
