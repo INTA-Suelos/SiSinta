@@ -4,7 +4,7 @@ class Ubicacion < ActiveRecord::Base
   after_initialize :cargar_x_y
 
   class_attribute :config
-  self.config = Suelos::Application.config
+  self.config = SiSINTA::Application.config
 
   set_rgeo_factory_for_column  :coordenadas,
                                FormatoCoordenadas.srid(4326).fabrica

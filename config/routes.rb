@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Suelos::Application.routes.draw do
+SiSINTA::Application.routes.draw do
 
   get 'inicio/index'
 
