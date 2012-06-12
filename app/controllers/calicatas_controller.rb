@@ -161,9 +161,7 @@ protected
     @usos_tierra = UsoTierra.all
     @formas_limite = LimiteForma.all
     @tipos_limite = LimiteTipo.all
-    @formatos_coordenada = FormatoCoordenadas.all.collect do |formato|
-      [formato.descripcion, formato.srid]
-    end.sort
+    @formatos_coordenada = FormatoCoordenadas.all.sort
   end
 
   def cargar_series_y_calicatas

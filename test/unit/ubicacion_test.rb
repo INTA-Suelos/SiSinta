@@ -25,12 +25,12 @@ class UbicacionTest < ActiveSupport::TestCase
 
     validos.each do |v|
       @u.x = v
-      assert @u.valid?, "#{v} no pasa la validación"
+      assert @u.valid?, "#{v} no pasa la validación por #{@u.errors.messages}"
     end
 
     invalidos.each do |v|
       @u.x = v
-      assert @u.invalid?, "#{v} pasa la validación"
+      assert @u.invalid?, "#{v} pasa la validación por #{@u.errors.messages}"
     end
   end
 
@@ -42,12 +42,12 @@ class UbicacionTest < ActiveSupport::TestCase
 
     validos.each do |v|
       @u.y = v
-      assert @u.valid?, "#{v} no pasa la validación por #{@u.errors}"
+      assert @u.valid?, "#{v} no pasa la validación por #{@u.errors.messages}"
     end
 
     invalidos.each do |v|
       @u.y = v
-      assert @u.invalid?, "#{v} no pasa la validación por #{@u.errors}"
+      assert @u.invalid?, "#{v} no pasa la validación por #{@u.errors.messages}"
     end
   end
 
@@ -81,4 +81,20 @@ class UbicacionTest < ActiveSupport::TestCase
     assert RGeo::CoordSys::Proj4::supported?
   end
 
+  test "debería hacer alguna transformación" do
+    ues = [ Ubicacion.transformar(22177, 4326, '7180428.8164', '7550269.2664'),
+            Ubicacion.transformar(4326, 22177, '-54', '-26') ]
+
+    ues.each do |u|
+      assert u.present?
+      assert u.x.present?
+      assert u.y.present?
+    end
+  end
+
+  test "debería transformar a WGS 84" do
+    @u.transformar_a_wgs84!(22177, '7180428.8164', '7550269.2664')
+    assert_equal 4326, @u.srid
+    assert @u.coordenadas.present?, "No carga las coordenadas nuevas"
+  end
 end

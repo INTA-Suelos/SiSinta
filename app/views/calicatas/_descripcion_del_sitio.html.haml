@@ -62,10 +62,9 @@
         .span-3.last= f_u.text_field :y, disabled: bloqueado
         = ayuda_para('modelo', 'campo')
       .span-11.last.campo
-        .span-2= label_tag :formato_coordenadas, 'Formato'
-        .span-8.last= select_tag :formato_coordenadas,
-          options_for_select(@formatos_coordenada, 4326),
-          disabled: bloqueado
+        .span-2= f_u.label :srid, 'Formato'
+        .span-8.last= f_u.collection_select :srid, @formatos_coordenada, :srid,
+            :descripcion, {}, disabled: bloqueado
         = ayuda_para('modelo', 'campo')
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'
