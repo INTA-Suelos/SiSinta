@@ -121,4 +121,18 @@ class UbicacionTest < ActiveSupport::TestCase
     assert_equal "Point", geojson["geometry"]["type"]
     assert_equal [-61.85, -34.1725], geojson["geometry"]["coordinates"]
   end
+
+  test "debería eliminar las coordenadas con datos en blanco" do
+    @c.save
+    assert_not_nil @c.coordenadas
+    @c.x, @c.y = "", ""
+    @c.save
+    assert_nil @c.coordenadas
+    @c.x, @c.y = nil, nil
+    @c.save
+    assert_nil @c.coordenadas
+    @c.x = nil
+    @c.save
+    assert_nil @c.coordenadas
+  end
 end

@@ -81,7 +81,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def self.grados_a_decimal(coordenada)
-    if coordenada
+    unless coordenada.blank?
       grados, minutos, segundos = coordenada.to_s.split(' ').push(0,0,0).map {|i| i.to_f}
       decimal = grados.abs + minutos/60 + segundos/3600
       decimal *= -1 if grados < 0
