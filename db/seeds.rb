@@ -57,3 +57,16 @@ cargar_csv_de('munsell', headers: true, col_sep: ';') do |color|
     nuevo.rgb = "rgb(#{r}, #{g}, #{b})"
   end
 end
+
+# Cargamos perfiles modales ya digitalizados
+cargar_csv_de('perfiles-modales', headers:true, col_sep: ',') do |csv|
+  Calicata.find_or_create_by_nombre(nombre: csv[0]) do |p|
+    p.modal = true
+    p.fecha = csv[1]
+    p.create_ubicacion( x: csv[2], y: csv[3],
+                        mosaico: csv[4].try(:split, ',').try(:first),
+                        descripcion: csv[5])
+    p.numero = csv[6]
+    p.grupo = Grupo.find_or_create_by_descripcion(csv[7])
+  end
+end
