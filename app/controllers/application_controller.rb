@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
-  include BrowserDetect
+  include BrowserDetect, AyudaHelper
 
   protect_from_forgery
 
@@ -47,6 +47,9 @@ class ApplicationController < ActionController::Base
 
   # Métodos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
+
+  # Ayuda para todos
+  helper_method :ayuda_para
 
 protected
 
