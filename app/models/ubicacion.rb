@@ -15,6 +15,10 @@ class Ubicacion < ActiveRecord::Base
 
   attr_accessor :x, :y, :srid
 
+  # Latitud (y), Longitud (x)
+  alias_attribute :longitud, :x
+  alias_attribute :latitud,  :y
+
   belongs_to :calicata, :inverse_of => :ubicacion
 
   validates_presence_of :calicata

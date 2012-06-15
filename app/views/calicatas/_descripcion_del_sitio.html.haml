@@ -55,17 +55,21 @@
       .span-2= f_u.label :descripcion
       .span-17.last= f_u.text_field :descripcion, disabled: bloqueado
       = ayuda_para('modelo', 'campo')
-    .prepend-2.span-20.last
-      .span-9.campo
-        .span-2= label_tag :x, 'Coordenadas'
-        .span-3.append-1= f_u.text_field :x, disabled: bloqueado
-        .span-3.last= f_u.text_field :y, disabled: bloqueado
+    .prepend-2.span-9.campo
+      .span-2= label_tag nil, 'Coordenadas'
+      .coordenada-y
+        = f_u.label :y, 'lat/y'
+        = f_u.text_field :y, disabled: bloqueado
         = ayuda_para('modelo', 'campo')
-      .span-11.last.campo
-        .span-2= f_u.label :srid, 'Formato'
-        .span-8.last= f_u.collection_select :srid, @formatos_coordenada, :srid,
-            :descripcion, {}, disabled: bloqueado
+      .coordenada-x
+        = f_u.label :x, 'lon/x'
+        = f_u.text_field :x, disabled: bloqueado
         = ayuda_para('modelo', 'campo')
+    .span-11.last.campo
+      .span-2= f_u.label :srid, 'Formato'
+      .span-8.last= f_u.collection_select :srid, @formatos_coordenada, :srid,
+        :descripcion, {}, disabled: bloqueado
+      = ayuda_para('modelo', 'campo')
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'
   = f.fields_for :paisaje do |f_p|
