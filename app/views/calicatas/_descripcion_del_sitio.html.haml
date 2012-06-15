@@ -29,7 +29,7 @@
       = ayuda_para('modelo', 'campo')
   .span-11.last.campo
     = f.fields_for :grupo do |f_g|
-      .span-2= f_g.label :descripcion, 'Gran grupo'
+      .span-2= f_g.label :descripcion, 'Subgrupo'
       .span-8.last= f_g.text_field :descripcion, disabled: bloqueado
       = ayuda_para('modelo', 'campo')
 
