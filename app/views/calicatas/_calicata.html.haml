@@ -1,6 +1,7 @@
 %tr
   %td= calicata.fecha
-  %td= calicata.ubicacion
+  %td= calicata.nombre
+  %td= calicata.ubicacion.try :descripcion
   %td= calicata.numero
   %td= "✓" if calicata.modal?
   %td.boton= link_to 'Mostrar', calicata

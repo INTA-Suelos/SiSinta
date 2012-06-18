@@ -8,7 +8,7 @@ class Calicata < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
   validates_uniqueness_of :nombre, :numero, :allow_blank => true
-  validates_presence_of :nombre, :simbolo, :if => Proc.new { |c| c.modal? }
+  validates_presence_of :nombre, :if => Proc.new { |c| c.modal? }
   validates_numericality_of :cobertura_vegetal,
                             :greater_than_or_equal_to => 0, :less_than => 101,
                             :allow_nil => true
@@ -20,7 +20,6 @@ class Calicata < ActiveRecord::Base
   has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
   has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
 
-  #
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
   #   has_one => lookup tiene calicata_id

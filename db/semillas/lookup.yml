@@ -118,6 +118,23 @@ formato_coordenadas:
   - ["Planas en UTM - zona 19S",                32719]
   - ["Planas en UTM - zona 20S",                32720]
   - ["Planas en UTM - zona 21S",                32721]
+# Clasificación de los suelos según su textura,
+# de http://www.miliarium.com/Paginas/Prontu/Tablas/Suelos/ClasesTexturales.htm
+#
+#   | Textura                     | Arena % | Limo % | Arcilla % | Clase textural |
+textura_horizonte:
+  - [arenoso,                   textura gruesa,               suelos arenosos]
+  - [arenoso franco,            textura gruesa,               suelos arenosos]
+  - [franco arenoso,            textura moderadamente gruesa, suelos francos]
+  - [franco,                    textura media,                suelos francos]
+  - [franco limoso,             textura media,                suelos francos]
+  - [limoso,                    textura media,                suelos francos]
+  - [franco arcilloso,          textura moderadamente fina,   suelos francos]
+  - [franco arenoso arcilloso,  textura moderadamente fina,   suelos francos]
+  - [franco limoso arcilloso,   textura moderadamente fina,   suelos francos]
+  - [arcilloso arenoso,         textura fina,                 suelos arcillosos]
+  - [arcilloso limoso,          textura fina,                 suelos arcillosos]
+  - [arcilloso,                 textura fina,                 suelos arcillosos]
 
 
 # Texto de las ayudas contextuales

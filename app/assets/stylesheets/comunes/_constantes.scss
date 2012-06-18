@@ -47,3 +47,13 @@ $gris_claro:  #777;
   float: left;
   margin-right: 10px;
 }
+
+@mixin coordenada($margen) {
+  width:        130px;
+  float:        left;
+  margin-right: $margen;
+  * { float:    left; }
+  input { width:  97px !important;  }
+  label { width:  25px;
+          margin: 6px 6px 6px 0; }
+}
