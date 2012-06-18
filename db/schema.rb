@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612102725) do
+ActiveRecord::Schema.define(:version => 20120618164218) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -136,10 +136,14 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.string "nombre", :limit => 15
   end
 
+  add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
+
   create_table "grupos", :force => true do |t|
     t.string "codigo"
     t.string "descripcion"
   end
+
+  add_index "grupos", ["descripcion"], :name => "index_grupos_on_descripcion", :unique => true
 
   create_table "horizontes", :force => true do |t|
     t.integer  "profundidad_superior"
