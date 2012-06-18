@@ -15,7 +15,12 @@ class CalicatasController < AutorizadoController
   def index
     @titulo = "Lista de #{@alias.pluralize}"
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        if request.xhr?
+          render :index,  layout: false,
+                          locals: { calicatas: @calicatas.pagina(params[:pagina]) }
+        end
+      end
       format.json { render  json: @calicatas,
                             only: [ :id,
                                     :numero,
@@ -167,12 +172,13 @@ protected
   end
 
   def cargar_series_y_calicatas
+    @calicatas = Calicata.order('fecha ASC')
     if request.fullpath =~ /^\/series/ then
-      @calicatas = Calicata.series.all(:order => 'fecha ASC')
+      @calicatas = @calicatas.series
       @alias = 'serie'
     else
-      @calicatas = Calicata.all(:order => 'fecha ASC')
       @alias = 'calicata'
     end
+    @calicatas = @calicatas.pagina(params[:pagina])
   end
 end
