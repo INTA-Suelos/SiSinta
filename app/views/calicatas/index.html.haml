@@ -1,6 +1,5 @@
-- parametros = { calicata: { modal: true } } if @alias == 'serie'
-.botonera= link_to "Nueva #{@alias.titleize}", new_calicata_path(parametros)
+.botonera= render 'botonera_index'
 
 = render partial: 'lista', locals: {calicatas: @calicatas}
 
-.botonera= link_to "Nueva #{@alias.titleize}", new_calicata_path(parametros)
+.botonera= render 'botonera_index'

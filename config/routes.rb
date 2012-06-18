@@ -26,21 +26,28 @@ SiSINTA::Application.routes.draw do
   f = { new: "nueva", edit: "editar" }
 
   resources :calicatas, path_names: f do
+    get 'pagina/:pagina', :action => :index, :on => :collection
+
     resources :analisis, only: :index, path_names: m do
       get 'edit', on: :collection
       put 'update', on: :collection
     end
+
     resources :adjuntos, path_names: m do
       get 'descargar', on: :member
     end
   end
+
   resources :horizontes, only: :index, path_names: m
+
   resources :grupos, path_names: m do
     get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
   end
+
   resources :fases, path_names: f do
     get 'autocompletar/:atributo' => 'fases#autocompletar', on: :collection
   end
+
   resources :colores, only: [], path_names: m do
     get 'autocompletar/:atributo' => 'colores#autocompletar', on: :collection
   end
