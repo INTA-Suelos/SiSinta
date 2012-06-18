@@ -3,7 +3,7 @@ require 'csv'
 
 class CalicatasController < AutorizadoController
 
-  before_filter :armar_lookups
+  before_filter :armar_lookups, except: :index
   before_filter :cargar_series_y_calicatas,
                 only: [:index, :geo, :preparar_csv, :procesar_csv]
   skip_before_filter :authenticate_usuario!, only: [:index, :geo]
