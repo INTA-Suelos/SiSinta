@@ -1,12 +1,41 @@
 @import "constantes";
 
 #arbol_de_contenidos {
+  width: 230px;
+  position: absolute;
+  left: 0;
 
   ul {
     list-style-type: none;
   }
 
+  .menu {
+    li {
+      background: $celeste;
+      border: 1px solid $azul_oscuro;
+      width: auto;
+    }
+  }
+
+  .submenu > * { display: none; }
+
+  li:hover > ul.submenu {
+    position: absolute;
+    width: 100%;
+  }
+
+  li:hover > ul.submenu > * {
+    display: block;
+  }
+
   a {
     text-decoration: none;
+  }
+}
+
+#bienvenida {
+  h2 {
+    color: $tierra;
+    font-weight: bold;
   }
 }

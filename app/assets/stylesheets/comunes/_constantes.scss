@@ -1,22 +1,35 @@
 // Dimensiones
-$alto_cabecera: 90px;
+$alto_cabecera: 95px;
 $altura-linea:  18px;
 
 // Colores
-//$azul_inta:     #02567b;
-$azul_inta:     #444a56;
-$azul_claro:    lighten($azul_inta, 20%);
-$celeste:       lighten($azul_claro, 23%);
-$tierra:        #a25038;
-$tierra_claro:  lighten($tierra, 15%);
+// Borde inferior en la cabecera
+$azul_inta:       #02567b;
 
-$rojo_inta: #d82918;
-$rojo_claro:  lighten($rojo_inta, 50%);
-$rojo_medio:  lighten($rojo_inta, 10%);
+$azul_claro:      #027AC6;
 
-$verde:       rgb(0, green($azul_inta), 0);
+// Cabecera
+$azul_medio:      #6497b4;
+$azul_oscuro:     #0062a0;
 
-$gris_claro:  #777;
+// Fondo general
+$celeste:         #EDF5FA;
+
+// Intercalado con $celeste en los forms
+$celeste_oscuro:  darken($celeste, 5%);
+
+// Links en la cabecera
+$rojo_inta:       #d82918;
+$rojo_claro:      lighten($rojo_inta, 50%);
+$rojo_medio:      lighten($rojo_inta, 10%);
+
+// Notificación de éxito
+$verde:           rgb(0, green($azul_inta), 0);
+
+$gris_claro:      #777;
+
+$tierra:          #a25038;
+$tierra_claro:    lighten($tierra, 15%);
 
 // Mixins
 @mixin mensaje($color) {
