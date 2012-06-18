@@ -37,6 +37,10 @@ form.completa {
 
 }
 
-#paginacion {
-  float: right;
+#lista {
+  #paginacion {
+    float: right;
+  }
+
+  #modal {  width: 50px; }
 }

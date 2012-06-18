@@ -15,7 +15,12 @@ class CalicatasController < AutorizadoController
   def index
     @titulo = "Lista de #{@alias.pluralize}"
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        if request.xhr?
+          render :index,  layout: false,
+                          locals: { calicatas: @calicatas.pagina(params[:pagina]) }
+        end
+      end
       format.json { render  json: @calicatas,
                             only: [ :id,
                                     :numero,
