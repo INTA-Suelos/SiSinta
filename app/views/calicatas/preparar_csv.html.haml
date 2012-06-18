@@ -1,6 +1,6 @@
 = form_tag 'procesar_csv', class: 'span-24 last', id: 'csv'
 
-= field_set_tag "Exportar a CSV", class: 'azul_claro span-23 last' do
+= field_set_tag "Exportar a CSV", class: 'celeste_oscuro span-23 last' do
 
   #controles.span-22.last
     #marcar.span-4.opcion
@@ -20,7 +20,7 @@
 
     #calicatas.atributos.span-22.last
       - @atributos.each do |a|
-        .span-6.last.campo{class: cycle('azul_claro', 'celeste')}
+        .span-6.last.campo{class: cycle('celeste_oscuro', 'celeste')}
           .span-5
             = label_tag a
           .span-1.last
