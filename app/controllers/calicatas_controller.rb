@@ -91,13 +91,10 @@ class CalicatasController < AutorizadoController
   # PUT /calicatas/1.json
   def update
 
-    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo que forzar que
-    # haya un arreglo vacío cuando es nil. El formulario devuelve nil por la especificación de html.
-    # Los tests fallan si no recupero la excepción de los nils.
-    begin
-      params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
-    rescue
-    end
+    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
+    # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
+    # la especificación de html, asique lo corrijo.
+    params[:calicata][:capacidad_attributes].try(:merge!, subclase_ids: [])
 
     @calicata = Calicata.find(params[:id])
 
