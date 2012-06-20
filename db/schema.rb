@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618164218) do
+ActiveRecord::Schema.define(:version => 20120620052610) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20120618164218) do
     t.integer "capacidad_clase_id"
   end
 
+  add_index "capacidades", ["calicata_id"], :name => "index_capacidades_on_calicatas", :unique => true
+
   create_table "colores", :force => true do |t|
     t.string "hvc", :null => false
     t.string "rgb", :null => false
@@ -190,6 +192,8 @@ ActiveRecord::Schema.define(:version => 20120618164218) do
     t.integer  "calicata_id"
   end
 
+  add_index "paisajes", ["calicata_id"], :name => "index_paisajes_on_calicatas", :unique => true
+
   create_table "roles", :force => true do |t|
     t.string "nombre"
   end
@@ -210,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20120618164218) do
     t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
+  add_index "ubicaciones", ["calicata_id"], :name => "index_ubicaciones_on_nombre", :unique => true
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
 
   create_table "usuarios", :force => true do |t|

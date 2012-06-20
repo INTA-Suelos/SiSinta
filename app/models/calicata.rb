@@ -34,6 +34,7 @@ class Calicata < ActiveRecord::Base
   belongs_to :anegamiento,    :inverse_of => :calicatas
   belongs_to :posicion,       :inverse_of => :calicatas
   belongs_to :drenaje,        :inverse_of => :calicatas
+  belongs_to :sal,            :inverse_of => :calicatas
 
   has_many :analisis,         :through => :horizontes
   has_many :estructuras,      :through => :horizontes

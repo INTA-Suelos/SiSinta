@@ -50,10 +50,11 @@ anegamiento:
   - [clase 4]
   - [clase 5]
 sal:
-  - [no salino]
-  - [débilmente salino]
-  - [moderadamente salino]
-  - [fuertemente salino]
+  - [clase 0]
+  - [clase 1]
+  - [clase 2]
+  - [clase 3]
+  - [clase 4]
 uso_tierra:
   - [agrícola]
   - [ganadero]
