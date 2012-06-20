@@ -47,6 +47,12 @@ body {
     margin-right: 4px;
   }
 
+  #menu {
+    // No ocupa espacio fijo, para que el logo_sisinta no baje si se achica
+    // mucho la pantalla 
+    width: auto;
+  }
+
   #logo_sisinta {
     float: right;
     padding: 0 10px;
