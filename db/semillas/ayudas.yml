@@ -1,0 +1,7 @@
+#
+# Texto de las ayudas contextuales
+#
+- id:           1
+  campo:        campo
+  modelo:       modelo
+  descripcion:  Texto de la ayuda

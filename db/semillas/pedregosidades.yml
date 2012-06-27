@@ -1,0 +1,17 @@
+#
+# Los valores posibles para Pedregosidad en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  grado 0
+- id:     2
+  valor:  grado 1
+- id:     3
+  valor:  grado 2
+- id:     4
+  valor:  grado 3
+- id:     5
+  valor:  grado 4
+- id:     6
+  valor:  grado 5

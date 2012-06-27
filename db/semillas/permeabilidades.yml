@@ -1,0 +1,18 @@
+#
+# Los valores posibles para Escurrimiento en la ficha de calicatas.
+# Si se cambia el ID se corre el riesgo de perder asociaciones previas.
+#
+- id:     1
+  valor:  muy lenta
+- id:     2
+  valor:  lenta
+- id:     3
+  valor:  moderadamente lenta
+- id:     4
+  valor:  moderada
+- id:     5
+  valor:  moderadamente rápida
+- id:     6
+  valor:  rápida
+- id:     7
+  valor:  muy rápida

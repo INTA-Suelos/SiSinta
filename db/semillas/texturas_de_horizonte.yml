@@ -1,0 +1,55 @@
+#
+# Clasificación de los suelos según su textura,
+# de http://www.miliarium.com/Paginas/Prontu/Tablas/Suelos/ClasesTexturales.htm
+# Los valores posibles para la Textura de los Horizontes en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:       1
+  clase:    arenoso
+  textura:  textura gruesa
+  suelo:    suelos arenosos
+- id:       2
+  clase:    arenoso franco
+  textura:  textura gruesa
+  suelo:    suelos arenosos
+- id:       3
+  clase:    franco arenoso
+  textura:  textura moderadamente gruesa
+  suelo:    suelos francos
+- id:       4
+  clase:    franco
+  textura:  textura media
+  suelo:    suelos francos
+- id:       5
+  clase:    franco limoso
+  textura:  textura media
+  suelo:    suelos francos
+- id:       6
+  clase:    limoso
+  textura:  textura media
+  suelo:    suelos francos
+- id:       7
+  clase:    franco arcilloso
+  textura:  textura moderadamente fina
+  suelo:    suelos francos
+- id:       8
+  clase:    franco arenoso arcilloso
+  textura:  textura moderadamente fina
+  suelo:    suelos francos
+- id:       9
+  clase:    franco limoso arcilloso
+  textura:  textura moderadamente fina
+  suelo:    suelos francos
+- id:       10
+  clase:    arcilloso arenoso
+  textura:  textura fina
+  suelo:    suelos arcillosos
+- id:       11
+  clase:    arcilloso limoso
+  textura:  textura fina
+  suelo:    suelos arcillosos
+- id:       12
+  clase:    arcilloso
+  textura:  textura fina
+  suelo:    suelos arcillosos
