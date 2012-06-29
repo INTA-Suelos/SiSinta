@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120627105415) do
+ActiveRecord::Schema.define(:version => 20120629120242) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(:version => 20120627105415) do
   create_table "horizontes", :force => true do |t|
     t.integer  "profundidad_superior"
     t.float    "ph"
-    t.string   "textura"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calicata_id"
