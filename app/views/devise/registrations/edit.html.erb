@@ -15,8 +15,8 @@
   <div><%= f.label :password_confirmation, 'Confirmación del password' %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :password_actual, 'Password actual' %> <i>(necesitamos tu password actual para confirmar los cambios)</i><br />
-  <%= f.password_field :password_actual %></div>
+  <div><%= f.label :current_password, 'Password actual' %> <i>(necesitamos tu password actual para confirmar los cambios)</i><br />
+  <%= f.password_field :current_password %></div>
 
   <div><%= f.submit "Actualizar" %></div>
 <% end %>
