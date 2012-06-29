@@ -7,7 +7,7 @@ class Ubicacion < ActiveRecord::Base
   self.config = SiSINTA::Application.config
 
   set_rgeo_factory_for_column  :coordenadas,
-                               FormatoCoordenadas.srid(4326).fabrica
+                               FormatoDeCoordenadas.srid(4326).fabrica
 
 #  self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
 #                                wkt_parser: :geos, wkt_generator: :geos,
@@ -94,8 +94,8 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def self.transformar(origen, destino, x, y, proyectar = true)
-    RGeo::Feature.cast(FormatoCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
-      factory: FormatoCoordenadas.srid(destino).fabrica, project: proyectar)
+    RGeo::Feature.cast(FormatoDeCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
+      factory: FormatoDeCoordenadas.srid(destino).fabrica, project: proyectar)
   end
 
   def coordenadas=(c)

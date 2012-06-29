@@ -46,20 +46,6 @@ class CalicataTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería cargar la capacidad asociada" do
-    assert_nothing_raised do
-      @c = Calicata.create(@atributos)
-      assert_difference 'CapacidadClase.first.calicatas.count' do
-        assert_difference 'CapacidadSubclase.first.calicatas.count' do
-          @c.capacidad = Capacidad.new(:capacidad_clase_id => CapacidadClase.first.id,
-                                       :calicata_id => @c.id)
-          assert @c.save
-          @c.capacidad.subclases << CapacidadSubclase.first
-        end
-      end
-    end
-  end
-
   test "debería cargar el drenaje de la tabla de lookup" do
     assert_nothing_raised do
       @atributos[:drenaje_id] = Drenaje.first.id

@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Calicata < ActiveRecord::Base
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   after_initialize :preparar
   before_validation :buscar_asociaciones
 
@@ -26,15 +28,16 @@ class Calicata < ActiveRecord::Base
   # Como los valores de estas tablas son un conjunto definido, se comparten
   # entre todas las calicatas, aunque suene raro un belongs_to acá.
   #
-  belongs_to :escurrimiento,  :inverse_of => :calicatas
-  belongs_to :pendiente,      :inverse_of => :calicatas
-  belongs_to :pedregosidad,   :inverse_of => :calicatas
-  belongs_to :permeabilidad,  :inverse_of => :calicatas
-  belongs_to :relieve,        :inverse_of => :calicatas
-  belongs_to :anegamiento,    :inverse_of => :calicatas
-  belongs_to :posicion,       :inverse_of => :calicatas
-  belongs_to :drenaje,        :inverse_of => :calicatas
-  belongs_to :sal,            :inverse_of => :calicatas
+  belongs_to_active_hash :escurrimiento
+  belongs_to_active_hash :pendiente
+  belongs_to_active_hash :pedregosidad
+  belongs_to_active_hash :permeabilidad
+  belongs_to_active_hash :relieve
+  belongs_to_active_hash :anegamiento
+  belongs_to_active_hash :posicion
+  belongs_to_active_hash :drenaje
+  belongs_to_active_hash :sal
+  belongs_to_active_hash :uso_de_la_tierra
 
   has_many :analisis,         :through => :horizontes
   has_many :estructuras,      :through => :horizontes

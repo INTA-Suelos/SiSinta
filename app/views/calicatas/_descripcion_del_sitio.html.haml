@@ -44,8 +44,8 @@
             s.id, tildada?(s), disabled: bloqueado
       = ayuda_para('modelo', 'campo')
     .span-11.last.campo
-      .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
-      .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
+      .span-2= f_c.label :clase_de_capacidad_id, 'Limitaciones principales'
+      .span-8.last= f_c.collection_select :clase_de_capacidad_id, @clases, :id, :descripcion,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para('modelo', 'campo')
 
@@ -67,7 +67,7 @@
         = ayuda_para('modelo', 'campo')
     .span-11.last.campo
       .span-2= f_u.label :srid, 'Formato'
-      .span-8.last= f_u.collection_select :srid, @formatos_coordenada, :srid,
+      .span-8.last= f_u.collection_select :srid, @formatos_de_coordenadas, :srid,
         :descripcion, {}, disabled: bloqueado
       = ayuda_para('modelo', 'campo')
 
@@ -161,7 +161,7 @@
     .span-9.last= f.text_field :erosion, disabled: bloqueado
     = ayuda_para('modelo', 'campo')
   .span-11.last.campo
-    .span-2= f.label :uso_tierra_id, "Uso de la tierra"
-    .span-8.last= f.collection_select :uso_tierra_id, @usos_tierra, :id, :valor,
+    .span-2= f.label :uso_de_la_tierra_id, "Uso de la tierra"
+    .span-8.last= f.collection_select :uso_de_la_tierra_id, @usos_de_la_tierra, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('modelo', 'campo')

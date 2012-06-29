@@ -3,30 +3,40 @@ require 'test_helper'
 
 class CapacidadTest < ActiveSupport::TestCase
 
+  fixtures :calicatas
+
   setup do
-    @atributos = { :calicata_id => Calicata.first.id }
+    @capacidad = Calicata.first.capacidad
   end
 
   test "debería cargar la clase asociada" do
-    assert_nothing_raised do
-      @atributos[:capacidad_clase_id] = CapacidadClase.first.id
-      assert_difference 'CapacidadClase.first.reload.capacidades.count' do
-        Capacidad.create(@atributos)
-      end
+    @atributos = { clase_de_capacidad_id: ClaseDeCapacidad.first.id }
+    assert_difference 'ClaseDeCapacidad.first.capacidades.count' do
+      @capacidad.update_attributes(@atributos)
+      assert @capacidad.valid?
     end
   end
 
-  test "debería cargar guardar la relación con la subclase" do
-    assert_nothing_raised do
-      @atributos[:subclase_ids] = [ CapacidadSubclase.first.id ]
-      assert_difference 'CapacidadSubclase.first.capacidades.count' do
-        Capacidad.create(@atributos)
-      end
-    end
+  test "debería guardar la relación con la/s subclase/s" do
+    @atributos = { subclase_ids: [ SubclaseDeCapacidad.first.id ] }
+    @capacidad.update_attributes(@atributos)
+    assert @capacidad.valid?
+    assert @capacidad.subclase_ids.include?(SubclaseDeCapacidad.first.id), 'no agrega una subclase'
+    assert @capacidad.subclases.include?(SubclaseDeCapacidad.first), 'no agrega una subclase'
+
+    @atributos = { subclase_ids: [  SubclaseDeCapacidad.first.id,
+                                    SubclaseDeCapacidad.last.id   ] }
+
+    @capacidad.update_attributes(@atributos)
+    assert @capacidad.valid?
+    assert @capacidad.subclase_ids.include?(SubclaseDeCapacidad.first.id), 'no agrega varias subclases'
+    assert @capacidad.subclases.include?(SubclaseDeCapacidad.first), 'no agrega varias subclases'
+    assert @capacidad.subclase_ids.include?(SubclaseDeCapacidad.last.id), 'no agrega varias subclases'
+    assert @capacidad.subclases.include?(SubclaseDeCapacidad.last), 'no agrega varias subclases'
   end
 
   test "debería negarse a cargar capacidad sin calicata" do
-    @atributos = { :capacidad_clase_id => CapacidadClase.first.id }
+    @atributos = { :clase_de_capacidad_id => ClaseDeCapacidad.first.id }
     assert Capacidad.new(@atributos).invalid?, "una capacidad sin calicata es válida"
   end
 

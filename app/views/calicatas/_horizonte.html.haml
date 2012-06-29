@@ -6,9 +6,9 @@
   disabled: bloqueado, placeholder: 'cm'
 .span-4
   = h.fields_for :limite do |h_l|
-    .span-2= h_l.collection_select :limite_tipo_id, @tipos_limite, :id, :valor,
+    .span-2= h_l.collection_select :tipo_de_limite_id, @tipos_de_limite, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    .span-2.last= h_l.collection_select :limite_forma_id, @formas_limite, :id,
+    .span-2.last= h_l.collection_select :forma_de_limite_id, @formas_de_limite, :id,
       :valor, { include_blank: true }, { disabled: bloqueado }
 .span-4
   = h.fields_for :color_seco do |h_c|
@@ -16,7 +16,7 @@
   = h.fields_for :color_humedo do |h_c|
     .span-2.last= h_c.text_field :hvc, disabled: bloqueado, class: 'munsell'
 .span-3
-  .span-3.last= h.collection_select :textura_horizonte_id, @texturas, :id, :clase,
+  .span-3.last= h.collection_select :textura_de_horizonte_id, @texturas, :id, :clase,
       { include_blank: true }, { disabled: bloqueado }
 .span-6
   = h.fields_for :estructura do |h_e|

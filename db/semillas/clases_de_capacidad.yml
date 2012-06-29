@@ -1,6 +1,6 @@
 # Clasificación utilitaria o Capacidad de uso, del Sistema de codificación de
-# suelos, Anexo 5
-# Los valores posibles para las Clases de Capacidad en la ficha de calicatas.
+# suelos, Anexo 5. Esto determina los valores posibles para las Clases de
+# Capacidad en la ficha de calicatas.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
 # asociaciones previas.
 #
@@ -10,7 +10,7 @@
   agrupamiento: tierras aptas para todo tipo de cultivo
 - id:           2
   codigo:       ii
-  descripción:  ligeras limitaciones
+  descripcion:  ligeras limitaciones
   agrupamiento: tierras aptas para todo tipo de cultivo
 - id:           3
   codigo:       iii
@@ -20,19 +20,19 @@
   codigo:       iv
   descripcion:  severas limitaciones
   agrupamiento: tierras aptas para cultivos limitados
-- id:           4
+- id:           5
   codigo:       v
   descripcion:  dificultad de maquinaria
   agrupamiento: tierras generalmente no aptas para cultivos
-- id:           4
+- id:           6
   codigo:       vi
   descripcion:  praderas naturales con posibles mejoras
   agrupamiento: tierras generalmente no aptas para cultivos
-- id:           4
+- id:           7
   codigo:       vii
   descripcion:  pasturas naturales
   agrupamiento: tierras generalmente no aptas para cultivos
-- id:           4
+- id:           8
   codigo:       viii
   descripcion:  fauna, vida silvestre
   agrupamiento: tierras generalmente no aptas para cultivos

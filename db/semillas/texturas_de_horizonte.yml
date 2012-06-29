@@ -1,7 +1,8 @@
 #
-# Clasificación de los suelos según su textura,
-# de http://www.miliarium.com/Paginas/Prontu/Tablas/Suelos/ClasesTexturales.htm
-# Los valores posibles para la Textura de los Horizontes en la ficha de calicatas.
+# La clasificación de los suelos según su textura,
+# de http://www.miliarium.com/Paginas/Prontu/Tablas/Suelos/ClasesTexturales.htm,
+# determina los valores posibles para la Textura de los Horizontes en la ficha
+# de calicatas.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
 # asociaciones previas.
 #
