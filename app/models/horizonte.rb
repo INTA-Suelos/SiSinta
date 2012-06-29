@@ -2,7 +2,7 @@
 class Horizonte < ActiveRecord::Base
 
   after_initialize :preparar
-  before_validation :buscar_asociaciones
+  before_save :buscar_asociaciones
 
   has_one :analisis,      :dependent => :destroy, :inverse_of => :horizonte
   has_one :limite,        :dependent => :destroy, :inverse_of => :horizonte
