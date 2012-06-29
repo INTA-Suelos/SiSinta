@@ -9,10 +9,6 @@ class Ubicacion < ActiveRecord::Base
   set_rgeo_factory_for_column  :coordenadas,
                                FormatoDeCoordenadas.srid(4326).fabrica
 
-#  self.rgeo_factory_generator = RGeo::Geos.factory_generator(srid: 4326,
-#                                wkt_parser: :geos, wkt_generator: :geos,
-#                                wkb_parser: :geos, wkb_generator: :geos)
-
   attr_accessor :x, :y, :srid
 
   # Latitud (y), Longitud (x)
