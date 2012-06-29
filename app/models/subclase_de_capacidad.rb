@@ -1,0 +1,2 @@
+class SubclaseDeCapacidad < Lookup
+end

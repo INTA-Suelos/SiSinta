@@ -4,8 +4,8 @@ require 'test_helper'
 class SeedTest < ActiveSupport::TestCase
 
   test "deberían cargarse las semillas de capacidad" do
-    assert_not_nil CapacidadClase.first, "no se cargaron las clases de capacidad"
-    assert_not_nil CapacidadSubclase.first, "no se cargaron las subclases de capacidad"
+    assert_not_nil ClaseDeCapacidad.first, "no se cargaron las clases de capacidad"
+    assert_not_nil SubclaseDeCapacidad.first, "no se cargaron las subclases de capacidad"
   end
 
   test "deberían cargarse las semillas de relieve" do

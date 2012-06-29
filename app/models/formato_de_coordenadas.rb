@@ -1,13 +1,13 @@
-class FormatoCoordenadas < Lookup
-  alias_attribute :descripcion, :valor1
-  alias_attribute :srid, :valor2
-
-  after_initialize :cargar_fabrica
-
-  attr_reader :fabrica
+class FormatoDeCoordenadas < Lookup
+  # Lo declaro para que ActiveHash genere el finder
+  field :srid
 
   def self.srid(srid)
-    find_by_valor2(srid.to_s)
+    find_by_srid(srid)
+  end
+
+  def fabrica
+    @fabrica || cargar_fabrica
   end
 
   private

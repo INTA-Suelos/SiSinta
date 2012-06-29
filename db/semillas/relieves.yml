@@ -1,0 +1,13 @@
+#
+# Los valores posibles para Relieve en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  pronunciado
+- id:     2
+  valor:  normal
+- id:     3
+  valor:  subnormal
+- id:     4
+  valor:  cóncavo

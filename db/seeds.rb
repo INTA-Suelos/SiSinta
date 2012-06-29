@@ -27,22 +27,6 @@ cargar_yml_de('roles').each do |campo|
   end
 end
 
-# Carga las tablas de lookup. Deben estar en la forma:
-#
-# modelo:
-#   - [valor1, valor2, valor3]
-#   - [valor1, valor2, valor3]
-#   ...
-#
-# donde valor1 debe estar presente y ser único para cada modelo.
-cargar_yml_de('lookup').each do |modelo|
-  puts "Cargando lookup #{modelo.first.camelcase} ..."
-  modelo.last.each do |datos|
-    lookup = Kernel.const_get(modelo.first.camelcase).find_or_create_by_valor1(datos[0])
-    lookup.update_attributes(:valor2 => datos[1], :valor3 => datos[2])
-  end
-end
-
 # Carga el usuario administrador inicial
 Usuario.create( :nombre => 'Administrador',
                 :email => 'email@falso.com',

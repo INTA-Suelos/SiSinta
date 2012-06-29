@@ -1,0 +1,15 @@
+#
+# Los valores posibles para Anegamiento en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  clase 1
+- id:     2
+  valor:  clase 2
+- id:     3
+  valor:  clase 3
+- id:     4
+  valor:  clase 4
+- id:     5
+  valor:  clase 5

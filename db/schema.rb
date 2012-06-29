@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620052610) do
+ActiveRecord::Schema.define(:version => 20120627105415) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(:version => 20120620052610) do
     t.string   "humedad"
     t.string   "erosion"
     t.integer  "fase_id"
-    t.boolean  "modal",             :default => false
-    t.date     "fecha",                                :null => false
+    t.boolean  "modal",               :default => false
+    t.date     "fecha",                                  :null => false
     t.string   "observaciones"
-    t.boolean  "publico",           :default => false
+    t.boolean  "publico",             :default => false
     t.integer  "usuario_id"
     t.integer  "relieve_id"
     t.integer  "posicion_id"
@@ -90,18 +90,14 @@ ActiveRecord::Schema.define(:version => 20120620052610) do
     t.string   "nombre"
     t.integer  "grupo_id"
     t.integer  "sal_id"
-    t.integer  "uso_tierra_id"
+    t.integer  "uso_de_la_tierra_id"
     t.integer  "pedregosidad_id"
-  end
-
-  create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|
-    t.integer "capacidad_id"
-    t.integer "capacidad_subclase_id"
   end
 
   create_table "capacidades", :force => true do |t|
     t.integer "calicata_id"
-    t.integer "capacidad_clase_id"
+    t.integer "clase_de_capacidad_id"
+    t.text    "subclase_ids"
   end
 
   add_index "capacidades", ["calicata_id"], :name => "index_capacidades_on_calicatas", :unique => true
@@ -165,15 +161,15 @@ ActiveRecord::Schema.define(:version => 20120620052610) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
-    t.integer  "textura_horizonte_id"
+    t.integer  "textura_de_horizonte_id"
   end
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "limite_tipo_id"
-    t.integer  "limite_forma_id"
+    t.integer  "tipo_de_limite_id"
+    t.integer  "forma_de_limite_id"
   end
 
   create_table "lookups", :force => true do |t|

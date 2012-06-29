@@ -94,7 +94,11 @@ class CalicatasController < AutorizadoController
     # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
     # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
     # la especificación de html, asique lo corrijo.
-    params[:calicata][:capacidad_attributes].try(:merge!, subclase_ids: [])
+    begin
+      params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
+    rescue
+      # Nada que hacer porque no hay capacidad asociada.
+    end
 
     @calicata = Calicata.find(params[:id])
 
@@ -150,8 +154,8 @@ protected
   #   - ++ ->
   #
   def armar_lookups
-    @subclases = CapacidadSubclase.all
-    @clases = CapacidadClase.all
+    @subclases = SubclaseDeCapacidad.all
+    @clases = ClaseDeCapacidad.all
     @drenajes = Drenaje.all
     @relieves = Relieve.all
     @anegamientos = Anegamiento.all
@@ -161,11 +165,11 @@ protected
     @escurrimientos = Escurrimiento.all
     @permeabilidades = Permeabilidad.all
     @sales = Sal.all
-    @usos_tierra = UsoTierra.all
-    @formas_limite = LimiteForma.all
-    @tipos_limite = LimiteTipo.all
-    @texturas = TexturaHorizonte.all
-    @formatos_coordenada = FormatoCoordenadas.all.sort
+    @usos_de_la_tierra = UsoDeLaTierra.all
+    @formas_de_limite = FormaDeLimite.all
+    @tipos_de_limite = TipoDeLimite.all
+    @texturas = TexturaDeHorizonte.all
+    @formatos_de_coordenadas = FormatoDeCoordenadas.all
   end
 
   def cargar_series_y_calicatas
