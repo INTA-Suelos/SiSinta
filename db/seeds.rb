@@ -13,9 +13,13 @@ end
 # Carga el archivo en formato csv +archivo+,  del directorio +semillas+, que
 # tiene datos iniciales para la base de datos.
 def cargar_csv_de(archivo, configuracion = {})
-  puts "Cargando CSV de #{archivo} ..."
-  CSV.foreach "#{Rails.root}/db/semillas/#{archivo}.csv", configuracion do |fila|
-    yield fila
+  begin
+    puts "Cargando CSV de #{archivo} ..."
+    CSV.foreach "#{Rails.root}/db/semillas/#{archivo}.csv", configuracion do |fila|
+      yield fila
+    end
+  rescue
+    puts "No se pudo abrir #{archivo}"
   end
 end
 
