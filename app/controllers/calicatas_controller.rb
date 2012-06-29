@@ -73,6 +73,7 @@ class CalicatasController < AutorizadoController
   # POST /calicatas
   # POST /calicatas.json
   def create
+
     @calicata = Calicata.new(params[:calicata])
 
     respond_to do |format|

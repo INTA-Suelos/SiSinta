@@ -2,7 +2,6 @@
 class Calicata < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  after_initialize :preparar
   before_validation :buscar_asociaciones
 
   scope :series, where(:modal => 'true')
@@ -14,7 +13,7 @@ class Calicata < ActiveRecord::Base
   validates_numericality_of :cobertura_vegetal,
                             :greater_than_or_equal_to => 0, :less_than => 101,
                             :allow_nil => true
-  validates_associated :ubicacion
+  validates_associated :ubicacion, :horizontes
 
   has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
   has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
@@ -45,9 +44,10 @@ class Calicata < ActiveRecord::Base
   belongs_to :fase, :inverse_of => :calicatas
   belongs_to :grupo, :inverse_of => :calicatas
 
-  accepts_nested_attributes_for :capacidad, :paisaje, :fase, :ubicacion, :grupo,
-                                :limit => 1, :allow_destroy => true
-  accepts_nested_attributes_for :horizontes, :analisis, :allow_destroy => true
+  accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion,
+                                limit: 1, allow_destroy: true
+  accepts_nested_attributes_for :grupo, :fase, limit: 1, reject_if: :all_blank
+  accepts_nested_attributes_for :horizontes, :analisis, allow_destroy: true
 
 # == Validaciones
 
@@ -82,10 +82,6 @@ class Calicata < ActiveRecord::Base
   end
 
   protected
-
-  def preparar
-    super(%w{capacidad paisaje ubicacion fase grupo})
-  end
 
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
   def buscar_asociaciones

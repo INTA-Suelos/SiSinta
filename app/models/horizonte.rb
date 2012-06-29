@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Horizonte < ActiveRecord::Base
+
   after_initialize :preparar
   before_validation :buscar_asociaciones
 
@@ -20,7 +21,7 @@ class Horizonte < ActiveRecord::Base
                                 :estructura, :textura_de_horizonte,
                                 limit: 1
   accepts_nested_attributes_for :color_seco, :color_humedo,
-                                reject_if: proc { |a| a['hvc'].blank? }
+                                reject_if: :all_blank
 
   validates_presence_of :calicata
 
