@@ -1,6 +1,7 @@
 class Usuario < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :calicatas, :inverse_of => :usuario
+  after_save :asignar_rol_por_defecto
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -20,5 +21,11 @@ class Usuario < ActiveRecord::Base
   def admin?
     self.roles.exists?({:nombre => 'administrador'})
   end
+
+  protected
+
+    def asignar_rol_por_defecto
+      self.roles << Rol.find_by_nombre('invitado')
+    end
 
 end
