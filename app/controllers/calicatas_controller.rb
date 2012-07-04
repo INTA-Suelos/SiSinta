@@ -139,7 +139,7 @@ class CalicatasController < ApplicationController
   end
 
   def procesar_csv
-    super(@calicatas || Calicata.all, @alias.pluralize)
+    super(@calicatas, @alias.pluralize)
   end
 
 protected
@@ -173,6 +173,7 @@ protected
   end
 
   def series_o_calicatas
+    @calicatas = Calicata.scoped
     if request.fullpath =~ /^\/series/ then
       @calicatas = @calicatas.series
       @alias = 'serie'

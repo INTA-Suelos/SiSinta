@@ -3,10 +3,10 @@ require 'test_helper'
 
 class CapacidadTest < ActiveSupport::TestCase
 
-  fixtures :calicatas
+  fixtures :capacidades
 
   setup do
-    @capacidad = Calicata.first.capacidad
+    @capacidad = capacidades(:poca)
   end
 
   test "debería cargar la clase asociada" do

@@ -3,11 +3,11 @@ require 'test_helper'
 
 class AnalisisControllerTest < ActionController::TestCase
 
-  fixtures :analisis
+  fixtures :analisis, :calicatas
 
   setup do
     @analisis = analisis(:uno)
-    @calicata = @analisis.calicata
+    @calicata = calicatas(:valida)
     sign_in Usuario.find_by_nombre('Administrador')
   end
 
