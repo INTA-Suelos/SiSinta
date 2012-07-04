@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Ayuda < Lookup
   include ActiveHash::Enum
 
@@ -6,4 +7,9 @@ class Ayuda < Lookup
 
   # Garantiza que 'campo' sea único y genera constantes del tipo Ayuda::CAMPO
   enum_accessor :campo
+
+  def to_s
+    ayuda
+  end
+
 end

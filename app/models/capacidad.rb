@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Capacidad < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -7,10 +8,10 @@ class Capacidad < ActiveRecord::Base
 
   validates_presence_of :calicata
 
-  def to_str
-    cadena = "#{self.clase_de_capacidad.try(:to_str)}"
+  def to_s
+    cadena = "#{clase_de_capacidad.try(:to_str)}"
     subclases.each do |sc|
-      cadena << ' ' << sc.try(:to_str)
+      cadena << ' ' << sc
     end
     return cadena
   end

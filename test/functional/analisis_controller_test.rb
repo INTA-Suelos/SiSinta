@@ -1,7 +1,10 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'test_helper'
 
 class AnalisisControllerTest < ActionController::TestCase
+
+  fixtures :analisis
+
   setup do
     @analisis = analisis(:uno)
     @calicata = @analisis.calicata

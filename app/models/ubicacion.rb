@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 class Ubicacion < ActiveRecord::Base
   before_validation :arreglar_coordenadas
   after_initialize :cargar_x_y
@@ -73,7 +73,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    self.try(:descripcion) unless self.try(:punto)
+    self.try(:punto)
   end
 
   def self.grados_a_decimal(coordenada)

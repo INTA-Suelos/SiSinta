@@ -1,3 +1,4 @@
+# encoding: utf-8
 class FormatoDeCoordenadas < Lookup
   # Lo declaro para que ActiveHash genere el finder
   field :srid
@@ -8,6 +9,10 @@ class FormatoDeCoordenadas < Lookup
 
   def fabrica
     @fabrica || cargar_fabrica
+  end
+
+  def to_str
+    descripcion
   end
 
   private

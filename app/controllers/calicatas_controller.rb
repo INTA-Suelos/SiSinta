@@ -1,9 +1,10 @@
 # encoding: utf-8
 class CalicatasController < ApplicationController
 
-  before_filter :armar_lookups, except: :index
-  before_filter :cargar_series_y_calicatas,
+  before_filter :armar_lookups, except: [:index, :preparar_csv]
+  before_filter :series_o_calicatas,
                 only: [:index, :geo, :preparar_csv, :procesar_csv]
+  before_filter :paginar, only: [:index]
   skip_before_filter :authenticate_usuario!, only: [:index, :geo]
 
   # GET /calicatas
@@ -138,7 +139,7 @@ class CalicatasController < ApplicationController
   end
 
   def procesar_csv
-    super(@calicatas, @alias.pluralize)
+    super(@calicatas || Calicata.all, @alias.pluralize)
   end
 
 protected
@@ -171,21 +172,17 @@ protected
     @formatos_de_coordenadas = FormatoDeCoordenadas.all
   end
 
-  def cargar_series_y_calicatas
-    @calicatas = Calicata.order('fecha ASC')
-
+  def series_o_calicatas
     if request.fullpath =~ /^\/series/ then
       @calicatas = @calicatas.series
       @alias = 'serie'
     else
       @alias = 'calicata'
     end
+  end
 
-    if n = params[:pagina]
-      @calicatas = @calicatas.pagina(n)
-    else
-      @calicatas = @calicatas.all
-    end
+  def paginar
+    @calicatas = @calicatas.pagina(params[:pagina])
   end
 
 end
