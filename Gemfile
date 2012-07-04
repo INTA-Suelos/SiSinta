@@ -23,7 +23,6 @@ gem 'kaminari'
 gem 'browser_detect'
 
 ## Modelos
-gem 'acts_as_list'
 gem 'paperclip'
 gem 'active_hash'
 

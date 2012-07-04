@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'csv'
+
 class ApplicationController < ActionController::Base
   include BrowserDetect, AyudaHelper
 

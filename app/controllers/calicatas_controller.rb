@@ -1,7 +1,5 @@
 # encoding: utf-8
-require 'csv'
-
-class CalicatasController < AutorizadoController
+class CalicatasController < ApplicationController
 
   before_filter :armar_lookups, except: :index
   before_filter :cargar_series_y_calicatas,
@@ -175,12 +173,19 @@ protected
 
   def cargar_series_y_calicatas
     @calicatas = Calicata.order('fecha ASC')
+
     if request.fullpath =~ /^\/series/ then
       @calicatas = @calicatas.series
       @alias = 'serie'
     else
       @alias = 'calicata'
     end
-    @calicatas = @calicatas.pagina(params[:pagina])
+
+    if n = params[:pagina]
+      @calicatas = @calicatas.pagina(n)
+    else
+      @calicatas = @calicatas.all
+    end
   end
+
 end
