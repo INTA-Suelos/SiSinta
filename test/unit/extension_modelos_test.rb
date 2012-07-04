@@ -3,24 +3,32 @@ require 'test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
 
-  fixtures :all
-
-  setup do
-    @calicata = calicatas(:valida)
-  end
+  fixtures :fases, :calicatas
 
   test "debería preparar las asociaciones del modelo" do
-    flunk "no implementado todavía"
+    h = Horizonte.new
+    refute_nil h.analisis
+    refute_nil h.estructura
+    refute_nil h.consistencia
+    refute_nil h.color_seco
+    refute_nil h.color_humedo
+    refute_nil h.limite
   end
 
   test "debería convertir el modelo a Array" do
-    assert_instance_of Array, @calicata.como_arreglo, "no devuelve Array"
+    assert_instance_of Array, calicatas(:valida).como_arreglo, "no devuelve Array"
+  end
+
+  test "debería buscar y cargar las asociaciones" do
+    assert_no_difference ('Fase.count') do
+      Calicata.create fase_attributes: { nombre: fases(:uno).nombre }
+    end
   end
 
   test "debería filtrar los atributos" do
-    sin_atributo = Calicata.atributos_y_asociaciones :excepto => :numero
-    sin_asociacion = Calicata.atributos_y_asociaciones :excepto => :ubicacion
-    sin_ambos = Calicata.atributos_y_asociaciones :excepto => [:numero, :ubicacion]
+    sin_atributo = Calicata.atributos_y_asociaciones excepto: :numero
+    sin_asociacion = Calicata.atributos_y_asociaciones excepto: :ubicacion
+    sin_ambos = Calicata.atributos_y_asociaciones excepto: [:numero, :ubicacion]
  
     assert_instance_of Array, sin_atributo, "no devuelve Array"
     assert_instance_of Array, sin_asociacion, "no devuelve Array"

@@ -3,8 +3,6 @@ require 'test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
 
-  fixtures :all
-
   setup do
     @admin = Usuario.find_by_nombre('Administrador')
     @simple = Usuario.create  :nombre => 'simplón',
@@ -15,28 +13,25 @@ class UsuarioTest < ActiveSupport::TestCase
   end
 
   test "debería tener en cuenta preferencias de ficha del usuario" do
-    assert @simple.usa_ficha_simple?, 'el método ? no devuelve el valor correcto de la variable'
-    assert !@completo.usa_ficha_simple?, 'el método ? no devuelve el valor correcto de la variable'
+    assert @simple.usa_ficha_simple?, 'El método ? no devuelve el valor correcto de la variable'
+    assert !@completo.usa_ficha_simple?, 'El método ? no devuelve el valor correcto de la variable'
     @nuevo = Usuario.new
-    assert !@nuevo.usa_ficha_simple?, 'el valor por omisión debería ser la ficha completa'
+    assert !@nuevo.usa_ficha_simple?, 'El valor por omisión debería ser la ficha completa'
     @nuevo = Usuario.new ficha: 'simple'
-    assert @nuevo.usa_ficha_simple?, 'no se puede pasar la preferencia en la creación'
+    assert @nuevo.usa_ficha_simple?, 'No se puede pasar la preferencia en la creación'
   end
 
   test "debería crear un nuevo rol" do
-    assert_nothing_raised do
-      assert_blank @simple.roles, "no debería tener roles al principio"
-      assert_difference 'Rol.count' do
-        @simple.roles << Rol.new(:nombre => 'mendocino')
-        @simple.save
-      end
+    assert_difference 'Rol.count' do
+      @simple.roles << Rol.new(:nombre => 'mendocino')
+      @simple.save
     end
   end
 
   test "debería responder correctamente sobre si es admin" do
-    assert !@admin.roles.blank?, "no carga los roles de la DB"
-    assert @admin.admin?, "debería ser admin"
-    assert !@simple.admin?, "no debería ser admin"
+    assert !@admin.roles.blank?, "No carga los roles de la DB"
+    assert @admin.admin?, "Debería ser admin"
+    assert !@simple.admin?, "No debería ser admin"
   end
 
   test "debería crear correctamente al usuario" do
@@ -44,10 +39,22 @@ class UsuarioTest < ActiveSupport::TestCase
       @u = Usuario.new(  :nombre => 'Otro Administrador',
                          :email => 'email@falso2.com',
                          :password => 'administrador')
-      assert @u.save, "no guarda al usuario"
+      assert @u.save, "No guarda al usuario"
       @u.roles << Rol.find_by_nombre('administrador')
-      assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "no guarda la relación"
+      assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "No guarda la relación"
     end
+  end
+
+  test "debería crear el usuario con un rol por default" do
+    assert_includes @simple.roles, Rol.find_by_nombre('invitado'), "Debería tener el Rol 'invitado' al principio"
+  end
+
+  test "debería comprobar el rol" do
+    assert @admin.es?('administrador'), ".es? falla con string"
+    assert @admin.es?(:administrador), ".es? falla con symbol"
+    assert @admin.admin?, "Un admin no es administrador"
+    assert @simple.es? 'invitado'
+    assert @simple.invitado?, "Un usuario nuevo no es invitado"
   end
 
 end

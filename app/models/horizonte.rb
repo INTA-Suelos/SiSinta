@@ -1,15 +1,23 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 class Horizonte < ActiveRecord::Base
 
-  after_initialize :preparar
-  before_save :buscar_asociaciones
+  # Declaramos la lista de asociaciones a preparar durante la inicialización
+  after_initialize do
+    preparar  :color_seco, :color_humedo, :limite, :consistencia, :estructura,
+              :analisis
+  end
 
-  has_one :analisis,      :dependent => :destroy, :inverse_of => :horizonte
-  has_one :limite,        :dependent => :destroy, :inverse_of => :horizonte
-  has_one :consistencia,  :dependent => :destroy, :inverse_of => :horizonte
-  has_one :estructura,    :dependent => :destroy, :inverse_of => :horizonte
+  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
+  before_save do
+    buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
+  end
 
-  belongs_to :calicata, :inverse_of => :horizontes
+  has_one :analisis,      dependent: :destroy, inverse_of: :horizonte
+  has_one :limite,        dependent: :destroy, inverse_of: :horizonte
+  has_one :consistencia,  dependent: :destroy, inverse_of: :horizonte
+  has_one :estructura,    dependent: :destroy, inverse_of: :horizonte
+
+  belongs_to :calicata, inverse_of: :horizontes
 
   belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco,
                           autosave: false
@@ -33,17 +41,6 @@ class Horizonte < ActiveRecord::Base
 
   def to_s
     self.to_param
-  end
-
-  protected
-
-  def preparar
-    super(%w{color_seco color_humedo limite consistencia estructura analisis})
-  end
-
-  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
-  def buscar_asociaciones
-    super({color_seco: 'hvc', color_humedo: 'hvc'})
   end
 
 end

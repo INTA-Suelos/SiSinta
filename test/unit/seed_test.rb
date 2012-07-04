@@ -50,7 +50,7 @@ class SeedTest < ActiveSupport::TestCase
 
   test "debería existir un rol de administrador" do
     assert_not_nil Rol.find_by_nombre('administrador'), "no hay un rol administrador"
-    assert_match /admin/, Rol.find_by_nombre('administrador').nombre
+    assert_instance_of Rol, Rol.administrador
   end
 
 end

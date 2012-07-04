@@ -1,10 +1,9 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module ExtensionModelos
   extend ActiveSupport::Concern
 
   module ClassMethods
 
-    #
     # Este método es llamado para generar el formulario de exportar/importar CSV.
     # Utiliza los atributos del modelo y sus asociaciones.
     #
@@ -31,16 +30,15 @@ module ExtensionModelos
 # Métodos de instancia
 
   included do
-    #
     # Construye los objetos asociados al modelo, para usar con el +FormHelper+, si es que no
     # existen ya.
     #
     # * *Args*    :
     #   - +asociaciones+ -> la lista de asociaciones que construir
     # * *Returns* :
-    #   - el modelo con las asociaciones preparadas
+    #   - el modelo con las asociaciones cargadas
     #
-    def preparar(asociaciones)
+    def preparar(*asociaciones)
       asociaciones.each do |asociacion|
         self.send("build_#{asociacion}") if self.send(asociacion).nil?
       end
@@ -54,17 +52,18 @@ module ExtensionModelos
       end
     end
 
+    # Busca las asociaciones indicadas por si ya existen, para no duplicar.
+    # Opcionalmente las crea.
     def buscar_asociaciones(asociaciones = {}, crear = false)
       asociaciones.each_pair do |modelo,metodo|
-        if self.send(modelo).try(metodo).present? then
+        unless self.send(modelo).try(metodo).blank?
           clase = self.association(modelo).reflection.klass
-          self.send(  "#{modelo}=",
+
+          # asociacion = Asociacion.find_by_metodo(self.asociacion.metodo)
+          # asociacion = Asociacion.find_or_create_by_metodo(self.asociacion.metodo)
+          self.send(  "#{modelo}=", #
                       clase.send("find#{crear ? '_or_create' : nil}_by_#{metodo}",
-                        self.send(modelo).send(metodo)
-                      )
-                    )
-        else
-          self.send("#{modelo}=", nil)
+                          self.send(modelo).try(metodo) ) )
         end
       end
     end

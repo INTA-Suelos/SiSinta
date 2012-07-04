@@ -1,25 +1,27 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 class Calicata < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  before_validation :buscar_asociaciones
+  before_validation do
+    buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
+  end
 
-  scope :series, where(:modal => 'true')
+  scope :series, where(modal: 'true')
 
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
-  validates_uniqueness_of :nombre, :numero, :allow_blank => true
-  validates_presence_of :nombre, :if => Proc.new { |c| c.modal? }
+  validates_uniqueness_of :nombre, :numero, allow_blank: true
+  validates_presence_of :nombre, if: Proc.new { |c| c.modal? }
   validates_numericality_of :cobertura_vegetal,
-                            :greater_than_or_equal_to => 0, :less_than => 101,
-                            :allow_nil => true
-  validates_associated :ubicacion, :horizontes
+                            greater_than_or_equal_to: 0, less_than: 101,
+                            allow_nil: true
+  validates_associated :ubicacion, :horizontes, :fase, :grupo
 
-  has_many :horizontes,   :dependent => :destroy, :inverse_of => :calicata
-  has_many :adjuntos,     :dependent => :destroy, :inverse_of => :calicata
-  has_one :capacidad,     :dependent => :destroy, :inverse_of => :calicata
-  has_one :ubicacion,     :dependent => :destroy, :inverse_of => :calicata
-  has_one :paisaje,       :dependent => :destroy, :inverse_of => :calicata
+  has_many :horizontes, dependent: :destroy, inverse_of: :calicata
+  has_many :adjuntos,   dependent: :destroy, inverse_of: :calicata
+  has_one :capacidad,   dependent: :destroy, inverse_of: :calicata
+  has_one :ubicacion,   dependent: :destroy, inverse_of: :calicata
+  has_one :paisaje,     dependent: :destroy, inverse_of: :calicata
 
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
@@ -38,11 +40,11 @@ class Calicata < ActiveRecord::Base
   belongs_to_active_hash :sal
   belongs_to_active_hash :uso_de_la_tierra
 
-  has_many :analisis,         :through => :horizontes
+  has_many :analisis, through: :horizontes
 
-  belongs_to :usuario, :inverse_of => :calicatas
-  belongs_to :fase, :inverse_of => :calicatas
-  belongs_to :grupo, :inverse_of => :calicatas
+  belongs_to :usuario,  inverse_of: :calicatas
+  belongs_to :fase,     inverse_of: :calicatas
+  belongs_to :grupo,    inverse_of: :calicatas
 
   accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion,
                                 limit: 1, allow_destroy: true
@@ -51,7 +53,6 @@ class Calicata < ActiveRecord::Base
 
 # == Validaciones
 
-  #
   # Validación para comprobar que no se guarda una calicata que no ha ocurrido.
   #
   def la_fecha_no_puede_ser_futura
@@ -60,7 +61,6 @@ class Calicata < ActiveRecord::Base
     end
   end
 
-  #
   # Prepara un hash para que RGeo genere geojson
   #
   def propiedades_publicas
@@ -70,7 +70,6 @@ class Calicata < ActiveRecord::Base
     end
   end
 
-  #
   # Devuelve el objeto con la geometría para RGeo
   #
   def geometria
@@ -79,13 +78,6 @@ class Calicata < ActiveRecord::Base
 
   def to_s
     self.to_param
-  end
-
-  protected
-
-  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
-  def buscar_asociaciones
-    super({grupo: 'descripcion', fase: 'nombre'}, true)
   end
 
 end
