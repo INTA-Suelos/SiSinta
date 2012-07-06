@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'csv'
 # En este archivo va la carga inicial de datos. La mayoría de estos datos
 # residen en db/semillas/, en diferentes archivos y formatos. Acá se realiza la
@@ -7,7 +7,7 @@ require 'csv'
 # Carga el archivo de semillas +archivo+, en formato yaml (con erb embebido) del
 # directorio +semillas+, que tiene datos iniciales para la base de datos
 def cargar_yml_de(archivo)
-  YAML::load(ERB.new(IO.read("#{Rails.root}/db/semillas/#{archivo}.yml")).result)
+  YAML::load(ERB.new(IO.read("db/semillas/#{archivo}.yml")).result)
 end
 
 # Carga el archivo en formato csv +archivo+,  del directorio +semillas+, que
@@ -15,7 +15,7 @@ end
 def cargar_csv_de(archivo, configuracion = {})
   begin
     puts "Cargando CSV de #{archivo} ..."
-    CSV.foreach "#{Rails.root}/db/semillas/#{archivo}.csv", configuracion do |fila|
+    CSV.foreach "db/semillas/#{archivo}.csv", configuracion do |fila|
       yield fila
     end
   rescue
@@ -46,7 +46,7 @@ cargar_csv_de('munsell', headers: true, col_sep: ';') do |color|
   end
 end
 
-if File.exists?('db/semillas/perfiles_modales.csv')
+if File.exists?('db/semillas/perfiles-modales.csv')
   # Cargamos perfiles modales ya digitalizados
   cargar_csv_de('perfiles-modales', headers:true, col_sep: ',') do |csv|
     Calicata.find_or_create_by_nombre(nombre: csv[0]) do |p|
