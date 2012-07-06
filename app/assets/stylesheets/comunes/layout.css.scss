@@ -84,6 +84,7 @@ ul.menu_usuarios {
 .botonera {
   float: none;
   margin-bottom: 1em;
+  min-height: $altura-linea;
   @include menu_horizontal;
 }
 
