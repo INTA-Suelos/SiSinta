@@ -1,5 +1,5 @@
 # encoding: utf-8
-class CalicatasController < ApplicationController
+class CalicatasController < AutorizadoController
 
   before_filter :armar_lookups, except: [:index, :preparar_csv]
   before_filter :series_o_calicatas,

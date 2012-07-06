@@ -9,6 +9,7 @@ class AnalisisControllerTest < ActionController::TestCase
     @analisis = analisis(:uno)
     @calicata = calicatas(:valida)
     sign_in Usuario.find_by_nombre('Administrador')
+    @request.env["HTTP_REFERER"] = "/calicatas/#{@calicata.to_param}/analisis"
   end
 
   test "should get index" do

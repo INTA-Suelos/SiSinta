@@ -1,5 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 SiSINTA::Application.routes.draw do
+
+  # Autenticación en rack
+  devise_for :usuarios
 
   get 'inicio/index'
 
@@ -10,9 +13,6 @@ SiSINTA::Application.routes.draw do
   post  'series/procesar_csv' => 'calicatas#procesar_csv'
   get   'horizontes/preparar_csv'
   post  'horizontes/procesar_csv'
-
-  # Autenticación en rack
-  devise_for :usuarios
 
   # Para limitar las vistas a las calicatas que son modales
   get 'series' => 'calicatas#index', as: 'series'
