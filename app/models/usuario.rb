@@ -40,7 +40,7 @@ class Usuario < ActiveRecord::Base
   protected
 
     def asignar_rol_por_defecto
-      self.roles << Rol.invitado
+      self.roles << Rol.invitado if roles.empty?
     end
 
 end
