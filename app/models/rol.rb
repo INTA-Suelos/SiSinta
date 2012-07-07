@@ -2,6 +2,8 @@
 class Rol < ActiveRecord::Base
   has_and_belongs_to_many :usuarios
 
+  accepts_nested_attributes_for :usuarios
+
   # TODO Meter todos estos en method missing
   def self.administrador
     self.find_by_nombre('administrador')
