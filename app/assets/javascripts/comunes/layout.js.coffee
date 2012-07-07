@@ -2,8 +2,8 @@ jQuery ->
 
   $('.fecha').datepicker()
 
-  $('.plegable legend').click ->
-    $(this).nextAll().toggle('slow')
+  $('.menu .plegable').click ->
+    $(this).nextAll().toggle('fast')
     return false
 
   $('.best_in_place').best_in_place()
