@@ -13,6 +13,8 @@ class Usuario < ActiveRecord::Base
   attr_accessible :nombre, :email, :password, :password_confirmation,
                   :remember_me, :ficha, :current_password
 
+  scope :por_rol, joins(:roles).order('roles.nombre ASC')
+
   def to_s
     nombre
   end
@@ -22,7 +24,11 @@ class Usuario < ActiveRecord::Base
   end
 
   def es? rol
-    self.roles.include? Rol.find_by_nombre(rol.to_s)
+    if rol.instance_of? Rol
+      self.roles.include? rol
+    else
+      self.roles.include? Rol.find_by_nombre(rol.to_s)
+    end
   end
 
   def admin?
