@@ -14,6 +14,7 @@ class Usuario < ActiveRecord::Base
                   :remember_me, :ficha, :current_password
 
   scope :por_rol, joins(:roles).order('roles.nombre ASC')
+  scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
 
   def to_s
     nombre
