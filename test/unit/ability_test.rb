@@ -29,7 +29,7 @@ class AbilityTest < ActiveSupport::TestCase
 
     @permisos = Ability.new @autorizado
 
-    @permisos.basicos.each do |recurso|
+    (@permisos.basicos + @permisos.calicatas).each do |recurso|
       assert @permisos.can?(:manage, recurso.new), "No puede administrar #{recurso}"
     end
     assert @permisos.cannot?(:manage, Usuario.new), "Puede administrar Usuario"

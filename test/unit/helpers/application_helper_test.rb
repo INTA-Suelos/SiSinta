@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'test_helper'
-require 'ayuda_helper'
+require 'application_helper'
 
-class AyudaHelperTest < ActionController::TestCase
-  include AyudaHelper
+class ApplicationHelperTest < ActionController::TestCase
+  include ApplicationHelper
 
   setup do
     @a = Ayuda.first
