@@ -112,6 +112,8 @@ ul.menu_usuarios {
     ul { list-style-type: none; }
 
     .menu {
+      margin-bottom: 1em;
+      border-top: 2px $azul_inta solid;
       li {
         background: $celeste;
         width: auto;
@@ -124,6 +126,7 @@ ul.menu_usuarios {
 
       a { text-decoration: none; }
     }
+
   }
 
   .cuerpo {

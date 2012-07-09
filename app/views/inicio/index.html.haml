@@ -26,5 +26,13 @@
       %ul.submenu
         %li= link_to 'Ver', fases_path
 
+  - if current_usuario.try(:admin?)
+    %ul#administracion.menu
+      %li
+        .plegable Usuarios
+        %ul.submenu
+          %li
+            = link_to 'Ver', usuarios_path
+
 #bienvenida.cuerpo
   %h2 Bienvenido a SiSINTA
