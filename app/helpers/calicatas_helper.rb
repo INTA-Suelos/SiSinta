@@ -13,4 +13,14 @@ module CalicatasHelper
     @calicata
   end
 
+  def horizonte_preparado
+    Horizonte.new(
+      color_seco: Color.new,
+      color_humedo: Color.new,
+      limite: Limite.new,
+      consistencia: Consistencia.new,
+      estructura: Estructura.new
+    )
+  end
+
 end
