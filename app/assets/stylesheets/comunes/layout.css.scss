@@ -38,7 +38,7 @@ body {
     @include mensaje($rojo_inta);
   }
 
-  #flash_notice {
+  #flash_notice, #flash_success {
     @include mensaje($verde);
   }
 
@@ -99,6 +99,41 @@ ul.menu_usuarios {
 #principal {
   margin-top: 10px;
   h1 { @include centrado; }
+
+  .barra {
+    width: 230px;
+    position: absolute;
+    left: 0;
+    border-right: 2px $azul_inta solid;
+    font-size: large;
+    color: $azul_inta;
+    font-weight: bold;
+
+    ul { list-style-type: none; }
+
+    .menu {
+      margin-bottom: 1em;
+      border-top: 2px $azul_inta solid;
+      li {
+        background: $celeste;
+        width: auto;
+      }
+
+      .plegable {
+        &:hover { cursor: s-resize; }
+        & + .submenu { display: none; }
+      }
+
+      a { text-decoration: none; }
+    }
+
+  }
+
+  .cuerpo {
+    position: absolute;
+    left: 230px;
+    margin-left: 4px
+  }
 }
 
 .centrado {

@@ -52,6 +52,12 @@ SiSINTA::Application.routes.draw do
     get 'autocompletar/:atributo' => 'colores#autocompletar', on: :collection
   end
 
+  scope "/admin" do
+    resources :usuarios, only: [:index, :destroy], path_names: m do
+      put 'update', on: :collection
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

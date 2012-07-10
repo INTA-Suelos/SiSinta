@@ -6,11 +6,7 @@ class AutorizadoController < ApplicationController
 
   rescue_from CanCan::AccessDenied do |e|
     flash[:error] = I18n.t 'unauthorized.default'
-    begin
-      redirect_to :back
-    rescue ActionController::RedirectBackError
-      redirect_to :root
-    end
+    volver
   end
 
   # Autorización con CanCan

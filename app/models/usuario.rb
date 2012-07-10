@@ -11,7 +11,10 @@ class Usuario < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :ficha, :current_password
+                  :remember_me, :ficha, :current_password, :rol_ids
+
+  scope :por_rol, joins(:roles).order('roles.nombre ASC')
+  scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
 
   def to_s
     nombre
@@ -22,7 +25,11 @@ class Usuario < ActiveRecord::Base
   end
 
   def es? rol
-    self.roles.include? Rol.find_by_nombre(rol.to_s)
+    if rol.instance_of? Rol
+      self.roles.include? rol
+    else
+      self.roles.include? Rol.find_by_nombre(rol.to_s)
+    end
   end
 
   def admin?

@@ -1,5 +1,14 @@
-# -*- encoding : utf-8 -*-
-module AyudaHelper
+# encoding: utf-8
+module ApplicationHelper
+
+  # Redirije hacia atrás o en caso de no exister, vuelve al inicio
+  def volver
+    begin
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to :root
+    end
+  end
 
   # Crea los divs preparados para el tooltip de los formularios, con la
   # descripción del campo.
@@ -19,4 +28,5 @@ module AyudaHelper
 
     "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe if texto
   end
+
 end

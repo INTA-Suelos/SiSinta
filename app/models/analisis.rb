@@ -50,4 +50,8 @@ class Analisis < ActiveRecord::Base
     agua_util_before_type_cast
   end
 
+  def publico
+    calicata.publico
+  end
+
 end

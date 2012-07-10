@@ -43,4 +43,8 @@ class Horizonte < ActiveRecord::Base
     self.to_param
   end
 
+  def publico
+    calicata.publico
+  end
+
 end

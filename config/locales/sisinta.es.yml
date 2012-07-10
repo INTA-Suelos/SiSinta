@@ -9,3 +9,5 @@ es:
   messages:
     created:  "La creación de %{model} fue exitosa."
     updated:  "La actualización de %{model} fue exitosa."
+    destroyed: "La eliminación de %{model} fue exitosa."
+    error: "Ocurrió algún error con la actualización."

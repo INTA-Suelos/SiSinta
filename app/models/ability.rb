@@ -2,7 +2,7 @@
 class Ability
   include CanCan::Ability
 
-  attr_reader :basicos
+  attr_reader :basicos, :calicatas
 
   def initialize(usuario)
     # Define abilities for the passed in user here. For example:
@@ -30,16 +30,19 @@ class Ability
 
     usuario ||= Usuario.new # guest user (not logged in)
 
-    @basicos = [Calicata, Horizonte, Analisis, Adjunto, Grupo, Fase]
+    @calicatas = [Calicata, Horizonte, Analisis, Adjunto]
+    @basicos = [Grupo, Fase]
 
     if usuario.admin?
       can :manage, :all
     else
       if usuario.autorizado?
+        can :manage, calicatas
         can :manage, basicos
       else
         # usuario invitado, anónimo o no existente
-        can :read, basicos, publico: true
+        can :read, calicatas, publico: true
+        can :read, basicos
       end
     end
 

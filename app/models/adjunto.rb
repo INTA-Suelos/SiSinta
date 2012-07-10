@@ -12,4 +12,8 @@ class Adjunto < ActiveRecord::Base
     archivo.try(:path)
   end
 
+  def publico
+    calicata.publico
+  end
+
 end

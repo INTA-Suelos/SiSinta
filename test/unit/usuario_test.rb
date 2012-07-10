@@ -51,9 +51,11 @@ class UsuarioTest < ActiveSupport::TestCase
 
   test "debería comprobar el rol" do
     assert @admin.es?('administrador'), ".es? falla con string"
+    assert @admin.es?(Rol.administrador), ".es? falla con Rol"
     assert @admin.es?(:administrador), ".es? falla con symbol"
     assert @admin.admin?, "Un admin no es administrador"
     assert @simple.es? 'invitado'
+    assert @simple.es? Rol.invitado
     assert @simple.invitado?, "Un usuario nuevo no es invitado"
   end
 
