@@ -6,8 +6,6 @@ jQuery ->
     $(this).nextAll().toggle('fast')
     return false
 
-  $('.best_in_place').best_in_place()
-
   $('#paginacion')
     .live('ajax:beforeSend', (evt, xhr, settings) ->
       $('body').css('cursor', 'wait') )

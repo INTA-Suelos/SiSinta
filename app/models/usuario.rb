@@ -11,7 +11,7 @@ class Usuario < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :ficha, :current_password
+                  :remember_me, :ficha, :current_password, :rol_ids
 
   scope :por_rol, joins(:roles).order('roles.nombre ASC')
   scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
