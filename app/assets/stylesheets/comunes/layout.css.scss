@@ -38,7 +38,7 @@ body {
     @include mensaje($rojo_inta);
   }
 
-  #flash_notice {
+  #flash_notice, #flash_success {
     @include mensaje($verde);
   }
 
