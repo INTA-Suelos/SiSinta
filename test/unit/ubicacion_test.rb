@@ -3,6 +3,8 @@ require 'test_helper'
 
 class UbicacionTest < ActiveSupport::TestCase
 
+  fixtures :calicatas
+
   setup do
     @atributos = {}
     @u = Ubicacion.new(calicata: calicatas(:uno))

@@ -4,8 +4,8 @@ require 'test_helper'
 class SeedTest < ActiveSupport::TestCase
 
   test "deberían cargarse las semillas de capacidad" do
-    assert_not_nil CapacidadClase.first, "no se cargaron las clases de capacidad"
-    assert_not_nil CapacidadSubclase.first, "no se cargaron las subclases de capacidad"
+    assert_not_nil ClaseDeCapacidad.first, "no se cargaron las clases de capacidad"
+    assert_not_nil SubclaseDeCapacidad.first, "no se cargaron las subclases de capacidad"
   end
 
   test "deberían cargarse las semillas de relieve" do
@@ -50,7 +50,7 @@ class SeedTest < ActiveSupport::TestCase
 
   test "debería existir un rol de administrador" do
     assert_not_nil Rol.find_by_nombre('administrador'), "no hay un rol administrador"
-    assert_match /admin/, Rol.find_by_nombre('administrador').nombre
+    assert_instance_of Rol, Rol.administrador
   end
 
 end

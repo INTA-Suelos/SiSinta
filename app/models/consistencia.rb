@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Consistencia < ActiveRecord::Base
   belongs_to :horizonte, :inverse_of => :consistencia
 

@@ -1,11 +1,15 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'test_helper'
 
 class AnalisisControllerTest < ActionController::TestCase
+
+  fixtures :analisis, :calicatas
+
   setup do
     @analisis = analisis(:uno)
-    @calicata = @analisis.calicata
+    @calicata = calicatas(:valida)
     sign_in Usuario.find_by_nombre('Administrador')
+    @request.env["HTTP_REFERER"] = "/calicatas/#{@calicata.to_param}/analisis"
   end
 
   test "should get index" do

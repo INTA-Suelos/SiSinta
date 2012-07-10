@@ -1,5 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 SiSINTA::Application.routes.draw do
+
+  # Autenticación en rack
+  devise_for :usuarios
 
   get 'inicio/index'
 
@@ -10,9 +13,6 @@ SiSINTA::Application.routes.draw do
   post  'series/procesar_csv' => 'calicatas#procesar_csv'
   get   'horizontes/preparar_csv'
   post  'horizontes/procesar_csv'
-
-  # Autenticación en rack
-  devise_for :usuarios
 
   # Para limitar las vistas a las calicatas que son modales
   get 'series' => 'calicatas#index', as: 'series'
@@ -26,23 +26,36 @@ SiSINTA::Application.routes.draw do
   f = { new: "nueva", edit: "editar" }
 
   resources :calicatas, path_names: f do
+    get 'pagina/:pagina', :action => :index, :on => :collection
+
     resources :analisis, only: :index, path_names: m do
       get 'edit', on: :collection
       put 'update', on: :collection
     end
+
     resources :adjuntos, path_names: m do
       get 'descargar', on: :member
     end
   end
+
   resources :horizontes, only: :index, path_names: m
+
   resources :grupos, path_names: m do
     get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
   end
+
   resources :fases, path_names: f do
     get 'autocompletar/:atributo' => 'fases#autocompletar', on: :collection
   end
+
   resources :colores, only: [], path_names: m do
     get 'autocompletar/:atributo' => 'colores#autocompletar', on: :collection
+  end
+
+  scope "/admin" do
+    resources :usuarios, only: [:index, :destroy], path_names: m do
+      put 'update', on: :collection
+    end
   end
 
   # The priority is based upon order of creation:

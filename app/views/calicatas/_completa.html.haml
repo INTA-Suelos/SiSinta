@@ -1,26 +1,30 @@
-= form_for @calicata, html: { class: 'completa span-24' } do |f|
+= form_for calicata_preparada, html: { class: 'completa span-24' } do |f|
 
   = f.error_messages
 
-  = field_set_tag 'Ficha de descripción edafológica', class: 'azul_claro span-23 last' do
+  = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
     .span-23.last
       .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
       .span-20.last.campo
-        = ayuda_para('modelo', 'campo')
+        = ayuda_para 'calicata.modal'
         = f.check_box :modal, class: 'span-1', disabled: bloqueado
         #serie
           .span-13.prepend-unaymedia.campo
             .span-2= f.label :nombre, 'Nombre de la serie'
             .span-11.last= f.text_field :nombre, disabled: bloqueado
-            = ayuda_para('modelo', 'campo')
+            = ayuda_para 'calicata.nombre'
           .span-4.last.campo
             .span-2= f.label :simbolo, 'Símbolo de la serie'
             .span-2.last= f.text_field :simbolo, disabled: bloqueado
-            = ayuda_para('modelo', 'campo')
+            = ayuda_para 'calicata.simbolo'
 
     = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}
     = render partial: 'descripcion_de_los_horizontes', locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'observaciones', locals: {f: f, bloqueado: bloqueado}
+
+    = field_set_tag 'Observaciones', class: 'celeste plegable span-22 last' do
+      .span-21.last
+        = f.text_area :observaciones, disabled: bloqueado
+        = ayuda_para 'calicata.observaciones'
 
     .acciones.span-4.last= f.submit unless bloqueado

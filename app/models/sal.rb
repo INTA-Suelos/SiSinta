@@ -1,5 +1,4 @@
+# encoding: utf-8
 class Sal < Lookup
-  alias_attribute :valor, :valor1
-
-  has_many :calicatas, :inverse_of => :sal
+  has_many :calicatas, inverse_of: :sal
 end

@@ -1,12 +1,14 @@
 %table.centrado
-  %tr
-    %th Fecha
-    %th Ubicación
-    %th Número
-    %th Es modal?
-    %th
-    %th
-    %th
-    %th
-
-  = render calicatas
+  %thead
+    %tr
+      %th Fecha
+      %th Nombre
+      %th Ubicación
+      %th Número
+      %th#modal Es modal?
+      %th
+      %th
+      %th
+      %th
+  %tbody
+    = render calicatas

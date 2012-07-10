@@ -1,5 +1,6 @@
+# encoding: utf-8
 class Estructura < ActiveRecord::Base
-  belongs_to :horizonte, :inverse_of => :estructura
+  belongs_to :horizonte, inverse_of: :estructura
 
   validates_presence_of :horizonte
 end

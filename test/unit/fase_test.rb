@@ -3,6 +3,8 @@ require 'test_helper'
 
 class FaseTest < ActiveSupport::TestCase
 
+  fixtures :fases
+
   test "debería negarse a guardarla si los campos son nulos" do
     assert !Fase.new.save, "permite guardar una fase vacía"
   end

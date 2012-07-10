@@ -1,6 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
+require 'csv'
+
 class ApplicationController < ActionController::Base
-  include BrowserDetect, AyudaHelper
+  include BrowserDetect, ApplicationHelper
 
   protect_from_forgery
 

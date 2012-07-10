@@ -1,7 +1,9 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'test_helper'
 
 class CalicatasControllerTest < ActionController::TestCase
+
+  fixtures :calicatas
 
   setup do
     @calicata = calicatas(:uno)

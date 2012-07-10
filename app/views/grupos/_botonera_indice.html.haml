@@ -1,1 +1,2 @@
-= link_to "Nuevo Grupo", new_grupo_path
+- if can? :create, @grupo
+  = link_to "Nuevo Grupo", new_grupo_path

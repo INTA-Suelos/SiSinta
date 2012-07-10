@@ -1,0 +1,17 @@
+#
+# Los valores posibles para Escurrimiento en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  estancado
+- id:     2
+  valor:  muy lento
+- id:     3
+  valor:  lento
+- id:     4
+  valor:  medio
+- id:     5
+  valor:  rápido
+- id:     6
+  valor:  muy rápido

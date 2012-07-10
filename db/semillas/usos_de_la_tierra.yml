@@ -1,0 +1,23 @@
+#
+# Los valores posibles para Uso de la tierra en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  agrícola
+- id:     2
+  valor:  ganadero
+- id:     3
+  valor:  frutícola
+- id:     4
+  valor:  hortícola
+- id:     5
+  valor:  bosque/monte
+- id:     6
+  valor:  natural
+- id:     7
+  valor:  bosque implantado
+- id:     8
+  valor:  tierra improductiva
+- id:     9
+  valor:  miscelánea

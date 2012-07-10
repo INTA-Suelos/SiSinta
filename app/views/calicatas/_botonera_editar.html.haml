@@ -1,7 +1,10 @@
-= link_to 'Mostrar', @calicata
-= '|'
-= link_to 'Editar análisis', edit_calicata_analisis_index_path(@calicata)
-= '|'
-= link_to 'Adjuntar archivo', new_calicata_adjunto_path(@calicata)
-= '|'
+- if can? :read, @calicata
+  = link_to 'Mostrar', @calicata
+  = '|'
+- if can? :update, @calicata.analisis
+  = link_to 'Editar análisis', edit_calicata_analisis_index_path(@calicata)
+  = '|'
+- if can? :create, @calicata.adjuntos.build
+  = link_to 'Adjuntar archivo', new_calicata_adjunto_path(@calicata)
+  = '|'
 = link_to 'Volver', calicatas_path

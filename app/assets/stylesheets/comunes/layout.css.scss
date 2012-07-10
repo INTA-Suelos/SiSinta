@@ -1,16 +1,30 @@
 @import "constantes";
 
-#titulo {
+body {
+  border-top: 15px solid black;
+}
+
+#cabecera {
+  width: 100%;
   height: $alto_cabecera;
+  background-color: $azul_medio;
+  margin-bottom: 1em;
+  border-top: solid 4px white;
+  border-bottom: 25px solid $azul_oscuro;
   float: none;
   margin: auto;
 
-  .inicio {
+  .titulo, .subtitulo {
     color: white;
+    a { text-decoration: none;  }
+  }
+
+  .titulo {
     margin-bottom: 0;
-    a {
-      text-decoration: none;
-    }
+  }
+
+  .subtitulo {
+    font-size: large;
   }
 
   a {
@@ -24,24 +38,53 @@
     @include mensaje($rojo_inta);
   }
 
-  #flash_notice {
+  #flash_notice, #flash_success {
     @include mensaje($verde);
   }
 
-  #logo {
-    border-right: 1px solid white;
+  #logo_inta {
+    // Separación con el menú de usuario
+    margin-right: 4px;
+  }
+
+  #menu {
+    // No ocupa espacio fijo, para que el logo_sisinta no baje si se achica
+    // mucho la pantalla
+    width: auto;
+  }
+
+  #logo_sisinta {
+    float: right;
+    padding: 0 10px;
+  }
+
+  .borde-azul {
+    height: $alto_cabecera;
+    border-bottom: solid 2px white;
+  }
+
+}
+
+a {
+  color: $azul_claro;
+  text-decoration: none;
+  &:hover {
+    color: $azul_oscuro;
+    text-decoration: underline;
   }
 }
 
 ul.menu_usuarios {
   @include menu_horizontal;
-  margin: 0 0 2em;
+  margin: 0;
   padding: 0;
+  font-weight: bold;
 }
 
 .botonera {
   float: none;
   margin-bottom: 1em;
+  min-height: $altura-linea;
   @include menu_horizontal;
 }
 
@@ -49,18 +92,48 @@ ul.menu_usuarios {
   background-color: $celeste;
 }
 
-.azul_claro {
-  background-color: $azul_claro;
+.celeste_oscuro {
+  background-color: $celeste_oscuro;
 }
 
-#principal h1 {
-  @include centrado;
-}
+#principal {
+  margin-top: 10px;
+  h1 { @include centrado; }
 
-#cabecera {
-  width: 100%;
-  background-color: $azul_inta;
-  margin-bottom: 1em;
+  .barra {
+    width: 230px;
+    position: absolute;
+    left: 0;
+    border-right: 2px $azul_inta solid;
+    font-size: large;
+    color: $azul_inta;
+    font-weight: bold;
+
+    ul { list-style-type: none; }
+
+    .menu {
+      margin-bottom: 1em;
+      border-top: 2px $azul_inta solid;
+      li {
+        background: $celeste;
+        width: auto;
+      }
+
+      .plegable {
+        &:hover { cursor: s-resize; }
+        & + .submenu { display: none; }
+      }
+
+      a { text-decoration: none; }
+    }
+
+  }
+
+  .cuerpo {
+    position: absolute;
+    left: 230px;
+    margin-left: 4px
+  }
 }
 
 .centrado {

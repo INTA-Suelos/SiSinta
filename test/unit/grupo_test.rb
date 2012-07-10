@@ -3,6 +3,8 @@ require 'test_helper'
 
 class GrupoTest < ActiveSupport::TestCase
 
+  fixtures :grupos
+
   test "debería negarse a guardarlo si los campos son nulos" do
     assert !Grupo.new.save, "permite guardar un grupo vacío"
   end

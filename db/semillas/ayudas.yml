@@ -1,0 +1,186 @@
+#
+# Texto de las ayudas contextuales. Campo debe ser único así es posible
+# seleccionar la ayuda correcta a partir de un nombre en vez del id.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  campo:  calicata.modal
+  ayuda:  Indica si el perfil es modal o no.
+- id:     2
+  campo:  calicata.nombre
+  ayuda:  Ayuda no disponible.
+- id:     3
+  campo:  calicata.simbolo
+  ayuda:  Ayuda no disponible.
+- id:     4
+  campo:  ubicacion.mosaico
+  ayuda:  Ayuda no disponible.
+- id:     5
+  campo:  ubicacion.recorrido
+  ayuda:  Ayuda no disponible.
+- id:     6
+  campo:  ubicacion.aerofoto
+  ayuda:  Ayuda no disponible.
+- id:     7
+  campo:  calicata.fecha
+  ayuda:  Ayuda no disponible.
+- id:     8
+  campo:  calicata.numero
+  ayuda:  Ayuda no disponible.
+- id:     9
+  campo:  fase.nombre
+  ayuda:  Ayuda no disponible.
+- id:     10
+  campo:  grupo.descripcion
+  ayuda:  Ayuda no disponible.
+- id:     11
+  campo:  capacidad.subclases
+  ayuda:  Ayuda no disponible.
+- id:     12
+  campo:  capacidad.clase
+  ayuda:  Ayuda no disponible.
+- id:     13
+  campo:  ubicacion.ayuda
+  ayuda:  Ayuda no disponible.
+- id:     14
+  campo:  ubicacion.y
+  ayuda:  Ayuda no disponible.
+- id:     15
+  campo:  ubicacion.x
+  ayuda:  Ayuda no disponible.
+- id:     16
+  campo:  ubicacion.formato
+  ayuda:  Ayuda no disponible.
+- id:     17
+  campo:  paisaje.tipo
+  ayuda:  Ayuda no disponible.
+- id:     18
+  campo:  paisaje.forma
+  ayuda:  Ayuda no disponible.
+- id:     19
+  campo:  paisaje.simbolo
+  ayuda:  Ayuda no disponible.
+- id:     20
+  campo:  calicata.material_original
+  ayuda:  Ayuda no disponible.
+- id:     21
+  campo:  calicata.drenaje
+  ayuda:  Ayuda no disponible.
+- id:     22
+  campo:  calicata.relieve
+  ayuda:  Ayuda no disponible.
+- id:     23
+  campo:  calicata.anegamiento
+  ayuda:  Ayuda no disponible.
+- id:     24
+  campo:  calicata.posicion
+  ayuda:  Ayuda no disponible.
+- id:     25
+  campo:  calicata.humedad
+  ayuda:  Ayuda no disponible.
+- id:     26
+  campo:  calicata.pendiente
+  ayuda:  Ayuda no disponible.
+- id:     27
+  campo:  calicata.cobertura_vegetal
+  ayuda:  Ayuda no disponible.
+- id:     28
+  campo:  calicata.profundidad_napa
+  ayuda:  Ayuda no disponible.
+- id:     29
+  campo:  calicata.escurrimiento
+  ayuda:  Ayuda no disponible.
+- id:     30
+  campo:  calicata.sal
+  ayuda:  Ayuda no disponible.
+- id:     31
+  campo:  calicata.permeabilidad
+  ayuda:  Ayuda no disponible.
+- id:     32
+  campo:  calicata.pedregosidad
+  ayuda:  Ayuda no disponible.
+- id:     33
+  campo:  calicata.erosion
+  ayuda:  Ayuda no disponible.
+- id:     34
+  campo:  calicata.uso_de_la_tierra
+  ayuda:  Ayuda no disponible.
+- id:     35
+  campo:  fase.codigo
+  ayuda:  Ayuda no disponible.
+- id:     36
+  campo:  grupo.codigo
+  ayuda:  Ayuda no disponible.
+- id:     37
+  campo:  horizonte.tipo
+  ayuda:  Ayuda no disponible.
+- id:     38
+  campo:  horizonte.profundidad_superior
+  ayuda:  Ayuda no disponible.
+- id:     39
+  campo:  horizonte.profundidad_inferior
+  ayuda:  Ayuda no disponible.
+- id:     40
+  campo:  limite.tipo
+  ayuda:  Ayuda no disponible.
+- id:     41
+  campo:  limite.forma
+  ayuda:  Ayuda no disponible.
+- id:     42
+  campo:  horizonte.color_seco
+  ayuda:  Ayuda no disponible.
+- id:     43
+  campo:  horizonte.color_humedo
+  ayuda:  Ayuda no disponible.
+- id:     44
+  campo:  horizonte.textura
+  ayuda:  Ayuda no disponible.
+- id:     45
+  campo:  estructura.tipo
+  ayuda:  Ayuda no disponible.
+- id:     46
+  campo:  estructura.clase
+  ayuda:  Ayuda no disponible.
+- id:     47
+  campo:  estructura.grado
+  ayuda:  Ayuda no disponible.
+- id:     48
+  campo:  consistencia.seco
+  ayuda:  Ayuda no disponible.
+- id:     49
+  campo:  consistencia.humedo
+  ayuda:  Ayuda no disponible.
+- id:     50
+  campo:  consistencia.mojado_plasticidad
+  ayuda:  Ayuda no disponible.
+- id:     51
+  campo:  consistencia.mojado_adhesividad
+  ayuda:  Ayuda no disponible.
+- id:     52
+  campo:  horizonte.ph
+  ayuda:  Ayuda no disponible.
+- id:     53
+  campo:  horizonte.co3
+  ayuda:  Ayuda no disponible.
+- id:     54
+  campo:  horizonte.concreciones
+  ayuda:  Ayuda no disponible.
+- id:     55
+  campo:  horizonte.barnices
+  ayuda:  Ayuda no disponible.
+- id:     56
+  campo:  horizonte.moteados
+  ayuda:  Ayuda no disponible.
+- id:     57
+  campo:  horizonte.humedad
+  ayuda:  Ayuda no disponible.
+- id:     58
+  campo:  horizonte.raices
+  ayuda:  Ayuda no disponible.
+- id:     59
+  campo:  horizonte.formaciones_especiales
+  ayuda:  Ayuda no disponible.
+- id:     60
+  campo:  calicata.observaciones
+  ayuda:  Ayuda no disponible.

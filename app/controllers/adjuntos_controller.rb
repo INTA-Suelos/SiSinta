@@ -1,4 +1,5 @@
-class AdjuntosController < ApplicationController
+# encoding: utf-8
+class AdjuntosController < AutorizadoController
 
   before_filter :cargar_calicata
 

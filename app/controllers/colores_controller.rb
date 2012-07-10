@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ColoresController < ApplicationController
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre

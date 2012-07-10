@@ -1,5 +1,7 @@
-= link_to 'Mostrar', calicata_analisis_index_path(@calicata)
-= '|'
-= link_to 'Editar calicata', edit_calicata_path(@calicata)
-= '|'
+- if can? :read, @calicata
+  = link_to 'Mostrar', calicata_analisis_index_path(@calicata)
+  = '|'
+- if can? :update, @calicata
+  = link_to 'Editar calicata', edit_calicata_path(@calicata)
+  = '|'
 = link_to 'Volver', calicatas_path

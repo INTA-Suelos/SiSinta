@@ -1,22 +1,38 @@
-#arbol_de_contenidos
-  %ul
-    %li= link_to 'Calicatas', calicatas_path
-    %ul
-      %li Exportar
-      %ul
-        %li= link_to 'a CSV', calicatas_preparar_csv_path
-        %li= link_to 'a GeoJSON', calicatas_geo_path(format: :json)
+#arbol_de_contenidos.barra
+  %ul.menu
+    %li
+      .plegable Perfiles
+      %ul.submenu
+        %li
+          = link_to 'Ver', calicatas_path
+        %li
+          Exportar
+          %ul.submenu
+            %li= link_to 'a CSV', calicatas_preparar_csv_path
+            %li= link_to 'a GeoJSON', calicatas_geo_path(format: :json)
+    %li
+      .plegable Horizontes
+      %ul.submenu
+        %li
+          Exportar
+          %ul.submenu
+            %li= link_to 'a CSV', horizontes_preparar_csv_path
+    %li
+      .plegable Grupos
+      %ul.submenu
+        %li= link_to 'Ver', grupos_path
+    %li
+      .plegable Fases
+      %ul.submenu
+        %li= link_to 'Ver', fases_path
 
-    %li= link_to 'Series', series_path
-    %ul
-      %li Exportar
-      %ul
-        %li= link_to 'a CSV', series_preparar_csv_path
-        %li= link_to 'a GeoJSON', series_geo_path(format: :json)
-    %li Horizontes
-    %ul
-      %li Exportar
-      %ul
-        %li= link_to 'a CSV', horizontes_preparar_csv_path
-    %li= link_to 'Grupos', grupos_path
-    %li= link_to 'Fases', fases_path
+  - if current_usuario.try(:admin?)
+    %ul#administracion.menu
+      %li
+        .plegable Usuarios
+        %ul.submenu
+          %li
+            = link_to 'Ver', admin_usuarios_path
+
+#bienvenida.cuerpo
+  %h2 Bienvenido a SiSINTA

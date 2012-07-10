@@ -1,0 +1,17 @@
+#
+# Los valores posibles para Posición en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  loma
+- id:     2
+  valor:  media loma alta
+- id:     3
+  valor:  media loma
+- id:     4
+  valor:  media loma baja
+- id:     5
+  valor:  pie de loma
+- id:     6
+  valor:  bajo

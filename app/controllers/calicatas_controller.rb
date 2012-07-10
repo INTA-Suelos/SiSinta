@@ -1,11 +1,10 @@
 # encoding: utf-8
-require 'csv'
-
 class CalicatasController < AutorizadoController
 
-  before_filter :armar_lookups
-  before_filter :cargar_series_y_calicatas,
+  before_filter :armar_lookups, except: [:index, :preparar_csv]
+  before_filter :series_o_calicatas,
                 only: [:index, :geo, :preparar_csv, :procesar_csv]
+  before_filter :paginar, only: [:index]
   skip_before_filter :authenticate_usuario!, only: [:index, :geo]
 
   # GET /calicatas
@@ -15,7 +14,12 @@ class CalicatasController < AutorizadoController
   def index
     @titulo = "Lista de #{@alias.pluralize}"
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        if request.xhr?
+          render :index,  layout: false,
+                          locals: { calicatas: @calicatas.pagina(params[:pagina]) }
+        end
+      end
       format.json { render  json: @calicatas,
                             only: [ :id,
                                     :numero,
@@ -68,6 +72,7 @@ class CalicatasController < AutorizadoController
   # POST /calicatas
   # POST /calicatas.json
   def create
+
     @calicata = Calicata.new(params[:calicata])
 
     respond_to do |format|
@@ -86,12 +91,13 @@ class CalicatasController < AutorizadoController
   # PUT /calicatas/1.json
   def update
 
-    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo que forzar que
-    # haya un arreglo vacío cuando es nil. El formulario devuelve nil por la especificación de html.
-    # Los tests fallan si no recupero la excepción de los nils.
+    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
+    # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
+    # la especificación de html, asique lo corrijo.
     begin
       params[:calicata][:capacidad_attributes][:subclase_ids] ||= []
     rescue
+      # Nada que hacer porque no hay capacidad asociada.
     end
 
     @calicata = Calicata.find(params[:id])
@@ -148,8 +154,8 @@ protected
   #   - ++ ->
   #
   def armar_lookups
-    @subclases = CapacidadSubclase.all
-    @clases = CapacidadClase.all
+    @subclases = SubclaseDeCapacidad.all
+    @clases = ClaseDeCapacidad.all
     @drenajes = Drenaje.all
     @relieves = Relieve.all
     @anegamientos = Anegamiento.all
@@ -159,20 +165,25 @@ protected
     @escurrimientos = Escurrimiento.all
     @permeabilidades = Permeabilidad.all
     @sales = Sal.all
-    @usos_tierra = UsoTierra.all
-    @formas_limite = LimiteForma.all
-    @tipos_limite = LimiteTipo.all
-    @texturas = TexturaHorizonte.all
-    @formatos_coordenada = FormatoCoordenadas.all.sort
+    @usos_de_la_tierra = UsoDeLaTierra.all
+    @formas_de_limite = FormaDeLimite.all
+    @tipos_de_limite = TipoDeLimite.all
+    @texturas = TexturaDeHorizonte.all
+    @formatos_de_coordenadas = FormatoDeCoordenadas.all
   end
 
-  def cargar_series_y_calicatas
+  def series_o_calicatas
+    @calicatas = Calicata.scoped
     if request.fullpath =~ /^\/series/ then
-      @calicatas = Calicata.series.all(:order => 'fecha ASC')
+      @calicatas = @calicatas.series
       @alias = 'serie'
     else
-      @calicatas = Calicata.all(:order => 'fecha ASC')
       @alias = 'calicata'
     end
   end
+
+  def paginar
+    @calicatas = @calicatas.pagina(params[:pagina])
+  end
+
 end

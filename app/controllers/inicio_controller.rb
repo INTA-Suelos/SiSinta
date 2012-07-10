@@ -1,7 +1,9 @@
+# encoding: utf-8
 class InicioController < ApplicationController
 
   def index
-    @usuarios = Usuario.all
+    @titulo = 'Sistema de información de Suelos del INTA'
+    @subtitulo = 'Menú principal'
   end
 
 end

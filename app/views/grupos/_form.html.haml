@@ -2,17 +2,17 @@
 
   = f.error_messages
 
-  = field_set_tag @titulo, class: 'azul_claro span-23 last' do
+  = field_set_tag @titulo, class: 'celeste_oscuro span-23 last' do
 
     = field_set_tag 'Definición', class: 'celeste plegable span-22 last' do
       .span-18.campo
         .span-2= f.label :descripcion, 'Descripción'
         .span-16.last= f.text_field :descripcion, disabled: bloqueado
-        = ayuda_para('grupo', 'descripcion')
+        = ayuda_para('grupo.descripcion')
       .span-4.last.campo
         .span-2= f.label :codigo, 'Código'
         .span-1.last= f.text_field :codigo, disabled: bloqueado
-        = ayuda_para('grupo', 'codigo')
+        = ayuda_para('grupo.codigo')
 
     - unless nuevo
       = field_set_tag 'Calicatas asociadas', class: 'celeste plegable span-22 last' do

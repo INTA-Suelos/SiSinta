@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'csv'
-
 class HorizontesController < AutorizadoController
 
   before_filter :cargar_horizontes

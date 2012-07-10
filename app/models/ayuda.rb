@@ -1,5 +1,15 @@
+# encoding: utf-8
 class Ayuda < Lookup
-  alias_attribute :descripcion, :valor1
-  alias_attribute :campo,       :valor2
-  alias_attribute :modelo,      :valor3
+  include ActiveHash::Enum
+
+  # Lo declaro para que ActiveHash genere el finder
+  field :campo
+
+  # Garantiza que 'campo' sea único y genera constantes del tipo Ayuda::CAMPO
+  enum_accessor :campo
+
+  def to_s
+    ayuda
+  end
+
 end

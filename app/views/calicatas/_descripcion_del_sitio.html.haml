@@ -4,34 +4,34 @@
     .span-4.campo
       .span-2= f_u.label :mosaico
       .span-2.last= f_u.text_field :mosaico, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('ubicacion.mosaico')
     .span-4.campo
       .span-2= f_u.label :recorrido
       .span-2.last= f_u.text_field :recorrido, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('ubicacion.recorrido')
     .span-4.campo
       .span-2= f_u.label :aerofoto
       .span-2.last= f_u.text_field :aerofoto, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('ubicacion.aerofoto')
   .span-5.campo
     .span-2= f.label :fecha
     .span-3.last= f.text_field :fecha, class: 'fecha', disabled: bloqueado
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.fecha')
   .span-4.last.campo
     .span-2= f.label :numero, "Número"
     .span-2.last= f.text_field :numero, disabled: bloqueado
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.numero')
 
   .span-11.campo
     = f.fields_for :fase do |f_f|
       .span-2= f_f.label :nombre, 'Fase'
       .span-9.last= f_f.text_field :nombre, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('calicata.fase')
   .span-11.last.campo
     = f.fields_for :grupo do |f_g|
       .span-2= f_g.label :descripcion, 'Subgrupo'
       .span-8.last= f_g.text_field :descripcion, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('calicata.grupo')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'
   = f.fields_for :capacidad do |f_c|
@@ -42,76 +42,76 @@
           = label_tag s.codigo
           = check_box_tag "calicata[capacidad_attributes][subclase_ids][]",
             s.id, tildada?(s), disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('capacidad.subclases')
     .span-11.last.campo
-      .span-2= f_c.label :capacidad_clase_id, 'Limitaciones principales'
-      .span-8.last= f_c.collection_select :capacidad_clase_id, @clases, :id, :descripcion,
+      .span-2= f_c.label :clase_de_capacidad_id, 'Limitaciones principales'
+      .span-8.last= f_c.collection_select :clase_de_capacidad_id, @clases, :id, :descripcion,
         { include_blank: true }, { disabled: bloqueado }
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('capacidad.clase')
 
   .span-2= label_tag nil, 'Ubicación', class: 'subtitulo'
   = f.fields_for :ubicacion do |f_u|
     .span-20.last.campo
       .span-2= f_u.label :descripcion
       .span-17.last= f_u.text_field :descripcion, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('ubicacion.descripcion')
     .prepend-2.span-9.campo
       .span-2= label_tag nil, 'Coordenadas'
       .coordenada-y
         = f_u.label :y, 'lat/y'
         = f_u.text_field :y, disabled: bloqueado
-        = ayuda_para('modelo', 'campo')
+        = ayuda_para('ubicacion.y')
       .coordenada-x
         = f_u.label :x, 'lon/x'
         = f_u.text_field :x, disabled: bloqueado
-        = ayuda_para('modelo', 'campo')
+        = ayuda_para('ubicacion.x')
     .span-11.last.campo
       .span-2= f_u.label :srid, 'Formato'
-      .span-8.last= f_u.collection_select :srid, @formatos_coordenada, :srid,
+      .span-8.last= f_u.collection_select :srid, @formatos_de_coordenadas, :srid,
         :descripcion, {}, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('ubicacion.formato')
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'
   = f.fields_for :paisaje do |f_p|
     .span-9.campo
       .span-2= f_p.label :tipo
       .span-7.last= f_p.text_field :tipo, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('paisaje.tipo')
     .span-5.campo
       .span-2= f_p.label :forma
       .span-3.last= f_p.text_field :forma, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('paisaje.forma')
     .span-6.last.campo
       .span-2= f_p.label :simbolo, 'Símbolo'
       .span-3.last= f_p.text_field :simbolo, disabled: bloqueado
-      = ayuda_para('modelo', 'campo')
+      = ayuda_para('paisaje.simbolo')
 
   .span-11.campo
     .span-2= f.label :material_original
     .span-9.last= f.text_field :material_original, disabled: bloqueado
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.material_original')
   .span-11.last.campo
     .span-2= f.label :drenaje_id
     .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.drenaje')
 
   .span-11.campo
     .span-2= f.label :relieve_id
     .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.relieve')
   .span-11.last.campo
     .span-2= f.label :anegamiento_id
     .span-8.last= f.collection_select :anegamiento_id, @anegamientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.anegamiento')
 
   .span-11.campo
     .span-2= f.label :posicion_id, "Posición"
     .span-9.last= f.collection_select :posicion_id, @posiciones, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.posicion')
   .span-11.last.campo
     .span-2= f.label :humedad
     .span-8.last= f.text_field :humedad, disabled: bloqueado
@@ -120,48 +120,48 @@
     .span-2= f.label :pendiente_id
     .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.pendiente')
   .span-5.campo
     .span-2= f.label :cobertura_vegetal, "Cobertura vegetal"
     .span-3.last= f.text_field :cobertura_vegetal,
       disabled: bloqueado, placeholder: '%'
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.cobertura_vegetal')
   .span-6.last.campo
     .span-2= f.label :profundidad_napa, "Profundidad de la napa"
     .span-3.last= f.text_field :profundidad_napa,
       disabled: bloqueado, placeholder: 'cm'
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.profundidad_napa')
 
   .span-11.campo
     .span-2= f.label :escurrimiento_id
     .span-9.last= f.collection_select :escurrimiento_id,
       @escurrimientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.escurrimiento')
   .span-11.last.campo
     .span-2= f.label :sal_id, 'Sales'
     .span-8.last= f.collection_select :sal_id, @sales, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.sal')
 
   .span-11.campo
     .span-2= f.label :permeabilidad_id
     .span-9.last= f.collection_select :permeabilidad_id,
       @permeabilidades, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.permeabilidad')
   .span-11.last.campo
     .span-2= f.label :pedregosidad_id
     .span-8.last= f.collection_select :pedregosidad_id, @pedregosidades, :id,
       :valor, { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.pedregosidad')
 
   .span-11.campo
     .span-2= f.label :erosion, "Erosión"
     .span-9.last= f.text_field :erosion, disabled: bloqueado
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.erosion')
   .span-11.last.campo
-    .span-2= f.label :uso_tierra_id, "Uso de la tierra"
-    .span-8.last= f.collection_select :uso_tierra_id, @usos_tierra, :id, :valor,
+    .span-2= f.label :uso_de_la_tierra_id, "Uso de la tierra"
+    .span-8.last= f.collection_select :uso_de_la_tierra_id, @usos_de_la_tierra, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('modelo', 'campo')
+    = ayuda_para('calicata.uso_de_la_tierra')

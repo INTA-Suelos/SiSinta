@@ -1,3 +1,4 @@
-= link_to 'Editar', edit_fase_path(@fase)
-= '|'
+- if can? :update, @fase
+  = link_to 'Editar', edit_fase_path(@fase)
+  = '|'
 = link_to 'Volver', fases_path

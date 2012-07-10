@@ -1,3 +1,4 @@
-= link_to 'Mostrar', @fase
-= '|'
+- if can? :read, @fase
+  = link_to 'Mostrar', @fase
+  = '|'
 = link_to 'Volver', fases_path

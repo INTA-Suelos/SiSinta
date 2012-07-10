@@ -1,5 +1,4 @@
+# encoding: utf-8
 class Drenaje < Lookup
-  alias_attribute :valor, :valor1
-
-  has_many :calicatas, :inverse_of => :drenaje
+  has_many :calicatas, inverse_of: :drenaje
 end

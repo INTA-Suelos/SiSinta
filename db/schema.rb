@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612102725) do
+ActiveRecord::Schema.define(:version => 20120629120242) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.string   "humedad"
     t.string   "erosion"
     t.integer  "fase_id"
-    t.boolean  "modal",             :default => false
-    t.date     "fecha",                                :null => false
+    t.boolean  "modal",               :default => false
+    t.date     "fecha",                                  :null => false
     t.string   "observaciones"
-    t.boolean  "publico",           :default => false
+    t.boolean  "publico",             :default => false
     t.integer  "usuario_id"
     t.integer  "relieve_id"
     t.integer  "posicion_id"
@@ -90,19 +90,17 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.string   "nombre"
     t.integer  "grupo_id"
     t.integer  "sal_id"
-    t.integer  "uso_tierra_id"
+    t.integer  "uso_de_la_tierra_id"
     t.integer  "pedregosidad_id"
-  end
-
-  create_table "capacidad_subclases_capacidades", :id => false, :force => true do |t|
-    t.integer "capacidad_id"
-    t.integer "capacidad_subclase_id"
   end
 
   create_table "capacidades", :force => true do |t|
     t.integer "calicata_id"
-    t.integer "capacidad_clase_id"
+    t.integer "clase_de_capacidad_id"
+    t.text    "subclase_ids"
   end
+
+  add_index "capacidades", ["calicata_id"], :name => "index_capacidades_on_calicatas", :unique => true
 
   create_table "colores", :force => true do |t|
     t.string "hvc", :null => false
@@ -136,15 +134,18 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.string "nombre", :limit => 15
   end
 
+  add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
+
   create_table "grupos", :force => true do |t|
     t.string "codigo"
     t.string "descripcion"
   end
 
+  add_index "grupos", ["descripcion"], :name => "index_grupos_on_descripcion", :unique => true
+
   create_table "horizontes", :force => true do |t|
     t.integer  "profundidad_superior"
     t.float    "ph"
-    t.string   "textura"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calicata_id"
@@ -159,15 +160,15 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
-    t.integer  "textura_horizonte_id"
+    t.integer  "textura_de_horizonte_id"
   end
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "limite_tipo_id"
-    t.integer  "limite_forma_id"
+    t.integer  "tipo_de_limite_id"
+    t.integer  "forma_de_limite_id"
   end
 
   create_table "lookups", :force => true do |t|
@@ -185,6 +186,8 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.datetime "updated_at"
     t.integer  "calicata_id"
   end
+
+  add_index "paisajes", ["calicata_id"], :name => "index_paisajes_on_calicatas", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string "nombre"
@@ -206,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20120612102725) do
     t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
+  add_index "ubicaciones", ["calicata_id"], :name => "index_ubicaciones_on_nombre", :unique => true
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
 
   create_table "usuarios", :force => true do |t|
