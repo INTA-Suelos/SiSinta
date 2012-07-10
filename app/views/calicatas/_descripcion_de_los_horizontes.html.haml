@@ -36,7 +36,8 @@
       .span-3.last= label_tag nil, 'Formaciones especiales'
 
       .items
-        = f.nested_fields_for :horizontes, show_empty: true, render_template: false do |f_h|
+        = f.nested_fields_for :horizontes, new_object: horizonte_preparado,
+            show_empty: true, render_template: false do |f_h|
           - if f_h
             .item= render partial: 'horizonte', locals: {h: f_h, bloqueado: bloqueado}
           - else
