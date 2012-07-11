@@ -5,7 +5,10 @@ class CalicatasController < AutorizadoController
   before_filter :series_o_calicatas,
                 only: [:index, :geo, :preparar_csv, :procesar_csv]
   before_filter :paginar, only: [:index]
+
   skip_before_filter :authenticate_usuario!, only: [:index, :geo]
+  skip_authorization_check only: [:index, :geo]
+  skip_authorize_resource  only: [:index, :geo]
 
   # GET /calicatas
   # GET /calicatas.json
@@ -32,10 +35,10 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/geo.json
   # GET /series/geo.json
   def geo
-     respond_to do |format|
+    respond_to do |format|
       format.json { render json: como_geojson(
-                              @calicatas.reject { |c| c.ubicacion.coordenadas.blank? },
-                              :geometria)   }
+                    @calicatas.reject { |c| c.ubicacion.coordenadas.blank? },
+                    :geometria)   }
     end
   end
 
