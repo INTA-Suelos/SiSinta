@@ -37,7 +37,7 @@ class CalicatasController < AutorizadoController
   def geo
     respond_to do |format|
       format.json { render json: como_geojson(
-                    @calicatas.reject { |c| c.ubicacion.coordenadas.blank? },
+                    @calicatas.reject { |c| c.ubicacion.try(:coordenadas).blank? },
                     :geometria)   }
     end
   end

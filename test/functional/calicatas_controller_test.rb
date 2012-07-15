@@ -88,4 +88,17 @@ class CalicatasControllerTest < ActionController::TestCase
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end
 
+  test "debería poder acceder a la lista de calicatas sin loguearse" do
+    assert_nil @controller.current_usuario
+    get :index
+    assert_response :success
+  end
+
+  test "debería poder acceder a los datos en geoJSON sin loguearse" do
+    assert_nil @controller.current_usuario
+    @request.env["HTTP_REFERER"] = "/calicatas/"
+    get :geo, format: :json
+    assert_response :success
+  end
+
 end
