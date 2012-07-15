@@ -3,18 +3,12 @@ class Horizonte < ActiveRecord::Base
   # nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  # Declaramos la lista de asociaciones a preparar durante la inicialización
-  after_initialize do
-    preparar  :color_seco, :color_humedo, :limite, :consistencia, :estructura,
-              :analisis
-  end
-
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
   before_save do
     buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
   end
 
-  default_scope order('profundidad_inferior ASC')
+  default_scope order('profundidad_superior ASC')
 
   has_one :analisis,      dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte
