@@ -109,7 +109,10 @@ ul.menu_usuarios {
     color: $azul_inta;
     font-weight: bold;
 
-    ul { list-style-type: none; }
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+    }
 
     .menu {
       margin-bottom: 1em;
@@ -117,14 +120,17 @@ ul.menu_usuarios {
       li {
         background: $celeste;
         width: auto;
+
+        a {
+          text-decoration: none;
+          font-size: small;
+        }
       }
 
       .plegable {
         &:hover { cursor: s-resize; }
         & + .submenu { display: none; }
       }
-
-      a { text-decoration: none; }
     }
 
   }
