@@ -3,10 +3,10 @@
   = h.text_field :tipo, disabled: bloqueado
   = ayuda_para 'horizonte.tipo'
 .span-1.campo
-  = h.text_field :profundidad_superior, disabled: bloqueado, placeholder: 'cm'
+  = h.text_field :profundidad_superior, disabled: bloqueado, placeholder: 'cm', class: 'prof_sup'
   = ayuda_para 'horizonte.profundidad_superior'
 .span-1.campo
-  = h.text_field :profundidad_inferior, disabled: bloqueado, placeholder: 'cm'
+  = h.text_field :profundidad_inferior, disabled: bloqueado, placeholder: 'cm', class: 'prof_inf'
   = ayuda_para 'horizonte.profundidad_inferior'
 .span-4
   = h.fields_for :limite do |h_l|

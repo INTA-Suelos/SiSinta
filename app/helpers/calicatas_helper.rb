@@ -3,7 +3,7 @@ module CalicatasHelper
   # Para checkear si debería estar marcado o no el checkbox de la subclase
   # correspondiente
   def tildada?(s)
-    @calicata.capacidad.try(:subclases.include?(s)
+    @calicata.capacidad.try(:subclases).include?(s)
   end
 
   # Para el +FormHelper+ necesito los objetos instanciados, aunque no tengan
@@ -30,6 +30,8 @@ module CalicatasHelper
   # tenían ya
   def horizonte_preparado
     Horizonte.new(
+      profundidad_superior:
+        @calicata.horizontes.empty? ? 0 : @calicata.horizontes.last.profundidad_inferior,
       color_seco: Color.new,
       color_humedo: Color.new,
       limite: Limite.new,
