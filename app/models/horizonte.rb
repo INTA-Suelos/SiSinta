@@ -12,6 +12,8 @@ class Horizonte < ActiveRecord::Base
     buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
   end
 
+  default_scope order('profundidad_inferior ASC')
+
   has_one :analisis,      dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte
   has_one :consistencia,  dependent: :destroy, inverse_of: :horizonte
