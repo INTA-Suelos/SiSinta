@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-  # nos da belongs_to_active_hash para las asociaciones con modelos estáticos
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
@@ -30,6 +30,9 @@ class Horizonte < ActiveRecord::Base
                                 reject_if: :all_blank
 
   validates_presence_of :calicata
+  validates_inclusion_of  :profundidad_superior, :profundidad_inferior,
+                          in: 0..500, allow_nil: true,
+                          message: "debe estar entre 0 y 500 cm"
 
   def rango_profundidad
     unless profundidad_superior.blank? or profundidad_inferior.blank?
