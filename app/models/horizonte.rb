@@ -1,5 +1,7 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
+  # nos da belongs_to_active_hash para las asociaciones con modelos estáticos
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
   # Declaramos la lista de asociaciones a preparar durante la inicialización
   after_initialize do
@@ -25,7 +27,7 @@ class Horizonte < ActiveRecord::Base
                           autosave: false
   belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo,
                             autosave: false
-  belongs_to :textura_de_horizonte, inverse_of: :horizontes
+  belongs_to_active_hash :textura_de_horizonte, inverse_of: :horizontes
 
   accepts_nested_attributes_for :analisis, :limite, :consistencia,
                                 :estructura, :textura_de_horizonte,
