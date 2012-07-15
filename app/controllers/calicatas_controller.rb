@@ -80,7 +80,7 @@ class CalicatasController < AutorizadoController
 
     respond_to do |format|
       if @calicata.save
-        format.html { redirect_to @calicata,
+        format.html { redirect_to calicata_o_analisis,
                       notice: I18n.t('messages.created', model: 'Calicata') }
         format.json { render json: @calicata, status: :created, location: @calicata }
       else
@@ -107,7 +107,7 @@ class CalicatasController < AutorizadoController
 
     respond_to do |format|
       if @calicata.update_attributes(params[:calicata])
-        format.html { redirect_to @calicata,
+        format.html { redirect_to calicata_o_analisis,
                       notice: I18n.t('messages.updated', model: 'Calicata') }
         format.json { head :ok }
       else
@@ -187,6 +187,10 @@ protected
 
   def paginar
     @calicatas = @calicatas.pagina(params[:pagina])
+  end
+
+  def calicata_o_analisis
+    params[:analisis].present? ? edit_calicata_analisis_index_path(@calicata) : @calicata
   end
 
 end

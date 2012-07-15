@@ -27,4 +27,6 @@
         = f.text_area :observaciones, disabled: bloqueado
         = ayuda_para 'calicata.observaciones'
 
-    .acciones.span-4.last= f.submit unless bloqueado
+    .acciones.span-8.last
+      .span-4= f.submit unless bloqueado
+      .span-4.last= f.submit('Cargar Análisis', name: 'analisis') unless bloqueado

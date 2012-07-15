@@ -5,16 +5,6 @@ class ExtensionModelosTest < ActiveSupport::TestCase
 
   fixtures :fases, :calicatas
 
-  test "debería preparar las asociaciones del modelo" do
-    h = Horizonte.new
-    refute_nil h.analisis
-    refute_nil h.estructura
-    refute_nil h.consistencia
-    refute_nil h.color_seco
-    refute_nil h.color_humedo
-    refute_nil h.limite
-  end
-
   test "debería convertir el modelo a Array" do
     assert_instance_of Array, calicatas(:valida).como_arreglo, "no devuelve Array"
   end
