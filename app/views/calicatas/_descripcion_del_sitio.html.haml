@@ -86,6 +86,11 @@
       .span-3.last= f_p.text_field :simbolo, disabled: bloqueado
       = ayuda_para('paisaje.simbolo')
 
+  .span-22.last.campo
+    .span-4= f.label :vegetacion_o_cultivos, 'Vegetación natural o cultivos'
+    .span-17= f.text_field :vegetacion_o_cultivos, disabled: bloqueado
+    = ayuda_para('calicata.vegetacion_o_cultivos')
+
   .span-11.campo
     .span-2= f.label :material_original
     .span-9.last= f.text_field :material_original, disabled: bloqueado
