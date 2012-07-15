@@ -3,20 +3,22 @@
     %li
       .plegable Perfiles
       %ul.submenu
-        %li
-          = link_to 'Ver', calicatas_path
+        %li= link_to 'Ver (todos)', calicatas_path
+        %li= link_to 'Ver (modales)', series_path
         %li
           Exportar
           %ul.submenu
-            %li= link_to 'a CSV', calicatas_preparar_csv_path
-            %li= link_to 'a GeoJSON', calicatas_geo_path(format: :json)
+            %li= link_to 'a CSV (todos)', preparar_csv_calicatas_path
+            %li= link_to 'a CSV (modales)', series_preparar_csv_path
+            %li= link_to 'a GeoJSON (todos)', geo_calicatas_path(format: :json)
+            %li= link_to 'a GeoJSON (modales)', series_geo_path(format: :json)
     %li
       .plegable Horizontes
       %ul.submenu
         %li
           Exportar
           %ul.submenu
-            %li= link_to 'a CSV', horizontes_preparar_csv_path
+            %li= link_to 'a CSV', preparar_csv_horizontes_path
     %li
       .plegable Grupos
       %ul.submenu

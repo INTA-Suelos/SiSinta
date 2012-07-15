@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Calicata < ActiveRecord::Base
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   before_validation do
