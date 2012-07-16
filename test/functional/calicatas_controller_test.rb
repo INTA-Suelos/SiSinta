@@ -34,7 +34,7 @@ class CalicatasControllerTest < ActionController::TestCase
     sign_in @admin
 
     assert_difference('Calicata.count', 1) do
-      post :create, calicata: @calicata.attributes
+      post :create, calicata: { fecha: @calicata.fecha, nombre: 'un nombre' }
     end
 
     assert_redirected_to calicata_path(assigns(:calicata))
