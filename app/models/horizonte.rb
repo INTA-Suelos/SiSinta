@@ -1,16 +1,14 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-
-  # Declaramos la lista de asociaciones a preparar durante la inicialización
-  after_initialize do
-    preparar  :color_seco, :color_humedo, :limite, :consistencia, :estructura,
-              :analisis
-  end
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
   # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
   before_save do
     buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
   end
+
+  default_scope order('profundidad_superior ASC')
 
   has_one :analisis,      dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte
@@ -23,7 +21,7 @@ class Horizonte < ActiveRecord::Base
                           autosave: false
   belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo,
                             autosave: false
-  belongs_to :textura_de_horizonte, inverse_of: :horizontes
+  belongs_to_active_hash :textura_de_horizonte, inverse_of: :horizontes
 
   accepts_nested_attributes_for :analisis, :limite, :consistencia,
                                 :estructura, :textura_de_horizonte,
@@ -32,6 +30,9 @@ class Horizonte < ActiveRecord::Base
                                 reject_if: :all_blank
 
   validates_presence_of :calicata
+  validates_inclusion_of  :profundidad_superior, :profundidad_inferior,
+                          in: 0..500, allow_nil: true,
+                          message: "debe estar entre 0 y 500 cm"
 
   def rango_profundidad
     unless profundidad_superior.blank? or profundidad_inferior.blank?

@@ -13,22 +13,15 @@ form.completa {
     padding-right: 0;
   }
 
-  #calicata_modal + #serie {
-    visibility: hidden;
-  }
-
-  #calicata_modal:checked + #serie {
-    visibility: visible;
-  }
-
   #serie {
     label, input {
       margin-left: -6px;
     }
   }
 
+  // Alrededor de 40px por columna
   #scrolleable_horizontes {
-    width: 1550px;
+    width: 1590px;
   }
 
   .coordenada-y { @include coordenada(10px);  }

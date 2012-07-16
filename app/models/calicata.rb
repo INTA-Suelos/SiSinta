@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Calicata < ActiveRecord::Base
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   before_validation do
@@ -12,7 +13,7 @@ class Calicata < ActiveRecord::Base
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
   validates_uniqueness_of :nombre, :numero, allow_blank: true
-  validates_presence_of :nombre, if: Proc.new { |c| c.modal? }
+  validates_presence_of :nombre
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true

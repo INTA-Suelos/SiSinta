@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629120242) do
+ActiveRecord::Schema.define(:version => 20120715090010) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(:version => 20120629120242) do
     t.string   "humedad"
     t.string   "erosion"
     t.integer  "fase_id"
-    t.boolean  "modal",               :default => false
-    t.date     "fecha",                                  :null => false
+    t.boolean  "modal",                 :default => false
+    t.date     "fecha",                                    :null => false
     t.string   "observaciones"
-    t.boolean  "publico",             :default => false
+    t.boolean  "publico",               :default => false
     t.integer  "usuario_id"
     t.integer  "relieve_id"
     t.integer  "posicion_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20120629120242) do
     t.integer  "sal_id"
     t.integer  "uso_de_la_tierra_id"
     t.integer  "pedregosidad_id"
+    t.string   "vegetacion_o_cultivos"
   end
 
   create_table "capacidades", :force => true do |t|

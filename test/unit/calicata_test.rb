@@ -6,7 +6,7 @@ class CalicataTest < ActiveSupport::TestCase
   fixtures :all
 
   setup do
-    @atributos = { fecha: Date.today }
+    @atributos = { fecha: Date.today, nombre: 'alguno' }
   end
 
   test "debería prohibir guardar calicatas sin fecha" do

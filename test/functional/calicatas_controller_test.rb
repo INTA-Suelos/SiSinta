@@ -34,7 +34,7 @@ class CalicatasControllerTest < ActionController::TestCase
     sign_in @admin
 
     assert_difference('Calicata.count', 1) do
-      post :create, calicata: @calicata.attributes
+      post :create, calicata: { fecha: @calicata.fecha, nombre: 'un nombre' }
     end
 
     assert_redirected_to calicata_path(assigns(:calicata))
@@ -86,6 +86,19 @@ class CalicatasControllerTest < ActionController::TestCase
   test "el usuario logueado debería ser admin" do
     sign_in @admin
     assert @controller.current_usuario.admin?, "el usuario no es admin"
+  end
+
+  test "debería poder acceder a la lista de calicatas sin loguearse" do
+    assert_nil @controller.current_usuario
+    get :index
+    assert_response :success
+  end
+
+  test "debería poder acceder a los datos en geoJSON sin loguearse" do
+    assert_nil @controller.current_usuario
+    @request.env["HTTP_REFERER"] = "/calicatas/"
+    get :geo, format: :json
+    assert_response :success
   end
 
 end

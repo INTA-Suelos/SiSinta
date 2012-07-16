@@ -40,7 +40,7 @@ class UsuarioTest < ActiveSupport::TestCase
                          :email => 'email@falso2.com',
                          :password => 'administrador')
       assert @u.save, "No guarda al usuario"
-      @u.roles << Rol.find_by_nombre('administrador')
+      @u.roles.clear << Rol.find_by_nombre('administrador')
       assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "No guarda la relación"
     end
   end

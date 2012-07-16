@@ -33,6 +33,6 @@ class HorizontesController < AutorizadoController
 protected
 
   def cargar_horizontes
-    @horizontes = Horizonte.all(:order => 'calicata_id, profundidad_superior DESC')
+    @horizontes = Horizonte.order('calicata_id ASC')
   end
 end

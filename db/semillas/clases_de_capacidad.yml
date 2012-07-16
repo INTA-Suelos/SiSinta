@@ -5,34 +5,34 @@
 # asociaciones previas.
 #
 - id:           1
-  codigo:       i
+  codigo:       I
   descripcion:  sin limitaciones
   agrupamiento: tierras aptas para todo tipo de cultivo
 - id:           2
-  codigo:       ii
+  codigo:       II
   descripcion:  ligeras limitaciones
   agrupamiento: tierras aptas para todo tipo de cultivo
 - id:           3
-  codigo:       iii
+  codigo:       III
   descripcion:  moderadas limitaciones
   agrupamiento: tierras aptas para todo tipo de cultivo
 - id:           4
-  codigo:       iv
+  codigo:       IV
   descripcion:  severas limitaciones
   agrupamiento: tierras aptas para cultivos limitados
 - id:           5
-  codigo:       v
+  codigo:       V
   descripcion:  dificultad de maquinaria
   agrupamiento: tierras generalmente no aptas para cultivos
 - id:           6
-  codigo:       vi
+  codigo:       VI
   descripcion:  praderas naturales con posibles mejoras
   agrupamiento: tierras generalmente no aptas para cultivos
 - id:           7
-  codigo:       vii
+  codigo:       VII
   descripcion:  pasturas naturales
   agrupamiento: tierras generalmente no aptas para cultivos
 - id:           8
-  codigo:       viii
+  codigo:       VIII
   descripcion:  fauna, vida silvestre
   agrupamiento: tierras generalmente no aptas para cultivos
