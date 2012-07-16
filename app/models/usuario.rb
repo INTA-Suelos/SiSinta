@@ -4,6 +4,8 @@ class Usuario < ActiveRecord::Base
   has_many :calicatas, inverse_of: :usuario
   after_create :asignar_rol_por_defecto
 
+  serialize :config, Hash
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,7 +13,7 @@ class Usuario < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :ficha, :current_password, :rol_ids
+                  :remember_me, :config, :current_password, :rol_ids
 
   scope :por_rol, joins(:roles).order('roles.nombre ASC')
   scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
@@ -20,34 +22,34 @@ class Usuario < ActiveRecord::Base
     nombre
   end
 
-  def usa_ficha_simple?
-    self.ficha == 'simple' ? true : false
+  def usa_ficha?(tipo)
+    config[:ficha] == tipo ? true : false
   end
 
   def es? rol
     if rol.instance_of? Rol
-      self.roles.include? rol
+      roles.include? rol
     else
-      self.roles.include? Rol.find_by_nombre(rol.to_s)
+      roles.include? Rol.find_by_nombre(rol.to_s)
     end
   end
 
   def admin?
-    self.roles.include? Rol.administrador
+    roles.include? Rol.administrador
   end
 
   def autorizado?
-    self.roles.include? Rol.autorizado
+    roles.include? Rol.autorizado
   end
 
   def invitado?
-    self.roles.include? Rol.invitado
+    roles.include? Rol.invitado
   end
 
   protected
 
     def asignar_rol_por_defecto
-      self.roles << Rol.invitado if roles.empty?
+      roles << Rol.invitado if roles.empty?
     end
 
 end

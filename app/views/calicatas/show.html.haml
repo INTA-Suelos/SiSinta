@@ -1,5 +1,6 @@
 .botonera= render 'botonera_mostrar'
 
-= render partial: current_usuario.ficha, locals: { calicata: @calicata, bloqueado: true }
+= render partial: current_usuario.config[:ficha] || 'completa',
+    locals: { calicata: @calicata, bloqueado: true }
 
 .botonera= render 'botonera_mostrar'

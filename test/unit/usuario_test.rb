@@ -5,20 +5,18 @@ class UsuarioTest < ActiveSupport::TestCase
 
   setup do
     @admin = Usuario.find_by_nombre('Administrador')
-    @simple = Usuario.create  :nombre => 'simplón',
-                              :email => 'roro@usuarios.com',
-                              :ficha => 'simple',
-                              :password => 's1mpl3c1t0'
-    @completo = Usuario.create :nombre => 'completín', :email => 'dada@usuarios.com'
+    @simple = Usuario.create( nombre: 'simplón',
+                              email: 'roro@usuarios.com',
+                              config: { ficha: 'simple', srid: '4326' },
+                              password: 's1mpl3c1t0' )
+    @completo = Usuario.create nombre: 'completín', email: 'dada@usuarios.com'
   end
 
   test "debería tener en cuenta preferencias de ficha del usuario" do
-    assert @simple.usa_ficha_simple?, 'El método ? no devuelve el valor correcto de la variable'
-    assert !@completo.usa_ficha_simple?, 'El método ? no devuelve el valor correcto de la variable'
-    @nuevo = Usuario.new
-    assert !@nuevo.usa_ficha_simple?, 'El valor por omisión debería ser la ficha completa'
-    @nuevo = Usuario.new ficha: 'simple'
-    assert @nuevo.usa_ficha_simple?, 'No se puede pasar la preferencia en la creación'
+    assert @simple.usa_ficha?('simple'), 'El método ? no devuelve el valor correcto de la variable'
+    assert !@completo.usa_ficha?('simple'), 'El método ? no devuelve el valor correcto de la variable'
+    @nuevo = Usuario.new config: { ficha: 'simple' }
+    assert @nuevo.usa_ficha?('simple'), 'No se puede pasar la preferencia en la creación'
   end
 
   test "debería crear un nuevo rol" do
