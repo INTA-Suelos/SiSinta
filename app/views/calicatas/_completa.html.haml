@@ -11,11 +11,11 @@
         = f.check_box :modal, class: 'span-1', disabled: bloqueado
         #serie
           .span-13.prepend-unaymedia.campo
-            .span-2= f.label :nombre, 'Nombre de la serie'
+            .span-2= f.label :nombre, 'Nombre'
             .span-11.last= f.text_field :nombre, disabled: bloqueado
             = ayuda_para 'calicata.nombre'
           .span-4.last.campo
-            .span-2= f.label :simbolo, 'Símbolo de la serie'
+            .span-2= f.label :simbolo, 'Símbolo'
             .span-2.last= f.text_field :simbolo, disabled: bloqueado
             = ayuda_para 'calicata.simbolo'
 
@@ -27,4 +27,6 @@
         = f.text_area :observaciones, disabled: bloqueado
         = ayuda_para 'calicata.observaciones'
 
-    .acciones.span-4.last= f.submit unless bloqueado
+    .acciones.span-8.last
+      .span-4= f.submit unless bloqueado
+      .span-4.last= f.submit('Cargar Análisis', name: 'analisis') unless bloqueado

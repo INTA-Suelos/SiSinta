@@ -184,3 +184,6 @@
 - id:     60
   campo:  calicata.observaciones
   ayuda:  Ayuda no disponible.
+- id:     61
+  campo:  calicata.vegetacion_o_cultivos
+  ayuda:  Ayuda no disponible.

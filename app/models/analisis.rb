@@ -18,6 +18,8 @@ class Analisis < ActiveRecord::Base
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
 
+  accepts_nested_attributes_for :horizonte
+
   def materia_organica_cn_before_type_cast
     begin
       read_attribute(:materia_organica_cn) || (materia_organica_c/materia_organica_n).round
