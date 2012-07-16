@@ -10,6 +10,7 @@ dos:
 valida:
   fecha: 2010-12-03
   numero: abcd-98
+  nombre: validísima
 
 con_serie:
   fecha: 2011-09-30
