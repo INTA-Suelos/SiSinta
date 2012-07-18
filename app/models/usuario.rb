@@ -1,10 +1,11 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
+  serialize :config, Hash
+
   has_and_belongs_to_many :roles
   has_many :calicatas, inverse_of: :usuario
-  after_create :asignar_rol_por_defecto
-
-  serialize :config, Hash
+  after_create :asignar_rol_inicial
+  after_initialize :asignar_valores_por_defecto
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -48,8 +49,16 @@ class Usuario < ActiveRecord::Base
 
   protected
 
-    def asignar_rol_por_defecto
+    # No asigno un rol por defecto para los nuevos usuarios porque quiero un
+    # usuario anónimo sin roles
+    def asignar_rol_inicial
       roles << Rol.invitado if roles.empty?
+    end
+
+    def asignar_valores_por_defecto
+      if self.config.blank?
+        self.config = { ficha: 'completa', srid: '4326' }
+      end
     end
 
 end

@@ -217,8 +217,8 @@ ActiveRecord::Schema.define(:version => 20120715230250) do
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                                 :default => "",                                         :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",                                         :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -227,7 +227,7 @@ ActiveRecord::Schema.define(:version => 20120715230250) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.text     "config",                                :default => "---\n:ficha: completa\n:srid: ''4326''\n"
+    t.text     "config"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
