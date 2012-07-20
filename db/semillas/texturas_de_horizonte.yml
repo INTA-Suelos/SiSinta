@@ -11,7 +11,7 @@
   textura:  textura gruesa
   suelo:    suelos arenosos
 - id:       2
-  clase:    arenoso franco
+  clase:    areno franco
   textura:  textura gruesa
   suelo:    suelos arenosos
 - id:       3
@@ -31,19 +31,19 @@
   textura:  textura media
   suelo:    suelos francos
 - id:       7
-  clase:    franco arcilloso
+  clase:    franco arcillo arenoso
   textura:  textura moderadamente fina
   suelo:    suelos francos
 - id:       8
-  clase:    franco arenoso arcilloso
+  clase:    franco arcilloso
   textura:  textura moderadamente fina
   suelo:    suelos francos
 - id:       9
-  clase:    franco limoso arcilloso
+  clase:    franco arcillo limoso
   textura:  textura moderadamente fina
   suelo:    suelos francos
 - id:       10
-  clase:    arcilloso arenoso
+  clase:    arcillo arenoso
   textura:  textura fina
   suelo:    suelos arcillosos
 - id:       11
