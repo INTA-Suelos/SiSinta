@@ -3,6 +3,5 @@
   %td= fase.codigo
   %td.boton= link_to 'Mostrar', fase
   %td.boton= link_to 'Editar', edit_fase_path(fase)
-  %td.boton= link_to 'Eliminar',
-    fase, method: :delete,
-    confirm: "¿Estás seguro? #{fase.calicatas.any? ? "Esto va a dejar sin fase a #{pluralize(fase.calicatas.size, 'calicata')}." : nil}"
+  %td.boton= link_to 'Eliminar', fase, method: :delete, data:
+    { confirm: "¿Estás seguro? #{fase.calicatas.any? ? "Esto va a dejar sin fase a #{pluralize(fase.calicatas.size, 'calicata')}." : nil}" }

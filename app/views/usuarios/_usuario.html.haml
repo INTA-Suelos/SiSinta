@@ -3,4 +3,5 @@
   %td{colspan: 2}= usuario.email
   - @roles.each do |rol|
     %td= radio_button_tag("usuarios[#{usuario.id}][rol_ids][]", rol.id, usuario.es?(rol))
-  %td.boton= link_to 'Eliminar', usuario, confirm: '¿Estás seguro?', method: :delete
+  %td.boton= link_to 'Eliminar', usuario,
+                      data: { confirm: '¿Estás seguro?'}, method: :delete

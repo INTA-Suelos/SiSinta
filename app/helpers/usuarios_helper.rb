@@ -5,7 +5,7 @@ module UsuariosHelper
     if(admins.include?(usuario) and admins.size == 1)
       link_to('Eliminar', nil, { class: 'eliminar_admin' } )
     else
-      link_to('Eliminar', usuario, confirm: '¿Estás seguro?', method: :delete)
+      link_to('Eliminar', usuario, data: {confirm: '¿Estás seguro?'}, method: :delete)
     end
   end
 
