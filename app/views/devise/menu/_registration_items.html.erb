@@ -1,9 +1,0 @@
-<% if usuario_signed_in? %>
-  <li>
-  <%= link_to('Editar perfil', edit_usuario_registration_path) %>
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Registrarse', new_usuario_registration_path)  %>
-  </li>
-<% end %>
