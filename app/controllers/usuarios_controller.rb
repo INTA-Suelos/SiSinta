@@ -61,6 +61,19 @@ class UsuariosController < AutorizadoController
     end
   end
 
+  def configurar
+    respond_to do |format|
+      if current_usuario.update_attributes(params[:usuario])
+        format.html { redirect_to :back,
+                      notice: I18n.t('messages.updated', model: 'Preferencias') }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: current_usuario.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
     def cargar_recursos
