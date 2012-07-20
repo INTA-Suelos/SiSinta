@@ -9,7 +9,8 @@ class FormatoDeCoordenadasTest < ActiveSupport::TestCase
   end
 
   test "debería cargar la fábrica de RGeo siempre" do
-    assert_kind_of RGeo::Geos::Factory, FormatoDeCoordenadas.first.fabrica
+    assert FormatoDeCoordenadas.first.fabrica.present?
+    assert FormatoDeCoordenadas.last.fabrica.present?
   end
 
 end
