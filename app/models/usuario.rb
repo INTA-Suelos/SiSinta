@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
-  serialize :config, Hash
+  store :config, accessors: [:ficha, :srid]
 
   has_and_belongs_to_many :roles
   has_many :calicatas, inverse_of: :usuario
@@ -14,7 +14,8 @@ class Usuario < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :config, :current_password, :rol_ids
+                  :remember_me, :config, :current_password, :rol_ids,
+                  :ficha, :srid
 
   scope :por_rol, joins(:roles).order('roles.nombre ASC')
   scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
@@ -24,7 +25,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def usa_ficha?(tipo)
-    config[:ficha] == tipo ? true : false
+    ficha == tipo
   end
 
   def es? rol
@@ -56,9 +57,8 @@ class Usuario < ActiveRecord::Base
     end
 
     def asignar_valores_por_defecto
-      if self.config.blank?
-        self.config = { ficha: 'completa', srid: '4326' }
-      end
+      self.ficha ||= 'completa'
+      self.srid  ||= '4326'
     end
 
 end
