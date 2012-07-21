@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715230250) do
+ActiveRecord::Schema.define(:version => 20120720234821) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -122,12 +122,12 @@ ActiveRecord::Schema.define(:version => 20120715230250) do
   end
 
   create_table "estructuras", :force => true do |t|
-    t.string   "tipo"
-    t.string   "clase"
-    t.string   "grado"
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tipo_de_estructura_id"
+    t.integer  "clase_de_estructura_id"
+    t.integer  "grado_de_estructura_id"
   end
 
   create_table "fases", :force => true do |t|
