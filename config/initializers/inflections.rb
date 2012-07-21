@@ -49,4 +49,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'color_humedo', 'colores_humedos'
   inflect.irregular 'formato_de_coordenadas', 'formatos_de_coordenadas'
   inflect.irregular 'pedregosidad', 'pedregosidades'
+  inflect.irregular 'tipo_de_estructura', 'tipos_de_estructura'
+  inflect.irregular 'clase_de_estructura', 'clases_de_estructura'
+  inflect.irregular 'grado_de_estructura', 'grados_de_estructura'
 end

@@ -1,0 +1,15 @@
+#
+# Los valores posibles para las Clases de Estructura en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  muy finos
+- id:     2
+  valor:  finos
+- id:     3
+  valor:  medios
+- id:     4
+  valor:  gruesos
+- id:     5
+  valor:  muy gruesos

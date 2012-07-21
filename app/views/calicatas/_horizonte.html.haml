@@ -35,13 +35,16 @@
 .span-6
   = h.fields_for :estructura do |h_e|
     .span-2.campo
-      = h_e.text_field :tipo, disabled: bloqueado
+      = h_e.collection_select :tipo_de_estructura_id, @tipos_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.tipo'
     .span-2.campo
-      = h_e.text_field :clase, disabled: bloqueado
+      = h_e.collection_select :clase_de_estructura_id, @clases_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.clase'
     .span-2.last.campo
-      = h_e.text_field :grado, disabled: bloqueado
+      = h_e.collection_select :grado_de_estructura_id, @grados_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.grado'
 .span-4
   =h.fields_for :consistencia do |h_c|

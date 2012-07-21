@@ -173,6 +173,9 @@ protected
     @tipos_de_limite = TipoDeLimite.all
     @texturas = TexturaDeHorizonte.all
     @formatos_de_coordenadas = FormatoDeCoordenadas.all
+    @tipos_de_estructura = TipoDeEstructura.all
+    @clases_de_estructura = ClaseDeEstructura.all
+    @grados_de_estructura = GradoDeEstructura.all
   end
 
   def series_o_calicatas

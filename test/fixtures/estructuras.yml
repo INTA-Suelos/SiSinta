@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  tipo: MyString
-  clase: MyString
-  grado: MyString
+  tipo_de_estructura_id: 1
+  clase_de_estructura_id: 1
+  grado_de_estructura_id: 1
   horizonte_id: 1
 
 two:
-  tipo: MyString
-  clase: MyString
-  grado: MyString
+  tipo_de_estructura_id: 2
+  clase_de_estructura_id: 2
+  grado_de_estructura_id: 2
   horizonte_id: 1
