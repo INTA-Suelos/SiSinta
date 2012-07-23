@@ -19,7 +19,7 @@ class ExtensionModelosTest < ActiveSupport::TestCase
     sin_atributo = Calicata.atributos_y_asociaciones excepto: :numero
     sin_asociacion = Calicata.atributos_y_asociaciones excepto: :ubicacion
     sin_ambos = Calicata.atributos_y_asociaciones excepto: [:numero, :ubicacion]
- 
+
     assert_instance_of Array, sin_atributo, "no devuelve Array"
     assert_instance_of Array, sin_asociacion, "no devuelve Array"
     assert_instance_of Array, sin_ambos, "no devuelve Array"

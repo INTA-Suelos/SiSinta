@@ -29,7 +29,7 @@ class CalicataTest < ActiveSupport::TestCase
   end
 
   test "debería cargar la ubicación asociada" do
-    @atributos[:ubicacion_attributes] = { 
+    @atributos[:ubicacion_attributes] = {
       descripcion: "Somewhere over the rainbow"}
     assert_difference 'Ubicacion.count' do
       c = Calicata.create(@atributos)
