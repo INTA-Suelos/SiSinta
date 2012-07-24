@@ -36,8 +36,8 @@
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'
   = f.fields_for :capacidad do |f_c|
     .span-7.campo
-      .span-2= f_c.label :clase_de_capacidad_id, 'Clase'
-      .span-5.last= f_c.collection_select :clase_de_capacidad_id, @clases, :id, :codigo,
+      .span-2= f_c.label :clase_id
+      .span-5.last= f_c.collection_select :clase_id, @clases, :id, :codigo,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para('capacidad.clase')
     .span-11.last.campo

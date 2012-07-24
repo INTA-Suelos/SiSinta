@@ -11,11 +11,11 @@
 .span-4
   = h.fields_for :limite do |h_l|
     .span-2.campo
-      = h_l.collection_select :tipo_de_limite_id, @tipos_de_limite, :id, :valor,
+      = h_l.collection_select :tipo_id, @tipos_de_limite, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'limite.tipo'
     .span-2.last.campo
-      = h_l.collection_select :forma_de_limite_id, @formas_de_limite, :id,
+      = h_l.collection_select :forma_id, @formas_de_limite, :id,
         :valor, { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'limite.forma'
 .span-4
@@ -29,21 +29,21 @@
       = ayuda_para 'horizonte.color_humedo'
 .span-3
   .span-3.last.campo
-    = h.collection_select :textura_de_horizonte_id, @texturas, :id, :clase,
+    = h.collection_select :textura_id, @texturas, :id, :clase,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para 'horizonte.textura'
 .span-6
   = h.fields_for :estructura do |h_e|
     .span-2.campo
-      = h_e.collection_select :tipo_de_estructura_id, @tipos_de_estructura, :id, :valor,
+      = h_e.collection_select :tipo_id, @tipos_de_estructura, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.tipo'
     .span-2.campo
-      = h_e.collection_select :clase_de_estructura_id, @clases_de_estructura, :id, :valor,
+      = h_e.collection_select :clase_id, @clases_de_estructura, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.clase'
     .span-2.last.campo
-      = h_e.collection_select :grado_de_estructura_id, @grados_de_estructura, :id, :valor,
+      = h_e.collection_select :grado_id, @grados_de_estructura, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.grado'
 .span-4
