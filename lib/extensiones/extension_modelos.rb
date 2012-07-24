@@ -25,6 +25,31 @@ module ExtensionModelos
       atributos.flatten.sort
     end
 
+    # Para guardar una serie (+Array+) de ids de una asociación en una misma
+    # columna de la BD. Útil para los ActiveHash
+    def guardar_como_arreglo(asociacion, clase)
+
+      # Defino el método asociacion_ids= que sincroniza la serialización con la
+      # variable de instancia @asociaciones
+      define_method "#{asociacion}_ids=" do |ids|
+        super Array.wrap(ids)
+        cargar_ids_para :subclase, SubclaseDeCapacidad
+      end
+
+      # Después de inicializar carga la variable de instancia con las instancias
+      # de la asociación
+      after_initialize do
+        cargar_ids_para asociacion, clase
+      end
+
+      # Antes de validar guarda los ids de las asociación en la variable de
+      # instancia en la columna +asociacion_ids+
+      before_validation do
+        guardar_ids_para asociacion
+      end
+
+    end
+
   end
 
 # Métodos de instancia
@@ -54,6 +79,20 @@ module ExtensionModelos
                           self.send(modelo).try(metodo) ) )
         end
       end
+    end
+
+    # asociacion_ids = @asociaciones.collect(&:id).uniq.sort
+    def guardar_ids_para(asociacion)
+      self.send(
+        "#{asociacion}_ids=",
+        instance_variable_get("@#{asociacion.to_s.pluralize}").collect(&:id).uniq.sort)
+    end
+
+    # @asociaciones = clase.find asociacion_ids.sort
+    def cargar_ids_para(asociacion, clase)
+      instance_variable_set(
+        "@#{asociacion.to_s.pluralize}",
+        clase.find(self.send("#{asociacion}_ids").sort))
     end
 
   end

@@ -9,5 +9,15 @@ class Lookup < ActiveYaml::Base
   def to_str
     valor
   end
+  alias_method :to_str, :to_s
+
+  def self.se_asocia_con(asociacion, opciones)
+    columna = opciones[:como].present? ? opciones[:como] : self.to_s.underscore
+    clase = asociacion.to_s.singularize.camelcase.safe_constantize
+
+    define_method asociacion.to_s.pluralize do
+      clase.where(clase.arel_table["#{columna}_ids"].matches("%#{self.id}%"))
+    end
+  end
 
 end
