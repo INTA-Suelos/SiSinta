@@ -44,6 +44,10 @@ class CapacidadTest < ActiveSupport::TestCase
     assert @capacidad.respond_to? :clase
     assert @capacidad.respond_to? :subclases
     assert @capacidad.respond_to? :calicata
+    assert_nothing_raised do
+      @capacidad.clase
+      @capacidad.subclases
+    end
 
     # Pruebo sus lookups
     assert ClaseDeCapacidad.first.respond_to? :capacidades

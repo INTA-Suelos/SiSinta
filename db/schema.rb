@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723203754) do
+ActiveRecord::Schema.define(:version => 20120724102537) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -112,13 +112,13 @@ ActiveRecord::Schema.define(:version => 20120723203754) do
   add_index "colores", ["rgb"], :name => "index_colores_on_rgb", :unique => true
 
   create_table "consistencias", :force => true do |t|
-    t.string   "seco"
-    t.string   "humedo"
     t.integer  "horizonte_id"
-    t.string   "mojado_adhesividad"
-    t.string   "mojado_plasticidad"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "en_seco_id"
+    t.integer  "en_humedo_id"
+    t.integer  "adhesividad_id"
+    t.integer  "plasticidad_id"
   end
 
   create_table "estructuras", :force => true do |t|
