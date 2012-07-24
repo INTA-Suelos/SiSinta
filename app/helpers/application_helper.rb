@@ -29,4 +29,97 @@ module ApplicationHelper
     "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe if texto
   end
 
+  # Variables para acceder desde la vista y armar las tablas de lookup
+  def subclases
+    @subclases ||= SubclaseDeCapacidad.all
+  end
+
+  def clases
+    @clases ||= ClaseDeCapacidad.all
+  end
+
+  def drenajes
+    @drenajes ||= Drenaje.all
+  end
+
+  def relieves
+    @relieves ||= Relieve.all
+  end
+
+  def anegamientos
+    @anegamientos ||= Anegamiento.all
+  end
+
+  def posiciones
+    @posiciones ||= Posicion.all
+  end
+
+  def pendientes
+    @pendientes ||= Pendiente.all
+  end
+
+  def pedregosidades
+    @pedregosidades ||= Pedregosidad.all
+  end
+
+  def escurrimientos
+    @escurrimientos ||= Escurrimiento.all
+  end
+
+  def permeabilidades
+    @permeabilidades ||= Permeabilidad.all
+  end
+
+  def sales
+    @sales ||= Sal.all
+  end
+
+  def usos_de_la_tierra
+    @usos_de_la_tierra ||= UsoDeLaTierra.all
+  end
+
+  def formas_de_limite
+    @formas_de_limite ||= FormaDeLimite.all
+  end
+
+  def tipos_de_limite
+    @tipos_de_limite ||= TipoDeLimite.all
+  end
+
+  def texturas
+    @texturas ||= TexturaDeHorizonte.all
+  end
+
+  def formatos_de_coordenadas
+    @formatos_de_coordenadas ||= FormatoDeCoordenadas.all
+  end
+
+  def tipos_de_estructura
+    @tipos_de_estructura ||= TipoDeEstructura.all
+  end
+
+  def clases_de_estructura
+    @clases_de_estructura ||= ClaseDeEstructura.all
+  end
+
+  def grados_de_estructura
+    @grados_de_estructura ||= GradoDeEstructura.all
+  end
+
+  def consistencias_en_seco
+    @consistencias_en_seco ||= ConsistenciaEnSeco.all
+  end
+
+  def consistencias_en_humedo
+    @consistencias_en_humedo ||= ConsistenciaEnHumedo.all
+  end
+
+  def plasticidades_de_consistencia
+    @plasticidades_de_consistencia ||= PlasticidadDeConsistencia.all
+  end
+
+  def adhesividades_de_consistencia
+    @adhesividades_de_consistencia ||= AdhesividadDeConsistencia.all
+  end
+
 end
