@@ -118,8 +118,13 @@
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.posicion')
   .span-11.last.campo
-    .span-2= f.label :humedad
-    .span-8.last= f.text_field :humedad, disabled: bloqueado
+    = f.fields_for :humedad do |f_h|
+      .span-2= f_h.label :clase_id, "Distrib. de la humedad"
+      .span-4= f_h.collection_select :clase_id, clases_de_humedad, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      .span-4.last= f_h.collection_select :subclase_id, subclases_de_humedad, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para('calicata.humedad')
 
   .span-11.campo
     .span-2= f.label :pendiente_id

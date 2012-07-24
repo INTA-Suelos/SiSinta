@@ -122,4 +122,12 @@ module ApplicationHelper
     @adhesividades_de_consistencia ||= AdhesividadDeConsistencia.all
   end
 
+  def clases_de_humedad
+    @clases_de_humedad ||= ClaseDeHumedad.all
+  end
+
+  def subclases_de_humedad
+    @subclases_de_humedad ||= SubclaseDeHumedad.all
+  end
+
 end
