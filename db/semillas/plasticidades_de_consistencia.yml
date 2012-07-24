@@ -1,0 +1,14 @@
+#
+# Los valores posibles para Plasticidad de consistencia en la ficha de
+# calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  no plástico
+- id:     2
+  valor:  ligeramente plástico
+- id:     3
+  valor:  plástico
+- id:     4
+  valor:  muy plástico 

@@ -1,0 +1,17 @@
+#
+# Los valores posibles para Consistencia en seco en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  suelto
+- id:     2
+  valor:  blando
+- id:     3
+  valor:  ligeramente duro
+- id:     4
+  valor:  duro
+- id:     5
+  valor:  muy duro
+- id:     6
+  valor:  extremadamente duro

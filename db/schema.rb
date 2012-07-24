@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720234821) do
+ActiveRecord::Schema.define(:version => 20120724102537) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20120720234821) do
 
   create_table "capacidades", :force => true do |t|
     t.integer "calicata_id"
-    t.integer "clase_de_capacidad_id"
+    t.integer "clase_id"
     t.text    "subclase_ids"
   end
 
@@ -112,22 +112,22 @@ ActiveRecord::Schema.define(:version => 20120720234821) do
   add_index "colores", ["rgb"], :name => "index_colores_on_rgb", :unique => true
 
   create_table "consistencias", :force => true do |t|
-    t.string   "seco"
-    t.string   "humedo"
     t.integer  "horizonte_id"
-    t.string   "mojado_adhesividad"
-    t.string   "mojado_plasticidad"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "en_seco_id"
+    t.integer  "en_humedo_id"
+    t.integer  "adhesividad_id"
+    t.integer  "plasticidad_id"
   end
 
   create_table "estructuras", :force => true do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tipo_de_estructura_id"
-    t.integer  "clase_de_estructura_id"
-    t.integer  "grado_de_estructura_id"
+    t.integer  "tipo_id"
+    t.integer  "clase_id"
+    t.integer  "grado_id"
   end
 
   create_table "fases", :force => true do |t|
@@ -161,15 +161,15 @@ ActiveRecord::Schema.define(:version => 20120720234821) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
-    t.integer  "textura_de_horizonte_id"
+    t.integer  "textura_id"
   end
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tipo_de_limite_id"
-    t.integer  "forma_de_limite_id"
+    t.integer  "tipo_id"
+    t.integer  "forma_id"
   end
 
   create_table "lookups", :force => true do |t|

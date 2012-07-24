@@ -36,14 +36,14 @@
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'
   = f.fields_for :capacidad do |f_c|
     .span-7.campo
-      .span-2= f_c.label :clase_de_capacidad_id, 'Clase'
-      .span-5.last= f_c.collection_select :clase_de_capacidad_id, @clases, :id, :codigo,
+      .span-2= f_c.label :clase_id
+      .span-5.last= f_c.collection_select :clase_id, clases, :id, :codigo,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para('capacidad.clase')
     .span-11.last.campo
       .span-2= f_c.label :subclases, 'Limitaciones principales'
       .prepend-2.span-6.last
-        - @subclases.each do |s|
+        - subclases.each do |s|
           = label_tag s.codigo
           = check_box_tag "calicata[capacidad_attributes][subclase_ids][]",
             s.id, tildada?(s), disabled: bloqueado
@@ -67,7 +67,7 @@
         = ayuda_para('ubicacion.x')
     .span-11.last.campo
       .span-2= f_u.label :srid, 'Formato'
-      .span-8.last= f_u.collection_select :srid, @formatos_de_coordenadas, :srid,
+      .span-8.last= f_u.collection_select :srid, formatos_de_coordenadas, :srid,
         :descripcion, {}, disabled: bloqueado
       = ayuda_para('ubicacion.formato')
 
@@ -97,24 +97,24 @@
     = ayuda_para('calicata.material_original')
   .span-11.last.campo
     .span-2= f.label :drenaje_id
-    .span-8.last= f.collection_select :drenaje_id, @drenajes, :id, :valor,
+    .span-8.last= f.collection_select :drenaje_id, drenajes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.drenaje')
 
   .span-11.campo
     .span-2= f.label :relieve_id
-    .span-9.last= f.collection_select :relieve_id, @relieves, :id, :valor,
+    .span-9.last= f.collection_select :relieve_id, relieves, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.relieve')
   .span-11.last.campo
     .span-2= f.label :anegamiento_id
-    .span-8.last= f.collection_select :anegamiento_id, @anegamientos, :id, :valor,
+    .span-8.last= f.collection_select :anegamiento_id, anegamientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.anegamiento')
 
   .span-11.campo
     .span-2= f.label :posicion_id, "Posición"
-    .span-9.last= f.collection_select :posicion_id, @posiciones, :id, :valor,
+    .span-9.last= f.collection_select :posicion_id, posiciones, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.posicion')
   .span-11.last.campo
@@ -123,7 +123,7 @@
 
   .span-11.campo
     .span-2= f.label :pendiente_id
-    .span-9.last= f.collection_select :pendiente_id, @pendientes, :id, :valor,
+    .span-9.last= f.collection_select :pendiente_id, pendientes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.pendiente')
   .span-5.campo
@@ -140,24 +140,24 @@
   .span-11.campo
     .span-2= f.label :escurrimiento_id
     .span-9.last= f.collection_select :escurrimiento_id,
-      @escurrimientos, :id, :valor,
+      escurrimientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.escurrimiento')
   .span-11.last.campo
     .span-2= f.label :sal_id, 'Sales'
-    .span-8.last= f.collection_select :sal_id, @sales, :id, :valor,
+    .span-8.last= f.collection_select :sal_id, sales, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.sal')
 
   .span-11.campo
     .span-2= f.label :permeabilidad_id
     .span-9.last= f.collection_select :permeabilidad_id,
-      @permeabilidades, :id, :valor,
+      permeabilidades, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.permeabilidad')
   .span-11.last.campo
     .span-2= f.label :pedregosidad_id
-    .span-8.last= f.collection_select :pedregosidad_id, @pedregosidades, :id,
+    .span-8.last= f.collection_select :pedregosidad_id, pedregosidades, :id,
       :valor, { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.pedregosidad')
 
@@ -167,6 +167,6 @@
     = ayuda_para('calicata.erosion')
   .span-11.last.campo
     .span-2= f.label :uso_de_la_tierra_id, "Uso de la tierra"
-    .span-8.last= f.collection_select :uso_de_la_tierra_id, @usos_de_la_tierra, :id, :valor,
+    .span-8.last= f.collection_select :uso_de_la_tierra_id, usos_de_la_tierra, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.uso_de_la_tierra')
