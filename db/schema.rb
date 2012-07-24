@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724102537) do
+ActiveRecord::Schema.define(:version => 20120724113812) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20120724102537) do
     t.string   "material_original"
     t.string   "esquema"
     t.string   "simbolo"
-    t.string   "humedad"
     t.string   "erosion"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
@@ -163,6 +162,14 @@ ActiveRecord::Schema.define(:version => 20120724102537) do
     t.integer  "profundidad_inferior"
     t.integer  "textura_id"
   end
+
+  create_table "humedades", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "humedades", ["calicata_id"], :name => "index_humedades_on_calicatas", :unique => true
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
