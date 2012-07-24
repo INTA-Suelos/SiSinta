@@ -46,21 +46,21 @@
       = h_e.collection_select :grado_id, grados_de_estructura, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'estructura.grado'
-.span-4
+.span-8
   =h.fields_for :consistencia do |h_c|
-    .span-1.campo
+    .span-2.campo
       = h_c.collection_select :en_seco_id, consistencias_en_seco, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'consistencia.en_seco'
-    .span-1.campo
+    .span-2.campo
       = h_c.collection_select :en_humedo_id, consistencias_en_humedo, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'consistencia.en_humedo'
-    .span-1.campo
+    .span-2.campo
       = h_c.collection_select :plasticidad_id, plasticidades_de_consistencia, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'consistencia.plasticidad'
-    .span-1.last.campo
+    .span-2.last.campo
       = h_c.collection_select :adhesividad_id, adhesividades_de_consistencia, :id, :valor,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para 'consistencia.adhesividad'
