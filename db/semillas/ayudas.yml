@@ -1,4 +1,3 @@
-#
 # Texto de las ayudas contextuales. Campo debe ser único así es posible
 # seleccionar la ayuda correcta a partir de un nombre en vez del id.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
