@@ -1,12 +1,9 @@
-# Los valores posibles para las Clases de Humedad en la ficha de calicatas.
+# Los valores posibles para las Subclases de Humedadad en la ficha de
+# calicatas.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
 # asociaciones previas.
 #
 - id:     1
-  valor:  seco
+  valor:  uniforme
 - id:     2
-  valor:  fresco
-- id:     3
-  valor:  húmedo
-- id:     4
-  valor:  mojado
+  valor:  no uniforme
