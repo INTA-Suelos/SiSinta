@@ -13,6 +13,11 @@ class EstructuraTest < ActiveSupport::TestCase
     assert @estructura.respond_to? :tipo
     assert @estructura.respond_to? :clase
     assert @estructura.respond_to? :grado
+    assert_nothing_raised do
+      @estructura.tipo
+      @estructura.clase
+      @estructura.grado
+    end
     assert @estructura.respond_to? :horizonte
 
     # Pruebo sus lookups

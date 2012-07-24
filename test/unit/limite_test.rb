@@ -12,6 +12,10 @@ class LimiteTest < ActiveSupport::TestCase
   test "debería poder acceder a sus asociaciones" do
     assert @limite.respond_to? :tipo
     assert @limite.respond_to? :forma
+    assert_nothing_raised do
+      @limite.forma
+      @limite.tipo
+    end
     assert @limite.respond_to? :horizonte
 
     # Pruebo sus lookups
