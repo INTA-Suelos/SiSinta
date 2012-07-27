@@ -73,7 +73,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    self.try(:punto)
+    punto
   end
 
   def self.grados_a_decimal(coordenada)
@@ -101,19 +101,20 @@ class Ubicacion < ActiveRecord::Base
 
   private
 
-  def arreglar_coordenadas
-    if @srid.to_i.eql?(4326) or @srid.blank?
-      @x = Ubicacion.grados_a_decimal(@x)
-      @y = Ubicacion.grados_a_decimal(@y)
-    else
-      transformar_a_wgs84!(@srid, @x, @y)
+    def arreglar_coordenadas
+      if @srid.to_i.eql?(4326) or @srid.blank?
+        @x = Ubicacion.grados_a_decimal(@x)
+        @y = Ubicacion.grados_a_decimal(@y)
+      else
+        transformar_a_wgs84!(@srid, @x, @y)
+      end
+      self.coordenadas = "POINT(#{@x} #{@y})"
     end
-    self.coordenadas = "POINT(#{@x} #{@y})"
-  end
 
-  def cargar_x_y
-    @x = coordenadas.x if coordenadas
-    @y = coordenadas.y if coordenadas
-    @srid = 4326
-  end
+    def cargar_x_y
+      @x = coordenadas.x if coordenadas
+      @y = coordenadas.y if coordenadas
+      @srid = 4326
+    end
+
 end
