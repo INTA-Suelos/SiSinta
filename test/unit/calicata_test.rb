@@ -74,12 +74,6 @@ class CalicataTest < ActiveSupport::TestCase
     assert_instance_of Pendiente, c.pendiente
   end
 
-  test "debería cargar la pedregosidad de la tabla de lookup" do
-    @atributos[:pedregosidad_id] = Pedregosidad.first.id
-    c = Calicata.create(@atributos)
-    assert_instance_of Pedregosidad, c.pedregosidad
-  end
-
   test "debería cargar el escurrimiento de la tabla de lookup" do
     @atributos[:escurrimiento_id] = Escurrimiento.first.id
     c = Calicata.create(@atributos)

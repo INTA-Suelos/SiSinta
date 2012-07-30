@@ -161,10 +161,13 @@
       { include_blank: true }, { disabled: bloqueado }
     = ayuda_para('calicata.permeabilidad')
   .span-11.last.campo
-    .span-2= f.label :pedregosidad_id
-    .span-8.last= f.collection_select :pedregosidad_id, pedregosidades, :id,
-      :valor, { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('calicata.pedregosidad')
+    = f.fields_for :pedregosidad do |f_h|
+      .span-2= f_h.label :clase_id, "Pedreg. o rocosidad"
+      .span-4= f_h.collection_select :clase_id, clases_de_pedregosidad, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      .span-4.last= f_h.collection_select :subclase_id, subclases_de_pedregosidad, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para('calicata.pedregosidad')
 
   .span-11.campo
     .span-2= f.label :erosion, "Erosión"

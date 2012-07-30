@@ -130,4 +130,12 @@ module ApplicationHelper
     @subclases_de_humedad ||= SubclaseDeHumedad.all
   end
 
+  def clases_de_pedregosidad
+    @clases_de_pedregosidad ||= ClaseDePedregosidad.all
+  end
+
+  def subclases_de_pedregosidad
+    @subclases_de_pedregosidad ||= SubclaseDePedregosidad.all
+  end
+
 end

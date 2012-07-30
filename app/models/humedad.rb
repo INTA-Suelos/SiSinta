@@ -4,8 +4,8 @@ class Humedad < ActiveRecord::Base
 
   belongs_to :calicata, inverse_of: :humedad
 
-  belongs_to_active_hash :clase,  inverse_of: :humedades,
-                                  class_name: 'ClaseDeHumedad'
+  belongs_to_active_hash :clase,    inverse_of: :humedades,
+                                    class_name: 'ClaseDeHumedad'
   belongs_to_active_hash :subclase, inverse_of: :humedades,
                                     class_name: 'SubclaseDeHumedad'
 

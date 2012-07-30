@@ -10,11 +10,13 @@ module CalicatasHelper
   # asociaciones realizadas, asique acá les asignamos un objeto nuevo si no
   # tenían ya
   def calicata_preparada
-    @calicata.grupo     ||= Grupo.new
-    @calicata.paisaje   ||= Paisaje.new
-    @calicata.capacidad ||= Capacidad.new
-    @calicata.fase      ||= Fase.new
-    @calicata.ubicacion ||= Ubicacion.new
+    @calicata.grupo         ||= Grupo.new
+    @calicata.paisaje       ||= Paisaje.new
+    @calicata.capacidad     ||= Capacidad.new
+    @calicata.fase          ||= Fase.new
+    @calicata.ubicacion     ||= Ubicacion.new
+    @calicata.humedad       ||= Humedad.new
+    @calicata.pedregosidad  ||= Pedregosidad.new
     @calicata.horizontes.each do |h|
       h.color_seco    || h.build_color_seco
       h.color_humedo  || h.build_color_humedo
