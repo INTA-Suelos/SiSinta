@@ -89,6 +89,10 @@ class Ubicacion < ActiveRecord::Base
     self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
   end
 
+  def self.transformar_de_wgs84_a(srid, x, y)
+    self.transformar(4326, srid, x, y)
+  end
+
   def self.transformar(origen, destino, x, y, proyectar = true)
     RGeo::Feature.cast(FormatoDeCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
       factory: FormatoDeCoordenadas.srid(destino).fabrica, project: proyectar)
