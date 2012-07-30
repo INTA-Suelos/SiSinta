@@ -6,7 +6,7 @@
 
     .span-24
       .span-3= f.label :srid, 'SRID por defecto'
-      .span-9.last= f.collection_select :srid, FormatoDeCoordenadas.all, :srid, :descripcion
+      .span-9.last= f.collection_select :srid, formatos_de_coordenadas, :srid, :descripcion
 
     .span-24
       .span-3= f.label :ficha, 'Ficha para calicatas'

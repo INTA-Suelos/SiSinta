@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730194127) do
+ActiveRecord::Schema.define(:version => 20120730205318) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20120730194127) do
     t.string   "material_original"
     t.string   "esquema"
     t.string   "simbolo"
-    t.string   "erosion"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
@@ -118,6 +117,14 @@ ActiveRecord::Schema.define(:version => 20120730194127) do
     t.integer  "adhesividad_id"
     t.integer  "plasticidad_id"
   end
+
+  create_table "erosiones", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "erosiones", ["calicata_id"], :name => "index_erosiones_on_calicatas", :unique => true
 
   create_table "estructuras", :force => true do |t|
     t.integer  "horizonte_id"

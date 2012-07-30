@@ -170,9 +170,13 @@
       = ayuda_para('calicata.pedregosidad')
 
   .span-11.campo
-    .span-2= f.label :erosion, "Erosión"
-    .span-9.last= f.text_field :erosion, disabled: bloqueado
-    = ayuda_para('calicata.erosion')
+    = f.fields_for :erosion do |f_h|
+      .span-2= f_h.label :clase_id, "Erosión"
+      .span-4= f_h.collection_select :subclase_id, subclases_de_erosion, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      .span-5.last= f_h.collection_select :clase_id, clases_de_erosion, :id, :valor,
+      { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para('calicata.erosion')
   .span-11.last.campo
     .span-2= f.label :uso_de_la_tierra_id, "Uso de la tierra"
     .span-8.last= f.collection_select :uso_de_la_tierra_id, usos_de_la_tierra, :id, :valor,
