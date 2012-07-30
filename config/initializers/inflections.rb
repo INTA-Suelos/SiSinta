@@ -61,6 +61,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'forma_de_limite', 'formas_de_limite'
   inflect.irregular 'formato_de_coordenadas', 'formatos_de_coordenadas'
   inflect.irregular 'pedregosidad', 'pedregosidades'
+  inflect.irregular 'subclase_de_pedregosidad', 'subclases_de_pedregosidad'
+  inflect.irregular 'clase_de_pedregosidad', 'clases_de_pedregosidad'
   inflect.irregular 'humedad', 'humedades'
   inflect.irregular 'clase_de_humedad', 'clases_de_humedad'
   inflect.irregular 'subclase_de_humedad', 'subclases_de_humedad'

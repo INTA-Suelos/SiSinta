@@ -19,12 +19,13 @@ class Calicata < ActiveRecord::Base
                             allow_nil: true
   validates_associated :ubicacion, :horizontes, :fase, :grupo
 
-  has_many :horizontes, dependent: :destroy, inverse_of: :calicata
-  has_many :adjuntos,   dependent: :destroy, inverse_of: :calicata
-  has_one :capacidad,   dependent: :destroy, inverse_of: :calicata
-  has_one :ubicacion,   dependent: :destroy, inverse_of: :calicata
-  has_one :paisaje,     dependent: :destroy, inverse_of: :calicata
-  has_one :humedad,     dependent: :destroy, inverse_of: :calicata
+  has_many :horizontes,   dependent: :destroy, inverse_of: :calicata
+  has_many :adjuntos,     dependent: :destroy, inverse_of: :calicata
+  has_one :capacidad,     dependent: :destroy, inverse_of: :calicata
+  has_one :ubicacion,     dependent: :destroy, inverse_of: :calicata
+  has_one :paisaje,       dependent: :destroy, inverse_of: :calicata
+  has_one :humedad,       dependent: :destroy, inverse_of: :calicata
+  has_one :pedregosidad,  dependent: :destroy, inverse_of: :calicata
 
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
   #   belongs_to => calicata tiene lookup_id
@@ -34,7 +35,6 @@ class Calicata < ActiveRecord::Base
   #
   belongs_to_active_hash :escurrimiento
   belongs_to_active_hash :pendiente
-  belongs_to_active_hash :pedregosidad
   belongs_to_active_hash :permeabilidad
   belongs_to_active_hash :relieve
   belongs_to_active_hash :anegamiento
@@ -49,7 +49,8 @@ class Calicata < ActiveRecord::Base
   belongs_to :fase,     inverse_of: :calicatas
   belongs_to :grupo,    inverse_of: :calicatas
 
-  accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion,
+  accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion, :pedregosidad,
+                                :humedad,
                                 limit: 1, allow_destroy: true
   accepts_nested_attributes_for :grupo, :fase, limit: 1, reject_if: :all_blank
   accepts_nested_attributes_for :horizontes, :analisis, allow_destroy: true

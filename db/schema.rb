@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724113812) do
+ActiveRecord::Schema.define(:version => 20120730194127) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20120724113812) do
     t.integer  "grupo_id"
     t.integer  "sal_id"
     t.integer  "uso_de_la_tierra_id"
-    t.integer  "pedregosidad_id"
     t.string   "vegetacion_o_cultivos"
   end
 
@@ -196,6 +195,14 @@ ActiveRecord::Schema.define(:version => 20120724113812) do
   end
 
   add_index "paisajes", ["calicata_id"], :name => "index_paisajes_on_calicatas", :unique => true
+
+  create_table "pedregosidades", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "pedregosidades", ["calicata_id"], :name => "index_pedregosidades_on_calicatas", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string "nombre"
