@@ -66,6 +66,9 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'humedad', 'humedades'
   inflect.irregular 'clase_de_humedad', 'clases_de_humedad'
   inflect.irregular 'subclase_de_humedad', 'subclases_de_humedad'
+  inflect.irregular 'erosion', 'erosiones'
+  inflect.irregular 'clase_de_erosion', 'clases_de_erosion'
+  inflect.irregular 'subclase_de_erosion', 'subclases_de_erosion'
 
   # Atajos
   inflect.irregular 'clase', 'clases'

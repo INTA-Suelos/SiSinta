@@ -138,4 +138,12 @@ module ApplicationHelper
     @subclases_de_pedregosidad ||= SubclaseDePedregosidad.all
   end
 
+  def clases_de_erosion
+    @clases_de_erosion ||= ClaseDeErosion.all
+  end
+
+  def subclases_de_erosion
+    @subclases_de_erosion ||= SubclaseDeErosion.all
+  end
+
 end

@@ -17,6 +17,7 @@ module CalicatasHelper
     @calicata.ubicacion     ||= Ubicacion.new
     @calicata.humedad       ||= Humedad.new
     @calicata.pedregosidad  ||= Pedregosidad.new
+    @calicata.erosion       ||= Erosion.new
     @calicata.horizontes.each do |h|
       h.color_seco    || h.build_color_seco
       h.color_humedo  || h.build_color_humedo
