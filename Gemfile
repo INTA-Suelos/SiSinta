@@ -18,6 +18,7 @@ gem 'dynamic_form'
 gem 'haml-rails'
 gem 'awesome_nested_fields'
 gem 'kaminari'
+gem 'draper'
 
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
