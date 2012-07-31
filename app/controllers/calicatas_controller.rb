@@ -44,7 +44,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1
   # GET /calicatas/1.json
   def show
-    @calicata = Calicata.find(params[:id])
+    @calicata = CalicataDecorator.find(params[:id])
     @titulo = "Calicata #{@calicata.numero}"
 
     respond_to do |format|
@@ -56,7 +56,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new(params[:calicata])
+    @calicata = CalicataDecorator.new(Calicata.new(params[:calicata]))
     @titulo = 'Nueva calicata'
 
     respond_to do |format|
@@ -67,7 +67,7 @@ class CalicatasController < AutorizadoController
 
   # GET /calicatas/1/edit
   def edit
-    @calicata = Calicata.find(params[:id])
+    @calicata = CalicataDecorator.find(params[:id])
     @titulo = "Editando calicata #{@calicata.numero}"
   end
 

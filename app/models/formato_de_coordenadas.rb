@@ -4,7 +4,7 @@ class FormatoDeCoordenadas < Lookup
   field :srid
 
   def self.srid(srid)
-    find_by_srid(srid)
+    find_by_srid(srid.to_i)
   end
 
   def fabrica
