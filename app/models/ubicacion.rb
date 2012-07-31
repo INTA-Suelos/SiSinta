@@ -94,8 +94,14 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def self.transformar(origen, destino, x, y, proyectar = true)
-    RGeo::Feature.cast(FormatoDeCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
-      factory: FormatoDeCoordenadas.srid(destino).fabrica, project: proyectar)
+    unless x.blank? || y.blank?
+      fabrica_origen  = FormatoDeCoordenadas.srid(origen).fabrica
+      fabrica_destino = FormatoDeCoordenadas.srid(destino).fabrica
+      RGeo::Feature.cast(
+        fabrica_origen.point(x.to_f, y.to_f),
+        factory: fabrica_destino,
+        project: proyectar)
+    end
   end
 
   def coordenadas=(c)
