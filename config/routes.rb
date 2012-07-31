@@ -65,6 +65,10 @@ SiSINTA::Application.routes.draw do
     end
   end
 
+  resource :usuarios, only: [], path_names: m do
+    put 'configurar', on: :member
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

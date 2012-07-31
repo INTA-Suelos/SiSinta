@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715090010) do
+ActiveRecord::Schema.define(:version => 20120730205318) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -73,8 +73,6 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
     t.string   "material_original"
     t.string   "esquema"
     t.string   "simbolo"
-    t.string   "humedad"
-    t.string   "erosion"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
@@ -91,13 +89,12 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
     t.integer  "grupo_id"
     t.integer  "sal_id"
     t.integer  "uso_de_la_tierra_id"
-    t.integer  "pedregosidad_id"
     t.string   "vegetacion_o_cultivos"
   end
 
   create_table "capacidades", :force => true do |t|
     t.integer "calicata_id"
-    t.integer "clase_de_capacidad_id"
+    t.integer "clase_id"
     t.text    "subclase_ids"
   end
 
@@ -112,22 +109,30 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
   add_index "colores", ["rgb"], :name => "index_colores_on_rgb", :unique => true
 
   create_table "consistencias", :force => true do |t|
-    t.string   "seco"
-    t.string   "humedo"
     t.integer  "horizonte_id"
-    t.string   "mojado_adhesividad"
-    t.string   "mojado_plasticidad"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "en_seco_id"
+    t.integer  "en_humedo_id"
+    t.integer  "adhesividad_id"
+    t.integer  "plasticidad_id"
   end
 
+  create_table "erosiones", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "erosiones", ["calicata_id"], :name => "index_erosiones_on_calicatas", :unique => true
+
   create_table "estructuras", :force => true do |t|
-    t.string   "tipo"
-    t.string   "clase"
-    t.string   "grado"
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tipo_id"
+    t.integer  "clase_id"
+    t.integer  "grado_id"
   end
 
   create_table "fases", :force => true do |t|
@@ -161,15 +166,23 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
     t.integer  "color_seco_id"
     t.integer  "color_humedo_id"
     t.integer  "profundidad_inferior"
-    t.integer  "textura_de_horizonte_id"
+    t.integer  "textura_id"
   end
+
+  create_table "humedades", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "humedades", ["calicata_id"], :name => "index_humedades_on_calicatas", :unique => true
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tipo_de_limite_id"
-    t.integer  "forma_de_limite_id"
+    t.integer  "tipo_id"
+    t.integer  "forma_id"
   end
 
   create_table "lookups", :force => true do |t|
@@ -189,6 +202,14 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
   end
 
   add_index "paisajes", ["calicata_id"], :name => "index_paisajes_on_calicatas", :unique => true
+
+  create_table "pedregosidades", :force => true do |t|
+    t.integer "subclase_id"
+    t.integer "clase_id"
+    t.integer "calicata_id"
+  end
+
+  add_index "pedregosidades", ["calicata_id"], :name => "index_pedregosidades_on_calicatas", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string "nombre"
@@ -217,8 +238,8 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                                 :default => "",         :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",         :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -227,7 +248,7 @@ ActiveRecord::Schema.define(:version => 20120715090010) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "ficha",                                 :default => "completa"
+    t.text     "config"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

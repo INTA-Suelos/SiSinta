@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -18,6 +18,7 @@ gem 'dynamic_form'
 gem 'haml-rails'
 gem 'awesome_nested_fields'
 gem 'kaminari'
+gem 'draper'
 
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'

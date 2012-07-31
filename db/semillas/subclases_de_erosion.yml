@@ -1,0 +1,8 @@
+# Los valores posibles para las Subclases de Erosión en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  hídrica
+- id:     2
+  valor:  eólica

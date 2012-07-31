@@ -3,7 +3,7 @@ SiSINTA::Application.configure do
   # Latitud es y, longitud es x.
   config.rango_y = -90..90
   config.rango_x = -180..180
-  
+
   # Precisión a mostrar para las coordenadas
   config.precision = 6
 end

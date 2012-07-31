@@ -1,4 +1,3 @@
-#
 # Los valores posibles para el Formato de Coordenadas en la ficha de calicatas.
 # Agregar formatos acá le permite al sistema manipularlos sin más cambios.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder

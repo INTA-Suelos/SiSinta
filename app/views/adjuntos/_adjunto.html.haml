@@ -7,4 +7,4 @@
   %td.boton= link_to 'Mostrar', [@calicata, adjunto]
   %td.boton= link_to 'Editar', edit_calicata_adjunto_path(@calicata, adjunto)
   %td.boton= link_to('Eliminar', [@calicata, adjunto],
-    confirm: '¿Estás seguro?', method: :delete)
+    data: { confirm: '¿Estás seguro?'}, method: :delete)

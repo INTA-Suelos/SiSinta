@@ -1,4 +1,3 @@
-#
 # Texto de las ayudas contextuales. Campo debe ser único así es posible
 # seleccionar la ayuda correcta a partir de un nombre en vez del id.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
@@ -146,16 +145,16 @@
   campo:  estructura.grado
   ayuda:  Ayuda no disponible.
 - id:     48
-  campo:  consistencia.seco
+  campo:  consistencia.en_seco
   ayuda:  Ayuda no disponible.
 - id:     49
-  campo:  consistencia.humedo
+  campo:  consistencia.en_humedo
   ayuda:  Ayuda no disponible.
 - id:     50
-  campo:  consistencia.mojado_plasticidad
+  campo:  consistencia.plasticidad
   ayuda:  Ayuda no disponible.
 - id:     51
-  campo:  consistencia.mojado_adhesividad
+  campo:  consistencia.adhesividad
   ayuda:  Ayuda no disponible.
 - id:     52
   campo:  horizonte.ph

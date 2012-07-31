@@ -1,7 +1,6 @@
 # encoding: utf-8
 class CalicatasController < AutorizadoController
 
-  before_filter :armar_lookups, except: [:index, :preparar_csv]
   before_filter :series_o_calicatas,
                 only: [:index, :geo, :preparar_csv, :procesar_csv]
   before_filter :paginar, only: [:index]
@@ -45,7 +44,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/1
   # GET /calicatas/1.json
   def show
-    @calicata = Calicata.find(params[:id])
+    @calicata = CalicataDecorator.find(params[:id])
     @titulo = "Calicata #{@calicata.numero}"
 
     respond_to do |format|
@@ -57,7 +56,7 @@ class CalicatasController < AutorizadoController
   # GET /calicatas/new
   # GET /calicatas/new.json
   def new
-    @calicata = Calicata.new(params[:calicata])
+    @calicata = CalicataDecorator.new(Calicata.new(params[:calicata]))
     @titulo = 'Nueva calicata'
 
     respond_to do |format|
@@ -68,7 +67,7 @@ class CalicatasController < AutorizadoController
 
   # GET /calicatas/1/edit
   def edit
-    @calicata = Calicata.find(params[:id])
+    @calicata = CalicataDecorator.find(params[:id])
     @titulo = "Editando calicata #{@calicata.numero}"
   end
 
@@ -146,34 +145,6 @@ class CalicatasController < AutorizadoController
   end
 
 protected
-
-  # Prepara las variables para acceder desde la vista y armar las tablas de lookup
-  #
-  # * *Args*    :
-  #   - ++ ->
-  # * *Returns* :
-  #   -
-  # * *Raises* :
-  #   - ++ ->
-  #
-  def armar_lookups
-    @subclases = SubclaseDeCapacidad.all
-    @clases = ClaseDeCapacidad.all
-    @drenajes = Drenaje.all
-    @relieves = Relieve.all
-    @anegamientos = Anegamiento.all
-    @posiciones = Posicion.all
-    @pendientes = Pendiente.all
-    @pedregosidades = Pedregosidad.all
-    @escurrimientos = Escurrimiento.all
-    @permeabilidades = Permeabilidad.all
-    @sales = Sal.all
-    @usos_de_la_tierra = UsoDeLaTierra.all
-    @formas_de_limite = FormaDeLimite.all
-    @tipos_de_limite = TipoDeLimite.all
-    @texturas = TexturaDeHorizonte.all
-    @formatos_de_coordenadas = FormatoDeCoordenadas.all
-  end
 
   def series_o_calicatas
     @calicatas = Calicata.scoped

@@ -7,4 +7,5 @@
   %td.boton= link_to 'Mostrar', calicata
   %td.boton= link_to 'Editar', edit_calicata_path(calicata)
   %td.boton= link_to 'Análisis', calicata_analisis_index_path(calicata)
-  %td.boton= link_to 'Eliminar', calicata, confirm: '¿Estás seguro?', method: :delete
+  %td.boton= link_to 'Eliminar', calicata,
+                      data: { confirm: '¿Estás seguro?'}, method: :delete

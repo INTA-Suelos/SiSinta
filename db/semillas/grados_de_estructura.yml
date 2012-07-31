@@ -1,0 +1,10 @@
+# Los valores posibles para los Grados de Estructura en la ficha de calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  débil
+- id:     2
+  valor:  moderado
+- id:     3
+  valor:  fuerte

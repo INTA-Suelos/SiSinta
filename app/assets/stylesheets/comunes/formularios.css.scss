@@ -85,21 +85,29 @@ form {
   ::-webkit-input-placeholder { color: $gris_claro; }
   input:focus::-webkit-input-placeholder {  color: transparent; }
 
-}
+  // estilo para los campos y etiquetas con error en los formularios
 
-// estilo para los campos y etiquetas con error en los formularios
-.field_with_errors {
+  .field_with_errors {
 
-  width: inherit !important;
+    input {
+      color: black;
+      background: lighten($rojo_inta, 50%);
+      border-color: $rojo_inta;
+    }
 
-  label, input {
-    @include mensaje($rojo_inta);
-    color: black;
-    border-width: 1px;
-    margin-bottom: 0;
+    label {
+      color: $rojo_inta;
+      text-decoration: underline;
+    }
+
   }
-}
 
+  .error_field {
+    // sobreescribe el default size=30
+    width: inherit !important;
+  }
+
+}
 // div con mensajes de error
 #errorExplanation {
   @include mensaje($rojo_inta);

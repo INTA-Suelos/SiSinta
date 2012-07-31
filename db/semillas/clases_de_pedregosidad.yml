@@ -1,0 +1,9 @@
+# Los valores posibles para las Clases de Pedregosidad en la ficha de
+# calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  pedregosidad
+- id:     2
+  valor:  rocosidad

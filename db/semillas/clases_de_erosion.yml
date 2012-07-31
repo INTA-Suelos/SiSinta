@@ -1,0 +1,17 @@
+# Los valores posibles para las Clases de Erosión en la ficha de
+# calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  nula
+- id:     2
+  valor:  ligera
+- id:     3
+  valor:  moderada
+- id:     4
+  valor:  severa
+- id:     5
+  valor:  grave
+- id:     6
+  valor:  muy grave

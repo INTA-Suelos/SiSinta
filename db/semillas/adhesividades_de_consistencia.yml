@@ -1,0 +1,13 @@
+# Los valores posibles para Adhesividad de consistencia en la ficha de
+# calicatas.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  no ahesivo
+- id:     2
+  valor:  ligeramente adhesivo
+- id:     3
+  valor:  adhesivo
+- id:     4
+  valor:  muy adhesivo 

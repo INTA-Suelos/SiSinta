@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  tipo_de_limite_id: 1
-  forma_de_limite_id: 2
+  tipo_id: 1
+  forma_id: 2
   horizonte_id: 1
 
 two:
-  tipo_de_limite_id: 3
-  forma_de_limite_id: 4
+  tipo_id: 3
+  forma_id: 4
   horizonte_id: 1

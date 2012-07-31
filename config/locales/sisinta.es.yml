@@ -2,10 +2,11 @@ es:
   activerecord:
     errors:
       models:
-        ubicacion:
+        calicata:
           attributes:
-            lat_lon:
-              invalid: "Las coordenadas 'latitud longitud' ingresadas son incorrectas"
+            fecha:
+              future: "todavía no llega"
+
   messages:
     created:  "La creación de %{model} fue exitosa."
     updated:  "La actualización de %{model} fue exitosa."

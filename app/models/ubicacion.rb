@@ -73,7 +73,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def to_s
-    self.try(:punto)
+    punto
   end
 
   def self.grados_a_decimal(coordenada)
@@ -89,9 +89,19 @@ class Ubicacion < ActiveRecord::Base
     self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
   end
 
+  def self.transformar_de_wgs84_a(srid, x, y)
+    self.transformar(4326, srid, x, y)
+  end
+
   def self.transformar(origen, destino, x, y, proyectar = true)
-    RGeo::Feature.cast(FormatoDeCoordenadas.srid(origen).fabrica.point(x.to_f, y.to_f),
-      factory: FormatoDeCoordenadas.srid(destino).fabrica, project: proyectar)
+    unless x.blank? || y.blank?
+      fabrica_origen  = FormatoDeCoordenadas.srid(origen).fabrica
+      fabrica_destino = FormatoDeCoordenadas.srid(destino).fabrica
+      RGeo::Feature.cast(
+        fabrica_origen.point(x.to_f, y.to_f),
+        factory: fabrica_destino,
+        project: proyectar)
+    end
   end
 
   def coordenadas=(c)
@@ -101,19 +111,20 @@ class Ubicacion < ActiveRecord::Base
 
   private
 
-  def arreglar_coordenadas
-    if @srid.to_i.eql?(4326) or @srid.blank?
-      @x = Ubicacion.grados_a_decimal(@x)
-      @y = Ubicacion.grados_a_decimal(@y)
-    else
-      transformar_a_wgs84!(@srid, @x, @y)
+    def arreglar_coordenadas
+      if @srid.to_i.eql?(4326) or @srid.blank?
+        @x = Ubicacion.grados_a_decimal(@x)
+        @y = Ubicacion.grados_a_decimal(@y)
+      else
+        transformar_a_wgs84!(@srid, @x, @y)
+      end
+      self.coordenadas = "POINT(#{@x} #{@y})"
     end
-    self.coordenadas = "POINT(#{@x} #{@y})"
-  end
 
-  def cargar_x_y
-    @x = coordenadas.x if coordenadas
-    @y = coordenadas.y if coordenadas
-    @srid = 4326
-  end
+    def cargar_x_y
+      @x = coordenadas.x if coordenadas
+      @y = coordenadas.y if coordenadas
+      @srid = 4326
+    end
+
 end

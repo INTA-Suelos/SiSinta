@@ -5,7 +5,7 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
       t.recoverable
       t.rememberable
       t.trackable
-    
+
       # t.encryptable
       # t.confirmable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
@@ -26,7 +26,7 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
   def self.down
     # By default, we don't want to make any assumption about how to roll back a migration when your
     # model already existed. Please edit below which fields you would like to remove in this migration.
-    # raise ActiveRecord::IrreversibleMigration   
+    # raise ActiveRecord::IrreversibleMigration
 
     remove_index :usuarios, :email
     remove_index :usuarios, :reset_password_token

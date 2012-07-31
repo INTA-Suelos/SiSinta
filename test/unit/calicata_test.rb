@@ -29,7 +29,7 @@ class CalicataTest < ActiveSupport::TestCase
   end
 
   test "debería cargar la ubicación asociada" do
-    @atributos[:ubicacion_attributes] = { 
+    @atributos[:ubicacion_attributes] = {
       descripcion: "Somewhere over the rainbow"}
     assert_difference 'Ubicacion.count' do
       c = Calicata.create(@atributos)
@@ -72,12 +72,6 @@ class CalicataTest < ActiveSupport::TestCase
     @atributos[:pendiente_id] = Pendiente.first.id
     c = Calicata.create(@atributos)
     assert_instance_of Pendiente, c.pendiente
-  end
-
-  test "debería cargar la pedregosidad de la tabla de lookup" do
-    @atributos[:pedregosidad_id] = Pedregosidad.first.id
-    c = Calicata.create(@atributos)
-    assert_instance_of Pedregosidad, c.pedregosidad
   end
 
   test "debería cargar el escurrimiento de la tabla de lookup" do
