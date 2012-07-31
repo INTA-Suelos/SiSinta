@@ -58,12 +58,16 @@
     .prepend-2.span-9.campo
       .span-2= label_tag nil, 'Coordenadas'
       .coordenada-y
-        = f_u.label :y, 'lat/y'
-        = f_u.text_field :y, disabled: bloqueado
+        .label-tag
+          = f_u.label :y, 'lat/y'
+        .input-tag
+          = f_u.text_field :y, disabled: bloqueado
         = ayuda_para('ubicacion.y')
       .coordenada-x
-        = f_u.label :x, 'lon/x'
-        = f_u.text_field :x, disabled: bloqueado
+        .label-tag
+          = f_u.label :x, 'lon/x'
+        .input-tag
+          = f_u.text_field :x, disabled: bloqueado
         = ayuda_para('ubicacion.x')
     .span-11.last.campo
       .span-2= f_u.label :srid, 'Formato'
