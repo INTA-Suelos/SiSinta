@@ -11,6 +11,10 @@
 - id:     4
   valor:  media loma baja
 - id:     5
-  valor:  pie de loma
+  valor:  pendiente
 - id:     6
+  valor:  tendido
+- id:     7
+  valor:  pie de loma
+- id:     8
   valor:  bajo
