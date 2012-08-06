@@ -41,6 +41,16 @@ class CalicatasController < AutorizadoController
     end
   end
 
+  #
+  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
+  # el que consultar, controlando el input del usuario.
+  #
+  def autocompletar
+    case params[:atributo]
+      when 'descripcion' then super(Calicata, :descripcion)
+    end
+  end
+
   # GET /calicatas/1
   # GET /calicatas/1.json
   def show

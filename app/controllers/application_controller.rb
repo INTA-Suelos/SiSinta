@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   # GET /:controlador/autocompletar/:atributo
-  def autocompletar(modelo)
-    render json: lista_para_autocompletar(modelo, params[:atributo])
+  def autocompletar(modelo, atributo)
+    render json: lista_para_autocompletar(modelo, atributo)
   end
 
   # Transforma la colección +objetos+ en una lista de 'features' de GeoJSON.
