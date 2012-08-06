@@ -26,6 +26,7 @@ gem 'browser_detect'
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
+gem 'rocket_tag'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
