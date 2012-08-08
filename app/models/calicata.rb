@@ -3,6 +3,8 @@ class Calicata < ActiveRecord::Base
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  attr_taggable :etiquetas
+
   before_validation do
     buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
   end
