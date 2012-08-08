@@ -1,7 +1,10 @@
 # encoding: utf-8
 class AnalisisController < AutorizadoController
 
-  before_filter :cargar_calicata
+  # La accioón +index+ carga sus propios análisis
+  load_and_authorize_resource :calicata
+  skip_load_and_authorize_resource
+  skip_authorization_check
 
   # GET /analisis
   # GET /analisis.json

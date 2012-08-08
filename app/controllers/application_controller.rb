@@ -53,6 +53,9 @@ class ApplicationController < ActionController::Base
   # Ayuda para todos
   helper_method :ayuda_para
 
+  # Para ordenar las columnas
+  helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
+
 protected
 
   # Devuelve una lista de coincidencias con el término de búsqueda para usar en el autocomplete de
@@ -111,6 +114,10 @@ protected
 
     send_data @respuesta, :filename => @archivo
 
+  end
+
+  def direccion_de_ordenamiento
+    %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
   end
 
 end
