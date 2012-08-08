@@ -1,0 +1,9 @@
+= field_set_tag 'Notas', class: 'celeste plegable span-22 last' do
+  .span-21.last.campo
+    .span-2= f.label :observaciones
+    .span-19.last= f.text_area :observaciones, disabled: bloqueado
+    = ayuda_para 'calicata.observaciones'
+  .span-21.last.campo
+    .span-2= f.label :etiquetas
+    .span-19.last= f.text_field :etiquetas, disabled: bloqueado
+    = ayuda_para 'calicata.etiquetas'

@@ -1,7 +1,11 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'test_helper'
 
 class ColoresControllerTest < ActionController::TestCase
+
+  setup do
+    loguearse_con_permisos
+  end
 
   test "debería routear a hvc" do
     assert_generates '/colores/autocompletar/hvc',
@@ -17,4 +21,19 @@ class ColoresControllerTest < ActionController::TestCase
                         atributo: 'rgb' }
   end
 
+  test "debería devolver hvc para términos parciales" do
+    @termino = '10'
+    get :autocompletar, atributo: 'hvc', term: @termino
+    assert_response :success
+    assert_equal  Color.where("hvc like '%#{@termino}%'").size,
+                  json.size
+  end
+
+  test "debería devolver rgb para términos parciales" do
+    @termino = '10'
+    get :autocompletar, atributo: 'rgb', term: @termino
+    assert_response :success
+    assert_equal  Color.where("rgb like '%#{@termino}%'").size,
+                  json.size
+  end
 end

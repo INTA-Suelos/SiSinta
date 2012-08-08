@@ -2,9 +2,12 @@
 class ColoresController < ApplicationController
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que hacemos la consulta.
+  # el que consultar, controlando el input del usuario.
   def autocompletar
-    super(Color)
+    case params[:atributo]
+      when 'hvc' then super(Color, :hvc)
+      when 'rgb' then super(Color, :rgb)
+    end
   end
 
 end

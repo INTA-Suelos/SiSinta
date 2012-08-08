@@ -186,3 +186,6 @@
 - id:     61
   campo:  calicata.vegetacion_o_cultivos
   ayuda:  Ayuda no disponible.
+- id:     62
+  campo:  calicata.etiquetas
+  ayuda:  Lista de etiquetas (separadas por coma) para esta calicata.

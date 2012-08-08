@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   # GET /:controlador/autocompletar/:atributo
-  def autocompletar(modelo)
-    render json: lista_para_autocompletar(modelo, params[:atributo])
+  def autocompletar(modelo, atributo)
+    render json: lista_para_autocompletar(modelo, atributo)
   end
 
   # Transforma la colección +objetos+ en una lista de 'features' de GeoJSON.
@@ -52,6 +52,9 @@ class ApplicationController < ActionController::Base
 
   # Ayuda para todos
   helper_method :ayuda_para
+
+  # Para ordenar las columnas
+  helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
 
 protected
 
@@ -111,6 +114,10 @@ protected
 
     send_data @respuesta, :filename => @archivo
 
+  end
+
+  def direccion_de_ordenamiento
+    %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
   end
 
 end

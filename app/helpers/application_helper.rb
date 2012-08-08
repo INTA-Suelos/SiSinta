@@ -29,6 +29,14 @@ module ApplicationHelper
     "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe if texto
   end
 
+  # Tomo prestado de http://asciicasts.com/episodes/228-sortable-table-columns
+  def link_para_ordenar(columna, titulo = nil)
+    columna = columna.to_s  # para permitir símbolos
+    titulo ||= columna.titleize
+    direccion = (columna == metodo_de_ordenamiento && direccion_de_ordenamiento == "asc") ? "desc" : "asc"
+    link_to titulo, por: columna, direccion: direccion
+  end
+
   # Variables para acceder desde la vista y armar las tablas de lookup
   def subclases
     @subclases ||= SubclaseDeCapacidad.all

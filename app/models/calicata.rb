@@ -3,12 +3,17 @@ class Calicata < ActiveRecord::Base
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  attr_taggable :etiquetas
+
   before_validation do
     buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
   end
 
-  scope :series, where(modal: 'true')
-  default_scope order('fecha ASC')
+  scope :modales, where(modal: 'true')
+  scope :index,   joins(:ubicacion)
+                  .select('calicatas.fecha, calicatas.nombre,
+                           ubicacion.descripcion as ubicacion,
+                           calicatas.numero, calicatas.modal')
 
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
