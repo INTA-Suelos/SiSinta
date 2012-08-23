@@ -189,3 +189,9 @@
 - id:     62
   campo:  calicata.etiquetas
   ayuda:  Lista de etiquetas (separadas por coma) para esta calicata.
+- id:     63
+  campo:  calicata.usuario
+  ayuda:  Usuario que cargó este perfil
+- id:     64
+  campo:  calicata.reconocedores
+  ayuda:  Lista de reconocedores del perfil (separados por coma).

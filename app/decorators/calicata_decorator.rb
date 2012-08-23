@@ -6,4 +6,8 @@ class CalicataDecorator < Draper::Base
     calicata.etiquetas.join(', ')
   end
 
+  def reconocedores
+    calicata.reconocedores.join(', ')
+  end
+
 end

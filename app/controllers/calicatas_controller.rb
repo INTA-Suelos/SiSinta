@@ -44,9 +44,10 @@ class CalicatasController < AutorizadoController
   #
   def autocompletar
     case params[:atributo]
-      when 'nombre'     then super(Calicata, :nombre)
-      when 'numero'     then super(Calicata, :numero)
-      when 'etiquetas'  then super(Calicata.tags, :name)
+      when 'nombre'         then super(Calicata, :nombre)
+      when 'numero'         then super(Calicata, :numero)
+      when 'etiquetas'      then super(Calicata.tags(on: :etiquetas), :name)
+      when 'reconocedores'  then super(Calicata.tags(on: :reconocedores), :name)
     end
   end
 

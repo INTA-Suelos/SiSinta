@@ -4,6 +4,7 @@ class Calicata < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   attr_taggable :etiquetas
+  attr_taggable :reconocedores
 
   before_validation do
     buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
