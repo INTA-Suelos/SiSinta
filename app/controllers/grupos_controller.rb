@@ -13,11 +13,13 @@ class GruposController < AutorizadoController
   end
 
   #
-  # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
-  # consultar.
+  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
+  # el que consultar, controlando el input del usuario.
   #
   def autocompletar
-    super(Grupo)
+    case params[:atributo]
+      when 'descripcion' then super(Grupo, :descripcion)
+    end
   end
 
   # GET /grupos/new

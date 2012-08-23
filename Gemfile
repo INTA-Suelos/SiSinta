@@ -19,6 +19,7 @@ gem 'haml-rails'
 gem 'awesome_nested_fields'
 gem 'kaminari'
 gem 'draper'
+gem 'ransack'
 
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
@@ -26,6 +27,7 @@ gem 'browser_detect'
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
+gem 'rocket_tag'
 
 ## GIS
 gem 'activerecord-postgis-adapter'

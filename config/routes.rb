@@ -6,26 +6,16 @@ SiSINTA::Application.routes.draw do
 
   get 'inicio/index'
 
-  # Rutas para exportar a CSV
-  get   'series/preparar_csv' => 'calicatas#preparar_csv'
-  post  'series/procesar_csv' => 'calicatas#procesar_csv'
-
-  # Para limitar las vistas a las calicatas que son modales
-  get 'series' => 'calicatas#index', as: 'series'
-
-  # Explicito la ruta para evitar que tome 'geo' como un :id
-  get 'series/geo'     => 'calicatas#geo'
-
   # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
   m = { new: "nuevo", edit: "editar" }
   f = { new: "nueva", edit: "editar" }
 
   resources :calicatas, path_names: f do
     collection do
-      get   'pagina/:pagina', action: :index
       get   'geo'
       get   'preparar_csv'
       post  'procesar_csv'
+      get 'autocompletar/:atributo' => 'calicatas#autocompletar'
     end
 
     resources :analisis, only: :index, path_names: m do

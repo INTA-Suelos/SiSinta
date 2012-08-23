@@ -21,11 +21,7 @@
 
     = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}
     = render partial: 'descripcion_de_los_horizontes', locals: {f: f, bloqueado: bloqueado}
-
-    = field_set_tag 'Observaciones', class: 'celeste plegable span-22 last' do
-      .span-21.last.campo
-        = f.text_area :observaciones, disabled: bloqueado
-        = ayuda_para 'calicata.observaciones'
+    = render partial: 'notas', locals: {f: f, bloqueado: bloqueado}
 
     .acciones.span-8.last
       .span-4= f.submit unless bloqueado

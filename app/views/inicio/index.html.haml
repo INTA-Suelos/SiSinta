@@ -1,40 +1,16 @@
-#arbol_de_contenidos.barra
-  %ul.menu
-    %li
-      .plegable Perfiles
-      %ul.submenu
-        %li= link_to 'Ver (todos)', calicatas_path
-        %li= link_to 'Ver (modales)', series_path
-        %li
-          Exportar
-          %ul.submenu
-            %li= link_to 'a CSV (todos)', preparar_csv_calicatas_path
-            %li= link_to 'a CSV (modales)', series_preparar_csv_path
-            %li= link_to 'a GeoJSON (todos)', geo_calicatas_path(format: :json)
-            %li= link_to 'a GeoJSON (modales)', series_geo_path(format: :json)
-    %li
-      .plegable Horizontes
-      %ul.submenu
-        %li
-          Exportar
-          %ul.submenu
-            %li= link_to 'a CSV', preparar_csv_horizontes_path
-    %li
-      .plegable Grupos
-      %ul.submenu
-        %li= link_to 'Ver', grupos_path
-    %li
-      .plegable Fases
-      %ul.submenu
-        %li= link_to 'Ver', fases_path
-
-  - if current_usuario.try(:admin?)
-    %ul#administracion.menu
-      %li
-        .plegable Usuarios
-        %ul.submenu
-          %li
-            = link_to 'Ver', usuarios_path
+#arbol_de_contenidos.barra= render 'barra'
 
 #bienvenida.cuerpo
   %h2 Bienvenido a SiSINTA
+
+  %h3 Búsqueda de perfiles
+
+  .span-20
+    = search_form_for @busqueda do |b|
+      .span-4=  b.label :nombre_or_numero_cont, "Por nombre o número"
+      .span-16.last= b.text_field :nombre_or_numero_cont
+
+      .span-4=  b.label :tags_name_cont, "y etiqueta"
+      .span-16.last= b.text_field :tags_name_cont
+
+      .span-2= b.submit "Buscar"

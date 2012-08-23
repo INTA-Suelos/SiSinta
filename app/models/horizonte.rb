@@ -8,6 +8,8 @@ class Horizonte < ActiveRecord::Base
     buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
   end
 
+  after_create :create_analisis
+
   default_scope order('profundidad_superior ASC')
 
   has_one :analisis,      dependent: :destroy, inverse_of: :horizonte

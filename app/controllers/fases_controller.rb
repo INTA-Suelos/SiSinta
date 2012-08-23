@@ -13,11 +13,13 @@ class FasesController < AutorizadoController
   end
 
   #
-  # Extendemos +ApplicationController#ajax+ y definimos el modelo sobre el que
-  # consultar.
+  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
+  # el que consultar, controlando el input del usuario.
   #
   def autocompletar
-    super(Fase)
+    case params[:atributo]
+      when 'nombre' then super(Fase, :nombre)
+    end
   end
 
   # GET /fases/new

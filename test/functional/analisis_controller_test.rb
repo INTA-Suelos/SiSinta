@@ -25,7 +25,7 @@ class AnalisisControllerTest < ActionController::TestCase
 
   test "should update analisis" do
     put :update, id: @analisis.to_param, analisis: @analisis.attributes, calicata_id: @calicata.id
-    assert_redirected_to calicata_analisis_index_path(@calicata, assigns(:analisis))
+    assert_redirected_to calicata_analisis_index_path(@calicata)
   end
 
 end
