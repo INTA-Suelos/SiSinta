@@ -150,6 +150,7 @@ protected
   # Prepara el scope para la lista de calicatas
   def preparar
     @calicatas ||= Calicata.scoped
+    @calicatas = @calicatas.search(params[:q]).result if params[:q].present?
   end
 
   # Ordena los resultados según las columnas de la lista. Si son columnas de
