@@ -1,0 +1,33 @@
+%ul.menu
+  %li
+    .plegable Perfiles
+    %ul.submenu
+      %li= link_to 'Ver', calicatas_path
+      %li
+        Exportar
+        %ul.submenu
+          %li= link_to 'a CSV', preparar_csv_calicatas_path
+          %li= link_to 'a GeoJSON', geo_calicatas_path(format: :json)
+  %li
+    .plegable Horizontes
+    %ul.submenu
+      %li
+        Exportar
+        %ul.submenu
+          %li= link_to 'a CSV', preparar_csv_horizontes_path
+  %li
+    .plegable Grupos
+    %ul.submenu
+      %li= link_to 'Ver', grupos_path
+  %li
+    .plegable Fases
+    %ul.submenu
+      %li= link_to 'Ver', fases_path
+
+- if current_usuario.try(:admin?)
+  %ul#administracion.menu
+    %li
+      .plegable Usuarios
+      %ul.submenu
+        %li
+          = link_to 'Ver', usuarios_path
