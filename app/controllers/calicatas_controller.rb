@@ -83,6 +83,8 @@ class CalicatasController < AutorizadoController
   # POST /calicatas
   # POST /calicatas.json
   def create
+    @calicata.usuario = current_usuario
+
     respond_to do |format|
       if @calicata.save
         format.html { redirect_to calicata_o_analisis,
