@@ -8,13 +8,14 @@
   ayuda:  Indica si el perfil es modal o no.
 - id:     2
   campo:  calicata.nombre
-  ayuda:  Ayuda no disponible.
+  ayuda:  Nombre de la Serie a la que está referenciada.
 - id:     3
   campo:  calicata.simbolo
-  ayuda:  Ayuda no disponible.
+  ayuda:  Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.
 - id:     4
   campo:  ubicacion.mosaico
-  ayuda:  Ayuda no disponible.
+  ayuda:  Nomenclatura del mosaico IGN.
+  ejemplo:3560-36-4
 - id:     5
   campo:  ubicacion.recorrido
   ayuda:  Ayuda no disponible.
