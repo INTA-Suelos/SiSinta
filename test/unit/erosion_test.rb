@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class ErosionTest < ActiveSupport::TestCase
 
-  fixtures :erosiones
+  fixtures :calicatas, :erosiones
 
   setup do
     @erosion = erosiones(:uno)

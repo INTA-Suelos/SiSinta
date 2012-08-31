@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class CapacidadTest < ActiveSupport::TestCase
 
-  fixtures :capacidades
+  fixtures :calicatas, :capacidades
 
   setup do
     @capacidad = capacidades(:poca)
