@@ -3,8 +3,6 @@ require './test/test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
 
-  fixtures :fases
-
   test "debería convertir el modelo a Array" do
     assert_instance_of Array, build(:calicata).como_arreglo, "no devuelve Array"
   end
