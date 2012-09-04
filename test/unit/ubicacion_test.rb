@@ -3,14 +3,12 @@ require './test/test_helper'
 
 class UbicacionTest < ActiveSupport::TestCase
 
-  fixtures :calicatas
-
   setup do
     @atributos = {}
-    @u = Ubicacion.new(calicata: calicatas(:uno))
+    @u = Ubicacion.new(calicata: build_stubbed(:calicata))
     @x = -61.85
     @y = -34.1725
-    @c = Ubicacion.new(calicata: calicatas(:uno), x: @x, y: @y)
+    @c = Ubicacion.new(calicata: build_stubbed(:calicata), x: @x, y: @y)
   end
 
   test "debería negarse a cargar la ubicación sin calicata" do
