@@ -15,7 +15,7 @@ class ActionController::TestCase
   include Devise::TestHelpers
 
   def loguearse_con_permisos
-    sign_in @admin ||= Usuario.find_by_nombre('Administrador')
+    sign_in (@admin || Usuario.find_by_nombre('Administrador'))
   end
 
   def json

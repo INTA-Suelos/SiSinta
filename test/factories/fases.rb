@@ -1,3 +1,4 @@
+# encoding: utf-8
 FactoryGirl.define do
   factory :fase do
     codigo { generate :cadena_unica }

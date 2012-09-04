@@ -4,10 +4,8 @@ require './test/test_helper'
 class UsuariosControllerTest < ActionController::TestCase
 
   setup do
-    @admin = Usuario.find_by_nombre('Administrador')
-    @simple = Usuario.create  :nombre => 'simplón',
-                              :email => 'roro@usuarios.com',
-                              :password => 'algun password inolvidable'
+    @simple = create(:usuario)
+    @admin = create(:usuario, :admin)
   end
 
   test "debería loguear al usuario" do
