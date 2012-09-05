@@ -3,10 +3,8 @@ require './test/test_helper'
 
 class AnalisisControllerTest < ActionController::TestCase
 
-  fixtures :analisis
-
   setup do
-    @analisis = analisis(:uno)
+    @analisis = create(:analisis)
     @calicata = create(:calicata)
     sign_in Usuario.find_by_nombre('Administrador')
     @request.env["HTTP_REFERER"] = "/calicatas/#{@calicata.to_param}/analisis"

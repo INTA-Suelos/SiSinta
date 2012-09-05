@@ -13,7 +13,7 @@ class CalicataTest < ActiveSupport::TestCase
   end
 
   test "debería prohibir fechas del futuro" do
-    assert build(:calicata_futura).invalid?, "la fecha es del futuro"
+    assert build_stubbed(:calicata_futura).invalid?, "la fecha es del futuro"
   end
 
   # TODO factorygirlizar

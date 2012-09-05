@@ -3,16 +3,14 @@ require './test/test_helper'
 
 class CalicataDecoratorTest < ActiveSupport::TestCase
 
-  fixtures :calicatas
-
   def setup
     ApplicationController.new.set_current_view_context
-    @valida = calicatas(:valida)
+    @calicata = build_stubbed(:calicata)
   end
 
   test "decora la ubicación" do
-    @valida.ubicacion = Ubicacion.new
-    assert_kind_of Draper::Base, CalicataDecorator.decorate(@valida).ubicacion
+    @calicata.ubicacion = Ubicacion.new
+    assert_kind_of Draper::Base, CalicataDecorator.decorate(@calicata).ubicacion
   end
 
 end
