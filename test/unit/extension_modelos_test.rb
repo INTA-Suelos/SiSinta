@@ -3,15 +3,14 @@ require './test/test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
 
-  fixtures :fases, :calicatas
-
   test "debería convertir el modelo a Array" do
-    assert_instance_of Array, calicatas(:valida).como_arreglo, "no devuelve Array"
+    assert_instance_of Array, build(:calicata).como_arreglo, "no devuelve Array"
   end
 
   test "debería buscar y cargar las asociaciones" do
+    existente = create(:fase).nombre
     assert_no_difference ('Fase.count') do
-      Calicata.create fase_attributes: { nombre: fases(:uno).nombre }
+      Calicata.create fase_attributes: { nombre: existente }
     end
   end
 

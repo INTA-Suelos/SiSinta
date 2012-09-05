@@ -3,10 +3,8 @@ require './test/test_helper'
 
 class ConsistenciaTest < ActiveSupport::TestCase
 
-  fixtures :consistencias
-
   setup do
-    @consistencia = consistencias(:one)
+    @consistencia = build_stubbed(:consistencia)
   end
 
   test "debería poder acceder a sus asociaciones" do

@@ -3,8 +3,6 @@ require './test/test_helper'
 
 class GruposControllerTest < ActionController::TestCase
 
-  fixtures :grupos
-
   setup do
     loguearse_con_permisos
   end
