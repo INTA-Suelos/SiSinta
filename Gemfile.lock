@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    SyslogLogger (1.4.1)
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
       mail (~> 2.4.4)
@@ -191,6 +192,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SyslogLogger
   active_hash
   activerecord-postgis-adapter
   awesome_nested_fields

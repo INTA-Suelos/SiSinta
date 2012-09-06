@@ -24,6 +24,12 @@ SiSINTA::Application.configure do
   # Defaults to Rails.root.join("public/assets")
   config.assets.manifest = Rails.root.join('public/estaticos')
 
+  # Especifica un host diferente para los assets, así no tienen sobrecarga por
+  # cookies. %d es para que Rails distribuya la carga entre 4 (%d va de 0 a 3)
+  # servidores virtuales, que pueden ser el mismo, pero que engaña al navegador
+  # para que haga más solicitudes
+  config.action_controller.asset_host = "http://cache%d.cambiame"
+
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
@@ -34,8 +40,11 @@ SiSINTA::Application.configure do
   # See everything in the log (default is :info)
   # config.log_level = :debug
 
+  # Prepend all log lines with the following tags
+  config.log_tags = [ :subdomain, :uuid ]
+
   # Use a different logger for distributed setups
-  # config.logger = SyslogLogger.new
+  config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new 'SiSINTA')
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -48,7 +57,7 @@ SiSINTA::Application.configure do
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
-  config.action_mailer.default_url_options = { :host => 'sisinta.maquinarodante.com.ar' }
+  config.action_mailer.default_url_options = { :host => 'cambiame' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   # Disable delivery errors, bad email addresses will be ignored
@@ -64,6 +73,10 @@ SiSINTA::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
   # símbolo :url que está definido en el modelo Adjunto
