@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806212754) do
+ActiveRecord::Schema.define(:version => 20120906172522) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
 
   create_table "colores", :force => true do |t|
     t.string "hvc", :null => false
-    t.string "rgb", :null => false
+    t.string "rgb"
   end
 
   add_index "colores", ["hvc"], :name => "index_colores_on_hvc", :unique => true
