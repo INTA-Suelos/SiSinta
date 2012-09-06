@@ -1,11 +1,14 @@
 jQuery ->
 
   # Propiedades comunes a todos los autocompletar
-  comunes =
+  comun =
     delay:      100
     autoFocus:  true
     minLength:  2
 
-  (etiquetas  = comunes).source = "/calicatas/autocompletar/etiquetas"
+  etiquetas =
+    source: "/calicatas/autocompletar/etiquetas"
 
-  $('#q_tags_name_cont').autocomplete(etiquetas)
+  $.extend etiquetas, comun
+
+  $('#q_tags_name_cont').autocomplete etiquetas

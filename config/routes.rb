@@ -15,7 +15,7 @@ SiSINTA::Application.routes.draw do
       get   'geo'
       get   'preparar_csv'
       post  'procesar_csv'
-      get 'autocompletar/:atributo' => 'calicatas#autocompletar'
+      get 'autocompletar/:atributo' => 'calicatas#autocompletar', as: 'autocompletar'
     end
 
     resources :analisis, only: :index, path_names: m do
@@ -38,15 +38,21 @@ SiSINTA::Application.routes.draw do
   end
 
   resources :grupos, path_names: m do
-    get 'autocompletar/:atributo' => 'grupos#autocompletar', on: :collection
+    collection do
+      get 'autocompletar/:atributo' => 'grupos#autocompletar', as: 'autocompletar'
+    end
   end
 
   resources :fases, path_names: f do
-    get 'autocompletar/:atributo' => 'fases#autocompletar', on: :collection
+    collection do
+      get 'autocompletar/:atributo' => 'fases#autocompletar', as: 'autocompletar'
+    end
   end
 
   resources :colores, only: [], path_names: m do
-    get 'autocompletar/:atributo' => 'colores#autocompletar', on: :collection
+    collection do
+      get 'autocompletar/:atributo' => 'colores#autocompletar', as: 'autocompletar'
+    end
   end
 
   scope "/admin" do
