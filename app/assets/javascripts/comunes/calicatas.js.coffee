@@ -11,7 +11,7 @@ jQuery ->
     autoFocus:  true
     minLenght:  2
 
-  multiples =
+  autocompletar_varios =
     focus:      ->
       false
     select:     (event, ui) ->
@@ -48,8 +48,8 @@ jQuery ->
   $.extend nombre, comun
   $.extend descripcion, comun
   $.extend hvc, comun
-  $.extend etiquetas, comun, multiples
-  $.extend reconocedores, comun, multiples
+  $.extend etiquetas, comun, autocompletar_varios
+  $.extend reconocedores, comun, autocompletar_varios
 
   $('#calicata_fase_attributes_nombre').autocomplete nombre
   $('#calicata_grupo_attributes_descripcion').autocomplete descripcion
