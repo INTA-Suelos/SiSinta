@@ -1,16 +1,34 @@
 class AddDeviseToUsuarios < ActiveRecord::Migration
+  # Actualización de Devise según:
+  # https://github.com/plataformatec/devise/wiki/How-To:-Upgrade-to-Devise-2.0-migration-schema-style
   def self.up
     change_table(:usuarios) do |t|
-      t.database_authenticatable :null => false
-      t.recoverable
-      t.rememberable
-      t.trackable
+      ## Database authenticatable
+      #t.database_authenticatable :null => false
+      t.string :email,              :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => ""
+
+      ## Recoverable
+      #t.recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      #t.rememberable
+      t.datetime :remember_created_at
+
+      ## Trackable
+      #t.trackable
+      t.integer  :sign_in_count, :default => 0
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       # t.encryptable
       # t.confirmable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
-
 
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps
@@ -31,7 +49,6 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
     remove_index :usuarios, :email
     remove_index :usuarios, :reset_password_token
 
-    remove_column :usuarios, :password_digest
     remove_column :usuarios, :email
     remove_column :usuarios, :encrypted_password
     remove_column :usuarios, :reset_password_token

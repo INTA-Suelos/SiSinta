@@ -6,7 +6,8 @@ class AnalisisControllerTest < ActionController::TestCase
   setup do
     @analisis = create(:analisis)
     @calicata = create(:calicata)
-    sign_in Usuario.find_by_nombre('Administrador')
+    @admin = create(:usuario, :admin)
+    sign_in @admin
     @request.env["HTTP_REFERER"] = "/calicatas/#{@calicata.to_param}/analisis"
   end
 

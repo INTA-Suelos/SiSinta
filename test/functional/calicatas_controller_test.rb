@@ -4,7 +4,6 @@ require './test/test_helper'
 class CalicatasControllerTest < ActionController::TestCase
 
   setup do
-    @simple = create(:usuario)
     @admin = create(:usuario, :admin)
   end
 
