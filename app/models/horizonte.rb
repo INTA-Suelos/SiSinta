@@ -3,9 +3,10 @@ class Horizonte < ActiveRecord::Base
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  # Arregla la entrada para que no haya objetos repetidos ni se creen vacíos
+  # Arregla la entrada para que no haya objetos repetidos, y en caso de no
+  # existir se creen
   before_save do
-    buscar_asociaciones color_seco: 'hvc', color_humedo: 'hvc'
+    buscar_asociaciones({ color_seco: 'hvc', color_humedo: 'hvc' }, true)
   end
 
   after_create :create_analisis
