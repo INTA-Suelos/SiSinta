@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806212754) do
+ActiveRecord::Schema.define(:version => 20120906172522) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "calicata_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.string   "archivo_file_name"
     t.string   "archivo_content_type"
     t.integer  "archivo_file_size"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
     t.decimal  "base_mg"
     t.decimal  "base_k"
     t.decimal  "base_na"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.integer  "horizonte_id"
     t.decimal  "arcilla",             :precision => 4, :scale => 2
     t.decimal  "materia_organica_c",  :precision => 4, :scale => 2
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
     t.integer  "drenaje_id"
     t.float    "profundidad_napa"
     t.decimal  "cobertura_vegetal"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "material_original"
     t.string   "esquema"
     t.string   "simbolo"
@@ -102,16 +102,16 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
 
   create_table "colores", :force => true do |t|
     t.string "hvc", :null => false
-    t.string "rgb", :null => false
+    t.string "rgb"
   end
 
   add_index "colores", ["hvc"], :name => "index_colores_on_hvc", :unique => true
-  add_index "colores", ["rgb"], :name => "index_colores_on_rgb", :unique => true
+  add_index "colores", ["rgb"], :name => "index_colores_on_rgb"
 
   create_table "consistencias", :force => true do |t|
     t.integer  "horizonte_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "en_seco_id"
     t.integer  "en_humedo_id"
     t.integer  "adhesividad_id"
@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
 
   create_table "estructuras", :force => true do |t|
     t.integer  "horizonte_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "tipo_id"
     t.integer  "clase_id"
     t.integer  "grado_id"
@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
   create_table "horizontes", :force => true do |t|
     t.integer  "profundidad_superior"
     t.float    "ph"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "calicata_id"
     t.string   "humedad"
     t.string   "raices"
@@ -179,8 +179,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "tipo_id"
     t.integer  "forma_id"
   end
@@ -196,8 +196,8 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
     t.string   "tipo"
     t.string   "forma"
     t.string   "simbolo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "calicata_id"
   end
 
@@ -240,12 +240,12 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
   create_table "ubicaciones", :force => true do |t|
     t.string   "descripcion"
     t.integer  "calicata_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["calicata_id"], :name => "index_ubicaciones_on_nombre", :unique => true
@@ -253,14 +253,14 @@ ActiveRecord::Schema.define(:version => 20120806212754) do
 
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    SyslogLogger (1.4.1)
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
       mail (~> 2.4.4)
@@ -64,6 +65,11 @@ GEM
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.0.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.0.0)
+      factory_girl (~> 4.0.0)
+      railties (>= 3.0.0)
     haml (3.1.6)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -186,6 +192,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SyslogLogger
   active_hash
   activerecord-postgis-adapter
   awesome_nested_fields
@@ -195,6 +202,7 @@ DEPENDENCIES
   devise
   draper
   dynamic_form
+  factory_girl_rails
   haml-rails
   hirb
   jquery-rails

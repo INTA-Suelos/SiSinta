@@ -1,12 +1,10 @@
-# -*- encoding : utf-8 -*-
-require 'test_helper'
+# encoding: utf-8
+require './test/test_helper'
 
 class AnalisisTest < ActiveSupport::TestCase
 
-  fixtures :analisis
-
   setup do
-    @analisis = analisis(:uno)
+    @analisis = build_stubbed(:analisis)
   end
 
   test 'debería devolver materia_organica_cn si no es null' do

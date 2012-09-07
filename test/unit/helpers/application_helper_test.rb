@@ -1,5 +1,5 @@
-# -*- encoding : utf-8 -*-
-require 'test_helper'
+# encoding: utf-8
+require './test/test_helper'
 require 'application_helper'
 
 class ApplicationHelperTest < ActionController::TestCase

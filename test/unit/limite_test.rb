@@ -1,12 +1,10 @@
 # encoding: utf-8
-require 'test_helper'
+require './test/test_helper'
 
 class LimiteTest < ActiveSupport::TestCase
 
-  fixtures :limites
-
   setup do
-    @limite = limites(:one)
+    @limite = build_stubbed(:limite)
   end
 
   test "debería poder acceder a sus asociaciones" do

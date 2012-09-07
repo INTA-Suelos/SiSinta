@@ -1,12 +1,10 @@
 # encoding: utf-8
-require 'test_helper'
+require './test/test_helper'
 
 class EstructuraTest < ActiveSupport::TestCase
 
-  fixtures :estructuras
-
   setup do
-    @estructura = estructuras(:one)
+    @estructura = build_stubbed(:estructura)
   end
 
   test "debería poder acceder a sus asociaciones" do

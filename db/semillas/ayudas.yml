@@ -15,7 +15,7 @@
 - id:     4
   campo:  ubicacion.mosaico
   ayuda:  Nomenclatura del mosaico IGN.
-  ejemplo:3560-36-4
+  ejemplo:  '3560-36-4'
 - id:     5
   campo:  ubicacion.recorrido
   ayuda:  Ayuda no disponible.

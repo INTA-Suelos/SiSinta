@@ -51,6 +51,7 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 gem 'thin'
+gem 'SyslogLogger', :require => 'syslog_logger'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -68,4 +69,5 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'minitest'
+  gem 'factory_girl_rails'
 end

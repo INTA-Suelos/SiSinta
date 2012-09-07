@@ -1,15 +1,15 @@
 # encoding : utf-8
-require 'test_helper'
+require './test/test_helper'
 
 class AbilityTest < ActiveSupport::TestCase
 
   setup do
-    @admin = Usuario.new
-    @autorizado = Usuario.new
-    @invitado = Usuario.new
-    @admin.roles << Rol.administrador
-    @autorizado.roles << Rol.autorizado
-    @invitado.roles << Rol.invitado
+    @admin = build(:usuario, :admin)
+    @autorizado = build(:usuario)
+    @invitado = build(:usuario)
+#    @admin.roles << Rol.administrador
+    @autorizado.roles << create(:rol, :autorizado)
+    @invitado.roles << create(:rol)
     @recursos = [Calicata, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
   end
 

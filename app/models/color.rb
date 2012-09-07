@@ -6,4 +6,6 @@ class Color < ActiveRecord::Base
   def to_s
     hvc
   end
+
+  # TODO rgb nil? aproximar
 end

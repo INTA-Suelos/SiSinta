@@ -1,9 +1,7 @@
 # encoding: utf-8
-require 'test_helper'
+require './test/test_helper'
 
 class FasesControllerTest < ActionController::TestCase
-
-  fixtures :fases
 
   setup do
     loguearse_con_permisos

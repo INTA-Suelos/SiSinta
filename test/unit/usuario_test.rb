@@ -1,15 +1,14 @@
-# -*- encoding : utf-8 -*-
-require 'test_helper'
+# encoding: utf-8
+require './test/test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
 
   setup do
-    @admin = Usuario.find_by_nombre('Administrador')
-    @simple = Usuario.create( nombre: 'simplón',
-                              email: 'roro@usuarios.com',
-                              config: { ficha: 'simple', srid: '4326' },
-                              password: 's1mpl3c1t0' )
-    @completo = Usuario.create nombre: 'completín', email: 'dada@usuarios.com'
+    create(:rol) # invitado
+    create(:rol, :autorizado)
+    @admin = create(:usuario, :admin)
+    @simple = create(:usuario, config: { ficha: 'simple', srid: '4326' })
+    @completo = create(:usuario)
   end
 
   test "debería tener en cuenta preferencias de ficha del usuario" do
@@ -34,9 +33,7 @@ class UsuarioTest < ActiveSupport::TestCase
 
   test "debería crear correctamente al usuario" do
     assert_nothing_raised do
-      @u = Usuario.new(  :nombre => 'Otro Administrador',
-                         :email => 'email@falso2.com',
-                         :password => 'administrador')
+      @u = build(:usuario)
       assert @u.save, "No guarda al usuario"
       @u.roles.clear << Rol.find_by_nombre('administrador')
       assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "No guarda la relación"

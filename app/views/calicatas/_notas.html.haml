@@ -5,11 +5,13 @@
     = ayuda_para 'calicata.observaciones'
   .span-21.last.campo
     .span-2= f.label :etiquetas
-    .span-19.last= f.text_field :etiquetas, disabled: bloqueado
+    .span-19.last= f.text_field :etiquetas, disabled: bloqueado,
+      data: { url: autocompletar_calicatas_path(:etiquetas) }
     = ayuda_para 'calicata.etiquetas'
   .span-21.last.campo
     .span-2= f.label :reconocedores
-    .span-19.last= f.text_field :reconocedores, disabled: bloqueado
+    .span-19.last= f.text_field :reconocedores, disabled: bloqueado,
+      data: { url: autocompletar_calicatas_path(:reconocedores) }
     = ayuda_para 'calicata.reconocedores'
   - if f.object.usuario.present?
     .span-21.last.campo
