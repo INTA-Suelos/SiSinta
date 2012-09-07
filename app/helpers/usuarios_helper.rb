@@ -9,10 +9,4 @@ module UsuariosHelper
     end
   end
 
-  def lista_de_fichas
-    [
-      ['Formulario clásico de Etchevere', 'completa']
-    ]
-  end
-
 end
