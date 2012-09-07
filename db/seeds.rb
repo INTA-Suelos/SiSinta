@@ -37,11 +37,11 @@ Usuario.create( :nombre => 'Administrador',
                 :password => 'administrador').roles.clear << Rol.find_by_nombre('administrador')
 
 # Carga la tabla de conversión de color Munsell
-cargar_csv_de('munsell', headers: true, col_sep: ';') do |color|
-  Color.find_or_create_by_hvc("#{color[0]} #{color[1]}/#{color[2]}") do |nuevo|
-    r = [(color[6].to_f * 255).round, 255].min
-    g = [(color[7].to_f * 255).round, 255].min
-    b = [(color[8].to_f * 255).round, 255].min
+cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|
+  Color.find_or_create_by_hvc("#{color[1]} #{color[2]}/#{color[3]}") do |nuevo|
+    r = [(color[4].to_f * 255).round, 255].min
+    g = [(color[5].to_f * 255).round, 255].min
+    b = [(color[6].to_f * 255).round, 255].min
     nuevo.rgb = "rgb(#{r}, #{g}, #{b})"
   end
 end
