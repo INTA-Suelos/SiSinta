@@ -154,4 +154,10 @@ module ApplicationHelper
     @subclases_de_erosion ||= SubclaseDeErosion.all
   end
 
+  def lista_de_fichas
+    [
+      ['Formulario clásico de Etchevere', 'completa']
+    ]
+  end
+
 end
