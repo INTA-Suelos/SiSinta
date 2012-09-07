@@ -4,6 +4,7 @@ require './test/test_helper'
 class UsuariosControllerTest < ActionController::TestCase
 
   setup do
+    create(:rol) # invitado
     @simple = create(:usuario)
     @admin = create(:usuario, :admin)
   end

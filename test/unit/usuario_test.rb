@@ -4,6 +4,8 @@ require './test/test_helper'
 class UsuarioTest < ActiveSupport::TestCase
 
   setup do
+    create(:rol) # invitado
+    create(:rol, :autorizado)
     @admin = create(:usuario, :admin)
     @simple = create(:usuario, config: { ficha: 'simple', srid: '4326' })
     @completo = create(:usuario)

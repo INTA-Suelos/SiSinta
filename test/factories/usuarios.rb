@@ -5,8 +5,10 @@ FactoryGirl.define do
     email
     password "algún password inolvidable"
 
+    # user_with_posts will create post data after the user has been created
     trait :admin do
-      roles { [Rol.find_by_nombre('administrador')] }
+      roles { [ create(:rol, :admin) ] }
     end
+
   end
 end
