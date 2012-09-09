@@ -175,7 +175,8 @@ protected
 
   # Agrega la paginación al scope en curso
   def paginar
-    @calicatas = @calicatas.pagina(params[:pagina])
+    @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
+    @calicatas = @calicatas.pagina(params[:pagina]).per(params[:filas])
   end
 
   # Determina la ruta a la que reenvia

@@ -1,4 +1,11 @@
 - if can? :create, @calicata
   = link_to "Nueva Calicata", new_calicata_path
 
-#paginacion= paginate @calicatas, remote: true
+#paginacion
+  = paginate @calicatas, remote: true
+  #filas
+    Mostrar
+    = link_to '10', calicatas_path(filas: 10), remote: true, id: activo?('10')
+    = link_to '20', calicatas_path(filas: 20), remote: true, id: activo?('20')
+    = link_to '50', calicatas_path(filas: 50), remote: true, id: activo?('50')
+    filas
