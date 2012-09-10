@@ -43,4 +43,8 @@ module CalicatasHelper
     )
   end
 
+  def activo?(elemento)
+    elemento == @activo ? 'activo' : nil
+  end
+
 end
