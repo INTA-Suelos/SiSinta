@@ -4,7 +4,7 @@ require './test/test_helper'
 class CalicatasControllerTest < ActionController::TestCase
 
   setup do
-    @admin = create(:usuario, :admin)
+    @admin = create(:usuario, :administrador)
   end
 
   test "debería acceder al controlador" do

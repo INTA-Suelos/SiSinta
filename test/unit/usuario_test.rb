@@ -4,11 +4,9 @@ require './test/test_helper'
 class UsuarioTest < ActiveSupport::TestCase
 
   setup do
-    create(:rol) # invitado
-    create(:rol, :autorizado)
-    @admin = create(:usuario, :admin)
-    @simple = create(:usuario, config: { ficha: 'simple', srid: '4326' })
-    @completo = create(:usuario)
+    @admin = create(:usuario, :administrador)
+    @simple = create(:usuario, :invitado, config: { ficha: 'simple', srid: '4326' })
+    @completo = create(:usuario, :autorizado)
   end
 
   test "debería tener en cuenta preferencias de ficha del usuario" do

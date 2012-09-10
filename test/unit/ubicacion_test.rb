@@ -5,10 +5,10 @@ class UbicacionTest < ActiveSupport::TestCase
 
   setup do
     @atributos = {}
-    @u = Ubicacion.new(calicata: build_stubbed(:calicata))
+    @u = build_stubbed(:ubicacion)
     @x = -61.85
     @y = -34.1725
-    @c = Ubicacion.new(calicata: build_stubbed(:calicata), x: @x, y: @y)
+    @c = create(:ubicacion, x: @x, y: @y)
   end
 
   test "debería negarse a cargar la ubicación sin calicata" do
@@ -55,7 +55,6 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "las coordenadas deberían estar en SRID 4326" do
-    @c.save
     srid = @c.coordenadas.srid
     assert 4326 == srid, "#{srid} es un SRID incorrecto"
   end
@@ -74,7 +73,7 @@ class UbicacionTest < ActiveSupport::TestCase
 
   test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
     flunk "no implementado todavía"
-    #u = Ubicacion.new mosaico: '3760-2-2'
+    #u = build_stubbed(:ubicacion, :vieja_escuela)
     #assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
@@ -103,8 +102,7 @@ class UbicacionTest < ActiveSupport::TestCase
     assert @u.coordenadas.present?, "No carga las coordenadas nuevas"
   end
 
-  test "debería corresonder (lat,lon) a (y,x)" do
-    @c.save
+  test "debería corresponder (lat,lon) a (y,x)" do
     assert_equal @c.latitud, @y
     assert_equal @c.longitud, @x
     assert_equal @c.coordenadas.x, @x
@@ -112,7 +110,6 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "debería convertir a GeoJSON" do
-    @c.save
     feature = RGeo::GeoJSON::EntityFactory.instance.feature @c.coordenadas
     assert_respond_to feature, :geometry, "No responde a 'geometry'"
     geojson = RGeo::GeoJSON.encode(feature)
@@ -123,7 +120,6 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   test "debería eliminar las coordenadas con datos en blanco" do
-    @c.save
     assert_not_nil @c.coordenadas
     @c.x, @c.y = "", ""
     @c.save

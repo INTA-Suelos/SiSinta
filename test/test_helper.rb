@@ -14,8 +14,11 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
 
-  def loguearse_con_permisos
-    sign_in (@admin || create(:usuario, :admin))
+  def loguearse_como(tipo_de_usuario)
+    @usuario = create :usuario, tipo_de_usuario
+    @request.env["devise.mapping"] = Devise.mappings[:usuario]
+    sign_in @usuario
+    return @usuario
   end
 
   def json

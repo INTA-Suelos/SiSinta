@@ -3,10 +3,6 @@ require './test/test_helper'
 
 class FasesControllerTest < ActionController::TestCase
 
-  setup do
-    loguearse_con_permisos
-  end
-
   test "debería routear a nombre" do
     assert_generates '/fases/autocompletar/nombre',
                       { controller: 'fases',
@@ -15,6 +11,7 @@ class FasesControllerTest < ActionController::TestCase
   end
 
   test "debería devolver nombre para términos parciales" do
+    loguearse_como :autorizado
     @termino = 'a'
     get :autocompletar, atributo: 'nombre', term: @termino
     assert_response :success

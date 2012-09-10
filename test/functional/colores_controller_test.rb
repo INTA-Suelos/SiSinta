@@ -3,10 +3,6 @@ require './test/test_helper'
 
 class ColoresControllerTest < ActionController::TestCase
 
-  setup do
-    loguearse_con_permisos
-  end
-
   test "debería routear a hvc" do
     assert_generates '/colores/autocompletar/hvc',
                       { controller: 'colores',
@@ -22,6 +18,7 @@ class ColoresControllerTest < ActionController::TestCase
   end
 
   test "debería devolver hvc para términos parciales" do
+    loguearse_como :autorizado
     @termino = '10'
     get :autocompletar, atributo: 'hvc', term: @termino
     assert_response :success
@@ -30,6 +27,7 @@ class ColoresControllerTest < ActionController::TestCase
   end
 
   test "debería devolver rgb para términos parciales" do
+    loguearse_como :autorizado
     @termino = '10'
     get :autocompletar, atributo: 'rgb', term: @termino
     assert_response :success
