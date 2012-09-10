@@ -128,7 +128,7 @@ ul.menu_usuarios {
       }
 
       .plegable {
-        &:hover { cursor: s-resize; }
+        &:hover { cursor: pointer; }
         & + .submenu { display: none; }
       }
     }
