@@ -15,43 +15,44 @@
 - id:     4
   campo:  ubicacion.mosaico
   ayuda:  Nomenclatura del mosaico IGN.
-  ejemplo:  '3560-36-4'
+  ejemplo:  '0000-00-0'
 - id:     5
   campo:  ubicacion.recorrido
-  ayuda:  Ayuda no disponible.
+  ayuda:  Número de recorrido del vuelo aerofotográfico.
 - id:     6
   campo:  ubicacion.aerofoto
-  ayuda:  Ayuda no disponible.
+  ayuda:  Número de fotograma.
 - id:     7
   campo:  calicata.fecha
-  ayuda:  Ayuda no disponible.
+  ayuda:  Fecha de toma de datos.
 - id:     8
   campo:  calicata.numero
-  ayuda:  Ayuda no disponible.
+  ayuda:  Número/Nombre del perfil.
+  ejemplo:  'C 00/000'
 - id:     9
   campo:  fase.nombre
-  ayuda:  Ayuda no disponible.
+  ayuda:  Fase respecto al perfil modal.
 - id:     10
   campo:  grupo.descripcion
-  ayuda:  Ayuda no disponible.
+  ayuda:  Taxonomía.
 - id:     11
   campo:  capacidad.subclases
-  ayuda:  Ayuda no disponible.
+  ayuda:  Subclase referida a la principal limitante.
 - id:     12
   campo:  capacidad.clase
-  ayuda:  Ayuda no disponible.
+  ayuda:  Capacidad de Uso: I a VIII.
 - id:     13
   campo:  ubicacion.ayuda
-  ayuda:  Ayuda no disponible.
+  ayuda:  Ubicación relativa.
 - id:     14
   campo:  ubicacion.y
-  ayuda:  Ayuda no disponible.
+  ayuda:  Coordenada y/latitud.
 - id:     15
   campo:  ubicacion.x
-  ayuda:  Ayuda no disponible.
+  ayuda:  Coordenada x/longitud.
 - id:     16
   campo:  ubicacion.formato
-  ayuda:  Ayuda no disponible.
+  ayuda:  Sistema de coordenadas de referencia.
 - id:     17
   campo:  paisaje.tipo
   ayuda:  Ayuda no disponible.
@@ -84,7 +85,7 @@
   ayuda:  Ayuda no disponible.
 - id:     27
   campo:  calicata.cobertura_vegetal
-  ayuda:  Ayuda no disponible.
+  ayuda:  Porcentaje de la superficie cubierta por vegetación.
 - id:     28
   campo:  calicata.profundidad_napa
   ayuda:  Ayuda no disponible.
