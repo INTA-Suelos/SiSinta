@@ -4,12 +4,9 @@ require './test/test_helper'
 class AbilityTest < ActiveSupport::TestCase
 
   setup do
-    @admin = build(:usuario, :admin)
-    @autorizado = build(:usuario)
-    @invitado = build(:usuario)
-#    @admin.roles << Rol.administrador
-    @autorizado.roles << create(:rol, :autorizado)
-    @invitado.roles << create(:rol)
+    @admin = build(:usuario, :administrador)
+    @autorizado = build(:usuario, :autorizado)
+    @invitado = build(:usuario, :invitado)
     @recursos = [Calicata, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
   end
 

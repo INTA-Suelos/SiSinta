@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :rol do
     nombre "invitado"
 
-    trait :admin do
+    trait :administrador do
       nombre "administrador"
     end
 
