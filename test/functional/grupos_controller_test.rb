@@ -3,10 +3,6 @@ require './test/test_helper'
 
 class GruposControllerTest < ActionController::TestCase
 
-  setup do
-    loguearse_con_permisos
-  end
-
   test "debería routear a descripcion" do
     assert_generates '/grupos/autocompletar/descripcion',
                       { controller: 'grupos',
@@ -15,6 +11,7 @@ class GruposControllerTest < ActionController::TestCase
   end
 
   test "debería devolver descripcion para términos parciales" do
+    loguearse_como :autorizado
     @termino = 'des'
     get :autocompletar, atributo: 'descripcion', term: @termino
     assert_response :success

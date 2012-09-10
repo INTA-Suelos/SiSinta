@@ -9,18 +9,10 @@ class AnalisisController < AutorizadoController
   # GET /analisis
   # GET /analisis.json
   def index
-    @analisis = @calicata.analisis
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @analisis }
     end
-  end
-
-  # GET /analisis/edit
-  def edit
-    # TODO sort por profundidad de horizonte
-    @analisis = @calicata.analisis.sort
   end
 
   # PUT /calicata/1/analisis

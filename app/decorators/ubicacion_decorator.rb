@@ -17,7 +17,11 @@ class UbicacionDecorator < Draper::Base
   end
 
   def srid
-    h.current_usuario.srid.to_i
+    begin
+      h.current_usuario.srid.to_i
+    rescue NoMethodError
+      4326
+    end
   end
 
   def redondear(numero)
