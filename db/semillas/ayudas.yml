@@ -40,7 +40,7 @@
   ayuda:  Subclase referida a la principal limitante.
 - id:     12
   campo:  capacidad.clase
-  ayuda:  Capacidad de Uso: I a VIII.
+  ayuda:  'Capacidad de Uso: I a VIII.'
 - id:     13
   campo:  ubicacion.ayuda
   ayuda:  Ubicación relativa.
