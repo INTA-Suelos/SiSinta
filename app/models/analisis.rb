@@ -29,7 +29,7 @@ class Analisis < ActiveRecord::Base
   end
 
   def profundidad_muestra_before_type_cast
-    read_attribute(:profundidad_muestra) || self.horizonte.rango_profundidad
+    read_attribute(:profundidad_muestra) || self.horizonte.try(:rango_profundidad)
   end
 
   def agua_util_before_type_cast
