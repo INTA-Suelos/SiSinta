@@ -1,31 +1,31 @@
 # encoding: utf-8
-module CalicatasHelper
+module PerfilesHelper
   # Para checkear si debería estar marcado o no el checkbox de la subclase
   # correspondiente
   def tildada?(s)
-    @calicata.capacidad.try(:subclases).include?(s)
+    @perfil.capacidad.try(:subclases).include?(s)
   end
 
   # Para el +FormHelper+ necesito los objetos instanciados, aunque no tengan
   # asociaciones realizadas, asique acá les asignamos un objeto nuevo si no
   # tenían ya
-  def calicata_preparada
-    @calicata.grupo         ||= Grupo.new
-    @calicata.paisaje       ||= Paisaje.new
-    @calicata.capacidad     ||= Capacidad.new
-    @calicata.fase          ||= Fase.new
-    @calicata.ubicacion     ||= Ubicacion.new
-    @calicata.humedad       ||= Humedad.new
-    @calicata.pedregosidad  ||= Pedregosidad.new
-    @calicata.erosion       ||= Erosion.new
-    @calicata.horizontes.each do |h|
+  def perfil_preparado
+    @perfil.grupo         ||= Grupo.new
+    @perfil.paisaje       ||= Paisaje.new
+    @perfil.capacidad     ||= Capacidad.new
+    @perfil.fase          ||= Fase.new
+    @perfil.ubicacion     ||= Ubicacion.new
+    @perfil.humedad       ||= Humedad.new
+    @perfil.pedregosidad  ||= Pedregosidad.new
+    @perfil.erosion       ||= Erosion.new
+    @perfil.horizontes.each do |h|
       h.color_seco    || h.build_color_seco
       h.color_humedo  || h.build_color_humedo
       h.limite        || h.build_limite
       h.consistencia  || h.build_consistencia
       h.estructura    || h.build_estructura
     end
-    @calicata
+    @perfil
   end
 
   # Para el +FormHelper+ necesito los objetos instanciados, aunque no tengan
@@ -34,7 +34,7 @@ module CalicatasHelper
   def horizonte_preparado
     Horizonte.new(
       profundidad_superior:
-        @calicata.horizontes.empty? ? 0 : @calicata.horizontes.last.profundidad_inferior,
+        @perfil.horizontes.empty? ? 0 : @perfil.horizontes.last.profundidad_inferior,
       color_seco: Color.new,
       color_humedo: Color.new,
       limite: Limite.new,
