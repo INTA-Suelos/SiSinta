@@ -29,6 +29,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'grupo', 'grupos'
   inflect.irregular 'rol', 'roles'
   inflect.irregular 'ubicacion', 'ubicaciones'
+  inflect.irregular 'proyecto', 'proyectos'
 
   # Modelos <=> Lookups
   inflect.irregular 'consistencia', 'consistencias'
