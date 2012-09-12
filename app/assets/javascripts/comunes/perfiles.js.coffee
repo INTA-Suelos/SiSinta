@@ -51,11 +51,11 @@ jQuery ->
   $.extend etiquetas, comun, autocompletar_varios
   $.extend reconocedores, comun, autocompletar_varios
 
-  $('#calicata_fase_attributes_nombre').autocomplete nombre
-  $('#calicata_grupo_attributes_descripcion').autocomplete descripcion
+  $('#perfil_fase_attributes_nombre').autocomplete nombre
+  $('#perfil_grupo_attributes_descripcion').autocomplete descripcion
   $('.munsell').autocomplete hvc
-  $('#calicata_etiquetas').autocomplete etiquetas
-  $('#calicata_reconocedores').autocomplete reconocedores
+  $('#perfil_etiquetas').autocomplete etiquetas
+  $('#perfil_reconocedores').autocomplete reconocedores
 
   $('.completa').nestedFields({
     afterInsert: ->
