@@ -4,13 +4,13 @@
 # asociaciones previas.
 #
 - id:     1
-  campo:  calicata.modal
+  campo:  perfil.modal
   ayuda:  Indica si el perfil es modal o no.
 - id:     2
-  campo:  calicata.nombre
+  campo:  perfil.nombre
   ayuda:  Nombre de la Serie a la que está referenciada.
 - id:     3
-  campo:  calicata.simbolo
+  campo:  perfil.simbolo
   ayuda:  Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.
 - id:     4
   campo:  ubicacion.mosaico
@@ -23,10 +23,10 @@
   campo:  ubicacion.aerofoto
   ayuda:  Número de fotograma.
 - id:     7
-  campo:  calicata.fecha
+  campo:  perfil.fecha
   ayuda:  Fecha de toma de datos.
 - id:     8
-  campo:  calicata.numero
+  campo:  perfil.numero
   ayuda:  Número/Nombre del perfil.
   ejemplo:  'C 00/000'
 - id:     9
@@ -63,49 +63,49 @@
   campo:  paisaje.simbolo
   ayuda:  Ayuda no disponible.
 - id:     20
-  campo:  calicata.material_original
+  campo:  perfil.material_original
   ayuda:  Ayuda no disponible.
 - id:     21
-  campo:  calicata.drenaje
+  campo:  perfil.drenaje
   ayuda:  Ayuda no disponible.
 - id:     22
-  campo:  calicata.relieve
+  campo:  perfil.relieve
   ayuda:  Ayuda no disponible.
 - id:     23
-  campo:  calicata.anegamiento
+  campo:  perfil.anegamiento
   ayuda:  Ayuda no disponible.
 - id:     24
-  campo:  calicata.posicion
+  campo:  perfil.posicion
   ayuda:  Ayuda no disponible.
 - id:     25
-  campo:  calicata.humedad
+  campo:  perfil.humedad
   ayuda:  Ayuda no disponible.
 - id:     26
-  campo:  calicata.pendiente
+  campo:  perfil.pendiente
   ayuda:  Ayuda no disponible.
 - id:     27
-  campo:  calicata.cobertura_vegetal
+  campo:  perfil.cobertura_vegetal
   ayuda:  Porcentaje de la superficie cubierta por vegetación.
 - id:     28
-  campo:  calicata.profundidad_napa
+  campo:  perfil.profundidad_napa
   ayuda:  Ayuda no disponible.
 - id:     29
-  campo:  calicata.escurrimiento
+  campo:  perfil.escurrimiento
   ayuda:  Ayuda no disponible.
 - id:     30
-  campo:  calicata.sal
+  campo:  perfil.sal
   ayuda:  Ayuda no disponible.
 - id:     31
-  campo:  calicata.permeabilidad
+  campo:  perfil.permeabilidad
   ayuda:  Ayuda no disponible.
 - id:     32
-  campo:  calicata.pedregosidad
+  campo:  perfil.pedregosidad
   ayuda:  Ayuda no disponible.
 - id:     33
-  campo:  calicata.erosion
+  campo:  perfil.erosion
   ayuda:  Ayuda no disponible.
 - id:     34
-  campo:  calicata.uso_de_la_tierra
+  campo:  perfil.uso_de_la_tierra
   ayuda:  Ayuda no disponible.
 - id:     35
   campo:  fase.codigo
@@ -183,17 +183,17 @@
   campo:  horizonte.formaciones_especiales
   ayuda:  Ayuda no disponible.
 - id:     60
-  campo:  calicata.observaciones
+  campo:  perfil.observaciones
   ayuda:  Ayuda no disponible.
 - id:     61
-  campo:  calicata.vegetacion_o_cultivos
+  campo:  perfil.vegetacion_o_cultivos
   ayuda:  Ayuda no disponible.
 - id:     62
-  campo:  calicata.etiquetas
-  ayuda:  Lista de etiquetas (separadas por coma) para esta calicata.
+  campo:  perfil.etiquetas
+  ayuda:  Lista de etiquetas (separadas por coma) para esta perfil.
 - id:     63
-  campo:  calicata.usuario
+  campo:  perfil.usuario
   ayuda:  Usuario que cargó este perfil
 - id:     64
-  campo:  calicata.reconocedores
+  campo:  perfil.reconocedores
   ayuda:  Lista de reconocedores del perfil (separados por coma).
