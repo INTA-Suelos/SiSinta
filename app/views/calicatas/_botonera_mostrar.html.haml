@@ -1,10 +1,10 @@
-- if can? :update, @calicata
-  = link_to 'Editar', edit_calicata_path(@calicata)
+- if can? :update, @perfil
+  = link_to 'Editar', edit_perfil_path(@perfil)
   = '|'
-- if can? :read, @calicata
-  = link_to 'Mostrar análisis', calicata_analisis_index_path(@calicata)
+- if can? :read, @perfil
+  = link_to 'Mostrar análisis', perfil_analisis_index_path(@perfil)
   = '|'
-- if can? :read, @calicata.adjuntos.build
-  = link_to 'Mostrar adjuntos', calicata_adjuntos_path(@calicata)
+- if can? :read, @perfil.adjuntos.build
+  = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
   = '|'
-= link_to 'Volver', calicatas_path
+= link_to 'Volver', perfiles_path

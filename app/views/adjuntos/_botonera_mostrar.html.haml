@@ -1,7 +1,7 @@
-- if can? :read, @calicata
-  = link_to 'Mostrar calicata', @calicata
+- if can? :read, @perfil
+  = link_to 'Mostrar perfil', @perfil
   = '|'
 - if can? :update, @adjunto
-  = link_to 'Editar adjunto', edit_calicata_adjunto_path(@calicata, @adjunto)
+  = link_to 'Editar adjunto', edit_perfil_adjunto_path(@perfil, @adjunto)
   = '|'
-= link_to 'Volver', calicata_adjuntos_path
+= link_to 'Volver', perfil_adjuntos_path

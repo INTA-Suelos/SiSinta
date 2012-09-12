@@ -2,19 +2,19 @@
   .span-21.last.campo
     .span-2= f.label :observaciones
     .span-19.last= f.text_area :observaciones, disabled: bloqueado
-    = ayuda_para 'calicata.observaciones'
+    = ayuda_para 'perfil.observaciones'
   .span-21.last.campo
     .span-2= f.label :etiquetas
     .span-19.last= f.text_field :etiquetas, disabled: bloqueado,
-      data: { url: autocompletar_calicatas_path(:etiquetas) }
-    = ayuda_para 'calicata.etiquetas'
+      data: { url: autocompletar_perfiles_path(:etiquetas) }
+    = ayuda_para 'perfil.etiquetas'
   .span-21.last.campo
     .span-2= f.label :reconocedores
     .span-19.last= f.text_field :reconocedores, disabled: bloqueado,
-      data: { url: autocompletar_calicatas_path(:reconocedores) }
-    = ayuda_para 'calicata.reconocedores'
+      data: { url: autocompletar_perfiles_path(:reconocedores) }
+    = ayuda_para 'perfil.reconocedores'
   - if f.object.usuario.present?
     .span-21.last.campo
       .span-2= f.label :usuario, "Cargado por"
       .span-19.last= f.text_field :usuario, disabled: true
-      = ayuda_para 'calicata.usuario'
+      = ayuda_para 'perfil.usuario'
