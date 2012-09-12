@@ -2,7 +2,7 @@ es:
   activerecord:
     errors:
       models:
-        calicata:
+        perfil:
           attributes:
             fecha:
               future: "todavía no llega"
