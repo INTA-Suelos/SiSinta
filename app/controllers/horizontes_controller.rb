@@ -33,6 +33,6 @@ class HorizontesController < AutorizadoController
 protected
 
   def cargar_horizontes
-    @horizontes = Horizonte.order('calicata_id ASC')
+    @horizontes = Horizonte.order('perfil_id ASC')
   end
 end

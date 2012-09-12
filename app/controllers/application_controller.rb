@@ -82,10 +82,10 @@ protected
                                           "#{atributo}" => elemento.send(atributo)]}
   end
 
-  # Carga la calicata a la que pertenecen el modelo anidado
+  # Carga el perfil al que pertenece el modelo anidado
   #
-  def cargar_calicata
-    @calicata = Calicata.find(params[:calicata_id])
+  def cargar_perfil
+    @perfil = Perfil.find(params[:perfil_id])
   end
 
   # Devuelve un csv en base a los atributos del modelo
