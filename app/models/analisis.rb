@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Analisis < ActiveRecord::Base
   belongs_to :horizonte, inverse_of: :analisis
-  has_one :calicata, through: :horizonte
+  has_one :perfil, through: :horizonte
 
   validates_presence_of :horizonte
   validates_numericality_of :registro,:ph_pasta,
@@ -53,7 +53,7 @@ class Analisis < ActiveRecord::Base
   end
 
   def publico
-    calicata.publico
+    perfil.publico
   end
 
 end

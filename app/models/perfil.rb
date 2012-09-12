@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Calicata < ActiveRecord::Base
+class Perfil < ActiveRecord::Base
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -12,9 +12,9 @@ class Calicata < ActiveRecord::Base
 
   scope :modales, where(modal: 'true')
   scope :index,   joins(:ubicacion)
-                  .select('calicatas.fecha, calicatas.nombre,
+                  .select('perfiles.fecha, perfiles.nombre,
                            ubicacion.descripcion as ubicacion,
-                           calicatas.numero, calicatas.modal')
+                           perfiles.numero, perfiles.modal')
 
   validate :la_fecha_no_puede_ser_futura
   validates_presence_of :fecha
@@ -24,20 +24,20 @@ class Calicata < ActiveRecord::Base
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
 
-  has_many :horizontes,   dependent: :destroy, inverse_of: :calicata
-  has_many :adjuntos,     dependent: :destroy, inverse_of: :calicata
-  has_one :capacidad,     dependent: :destroy, inverse_of: :calicata
-  has_one :ubicacion,     dependent: :destroy, inverse_of: :calicata
-  has_one :paisaje,       dependent: :destroy, inverse_of: :calicata
-  has_one :humedad,       dependent: :destroy, inverse_of: :calicata
-  has_one :erosion,       dependent: :destroy, inverse_of: :calicata
-  has_one :pedregosidad,  dependent: :destroy, inverse_of: :calicata
+  has_many :horizontes,   dependent: :destroy, inverse_of: :perfil
+  has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil
+  has_one :capacidad,     dependent: :destroy, inverse_of: :perfil
+  has_one :ubicacion,     dependent: :destroy, inverse_of: :perfil
+  has_one :paisaje,       dependent: :destroy, inverse_of: :perfil
+  has_one :humedad,       dependent: :destroy, inverse_of: :perfil
+  has_one :erosion,       dependent: :destroy, inverse_of: :perfil
+  has_one :pedregosidad,  dependent: :destroy, inverse_of: :perfil
 
   # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
-  #   belongs_to => calicata tiene lookup_id
-  #   has_one => lookup tiene calicata_id
+  #   belongs_to => perfil tiene lookup_id
+  #   has_one => lookup tiene perfil_id
   # Como los valores de estas tablas son un conjunto definido, se comparten
-  # entre todas las calicatas, aunque suene raro un belongs_to acá.
+  # entre todos los perfiles, aunque suene raro un belongs_to acá.
   #
   belongs_to_active_hash :escurrimiento
   belongs_to_active_hash :pendiente
@@ -51,9 +51,9 @@ class Calicata < ActiveRecord::Base
 
   has_many :analisis, through: :horizontes
 
-  belongs_to :usuario,  inverse_of: :calicatas
-  belongs_to :fase,     inverse_of: :calicatas
-  belongs_to :grupo,    inverse_of: :calicatas
+  belongs_to :usuario,  inverse_of: :perfiles
+  belongs_to :fase,     inverse_of: :perfiles
+  belongs_to :grupo,    inverse_of: :perfiles
 
   accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion, :pedregosidad,
                                 :humedad, :erosion,
@@ -63,7 +63,7 @@ class Calicata < ActiveRecord::Base
 
 # == Validaciones
 
-  # Validación para comprobar que no se guarda una calicata que no ha ocurrido.
+  # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
   #
   def la_fecha_no_puede_ser_futura
     if !fecha.blank? and fecha > Date.today

@@ -15,9 +15,9 @@ class Ubicacion < ActiveRecord::Base
   alias_attribute :longitud, :x
   alias_attribute :latitud,  :y
 
-  belongs_to :calicata, :inverse_of => :ubicacion
+  belongs_to :perfil, :inverse_of => :ubicacion
 
-  validates_presence_of :calicata
+  validates_presence_of :perfil
   validates_inclusion_of :x,  in: config.rango_x, allow_blank: true,
                               message: "No está dentro del rango permitido"
   validates_inclusion_of :y,  in: config.rango_y, allow_blank: true,
@@ -46,7 +46,7 @@ class Ubicacion < ActiveRecord::Base
   # el controlador y devuelva geojson para las coordenadas.
   #
   def as_json(options={})
-    { :calicata_id => calicata_id,
+    { :perfil_id => perfil_id,
       :mosaico => mosaico,
       :recorrido => recorrido,
       :aerofoto => aerofoto,
