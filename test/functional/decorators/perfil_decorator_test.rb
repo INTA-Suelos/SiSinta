@@ -1,20 +1,20 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class CalicataDecoratorTest < ActiveSupport::TestCase
+class PerfilDecoratorTest < ActiveSupport::TestCase
 
   def setup
-    @calicata = build_stubbed(:calicata)
+    @perfil = build_stubbed(:perfil)
   end
 
   test "decora la ubicación" do
-    @calicata.ubicacion = create(:ubicacion)
-    assert_kind_of Draper::Base, CalicataDecorator.decorate(@calicata).ubicacion
+    @perfil.ubicacion = create(:ubicacion)
+    assert_kind_of Draper::Base, PerfilDecorator.decorate(@perfil).ubicacion
   end
 
   test "usa día/mes/año para la fecha" do
-    @calicata.fecha = Date.new
-    assert_equal Date.new.to_s(:dma), CalicataDecorator.decorate(@calicata).fecha
+    @perfil.fecha = Date.new
+    assert_equal Date.new.to_s(:dma), PerfilDecorator.decorate(@perfil).fecha
   end
 
 end

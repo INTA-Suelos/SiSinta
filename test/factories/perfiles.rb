@@ -1,19 +1,19 @@
 # encoding: utf-8
 FactoryGirl.define do
-  factory :calicata do
+  factory :perfil do
     nombre { generate :cadena_unica }
     fecha "2012-09-03"
 
-    factory :calicata_modal do
+    factory :perfil_modal do
       modal true
       simbolo { generate :cadena_unica }
     end
 
-    factory :calicata_anonima do
+    factory :perfil_anonimo do
       nombre nil
     end
 
-    factory :calicata_futura do
+    factory :perfil_futuro do
       fecha { 2.days.from_now }
     end
   end

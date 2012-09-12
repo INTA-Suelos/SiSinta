@@ -1,21 +1,21 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class CalicatasControllerTest < ActionController::TestCase
+class PerfilesControllerTest < ActionController::TestCase
 
   setup do
     @admin = create(:usuario, :administrador)
   end
 
   test "debería acceder al controlador" do
-    assert_instance_of CalicatasController, @controller
+    assert_instance_of PerfilesController, @controller
   end
 
   test "should get index" do
     sign_in @admin
     get :index
     assert_response :success
-    assert_not_nil assigns(:calicatas)
+    assert_not_nil assigns(:perfiles)
   end
 
   test "should get new" do
@@ -24,51 +24,51 @@ class CalicatasControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create calicata" do
+  test "should create perfil" do
     sign_in @admin
 
-    assert_difference('Calicata.count', 1) do
-      post :create, calicata: attributes_for(:calicata)
+    assert_difference('Perfil.count', 1) do
+      post :create, perfil: attributes_for(:perfil)
     end
 
-    assert_redirected_to calicata_path(assigns(:calicata))
+    assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "should show calicata" do
+  test "should show perfil" do
     sign_in @admin
-    @request.env["HTTP_REFERER"] = "/calicatas/"
+    @request.env["HTTP_REFERER"] = "/perfiles/"
 
-    get :show, id: create(:calicata).to_param
+    get :show, id: create(:perfil).to_param
 
     assert_response :success
   end
 
   test "should get edit" do
     sign_in @admin
-    get :edit, id: create(:calicata).to_param
+    get :edit, id: create(:perfil).to_param
 
     assert_response :success
   end
 
-  test "should update calicata" do
+  test "should update perfil" do
     sign_in @admin
-    calicata = create(:calicata)
-    @request.env["HTTP_REFERER"] = "/calicatas/#{calicata.to_param}"
-    put :update, id: calicata.to_param, calicata: calicata.attributes
-    assert_redirected_to calicata_path(assigns(:calicata))
+    perfil = create(:perfil)
+    @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
+    put :update, id: perfil.to_param, perfil: perfil.attributes
+    assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "should destroy calicata" do
+  test "should destroy perfil" do
     sign_in @admin
-    calicata = create(:calicata)
-    assert_difference('Calicata.count', -1) do
-      delete :destroy, id: calicata.to_param
+    perfil = create(:perfil)
+    assert_difference('Perfil.count', -1) do
+      delete :destroy, id: perfil.to_param
     end
 
-    assert_redirected_to calicatas_path
+    assert_redirected_to perfiles_path
   end
 
-  test "debería poder acceder a la lista de calicatas sin loguearse" do
+  test "debería poder acceder a la lista de perfiles sin loguearse" do
     assert_nil @controller.current_usuario
     get :index
     assert_response :success
@@ -76,7 +76,7 @@ class CalicatasControllerTest < ActionController::TestCase
 
   test "debería poder acceder a los datos en geoJSON sin loguearse" do
     assert_nil @controller.current_usuario
-    @request.env["HTTP_REFERER"] = "/calicatas/"
+    @request.env["HTTP_REFERER"] = "/perfiles/"
     get :geo, format: :json
     assert_response :success
   end
