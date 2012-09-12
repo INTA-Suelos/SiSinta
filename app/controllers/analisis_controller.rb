@@ -1,7 +1,7 @@
 # encoding: utf-8
 class AnalisisController < AutorizadoController
 
-  # La accioón +index+ carga sus propios análisis
+  # La acción +index+ carga sus propios análisis
   load_and_authorize_resource :perfil
   skip_load_and_authorize_resource
   skip_authorization_check
