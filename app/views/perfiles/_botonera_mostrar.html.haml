@@ -1,8 +1,8 @@
 - if can? :update, @perfil
-  = link_to 'Editar', edit_perfil_analisis_index_path(@perfil)
+  = link_to 'Editar', edit_perfil_path(@perfil)
   = '|'
 - if can? :read, @perfil
-  = link_to 'Mostrar perfil', @perfil
+  = link_to 'Mostrar análisis', perfil_analisis_index_path(@perfil)
   = '|'
 - if can? :read, @perfil.adjuntos.build
   = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)

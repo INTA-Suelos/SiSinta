@@ -6,16 +6,16 @@ SiSINTA::Application.routes.draw do
 
   get 'inicio/index'
 
-  # Rutas en castellano (i.e. calicatas/nueva, calicatas/2/editar)
+  # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
   m = { new: "nuevo", edit: "editar" }
   f = { new: "nueva", edit: "editar" }
 
-  resources :calicatas, path_names: f do
+  resources :perfiles, path_names: m do
     collection do
       get   'geo'
       get   'preparar_csv'
       post  'procesar_csv'
-      get 'autocompletar/:atributo' => 'calicatas#autocompletar', as: 'autocompletar'
+      get 'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
     end
 
     resources :analisis, only: :index, path_names: m do

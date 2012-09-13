@@ -7,7 +7,7 @@ class AbilityTest < ActiveSupport::TestCase
     @admin = build(:usuario, :administrador)
     @autorizado = build(:usuario, :autorizado)
     @invitado = build(:usuario, :invitado)
-    @recursos = [Calicata, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
+    @recursos = [Perfil, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
   end
 
   test "deberia permitirle todo al administrador" do
@@ -26,7 +26,7 @@ class AbilityTest < ActiveSupport::TestCase
 
     @permisos = Ability.new @autorizado
 
-    (@permisos.basicos + @permisos.calicatas).each do |recurso|
+    (@permisos.basicos + @permisos.perfiles).each do |recurso|
       assert @permisos.can?(:manage, recurso.new), "No puede administrar #{recurso}"
     end
     assert @permisos.cannot?(:manage, Usuario.new), "Puede administrar Usuario"

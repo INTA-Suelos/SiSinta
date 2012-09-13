@@ -7,7 +7,7 @@ jQuery ->
     minLength:  2
 
   etiquetas =
-    source: "/calicatas/autocompletar/etiquetas"
+    source: "/perfiles/autocompletar/etiquetas"
 
   $.extend etiquetas, comun
 

@@ -1,10 +1,10 @@
-= form_for(calicata, html: { class: 'simple span-24' }) do |f|
+= form_for(perfil, html: { class: 'simple span-24' }) do |f|
 
-  - if calicata.errors.any?
+  - if perfil.errors.any?
     #mensaje_de_error.span-23
-      %h2= "#{pluralize(@calicata.errors.count, "error")} impide(n) que se guarde esta calicata:"
+      %h2= "#{pluralize(@perfil.errors.count, "error")} impide(n) que se guarde esta perfil:"
       %ul
-        - @calicata.errors.full_messages.each do |msg|
+        - @perfil.errors.full_messages.each do |msg|
           %li= msg
 
   = field_set_tag 'Ficha de descripción edafológica', class: 'span-23 last' do

@@ -1,6 +1,6 @@
 # Clasificación utilitaria o Capacidad de uso, del Sistema de codificación de
 # suelos, Anexo 5. Esto determina los valores posibles para las Clases de
-# Capacidad en la ficha de calicatas.
+# Capacidad en la ficha de perfiles.
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
 # asociaciones previas.
 #

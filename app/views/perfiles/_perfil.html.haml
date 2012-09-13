@@ -1,0 +1,11 @@
+%tr
+  %td= perfil.fecha
+  %td= perfil.nombre
+  %td= perfil.ubicacion.try :descripcion
+  %td= perfil.numero
+  %td= "✓" if perfil.modal?
+  %td.boton= link_to 'Mostrar', perfil
+  %td.boton= link_to 'Editar', edit_perfil_path(perfil)
+  %td.boton= link_to 'Análisis', perfil_analisis_index_path(perfil)
+  %td.boton= link_to 'Eliminar', perfil,
+                      data: { confirm: '¿Estás seguro?'}, method: :delete

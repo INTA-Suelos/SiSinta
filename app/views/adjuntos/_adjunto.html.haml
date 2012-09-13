@@ -1,10 +1,10 @@
 %tr
   %td.nombre= link_to adjunto.archivo.original_filename,
-    descargar_calicata_adjunto_path(@calicata, adjunto)
+    descargar_perfil_adjunto_path(@perfil, adjunto)
   %td.icono= icono_para_extension(adjunto.extension)
   %td= number_to_human_size(adjunto.archivo_file_size)
   %td.notas= adjunto.notas
-  %td.boton= link_to 'Mostrar', [@calicata, adjunto]
-  %td.boton= link_to 'Editar', edit_calicata_adjunto_path(@calicata, adjunto)
-  %td.boton= link_to('Eliminar', [@calicata, adjunto],
+  %td.boton= link_to 'Mostrar', [@perfil, adjunto]
+  %td.boton= link_to 'Editar', edit_perfil_adjunto_path(@perfil, adjunto)
+  %td.boton= link_to('Eliminar', [@perfil, adjunto],
     data: { confirm: '¿Estás seguro?'}, method: :delete)

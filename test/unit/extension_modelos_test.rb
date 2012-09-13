@@ -4,20 +4,20 @@ require './test/test_helper'
 class ExtensionModelosTest < ActiveSupport::TestCase
 
   test "debería convertir el modelo a Array" do
-    assert_instance_of Array, build(:calicata).como_arreglo, "no devuelve Array"
+    assert_instance_of Array, build(:perfil).como_arreglo, "no devuelve Array"
   end
 
   test "debería buscar y cargar las asociaciones" do
     existente = create(:fase).nombre
     assert_no_difference ('Fase.count') do
-      Calicata.create fase_attributes: { nombre: existente }
+      Perfil.create fase_attributes: { nombre: existente }
     end
   end
 
   test "debería filtrar los atributos" do
-    sin_atributo = Calicata.atributos_y_asociaciones excepto: :numero
-    sin_asociacion = Calicata.atributos_y_asociaciones excepto: :ubicacion
-    sin_ambos = Calicata.atributos_y_asociaciones excepto: [:numero, :ubicacion]
+    sin_atributo = Perfil.atributos_y_asociaciones excepto: :numero
+    sin_asociacion = Perfil.atributos_y_asociaciones excepto: :ubicacion
+    sin_ambos = Perfil.atributos_y_asociaciones excepto: [:numero, :ubicacion]
 
     assert_instance_of Array, sin_atributo, "no devuelve Array"
     assert_instance_of Array, sin_asociacion, "no devuelve Array"

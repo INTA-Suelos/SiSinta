@@ -49,7 +49,7 @@ end
 if File.exists?('db/semillas/perfiles-modales.csv')
   # Cargamos perfiles modales ya digitalizados
   cargar_csv_de('perfiles-modales', headers:true, col_sep: ',') do |csv|
-    Calicata.find_or_create_by_nombre(nombre: csv[0]) do |p|
+    Perfil.find_or_create_by_nombre(nombre: csv[0]) do |p|
       p.modal = true
       p.fecha = csv[1]
       p.create_ubicacion( x: csv[2], y: csv[3],
