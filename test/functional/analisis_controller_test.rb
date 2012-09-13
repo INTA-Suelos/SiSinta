@@ -4,17 +4,18 @@ require './test/test_helper'
 class AnalisisControllerTest < ActionController::TestCase
 
   setup do
+    loguearse_como :administrador 
     @analisis = create(:analisis)
-    @perfil = create(:perfil)
-    @admin = create(:usuario, :administrador)
-    sign_in @admin
+    @perfil = @analisis.perfil
     @request.env["HTTP_REFERER"] = "/perfiles/#{@perfil.to_param}/analisis"
   end
 
   test "should get index" do
     get :index, perfil_id: @perfil.id
     assert_response :success
-    assert_not_nil assigns(:analisis)
+    perfil = assigns(:perfil)
+    assert_not_nil perfil
+    assert_not_nil perfil.analisis
   end
 
   test "should get edit" do

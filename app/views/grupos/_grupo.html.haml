@@ -3,5 +3,5 @@
   %td= grupo.codigo
   %td.boton= link_to 'Mostrar', grupo
   %td.boton= link_to 'Editar', edit_grupo_path(grupo)
-  %td.boton= link_to 'Eliminar', grupo, method: :delete, data:
-    { confirm: "¿Estás seguro? #{grupo.perfiles.any? ? "Esto va a dejar sin grupo a #{pluralize(grupo.perfiles.size, 'perfil')}." : nil}" }
+  %td.boton= link_to 'Eliminar', grupo, method: :delete,
+    data: { confirm: "¿Estás seguro? #{grupo.perfiles.any? ? "Esto va a dejar sin grupo a #{pluralize(grupo.perfiles.size, 'perfil')}." : nil}" }

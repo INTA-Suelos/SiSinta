@@ -11,7 +11,7 @@ class AnalisisController < AutorizadoController
   def index
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @analisis }
+      format.json { render json: @perfil.analisis }
     end
   end
 
