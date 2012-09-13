@@ -55,6 +55,8 @@ class Perfil < ActiveRecord::Base
   belongs_to :fase,     inverse_of: :perfiles
   belongs_to :grupo,    inverse_of: :perfiles
 
+  has_and_belongs_to_many :proyectos
+
   accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion, :pedregosidad,
                                 :humedad, :erosion,
                                 limit: 1, allow_destroy: true

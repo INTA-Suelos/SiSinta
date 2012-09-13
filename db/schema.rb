@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912191218) do
+ActiveRecord::Schema.define(:version => 20120913001404) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -200,6 +200,21 @@ ActiveRecord::Schema.define(:version => 20120912191218) do
     t.integer  "uso_de_la_tierra_id"
     t.string   "vegetacion_o_cultivos"
   end
+
+  create_table "perfiles_proyectos", :id => false, :force => true do |t|
+    t.integer "proyecto_id"
+    t.integer "perfil_id"
+  end
+
+  create_table "proyectos", :force => true do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.text     "cita"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string "nombre"
