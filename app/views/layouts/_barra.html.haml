@@ -2,12 +2,12 @@
   %li
     .plegable Perfiles
     %ul.submenu
-      %li= link_to 'Ver', calicatas_path
+      %li= link_to 'Ver', perfiles_path
       %li
         Exportar
         %ul.submenu
-          %li= link_to 'a CSV', preparar_csv_calicatas_path
-          %li= link_to 'a GeoJSON', geo_calicatas_path(format: :json)
+          %li= link_to 'a CSV', preparar_csv_perfiles_path
+          %li= link_to 'a GeoJSON', geo_perfiles_path(format: :json)
   %li
     .plegable Horizontes
     %ul.submenu
@@ -15,6 +15,10 @@
         Exportar
         %ul.submenu
           %li= link_to 'a CSV', preparar_csv_horizontes_path
+  %li
+    .plegable Proyectos
+    %ul.submenu
+      %li= link_to 'Ver', proyectos_path
   %li
     .plegable Grupos
     %ul.submenu
