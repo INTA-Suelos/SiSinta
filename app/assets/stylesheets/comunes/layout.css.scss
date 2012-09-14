@@ -101,12 +101,6 @@ ul.menu_usuarios {
   margin-top: 10px;
   margin-left: 1em;
   h1 { @include centrado; }
-
-  .cuerpo {
-    position: absolute;
-    left: 230px;
-    margin-left: 4px
-  }
 }
 
 .barra {
@@ -163,4 +157,21 @@ td.acciones {
 
 label {
   font-size: x-small;
+}
+
+#lista {
+  table {
+    background: $celeste_oscuro;
+  }
+  #paginacion {
+    float: right;
+
+    #filas {
+      float: right;
+
+      #activo {
+        font-weight: bold;
+      }
+    }
+  }
 }

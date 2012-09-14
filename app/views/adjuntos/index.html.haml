@@ -1,14 +1,16 @@
 .botonera= render 'botonera_indice'
 
-.span-24
+#lista.span-24
   %table#adjuntos.centrado.span-23.last
-    %tr
-      %th Archivo
-      %th Tipo
-      %th Tamaño
-      %th Notas
-      %th.acciones
+    %thead
+      %tr
+        %th Archivo
+        %th Tipo
+        %th Tamaño
+        %th Notas
+        %th.acciones
 
-    = render @adjuntos
+    %tbody
+      = render @adjuntos
 
 .botonera= render 'botonera_indice'
