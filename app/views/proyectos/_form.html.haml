@@ -11,13 +11,15 @@
 
     .span-22.campo
       .span-2= f.label :descripcion, 'Descripción'
-      .span-20.last= f.text_area :descripcion
+      .span-20.last= f.text_area :descripcion, class: 'tinymce'
       = ayuda_para('proyecto.descripcion')
 
     .span-22.campo
       .span-2= f.label :cita, 'Cómo citar'
-      .span-20.last= f.text_area :cita
+      .span-20.last= f.text_area :cita, class: 'tinymce'
       = ayuda_para('proyecto.cita')
+
+    = tinymce
 
   .acciones.span-4.last
     = f.submit
