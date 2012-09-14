@@ -1,0 +1,28 @@
+= form_for perfil_preparado, html: { class: 'completa span-24' } do |f|
+
+  = f.error_messages
+
+  = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
+
+    .span-23.last
+      .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
+      .span-20.last.campo
+        = ayuda_para 'perfil.modal'
+        = f.check_box :modal, class: 'span-1', disabled: bloqueado
+        #serie
+          .span-13.prepend-unaymedia.campo
+            .span-2= f.label :nombre, 'Nombre'
+            .span-11.last= f.text_field :nombre, disabled: bloqueado
+            = ayuda_para 'perfil.nombre'
+          .span-4.last.campo
+            .span-2= f.label :simbolo, 'Símbolo'
+            .span-2.last= f.text_field :simbolo, disabled: bloqueado
+            = ayuda_para 'perfil.simbolo'
+
+    = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'descripcion_de_los_horizontes', locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'notas', locals: {f: f, bloqueado: bloqueado}
+
+    .acciones.span-8.last
+      .span-4= f.submit unless bloqueado
+      .span-4.last= f.submit('Cargar Análisis', name: 'analisis') unless bloqueado

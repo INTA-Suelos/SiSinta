@@ -1,0 +1,44 @@
+@import "constantes";
+
+form.completa {
+  .campo-suelto {
+    padding-top: 0;
+    padding-left: 659px;
+  }
+
+  #perfil_observaciones {
+    height: $altura-linea * 4;
+  }
+
+  #serie {
+    label, input {
+      margin-left: -6px;
+    }
+  }
+
+  // Alrededor de 40px por columna
+  #scrolleable_horizontes {
+    width: 1740px;
+  }
+
+  .coordenada-y { @include coordenada(10px);  }
+  .coordenada-x { @include coordenada(0px);
+                  padding-right: 0; }
+
+}
+
+#lista {
+  #paginacion {
+    float: right;
+
+    #filas {
+      float: right;
+
+      #activo {
+        font-weight: bold;
+      }
+    }
+  }
+
+  #modal {  width: 50px; }
+}

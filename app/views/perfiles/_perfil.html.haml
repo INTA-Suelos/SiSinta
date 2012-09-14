@@ -1,0 +1,15 @@
+%tr
+  %td= perfil.fecha
+  %td= perfil.nombre
+  %td= perfil.ubicacion.try :descripcion
+  %td= perfil.numero
+  %td= "✓" if perfil.modal?
+  %td.acciones
+    = link_to 'Mostrar', perfil
+    = '|'
+    = link_to 'Editar', edit_perfil_path(perfil)
+    = '|'
+    = link_to 'Análisis', perfil_analisis_index_path(perfil)
+    = '|'
+    = link_to 'Eliminar', perfil,
+        data: { confirm: t(:confirmar) }, method: :delete

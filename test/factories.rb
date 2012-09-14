@@ -10,8 +10,8 @@ FactoryGirl.define do
     "mail-numero-#{n}@falso.com"
   end
 
-  # Hay varios modelos que pueden o no tener una calicata asociada
-  trait :sin_calicata do
-    calicata nil
+  # Hay varios modelos que pueden o no tener un perfil asociado
+  trait :sin_perfil do
+    perfil nil
   end
 end

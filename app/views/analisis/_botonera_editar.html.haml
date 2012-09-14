@@ -1,7 +1,7 @@
-- if can? :read, @calicata
-  = link_to 'Mostrar', calicata_analisis_index_path(@calicata)
+- if can? :read, @perfil
+  = link_to 'Mostrar', perfil_analisis_index_path(@perfil)
   = '|'
-- if can? :update, @calicata
-  = link_to 'Editar calicata', edit_calicata_path(@calicata)
+- if can? :update, @perfil
+  = link_to 'Editar perfil', edit_perfil_path(@perfil)
   = '|'
-= link_to 'Volver', calicatas_path
+= link_to 'Volver', perfiles_path

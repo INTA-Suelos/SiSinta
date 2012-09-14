@@ -1,7 +1,7 @@
 # encoding: utf-8
 class AdjuntosController < AutorizadoController
 
-  before_filter :cargar_calicata
+  before_filter :cargar_perfil
 
   def show
     @adjunto = Adjunto.find(params[:id])
@@ -13,7 +13,7 @@ class AdjuntosController < AutorizadoController
   end
 
   def index
-    @adjuntos = @calicata.adjuntos
+    @adjuntos = @perfil.adjuntos
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,12 +26,12 @@ class AdjuntosController < AutorizadoController
 
     respond_to do |format|
       if @adjunto.update_attributes(params[:adjunto])
-        format.html { redirect_to calicata_adjuntos_path(@calicata),
+        format.html { redirect_to perfil_adjuntos_path(@perfil),
                       notice: I18n.t('messages.updated', model: 'Adjunto') }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @calicata.errors, status: :unprocessable_entity }
+        format.json { render json: @perfil.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,7 +41,7 @@ class AdjuntosController < AutorizadoController
     @adjunto.destroy
 
     respond_to do |format|
-      format.html { redirect_to calicata_adjuntos_path(@calicata) }
+      format.html { redirect_to perfil_adjuntos_path(@perfil) }
       format.json { head :ok }
     end
   end
@@ -52,7 +52,7 @@ class AdjuntosController < AutorizadoController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: [@calicata, @adjunto] }
+      format.json { render json: [@perfil, @adjunto] }
     end
   end
 
@@ -60,11 +60,11 @@ class AdjuntosController < AutorizadoController
     @adjunto = Adjunto.new(params[:adjunto])
 
     respond_to do |format|
-      if @calicata.adjuntos << @adjunto
-        format.html { redirect_to calicata_adjuntos_path(@calicata),
+      if @perfil.adjuntos << @adjunto
+        format.html { redirect_to perfil_adjuntos_path(@perfil),
                       notice: I18n.t('messages.created', model: 'Adjunto') }
         format.json { render json: @adjunto, status: :created,
-                      location: calicata_adjuntos_path(@calicata) }
+                      location: perfil_adjuntos_path(@perfil) }
       else
         format.html { render action: "new" }
         format.json { render json: @adjunto.errors, status: :unprocessable_entity }
@@ -74,7 +74,7 @@ class AdjuntosController < AutorizadoController
 
   def edit
     @adjunto = Adjunto.find(params[:id])
-    @titulo = "Editando adjunto de calicata #{@calicata.numero}"
+    @titulo = "Editando adjunto de perfil #{@perfil.numero}"
   end
 
   def descargar

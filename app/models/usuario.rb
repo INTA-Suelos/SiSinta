@@ -3,7 +3,7 @@ class Usuario < ActiveRecord::Base
   store :config, accessors: [:ficha, :srid]
 
   has_and_belongs_to_many :roles
-  has_many :calicatas, inverse_of: :usuario
+  has_many :perfiles, inverse_of: :usuario
   after_create :asignar_rol_inicial
   after_initialize :asignar_valores_por_defecto
 

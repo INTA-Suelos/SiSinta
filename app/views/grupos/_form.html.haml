@@ -15,12 +15,12 @@
         = ayuda_para('grupo.codigo')
 
     - unless nuevo
-      = field_set_tag 'Calicatas asociadas', class: 'celeste plegable span-22 last' do
+      = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do
 
         .span-21.last
-          - if @grupo.calicatas.any?
-            = render partial: 'calicatas/lista', locals: {calicatas: @grupo.calicatas}
+          - if @grupo.perfiles.any?
+            = render partial: 'perfiles/lista', locals: {perfiles: @grupo.perfiles}
           - else
-            .empty.centrado No hay calicatas asociadas
+            .empty.centrado No hay perfiles asociados
 
     .acciones.span-4.last= f.submit

@@ -18,7 +18,7 @@ class Horizonte < ActiveRecord::Base
   has_one :consistencia,  dependent: :destroy, inverse_of: :horizonte
   has_one :estructura,    dependent: :destroy, inverse_of: :horizonte
 
-  belongs_to :calicata, inverse_of: :horizontes
+  belongs_to :perfil, inverse_of: :horizontes
 
   belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco,
                           autosave: false
@@ -33,7 +33,7 @@ class Horizonte < ActiveRecord::Base
   accepts_nested_attributes_for :color_seco, :color_humedo,
                                 reject_if: :all_blank
 
-  validates_presence_of :calicata
+  validates_presence_of :perfil
   validates_inclusion_of  :profundidad_superior, :profundidad_inferior,
                           in: 0..500, allow_nil: true,
                           message: "debe estar entre 0 y 500 cm"
@@ -49,7 +49,7 @@ class Horizonte < ActiveRecord::Base
   end
 
   def publico
-    calicata.publico
+    perfil.publico
   end
 
 end

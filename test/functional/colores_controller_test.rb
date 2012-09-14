@@ -18,7 +18,6 @@ class ColoresControllerTest < ActionController::TestCase
   end
 
   test "debería devolver hvc para términos parciales" do
-    loguearse_como :autorizado
     @termino = '10'
     get :autocompletar, atributo: 'hvc', term: @termino
     assert_response :success
@@ -27,7 +26,6 @@ class ColoresControllerTest < ActionController::TestCase
   end
 
   test "debería devolver rgb para términos parciales" do
-    loguearse_como :autorizado
     @termino = '10'
     get :autocompletar, atributo: 'rgb', term: @termino
     assert_response :success
