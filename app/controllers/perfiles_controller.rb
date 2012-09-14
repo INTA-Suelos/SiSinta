@@ -13,7 +13,7 @@ class PerfilesController < AutorizadoController
   # GET /perfiles
   # GET /perfiles.json
   def index
-    @titulo = "Lista de perfiles"
+    @titulo = "Perfiles"
     respond_to do |format|
       format.html do
         if request.xhr?

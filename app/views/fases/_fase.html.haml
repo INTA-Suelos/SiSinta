@@ -1,7 +1,10 @@
 %tr
   %td{colspan: 4}= fase.nombre
   %td= fase.codigo
-  %td.boton= link_to 'Mostrar', fase
-  %td.boton= link_to 'Editar', edit_fase_path(fase)
-  %td.boton= link_to 'Eliminar', fase, method: :delete, data:
-    { confirm: "¿Estás seguro? #{fase.perfiles.any? ? "Esto va a dejar sin fase a #{pluralize(fase.perfiles.size, 'perfil')}." : nil}" }
+  %td.acciones
+    = link_to 'Mostrar', fase
+    = '|'
+    = link_to 'Editar', edit_fase_path(fase)
+    = '|'
+    = link_to 'Eliminar', fase, method: :delete,
+        data: { confirm: "#{t :confirmar} #{fase.perfiles.any? ? "Esto va a dejar sin fase a #{pluralize(fase.perfiles.size, 'perfil')}." : nil } " }

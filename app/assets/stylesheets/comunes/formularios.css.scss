@@ -24,6 +24,12 @@ form {
     width: auto !important;
   }
 
+  textarea {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .subtitulo { text-decoration: underline; }
 
   .texto-corto { height: $altura-linea * 2 + 1;  }
@@ -138,11 +144,6 @@ form {
   width: 45px;
   float: left;
   margin-right: 10px;
-}
-
-.boton {
-  padding: 0 2px;
-  font-size: x-small;
 }
 
 select {

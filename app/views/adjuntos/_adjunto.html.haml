@@ -4,7 +4,10 @@
   %td.icono= icono_para_extension(adjunto.extension)
   %td= number_to_human_size(adjunto.archivo_file_size)
   %td.notas= adjunto.notas
-  %td.boton= link_to 'Mostrar', [@perfil, adjunto]
-  %td.boton= link_to 'Editar', edit_perfil_adjunto_path(@perfil, adjunto)
-  %td.boton= link_to('Eliminar', [@perfil, adjunto],
-    data: { confirm: '¿Estás seguro?'}, method: :delete)
+  %td.acciones
+    = link_to 'Mostrar', [@perfil, adjunto]
+    = '|'
+    = link_to 'Editar', edit_perfil_adjunto_path(@perfil, adjunto)
+    = '|'
+    = link_to('Eliminar', [@perfil, adjunto],
+        data: { confirm: t(:confirmar) }, method: :delete)

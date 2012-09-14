@@ -12,3 +12,5 @@ es:
     updated:  "La actualización de %{model} fue exitosa."
     destroyed: "La eliminación de %{model} fue exitosa."
     error: "Ocurrió algún error con la actualización."
+
+  confirmar:  "¿En serio?"
