@@ -7,6 +7,7 @@
         %th Nombre
         %th Descripcion
         %th Cita
+        %th.numero Perfiles
         %th.acciones
 
     %tbody
@@ -15,6 +16,7 @@
           %td= proyecto.nombre
           %td!= proyecto.descripcion.try(:truncate, 35)
           %td!= proyecto.cita.try(:truncate, 35)
+          %td.numero= proyecto.perfiles.length
           %td.acciones
             = link_to 'Mostrar', proyecto
             = '|'
