@@ -1,25 +1,26 @@
-= form_for @proyecto, html: { class: 'span-24' } do |f|
+#proyecto
+  = form_for @proyecto, html: { class: 'span-24' } do |f|
 
-  = f.error_messages
+    = f.error_messages
 
-  = field_set_tag 'Datos del proyecto', class: 'celeste_oscuro span-23 last' do
+    = field_set_tag 'Datos del proyecto', class: 'celeste_oscuro span-23 last' do
 
-    .span-22.campo
-      .span-2= f.label :nombre
-      .span-20.last= f.text_field :nombre
-      = ayuda_para('proyecto.nombre')
+      .span-22.campo
+        .span-2= f.label :nombre
+        .span-20.last= f.text_field :nombre
+        = ayuda_para('proyecto.nombre')
 
-    .span-22.campo
-      .span-2= f.label :descripcion, 'Descripción'
-      .span-20.last= f.text_area :descripcion, class: 'tinymce'
-      = ayuda_para('proyecto.descripcion')
+      #descripcion.span-22.campo
+        .span-2= f.label :descripcion, 'Descripción'
+        .span-20.last= f.text_area :descripcion, class: 'tinymce'
+        = ayuda_para('proyecto.descripcion')
 
-    .span-22.campo
-      .span-2= f.label :cita, 'Cómo citar'
-      .span-20.last= f.text_area :cita, class: 'tinymce'
-      = ayuda_para('proyecto.cita')
+      .span-22.campo
+        .span-2= f.label :cita, 'Cómo citar'
+        .span-20.last= f.text_area :cita, class: 'tinymce'
+        = ayuda_para('proyecto.cita')
 
-    = tinymce
+      = tinymce
 
-  .acciones.span-4.last
-    = f.submit
+    .acciones.span-4.last
+      = f.submit

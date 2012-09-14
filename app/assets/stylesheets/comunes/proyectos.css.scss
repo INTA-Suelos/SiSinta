@@ -1,9 +1,17 @@
 @import "constantes";
 
-#proyecto_descripcion {
-  height: $altura-linea * 8;
-}
+#proyecto {
 
-#proyecto_cita {
-  height: $altura-linea * 4;
+  #descripcion {
+    margin-bottom: 0.5em;
+  }
+
+  #proyecto_descripcion {
+    height: $altura-linea * 8;
+  }
+
+  #proyecto_cita {
+    height: $altura-linea * 4;
+  }
+
 }
