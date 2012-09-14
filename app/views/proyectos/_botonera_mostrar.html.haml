@@ -1,0 +1,4 @@
+- if can? :update, @proyecto
+  = link_to 'Editar', edit_proyecto_path(@proyecto)
+  = '|'
+= link_to 'Volver', proyectos_path

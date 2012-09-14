@@ -197,3 +197,12 @@
 - id:     64
   campo:  perfil.reconocedores
   ayuda:  Lista de reconocedores del perfil (separados por coma).
+- id:     65
+  campo:  proyecto.nombre
+  ayuda:  Ayuda no disponible.
+- id:     66
+  campo:  proyecto.descripcion
+  ayuda:  Ayuda no disponible.
+- id:     67
+  campo:  proyecto.cita
+  ayuda:  Ayuda no disponible.

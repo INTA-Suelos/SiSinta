@@ -8,6 +8,7 @@ class ProyectosController < AutorizadoController
   # GET /proyectos.json
   def index
     @proyectos = Proyecto.all
+    @titulo = "Proyectos"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,6 +20,7 @@ class ProyectosController < AutorizadoController
   # GET /proyectos/1.json
   def show
     @proyecto = Proyecto.find(params[:id])
+    @titulo = @proyecto.nombre
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,6 +31,8 @@ class ProyectosController < AutorizadoController
   # GET /proyectos/new
   # GET /proyectos/new.json
   def new
+    @titulo = 'Nuevo proyecto'
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @proyecto }
@@ -37,6 +41,7 @@ class ProyectosController < AutorizadoController
 
   # GET /proyectos/1/edit
   def edit
+    @titulo = "Editando #{@proyecto.nombre}"
   end
 
   # POST /proyectos

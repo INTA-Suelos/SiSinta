@@ -1,15 +1,19 @@
-%p#notice= notice
+.botonera= render 'botonera_mostrar'
 
-%p
-  %b Nombre:
-  = @proyecto.nombre
-%p
-  %b Descripcion:
-  = @proyecto.descripcion
-%p
-  %b Cita:
-  = @proyecto.cita
+.span-24
 
-= link_to 'Edit', edit_proyecto_path(@proyecto)
-\|
-= link_to 'Back', proyectos_path
+  = field_set_tag 'Datos del proyecto', class: 'celeste_oscuro span-23 last' do
+
+    .span-22
+      .span-2= label_tag 'Nombre'
+      .span-20.last= @proyecto.nombre
+
+    .span-22
+      .span-2= label_tag 'Descripción'
+      .span-20.last!= @proyecto.descripcion
+
+    .span-22
+      .span-2= label_tag 'Cita'
+      .span-20.last!= @proyecto.cita
+
+.botonera= render 'botonera_mostrar'

@@ -1,23 +1,22 @@
-%h1 Listing proyectos
+.botonera= link_to 'Nuevo proyecto', new_proyecto_path
 
 %table
   %tr
     %th Nombre
     %th Descripcion
     %th Cita
-    %th
-    %th
-    %th
+    %th.acciones
 
   - @proyectos.each do |proyecto|
     %tr
       %td= proyecto.nombre
-      %td= proyecto.descripcion
-      %td= proyecto.cita
-      %td= link_to 'Show', proyecto
-      %td= link_to 'Edit', edit_proyecto_path(proyecto)
-      %td= link_to 'Destroy', proyecto, :confirm => 'Are you sure?', :method => :delete
+      %td!= proyecto.descripcion.try(:truncate, 35)
+      %td!= proyecto.cita.try(:truncate, 35)
+      %td.acciones
+        = link_to 'Mostrar', proyecto
+        = '|'
+        = link_to 'Editar', edit_proyecto_path(proyecto)
+        = '|'
+        = link_to 'Eliminar', proyecto, confirm: t(:confirmar), method: :delete
 
-%br
-
-= link_to 'New Proyecto', new_proyecto_path
+.botonera= link_to 'Nuevo proyecto', new_proyecto_path
