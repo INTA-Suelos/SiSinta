@@ -1,3 +1,5 @@
+= tinymce
+
 #proyecto
   = form_for @proyecto, html: { class: 'span-24' } do |f|
 
@@ -19,8 +21,6 @@
         .span-2= f.label :cita, 'Cómo citar'
         .span-20.last= f.text_area :cita, class: 'tinymce'
         = ayuda_para('proyecto.cita')
-
-      = tinymce
 
     .acciones.span-4.last
       = f.submit
