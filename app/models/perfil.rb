@@ -1,5 +1,13 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
+  attr_accessible :fecha, :nombre, :numero, :drenaje_id, :profundidad_napa,
+                  :cobertura_vegetal, :posicion_id, :pendiente_id,
+                  :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
+                  :uso_de_la_tierra_id, :material_original, :simbolo, :esquema,
+                  :fase_id, :modal, :observaciones, :publico, :relieve_id,
+                  :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
+                  :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes
+
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 

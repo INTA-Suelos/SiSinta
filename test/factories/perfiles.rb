@@ -2,6 +2,7 @@
 FactoryGirl.define do
   factory :perfil do
     nombre { generate :cadena_unica }
+    numero { generate :cadena_unica }
     fecha "2012-09-03"
 
     factory :perfil_modal do

@@ -3,29 +3,19 @@ require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
 
-  setup do
-    @admin = create(:usuario, :administrador)
-  end
-
   test "debería acceder al controlador" do
     assert_instance_of PerfilesController, @controller
   end
 
-  test "should get index" do
-    sign_in @admin
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:perfiles)
-  end
+  test "debería ir a 'nuevo' si está autorizado" do
+    loguearse_como :autorizado
 
-  test "should get new" do
-    sign_in @admin
     get :new
     assert_response :success
   end
 
-  test "should create perfil" do
-    sign_in @admin
+  test "debería crear un perfil si está autorizado" do
+    loguearse_como :autorizado
 
     assert_difference('Perfil.count', 1) do
       post :create, perfil: attributes_for(:perfil)
@@ -34,8 +24,9 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "should show perfil" do
-    sign_in @admin
+  test "debería mostrar un perfil si está autorizado" do
+    loguearse_como :autorizado
+
     @request.env["HTTP_REFERER"] = "/perfiles/"
 
     get :show, id: create(:perfil).to_param
@@ -43,23 +34,25 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    sign_in @admin
-    get :edit, id: create(:perfil).to_param
+  test "debería ir a 'editar' si está autorizado" do
+    loguearse_como :autorizado
 
+    get :edit, id: create(:perfil).to_param
     assert_response :success
   end
 
-  test "should update perfil" do
-    sign_in @admin
+  test "debería actualizar un perfil si está autorizado" do
+    loguearse_como :autorizado
+
     perfil = create(:perfil)
     @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
-    put :update, id: perfil.to_param, perfil: perfil.attributes
+    put :update, id: perfil.to_param, perfil: attributes_for(:perfil)
     assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "should destroy perfil" do
-    sign_in @admin
+  test "debería eliminar un perfil si está autorizado" do
+    loguearse_como :autorizado
+
     perfil = create(:perfil)
     assert_difference('Perfil.count', -1) do
       delete :destroy, id: perfil.to_param
@@ -79,6 +72,34 @@ class PerfilesControllerTest < ActionController::TestCase
     @request.env["HTTP_REFERER"] = "/perfiles/"
     get :geo, format: :json
     assert_response :success
+  end
+
+  test "debería devolver nombre para términos parciales" do
+    loguearse_como :autorizado
+    @termino = create(:perfil).nombre
+
+    get :autocompletar, atributo: 'nombre', term: @termino
+    assert_response :success
+    assert_equal  Perfil.where("nombre like '%#{@termino}%'").size,
+                  json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('nombre'), "debe devolver el nombre"
+  end
+
+  test "debería devolver numero para términos parciales" do
+    loguearse_como :autorizado
+    @termino = create(:perfil).numero
+
+    get :autocompletar, atributo: 'numero', term: @termino
+    assert_response :success
+    assert_equal  Perfil.where("numero like '%#{@termino}%'").size,
+                  json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('numero'), "debe devolver el número"
   end
 
 end
