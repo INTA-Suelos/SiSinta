@@ -6,7 +6,9 @@ class Perfil < ActiveRecord::Base
                   :uso_de_la_tierra_id, :material_original, :simbolo, :esquema,
                   :fase_id, :modal, :observaciones, :publico, :relieve_id,
                   :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
-                  :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes
+                  :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
+                  :capacidad_attributes, :humedad_attributes, :pedregosidad_attributes,
+                  :erosion_attributes, :etiquetas, :reconocedores
 
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions

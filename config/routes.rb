@@ -15,7 +15,7 @@ SiSINTA::Application.routes.draw do
       get   'geo'
       get   'preparar_csv'
       post  'procesar_csv'
-      get 'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
+      get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
     end
 
     resources :analisis, only: :index, path_names: m do

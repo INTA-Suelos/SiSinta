@@ -3,7 +3,7 @@ class PerfilDecorator < Draper::Base
   decorates_association :ubicacion
 
   def fecha
-    perfil.fecha.to_s(:dma)
+    perfil.fecha.try :to_s, :dma
   end
 
   def etiquetas

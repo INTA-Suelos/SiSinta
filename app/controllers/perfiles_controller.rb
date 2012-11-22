@@ -1,9 +1,11 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
 
-  before_filter :preparar,  only: [:index, :geo, :preparar_csv, :procesar_csv]
-  before_filter :ordenar,   only: [:index, :geo, :preparar_csv, :procesar_csv]
-  before_filter :paginar,   only: [:index]
+  before_filter :preparar,  only: [:index, :geo, :seleccionar,
+                                   :preparar_csv, :procesar_csv ]
+  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
+                                   :preparar_csv, :procesar_csv ]
+  before_filter :paginar,   only: [:index, :seleccionar]
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
@@ -148,47 +150,47 @@ class PerfilesController < AutorizadoController
     super(@perfiles, 'perfiles')
   end
 
-protected
+  protected
 
-  # Prepara el scope para la lista de perfiles
-  def preparar
-    @perfiles ||= Perfil.scoped
-    @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
-  end
-
-  # Ordena los resultados según las columnas de la lista. Si son columnas de
-  # texto, las normaliza a lowercase.
-  def ordenar
-    case @metodo = metodo_de_ordenamiento
-    when 'ubicacion'
-      @perfiles =
-        @perfiles.joins(:ubicacion)
-                  .select('perfiles.*, ubicaciones.descripcion')
-      @metodo = 'lower(ubicaciones.descripcion)'
-    when 'nombre', 'numero'
-      @metodo = "lower(#{@metodo})"
-    else
-      # A los date y boolean no se les aplica lower()
+    # Prepara el scope para la lista de perfiles
+    def preparar
+      @perfiles ||= Perfil.scoped
+      @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
-    @perfiles = @perfiles.order("#{@metodo} #{direccion_de_ordenamiento}")
-  end
 
-  # Agrega la paginación al scope en curso
-  def paginar
-    @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
-    @perfiles = @perfiles.pagina(params[:pagina]).per(params[:filas])
-  end
+    # Ordena los resultados según las columnas de la lista. Si son columnas de
+    # texto, las normaliza a lowercase.
+    def ordenar
+      case @metodo = metodo_de_ordenamiento
+      when 'ubicacion'
+        @perfiles =
+          @perfiles.joins(:ubicacion)
+                    .select('perfiles.*, ubicaciones.descripcion')
+        @metodo = 'lower(ubicaciones.descripcion)'
+      when 'nombre', 'numero'
+        @metodo = "lower(#{@metodo})"
+      else
+        # A los date y boolean no se les aplica lower()
+      end
+      @perfiles = @perfiles.order("#{@metodo} #{direccion_de_ordenamiento}")
+    end
 
-  # Determina la ruta a la que reenvia
-  def perfil_o_analisis
-    params[:analisis].present? ? edit_perfil_analisis_index_path(@perfil) : @perfil
-  end
+    # Agrega la paginación al scope en curso
+    def paginar
+      @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
+      @perfiles = @perfiles.pagina(params[:pagina]).per(params[:filas])
+    end
 
-  # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
-  # la +fecha+ por default.
-  def metodo_de_ordenamiento
-    %w[ fecha nombre ubicacion numero modal
-      ].include?(params[:por]) ? params[:por] : 'fecha'
-  end
+    # Determina la ruta a la que reenvia
+    def perfil_o_analisis
+      params[:analisis].present? ? edit_perfil_analisis_index_path(@perfil) : @perfil
+    end
+
+    # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
+    # la +fecha+ por default.
+    def metodo_de_ordenamiento
+      %w[ fecha nombre ubicacion numero modal
+        ].include?(params[:por]) ? params[:por] : 'fecha'
+    end
 
 end

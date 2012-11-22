@@ -30,9 +30,10 @@ class HorizontesController < AutorizadoController
     super(@horizontes, 'horizontes')
   end
 
-protected
+  protected
 
-  def cargar_horizontes
-    @horizontes = Horizonte.order('perfil_id ASC')
-  end
+    def cargar_horizontes
+      @horizontes = Horizonte.order('perfil_id ASC')
+    end
+
 end

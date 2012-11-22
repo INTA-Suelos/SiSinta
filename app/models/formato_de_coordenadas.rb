@@ -17,11 +17,11 @@ class FormatoDeCoordenadas < Lookup
 
   private
 
-  def cargar_fabrica
-    @fabrica = RGeo::Geos.factory(
-      srs_database: RGeo::CoordSys::SRSDatabase::ActiveRecordTable.new,
-      srid:         self.srid
-    )
-  end
+    def cargar_fabrica
+      @fabrica = RGeo::Geos.factory(
+        srs_database: RGeo::CoordSys::SRSDatabase::ActiveRecordTable.new,
+        srid:         self.srid
+      )
+    end
 
 end
