@@ -1,11 +1,11 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
 
-  before_filter :preparar,  only: [:index, :geo, :seleccionar,
+  before_filter :preparar,  only: [:index, :geo,
                                    :preparar_csv, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
+  before_filter :ordenar,   only: [:index, :geo,
                                    :preparar_csv, :procesar_csv ]
-  before_filter :paginar,   only: [:index, :seleccionar]
+  before_filter :paginar,   only: [:index]
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
@@ -29,6 +29,11 @@ class PerfilesController < AutorizadoController
                                     :nombre,
                                     :ubicacion,
                                     :fecha      ] }
+      format.seleccion do
+        session['objeto'] = params['objeto']
+        @regresar = params['origen']
+        render layout: 'application.html'
+      end
     end
   end
 

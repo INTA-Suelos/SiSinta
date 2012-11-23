@@ -1,5 +1,5 @@
 class Proyecto < ActiveRecord::Base
-  attr_accessible :cita, :descripcion, :nombre, :perfil_id
+  attr_accessible :cita, :descripcion, :nombre, :perfil_ids
 
   has_and_belongs_to_many :perfiles
 

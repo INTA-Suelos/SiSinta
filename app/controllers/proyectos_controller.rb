@@ -32,6 +32,7 @@ class ProyectosController < AutorizadoController
   # GET /proyectos/new.json
   def new
     @titulo = 'Nuevo proyecto'
+    @proyecto = ProyectoDecorator.decorate(@proyecto)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +42,10 @@ class ProyectosController < AutorizadoController
 
   # GET /proyectos/1/edit
   def edit
+    @proyecto.perfiles << Perfil.find(params[:perfil_ids])
     @titulo = "Editando #{@proyecto.nombre}"
+    @busqueda = Perfil.search
+    @proyecto = ProyectoDecorator.decorate(@proyecto)
   end
 
   # POST /proyectos

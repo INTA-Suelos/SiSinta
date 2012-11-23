@@ -1,0 +1,10 @@
+%tr
+  %td.acciones
+    =  link_to 'X', '#perfiles', class: 'remove remover'
+  %td.nombre
+    = ff.label :nombre, perfil.nombre, class: 'perfil_nombre'
+  %td.numero
+    = ff.label :numero, perfil.numero, class: 'perfil_numero'
+  %td.fecha
+    = ff.label :fecha, perfil.fecha
+  = hidden_field_tag "proyecto[perfil_id][]", perfil.id
