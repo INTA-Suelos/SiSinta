@@ -16,6 +16,7 @@ class PerfilesController < AutorizadoController
   # GET /perfiles.json
   def index
     @titulo = "Perfiles"
+    @perfiles = PerfilDecorator.decorate(@perfiles)
     respond_to do |format|
       format.html do
         if request.xhr?
@@ -30,7 +31,6 @@ class PerfilesController < AutorizadoController
                                     :ubicacion,
                                     :fecha      ] }
       format.seleccion do
-        session['objeto'] = params['objeto']
         @regresar = params['origen']
         render layout: 'application.html'
       end

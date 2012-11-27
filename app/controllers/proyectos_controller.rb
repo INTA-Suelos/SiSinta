@@ -4,6 +4,8 @@ class ProyectosController < AutorizadoController
   skip_load_and_authorize_resource            only: [:index, :show]
   skip_authorization_check                    only: [:index, :show]
 
+  before_filter :perfiles_asociados,  only: [:edit]
+
   # GET /proyectos
   # GET /proyectos.json
   def index
@@ -42,7 +44,6 @@ class ProyectosController < AutorizadoController
 
   # GET /proyectos/1/edit
   def edit
-    @proyecto.perfiles << Perfil.find(params[:perfil_ids])
     @titulo = "Editando #{@proyecto.nombre}"
     @busqueda = Perfil.search
     @proyecto = ProyectoDecorator.decorate(@proyecto)
@@ -86,4 +87,15 @@ class ProyectosController < AutorizadoController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def perfiles_asociados
+      if params[:perfil_ids]
+        # Agregamos sólo los ids que no estaban ya
+        nuevos = params[:perfil_ids].collect {|id| id.to_i } - @proyecto.perfil_ids
+        @proyecto.perfiles << Perfil.find(nuevos)
+      end
+    end
+
 end
