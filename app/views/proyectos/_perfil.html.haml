@@ -1,6 +1,7 @@
 %tr{class: cycle("odd", "even")}
-  %td.acciones
-    =  link_to 'X', '#perfiles', class: 'remove remover'
+  - if remover
+    %td.borrar
+      =  link_to 'X', '#perfiles', class: 'remove remover'
   %td.nombre
     = ff.label :nombre, perfil.nombre, class: 'perfil_nombre'
   %td.numero

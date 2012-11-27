@@ -39,7 +39,7 @@
                                                 new_object: @proyecto.nuevo_perfil,
                                                 show_empty: true do |ff|
                 - if ff
-                  = render partial: 'perfil', locals: { f: f, ff: ff, perfil: ff.object }
+                  = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: true }
                 - else
                   %tr.empty
                     %td
