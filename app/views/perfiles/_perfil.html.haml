@@ -1,7 +1,7 @@
 %tr
   %td= perfil.fecha
   %td= perfil.nombre
-  %td= perfil.ubicacion.try :descripcion
+  %td= perfil.ubicacion.try(:descripcion).try(:truncate, 70)
   %td= perfil.numero
   %td= "✓" if perfil.modal?
   %td.acciones

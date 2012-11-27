@@ -1,17 +1,19 @@
 #lista
   .botonera= render 'botonera_indice'
 
-
   = form_tag usuarios_path, method: :put do |f|
 
     %table#roles.centrado
-      %tr
-        %th{colspan: 2} Usuario
-        %th{colspan: 2} Email
-        - @roles.each do |rol|
-          %th= rol.nombre.titleize
-        %th
-      = render @usuarios
+      %thead
+        %tr
+          %th{colspan: 2} Usuario
+          %th{colspan: 2} Email
+          - @roles.each do |rol|
+            %th= rol.nombre.titleize
+          %th.acciones
+
+      %tbody
+        = render @usuarios
 
     = submit_tag 'Asignar roles'
 
