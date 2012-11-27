@@ -1,0 +1,30 @@
+@import "constantes";
+
+#proyecto {
+
+  #descripcion {
+    margin-bottom: 0.5em;
+  }
+
+  #proyecto_descripcion {
+    height: $altura-linea * 8;
+  }
+
+  #proyecto_cita {
+    height: $altura-linea * 4;
+  }
+
+  #perfiles {
+    label {
+      font-weight: normal;
+      font-size: small;
+    }
+
+    .borrar { width: 1%;  }
+    .nombre { width: 69%; }
+    .numero { width: 20%; }
+    .fecha  { width: 10%; }
+
+  }
+
+}

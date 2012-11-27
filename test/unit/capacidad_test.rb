@@ -31,15 +31,15 @@ class CapacidadTest < ActiveSupport::TestCase
     assert capacidad.subclases.include?(SubclaseDeCapacidad.last), 'no agrega varias subclases'
   end
 
-  test "debería negarse a cargar capacidad sin calicata" do
-    assert build_stubbed(:capacidad, :sin_calicata).invalid?, "una capacidad sin calicata es válida"
+  test "debería negarse a cargar capacidad sin perfil" do
+    assert build_stubbed(:capacidad, :sin_perfil).invalid?, "una capacidad sin perfil es válida"
   end
 
   test "debería poder acceder a sus asociaciones" do
     capacidad = build_stubbed(:capacidad)
     assert capacidad.respond_to? :clase
     assert capacidad.respond_to? :subclases
-    assert capacidad.respond_to? :calicata
+    assert capacidad.respond_to? :perfil
     assert_nothing_raised do
       capacidad.clase
       capacidad.subclases

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906172522) do
+ActiveRecord::Schema.define(:version => 20120913001404) do
 
   create_table "adjuntos", :force => true do |t|
-    t.integer  "calicata_id"
+    t.integer  "perfil_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "archivo_file_name"
@@ -63,42 +63,11 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
     t.decimal  "agua_3_atm",          :precision => 4, :scale => 2
   end
 
-  create_table "calicatas", :force => true do |t|
-    t.string   "numero"
-    t.integer  "drenaje_id"
-    t.float    "profundidad_napa"
-    t.decimal  "cobertura_vegetal"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.string   "material_original"
-    t.string   "esquema"
-    t.string   "simbolo"
-    t.integer  "fase_id"
-    t.boolean  "modal",                 :default => false
-    t.date     "fecha",                                    :null => false
-    t.string   "observaciones"
-    t.boolean  "publico",               :default => false
-    t.integer  "usuario_id"
-    t.integer  "relieve_id"
-    t.integer  "posicion_id"
-    t.integer  "pendiente_id"
-    t.integer  "escurrimiento_id"
-    t.integer  "permeabilidad_id"
-    t.integer  "anegamiento_id"
-    t.string   "nombre"
-    t.integer  "grupo_id"
-    t.integer  "sal_id"
-    t.integer  "uso_de_la_tierra_id"
-    t.string   "vegetacion_o_cultivos"
-  end
-
   create_table "capacidades", :force => true do |t|
-    t.integer "calicata_id"
+    t.integer "perfil_id"
     t.integer "clase_id"
     t.text    "subclase_ids"
   end
-
-  add_index "capacidades", ["calicata_id"], :name => "index_capacidades_on_calicatas", :unique => true
 
   create_table "colores", :force => true do |t|
     t.string "hvc", :null => false
@@ -121,10 +90,8 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
   create_table "erosiones", :force => true do |t|
     t.integer "subclase_id"
     t.integer "clase_id"
-    t.integer "calicata_id"
+    t.integer "perfil_id"
   end
-
-  add_index "erosiones", ["calicata_id"], :name => "index_erosiones_on_calicatas", :unique => true
 
   create_table "estructuras", :force => true do |t|
     t.integer  "horizonte_id"
@@ -154,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
     t.float    "ph"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.integer  "calicata_id"
+    t.integer  "perfil_id"
     t.string   "humedad"
     t.string   "raices"
     t.string   "formaciones_especiales"
@@ -172,10 +139,8 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
   create_table "humedades", :force => true do |t|
     t.integer "subclase_id"
     t.integer "clase_id"
-    t.integer "calicata_id"
+    t.integer "perfil_id"
   end
-
-  add_index "humedades", ["calicata_id"], :name => "index_humedades_on_calicatas", :unique => true
 
   create_table "limites", :force => true do |t|
     t.integer  "horizonte_id"
@@ -196,20 +161,60 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
     t.string   "tipo"
     t.string   "forma"
     t.string   "simbolo"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "calicata_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "perfil_id"
   end
-
-  add_index "paisajes", ["calicata_id"], :name => "index_paisajes_on_calicatas", :unique => true
 
   create_table "pedregosidades", :force => true do |t|
     t.integer "subclase_id"
     t.integer "clase_id"
-    t.integer "calicata_id"
+    t.integer "perfil_id"
   end
 
-  add_index "pedregosidades", ["calicata_id"], :name => "index_pedregosidades_on_calicatas", :unique => true
+  create_table "perfiles", :force => true do |t|
+    t.string   "numero"
+    t.integer  "drenaje_id"
+    t.float    "profundidad_napa"
+    t.decimal  "cobertura_vegetal"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "material_original"
+    t.string   "esquema"
+    t.string   "simbolo"
+    t.integer  "fase_id"
+    t.boolean  "modal",                 :default => false
+    t.date     "fecha",                                    :null => false
+    t.string   "observaciones"
+    t.boolean  "publico",               :default => false
+    t.integer  "usuario_id"
+    t.integer  "relieve_id"
+    t.integer  "posicion_id"
+    t.integer  "pendiente_id"
+    t.integer  "escurrimiento_id"
+    t.integer  "permeabilidad_id"
+    t.integer  "anegamiento_id"
+    t.string   "nombre"
+    t.integer  "grupo_id"
+    t.integer  "sal_id"
+    t.integer  "uso_de_la_tierra_id"
+    t.string   "vegetacion_o_cultivos"
+  end
+
+  create_table "perfiles_proyectos", :id => false, :force => true do |t|
+    t.integer "proyecto_id"
+    t.integer "perfil_id"
+  end
+
+  create_table "proyectos", :force => true do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.text     "cita"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string "nombre"
@@ -239,7 +244,7 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
 
   create_table "ubicaciones", :force => true do |t|
     t.string   "descripcion"
-    t.integer  "calicata_id"
+    t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
     t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
@@ -248,7 +253,6 @@ ActiveRecord::Schema.define(:version => 20120906172522) do
     t.integer  "aerofoto"
   end
 
-  add_index "ubicaciones", ["calicata_id"], :name => "index_ubicaciones_on_nombre", :unique => true
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
 
   create_table "usuarios", :force => true do |t|

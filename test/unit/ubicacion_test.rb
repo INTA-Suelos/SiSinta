@@ -11,9 +11,9 @@ class UbicacionTest < ActiveSupport::TestCase
     @c = create(:ubicacion, x: @x, y: @y)
   end
 
-  test "debería negarse a cargar la ubicación sin calicata" do
-    assert Ubicacion.new(@atributos).invalid?, "una ubicación sin calicata es válida"
-    assert @u.valid?, "una ubicación sólo con calicata es válida"
+  test "debería negarse a cargar la ubicación sin perfil" do
+    assert Ubicacion.new(@atributos).invalid?, "una ubicación sin perfil es válida"
+    assert @u.valid?, "una ubicación sólo con perfil es válida"
   end
 
   test "debería negarse a guardar un punto mal formado" do

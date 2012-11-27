@@ -1,0 +1,22 @@
+.botonera= link_to 'Nuevo proyecto', new_proyecto_path
+
+%table#proyectos
+  %tr
+    %th Nombre
+    %th Descripcion
+    %th Cita
+    %th.acciones
+
+  - @proyectos.each do |proyecto|
+    %tr
+      %td= proyecto.nombre
+      %td!= proyecto.descripcion.try(:truncate, 35)
+      %td!= proyecto.cita.try(:truncate, 35)
+      %td.acciones
+        = link_to 'Mostrar', proyecto
+        = '|'
+        = link_to 'Editar', edit_proyecto_path(proyecto)
+        = '|'
+        = link_to 'Eliminar', proyecto, confirm: t(:confirmar), method: :delete
+
+.botonera= link_to 'Nuevo proyecto', new_proyecto_path

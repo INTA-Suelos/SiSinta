@@ -3,10 +3,6 @@
 form {
   line-height: $altura-linea;
 
-  label {
-    font-size: x-small;
-  }
-
   input {
     width: inherit !important;
   }
@@ -22,6 +18,12 @@ form {
   input[type="checkbox"] {
     margin-left: 2px;
     width: auto !important;
+  }
+
+  textarea {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .subtitulo { text-decoration: underline; }
@@ -138,11 +140,6 @@ form {
   width: 45px;
   float: left;
   margin-right: 10px;
-}
-
-.boton {
-  padding: 0 2px;
-  font-size: x-small;
 }
 
 select {

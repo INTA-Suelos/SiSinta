@@ -4,7 +4,7 @@ class InicioController < ApplicationController
   def index
     @titulo = 'Sistema de información de Suelos del INTA'
     @subtitulo = 'Menú principal'
-    @busqueda = Calicata.search
+    @busqueda = Perfil.search
   end
 
 end

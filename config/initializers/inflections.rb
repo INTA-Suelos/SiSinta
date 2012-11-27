@@ -15,7 +15,7 @@
 # poder pluralizar y singularizar para trabajar con la base de datos
 ActiveSupport::Inflector.inflections do |inflect|
   # Modelos
-  inflect.irregular 'calicata', 'calicatas'
+  inflect.irregular 'perfil', 'perfiles'
   inflect.irregular 'horizonte', 'horizontes'
   inflect.irregular 'analisis', 'analisis'
   inflect.irregular 'usuario', 'usuarios'
@@ -29,6 +29,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'grupo', 'grupos'
   inflect.irregular 'rol', 'roles'
   inflect.irregular 'ubicacion', 'ubicaciones'
+  inflect.irregular 'proyecto', 'proyectos'
 
   # Modelos <=> Lookups
   inflect.irregular 'consistencia', 'consistencias'

@@ -1,0 +1,60 @@
+= tinymce
+
+#proyecto
+
+  = form_for @proyecto, html: { class: 'span-24' } do |f|
+
+    = field_set_tag @titulo, class: 'celeste_oscuro span-24 last' do
+
+      = f.error_messages
+
+      = field_set_tag 'Datos del proyecto', class: 'celeste plegable span-23 last' do
+
+        .span-22.campo
+          .span-2= f.label :nombre
+          .span-20.last= f.text_field :nombre, autofocus: true, required: true
+          = ayuda_para('proyecto.nombre')
+
+        #descripcion.span-22.campo
+          .span-2= f.label :descripcion, 'Descripción'
+          .span-20.last= f.text_area :descripcion, class: 'tinymce'
+          = ayuda_para('proyecto.descripcion')
+
+        #cita.span-22.campo
+          .span-2= f.label :cita, 'Cómo citar'
+          .span-20.last= f.text_area :cita
+          = ayuda_para('proyecto.cita')
+
+      = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
+        .span-22.campo
+          %table#perfiles
+            %thead
+              %tr
+                %th.borrar
+                %th.nombre    Nombre
+                %th.numero    Número
+                %th.fecha     Fecha
+            %tbody
+              = f.nested_fields_for :perfiles,  render_template: false,
+                                                new_object: @proyecto.nuevo_perfil,
+                                                show_empty: true do |ff|
+                - if ff
+                  = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: true }
+                - else
+                  %tr.empty
+                    %td
+                    %td{colspan: 3} Buscá perfiles para asociar a este proyecto.
+
+          = nested_fields_templates
+
+        = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable span-21' do
+          #busqueda.span-21
+            = search_form_for @busqueda do |b|
+              .span-3=  b.label :nombre_or_numero_cont, "Por nombre o número"
+              .span-7= b.text_field :nombre_or_numero_cont
+
+              .span-2=  b.label :tags_name_cont, "y etiqueta"
+              .span-7= b.text_field :tags_name_cont
+              .span-2.last= b.submit "Buscar", id: :seleccion
+
+      .acciones.span-4.last= f.submit

@@ -5,6 +5,7 @@ class GruposController < AutorizadoController
   # GET /grupos.json
   def index
     @grupos = Grupo.all(:order => 'descripcion ASC')
+    @titulo = "Grupos"
 
     respond_to do |format|
       format.html # index.html.{erb,haml}

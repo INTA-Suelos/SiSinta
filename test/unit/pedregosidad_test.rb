@@ -11,15 +11,15 @@ class PedregrosidadTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería negarse a cargar pedregosidad sin calicata" do
-    assert build_stubbed(:pedregosidad, :sin_calicata).invalid?, "Una pedregosidad sin calicata es válida"
+  test "debería negarse a cargar pedregosidad sin perfil" do
+    assert build_stubbed(:pedregosidad, :sin_perfil).invalid?, "Una pedregosidad sin perfil es válida"
   end
 
   test "debería poder acceder a sus asociaciones" do
     pedregosidad = build_stubbed(:pedregosidad)
     assert pedregosidad.respond_to? :clase
     assert pedregosidad.respond_to? :subclase
-    assert pedregosidad.respond_to? :calicata
+    assert pedregosidad.respond_to? :perfil
     assert_nothing_raised do
       pedregosidad.clase
       pedregosidad.subclase

@@ -12,11 +12,15 @@ class FasesControllerTest < ActionController::TestCase
 
   test "debería devolver nombre para términos parciales" do
     loguearse_como :autorizado
-    @termino = 'a'
+    @termino = create(:fase).nombre
     get :autocompletar, atributo: 'nombre', term: @termino
     assert_response :success
     assert_equal  Fase.where("nombre like '%#{@termino}%'").size,
                   json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('nombre'), "debe devolver el nombre"
   end
 
 end
