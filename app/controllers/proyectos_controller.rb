@@ -4,7 +4,7 @@ class ProyectosController < AutorizadoController
   skip_load_and_authorize_resource            only: [:index, :show]
   skip_authorization_check                    only: [:index, :show]
 
-  before_filter :perfiles_asociados,  only: [:edit]
+  before_filter :asociar_perfiles,            only: [:update]
 
   # GET /proyectos
   # GET /proyectos.json
@@ -33,6 +33,7 @@ class ProyectosController < AutorizadoController
   # GET /proyectos/new
   # GET /proyectos/new.json
   def new
+    @busqueda = Perfil.search
     @titulo = 'Nuevo proyecto'
     @proyecto = ProyectoDecorator.decorate(@proyecto)
 
@@ -44,8 +45,8 @@ class ProyectosController < AutorizadoController
 
   # GET /proyectos/1/edit
   def edit
-    @titulo = "Editando #{@proyecto.nombre}"
     @busqueda = Perfil.search
+    @titulo = "Editando #{@proyecto.nombre}"
     @proyecto = ProyectoDecorator.decorate(@proyecto)
   end
 
@@ -54,7 +55,7 @@ class ProyectosController < AutorizadoController
   def create
     respond_to do |format|
       if @proyecto.save
-        format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
+        format.html { buscar_perfiles_o_guardar }
         format.json { render json: @proyecto, status: :created, location: @proyecto }
       else
         format.html { render action: "new" }
@@ -68,7 +69,7 @@ class ProyectosController < AutorizadoController
   def update
     respond_to do |format|
       if @proyecto.update_attributes(params[:proyecto])
-        format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
+        format.html { buscar_perfiles_o_guardar }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -90,11 +91,21 @@ class ProyectosController < AutorizadoController
 
   private
 
-    def perfiles_asociados
+    def asociar_perfiles
       if params[:perfil_ids]
         # Agregamos sólo los ids que no estaban ya
         nuevos = params[:perfil_ids].collect {|id| id.to_i } - @proyecto.perfil_ids
         @proyecto.perfiles << Perfil.find(nuevos)
+      end
+    end
+
+    def buscar_perfiles_o_guardar
+      case params[:commit]
+      when 'Buscar'
+        session[:origen] = proyecto_path(@proyecto)
+        redirect_to perfiles_path(format: :seleccion, q: params[:q])
+      else
+        redirect_to @proyecto, notice: I18n.t("messages.#{params[:action]}d", model: 'Proyecto')
       end
     end
 

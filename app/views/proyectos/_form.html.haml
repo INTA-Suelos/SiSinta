@@ -55,9 +55,6 @@
 
               .span-2=  b.label :tags_name_cont, "y etiqueta"
               .span-7= b.text_field :tags_name_cont
-              = hidden_field_tag :origen, edit_proyecto_path(@proyecto)
-              = hidden_field_tag :preservar, 'proyecto'
-              .span-2.last= b.submit "Buscar", name: :seleccion, id: :seleccion,
-                formmethod: :get, formaction: perfiles_path(format: :seleccion)
+              .span-2.last= b.submit "Buscar", id: :seleccion
 
       .acciones.span-4.last= f.submit
