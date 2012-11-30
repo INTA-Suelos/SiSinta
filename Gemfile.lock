@@ -154,6 +154,7 @@ GEM
     rocket_tag (0.5.6)
       activerecord (>= 3.2.0)
       squeel (~> 1.0.0)
+    rolify (3.2.0)
     sass (3.1.20)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -220,6 +221,7 @@ DEPENDENCIES
   rgeo
   rgeo-geojson
   rocket_tag
+  rolify
   sass-rails (~> 3.2.3)
   therubyracer
   thin

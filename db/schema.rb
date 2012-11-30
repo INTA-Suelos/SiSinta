@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913001404) do
+ActiveRecord::Schema.define(:version => 20121130011544) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -217,13 +217,20 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
   add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
 
   create_table "roles", :force => true do |t|
-    t.string "nombre"
+    t.string  "name"
+    t.integer "resource_id"
+    t.string  "resource_type"
   end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "roles_usuarios", :id => false, :force => true do |t|
     t.integer "usuario_id"
     t.integer "rol_id"
   end
+
+  add_index "roles_usuarios", ["usuario_id", "rol_id"], :name => "index_roles_usuarios_on_usuario_id_and_rol_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -247,10 +254,10 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true

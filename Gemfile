@@ -12,6 +12,7 @@ gem 'pg'
 gem 'devise'
 gem 'cancan'
 gem 'param_protected'
+gem 'rolify'
 
 ## Presentación
 gem 'dynamic_form'

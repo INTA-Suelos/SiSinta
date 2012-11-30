@@ -77,7 +77,7 @@ class UsuariosController < AutorizadoController
   private
 
     def cargar_recursos
-      @roles = Rol.order('nombre ASC')
+      @roles = Rol.order('name ASC')
       @usuarios = Usuario.por_rol
     end
 

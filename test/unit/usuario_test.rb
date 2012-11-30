@@ -33,13 +33,13 @@ class UsuarioTest < ActiveSupport::TestCase
     assert_nothing_raised do
       @u = build(:usuario)
       assert @u.save, "No guarda al usuario"
-      @u.roles.clear << Rol.find_by_nombre('administrador')
-      assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "No guarda la relación"
+      @u.roles.clear << Rol.find_by_name('administrador')
+      assert_equal @u.roles.first, Rol.find_by_name('administrador'), "No guarda la relación"
     end
   end
 
   test "debería crear el usuario con un rol por default" do
-    assert_includes @simple.roles, Rol.find_by_nombre('invitado'), "Debería tener el Rol 'invitado' al principio"
+    assert_includes @simple.roles, Rol.find_by_name('invitado'), "Debería tener el Rol 'invitado' al principio"
   end
 
   test "debería comprobar el rol" do

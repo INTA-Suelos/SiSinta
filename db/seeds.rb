@@ -34,7 +34,7 @@ end
 # Carga el usuario administrador inicial
 Usuario.create( :nombre => 'Administrador',
                 :email => 'email@falso.com',
-                :password => 'administrador').roles.clear << Rol.find_by_nombre('administrador')
+                :password => 'administrador').roles.clear << Rol.find_by_name('administrador')
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|

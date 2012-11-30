@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
+  rolify :role_cname => 'Rol'
   store :config, accessors: [:ficha, :srid]
 
   has_and_belongs_to_many :roles
@@ -17,8 +18,8 @@ class Usuario < ActiveRecord::Base
                   :remember_me, :config, :current_password, :rol_ids,
                   :ficha, :srid
 
-  scope :por_rol, joins(:roles).order('roles.nombre ASC')
-  scope :admins, joins(:roles).where('roles.nombre = ?', 'administrador')
+  scope :por_rol, joins(:roles).order('roles.name ASC')
+  scope :admins, joins(:roles).where('roles.name = ?', 'administrador')
 
   def to_s
     nombre
@@ -32,7 +33,7 @@ class Usuario < ActiveRecord::Base
     if rol.instance_of? Rol
       roles.include? rol
     else
-      roles.include? Rol.find_by_nombre(rol.to_s)
+      roles.include? Rol.find_by_name(rol.to_s)
     end
   end
 
