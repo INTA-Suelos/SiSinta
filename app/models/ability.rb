@@ -33,18 +33,34 @@ class Ability
     @perfiles = [Perfil, Horizonte, Analisis, Adjunto]
     @basicos = [Grupo, Fase, Proyecto]
 
-    if usuario.admin?
-      can :manage, :all
+    if usuario.has_role? I18n.t('roles.admin')
+      administrador
     else
-      if usuario.autorizado?
-        can :manage, perfiles
-        can :manage, basicos
+      if usuario.has_role? I18n.t('roles.data_entry')
+        autorizado
       else
-        # usuario invitado, anónimo o no existente
-        can :read, perfiles, publico: true
-        can :read, basicos
+        invitado
       end
     end
 
   end
+
+  # Lógica de cada rol
+  private
+
+    def administrador
+      can :manage, :all
+    end
+
+    def autorizado
+      can :manage, perfiles
+      can :manage, basicos
+    end
+
+    # usuario invitado, anónimo o no existente
+    def invitado
+      can :read, perfiles, publico: true
+      can :read, basicos
+    end
+
 end

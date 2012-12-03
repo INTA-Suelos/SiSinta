@@ -23,18 +23,12 @@ def cargar_csv_de(archivo, configuracion = {})
   end
 end
 
-# Carga los roles predefinidos
-cargar_yml_de('roles').each do |campo|
-  campo.last.each do |v|
-    puts "Cargando rol #{v} ..."
-    Rol.send("find_or_create_by_#{campo.first}", v)
-  end
-end
-
 # Carga el usuario administrador inicial
-Usuario.create( :nombre => 'Administrador',
-                :email => 'email@falso.com',
-                :password => 'administrador').roles.clear << Rol.find_by_name('administrador')
+Usuario.create(
+  nombre:   'Administra Administrador',
+  email:    'admin@cambiame.com',
+  password: 'cambiame'
+).add_role  I18n.t('roles.admin')
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|

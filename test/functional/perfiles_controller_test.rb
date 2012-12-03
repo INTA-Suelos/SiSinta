@@ -8,14 +8,14 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería ir a 'nuevo' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     get :new
     assert_response :success
   end
 
   test "debería crear un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     assert_difference('Perfil.count', 1) do
       post :create, perfil: attributes_for(:perfil)
@@ -25,7 +25,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería mostrar un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     @request.env["HTTP_REFERER"] = "/perfiles/"
 
@@ -35,14 +35,14 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería ir a 'editar' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     get :edit, id: create(:perfil).to_param
     assert_response :success
   end
 
   test "debería actualizar un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     perfil = create(:perfil)
     @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
@@ -51,7 +51,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería eliminar un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
 
     perfil = create(:perfil)
     assert_difference('Perfil.count', -1) do
@@ -75,7 +75,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería devolver nombre para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
     @termino = create(:perfil).nombre
 
     get :autocompletar, atributo: 'nombre', term: @termino
@@ -89,7 +89,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "debería devolver numero para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
     @termino = create(:perfil).numero
 
     get :autocompletar, atributo: 'numero', term: @termino

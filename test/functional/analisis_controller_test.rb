@@ -4,7 +4,7 @@ require './test/test_helper'
 class AnalisisControllerTest < ActionController::TestCase
 
   setup do
-    loguearse_como :autorizado
+    loguearse_como I18n.t('roles.data_entry')
     @analisis = create(:analisis)
     @perfil = @analisis.perfil
     @request.env["HTTP_REFERER"] = "/perfiles/#{@perfil.to_param}/analisis"

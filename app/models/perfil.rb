@@ -16,6 +16,9 @@ class Perfil < ActiveRecord::Base
   attr_taggable :etiquetas
   attr_taggable :reconocedores
 
+  # Permite utilizar roles sobre este modelo
+  resourcify role_cname: 'Rol'
+
   before_validation do
     buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
   end

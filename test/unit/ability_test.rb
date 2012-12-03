@@ -4,9 +4,9 @@ require './test/test_helper'
 class AbilityTest < ActiveSupport::TestCase
 
   setup do
-    @admin = build(:usuario, :administrador)
-    @autorizado = build(:usuario, :autorizado)
-    @invitado = build(:usuario, :invitado)
+    @admin = build(:usuario, rol: I18n.t('roles.admin'))
+    @autorizado = build(:usuario, rol: I18n.t('roles.data_entry'))
+    @invitado = build(:usuario, rol: "Invitado")
     @recursos = [Perfil, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
   end
 
@@ -22,7 +22,7 @@ class AbilityTest < ActiveSupport::TestCase
 
   test "debería permitirle administrar objetos basicos a los autorizados" do
     refute @autorizado.admin?, "Es administrador"
-    assert @autorizado.autorizado?, "No es autorizado"
+    assert @autorizado.has_role?(I18n.t('roles.data_entry')), "No es autorizado"
 
     @permisos = Ability.new @autorizado
 
@@ -34,8 +34,8 @@ class AbilityTest < ActiveSupport::TestCase
 
   test "debería prohibirle a los invitados crear o modificar objetos" do
     refute @invitado.admin?, "Es administrador"
-    refute @invitado.autorizado?, "Es autorizado"
-    assert @invitado.invitado?, "No es invitado"
+    refute @invitado.has_role?(I18n.t('roles.data_entry')), "Es autorizado"
+    assert @invitado.has_role?("Invitado"), "No es invitado"
 
     @permisos = Ability.new @invitado
 

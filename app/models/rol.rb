@@ -7,20 +7,7 @@ class Rol < ActiveRecord::Base
 
   scopify
 
-  # TODO Meter todos estos en method missing
-  def self.administrador
-    self.find_by_name('administrador')
-  end
-
-  def self.autorizado
-    self.find_by_name('autorizado')
-  end
-
-  def self.invitado
-    self.find_by_name('invitado')
-  end
-
-  def to_s
+  def to_param
     nombre
   end
 
