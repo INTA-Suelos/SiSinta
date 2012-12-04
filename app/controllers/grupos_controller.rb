@@ -13,10 +13,8 @@ class GruposController < AutorizadoController
     end
   end
 
-  #
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
   # el que consultar, controlando el input del usuario.
-  #
   def autocompletar
     case params[:atributo]
       when 'descripcion' then super(Grupo, :descripcion)

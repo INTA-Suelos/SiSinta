@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ProyectosController < AutorizadoController
 
   skip_before_filter :authenticate_usuario!,  only: [:index, :show]
