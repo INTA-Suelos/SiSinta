@@ -7,7 +7,7 @@ FactoryGirl.define do
 
     ignore { rol nil }
     after(:build) do |usuario, params|
-        usuario.grant(params.rol) if params.rol
+      usuario.grant(params.rol) if params.rol
     end
   end
 end

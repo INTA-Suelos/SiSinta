@@ -17,4 +17,4 @@ es:
   roles:
     admin:      "Administrador"
     miembro:    "Miembro"
-    data_entry: "Autorizado"
+    autorizado: "Autorizado"

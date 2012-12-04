@@ -4,7 +4,7 @@ class Ability
 
   attr_reader :basicos, :perfiles
 
-  def initialize(usuario)
+  def initialize(usuario = nil)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -28,18 +28,18 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    usuario ||= Usuario.new # guest user (not logged in)
+    @usuario = usuario || Usuario.new # guest user (not logged in)
 
     @perfiles = [Perfil, Horizonte, Analisis, Adjunto]
     @basicos = [Grupo, Fase, Proyecto]
 
-    if usuario.has_role? I18n.t('roles.admin')
+    if @usuario.has_role? :admin
       administrador
     else
-      if usuario.has_role? I18n.t('roles.data_entry')
+      if @usuario.has_role? :autorizado
         autorizado
       else
-        invitado
+        miembro
       end
     end
 
@@ -55,6 +55,14 @@ class Ability
     def autorizado
       can :manage, perfiles
       can :manage, basicos
+    end
+
+    # Usuario miembro de un perfil. Usamos una acción personalizada para
+    # separar la consulta sobre instancias de la consulta de clases, por
+    # requisito de rolify
+    def miembro
+      can :modificar, Perfil, id: Perfil.with_role('miembro', @usuario).map {|p| p.id}
+      invitado
     end
 
     # usuario invitado, anónimo o no existente

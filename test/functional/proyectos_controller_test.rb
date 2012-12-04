@@ -14,14 +14,14 @@ class ProyectosControllerTest < ActionController::TestCase
   end
 
   test "debería ir a 'nuevo' si está autorizado" do
-    loguearse_como I18n.t('roles.data_entry')
+    loguearse_como :autorizado
 
     get :new
     assert_response :success
   end
 
   test "debería crear un proyecto si está autorizado" do
-    loguearse_como I18n.t('roles.data_entry')
+    loguearse_como :autorizado
 
     assert_difference('Proyecto.count') do
       post :create, proyecto: attributes_for(:proyecto)
@@ -36,21 +36,21 @@ class ProyectosControllerTest < ActionController::TestCase
   end
 
   test "debería ir a 'editar' si está autorizado" do
-    loguearse_como I18n.t('roles.data_entry')
+    loguearse_como :autorizado
 
     get :edit, id: @proyecto
     assert_response :success
   end
 
   test "debería actualizar un proyecto si está autorizado" do
-    loguearse_como I18n.t('roles.data_entry')
+    loguearse_como :autorizado
 
     put :update, id: @proyecto, proyecto: attributes_for(:proyecto)
     assert_redirected_to proyecto_path(assigns(:proyecto))
   end
 
   test "debería eliminar un proyecto si está autorizado" do
-    loguearse_como I18n.t('roles.data_entry')
+    loguearse_como :autorizado
 
     assert_difference('Proyecto.count', -1) do
       delete :destroy, id: @proyecto

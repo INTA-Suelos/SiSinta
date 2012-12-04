@@ -3,7 +3,6 @@ class Usuario < ActiveRecord::Base
   rolify :role_cname => 'Rol'
   store :config, accessors: [:ficha, :srid]
 
-  has_and_belongs_to_many :roles
   has_many :perfiles, inverse_of: :usuario
   after_initialize :asignar_valores_por_defecto
 
@@ -17,7 +16,7 @@ class Usuario < ActiveRecord::Base
                   :remember_me, :config, :current_password, :ficha, :srid
 
   scope :por_rol, joins(:roles).order('roles.name ASC')
-  scope :admins, joins(:roles).where('roles.name = ?', I18n.t('roles.admin'))
+  scope :admins, joins(:roles).where('roles.name = ?', :admin)
 
   def to_s
     nombre
@@ -28,7 +27,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def admin?
-    has_role? I18n.t('roles.admin')
+    has_role? :admin
   end
 
   protected

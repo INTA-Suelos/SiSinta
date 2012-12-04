@@ -15,7 +15,7 @@ class UsuariosControllerTest < ActionController::TestCase
   end
 
   test "el usuario logueado debería ser admin" do
-    @admin = loguearse_como I18n.t('roles.admin')
+    @admin = loguearse_como :admin
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end
 

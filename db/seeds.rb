@@ -28,7 +28,7 @@ Usuario.create(
   nombre:   'Administra Administrador',
   email:    'admin@cambiame.com',
   password: 'cambiame'
-).add_role  I18n.t('roles.admin')
+).add_role  :admin
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|

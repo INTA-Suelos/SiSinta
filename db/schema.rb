@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130011544) do
+ActiveRecord::Schema.define(:version => 20121204041324) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -225,13 +225,6 @@ ActiveRecord::Schema.define(:version => 20121130011544) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
-  create_table "roles_usuarios", :id => false, :force => true do |t|
-    t.integer "usuario_id"
-    t.integer "rol_id"
-  end
-
-  add_index "roles_usuarios", ["usuario_id", "rol_id"], :name => "index_roles_usuarios_on_usuario_id_and_rol_id"
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -281,5 +274,12 @@ ActiveRecord::Schema.define(:version => 20121130011544) do
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
   add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
+
+  create_table "usuarios_roles", :id => false, :force => true do |t|
+    t.integer "usuario_id"
+    t.integer "rol_id"
+  end
+
+  add_index "usuarios_roles", ["usuario_id", "rol_id"], :name => "index_roles_usuarios_on_usuario_id_and_rol_id"
 
 end
