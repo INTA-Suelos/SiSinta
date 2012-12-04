@@ -24,6 +24,11 @@ def cargar_csv_de(archivo, configuracion = {})
 end
 
 # Carga el usuario administrador inicial
+puts <<MSG
+Creando usuario administrador con:
+  email:    admin@cambiame.com"
+  password: cambiame"
+MSG
 Usuario.create(
   nombre:   'Administra Administrador',
   email:    'admin@cambiame.com',

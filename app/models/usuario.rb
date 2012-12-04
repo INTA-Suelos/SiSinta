@@ -15,9 +15,6 @@ class Usuario < ActiveRecord::Base
   attr_accessible :nombre, :email, :password, :password_confirmation,
                   :remember_me, :config, :current_password, :ficha, :srid
 
-  scope :por_rol, joins(:roles).order('roles.name ASC')
-  scope :admins, joins(:roles).where('roles.name = ?', :admin)
-
   def to_s
     nombre
   end

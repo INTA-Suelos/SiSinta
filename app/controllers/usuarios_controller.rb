@@ -1,14 +1,12 @@
 # encoding: utf-8
 class UsuariosController < AutorizadoController
 
-  before_filter :cargar_recursos
   before_filter :paginar, only: [:index]
 
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios.reject! { |u| u.id == current_usuario.id }
-    @titulo = "Administración de usuarios y roles"
+    @titulo = "Administración de usuarios y grupos"
     respond_to do |format|
       format.html do
         if request.xhr?
@@ -16,7 +14,7 @@ class UsuariosController < AutorizadoController
                           locals: { usuarios: @usuarios.pagina(params[:pagina]) }
         end
       end
-      format.json { render  json: @roles }
+      format.json { render  json: @usuarios }
     end
   end
 
@@ -75,11 +73,6 @@ class UsuariosController < AutorizadoController
   end
 
   private
-
-    def cargar_recursos
-      @roles = Rol.order('name ASC')
-      @usuarios = Usuario.por_rol
-    end
 
     def paginar
       @usuarios = @usuarios.pagina(params[:pagina])
