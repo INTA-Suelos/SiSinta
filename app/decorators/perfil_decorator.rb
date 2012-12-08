@@ -14,4 +14,8 @@ class PerfilDecorator < Draper::Base
     source.reconocedores.join(', ')
   end
 
+  def numero
+    source.numero.blank? ? '-' : source.numero
+  end
+
 end

@@ -31,9 +31,10 @@
             %thead
               %tr
                 %th.borrar
-                %th.nombre    Nombre
-                %th.numero    Número
-                %th.fecha     Fecha
+                %th.nombre          Nombre
+                %th.numero.centrado Número
+                %th.fecha.centrado  Fecha
+                %th.acciones
             %tbody
               = f.nested_fields_for :perfiles,  render_template: false,
                                                 new_object: @proyecto.nuevo_perfil,

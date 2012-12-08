@@ -33,7 +33,7 @@ class SeriesController < AutorizadoController
   # GET /series/1
   # GET /series/1.json
   def show
-    @serie = SerieDecorator.new(@serie)
+    @serie = @serie.decorate
     @titulo = "Serie #{@serie.nombre} (#{@serie.simbolo})"
 
     respond_to do |format|
