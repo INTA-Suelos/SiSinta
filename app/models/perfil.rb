@@ -8,7 +8,7 @@ class Perfil < ActiveRecord::Base
                   :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
                   :capacidad_attributes, :humedad_attributes, :pedregosidad_attributes,
-                  :erosion_attributes, :etiquetas, :reconocedores
+                  :erosion_attributes, :etiquetas, :reconocedores, :grupo
 
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -31,7 +31,6 @@ class Perfil < ActiveRecord::Base
 
   validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
-  validates_presence_of :numero
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
@@ -87,6 +86,7 @@ class Perfil < ActiveRecord::Base
 
   # TODO Comprueba que numero sea único dentro de una serie
   def numero_es_unico_dentro_de_una_serie
+    true
   end
 
   # Prepara un hash para que RGeo genere geojson

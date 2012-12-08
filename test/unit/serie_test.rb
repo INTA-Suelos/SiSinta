@@ -12,14 +12,9 @@ class SerieTest < ActiveSupport::TestCase
     assert build_stubbed(:serie, nombre: existente).invalid?, "Permite nombres duplicados"
   end
 
-  test "debería requerir el símbolo" do
-    assert build_stubbed(:serie_anonima).invalid?, "Valida sin simbolo"
-  end
-
   test "no debería permitir símbolos duplicados" do
     existente = create(:serie).simbolo
     assert build_stubbed(:serie, simbolo: existente).invalid?, "Permite símbolos duplicados"
   end
-
 
 end
