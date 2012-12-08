@@ -1,0 +1,27 @@
+.botonera= link_to 'Nueva serie', new_serie_path
+
+#lista
+  %table#series
+    %thead
+      %tr
+        %th Nombre
+        %th Símbolo
+        %th Descripcion
+        %th.numero Perfiles
+        %th.acciones
+
+    %tbody
+      - @series.each do |serie|
+        %tr
+          %td= serie.nombre
+          %td= serie.simbolo
+          %td!= serie.descripcion.try(:truncate, 35)
+          %td.numero= serie.perfiles.size
+          %td.acciones
+            = link_to 'Mostrar', serie
+            = '|'
+            = link_to 'Editar', edit_serie_path(serie)
+            = '|'
+            = link_to 'Eliminar', serie, confirm: t(:confirmar), method: :delete
+
+.botonera= link_to 'Nueva serie', new_serie_path

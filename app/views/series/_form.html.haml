@@ -1,29 +1,26 @@
-= tinymce
+#serie
 
-#proyecto
-
-  = form_for @proyecto, html: { class: 'span-24' } do |f|
+  = form_for @serie, html: { class: 'span-24' } do |f|
 
     = field_set_tag @titulo, class: 'celeste_oscuro span-24 last' do
 
       = f.error_messages
 
-      = field_set_tag 'Datos del proyecto', class: 'celeste plegable span-23 last' do
+      = field_set_tag 'Datos de la serie', class: 'celeste plegable span-23 last' do
+
+        .span-19.campo
+          .span-2= f.label :nombre
+          .span-17.last= f.text_field :nombre, autofocus: true, required: true
+          = ayuda_para('serie.nombre')
+        .span-3.campo.last
+          .span-2= f.label :simbolo
+          .span-1.last= f.text_field :simbolo, required: true
+          = ayuda_para('serie.simbolo')
 
         .span-22.campo
-          .span-2= f.label :nombre
-          .span-20.last= f.text_field :nombre, autofocus: true, required: true
-          = ayuda_para('proyecto.nombre')
-
-        #descripcion.span-22.campo
           .span-2= f.label :descripcion, 'Descripción'
-          .span-20.last= f.text_area :descripcion, class: 'tinymce'
-          = ayuda_para('proyecto.descripcion')
-
-        #cita.span-22.campo
-          .span-2= f.label :cita, 'Cómo citar'
-          .span-20.last= f.text_area :cita
-          = ayuda_para('proyecto.cita')
+          .span-20.last= f.text_area :descripcion
+          = ayuda_para('serie.descripcion')
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
         .span-22.campo
@@ -31,27 +28,28 @@
             %thead
               %tr
                 %th.borrar
-                %th.nombre    Nombre
-                %th.numero    Número
-                %th.fecha     Fecha
+                %th.ubicacion       Ubicación
+                %th.numero          Número
+                %th.fecha           Fecha
+                %th.modal.centrado  ¿Es modal?
             %tbody
               = f.nested_fields_for :perfiles,  render_template: false,
-                                                new_object: @proyecto.nuevo_perfil,
+                                                new_object: @serie.nuevo_perfil,
                                                 show_empty: true do |ff|
                 - if ff
                   = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: true }
                 - else
                   %tr.empty
                     %td
-                    %td{colspan: 3} Buscá perfiles para asociar a este proyecto.
+                    %td{colspan: 3} Buscá perfiles para asociar a esta serie.
 
           = nested_fields_templates
 
         = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable span-21' do
           #busqueda.span-21
             = search_form_for @busqueda do |b|
-              .span-3=  b.label :serie_nombre_or_numero_cont, "Por nombre o número"
-              .span-7= b.text_field :serie_nombre_or_numero_cont
+              .span-3=  b.label :ubicacion_descripcion_or_numero_cont, "Por ubicación o número"
+              .span-7= b.text_field :ubicacion_descripcion_or_numero_cont
 
               .span-2=  b.label :tags_name_cont, "y etiqueta"
               .span-7= b.text_field :tags_name_cont

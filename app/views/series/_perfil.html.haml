@@ -1,0 +1,16 @@
+%tr{class: cycle("odd", "even")}
+  - if remover
+    %td.borrar
+      =  link_to 'X', '#perfiles', class: 'remove remover'
+  %td.ubicacion
+    = ff.label :ubicacion, perfil.ubicacion, class: 'perfil_ubicacion'
+  %td.numero
+    = ff.label :numero, perfil.numero, class: 'perfil_numero'
+  %td.fecha
+    = ff.label :fecha, perfil.fecha
+  %td.modal.centrado
+    = ff.label :modal, "✓" if perfil.modal?
+
+
+  = ff.hidden_field :id
+  = ff.hidden_field :_destroy

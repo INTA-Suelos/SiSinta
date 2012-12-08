@@ -4,6 +4,7 @@ require './test/test_helper'
 class UbicacionDecoratorTest < ActionController::TestCase
 
   def setup
+    ApplicationController.new.view_context
     @lugar = build_stubbed :ubicacion, x: '-35.0', y: '-35.0'
   end
 

@@ -1,9 +1,9 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
-  attr_accessible :fecha, :nombre, :numero, :drenaje_id, :profundidad_napa,
+  attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
                   :cobertura_vegetal, :posicion_id, :pendiente_id,
                   :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
-                  :uso_de_la_tierra_id, :material_original, :simbolo, :esquema,
+                  :uso_de_la_tierra_id, :material_original, :esquema,
                   :fase_id, :modal, :observaciones, :publico, :relieve_id,
                   :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
@@ -29,10 +29,9 @@ class Perfil < ActiveRecord::Base
                            ubicacion.descripcion as ubicacion,
                            perfiles.numero, perfiles.modal')
 
-  validate :la_fecha_no_puede_ser_futura
+  validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
-  validates_uniqueness_of :nombre, :numero, allow_blank: true
-  validates_presence_of :nombre
+  validates_presence_of :numero
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
@@ -51,7 +50,6 @@ class Perfil < ActiveRecord::Base
   #   has_one => lookup tiene perfil_id
   # Como los valores de estas tablas son un conjunto definido, se comparten
   # entre todos los perfiles, aunque suene raro un belongs_to acá.
-  #
   belongs_to_active_hash :escurrimiento
   belongs_to_active_hash :pendiente
   belongs_to_active_hash :permeabilidad
@@ -67,27 +65,31 @@ class Perfil < ActiveRecord::Base
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles
   belongs_to :grupo,    inverse_of: :perfiles
+  belongs_to :serie,    inverse_of: :perfiles
 
   has_and_belongs_to_many :proyectos
 
   accepts_nested_attributes_for :capacidad, :paisaje, :ubicacion, :pedregosidad,
                                 :humedad, :erosion,
                                 limit: 1, allow_destroy: true
-  accepts_nested_attributes_for :grupo, :fase, limit: 1, reject_if: :all_blank
+  accepts_nested_attributes_for :grupo, :fase, :serie, limit: 1, reject_if: :all_blank
   accepts_nested_attributes_for :horizontes, :analisis, allow_destroy: true
 
-# == Validaciones
+  delegate :nombre,   to: :serie, allow_nil: true
+  delegate :simbolo,  to: :serie, allow_nil: true
 
   # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
-  #
-  def la_fecha_no_puede_ser_futura
+  def fecha_no_puede_ser_futura
     if !fecha.blank? and fecha > Date.today
       errors.add(:fecha, :future)
     end
   end
 
+  # TODO Comprueba que numero sea único dentro de una serie
+  def numero_es_unico_dentro_de_una_serie
+  end
+
   # Prepara un hash para que RGeo genere geojson
-  #
   def propiedades_publicas
     [:id, :numero, :nombre, :fecha].inject({}) do |hash, atributo|
       hash[atributo] = self.try(atributo)

@@ -57,6 +57,12 @@ SiSINTA::Application.routes.draw do
 
   resources :proyectos, path_names: m
 
+  resources :series, path_names: f do
+    collection do
+      get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
+    end
+  end
+
   scope "/admin" do
     resources :usuarios, only: [:index, :destroy], path_names: m do
       put 'update', on: :collection

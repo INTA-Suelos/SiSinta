@@ -3,7 +3,7 @@ class UbicacionDecorator < Draper::Base
 
   # Transforma del srid real al preferido por el usuario
   def transformar
-    @coordenadas ||= Ubicacion.transformar(ubicacion.srid, h.current_usuario.srid, ubicacion.x, ubicacion.y)
+    @coordenadas ||= Ubicacion.transformar(source.srid, h.current_usuario.srid, source.x, source.y)
   end
 
   # x de acuerdo al SRID preferido
@@ -26,6 +26,10 @@ class UbicacionDecorator < Draper::Base
 
   def redondear(numero)
     numero.try(:round, SiSINTA::Application.config.precision)
+  end
+
+  def to_s
+    source.descripcion
   end
 
 end

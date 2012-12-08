@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204041324) do
+ActiveRecord::Schema.define(:version => 20121204115211) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -181,7 +181,6 @@ ActiveRecord::Schema.define(:version => 20121204041324) do
     t.datetime "updated_at",                               :null => false
     t.string   "material_original"
     t.string   "esquema"
-    t.string   "simbolo"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
@@ -194,11 +193,11 @@ ActiveRecord::Schema.define(:version => 20121204041324) do
     t.integer  "escurrimiento_id"
     t.integer  "permeabilidad_id"
     t.integer  "anegamiento_id"
-    t.string   "nombre"
     t.integer  "grupo_id"
     t.integer  "sal_id"
     t.integer  "uso_de_la_tierra_id"
     t.string   "vegetacion_o_cultivos"
+    t.integer  "serie_id"
   end
 
   create_table "perfiles_proyectos", :id => false, :force => true do |t|
@@ -224,6 +223,14 @@ ActiveRecord::Schema.define(:version => 20121204041324) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "series", :force => true do |t|
+    t.string   "nombre"
+    t.string   "simbolo"
+    t.text     "descripcion"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

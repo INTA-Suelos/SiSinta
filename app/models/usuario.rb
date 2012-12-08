@@ -15,6 +15,10 @@ class Usuario < ActiveRecord::Base
   attr_accessible :nombre, :email, :password, :password_confirmation,
                   :remember_me, :config, :current_password, :ficha, :srid
 
+  # Arregla cierto problema con rolify y las inflecciones
+  alias_method :role_ids, :rol_ids
+  alias_method :role_ids=, :rol_ids=
+
   def to_s
     nombre
   end
