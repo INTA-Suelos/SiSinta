@@ -1,0 +1,23 @@
+@import "constantes";
+
+#serie {
+
+  #serie_descripcion {
+    height: $altura-linea * 4;
+  }
+
+  #perfiles {
+    label {
+      font-weight: normal;
+      font-size: small;
+    }
+
+    .borrar     { width: 1%;  }
+    .ubicacion  { width: 49%; }
+    .numero     { width: 20%; }
+    .fecha      { width: 20%; }
+    .modal      { width: 10%; }
+
+  }
+
+}

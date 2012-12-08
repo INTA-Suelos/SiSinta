@@ -29,10 +29,9 @@ class Perfil < ActiveRecord::Base
                            ubicacion.descripcion as ubicacion,
                            perfiles.numero, perfiles.modal')
 
-  validate :la_fecha_no_puede_ser_futura
+  validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
-  validates_uniqueness_of :nombre, :numero, allow_blank: true
-  validates_presence_of :nombre
+  validates_presence_of :numero
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
@@ -76,18 +75,21 @@ class Perfil < ActiveRecord::Base
   accepts_nested_attributes_for :grupo, :fase, :serie, limit: 1, reject_if: :all_blank
   accepts_nested_attributes_for :horizontes, :analisis, allow_destroy: true
 
-# == Validaciones
+  delegate :nombre,   to: :serie, allow_nil: true
+  delegate :simbolo,  to: :serie, allow_nil: true
 
   # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
-  #
-  def la_fecha_no_puede_ser_futura
+  def fecha_no_puede_ser_futura
     if !fecha.blank? and fecha > Date.today
       errors.add(:fecha, :future)
     end
   end
 
+  # TODO Comprueba que numero sea único dentro de una serie
+  def numero_es_unico_dentro_de_una_serie
+  end
+
   # Prepara un hash para que RGeo genere geojson
-  #
   def propiedades_publicas
     [:id, :numero, :nombre, :fecha].inject({}) do |hash, atributo|
       hash[atributo] = self.try(atributo)

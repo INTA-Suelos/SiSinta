@@ -1,6 +1,7 @@
 # encoding: utf-8
 class ProyectosController < AutorizadoController
 
+  # Las acciones +index+ y +show+ funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [:index, :show]
   skip_load_and_authorize_resource            only: [:index, :show]
   skip_authorization_check                    only: [:index, :show]
