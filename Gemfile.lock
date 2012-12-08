@@ -223,7 +223,7 @@ DEPENDENCIES
   rocket_tag
   rolify
   sass-rails (~> 3.2.3)
-  therubyracer
+  therubyracer (= 0.10.1)
   thin
   tinymce-rails
   turn
