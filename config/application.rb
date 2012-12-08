@@ -47,6 +47,9 @@ module SiSINTA
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
 
+    # Activar protección de asignación en masa
+    config.active_record.whitelist_attributes = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

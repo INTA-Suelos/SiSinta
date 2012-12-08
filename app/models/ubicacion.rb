@@ -69,7 +69,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def coordenadas_en_geojson
-    RGeo::GeoJSON.encode(coordenadas) unless coordenadas.nil?
+    RGeo::GeoJSON.encode(coordenadas) if coordenadas?
   end
 
   def to_s

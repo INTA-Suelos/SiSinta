@@ -7,8 +7,9 @@ class Perfil < ActiveRecord::Base
                   :fase_id, :modal, :observaciones, :publico, :relieve_id,
                   :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
-                  :capacidad_attributes, :humedad_attributes, :pedregosidad_attributes,
-                  :erosion_attributes, :etiquetas, :reconocedores, :grupo
+                  :capacidad_attributes, :humedad_attributes,
+                  :pedregosidad_attributes, :erosion_attributes, :etiquetas,
+                  :reconocedores, :grupo, :serie_attributes
 
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -79,7 +80,7 @@ class Perfil < ActiveRecord::Base
 
   # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
   def fecha_no_puede_ser_futura
-    if !fecha.blank? and fecha > Date.today
+    if fecha? and fecha > Date.today
       errors.add(:fecha, :future)
     end
   end

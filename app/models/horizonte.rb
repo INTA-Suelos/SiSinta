@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
+  attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
+                  :consistencia, :estructura
+
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -39,7 +42,7 @@ class Horizonte < ActiveRecord::Base
                           message: "debe estar entre 0 y 500 cm"
 
   def rango_profundidad
-    unless profundidad_superior.blank? or profundidad_inferior.blank?
+    if profundidad_superior? and profundidad_inferior?
       "#{profundidad_superior} - #{profundidad_inferior}"
     end
   end

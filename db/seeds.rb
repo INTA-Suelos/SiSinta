@@ -18,7 +18,7 @@ def cargar_csv_de(archivo, configuracion = {})
     CSV.foreach "db/semillas/#{archivo}.csv", configuracion do |fila|
       yield fila
     end
-  rescue Exception => e
+  rescue => e
     puts "No se pudo abrir #{archivo}: #{e}"
   end
 end

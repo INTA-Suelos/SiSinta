@@ -41,7 +41,7 @@ class PerfilesController < AutorizadoController
   def geo
     respond_to do |format|
       format.json { render json: como_geojson(
-                    @perfiles.reject { |c| c.ubicacion.try(:coordenadas).blank? },
+                    @perfiles.select { |c| c.ubicacion.try(:coordenadas?) },
                     :geometria)   }
     end
   end
@@ -91,6 +91,7 @@ class PerfilesController < AutorizadoController
   # POST /perfiles.json
   def create
     @perfil.usuario = current_usuario
+    current_usuario.grant :miembro, @perfil
 
     respond_to do |format|
       if @perfil.save
