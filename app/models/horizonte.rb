@@ -1,10 +1,15 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-  attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
-                  :consistencia, :estructura
-
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
+
+  attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
+                  :consistencia, :estructura, :tipo, :profundidad_inferior,
+                  :limite_attributes, :color_seco_attributes,
+                  :color_humedo_attributes, :textura_id,
+                  :estructura_attributes, :consistencia_attributes, :ph, :co3,
+                  :concreciones, :barnices, :moteados, :humedad, :raices,
+                  :formaciones_especiales
 
   # Arregla la entrada para que no haya objetos repetidos, y en caso de no
   # existir se creen

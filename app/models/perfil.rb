@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
                   :cobertura_vegetal, :posicion_id, :pendiente_id,
                   :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
@@ -9,10 +12,8 @@ class Perfil < ActiveRecord::Base
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
                   :capacidad_attributes, :humedad_attributes,
                   :pedregosidad_attributes, :erosion_attributes, :etiquetas,
-                  :reconocedores, :grupo, :serie_attributes
-
-  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
-  extend ActiveHash::Associations::ActiveRecordExtensions
+                  :reconocedores, :grupo, :serie_attributes,
+                  :horizontes_attributes
 
   attr_taggable :etiquetas
   attr_taggable :reconocedores
@@ -20,15 +21,15 @@ class Perfil < ActiveRecord::Base
   # Permite utilizar roles sobre este modelo
   resourcify role_cname: 'Rol'
 
-  before_validation do
-    buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
-  end
-
   scope :modales, where(modal: 'true')
   scope :index,   joins(:ubicacion)
                   .select('perfiles.fecha, perfiles.nombre,
                            ubicacion.descripcion as ubicacion,
                            perfiles.numero, perfiles.modal')
+
+  before_validation do
+    buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
+  end
 
   validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha

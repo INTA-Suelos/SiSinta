@@ -2,6 +2,8 @@
 class Capacidad < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  attr_accessible :clase_id, :subclase_ids
+
   belongs_to :perfil, inverse_of: :capacidad
 
   belongs_to_active_hash :clase,  inverse_of: :capacidades,
