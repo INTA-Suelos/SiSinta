@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210154849) do
+ActiveRecord::Schema.define(:version => 20121210234341) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -148,13 +148,6 @@ ActiveRecord::Schema.define(:version => 20121210154849) do
     t.datetime "updated_at",   :null => false
     t.integer  "tipo_id"
     t.integer  "forma_id"
-  end
-
-  create_table "lookups", :force => true do |t|
-    t.string "type"
-    t.string "valor2"
-    t.string "valor1"
-    t.string "valor3"
   end
 
   create_table "paisajes", :force => true do |t|
