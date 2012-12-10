@@ -27,10 +27,6 @@ class Perfil < ActiveRecord::Base
                            ubicacion.descripcion as ubicacion,
                            perfiles.numero, perfiles.modal')
 
-  before_validation do
-    buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
-  end
-
   validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
   validates_numericality_of :cobertura_vegetal,
@@ -64,9 +60,9 @@ class Perfil < ActiveRecord::Base
   has_many :analisis, through: :horizontes
 
   belongs_to :usuario,  inverse_of: :perfiles
-  belongs_to :fase,     inverse_of: :perfiles
-  belongs_to :grupo,    inverse_of: :perfiles
-  belongs_to :serie,    inverse_of: :perfiles
+  belongs_to :fase,     inverse_of: :perfiles, validate: false
+  belongs_to :grupo,    inverse_of: :perfiles, validate: false
+  belongs_to :serie,    inverse_of: :perfiles, validate: false
 
   has_and_belongs_to_many :proyectos
 
@@ -78,6 +74,33 @@ class Perfil < ActiveRecord::Base
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
+
+  # Se crea una serie si no existe ya
+  def autosave_associated_records_for_serie
+    # Si la serie ya existe no actualiza el símbolo. En otras palabras, sólo se
+    # puede crear una serie desde el perfil, nunca modificarla
+    # TODO  Encontrar la manera de validar la unicidad de simbolo, como
+    # TODO    +validate_associated_records_for_serie+
+    if nombre
+      self.serie = Serie.find_or_create_by_nombre(nombre) do |serie|
+        serie.simbolo = simbolo
+      end
+    end
+  end
+
+  # Se crea una fase si no existe ya
+  def autosave_associated_records_for_fase
+    if fase.try(:nombre?)
+      self.fase = Fase.find_or_create_by_nombre(fase.nombre)
+    end
+  end
+
+  # Se crea un grupo si no existe ya
+  def autosave_associated_records_for_grupo
+    if grupo.try(:descripcion?)
+      self.grupo = Grupo.find_or_create_by_descripcion(grupo.descripcion)
+    end
+  end
 
   # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
   def fecha_no_puede_ser_futura
