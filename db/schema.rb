@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204115211) do
+ActiveRecord::Schema.define(:version => 20121210154849) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -228,8 +228,9 @@ ActiveRecord::Schema.define(:version => 20121204115211) do
     t.string   "nombre"
     t.string   "simbolo"
     t.text     "descripcion"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "cantidad_de_perfiles", :default => 0, :null => false
   end
 
   create_table "taggings", :force => true do |t|

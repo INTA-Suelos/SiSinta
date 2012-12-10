@@ -65,6 +65,7 @@ group :development do
   gem 'pry'
   gem 'pry-rails'
   gem 'hirb'
+  gem 'bullet'
 end
 
 group :test do
