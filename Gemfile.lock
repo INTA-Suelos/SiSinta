@@ -36,6 +36,7 @@ GEM
       multi_json (~> 1.0)
     ansi (1.4.3)
     arel (3.0.2)
+    attribute_normalizer (1.1.0)
     awesome_nested_fields (0.6.0)
       rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
@@ -201,6 +202,7 @@ DEPENDENCIES
   SyslogLogger
   active_hash
   activerecord-postgis-adapter
+  attribute_normalizer
   awesome_nested_fields
   browser_detect
   bullet

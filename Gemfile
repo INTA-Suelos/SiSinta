@@ -30,6 +30,7 @@ gem 'browser_detect'
 gem 'paperclip'
 gem 'active_hash'
 gem 'rocket_tag'
+gem 'attribute_normalizer'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
