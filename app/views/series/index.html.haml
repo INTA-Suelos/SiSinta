@@ -1,13 +1,14 @@
-.botonera= link_to 'Nueva serie', new_serie_path
 
 #lista
+  .botonera= render 'botonera_index'
+
   %table#series
     %thead
       %tr
-        %th Nombre
-        %th Símbolo
-        %th Descripcion
-        %th.numero Perfiles
+        %th= link_para_ordenar        :nombre,                'Nombre'
+        %th= link_para_ordenar        :simbolo,               'Símbolo'
+        %th= link_para_ordenar        :descripcion,           'Descripcion'
+        %th.numero= link_para_ordenar :cantidad_de_perfiles,  'Perfiles'
         %th.acciones
 
     %tbody
@@ -24,4 +25,4 @@
             = '|'
             = link_to 'Eliminar', serie, confirm: t(:confirmar), method: :delete
 
-.botonera= link_to 'Nueva serie', new_serie_path
+  .botonera= render 'botonera_index'

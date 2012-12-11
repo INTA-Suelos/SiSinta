@@ -44,8 +44,4 @@ module PerfilesHelper
     )
   end
 
-  def activo?(elemento)
-    elemento == @activo ? 'activo' : nil
-  end
-
 end

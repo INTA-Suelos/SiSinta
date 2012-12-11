@@ -19,7 +19,7 @@ class PerfilesController < AutorizadoController
     @perfiles = PerfilDecorator.decorate(@perfiles)
     respond_to do |format|
       format.html do
-        if request.xhr?
+        if request.xhr?   # solicitud ajax para la paginación
           render :index,  layout: false,
                           locals: { perfiles: @perfiles.pagina(params[:pagina]) }
         end
