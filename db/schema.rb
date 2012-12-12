@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204115211) do
+ActiveRecord::Schema.define(:version => 20121210234341) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -150,13 +150,6 @@ ActiveRecord::Schema.define(:version => 20121204115211) do
     t.integer  "forma_id"
   end
 
-  create_table "lookups", :force => true do |t|
-    t.string "type"
-    t.string "valor2"
-    t.string "valor1"
-    t.string "valor3"
-  end
-
   create_table "paisajes", :force => true do |t|
     t.string   "tipo"
     t.string   "forma"
@@ -228,8 +221,9 @@ ActiveRecord::Schema.define(:version => 20121204115211) do
     t.string   "nombre"
     t.string   "simbolo"
     t.text     "descripcion"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "cantidad_de_perfiles", :default => 0, :null => false
   end
 
   create_table "taggings", :force => true do |t|

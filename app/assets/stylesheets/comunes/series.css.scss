@@ -13,10 +13,12 @@
     }
 
     .borrar     { width: 1%;  }
-    .ubicacion  { width: 49%; }
-    .numero     { width: 20%; }
-    .fecha      { width: 20%; }
+    .ubicacion  { width: 67%; }
+    .numero     { width: 10%;
+                  text-align: center; }
+    .fecha      { width: 10%; }
     .modal      { width: 10%; }
+    .acciones   { width: 2%; }
 
   }
 

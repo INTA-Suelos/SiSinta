@@ -10,6 +10,7 @@ module PerfilesHelper
   # asociaciones realizadas, asique acá les asignamos un objeto nuevo si no
   # tenían ya
   def perfil_preparado
+    @perfil.serie         ||= Serie.new
     @perfil.grupo         ||= Grupo.new
     @perfil.paisaje       ||= Paisaje.new
     @perfil.capacidad     ||= Capacidad.new
@@ -41,10 +42,6 @@ module PerfilesHelper
       consistencia: Consistencia.new,
       estructura: Estructura.new
     )
-  end
-
-  def activo?(elemento)
-    elemento == @activo ? 'activo' : nil
   end
 
 end

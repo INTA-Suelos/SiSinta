@@ -3,11 +3,13 @@ class Horizonte < ActiveRecord::Base
   # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  # Arregla la entrada para que no haya objetos repetidos, y en caso de no
-  # existir se creen
-  before_save do
-    buscar_asociaciones({ color_seco: 'hvc', color_humedo: 'hvc' }, true)
-  end
+  attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
+                  :consistencia, :estructura, :tipo, :profundidad_inferior,
+                  :limite_attributes, :color_seco_attributes,
+                  :color_humedo_attributes, :textura_id,
+                  :estructura_attributes, :consistencia_attributes, :ph, :co3,
+                  :concreciones, :barnices, :moteados, :humedad, :raices,
+                  :formaciones_especiales
 
   after_create :create_analisis
 
@@ -20,10 +22,10 @@ class Horizonte < ActiveRecord::Base
 
   belongs_to :perfil, inverse_of: :horizontes
 
-  belongs_to :color_seco, class_name: 'Color', inverse_of: :horizontes_en_seco,
-                          autosave: false
-  belongs_to :color_humedo, class_name: 'Color', inverse_of: :horizontes_en_humedo,
-                            autosave: false
+  belongs_to :color_seco, class_name: 'Color',
+              inverse_of: :horizontes_en_seco, validate: false
+  belongs_to :color_humedo, class_name: 'Color',
+              inverse_of: :horizontes_en_humedo, validate: false
   belongs_to_active_hash :textura,  inverse_of: :horizontes,
                                     class_name: 'TexturaDeHorizonte'
 
@@ -38,8 +40,22 @@ class Horizonte < ActiveRecord::Base
                           in: 0..500, allow_nil: true,
                           message: "debe estar entre 0 y 500 cm"
 
+  # Se crea un color si no existe ya
+  def autosave_associated_records_for_color_seco
+    if color_seco.try(:hvc?)
+      self.color_seco = Color.find_or_create_by_hvc(color_seco.hvc)
+    end
+  end
+
+  # Se crea un color si no existe ya
+  def autosave_associated_records_for_color_humedo
+    if color_humedo.try(:hvc?)
+      self.color_humedo = Color.find_or_create_by_hvc(color_humedo.hvc)
+    end
+  end
+
   def rango_profundidad
-    unless profundidad_superior.blank? or profundidad_inferior.blank?
+    if profundidad_superior? and profundidad_inferior?
       "#{profundidad_superior} - #{profundidad_inferior}"
     end
   end

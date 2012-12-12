@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Ubicacion < ActiveRecord::Base
+  attr_accessible :mosaico, :recorrido, :aerofoto, :descripcion, :y, :x, :srid,
+                  :coordenadas
+
   before_validation :arreglar_coordenadas
   after_initialize :cargar_x_y
 
@@ -69,7 +72,7 @@ class Ubicacion < ActiveRecord::Base
   end
 
   def coordenadas_en_geojson
-    RGeo::GeoJSON.encode(coordenadas) unless coordenadas.nil?
+    RGeo::GeoJSON.encode(coordenadas) if coordenadas?
   end
 
   def to_s

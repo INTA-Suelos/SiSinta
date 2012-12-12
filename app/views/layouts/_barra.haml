@@ -1,5 +1,9 @@
 %ul.menu
   %li
+    .plegable Series
+    %ul.submenu
+      %li= link_to 'Ver', series_path
+  %li
     .plegable Perfiles
     %ul.submenu
       %li= link_to 'Ver', perfiles_path
@@ -8,6 +12,15 @@
         %ul.submenu
           %li= link_to 'a CSV', preparar_csv_perfiles_path
           %li= link_to 'a GeoJSON', geo_perfiles_path(format: :json)
+      %li
+        Subgrupos
+        %ul.submenu
+          %li= link_to 'Ver', grupos_path
+      %li
+        Fases
+        %ul.submenu
+          %li= link_to 'Ver', fases_path
+
   %li
     .plegable Horizontes
     %ul.submenu
@@ -19,14 +32,6 @@
     .plegable Proyectos
     %ul.submenu
       %li= link_to 'Ver', proyectos_path
-  %li
-    .plegable Grupos
-    %ul.submenu
-      %li= link_to 'Ver', grupos_path
-  %li
-    .plegable Fases
-    %ul.submenu
-      %li= link_to 'Ver', fases_path
 
 - if current_usuario.try(:admin?)
   %ul#administracion.menu

@@ -15,7 +15,8 @@
       = ayuda_para('ubicacion.aerofoto')
   .span-5.campo
     .span-2= f.label :fecha
-    .span-3.last= f.text_field :fecha, class: 'fecha', disabled: bloqueado
+    .span-3.last= f.text_field :fecha, class: 'fecha',
+      disabled: bloqueado, required: true
     = ayuda_para('perfil.fecha')
   .span-4.last.campo
     .span-2= f.label :numero, "Número"
@@ -23,14 +24,14 @@
     = ayuda_para('perfil.numero')
 
   .span-11.campo
-    = f.fields_for :fase do |f_f|
-      .span-2= f_f.label :nombre, 'Fase'
-      .span-9.last= f_f.text_field :nombre, disabled: bloqueado
+    = f.fields_for :fase do |ff|
+      .span-2= ff.label :nombre, 'Fase'
+      .span-9.last= ff.text_field :nombre, disabled: bloqueado
       = ayuda_para('fase.nombre')
   .span-11.last.campo
-    = f.fields_for :grupo do |f_g|
-      .span-2= f_g.label :descripcion, 'Subgrupo'
-      .span-8.last= f_g.text_field :descripcion, disabled: bloqueado
+    = f.fields_for :grupo do |fg|
+      .span-2= fg.label :descripcion, 'Subgrupo'
+      .span-8.last= fg.text_field :descripcion, disabled: bloqueado
       = ayuda_para('grupo.descripcion')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'

@@ -2,6 +2,8 @@
 class Humedad < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  attr_accessible :clase_id, :subclase_id
+
   belongs_to :perfil, inverse_of: :humedad
 
   belongs_to_active_hash :clase,    inverse_of: :humedades,

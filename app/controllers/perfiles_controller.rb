@@ -19,7 +19,7 @@ class PerfilesController < AutorizadoController
     @perfiles = PerfilDecorator.decorate(@perfiles)
     respond_to do |format|
       format.html do
-        if request.xhr?
+        if request.xhr?   # solicitud ajax para la paginación
           render :index,  layout: false,
                           locals: { perfiles: @perfiles.pagina(params[:pagina]) }
         end
@@ -41,7 +41,7 @@ class PerfilesController < AutorizadoController
   def geo
     respond_to do |format|
       format.json { render json: como_geojson(
-                    @perfiles.reject { |c| c.ubicacion.try(:coordenadas).blank? },
+                    @perfiles.select { |c| c.ubicacion.try(:coordenadas?) },
                     :geometria)   }
     end
   end
@@ -94,6 +94,8 @@ class PerfilesController < AutorizadoController
 
     respond_to do |format|
       if @perfil.save
+        # Cada usuario es miembro de los perfiles que crea
+        current_usuario.grant :miembro, @perfil
         format.html { redirect_to perfil_o_analisis,
                       notice: I18n.t('messages.created', model: 'Perfil') }
         format.json { render json: @perfil, status: :created, location: @perfil }
@@ -158,7 +160,9 @@ class PerfilesController < AutorizadoController
 
     # Prepara el scope para la lista de perfiles
     def preparar
-      @perfiles ||= Perfil.scoped
+      # Selecciono sólo lo que necesito en el index
+      @perfiles ||= Perfil.joins(:ubicacion, :serie)
+        .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
 

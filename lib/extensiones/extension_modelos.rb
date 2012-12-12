@@ -63,24 +63,6 @@ module ExtensionModelos
       end
     end
 
-    # Busca las asociaciones indicadas por si ya existen, para no duplicar.
-    # Opcionalmente las crea.
-    def buscar_asociaciones(asociaciones = {}, crear = false)
-      asociaciones.each_pair do |modelo,metodo|
-        if self.send(modelo).try(metodo).blank?
-          self.send("#{modelo}=", nil)
-        else
-          clase = self.association(modelo).reflection.klass
-
-          # asociacion = Asociacion.find_by_metodo(self.asociacion.metodo)
-          # asociacion = Asociacion.find_or_create_by_metodo(self.asociacion.metodo)
-          self.send(  "#{modelo}=", #
-                      clase.send("find#{crear ? '_or_create' : nil}_by_#{metodo}",
-                          self.send(modelo).try(metodo) ) )
-        end
-      end
-    end
-
     # asociacion_ids = @asociaciones.collect(&:id).uniq.sort
     def guardar_ids_para(asociacion)
       self.send(

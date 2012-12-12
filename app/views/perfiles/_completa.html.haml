@@ -5,18 +5,19 @@
   = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
     .span-23.last
-      .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
-      .span-20.last.campo
+      .span-4.campo
+        .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
+        = f.check_box :modal, class: 'span-1 last', disabled: bloqueado
         = ayuda_para 'perfil.modal'
-        = f.check_box :modal, class: 'span-1', disabled: bloqueado
-        #serie
-          .span-13.prepend-unaymedia.campo
-            .span-2= f.label :nombre, 'Nombre'
-            .span-11.last= f.text_field :nombre, disabled: bloqueado
+      #serie
+        = f.fields_for :serie do |fs|
+          .span-13.campo
+            .span-2= fs.label :nombre, 'Nombre'
+            .span-11.last= fs.text_field :nombre, disabled: bloqueado
             = ayuda_para 'perfil.nombre'
-          .span-4.last.campo
-            .span-2= f.label :simbolo, 'Símbolo'
-            .span-2.last= f.text_field :simbolo, disabled: bloqueado
+          .span-4.prepend-media.last.campo
+            .span-2= fs.label :simbolo, 'Símbolo'
+            .span-2.last= fs.text_field :simbolo, disabled: bloqueado
             = ayuda_para 'perfil.simbolo'
 
     = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}

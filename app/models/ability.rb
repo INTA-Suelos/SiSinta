@@ -61,6 +61,7 @@ class Ability
     # separar la consulta sobre instancias de la consulta de clases, por
     # requisito de rolify
     def miembro
+      can :modificar, Serie,  id: Serie.with_role('miembro', @usuario).map {|s| s.id}
       can :modificar, Perfil, id: Perfil.with_role('miembro', @usuario).map {|p| p.id}
       invitado
     end

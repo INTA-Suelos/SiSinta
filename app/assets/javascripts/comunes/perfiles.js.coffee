@@ -31,31 +31,41 @@ jQuery ->
         response(data)
       )
 
-  nombre =
+  fases =
     source: "/fases/autocompletar/nombre"
 
-  descripcion =
+  grupos =
     source: "/grupos/autocompletar/descripcion"
 
   hvc =
     source: "/colores/autocompletar/hvc"
+
+  nombres =
+    source: "/series/autocompletar/nombre"
+
+  simbolos =
+    source: "/series/autocompletar/simbolo"
 
   etiquetas = {}
 
   reconocedores = {}
 
   # extendemos los objetos con las características comunes
-  $.extend nombre, comun
-  $.extend descripcion, comun
+  $.extend fases, comun
+  $.extend grupos, comun
   $.extend hvc, comun
+  $.extend nombres, comun
+  $.extend simbolos, comun
   $.extend etiquetas, comun, autocompletar_varios
   $.extend reconocedores, comun, autocompletar_varios
 
-  $('#perfil_fase_attributes_nombre').autocomplete nombre
-  $('#perfil_grupo_attributes_descripcion').autocomplete descripcion
+  $('#perfil_fase_attributes_nombre').autocomplete fases
+  $('#perfil_grupo_attributes_descripcion').autocomplete grupos
   $('.munsell').autocomplete hvc
   $('#perfil_etiquetas').autocomplete etiquetas
   $('#perfil_reconocedores').autocomplete reconocedores
+  $('#perfil_serie_attributes_nombre').autocomplete nombres
+  $('#perfil_serie_attributes_simbolo').autocomplete simbolos
 
   $('.completa').nestedFields({
     afterInsert: ->

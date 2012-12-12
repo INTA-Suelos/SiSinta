@@ -23,7 +23,7 @@ class ProyectosController < AutorizadoController
   # GET /proyectos/1
   # GET /proyectos/1.json
   def show
-    @proyecto = Proyecto.find(params[:id])
+    @proyecto = Proyecto.find(params[:id]).decorate
     @titulo = @proyecto.nombre
 
     respond_to do |format|

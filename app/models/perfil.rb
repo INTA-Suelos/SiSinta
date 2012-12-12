@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
+  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
                   :cobertura_vegetal, :posicion_id, :pendiente_id,
                   :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
@@ -7,21 +10,16 @@ class Perfil < ActiveRecord::Base
                   :fase_id, :modal, :observaciones, :publico, :relieve_id,
                   :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
-                  :capacidad_attributes, :humedad_attributes, :pedregosidad_attributes,
-                  :erosion_attributes, :etiquetas, :reconocedores
-
-  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
-  extend ActiveHash::Associations::ActiveRecordExtensions
+                  :capacidad_attributes, :humedad_attributes,
+                  :pedregosidad_attributes, :erosion_attributes, :etiquetas,
+                  :reconocedores, :grupo, :serie_attributes,
+                  :horizontes_attributes
 
   attr_taggable :etiquetas
   attr_taggable :reconocedores
 
   # Permite utilizar roles sobre este modelo
   resourcify role_cname: 'Rol'
-
-  before_validation do
-    buscar_asociaciones({ grupo: 'descripcion', fase: 'nombre' }, true)
-  end
 
   scope :modales, where(modal: 'true')
   scope :index,   joins(:ubicacion)
@@ -31,7 +29,6 @@ class Perfil < ActiveRecord::Base
 
   validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
-  validates_presence_of :numero
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
@@ -63,9 +60,10 @@ class Perfil < ActiveRecord::Base
   has_many :analisis, through: :horizontes
 
   belongs_to :usuario,  inverse_of: :perfiles
-  belongs_to :fase,     inverse_of: :perfiles
-  belongs_to :grupo,    inverse_of: :perfiles
-  belongs_to :serie,    inverse_of: :perfiles
+  belongs_to :fase,     inverse_of: :perfiles, validate: false
+  belongs_to :grupo,    inverse_of: :perfiles, validate: false
+  belongs_to :serie,    inverse_of: :perfiles, validate: false,
+                        counter_cache: :cantidad_de_perfiles
 
   has_and_belongs_to_many :proyectos
 
@@ -78,15 +76,43 @@ class Perfil < ActiveRecord::Base
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
 
+  # Se crea una serie si no existe ya
+  def autosave_associated_records_for_serie
+    # Si la serie ya existe no actualiza el símbolo. En otras palabras, sólo se
+    # puede crear una serie desde el perfil, nunca modificarla
+    # TODO  Encontrar la manera de validar la unicidad de simbolo, como
+    # TODO    +validate_associated_records_for_serie+
+    if nombre
+      self.serie = Serie.find_or_create_by_nombre(nombre) do |serie|
+        serie.simbolo = simbolo
+      end
+    end
+  end
+
+  # Se crea una fase si no existe ya
+  def autosave_associated_records_for_fase
+    if fase.try(:nombre?)
+      self.fase = Fase.find_or_create_by_nombre(fase.nombre)
+    end
+  end
+
+  # Se crea un grupo si no existe ya
+  def autosave_associated_records_for_grupo
+    if grupo.try(:descripcion?)
+      self.grupo = Grupo.find_or_create_by_descripcion(grupo.descripcion)
+    end
+  end
+
   # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
   def fecha_no_puede_ser_futura
-    if !fecha.blank? and fecha > Date.today
+    if fecha? and fecha > Date.today
       errors.add(:fecha, :future)
     end
   end
 
   # TODO Comprueba que numero sea único dentro de una serie
   def numero_es_unico_dentro_de_una_serie
+    true
   end
 
   # Prepara un hash para que RGeo genere geojson

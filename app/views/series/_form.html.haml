@@ -29,9 +29,10 @@
               %tr
                 %th.borrar
                 %th.ubicacion       Ubicación
-                %th.numero          Número
-                %th.fecha           Fecha
+                %th.numero.centrado Número
+                %th.fecha.centrado  Fecha
                 %th.modal.centrado  ¿Es modal?
+                %th.acciones
             %tbody
               = f.nested_fields_for :perfiles,  render_template: false,
                                                 new_object: @serie.nuevo_perfil,

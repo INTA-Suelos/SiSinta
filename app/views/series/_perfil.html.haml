@@ -4,13 +4,14 @@
       =  link_to 'X', '#perfiles', class: 'remove remover'
   %td.ubicacion
     = ff.label :ubicacion, perfil.ubicacion, class: 'perfil_ubicacion'
-  %td.numero
+  %td.numero.centrado
     = ff.label :numero, perfil.numero, class: 'perfil_numero'
-  %td.fecha
+  %td.fecha.centrado
     = ff.label :fecha, perfil.fecha
   %td.modal.centrado
     = ff.label :modal, "✓" if perfil.modal?
-
+  %td.acciones
+    = link_to 'Ver', perfil
 
   = ff.hidden_field :id
   = ff.hidden_field :_destroy
