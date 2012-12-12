@@ -4,6 +4,7 @@ require './test/test_helper'
 class PerfilDecoratorTest < ActiveSupport::TestCase
 
   def setup
+    ApplicationController.new.view_context
     @perfil = build_stubbed(:perfil)
   end
 

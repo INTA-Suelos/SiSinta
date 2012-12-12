@@ -8,13 +8,11 @@
         %tr
           %th{colspan: 2} Usuario
           %th{colspan: 2} Email
-          - @roles.each do |rol|
-            %th= rol.nombre.titleize
           %th.acciones
 
       %tbody
         = render @usuarios
 
-    = submit_tag 'Asignar roles'
+    = submit_tag
 
   .botonera= render 'botonera_indice'

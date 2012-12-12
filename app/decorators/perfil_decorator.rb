@@ -3,15 +3,15 @@ class PerfilDecorator < Draper::Base
   decorates_association :ubicacion
 
   def fecha
-    perfil.fecha.try :to_s, :dma
+    source.fecha.try :to_s, :dma
   end
 
   def etiquetas
-    perfil.etiquetas.join(', ')
+    source.etiquetas.join(', ')
   end
 
   def reconocedores
-    perfil.reconocedores.join(', ')
+    source.reconocedores.join(', ')
   end
 
 end

@@ -5,16 +5,9 @@ FactoryGirl.define do
     email
     password "algún password inolvidable"
 
-    trait :administrador do
-      roles { [ create(:rol, :administrador) ] }
-    end
-
-    trait :autorizado do
-      roles { [ create(:rol, :autorizado) ] }
-    end
-
-    trait :invitado do
-      roles { [ create(:rol) ] }
+    ignore { rol nil }
+    after(:build) do |usuario, params|
+      usuario.grant(params.rol) if params.rol
     end
   end
 end

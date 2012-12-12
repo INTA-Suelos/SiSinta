@@ -4,9 +4,9 @@ require './test/test_helper'
 class UsuarioTest < ActiveSupport::TestCase
 
   setup do
-    @admin = create(:usuario, :administrador)
-    @simple = create(:usuario, :invitado, config: { ficha: 'simple', srid: '4326' })
-    @completo = create(:usuario, :autorizado)
+    @admin = create(:usuario, rol: :admin)
+    @simple = create(:usuario, rol: "Invitado", config: { ficha: 'simple', srid: '4326' })
+    @completo = create(:usuario, rol: "Autorizado")
   end
 
   test "debería tener en cuenta preferencias de ficha del usuario" do
@@ -14,13 +14,6 @@ class UsuarioTest < ActiveSupport::TestCase
     assert !@completo.usa_ficha?('simple'), 'El método ? no devuelve el valor correcto de la variable'
     @nuevo = Usuario.new config: { ficha: 'simple' }
     assert @nuevo.usa_ficha?('simple'), 'No se puede pasar la preferencia en la creación'
-  end
-
-  test "debería crear un nuevo rol" do
-    assert_difference 'Rol.count' do
-      @simple.roles << Rol.new(:nombre => 'mendocino')
-      @simple.save
-    end
   end
 
   test "debería responder correctamente sobre si es admin" do
@@ -33,23 +26,13 @@ class UsuarioTest < ActiveSupport::TestCase
     assert_nothing_raised do
       @u = build(:usuario)
       assert @u.save, "No guarda al usuario"
-      @u.roles.clear << Rol.find_by_nombre('administrador')
-      assert_equal @u.roles.first, Rol.find_by_nombre('administrador'), "No guarda la relación"
+      @u.grant :admin
+      assert @u.has_role?(:admin), "No guarda el rol"
     end
   end
 
-  test "debería crear el usuario con un rol por default" do
-    assert_includes @simple.roles, Rol.find_by_nombre('invitado'), "Debería tener el Rol 'invitado' al principio"
-  end
-
   test "debería comprobar el rol" do
-    assert @admin.es?('administrador'), ".es? falla con string"
-    assert @admin.es?(Rol.administrador), ".es? falla con Rol"
-    assert @admin.es?(:administrador), ".es? falla con symbol"
     assert @admin.admin?, "Un admin no es administrador"
-    assert @simple.es? 'invitado'
-    assert @simple.es? Rol.invitado
-    assert @simple.invitado?, "Un usuario nuevo no es invitado"
   end
 
   test "un usuario nuevo debería tener config por defecto" do

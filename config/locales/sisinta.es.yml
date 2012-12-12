@@ -14,3 +14,7 @@ es:
     error: "Ocurrió algún error con la actualización."
 
   confirmar:  "¿En serio?"
+  roles:
+    admin:      "Administrador"
+    miembro:    "Miembro"
+    autorizado: "Autorizado"

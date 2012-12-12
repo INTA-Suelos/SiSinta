@@ -51,7 +51,6 @@ class PerfilesController < AutorizadoController
   #
   def autocompletar
     case params[:atributo]
-      when 'nombre'         then super(Perfil, :nombre)
       when 'numero'         then super(Perfil, :numero)
       when 'etiquetas'      then super(Perfil.tags(on: :etiquetas), :name)
       when 'reconocedores'  then super(Perfil.tags(on: :reconocedores), :name)

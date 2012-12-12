@@ -1,14 +1,14 @@
 # encoding: utf-8
 FactoryGirl.define do
   factory :rol do
-    nombre "invitado"
+    name "invitado"
 
     trait :administrador do
-      nombre "administrador"
+      name "administrador"
     end
 
     trait :autorizado do
-      nombre "autorizado"
+      name "Autorizado"
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913001404) do
+ActiveRecord::Schema.define(:version => 20121204115211) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -181,7 +181,6 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
     t.datetime "updated_at",                               :null => false
     t.string   "material_original"
     t.string   "esquema"
-    t.string   "simbolo"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
@@ -194,11 +193,11 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
     t.integer  "escurrimiento_id"
     t.integer  "permeabilidad_id"
     t.integer  "anegamiento_id"
-    t.string   "nombre"
     t.integer  "grupo_id"
     t.integer  "sal_id"
     t.integer  "uso_de_la_tierra_id"
     t.string   "vegetacion_o_cultivos"
+    t.integer  "serie_id"
   end
 
   create_table "perfiles_proyectos", :id => false, :force => true do |t|
@@ -217,12 +216,20 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
   add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
 
   create_table "roles", :force => true do |t|
-    t.string "nombre"
+    t.string  "name"
+    t.integer "resource_id"
+    t.string  "resource_type"
   end
 
-  create_table "roles_usuarios", :id => false, :force => true do |t|
-    t.integer "usuario_id"
-    t.integer "rol_id"
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "series", :force => true do |t|
+    t.string   "nombre"
+    t.string   "simbolo"
+    t.text     "descripcion"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -247,10 +254,10 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
@@ -274,5 +281,12 @@ ActiveRecord::Schema.define(:version => 20120913001404) do
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
   add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
+
+  create_table "usuarios_roles", :id => false, :force => true do |t|
+    t.integer "usuario_id"
+    t.integer "rol_id"
+  end
+
+  add_index "usuarios_roles", ["usuario_id", "rol_id"], :name => "index_roles_usuarios_on_usuario_id_and_rol_id"
 
 end
