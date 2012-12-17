@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Analisis < ActiveRecord::Base
-  belongs_to :horizonte, inverse_of: :analisis
+  belongs_to :horizonte
   has_one :perfil, through: :horizonte
 
   validates_presence_of :horizonte
