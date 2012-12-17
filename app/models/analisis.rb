@@ -20,6 +20,8 @@ class Analisis < ActiveRecord::Base
 
   accepts_nested_attributes_for :horizonte
 
+  delegate :publico, to: :perfil
+
   def materia_organica_cn_before_type_cast
     begin
       read_attribute(:materia_organica_cn) || (materia_organica_c/materia_organica_n).round
@@ -50,10 +52,6 @@ class Analisis < ActiveRecord::Base
 
   def agua_util
     agua_util_before_type_cast
-  end
-
-  def publico
-    perfil.publico
   end
 
 end

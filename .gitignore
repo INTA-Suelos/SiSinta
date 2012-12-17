@@ -10,6 +10,7 @@ TODO
 public/estaticos
 
 # Archivos a configurar en cada deploy
+# TODO automatizar copia con rake
 config/database.yml
 config/environments/production.rb
 config/initializers/devise.rb
