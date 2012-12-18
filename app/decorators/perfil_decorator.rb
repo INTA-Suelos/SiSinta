@@ -18,4 +18,8 @@ class PerfilDecorator < Draper::Base
     source.numero.blank? ? '-' : source.numero
   end
 
+  def to_s
+    source.numero || source.nombre
+  end
+
 end

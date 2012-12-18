@@ -23,6 +23,8 @@
             = '|'
             = link_to 'Editar', edit_serie_path(serie)
             = '|'
+            = link_to 'Permisos', permisos_serie_path(serie)
+            = '|'
             = link_to 'Eliminar', serie, confirm: t(:confirmar), method: :delete
 
   .botonera= render 'botonera_index'
