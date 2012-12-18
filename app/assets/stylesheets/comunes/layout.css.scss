@@ -4,6 +4,10 @@ body {
   border-top: 15px solid black;
 }
 
+.container {
+  margin-left: $ancho_barra;
+}
+
 #cabecera {
   width: 100%;
   height: $alto_cabecera;
@@ -85,7 +89,7 @@ ul.menu_usuarios {
 .botonera {
   float: none;
   margin-bottom: 1em;
-  min-height: $altura-linea;
+  min-height: $altura_linea;
   @include menu_horizontal;
 }
 
@@ -104,7 +108,7 @@ ul.menu_usuarios {
 }
 
 .barra {
-  width: 200px;
+  width: $ancho_barra;
   position: absolute;
   left: 0;
   background: $azul_inta;

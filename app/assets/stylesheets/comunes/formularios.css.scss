@@ -1,7 +1,7 @@
 @import "constantes";
 
 form {
-  line-height: $altura-linea;
+  line-height: $altura_linea;
 
   input {
     width: inherit !important;
@@ -28,7 +28,7 @@ form {
 
   .subtitulo { text-decoration: underline; }
 
-  .texto-corto { height: $altura-linea * 2 + 1;  }
+  .texto-corto { height: $altura_linea * 2 + 1;  }
 
   .fecha { text-align: center; }
 
