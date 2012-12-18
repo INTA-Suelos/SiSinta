@@ -6,4 +6,8 @@ class SerieDecorator < Draper::Base
     PerfilDecorator.new(Perfil.new)
   end
 
+  def to_s
+    source.nombre
+  end
+
 end

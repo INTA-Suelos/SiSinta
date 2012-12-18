@@ -17,6 +17,10 @@ SiSINTA::Application.routes.draw do
       post  'procesar_csv'
       get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
     end
+    member do
+      get   'permisos'
+      post  'permitir'
+    end
 
     resources :analisis, only: :index, path_names: m do
       collection do
@@ -60,6 +64,10 @@ SiSINTA::Application.routes.draw do
   resources :series, path_names: f do
     collection do
       get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
+    end
+    member do
+      get   'permisos'
+      post  'permitir'
     end
   end
 
