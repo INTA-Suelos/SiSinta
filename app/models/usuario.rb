@@ -19,6 +19,13 @@ class Usuario < ActiveRecord::Base
   alias_method :role_ids, :rol_ids
   alias_method :role_ids=, :rol_ids=
 
+  # TODO Deshardcodear el nombre del rol +miembro+
+  scope :miembros, ->(recurso) do
+    joins(:roles).where("roles.resource_type" => recurso.class.to_s,
+                        "roles.resource_id" => recurso.id,
+                        "roles.name" => "miembro")
+  end
+
   def to_s
     nombre
   end
