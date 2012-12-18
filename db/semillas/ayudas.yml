@@ -25,6 +25,7 @@
 - id:     7
   campo:  calicata.fecha
   ayuda:  Fecha de toma de datos.
+  ejemplo:aaaa/mm/dd
 - id:     8
   campo:  calicata.numero
   ayuda:  Número/Nombre del perfil.
