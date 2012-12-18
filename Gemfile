@@ -22,6 +22,7 @@ gem 'kaminari'
 gem 'draper'
 gem 'ransack'
 gem 'tinymce-rails'
+gem 'multiselectjs_rails'
 
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
