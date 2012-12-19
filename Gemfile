@@ -7,6 +7,7 @@ gem 'rails', '3.2.9'
 
 ## DB
 gem 'pg'
+gem 'yaml_db'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
