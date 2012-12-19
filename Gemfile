@@ -56,7 +56,7 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 gem 'thin'
-gem 'SyslogLogger', :require => 'syslog/logger'
+gem 'sysloglogger'
 
 # Deploy with Capistrano
 # gem 'capistrano'
