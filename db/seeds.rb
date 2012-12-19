@@ -19,7 +19,7 @@ def cargar_csv_de(archivo, configuracion = {})
       yield fila
     end
   rescue => e
-    puts "No se pudo abrir #{archivo}: #{e}"
+    puts "No se pudo procesar #{archivo}: #{e}"
   end
 end
 

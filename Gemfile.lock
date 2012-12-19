@@ -195,6 +195,7 @@ GEM
     uniform_notifier (1.1.0)
     warden (1.2.1)
       rack (>= 1.0)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -236,3 +237,4 @@ DEPENDENCIES
   tinymce-rails
   turn
   uglifier
+  yaml_db
