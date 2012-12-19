@@ -2,9 +2,9 @@
 class Ability
   include CanCan::Ability
 
-  attr_reader :basicos, :calicatas
+  attr_reader :basicos, :perfiles
 
-  def initialize(usuario)
+  def initialize(usuario = nil)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -28,23 +28,48 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    usuario ||= Usuario.new # guest user (not logged in)
+    @usuario = usuario || Usuario.new # guest user (not logged in)
 
-    @calicatas = [Calicata, Horizonte, Analisis, Adjunto]
-    @basicos = [Grupo, Fase]
+    @perfiles = [Perfil, Horizonte, Analisis, Adjunto]
+    @basicos = [Grupo, Fase, Proyecto, Serie]
 
-    if usuario.admin?
-      can :manage, :all
+    if @usuario.has_role? :admin
+      administrador
     else
-      if usuario.autorizado?
-        can :manage, calicatas
-        can :manage, basicos
+      if @usuario.has_role? :autorizado
+        autorizado
       else
-        # usuario invitado, anónimo o no existente
-        can :read, calicatas, publico: true
-        can :read, basicos
+        miembro
       end
     end
 
   end
+
+  # Lógica de cada rol
+  private
+
+    def administrador
+      can :manage, :all
+    end
+
+    def autorizado
+      can :manage, perfiles
+      can :manage, basicos
+    end
+
+    # Usuario miembro de un perfil. Usamos una acción personalizada para
+    # separar la consulta sobre instancias de la consulta de clases, por
+    # requisito de rolify
+    def miembro
+      can :modificar, Serie,  id: Serie.with_role('miembro', @usuario).map {|s| s.id}
+      can :modificar, Perfil, id: Perfil.with_role('miembro', @usuario).map {|p| p.id}
+      invitado
+    end
+
+    # usuario invitado, anónimo o no existente
+    def invitado
+      can :read, perfiles, publico: true
+      can :read, basicos
+    end
+
 end

@@ -11,15 +11,15 @@ class ErosionTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería negarse a cargar erosion sin calicata" do
-    assert build_stubbed(:erosion, :sin_calicata).invalid?, "una erosion sin calicata es válida"
+  test "debería negarse a cargar erosion sin perfil" do
+    assert build_stubbed(:erosion, :sin_perfil).invalid?, "una erosion sin perfil es válida"
   end
 
   test "debería poder acceder a sus asociaciones" do
     erosion = build_stubbed(:erosion)
     assert erosion.respond_to? :clase
     assert erosion.respond_to? :subclase
-    assert erosion.respond_to? :calicata
+    assert erosion.respond_to? :perfil
     assert_nothing_raised do
       erosion.clase
       erosion.subclase

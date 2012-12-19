@@ -5,6 +5,7 @@ class FasesController < AutorizadoController
   # GET /fases.json
   def index
     @fases = Fase.all(:order => 'nombre ASC')
+    @titulo = "Fases"
 
     respond_to do |format|
       format.html # index.html.{erb,haml}

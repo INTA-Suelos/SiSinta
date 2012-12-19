@@ -5,6 +5,7 @@ class GruposController < AutorizadoController
   # GET /grupos.json
   def index
     @grupos = Grupo.all(:order => 'descripcion ASC')
+    @titulo = "Grupos"
 
     respond_to do |format|
       format.html # index.html.{erb,haml}
@@ -12,10 +13,8 @@ class GruposController < AutorizadoController
     end
   end
 
-  #
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
   # el que consultar, controlando el input del usuario.
-  #
   def autocompletar
     case params[:atributo]
       when 'descripcion' then super(Grupo, :descripcion)

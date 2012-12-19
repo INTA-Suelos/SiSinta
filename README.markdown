@@ -87,7 +87,8 @@ Precompilamos los archivos estáticos
 
     $ rake assets:precompile
 
-El usuario default es Administrador, y se loguea con email@falso.com y el password *administrador*
+El usuario default es **admin** global. Se loguea con *admin@cambiame.com* y el
+password *cambiame*
 
 [PostgreSQL]: http://www.postgresql.org/
 [PostGIS]: http://www.postgis.org/

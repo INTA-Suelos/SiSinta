@@ -1,0 +1,12 @@
+%table.centrado
+  %thead
+    %tr
+      %th= link_para_ordenar :fecha,        'Fecha'
+      %th= link_para_ordenar :nombre,       'Nombre'
+      %th= link_para_ordenar :ubicacion,    'Ubicación'
+      %th= link_para_ordenar :numero,       'Número'
+      %th#modal= link_para_ordenar :modal,  '¿Es modal?'
+      %th.acciones
+
+  %tbody
+    = render perfiles

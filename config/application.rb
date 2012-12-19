@@ -47,11 +47,14 @@ module SiSINTA
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
 
+    # Activar protección de asignación en masa
+    config.active_record.whitelist_attributes = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '0.0.10'
+    config.assets.version = '0.1.0'
 
     # Traduzco el path
     config.assets.prefix = "/estaticos"

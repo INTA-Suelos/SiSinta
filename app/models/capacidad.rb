@@ -2,7 +2,9 @@
 class Capacidad < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  belongs_to :calicata, inverse_of: :capacidad
+  attr_accessible :clase_id, :subclase_ids
+
+  belongs_to :perfil, inverse_of: :capacidad
 
   belongs_to_active_hash :clase,  inverse_of: :capacidades,
                                   class_name: 'ClaseDeCapacidad'
@@ -13,7 +15,7 @@ class Capacidad < ActiveRecord::Base
   guardar_como_arreglo :subclase, SubclaseDeCapacidad
   attr_accessor :subclases
 
-  validates_presence_of :calicata
+  validates_presence_of :perfil
 
   def to_s
     cadena = "#{clase_de_capacidad.try(:to_str)}"

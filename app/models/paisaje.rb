@@ -1,8 +1,10 @@
 # encoding: utf-8
 class Paisaje < ActiveRecord::Base
-  belongs_to :calicata, inverse_of: :paisaje
+  attr_accessible :tipo, :forma, :simbolo, :perfil
 
-  validates_presence_of :calicata
+  belongs_to :perfil, inverse_of: :paisaje
+
+  validates_presence_of :perfil
 
   def to_s
     "#{tipo} #{forma} #{simbolo}".chomp

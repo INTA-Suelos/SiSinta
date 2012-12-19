@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Grupo < ActiveRecord::Base
-  has_many :calicatas, inverse_of: :grupo
+  attr_accessible :codigo, :descripcion
+
+  has_many :perfiles, inverse_of: :grupo
 
   validates_uniqueness_of :codigo, allow_blank: true
   validates_uniqueness_of :descripcion

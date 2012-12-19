@@ -6,5 +6,6 @@
  *= require_self
  *= require blueprint
  *= require jquery
+ *= require ui.multiselect
  *= require_tree ./comunes
 */

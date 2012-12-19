@@ -1,23 +1,13 @@
 # encoding: utf-8
 class Rol < ActiveRecord::Base
-  has_and_belongs_to_many :usuarios
+  has_and_belongs_to_many :usuarios, join_table: :usuarios_roles
+  belongs_to :resource, :polymorphic => true
 
-  accepts_nested_attributes_for :usuarios
+  alias_attribute :nombre, :name
 
-  # TODO Meter todos estos en method missing
-  def self.administrador
-    self.find_by_nombre('administrador')
-  end
+  scopify
 
-  def self.autorizado
-    self.find_by_nombre('autorizado')
-  end
-
-  def self.invitado
-    self.find_by_nombre('invitado')
-  end
-
-  def to_s
+  def to_param
     nombre
   end
 

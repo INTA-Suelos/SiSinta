@@ -12,11 +12,15 @@ class GruposControllerTest < ActionController::TestCase
 
   test "debería devolver descripcion para términos parciales" do
     loguearse_como :autorizado
-    @termino = 'des'
+    @termino = create(:grupo).descripcion
     get :autocompletar, atributo: 'descripcion', term: @termino
     assert_response :success
     assert_equal  Grupo.where("descripcion like '%#{@termino}%'").size,
                   json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('descripcion'), "debe devolver la descripción"
   end
 
 end

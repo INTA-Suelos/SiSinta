@@ -1,12 +1,14 @@
 .botonera= render 'botonera_indice'
 
-%table#grupos.centrado
-  %tr
-    %th{colspan: 4} Descripción
-    %th Código
-    %th
-    %th
-    %th
-  = render @grupos
+#lista
+  %table#grupos.centrado
+    %thead
+      %tr
+        %th{colspan: 4} Descripción
+        %th Código
+        %th.acciones
+
+    %tbody
+      = render @grupos
 
 .botonera= render 'botonera_indice'

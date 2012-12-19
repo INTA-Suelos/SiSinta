@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Analisis < ActiveRecord::Base
-  belongs_to :horizonte, inverse_of: :analisis
-  has_one :calicata, through: :horizonte
+  belongs_to :horizonte
+  has_one :perfil, through: :horizonte
 
   validates_presence_of :horizonte
   validates_numericality_of :registro,:ph_pasta,
@@ -19,6 +19,8 @@ class Analisis < ActiveRecord::Base
                             allow_nil: true
 
   accepts_nested_attributes_for :horizonte
+
+  delegate :publico, to: :perfil
 
   def materia_organica_cn_before_type_cast
     begin
@@ -50,10 +52,6 @@ class Analisis < ActiveRecord::Base
 
   def agua_util
     agua_util_before_type_cast
-  end
-
-  def publico
-    calicata.publico
   end
 
 end

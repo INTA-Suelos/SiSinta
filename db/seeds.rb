@@ -18,23 +18,24 @@ def cargar_csv_de(archivo, configuracion = {})
     CSV.foreach "db/semillas/#{archivo}.csv", configuracion do |fila|
       yield fila
     end
-  rescue
-    puts "No se pudo abrir #{archivo}"
-  end
-end
-
-# Carga los roles predefinidos
-cargar_yml_de('roles').each do |campo|
-  campo.last.each do |v|
-    puts "Cargando rol #{v} ..."
-    Rol.send("find_or_create_by_#{campo.first}", v)
+  rescue => e
+    puts "No se pudo procesar #{archivo}: #{e}"
   end
 end
 
 # Carga el usuario administrador inicial
-Usuario.create( :nombre => 'Administrador',
-                :email => 'email@falso.com',
-                :password => 'administrador').roles.clear << Rol.find_by_nombre('administrador')
+puts <<MSG
+
+Creando usuario administrador con:
+  email:    admin@cambiame.com
+  password: cambiame
+
+MSG
+Usuario.create(
+  nombre:   'Administra Administrador',
+  email:    'admin@cambiame.com',
+  password: 'cambiame'
+).add_role  :admin
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|
@@ -49,14 +50,19 @@ end
 if File.exists?('db/semillas/perfiles-modales.csv')
   # Cargamos perfiles modales ya digitalizados
   cargar_csv_de('perfiles-modales', headers:true, col_sep: ',') do |csv|
-    Calicata.find_or_create_by_nombre(nombre: csv[0]) do |p|
-      p.modal = true
-      p.fecha = csv[1]
-      p.create_ubicacion( x: csv[2], y: csv[3],
-                          mosaico: csv[4].try(:split, ',').try(:first),
-                          descripcion: csv[5])
-      p.numero = csv[6]
-      p.grupo = Grupo.find_or_create_by_descripcion(csv[7])
+    Serie.find_or_create_by_nombre(csv[0]) do |s|
+      mosaico, observaciones = csv[4].try(:split, ',')
+      grupo = Grupo.find_or_create_by_descripcion(csv[7])
+      s.perfiles.build(
+        fecha: csv[1],
+        ubicacion_attributes: { x: csv[2], y: csv[3],
+                                mosaico: mosaico,
+                                descripcion: csv[5] },
+        modal: true,
+        numero: csv[6],
+        grupo: grupo,
+        observaciones: observaciones
+      )
     end
   end
 end

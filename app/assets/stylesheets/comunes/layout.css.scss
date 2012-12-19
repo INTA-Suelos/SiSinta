@@ -4,6 +4,10 @@ body {
   border-top: 15px solid black;
 }
 
+.container {
+  margin-left: $ancho_barra;
+}
+
 #cabecera {
   width: 100%;
   height: $alto_cabecera;
@@ -51,6 +55,7 @@ body {
     // No ocupa espacio fijo, para que el logo_sisinta no baje si se achica
     // mucho la pantalla
     width: auto;
+    margin-left: 1em;
   }
 
   #logo_sisinta {
@@ -84,7 +89,7 @@ ul.menu_usuarios {
 .botonera {
   float: none;
   margin-bottom: 1em;
-  min-height: $altura-linea;
+  min-height: $altura_linea;
   @include menu_horizontal;
 }
 
@@ -98,48 +103,43 @@ ul.menu_usuarios {
 
 #principal {
   margin-top: 10px;
+  margin-left: 1em;
   h1 { @include centrado; }
+}
 
-  .barra {
-    width: 230px;
-    position: absolute;
-    left: 0;
-    border-right: 2px $azul_inta solid;
-    font-size: large;
-    color: $azul_inta;
-    font-weight: bold;
+.barra {
+  width: $ancho_barra;
+  position: absolute;
+  left: 0;
+  background: $azul_inta;
+  font-size: large;
+  color: white;
+  font-weight: bold;
 
-    ul {
-      list-style-type: none;
-      padding-left: 1em;
-    }
+  ul {
+    list-style-type: none;
+    padding-left: 1em;
+  }
 
-    .menu {
-      margin-bottom: 1em;
-      border-top: 2px $azul_inta solid;
-      li {
-        background: $celeste;
-        width: auto;
+  .menu {
+    margin-bottom: 1em;
+    border-top: 2px $azul_inta solid;
+    li {
+      width: auto;
 
-        a {
-          text-decoration: none;
-          font-size: small;
-        }
-      }
-
-      .plegable {
-        &:hover { cursor: pointer; }
-        & + .submenu { display: none; }
+      a {
+        text-decoration: none;
+        font-size: small;
+        color: lighten($gris_claro, 25%);
       }
     }
 
+    .plegable {
+      &:hover { cursor: pointer; }
+      & + .submenu { display: none; }
+    }
   }
 
-  .cuerpo {
-    position: absolute;
-    left: 230px;
-    margin-left: 4px
-  }
 }
 
 .centrado {
@@ -152,4 +152,36 @@ ul.menu_usuarios {
 
 .desaparecer {
   display: none;
+}
+
+td.acciones {
+  text-align: right;
+  font-size: x-small;
+}
+
+label {
+  font-size: x-small;
+}
+
+#lista {
+  table {
+    background: $celeste_oscuro;
+  }
+  #paginacion {
+    float: right;
+
+    #filas {
+      float: right;
+
+      #activo {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+table {
+  .numero {
+    text-align: right;
+  }
 }

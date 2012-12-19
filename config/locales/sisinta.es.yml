@@ -2,7 +2,7 @@ es:
   activerecord:
     errors:
       models:
-        calicata:
+        perfil:
           attributes:
             fecha:
               future: "todavía no llega"
@@ -12,3 +12,9 @@ es:
     updated:  "La actualización de %{model} fue exitosa."
     destroyed: "La eliminación de %{model} fue exitosa."
     error: "Ocurrió algún error con la actualización."
+
+  confirmar:  "¿En serio?"
+  roles:
+    admin:      "Administrador"
+    miembro:    "Miembro"
+    autorizado: "Autorizado"

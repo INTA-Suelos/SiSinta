@@ -47,6 +47,33 @@ class ApplicationController < ActionController::Base
     RGeo::GeoJSON.encode factory.feature_collection(features)
   end
 
+  # GET /:controlador/:id/permisos
+  def permisos
+    @titulo = "Permisos"
+    @recurso = recurso
+    @controlador = params[:controller]
+    @miembros = Usuario.miembros(@recurso).collect {|u| u.id}
+    @usuarios = Usuario.all
+    @recurso = @recurso.decorate
+    render 'comunes/permisos'
+  end
+
+  # POST /:controlador/:id/permitir
+  def permitir
+    @recurso = recurso
+
+    respond_to do |format|
+      if Usuario.find(params["usuario_ids"]).each { |u| u.grant :miembro, @recurso }
+        format.html { redirect_to permisos_url,
+                      notice: I18n.t('messages.updated', model: @recurso.class) }
+        format.json { head :ok }
+      else
+        format.html { render action: "permisos" }
+        format.json { render json: @recurso.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # Métodos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 
@@ -56,68 +83,84 @@ class ApplicationController < ActionController::Base
   # Para ordenar las columnas
   helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
 
-protected
+  # Para los permisos
+  helper_method :permitir_url
 
-  # Devuelve una lista de coincidencias con el término de búsqueda para usar en el autocomplete de
-  # JQuery-UI. Cada controlador llama al método con un Modelo
-  #
-  # * *Args*    :
-  #   - +modelo+ -> La clase del modelo sobre el que hacer la búsqueda
-  #   - +atributo+ -> El atributo que buscar, como cadena o símbolo
-  # * *Returns* :
-  #   - La lista de coincidencias mapeada en +json+
-  #
-  def lista_para_autocompletar(modelo, atributo)
-    # Uso ARel porque me permite ignorar que el LIKE es case-sensitive en
-    # PostgreSQL pero insensitive en otros motores. En PostgreSQL se usa ILIKE
-    # para comparaciones case-insensitive (es una extensión exclusiva de
-    # PostgreSQL)
-    if params[:term]
-      conjunto = modelo.where modelo.arel_table[atributo].matches("%#{params[:term]}%")
-    else
-      conjunto = modelo.all
-    end
-    lista = conjunto.map {|elemento| Hash[:id => elemento.id,
-                                          :label => elemento.send(atributo),
-                                          "#{atributo}" => elemento.send(atributo)]}
-  end
+  protected
 
-  # Carga la calicata a la que pertenecen el modelo anidado
-  #
-  def cargar_calicata
-    @calicata = Calicata.find(params[:calicata_id])
-  end
-
-  # Devuelve un csv en base a los atributos del modelo
-  #
-  # * *Args*    :
-  #   - +coleccion+ -> coleccion a convertir en CSV
-  #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
-  # * *Returns* :
-  #   - La lista de coincidencias mapeada en +json+
-
-  def procesar_csv(coleccion = {}, prefijo = 'csv')
-
-    @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
-
-    @encabezado = true if params[:incluir_encabezado]
-
-    @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-      @atributos = params[:atributos].keys.sort
-
-      csv << @atributos if @encabezado
-
-      coleccion.each do |miembro|
-        csv << miembro.como_arreglo(@atributos)
+    # Devuelve una lista de coincidencias con el término de búsqueda para usar en el autocomplete de
+    # JQuery-UI. Cada controlador llama al método con un Modelo
+    #
+    # * *Args*    :
+    #   - +modelo+ -> La clase del modelo sobre el que hacer la búsqueda
+    #   - +atributo+ -> El atributo que buscar, como cadena o símbolo
+    # * *Returns* :
+    #   - La lista de coincidencias mapeada en +json+
+    #
+    def lista_para_autocompletar(modelo, atributo)
+      # Uso ARel porque me permite ignorar que el LIKE es case-sensitive en
+      # PostgreSQL pero insensitive en otros motores. En PostgreSQL se usa ILIKE
+      # para comparaciones case-insensitive (es una extensión exclusiva de
+      # PostgreSQL)
+      if params[:term]
+        conjunto = modelo.where modelo.arel_table[atributo].matches("%#{params[:term]}%")
+      else
+        conjunto = modelo.all
       end
+      lista = conjunto.map {|elemento| Hash[:id => elemento.id,
+                                            :label => elemento.send(atributo),
+                                            "#{atributo}" => elemento.send(atributo)]}
     end
 
-    send_data @respuesta, :filename => @archivo
+    # Carga el perfil al que pertenece el modelo anidado
+    #
+    def cargar_perfil
+      @perfil = Perfil.find(params[:perfil_id])
+    end
 
-  end
+    # Devuelve un csv en base a los atributos del modelo
+    #
+    # * *Args*    :
+    #   - +coleccion+ -> coleccion a convertir en CSV
+    #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
+    # * *Returns* :
+    #   - La lista de coincidencias mapeada en +json+
 
-  def direccion_de_ordenamiento
-    %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
-  end
+    def procesar_csv(coleccion = {}, prefijo = 'csv')
+
+      @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
+
+      @encabezado = true if params[:incluir_encabezado]
+
+      @respuesta = CSV.generate(:headers => @encabezado) do |csv|
+        @atributos = params[:atributos].keys.sort
+
+        csv << @atributos if @encabezado
+
+        coleccion.each do |miembro|
+          csv << miembro.como_arreglo(@atributos)
+        end
+      end
+
+      send_data @respuesta, :filename => @archivo
+
+    end
+
+    def direccion_de_ordenamiento
+      %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
+    end
+
+    # TODO filtrar por modelos existentes
+    def recurso
+      Kernel.const_get(params[:controller].classify).find(params[:id])
+    end
+
+    def permisos_url
+      "#{url_for(@recurso)}/permisos"
+    end
+
+    def permitir_url
+      "#{url_for(@recurso)}/permitir"
+    end
 
 end

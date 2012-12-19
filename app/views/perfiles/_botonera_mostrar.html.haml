@@ -1,0 +1,12 @@
+- if can?(:update, @perfil) or can?(:modificar, @perfil)
+  = link_to 'Editar', edit_perfil_path(@perfil)
+  = '|'
+  = link_to 'Permisos', permisos_perfil_path(@perfil)
+  = '|'
+- if can? :read, @perfil
+  = link_to 'Mostrar análisis', perfil_analisis_index_path(@perfil)
+  = '|'
+- if can? :read, @perfil.adjuntos.build
+  = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
+  = '|'
+= link_to 'Volver', perfiles_path
