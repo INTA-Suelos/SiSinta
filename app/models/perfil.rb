@@ -13,7 +13,7 @@ class Perfil < ActiveRecord::Base
                   :capacidad_attributes, :humedad_attributes,
                   :pedregosidad_attributes, :erosion_attributes, :etiquetas,
                   :reconocedores, :grupo, :serie_attributes,
-                  :horizontes_attributes
+                  :horizontes_attributes, :analisis_attributes
 
   attr_taggable :etiquetas
   attr_taggable :reconocedores
