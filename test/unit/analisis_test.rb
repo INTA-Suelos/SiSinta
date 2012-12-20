@@ -25,4 +25,8 @@ class AnalisisTest < ActiveSupport::TestCase
     assert_equal 2, @analisis.materia_organica_cn
   end
 
+  test 'debería permitir asignación masiva de ciertos atributos' do
+    assert Analisis.create(attributes_for(:analisis))
+  end
+
 end
