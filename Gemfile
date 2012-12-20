@@ -37,7 +37,7 @@ gem 'attribute_normalizer'
 ## GIS
 gem 'activerecord-postgis-adapter'
 gem 'rgeo'
-gem 'rgeo-geojson', :require => 'rgeo/geo_json'
+gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
 # Esta gema falla a partir de algún cambio de ActiveRecord
 #gem 'postgis_adapter'
@@ -56,7 +56,7 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 gem 'thin'
-gem 'SyslogLogger', :require => 'syslog/logger'
+gem 'SyslogLogger', require: 'syslog/logger'
 
 # Deploy with Capistrano
 # gem 'capistrano'
