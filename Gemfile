@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.9'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 ## DB
 gem 'pg'
 gem 'yaml_db'
@@ -22,6 +19,7 @@ gem 'awesome_nested_fields'
 gem 'kaminari'
 gem 'draper'
 gem 'ransack'
+gem 'jquery-rails'
 gem 'tinymce-rails'
 gem 'multiselectjs_rails'
 
@@ -39,9 +37,6 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
-# Esta gema falla a partir de algún cambio de ActiveRecord
-#gem 'postgis_adapter'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -51,18 +46,8 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'jquery-rails'
-
-# Use unicorn as the web server
-# gem 'unicorn'
 gem 'thin'
 gem 'SyslogLogger', require: 'syslog/logger'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development do
   gem 'pry'
@@ -73,7 +58,9 @@ end
 
 group :test do
   # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'turn'
   gem 'minitest'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
