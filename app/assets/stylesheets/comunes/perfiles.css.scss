@@ -28,7 +28,12 @@ form.completa {
 }
 
 #lista {
-  #modal {  width: 50px; }
+  #fecha      { width: 5%; }
+  #nombre     { width: 10%; }
+  #ubicacion  { width: 45%; }
+  #numero     { width: 5%; }
+  #modal      { width: 5%; }
+  .acciones   { width: 30%; }
 }
 
 .marcar {
