@@ -1,5 +1,6 @@
 # encoding: utf-8
 SiSINTA::Application.routes.draw do
+  # TODO buscar en todos los modelos con un index agregador
 
   # Autenticación en rack
   devise_for :usuarios

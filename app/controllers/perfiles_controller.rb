@@ -31,7 +31,7 @@ class PerfilesController < AutorizadoController
                                     :ubicacion,
                                     :fecha      ] }
       format.seleccion do
-        @regresar = session.delete :origen
+        @continuar = session.delete :continuar
         render layout: 'application.html'
       end
     end

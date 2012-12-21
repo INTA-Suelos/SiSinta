@@ -123,7 +123,7 @@ class SeriesController < AutorizadoController
     def buscar_perfiles_o_guardar
       case params[:commit]
       when 'Buscar'
-        session[:origen] = serie_path(@serie)
+        session[:continuar] = serie_path(@serie)
         redirect_to perfiles_path(format: :seleccion, q: params[:q])
       else
         redirect_to @serie, notice: I18n.t("messages.#{params[:action]}d",  model: 'Serie')
