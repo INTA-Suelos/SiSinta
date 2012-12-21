@@ -43,7 +43,7 @@ class SeriesController < AutorizadoController
   # GET /series/1.json
   def show
     @serie = @serie.decorate
-    @titulo = "Serie #{@serie.nombre} (#{@serie.simbolo})"
+    @titulo = "Serie #{@serie.nombre_y_simbolo}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -67,8 +67,8 @@ class SeriesController < AutorizadoController
   # GET /series/1/edit
   def edit
     @busqueda = Perfil.search
-    @titulo = "Editando serie #{@serie.nombre}"
     @serie = SerieDecorator.new(@serie)
+    @titulo = "Editando serie #{@serie.nombre_y_simboloo}"
   end
 
   # POST /series
