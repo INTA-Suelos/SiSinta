@@ -1,4 +1,4 @@
-class SerieDecorator < Draper::Base
+class SerieDecorator < ApplicationDecorator
   decorates :serie
   decorates_association :perfiles
 

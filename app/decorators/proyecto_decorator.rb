@@ -1,4 +1,4 @@
-class ProyectoDecorator < Draper::Base
+class ProyectoDecorator < ApplicationDecorator
   decorates :proyecto
   decorates_association :perfiles
 
