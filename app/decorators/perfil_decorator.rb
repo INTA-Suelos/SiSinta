@@ -1,4 +1,4 @@
-class PerfilDecorator < Draper::Base
+class PerfilDecorator < ApplicationDecorator
   decorates :perfil
   decorates_association :ubicacion
 

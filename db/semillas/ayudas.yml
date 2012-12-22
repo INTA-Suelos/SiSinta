@@ -3,207 +3,207 @@
 # El id es de uso interno, y si se lo cambia se corre el riesgo de perder
 # asociaciones previas.
 #
-- id:     1
-  campo:  perfil.modal
-  ayuda:  Indica si el perfil es modal o no.
-- id:     2
-  campo:  perfil.nombre
-  ayuda:  Nombre de la Serie a la que está referenciada.
-- id:     3
-  campo:  perfil.simbolo
-  ayuda:  Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.
-- id:     4
-  campo:  ubicacion.mosaico
-  ayuda:  Nomenclatura del mosaico IGN.
+- id:       1
+  campo:    Perfil.modal
+  ayuda:    Indica si el perfil es modal o no.
+- id:       2
+  campo:    Perfil.nombre
+  ayuda:    Nombre de la Serie a la que está referenciada.
+- id:       3
+  campo:    Perfil.simbolo
+  ayuda:    Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.
+- id:       4
+  campo:    Ubicacion.mosaico
+  ayuda:    Nomenclatura del mosaico IGN.
   ejemplo:  '0000-00-0'
-- id:     5
-  campo:  ubicacion.recorrido
-  ayuda:  Número de recorrido del vuelo aerofotográfico.
-- id:     6
-  campo:  ubicacion.aerofoto
-  ayuda:  Número de fotograma.
-- id:     7
-  campo:  perfil.fecha
-  ayuda:  Fecha de toma de datos.
-  ejemplo: 'aaaa/mm/dd'
-- id:     8
-  campo:  perfil.numero
-  ayuda:  Número/Nombre del perfil.
+- id:       5
+  campo:    Ubicacion.recorrido
+  ayuda:    Número de recorrido del vuelo aerofotográfico.
+- id:       6
+  campo:    Ubicacion.aerofoto
+  ayuda:    Número de fotograma.
+- id:       7
+  campo:    Perfil.fecha
+  ayuda:    Fecha de toma de datos.
+  ejemplo:  'aaaa/mm/dd'
+- id:       8
+  campo:    Perfil.numero
+  ayuda:    Número/Nombre del perfil.
   ejemplo:  'C 00/000'
-- id:     9
-  campo:  fase.nombre
-  ayuda:  Fase respecto al perfil modal.
-- id:     10
-  campo:  grupo.descripcion
-  ayuda:  Taxonomía.
-- id:     11
-  campo:  capacidad.subclases
-  ayuda:  Subclase referida a la principal limitante.
-- id:     12
-  campo:  capacidad.clase
-  ayuda:  'Capacidad de Uso: I a VIII.'
-- id:     13
-  campo:  ubicacion.ayuda
-  ayuda:  Ubicación relativa.
-- id:     14
-  campo:  ubicacion.y
-  ayuda:  Coordenada y/latitud.
-- id:     15
-  campo:  ubicacion.x
-  ayuda:  Coordenada x/longitud.
-- id:     16
-  campo:  ubicacion.formato
-  ayuda:  Sistema de coordenadas de referencia.
-- id:     17
-  campo:  paisaje.tipo
-  ayuda:  Ayuda no disponible.
-- id:     18
-  campo:  paisaje.forma
-  ayuda:  Ayuda no disponible.
-- id:     19
-  campo:  paisaje.simbolo
-  ayuda:  Ayuda no disponible.
-- id:     20
-  campo:  perfil.material_original
-  ayuda:  Ayuda no disponible.
-- id:     21
-  campo:  perfil.drenaje
-  ayuda:  Ayuda no disponible.
-- id:     22
-  campo:  perfil.relieve
-  ayuda:  Ayuda no disponible.
-- id:     23
-  campo:  perfil.anegamiento
-  ayuda:  Ayuda no disponible.
-- id:     24
-  campo:  perfil.posicion
-  ayuda:  Ayuda no disponible.
-- id:     25
-  campo:  perfil.humedad
-  ayuda:  Ayuda no disponible.
-- id:     26
-  campo:  perfil.pendiente
-  ayuda:  Ayuda no disponible.
-- id:     27
-  campo:  perfil.cobertura_vegetal
-  ayuda:  Porcentaje de la superficie cubierta por vegetación.
-- id:     28
-  campo:  perfil.profundidad_napa
-  ayuda:  Ayuda no disponible.
-- id:     29
-  campo:  perfil.escurrimiento
-  ayuda:  Ayuda no disponible.
-- id:     30
-  campo:  perfil.sal
-  ayuda:  Ayuda no disponible.
-- id:     31
-  campo:  perfil.permeabilidad
-  ayuda:  Ayuda no disponible.
-- id:     32
-  campo:  perfil.pedregosidad
-  ayuda:  Ayuda no disponible.
-- id:     33
-  campo:  perfil.erosion
-  ayuda:  Ayuda no disponible.
-- id:     34
-  campo:  perfil.uso_de_la_tierra
-  ayuda:  Ayuda no disponible.
-- id:     35
-  campo:  fase.codigo
-  ayuda:  Ayuda no disponible.
-- id:     36
-  campo:  grupo.codigo
-  ayuda:  Ayuda no disponible.
-- id:     37
-  campo:  horizonte.tipo
-  ayuda:  Ayuda no disponible.
-- id:     38
-  campo:  horizonte.profundidad_superior
-  ayuda:  Ayuda no disponible.
-- id:     39
-  campo:  horizonte.profundidad_inferior
-  ayuda:  Ayuda no disponible.
-- id:     40
-  campo:  limite.tipo
-  ayuda:  Ayuda no disponible.
-- id:     41
-  campo:  limite.forma
-  ayuda:  Ayuda no disponible.
-- id:     42
-  campo:  horizonte.color_seco
-  ayuda:  Ayuda no disponible.
-- id:     43
-  campo:  horizonte.color_humedo
-  ayuda:  Ayuda no disponible.
-- id:     44
-  campo:  horizonte.textura
-  ayuda:  Ayuda no disponible.
-- id:     45
-  campo:  estructura.tipo
-  ayuda:  Ayuda no disponible.
-- id:     46
-  campo:  estructura.clase
-  ayuda:  Ayuda no disponible.
-- id:     47
-  campo:  estructura.grado
-  ayuda:  Ayuda no disponible.
-- id:     48
-  campo:  consistencia.en_seco
-  ayuda:  Ayuda no disponible.
-- id:     49
-  campo:  consistencia.en_humedo
-  ayuda:  Ayuda no disponible.
-- id:     50
-  campo:  consistencia.plasticidad
-  ayuda:  Ayuda no disponible.
-- id:     51
-  campo:  consistencia.adhesividad
-  ayuda:  Ayuda no disponible.
-- id:     52
-  campo:  horizonte.ph
-  ayuda:  Ayuda no disponible.
-- id:     53
-  campo:  horizonte.co3
-  ayuda:  Ayuda no disponible.
-- id:     54
-  campo:  horizonte.concreciones
-  ayuda:  Ayuda no disponible.
-- id:     55
-  campo:  horizonte.barnices
-  ayuda:  Ayuda no disponible.
-- id:     56
-  campo:  horizonte.moteados
-  ayuda:  Ayuda no disponible.
-- id:     57
-  campo:  horizonte.humedad
-  ayuda:  Ayuda no disponible.
-- id:     58
-  campo:  horizonte.raices
-  ayuda:  Ayuda no disponible.
-- id:     59
-  campo:  horizonte.formaciones_especiales
-  ayuda:  Ayuda no disponible.
-- id:     60
-  campo:  perfil.observaciones
-  ayuda:  Ayuda no disponible.
-- id:     61
-  campo:  perfil.vegetacion_o_cultivos
-  ayuda:  Ayuda no disponible.
-- id:     62
-  campo:  perfil.etiquetas
-  ayuda:  Lista de etiquetas (separadas por coma) para esta perfil.
-- id:     63
-  campo:  perfil.usuario
-  ayuda:  Usuario que cargó este perfil
-- id:     64
-  campo:  perfil.reconocedores
-  ayuda:  Lista de reconocedores del perfil (separados por coma).
-- id:     65
-  campo:  proyecto.nombre
-  ayuda:  Ayuda no disponible.
-- id:     66
-  campo:  proyecto.descripcion
-  ayuda:  Ayuda no disponible.
-- id:     67
-  campo:  proyecto.cita
-  ayuda:  Ayuda no disponible.
+- id:       9
+  campo:    Fase.nombre
+  ayuda:    Fase respecto al perfil modal.
+- id:       10
+  campo:    Grupo.descripcion
+  ayuda:    Taxonomía.
+- id:       11
+  campo:    Capacidad.subclases
+  ayuda:    Subclase referida a la principal limitante.
+- id:       12
+  campo:    Capacidad.clase
+  ayuda:    'Capacidad de Uso: I a VIII.'
+- id:       13
+  campo:    Ubicacion.descripcion
+  ayuda:    Ubicación relativa.
+- id:       14
+  campo:    Ubicacion.y
+  ayuda:    Coordenada y/latitud.
+- id:       15
+  campo:    Ubicacion.x
+  ayuda:    Coordenada x/longitud.
+- id:       16
+  campo:    Ubicacion.formato
+  ayuda:    Sistema de coordenadas de referencia.
+- id:       17
+  campo:    Paisaje.tipo
+  ayuda:    Ayuda no disponible.
+- id:       18
+  campo:    Paisaje.forma
+  ayuda:    Ayuda no disponible.
+- id:       19
+  campo:    Paisaje.simbolo
+  ayuda:    Ayuda no disponible.
+- id:       20
+  campo:    Perfil.material_original
+  ayuda:    Ayuda no disponible.
+- id:       21
+  campo:    Perfil.drenaje
+  ayuda:    Ayuda no disponible.
+- id:       22
+  campo:    Perfil.relieve
+  ayuda:    Ayuda no disponible.
+- id:       23
+  campo:    Perfil.anegamiento
+  ayuda:    Ayuda no disponible.
+- id:       24
+  campo:    Perfil.posicion
+  ayuda:    Ayuda no disponible.
+- id:       25
+  campo:    Perfil.humedad
+  ayuda:    Ayuda no disponible.
+- id:       26
+  campo:    Perfil.pendiente
+  ayuda:    Ayuda no disponible.
+- id:       27
+  campo:    Perfil.cobertura_vegetal
+  ayuda:    Porcentaje de la superficie cubierta por vegetación.
+- id:       28
+  campo:    Perfil.profundidad_napa
+  ayuda:    Ayuda no disponible.
+- id:       29
+  campo:    Perfil.escurrimiento
+  ayuda:    Ayuda no disponible.
+- id:       30
+  campo:    Perfil.sal
+  ayuda:    Ayuda no disponible.
+- id:       31
+  campo:    Perfil.permeabilidad
+  ayuda:    Ayuda no disponible.
+- id:       32
+  campo:    Perfil.pedregosidad
+  ayuda:    Ayuda no disponible.
+- id:       33
+  campo:    Perfil.erosion
+  ayuda:    Ayuda no disponible.
+- id:       34
+  campo:    Perfil.uso_de_la_tierra
+  ayuda:    Ayuda no disponible.
+- id:       35
+  campo:    Fase.codigo
+  ayuda:    Ayuda no disponible.
+- id:       36
+  campo:    Grupo.codigo
+  ayuda:    Ayuda no disponible.
+- id:       37
+  campo:    Horizonte.tipo
+  ayuda:    Ayuda no disponible.
+- id:       38
+  campo:    Horizonte.profundidad_superior
+  ayuda:    Ayuda no disponible.
+- id:       39
+  campo:    Horizonte.profundidad_inferior
+  ayuda:    Ayuda no disponible.
+- id:       40
+  campo:    Limite.tipo
+  ayuda:    Ayuda no disponible.
+- id:       41
+  campo:    Limite.forma
+  ayuda:    Ayuda no disponible.
+- id:       42
+  campo:    Horizonte.color_seco
+  ayuda:    Ayuda no disponible.
+- id:       43
+  campo:    Horizonte.color_humedo
+  ayuda:    Ayuda no disponible.
+- id:       44
+  campo:    Horizonte.textura
+  ayuda:    Ayuda no disponible.
+- id:       45
+  campo:    Estructura.tipo
+  ayuda:    Ayuda no disponible.
+- id:       46
+  campo:    Estructura.clase
+  ayuda:    Ayuda no disponible.
+- id:       47
+  campo:    Estructura.grado
+  ayuda:    Ayuda no disponible.
+- id:       48
+  campo:    Consistencia.en_seco
+  ayuda:    Ayuda no disponible.
+- id:       49
+  campo:    Consistencia.en_humedo
+  ayuda:    Ayuda no disponible.
+- id:       50
+  campo:    Consistencia.plasticidad
+  ayuda:    Ayuda no disponible.
+- id:       51
+  campo:    Consistencia.adhesividad
+  ayuda:    Ayuda no disponible.
+- id:       52
+  campo:    Horizonte.ph
+  ayuda:    Ayuda no disponible.
+- id:       53
+  campo:    Horizonte.co3
+  ayuda:    Ayuda no disponible.
+- id:       54
+  campo:    Horizonte.concreciones
+  ayuda:    Ayuda no disponible.
+- id:       55
+  campo:    Horizonte.barnices
+  ayuda:    Ayuda no disponible.
+- id:       56
+  campo:    Horizonte.moteados
+  ayuda:    Ayuda no disponible.
+- id:       57
+  campo:    Horizonte.humedad
+  ayuda:    Ayuda no disponible.
+- id:       58
+  campo:    Horizonte.raices
+  ayuda:    Ayuda no disponible.
+- id:       59
+  campo:    Horizonte.formaciones_especiales
+  ayuda:    Ayuda no disponible.
+- id:       60
+  campo:    Perfil.observaciones
+  ayuda:    Ayuda no disponible.
+- id:       61
+  campo:    Perfil.vegetacion_o_cultivos
+  ayuda:    Ayuda no disponible.
+- id:       62
+  campo:    Perfil.etiquetas
+  ayuda:    Lista de etiquetas (separadas por coma) para esta perfil.
+- id:       63
+  campo:    Perfil.usuario
+  ayuda:    Usuario que cargó este perfil
+- id:       64
+  campo:    Perfil.reconocedores
+  ayuda:    Lista de reconocedores del perfil (separados por coma).
+- id:       65
+  campo:    Proyecto.nombre
+  ayuda:    Ayuda no disponible.
+- id:       66
+  campo:    Proyecto.descripcion
+  ayuda:    Ayuda no disponible.
+- id:       67
+  campo:    Proyecto.cita
+  ayuda:    Ayuda no disponible.

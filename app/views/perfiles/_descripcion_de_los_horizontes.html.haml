@@ -37,9 +37,9 @@
 
       .items
         = f.nested_fields_for :horizontes, new_object: horizonte_preparado,
-            show_empty: true, render_template: false do |f_h|
-          - if f_h
-            .item= render partial: 'horizonte', locals: {h: f_h, bloqueado: bloqueado}
+            show_empty: true, render_template: false do |fh|
+          - if fh
+            .item= render partial: 'horizonte', locals: {h: fh, bloqueado: bloqueado}
           - else
             .prepend-8.span-5.empty No hay horizontes cargados
 
