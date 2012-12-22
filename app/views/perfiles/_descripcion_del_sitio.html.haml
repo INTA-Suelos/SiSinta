@@ -3,8 +3,9 @@
   = f.fields_for :ubicacion do |f_u|
     .span-4.campo
       .span-2= f_u.label :mosaico
-      .span-2.last= f_u.text_field :mosaico, disabled: bloqueado
-      = ayuda_para('ubicacion.mosaico')
+      .span-2.last= f_u.text_field :mosaico, disabled: bloqueado,
+        placeholder: f_u.object.pista(:mosaico)
+      = f_u.object.ayuda(:mosaico)
     .span-4.campo
       .span-2= f_u.label :recorrido
       .span-2.last= f_u.text_field :recorrido, disabled: bloqueado
@@ -20,8 +21,9 @@
     = ayuda_para('perfil.fecha')
   .span-4.last.campo
     .span-2= f.label :numero, "Número"
-    .span-2.last= f.text_field :numero, disabled: bloqueado
-    = ayuda_para('perfil.numero')
+    .span-2.last= f.text_field :numero, disabled: bloqueado,
+      placeholder: f.object.pista(:numero)
+    = f.object.ayuda(:numero)
 
   .span-11.campo
     = f.fields_for :fase do |ff|
