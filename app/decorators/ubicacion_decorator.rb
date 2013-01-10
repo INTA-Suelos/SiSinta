@@ -36,7 +36,7 @@ class UbicacionDecorator < ApplicationDecorator
     h.image_tag "http://maps.google.com/maps/api/staticmap?size=#{
                   ancho}x#{
                   alto}&sensor=false&zoom=#{
-                  zoom}&markers=#{
+                  zoom}&maptype=hybrid&markers=#{
                   source.latitud}%2C#{
                   source.longitud}"
   end
