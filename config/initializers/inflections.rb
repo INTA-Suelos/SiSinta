@@ -29,6 +29,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'grupo', 'grupos'
   inflect.irregular 'rol', 'roles'
   inflect.irregular 'ubicacion', 'ubicaciones'
+  inflect.irregular 'ubicación', 'ubicaciones'
   inflect.irregular 'proyecto', 'proyectos'
 
   # Modelos <=> Lookups
@@ -47,6 +48,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'relieve', 'relieves'
   inflect.irregular 'anegamiento', 'anegamientos'
   inflect.irregular 'posicion', 'posiciones'
+  inflect.irregular 'posición', 'posiciones'
   inflect.irregular 'drenaje', 'drenajes'
   inflect.irregular 'sal', 'sales'
   inflect.irregular 'uso_de_la_tierra', 'usos_de_la_tierra'
@@ -59,7 +61,9 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'consistencia_en_seco', 'consistencias_en_seco'
   inflect.irregular 'consistencia_en_humedo', 'consistencias_en_humedo'
   inflect.irregular 'tipo_de_limite', 'tipos_de_limite'
+  inflect.irregular 'tipo_de_límite', 'tipos_de_límite'
   inflect.irregular 'forma_de_limite', 'formas_de_limite'
+  inflect.irregular 'forma_de_límite', 'formas_de_límite'
   inflect.irregular 'formato_de_coordenadas', 'formatos_de_coordenadas'
   inflect.irregular 'pedregosidad', 'pedregosidades'
   inflect.irregular 'subclase_de_pedregosidad', 'subclases_de_pedregosidad'
@@ -68,8 +72,11 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'clase_de_humedad', 'clases_de_humedad'
   inflect.irregular 'subclase_de_humedad', 'subclases_de_humedad'
   inflect.irregular 'erosion', 'erosiones'
+  inflect.irregular 'erosión', 'erosiones'
   inflect.irregular 'clase_de_erosion', 'clases_de_erosion'
+  inflect.irregular 'clase_de_erosión', 'clases_de_erosión'
   inflect.irregular 'subclase_de_erosion', 'subclases_de_erosion'
+  inflect.irregular 'subclase_de_erosión', 'subclases_de_erosión'
 
   # Atajos
   inflect.irregular 'clase', 'clases'
