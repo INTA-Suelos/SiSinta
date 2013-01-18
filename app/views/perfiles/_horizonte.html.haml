@@ -23,7 +23,7 @@
     .span-2.campo
       = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
       = ayuda_para 'Horizonte.color_seco'
-  = h.fields_for :color_humedo do |h_c|
+  = h.fields_for :color_humedo do |hc|
     .span-2.last.campo
       = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
       = ayuda_para 'Horizonte.color_humedo'
