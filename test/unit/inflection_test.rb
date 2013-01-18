@@ -15,25 +15,21 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'fase', 'fases'.singularize
     assert_equal 'grupo', 'grupos'.singularize
     assert_equal 'rol', 'roles'.singularize
-    assert_equal 'ubicación', 'ubicaciones'.singularize
     assert_equal 'proyecto', 'proyectos'.singularize
     assert_equal 'consistencia', 'consistencias'.singularize
     assert_equal 'estructura', 'estructuras'.singularize
     assert_equal 'limite', 'limites'.singularize
-    assert_equal 'límite', 'límites'.singularize
     assert_equal 'capacidad', 'capacidades'.singularize
     assert_equal 'escurrimiento', 'escurrimientos'.singularize
     assert_equal 'pendiente', 'pendientes'.singularize
     assert_equal 'permeabilidad', 'permeabilidades'.singularize
     assert_equal 'relieve', 'relieves'.singularize
     assert_equal 'anegamiento', 'anegamientos'.singularize
-    assert_equal 'posición', 'posiciones'.singularize
     assert_equal 'drenaje', 'drenajes'.singularize
     assert_equal 'sal', 'sales'.singularize
     assert_equal 'ayuda', 'ayudas'.singularize
     assert_equal 'pedregosidad', 'pedregosidades'.singularize
     assert_equal 'humedad', 'humedades'.singularize
-    assert_equal 'erosión', 'erosiones'.singularize
     assert_equal 'clase', 'clases'.singularize
     assert_equal 'subclase', 'subclases'.singularize
     assert_equal 'tipo', 'tipos'.singularize
@@ -59,18 +55,14 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'consistencia_en_seco', 'consistencias_en_seco'.singularize
     assert_equal 'consistencia_en_humedo', 'consistencias_en_humedo'.singularize
     assert_equal 'tipo_de_limite', 'tipos_de_limite'.singularize
-    assert_equal 'tipo_de_límite', 'tipos_de_límite'.singularize
     assert_equal 'forma_de_limite', 'formas_de_limite'.singularize
-    assert_equal 'forma_de_límite', 'formas_de_límite'.singularize
     assert_equal 'formato_de_coordenadas', 'formatos_de_coordenadas'.singularize
     assert_equal 'subclase_de_pedregosidad', 'subclases_de_pedregosidad'.singularize
     assert_equal 'clase_de_pedregosidad', 'clases_de_pedregosidad'.singularize
     assert_equal 'clase_de_humedad', 'clases_de_humedad'.singularize
     assert_equal 'subclase_de_humedad', 'subclases_de_humedad'.singularize
     assert_equal 'clase_de_erosion', 'clases_de_erosion'.singularize
-    assert_equal 'clase_de_erosión', 'clases_de_erosión'.singularize
     assert_equal 'subclase_de_erosion', 'subclases_de_erosion'.singularize
-    assert_equal 'subclase_de_erosión', 'subclases_de_erosión'.singularize
   end
 
   test "debería pluralizar lo simple" do
@@ -85,13 +77,11 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'fases', 'fase'.pluralize
     assert_equal 'grupos', 'grupo'.pluralize
     assert_equal 'roles', 'rol'.pluralize
-    assert_equal 'ubicaciones', 'ubicación'.pluralize
     assert_equal 'ubicaciones', 'ubicacion'.pluralize
     assert_equal 'proyectos', 'proyecto'.pluralize
     assert_equal 'consistencias', 'consistencia'.pluralize
     assert_equal 'estructuras', 'estructura'.pluralize
     assert_equal 'limites', 'limite'.pluralize
-    assert_equal 'límites', 'límite'.pluralize
     assert_equal 'capacidades', 'capacidad'.pluralize
     assert_equal 'escurrimientos', 'escurrimiento'.pluralize
     assert_equal 'pendientes', 'pendiente'.pluralize
@@ -99,14 +89,12 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'relieves', 'relieve'.pluralize
     assert_equal 'anegamientos', 'anegamiento'.pluralize
     assert_equal 'posiciones', 'posicion'.pluralize
-    assert_equal 'posiciones', 'posición'.pluralize
     assert_equal 'drenajes', 'drenaje'.pluralize
     assert_equal 'sales', 'sal'.pluralize
     assert_equal 'ayudas', 'ayuda'.pluralize
     assert_equal 'pedregosidades', 'pedregosidad'.pluralize
     assert_equal 'humedades', 'humedad'.pluralize
     assert_equal 'erosiones', 'erosion'.pluralize
-    assert_equal 'erosiones', 'erosión'.pluralize
     assert_equal 'clases', 'clase'.pluralize
     assert_equal 'subclases', 'subclase'.pluralize
     assert_equal 'tipos', 'tipo'.pluralize
@@ -132,18 +120,14 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'consistencias_en_seco', 'consistencia_en_seco'.pluralize
     assert_equal 'consistencias_en_humedo', 'consistencia_en_humedo'.pluralize
     assert_equal 'tipos_de_limite', 'tipo_de_limite'.pluralize
-    assert_equal 'tipos_de_límite', 'tipo_de_límite'.pluralize
     assert_equal 'formas_de_limite', 'forma_de_limite'.pluralize
-    assert_equal 'formas_de_límite', 'forma_de_límite'.pluralize
     assert_equal 'formatos_de_coordenadas', 'formato_de_coordenadas'.pluralize
     assert_equal 'subclases_de_pedregosidad', 'subclase_de_pedregosidad'.pluralize
     assert_equal 'clases_de_pedregosidad', 'clase_de_pedregosidad'.pluralize
     assert_equal 'clases_de_humedad', 'clase_de_humedad'.pluralize
     assert_equal 'subclases_de_humedad', 'subclase_de_humedad'.pluralize
     assert_equal 'clases_de_erosion', 'clase_de_erosion'.pluralize
-    assert_equal 'clases_de_erosión', 'clase_de_erosión'.pluralize
     assert_equal 'subclases_de_erosion', 'subclase_de_erosion'.pluralize
-    assert_equal 'subclases_de_erosión', 'subclase_de_erosión'.pluralize
   end
 
 end
