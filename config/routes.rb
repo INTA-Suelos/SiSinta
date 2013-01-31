@@ -2,10 +2,11 @@
 SiSINTA::Application.routes.draw do
   # TODO buscar en todos los modelos con un index agregador
 
+  root to: 'inicio#index'
+  get 'inicio/index'
+
   # Autenticación en rack
   devise_for :usuarios
-
-  get 'inicio/index'
 
   # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
   m = { new: "nuevo", edit: "editar" }
@@ -81,6 +82,4 @@ SiSINTA::Application.routes.draw do
   resource :usuarios, only: [], path_names: m do
     put 'configurar', on: :member
   end
-
-  root to: 'inicio#index'
 end
