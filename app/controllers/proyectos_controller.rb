@@ -8,8 +8,6 @@ class ProyectosController < AutorizadoController
 
   before_filter :asociar_perfiles,            only: [:update]
 
-  # GET /proyectos
-  # GET /proyectos.json
   def index
     @proyectos = Proyecto.all
     @titulo = "Proyectos"
@@ -20,8 +18,6 @@ class ProyectosController < AutorizadoController
     end
   end
 
-  # GET /proyectos/1
-  # GET /proyectos/1.json
   def show
     @proyecto = Proyecto.find(params[:id]).decorate
     @titulo = @proyecto.nombre
@@ -32,8 +28,6 @@ class ProyectosController < AutorizadoController
     end
   end
 
-  # GET /proyectos/new
-  # GET /proyectos/new.json
   def new
     @busqueda = Perfil.search
     @titulo = 'Nuevo proyecto'
@@ -45,15 +39,12 @@ class ProyectosController < AutorizadoController
     end
   end
 
-  # GET /proyectos/1/edit
   def edit
     @busqueda = Perfil.search
     @titulo = "Editando #{@proyecto.nombre}"
     @proyecto = ProyectoDecorator.decorate(@proyecto)
   end
 
-  # POST /proyectos
-  # POST /proyectos.json
   def create
     respond_to do |format|
       if @proyecto.save
@@ -66,8 +57,6 @@ class ProyectosController < AutorizadoController
     end
   end
 
-  # PUT /proyectos/1
-  # PUT /proyectos/1.json
   def update
     respond_to do |format|
       if @proyecto.update_attributes(params[:proyecto])
@@ -80,8 +69,6 @@ class ProyectosController < AutorizadoController
     end
   end
 
-  # DELETE /proyectos/1
-  # DELETE /proyectos/1.json
   def destroy
     @proyecto.destroy
 
