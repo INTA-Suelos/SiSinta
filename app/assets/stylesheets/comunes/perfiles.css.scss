@@ -39,3 +39,28 @@ form.completa {
 .marcar {
   width: 80px;
 }
+
+// Cuando hay una lista de perfiles asociados al modelo en cuestión, se usa
+// este id, con este estilo por default
+#perfiles_asociados {
+  label {
+    font-weight: normal;
+    font-size: small;
+  }
+
+  .borrar     { width: 1%;  }
+  .nombre     { width: 15%; }
+  .numero     { width: 10%;
+                text-align: center; }
+  .ubicacion  { width: 52%; }
+  .fecha      { width: 10%; }
+  .modal      { width: 10%; }
+  .acciones   { width: 2%; }
+}
+
+.show {
+  #perfiles_asociados {
+    .borrar { display: none; }
+    .acciones { display: 3%; }
+  }
+}

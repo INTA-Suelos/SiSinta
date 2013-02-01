@@ -29,7 +29,7 @@ class ProyectosController < AutorizadoController
   end
 
   def new
-    @busqueda = Perfil.search
+    @busqueda_perfil = Perfil.search
     @titulo = 'Nuevo proyecto'
     @proyecto = ProyectoDecorator.decorate(@proyecto)
 
@@ -40,7 +40,7 @@ class ProyectosController < AutorizadoController
   end
 
   def edit
-    @busqueda = Perfil.search
+    @busqueda_perfil = Perfil.search
     @titulo = "Editando #{@proyecto.nombre}"
     @proyecto = ProyectoDecorator.decorate(@proyecto)
   end
@@ -91,7 +91,7 @@ class ProyectosController < AutorizadoController
     def buscar_perfiles_o_guardar
       case params[:commit]
       when 'Buscar'
-        session[:origen] = proyecto_path(@proyecto)
+        session[:continuar] = proyecto_path(@proyecto)
         redirect_to perfiles_path(format: :seleccion, q: params[:q])
       else
         redirect_to @proyecto, notice: I18n.t("messages.#{params[:action]}d", model: 'Proyecto')

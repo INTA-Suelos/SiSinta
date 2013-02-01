@@ -48,7 +48,7 @@ class SeriesController < AutorizadoController
   end
 
   def new
-    @busqueda = Perfil.search
+    @busqueda_perfil = Perfil.search
     @titulo = 'Nueva serie'
     @serie = SerieDecorator.decorate(@serie)
 
@@ -59,7 +59,7 @@ class SeriesController < AutorizadoController
   end
 
   def edit
-    @busqueda = Perfil.search
+    @busqueda_perfil = Perfil.search
     @serie = @serie.decorate
     @titulo = "Editando serie #{@serie.nombre_y_simbolo}"
   end
