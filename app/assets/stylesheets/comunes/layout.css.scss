@@ -136,7 +136,6 @@ ul.menu_usuarios {
 
     .plegable {
       &:hover { cursor: pointer; }
-      & + .submenu { display: none; }
     }
   }
 
