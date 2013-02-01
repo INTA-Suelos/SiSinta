@@ -1,9 +1,9 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
 
-  before_filter :preparar,  only: [:index, :geo,
+  before_filter :preparar,  only: [:index, :geo, :seleccionar,
                                    :preparar_csv, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo,
+  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
                                    :preparar_csv, :procesar_csv ]
   before_filter :paginar,   only: [:index]
 
@@ -30,10 +30,6 @@ class PerfilesController < AutorizadoController
                                     :nombre,
                                     :ubicacion,
                                     :fecha      ] }
-      format.seleccion do
-        @continuar = session.delete :continuar
-        render layout: 'application.html'
-      end
     end
   end
 
@@ -156,12 +152,16 @@ class PerfilesController < AutorizadoController
     super(@perfiles, 'perfiles')
   end
 
+  def seleccionar
+    @continuar = session.delete :continuar
+  end
+
   protected
 
     # Prepara el scope para la lista de perfiles
     def preparar
       # Selecciono sólo lo que necesito en el index
-      @perfiles ||= Perfil.joins(:ubicacion, :serie)
+      @perfiles ||= Perfil.includes(:ubicacion, :serie)
         .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end

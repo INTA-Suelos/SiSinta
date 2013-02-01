@@ -1,9 +1,9 @@
 %tr
-  %td= perfil.fecha
-  %td= perfil.nombre
-  %td= perfil.ubicacion.try(:descripcion).try(:truncate, 70)
-  %td= perfil.numero
-  %td= "✓" if perfil.modal?
+  %td.fecha=      perfil.fecha
+  %td.serie=      perfil.nombre
+  %td.ubicacion=  perfil.ubicacion.try(:descripcion).try(:truncate, 70)
+  %td.numero=     perfil.numero
+  %td.modal=      "✓" if perfil.modal?
   %td.acciones
     = link_to 'Mostrar', perfil
     = '|'
@@ -11,7 +11,7 @@
     = '|'
     = link_to 'Permisos', permisos_perfil_path(perfil)
     = '|'
-    = link_to 'Análisis', perfil_analisis_index_path(perfil)
-    = '|'
     = link_to 'Eliminar', perfil,
         data: { confirm: t(:confirmar) }, method: :delete
+  %td.checks
+    = check_box_tag 'perfil_ids[]', perfil.id

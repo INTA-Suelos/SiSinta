@@ -18,6 +18,7 @@ SiSINTA::Application.routes.draw do
       get   'preparar_csv'
       post  'procesar_csv'
       get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
+      get   'seleccionar'
     end
     member do
       get   'permisos'

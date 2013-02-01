@@ -92,7 +92,7 @@ class ProyectosController < AutorizadoController
       case params[:commit]
       when 'Buscar'
         session[:continuar] = proyecto_path(@proyecto)
-        redirect_to perfiles_path(format: :seleccion, q: params[:q])
+        redirect_to seleccionar_perfiles_path(q: params[:q])
       else
         redirect_to @proyecto, notice: I18n.t("messages.#{params[:action]}d", model: 'Proyecto')
       end

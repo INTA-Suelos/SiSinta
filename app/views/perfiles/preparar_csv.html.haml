@@ -21,9 +21,7 @@
     #perfiles.checks.span-22.last
       - @atributos.each do |a|
         .span-6.last.campo{class: cycle('celeste_oscuro', 'celeste')}
-          .span-5
-            = label_tag a
-          .span-1.last
-            = check_box_tag "atributos[#{a}]"
+          = label_tag do
+            = check_box_tag("atributos[#{a}]") + a.to_s.humanize
 
   .acciones.span-4= submit_tag 'Exportar'
