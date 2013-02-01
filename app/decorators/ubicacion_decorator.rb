@@ -1,4 +1,4 @@
-class UbicacionDecorator < Draper::Base
+class UbicacionDecorator < ApplicationDecorator
   decorates :ubicacion
 
   # Transforma del srid real al preferido por el usuario
