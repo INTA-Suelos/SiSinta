@@ -1,6 +1,7 @@
 %tr{class: cycle("odd", "even")}
-  %td.borrar
-    =  link_to 'X', '#perfiles', class: 'remove remover'
+  %td.borrar.centrado
+    = link_to 'X', '#perfiles', class: 'remove remover'
+    = ff.check_box :_destroy
   %td.nombre
     = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
   %td.numero.centrado
@@ -15,4 +16,3 @@
     = link_to 'Ver', perfil
 
   = ff.hidden_field :id
-  = ff.hidden_field :_destroy

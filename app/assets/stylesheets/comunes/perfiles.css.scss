@@ -48,7 +48,10 @@ form.completa {
     font-size: small;
   }
 
-  .borrar     { width: 1%;  }
+  .borrar     { width: 1%;
+                color: $rojo_inta;
+    // Si hay javascript lo muestro y oculto el checkbox
+    a {         display: none; } }
   .nombre     { width: 15%; }
   .numero     { width: 10%;
                 text-align: center; }

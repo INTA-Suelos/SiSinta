@@ -16,3 +16,8 @@ jQuery ->
 
     .live('ajax:error', (evt, xhr, status) ->
       $('body').css('cursor', 'auto') )
+
+  # Oculto el checkbox y muestro el link de awesome_nested_fields, que sólo
+  # funciona con js
+  $('#perfiles_asociados .borrar a').toggle()
+  $('#perfiles_asociados .borrar input').toggle()
