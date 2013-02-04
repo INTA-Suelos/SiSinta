@@ -63,11 +63,6 @@ form {
     }
   }
 
-  .empty {
-    padding-top: 15.3334px;
-    font-style: italic;
-  }
-
   .agregar {
     font-size: large;
   }
@@ -151,4 +146,9 @@ select {
   padding-bottom: 1em;
   border-right: 1px $gris_claro dashed;
   border-left: 1px $gris_claro dashed;
+}
+
+.empty {
+  padding-top: 15.3334px;
+  font-style: italic;
 }

@@ -16,8 +16,7 @@
               locals: { f: builder, perfil: perfil, param: param }
     - else
       %tr.empty
-        %td
-        %td{colspan: 3} Buscá perfiles para agregar.
+        %td{colspan: 3} Ningún perfil todavía.
 
 - if @busqueda_perfil.present?
   = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable' do
