@@ -1,18 +1,17 @@
 %tr{class: cycle("odd", "even")}
   %td.borrar.centrado
     = link_to 'X', '#perfiles', class: 'remove remover'
-    = ff.check_box :_destroy
+    = check_box_tag "#{param}[perfiles_attributes][#{perfil.id}][_destroy]", '1', false
+    = hidden_field_tag "#{param}[perfiles_attributes][#{perfil.id}][id]", perfil.id
   %td.nombre
     = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
   %td.numero.centrado
     = link_to perfil.numero, perfil, class: 'perfil_numero'
   %td.ubicacion
-    = ff.label :ubicacion, perfil.ubicacion, class: 'perfil_ubicacion'
+    = f.label :ubicacion, perfil.ubicacion, class: 'perfil_ubicacion'
   %td.fecha.centrado
-    = ff.label :fecha, perfil.fecha
+    = f.label :fecha, perfil.fecha
   %td.modal.centrado
-    = ff.label :modal, "✓" if perfil.modal?
+    = f.label :modal, "✓" if perfil.modal?
   %td.acciones
     = link_to 'Ver', perfil
-
-  = ff.hidden_field :id

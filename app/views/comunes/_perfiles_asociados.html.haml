@@ -9,18 +9,15 @@
       %th.modal.centrado  ¿Es modal?
       %th.acciones
   %tbody
-    = f.nested_fields_for :perfiles,  render_template: false,
-                                      new_object: objeto.nuevo_perfil,
-                                      show_empty: true do |ff|
-      - if ff
-        = render partial: 'comunes/perfil',
-            locals: { ff: ff, perfil: ff.object }
-      - else
-        %tr.empty
-          %td
-          %td{colspan: 3} Buscá más perfiles para agregar.
-
-= nested_fields_templates
+    - if perfiles.any?
+      - perfiles.each do |perfil|
+        = fields_for perfil do |builder|
+          = render partial: 'comunes/perfil',
+              locals: { f: builder, perfil: perfil, param: param }
+    - else
+      %tr.empty
+        %td
+        %td{colspan: 3} Buscá perfiles para agregar.
 
 - if @busqueda_perfil.present?
   = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable' do
