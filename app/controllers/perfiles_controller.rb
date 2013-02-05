@@ -1,5 +1,9 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
+  # Las acciones +index+ y +geo+ funcionan anónimamente
+  skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
+  skip_load_and_authorize_resource            only: [:index, :geo]
+  skip_authorization_check                    only: [:index, :geo]
 
   before_filter :preparar,  only: [:index, :geo, :seleccionar,
                                    :preparar_csv, :procesar_csv ]
@@ -7,10 +11,8 @@ class PerfilesController < AutorizadoController
                                    :preparar_csv, :procesar_csv ]
   before_filter :paginar,   only: [:index]
 
-  # Las acciones +index+ y +geo+ funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
-  skip_load_and_authorize_resource            only: [:index, :geo]
-  skip_authorization_check                    only: [:index, :geo]
+  before_filter :buscar_perfiles_o_exportar,  only: [:procesar_csv]
+  before_filter :extraer_perfiles_de_cookies, only: [:preparar_csv, :almacenar, :procesar_csv]
 
   # GET /perfiles
   # GET /perfiles.json
@@ -140,8 +142,16 @@ class PerfilesController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   #
   def preparar_csv
+    @busqueda_perfil = Perfil.search(params[:q])
     @atributos = Perfil.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :horizontes ]
+      [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
+        :reconocedores_taggings ]
+
+    @marcados = if cookies[:marcados].present?
+      cookies[:marcados].split('&').collect { |m| m.to_sym }
+    else
+      [ :id, :fecha, :serie ]
+    end
 
     respond_to do |format|
       format.html
@@ -154,6 +164,12 @@ class PerfilesController < AutorizadoController
 
   def seleccionar
     @continuar = session.delete :continuar
+  end
+
+  def almacenar
+    perfiles = @perfiles.collect { |p| p.id.to_s }
+    cookies[:perfil_ids] = perfiles
+    redirect_to preparar_csv_perfiles_path
   end
 
   protected
@@ -201,4 +217,28 @@ class PerfilesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'fecha'
     end
 
+    def extraer_perfiles_de_cookies
+      @perfiles = if cookies[:perfil_ids].present?
+        Perfil.find cookies[:perfil_ids].split('&')
+      else
+        []
+      end
+      @perfiles += Array.wrap(params[:perfil_ids]).collect {|id| Perfil.find(id) }
+    end
+
+    def buscar_perfiles_o_exportar
+      # Guarda los checkboxes que estaban marcados
+      cookies[:marcados] = params[:atributos]
+
+      # Dirije la navegación según el botón que apretó el usuario
+      case params[:commit]
+      when 'Buscar'
+        session[:continuar] = almacenar_perfiles_path
+        redirect_to seleccionar_perfiles_path(q: params[:q])
+      when 'Exportar'
+        # Nada, continuamos a procesar_csv
+      else
+        # Nada, continuamos
+      end
+    end
 end

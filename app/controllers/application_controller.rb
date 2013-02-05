@@ -133,7 +133,7 @@ class ApplicationController < ActionController::Base
       @encabezado = true if params[:incluir_encabezado]
 
       @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-        @atributos = params[:atributos].keys.sort
+        @atributos = params[:atributos].sort
 
         csv << @atributos if @encabezado
 
