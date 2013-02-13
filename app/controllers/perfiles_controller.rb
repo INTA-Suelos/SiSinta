@@ -165,6 +165,7 @@ class PerfilesController < AutorizadoController
   end
 
   def seleccionar
+    self.perfiles_seleccionados = self.perfiles_seleccionados - Array.wrap(params[:remover])
     @continuar = session.delete :despues_de_seleccionar
     @perfiles = PerfilDecorator.decorate @perfiles
   end
@@ -230,11 +231,16 @@ class PerfilesController < AutorizadoController
       # Guarda los checkboxes que estaban marcados
       self.checks_csv_marcados = params[:atributos]
 
+      # Perfiles con +_destroy+ marcado
+      remover = params[:csv][:perfiles_attributes].each.collect do |p|
+        p.first if p.last[:_destroy]
+      end.reject { |elemento| elemento.nil? }
+
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
       when 'Buscar'
         session[:despues_de_seleccionar] = almacenar_perfiles_path
-        redirect_to seleccionar_perfiles_path(q: params[:q])
+        redirect_to seleccionar_perfiles_path(q: params[:q], remover: remover)
       when 'Exportar'
         # Nada, continuamos a procesar_csv
       else
