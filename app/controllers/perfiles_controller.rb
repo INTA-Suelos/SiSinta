@@ -160,6 +160,7 @@ class PerfilesController < AutorizadoController
   end
 
   def procesar_csv
+    self.perfiles_seleccionados = nil
     super(PerfilDecorator.decorate(@perfiles), 'perfiles')
   end
 

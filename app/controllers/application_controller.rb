@@ -138,7 +138,6 @@ class ApplicationController < ActionController::Base
       end
 
       send_data @respuesta, :filename => @archivo
-
     end
 
     def direccion_de_ordenamiento
@@ -157,5 +156,4 @@ class ApplicationController < ActionController::Base
     def permitir_url
       "#{url_for(@recurso)}/permitir"
     end
-
 end
