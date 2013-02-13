@@ -11,8 +11,8 @@ class PerfilesController < AutorizadoController
                                    :preparar_csv, :procesar_csv ]
   before_filter :paginar,   only: [:index]
 
-  before_filter :buscar_perfiles_o_exportar,  only: [:procesar_csv]
-  before_filter :extraer_perfiles_de_cookies, only: [:preparar_csv, :procesar_csv]
+  before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
+  before_filter :cargar_perfiles_seleccionados, only: [:preparar_csv, :procesar_csv]
 
   # GET /perfiles
   # GET /perfiles.json
@@ -146,11 +146,13 @@ class PerfilesController < AutorizadoController
       [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
         :reconocedores_taggings ]
 
-    @marcados = if cookies[:csv_marcados].present?
-      cookies[:csv_marcados].split('&').map(&:to_sym)
+    @marcados = if self.checks_csv_marcados.any?
+      self.checks_csv_marcados.map(&:to_sym)
     else
       [ :id, :numero, :fecha, :serie ]
     end
+
+    @perfiles = PerfilDecorator.decorate @perfiles
 
     respond_to do |format|
       format.html
@@ -158,7 +160,7 @@ class PerfilesController < AutorizadoController
   end
 
   def procesar_csv
-    super(@perfiles, 'perfiles')
+    super(PerfilDecorator.decorate(@perfiles), 'perfiles')
   end
 
   def seleccionar
@@ -167,7 +169,9 @@ class PerfilesController < AutorizadoController
 
   def almacenar
     # Perfiles recién seleccionados y los ya viejos
-    cookies[:perfiles_seleccionados] = perfiles_seleccionados_sin_repetir
+    self.perfiles_seleccionados = (
+      self.perfiles_seleccionados + Array.wrap(params[:perfil_ids])
+    ).uniq
     redirect_to preparar_csv_perfiles_path
   end
 
@@ -216,13 +220,13 @@ class PerfilesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'fecha'
     end
 
-    def extraer_perfiles_de_cookies
-      @perfiles = @perfiles.where(id: cookies[:perfiles_seleccionados].try(:split, '&'))
+    def cargar_perfiles_seleccionados
+      @perfiles = @perfiles.where(id: perfiles_seleccionados)
     end
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      cookies[:csv_marcados] = params[:atributos]
+      self.checks_csv_marcados = params[:atributos]
 
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
@@ -236,7 +240,19 @@ class PerfilesController < AutorizadoController
       end
     end
 
-    def perfiles_seleccionados_sin_repetir
-      (cookies[:perfiles_seleccionados].split('&') + params[:perfil_ids]).uniq
+    def perfiles_seleccionados
+      Array.wrap session[:perfiles_seleccionados]
+    end
+
+    def perfiles_seleccionados=(perfiles)
+      session[:perfiles_seleccionados] = perfiles
+    end
+
+    def checks_csv_marcados
+      Array.wrap current_usuario.checks_csv_perfiles
+    end
+
+    def checks_csv_marcados=(checks)
+      current_usuario.update_attribute :checks_csv_perfiles, checks
     end
 end
