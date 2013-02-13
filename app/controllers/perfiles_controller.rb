@@ -12,7 +12,7 @@ class PerfilesController < AutorizadoController
   before_filter :paginar,   only: [:index]
 
   before_filter :buscar_perfiles_o_exportar,  only: [:procesar_csv]
-  before_filter :extraer_perfiles_de_cookies, only: [:preparar_csv, :almacenar, :procesar_csv]
+  before_filter :extraer_perfiles_de_cookies, only: [:preparar_csv, :procesar_csv]
 
   # GET /perfiles
   # GET /perfiles.json
@@ -140,17 +140,16 @@ class PerfilesController < AutorizadoController
   end
 
   # Preparar los atributos a exportar/importar en CSV
-  #
   def preparar_csv
     @busqueda_perfil = Perfil.search(params[:q])
     @atributos = Perfil.atributos_y_asociaciones :excepto =>
       [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
         :reconocedores_taggings ]
 
-    @marcados = if cookies[:marcados].present?
-      cookies[:marcados].split('&').collect { |m| m.to_sym }
+    @marcados = if cookies[:csv_marcados].present?
+      cookies[:csv_marcados].split('&').map(&:to_sym)
     else
-      [ :id, :fecha, :serie ]
+      [ :id, :numero, :fecha, :serie ]
     end
 
     respond_to do |format|
@@ -163,12 +162,12 @@ class PerfilesController < AutorizadoController
   end
 
   def seleccionar
-    @continuar = session.delete :continuar
+    @continuar = session.delete :despues_de_seleccionar
   end
 
   def almacenar
-    perfiles = @perfiles.collect { |p| p.id.to_s }
-    cookies[:perfil_ids] = perfiles
+    # Perfiles recién seleccionados y los ya viejos
+    cookies[:perfiles_seleccionados] = perfiles_seleccionados_sin_repetir
     redirect_to preparar_csv_perfiles_path
   end
 
@@ -218,27 +217,26 @@ class PerfilesController < AutorizadoController
     end
 
     def extraer_perfiles_de_cookies
-      @perfiles = if cookies[:perfil_ids].present?
-        Perfil.find cookies[:perfil_ids].split('&')
-      else
-        []
-      end
-      @perfiles += Array.wrap(params[:perfil_ids]).collect {|id| Perfil.find(id) }
+      @perfiles = @perfiles.where(id: cookies[:perfiles_seleccionados].try(:split, '&'))
     end
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      cookies[:marcados] = params[:atributos]
+      cookies[:csv_marcados] = params[:atributos]
 
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
       when 'Buscar'
-        session[:continuar] = almacenar_perfiles_path
+        session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
       when 'Exportar'
         # Nada, continuamos a procesar_csv
       else
         # Nada, continuamos
       end
+    end
+
+    def perfiles_seleccionados_sin_repetir
+      (cookies[:perfiles_seleccionados].split('&') + params[:perfil_ids]).uniq
     end
 end

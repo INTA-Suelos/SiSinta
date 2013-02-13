@@ -113,7 +113,6 @@ class ApplicationController < ActionController::Base
     end
 
     # Carga el perfil al que pertenece el modelo anidado
-    #
     def cargar_perfil
       @perfil = Perfil.find(params[:perfil_id])
     end
@@ -125,9 +124,7 @@ class ApplicationController < ActionController::Base
     #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
     # * *Returns* :
     #   - La lista de coincidencias mapeada en +json+
-
     def procesar_csv(coleccion = {}, prefijo = 'csv')
-
       @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
 
       @encabezado = true if params[:incluir_encabezado]

@@ -91,7 +91,7 @@ class ProyectosController < AutorizadoController
     def buscar_perfiles_o_guardar
       case params[:commit]
       when 'Buscar'
-        session[:continuar] = proyecto_path(@proyecto)
+        session[:despues_de_seleccionar] = proyecto_path(@proyecto)
         redirect_to seleccionar_perfiles_path(q: params[:q])
       else
         redirect_to @proyecto, notice: I18n.t("messages.#{params[:action]}d", model: 'Proyecto')

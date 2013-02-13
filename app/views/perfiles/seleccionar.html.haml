@@ -5,7 +5,7 @@
     %thead
       %tr
         %th.fecha=      link_para_ordenar :fecha,     'Fecha'
-        %th.serie=     link_para_ordenar :nombre,    'Serie'
+        %th.serie=      link_para_ordenar :nombre,    'Serie'
         %th.ubicacion=  link_para_ordenar :ubicacion, 'Ubicación'
         %th.numero=     link_para_ordenar :numero,    'Número'
         %th.modal=      link_para_ordenar :modal,     '¿Es modal?'
@@ -17,4 +17,4 @@
     %tbody
       = render @perfiles
 
-  .acciones.span-4= submit_tag 'Seleccionar'
+  .acciones.span-4= submit_tag 'Seleccionar y volver'
