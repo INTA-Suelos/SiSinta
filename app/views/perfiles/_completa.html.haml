@@ -20,10 +20,14 @@
             .span-2.last= fs.text_field :simbolo, disabled: bloqueado
             = f.object.ayuda :simbolo
 
-    = render partial: 'descripcion_del_sitio', locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'descripcion_de_los_horizontes', locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'notas', locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'mapa', locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'perfiles/completa/descripcion_del_sitio',
+        locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'perfiles/completa/descripcion_de_los_horizontes',
+        locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'perfiles/completa/notas',
+        locals: {f: f, bloqueado: bloqueado}
+    = render partial: 'perfiles/completa/mapa',
+        locals: {f: f, bloqueado: bloqueado}
 
     .acciones.span-8.last
       .span-4= f.submit unless bloqueado
