@@ -32,4 +32,13 @@ class UbicacionDecorator < ApplicationDecorator
     source.descripcion
   end
 
+  def mapa(ancho = 400, alto = 300, zoom = 9)
+    h.image_tag "http://maps.google.com/maps/api/staticmap?size=#{
+                  ancho}x#{
+                  alto}&sensor=false&zoom=#{
+                  zoom}&maptype=hybrid&markers=#{
+                  source.latitud}%2C#{
+                  source.longitud}"
+  end
+
 end
