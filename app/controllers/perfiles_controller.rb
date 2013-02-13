@@ -166,6 +166,7 @@ class PerfilesController < AutorizadoController
 
   def seleccionar
     @continuar = session.delete :despues_de_seleccionar
+    @perfiles = PerfilDecorator.decorate @perfiles
   end
 
   def almacenar
