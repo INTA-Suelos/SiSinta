@@ -1,16 +1,18 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
-
-  before_filter :preparar,  only: [:index, :geo,
-                                   :preparar_csv, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo,
-                                   :preparar_csv, :procesar_csv ]
-  before_filter :paginar,   only: [:index]
-
   # Las acciones +index+ y +geo+ funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
   skip_load_and_authorize_resource            only: [:index, :geo]
   skip_authorization_check                    only: [:index, :geo]
+
+  before_filter :preparar,  only: [:index, :geo, :seleccionar,
+                                   :preparar_csv, :procesar_csv ]
+  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
+                                   :preparar_csv, :procesar_csv ]
+  before_filter :paginar,   only: [:index]
+
+  before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
+  before_filter :cargar_perfiles_seleccionados, only: [:preparar_csv, :procesar_csv]
 
   # GET /perfiles
   # GET /perfiles.json
@@ -30,10 +32,6 @@ class PerfilesController < AutorizadoController
                                     :nombre,
                                     :ubicacion,
                                     :fecha      ] }
-      format.seleccion do
-        @regresar = session.delete :origen
-        render layout: 'application.html'
-      end
     end
   end
 
@@ -142,10 +140,19 @@ class PerfilesController < AutorizadoController
   end
 
   # Preparar los atributos a exportar/importar en CSV
-  #
   def preparar_csv
+    @busqueda_perfil = Perfil.search(params[:q])
     @atributos = Perfil.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :horizontes ]
+      [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
+        :reconocedores_taggings ]
+
+    @marcados = if self.checks_csv_marcados.any?
+      self.checks_csv_marcados.map(&:to_sym)
+    else
+      [ :id, :numero, :fecha, :serie ]
+    end
+
+    @perfiles = PerfilDecorator.decorate @perfiles
 
     respond_to do |format|
       format.html
@@ -153,7 +160,22 @@ class PerfilesController < AutorizadoController
   end
 
   def procesar_csv
-    super(@perfiles, 'perfiles')
+    self.perfiles_seleccionados = nil
+    super(PerfilDecorator.decorate(@perfiles), 'perfiles')
+  end
+
+  def seleccionar
+    self.perfiles_seleccionados = self.perfiles_seleccionados - Array.wrap(params[:remover])
+    @continuar = session.delete :despues_de_seleccionar
+    @perfiles = PerfilDecorator.decorate @perfiles
+  end
+
+  def almacenar
+    # Perfiles recién seleccionados y los ya viejos
+    self.perfiles_seleccionados = (
+      self.perfiles_seleccionados + Array.wrap(params[:perfil_ids])
+    ).uniq
+    redirect_to preparar_csv_perfiles_path
   end
 
   protected
@@ -161,7 +183,7 @@ class PerfilesController < AutorizadoController
     # Prepara el scope para la lista de perfiles
     def preparar
       # Selecciono sólo lo que necesito en el index
-      @perfiles ||= Perfil.joins(:ubicacion, :serie)
+      @perfiles ||= Perfil.includes(:ubicacion, :serie)
         .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
@@ -201,4 +223,44 @@ class PerfilesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'fecha'
     end
 
+    def cargar_perfiles_seleccionados
+      @perfiles = @perfiles.where(id: perfiles_seleccionados)
+    end
+
+    def buscar_perfiles_o_exportar
+      # Guarda los checkboxes que estaban marcados
+      self.checks_csv_marcados = params[:atributos]
+
+      # Perfiles con +_destroy+ marcado
+      remover = params[:csv][:perfiles_attributes].each.collect do |p|
+        p.first if p.last[:_destroy]
+      end.reject { |elemento| elemento.nil? }
+
+      # Dirije la navegación según el botón que apretó el usuario
+      case params[:commit]
+      when 'Buscar'
+        session[:despues_de_seleccionar] = almacenar_perfiles_path
+        redirect_to seleccionar_perfiles_path(q: params[:q], remover: remover)
+      when 'Exportar'
+        # Nada, continuamos a procesar_csv
+      else
+        # Nada, continuamos
+      end
+    end
+
+    def perfiles_seleccionados
+      Array.wrap session[:perfiles_seleccionados]
+    end
+
+    def perfiles_seleccionados=(perfiles)
+      session[:perfiles_seleccionados] = perfiles
+    end
+
+    def checks_csv_marcados
+      Array.wrap current_usuario.checks_csv_perfiles
+    end
+
+    def checks_csv_marcados=(checks)
+      current_usuario.update_attribute :checks_csv_perfiles, checks
+    end
 end

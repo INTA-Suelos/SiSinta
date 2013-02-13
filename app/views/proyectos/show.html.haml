@@ -1,7 +1,7 @@
 .botonera= render 'botonera_mostrar'
 
-#proyecto
-  = fields_for @proyecto, html: { class: 'span-24' } do |f|
+#proyecto.span-24.show
+  = fields_for @proyecto do |f|
 
     = field_set_tag 'Datos del proyecto', class: 'celeste_oscuro span-23 last' do
 
@@ -18,16 +18,8 @@
         .span-20.last!= @proyecto.cita
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do
-        .span-21.campo
-          %table#perfiles
-            %thead
-              %tr
-                %th.nombre          Nombre
-                %th.numero.centrado Número
-                %th.fecha.centrado  Fecha
-                %th.acciones
-            %tbody
-              = f.fields_for :perfiles do |ff|
-                = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: false }
+
+        .span-21.campo= render partial: 'comunes/perfiles_asociados',
+          locals: { perfiles: @proyecto.perfiles, param: 'proyecto' }
 
 .botonera= render 'botonera_mostrar'

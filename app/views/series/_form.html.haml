@@ -23,37 +23,8 @@
           = ayuda_para('serie.descripcion')
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
-        .span-22.campo
-          %table#perfiles
-            %thead
-              %tr
-                %th.borrar
-                %th.ubicacion       Ubicación
-                %th.numero.centrado Número
-                %th.fecha.centrado  Fecha
-                %th.modal.centrado  ¿Es modal?
-                %th.acciones
-            %tbody
-              = f.nested_fields_for :perfiles,  render_template: false,
-                                                new_object: @serie.nuevo_perfil,
-                                                show_empty: true do |ff|
-                - if ff
-                  = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: true }
-                - else
-                  %tr.empty
-                    %td
-                    %td{colspan: 3} Buscá perfiles para asociar a esta serie.
 
-          = nested_fields_templates
-
-        = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable span-21' do
-          #busqueda.span-21
-            = search_form_for @busqueda do |b|
-              .span-3=  b.label :ubicacion_descripcion_or_numero_cont, "Por ubicación o número"
-              .span-7= b.text_field :ubicacion_descripcion_or_numero_cont
-
-              .span-2=  b.label :tags_name_cont, "y etiqueta"
-              .span-7= b.text_field :tags_name_cont
-              .span-2.last= b.submit "Buscar", id: :seleccion
+        .span-22.campo= render partial: 'comunes/perfiles_asociados',
+          locals: { perfiles: @serie.perfiles, param: 'serie' }
 
       .acciones.span-4.last= f.submit

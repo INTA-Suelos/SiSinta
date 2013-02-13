@@ -3,10 +3,6 @@ require './test/test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
 
-  test "debería convertir el modelo a Array" do
-    assert_instance_of Array, build(:perfil).como_arreglo, "no devuelve Array"
-  end
-
   test "debería buscar y cargar las asociaciones" do
     existente = create(:fase).nombre
     assert_no_difference ('Fase.count') do

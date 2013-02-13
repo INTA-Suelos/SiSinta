@@ -1,9 +1,9 @@
 .botonera= render 'botonera_mostrar'
 
-#serie
-  = fields_for @serie, html: { class: 'span-24' } do |f|
+#serie.span-24.show
+  = fields_for @serie do |f|
 
-    = field_set_tag 'Datos del serie', class: 'celeste_oscuro span-23 last' do
+    = field_set_tag 'Datos de la serie', class: 'celeste_oscuro span-23 last' do
 
       .span-22
         .span-2= f.label 'Nombre'
@@ -16,17 +16,8 @@
         .span-20.last!= @serie.descripcion
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do
-        .span-21.campo
-          %table#perfiles
-            %thead
-              %tr
-                %th.ubicacion       Ubicación
-                %th.numero          Número
-                %th.fecha           Fecha
-                %th.centrado.modal  ¿Es modal?
-                %th.acciones
-            %tbody
-              = f.fields_for :perfiles do |ff|
-                = render partial: 'perfil', locals: { ff: ff, perfil: ff.object, remover: false }
+
+        .span-21.campo= render partial: 'comunes/perfiles_asociados',
+          locals: { perfiles: @serie.perfiles, param: 'serie' }
 
 .botonera= render 'botonera_mostrar'

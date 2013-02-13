@@ -113,7 +113,6 @@ class ApplicationController < ActionController::Base
     end
 
     # Carga el perfil al que pertenece el modelo anidado
-    #
     def cargar_perfil
       @perfil = Perfil.find(params[:perfil_id])
     end
@@ -123,27 +122,22 @@ class ApplicationController < ActionController::Base
     # * *Args*    :
     #   - +coleccion+ -> coleccion a convertir en CSV
     #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
-    # * *Returns* :
-    #   - La lista de coincidencias mapeada en +json+
-
-    def procesar_csv(coleccion = {}, prefijo = 'csv')
-
+    def procesar_csv(coleccion = [], prefijo = 'csv')
       @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
 
       @encabezado = true if params[:incluir_encabezado]
 
       @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-        @atributos = params[:atributos].keys.sort
+        @atributos = params[:atributos].try :sort
 
         csv << @atributos if @encabezado
 
         coleccion.each do |miembro|
-          csv << miembro.como_arreglo(@atributos)
+          csv << miembro.to_array(@atributos)
         end
       end
 
       send_data @respuesta, :filename => @archivo
-
     end
 
     def direccion_de_ordenamiento
@@ -162,5 +156,4 @@ class ApplicationController < ActionController::Base
     def permitir_url
       "#{url_for(@recurso)}/permitir"
     end
-
 end

@@ -21,9 +21,12 @@
     #perfiles.checks.span-22.last
       - @atributos.each do |a|
         .span-6.last.campo{class: cycle('celeste_oscuro', 'celeste')}
-          .span-5
-            = label_tag a
-          .span-1.last
-            = check_box_tag "atributos[#{a}]"
+          = label_tag do
+            = check_box_tag("atributos[]", a, @marcados.include?(a)) + a.to_s.humanize
+
+  = field_set_tag "Agregar perfiles para exportar", class: 'celeste span-22 last plegable' do
+
+    .span-21.campo= render partial: 'comunes/perfiles_asociados',
+      locals: { perfiles: @perfiles, param: 'csv' }
 
   .acciones.span-4= submit_tag 'Exportar'

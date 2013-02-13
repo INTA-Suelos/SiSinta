@@ -56,13 +56,6 @@ module ExtensionModelos
 
   included do
 
-    def como_arreglo(filtro = nil)
-      filtro ||= attributes.keys.flatten
-      filtro.inject([]) do |arreglo, atributo|
-        arreglo << self.send(atributo)
-      end
-    end
-
     # asociacion_ids = @asociaciones.collect(&:id).uniq.sort
     def guardar_ids_para(asociacion)
       self.send(

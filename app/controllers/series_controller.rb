@@ -12,8 +12,6 @@ class SeriesController < AutorizadoController
   skip_load_and_authorize_resource            only: [:index]
   skip_authorization_check                    only: [:index]
 
-  # GET /series
-  # GET /series.json
   def index
     @titulo = "Series de suelos"
     @series = @series.decorate
@@ -39,11 +37,9 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # GET /series/1
-  # GET /series/1.json
   def show
     @serie = @serie.decorate
-    @titulo = "Serie #{@serie.nombre} (#{@serie.simbolo})"
+    @titulo = "Serie #{@serie.nombre_y_simbolo}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -51,10 +47,8 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # GET /series/new
-  # GET /series/new.json
   def new
-    @busqueda = Perfil.search
+    @busqueda_perfil = Perfil.search
     @titulo = 'Nueva serie'
     @serie = SerieDecorator.decorate(@serie)
 
@@ -64,15 +58,12 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # GET /series/1/edit
   def edit
-    @busqueda = Perfil.search
-    @titulo = "Editando serie #{@serie.nombre}"
-    @serie = SerieDecorator.new(@serie)
+    @busqueda_perfil = Perfil.search
+    @serie = @serie.decorate
+    @titulo = "Editando serie #{@serie.nombre_y_simbolo}"
   end
 
-  # POST /series
-  # POST /series.json
   def create
     respond_to do |format|
       if @serie.save
@@ -85,8 +76,6 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # PUT /series/1
-  # PUT /series/1.json
   def update
     respond_to do |format|
       if @serie.update_attributes(params[:serie])
@@ -99,14 +88,12 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # DELETE /series/1
-  # DELETE /series/1.json
   def destroy
     @serie.destroy
 
     respond_to do |format|
       format.html { redirect_to series_url }
-      format.json { head :ok }
+      format.json { head :no_content }
     end
   end
 
@@ -123,8 +110,8 @@ class SeriesController < AutorizadoController
     def buscar_perfiles_o_guardar
       case params[:commit]
       when 'Buscar'
-        session[:origen] = serie_path(@serie)
-        redirect_to perfiles_path(format: :seleccion, q: params[:q])
+        session[:despues_de_seleccionar] = serie_path(@serie)
+        redirect_to seleccionar_perfiles_path(q: params[:q])
       else
         redirect_to @serie, notice: I18n.t("messages.#{params[:action]}d",  model: 'Serie')
       end

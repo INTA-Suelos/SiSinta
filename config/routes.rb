@@ -1,5 +1,6 @@
 # encoding: utf-8
 SiSINTA::Application.routes.draw do
+  # TODO buscar en todos los modelos con un index agregador
 
   root to: 'inicio#index'
   get 'inicio/index'
@@ -18,7 +19,9 @@ SiSINTA::Application.routes.draw do
         get   'geo'
         get   'preparar_csv'
         post  'procesar_csv'
+        put   'almacenar'
         get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
+        get   'seleccionar'
       end
       member do
         get   'permisos'

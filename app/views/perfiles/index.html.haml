@@ -1,6 +1,17 @@
 #lista
   .botonera= render 'botonera_index'
 
-  = render partial: 'lista', locals: {perfiles: @perfiles}
+  %table
+    %thead
+      %tr
+        %th#fecha=      link_para_ordenar :fecha,     'Fecha'
+        %th#nombre=     link_para_ordenar :nombre,    'Nombre'
+        %th#ubicacion=  link_para_ordenar :ubicacion, 'Ubicación'
+        %th#numero=     link_para_ordenar :numero,    'Número'
+        %th#modal=      link_para_ordenar :modal,     '¿Es modal?'
+        %th.acciones
+
+    %tbody
+      = render @perfiles
 
   .botonera= render 'botonera_index'
