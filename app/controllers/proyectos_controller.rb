@@ -9,7 +9,7 @@ class ProyectosController < AutorizadoController
   before_filter :asociar_perfiles,            only: [:update]
 
   def index
-    @proyectos = Proyecto.all
+    @proyectos = PaginadorDecorator.decorate Proyecto.scoped
     @titulo = "Proyectos"
 
     respond_to do |format|
@@ -31,7 +31,7 @@ class ProyectosController < AutorizadoController
   def new
     @busqueda_perfil = Perfil.search
     @titulo = 'Nuevo proyecto'
-    @proyecto = ProyectoDecorator.decorate(@proyecto)
+    @proyecto = @proyecto.decorate
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class ProyectosController < AutorizadoController
   def edit
     @busqueda_perfil = Perfil.search
     @titulo = "Editando #{@proyecto.nombre}"
-    @proyecto = ProyectoDecorator.decorate(@proyecto)
+    @proyecto = @proyecto.decorate
   end
 
   def create
