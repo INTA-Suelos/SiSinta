@@ -1,5 +1,4 @@
 class SerieDecorator < ApplicationDecorator
-  decorates :serie
   decorates_association :perfiles
 
   def to_s

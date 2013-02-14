@@ -1,4 +1,5 @@
-class ApplicationDecorator < Draper::Base
+class ApplicationDecorator < Draper::Decorator
+  delegate_all
 
   def pista(atributo)
     Ayuda.find_by_campo("#{source.class}.#{atributo}").ejemplo

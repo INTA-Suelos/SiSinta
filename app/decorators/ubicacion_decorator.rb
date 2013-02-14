@@ -1,6 +1,4 @@
 class UbicacionDecorator < ApplicationDecorator
-  decorates :ubicacion
-
   # Transforma del srid real al preferido por el usuario
   def transformar
     @coordenadas ||= Ubicacion.transformar(source.srid, h.current_usuario.srid, source.x, source.y)

@@ -14,7 +14,7 @@ class SeriesController < AutorizadoController
 
   def index
     @titulo = "Series de suelos"
-    @series = @series.decorate
+    @series = PaginadorDecorator.decorate @series
 
     respond_to do |format|
       format.html do
@@ -50,7 +50,6 @@ class SeriesController < AutorizadoController
   def new
     @busqueda_perfil = Perfil.search
     @titulo = 'Nueva serie'
-    @serie = SerieDecorator.decorate(@serie)
 
     respond_to do |format|
       format.html # new.html.erb

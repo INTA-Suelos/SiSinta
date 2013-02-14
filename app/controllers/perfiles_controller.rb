@@ -18,7 +18,7 @@ class PerfilesController < AutorizadoController
   # GET /perfiles.json
   def index
     @titulo = "Perfiles"
-    @perfiles = PerfilDecorator.decorate(@perfiles)
+    @perfiles = PaginadorDecorator.decorate(@perfiles)
     respond_to do |format|
       format.html do
         if request.xhr?   # solicitud ajax para la paginación
@@ -58,7 +58,7 @@ class PerfilesController < AutorizadoController
   # GET /perfiles/1
   # GET /perfiles/1.json
   def show
-    @perfil = PerfilDecorator.new(@perfil)
+    @perfil = @perfil.decorate
     @titulo = "Perfil #{@perfil.numero}"
 
     respond_to do |format|
@@ -70,7 +70,7 @@ class PerfilesController < AutorizadoController
   # GET /perfiles/new
   # GET /perfiles/new.json
   def new
-    @perfil = PerfilDecorator.new(@perfil)
+    @perfil = @perfil.decorate
     @titulo = 'Nuevo perfil'
 
     respond_to do |format|
@@ -81,7 +81,7 @@ class PerfilesController < AutorizadoController
 
   # GET /perfiles/1/edit
   def edit
-    @perfil = PerfilDecorator.new(@perfil)
+    @perfil = @perfil.decorate
     @titulo = "Editando perfil #{@perfil.numero}"
   end
 
@@ -152,7 +152,7 @@ class PerfilesController < AutorizadoController
       [ :id, :numero, :fecha, :serie ]
     end
 
-    @perfiles = PerfilDecorator.decorate @perfiles
+    @perfiles = PaginadorDecorator.decorate @perfiles
 
     respond_to do |format|
       format.html
@@ -161,13 +161,13 @@ class PerfilesController < AutorizadoController
 
   def procesar_csv
     self.perfiles_seleccionados = nil
-    super(PerfilDecorator.decorate(@perfiles), 'perfiles')
+    super(@perfiles.decorate, 'perfiles')
   end
 
   def seleccionar
     self.perfiles_seleccionados = self.perfiles_seleccionados - Array.wrap(params[:remover])
     @continuar = session.delete :despues_de_seleccionar
-    @perfiles = PerfilDecorator.decorate @perfiles
+    @perfiles = PaginadorDecorator.decorate @perfiles
   end
 
   def almacenar
