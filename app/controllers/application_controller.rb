@@ -1,8 +1,13 @@
 # encoding: utf-8
 require 'csv'
+require "application_responder"
 
 class ApplicationController < ActionController::Base
   include BrowserDetect, ApplicationHelper
+
+  # Responders
+  self.responder = ApplicationResponder
+  respond_to :html
 
   protect_from_forgery
 

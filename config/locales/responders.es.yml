@@ -1,0 +1,10 @@
+en:
+  flash:
+    actions:
+      create:
+        notice: 'Se creó algo: %{resource_name}.'
+      update:
+        notice: 'Se actualizó algo: %{resource_name}.'
+      destroy:
+        notice: 'Se destruyó algo: %{resource_name}.'
+        alert: 'No se pudo destruir algo: %{resource_name}.'
