@@ -80,4 +80,17 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
+  test "guarda y devuelve bien los tags" do
+    perfil = create(:perfil)
+
+    perfil.reconocedores = [ "Juan Salvo", "Favalli" ]
+    perfil.etiquetas = %w{ nevado }
+
+    assert perfil.save
+
+    assert Perfil.tags(on: :etiquetas).pluck(:name).include? 'nevado'
+    assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Favalli'
+    assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Juan Salvo'
+  end
+
 end

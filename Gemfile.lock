@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/bradphelan/rocket_tag.git
+  revision: a47b3340621dc36afa5559458eec9512384a87ba
+  specs:
+    rocket_tag (0.5.6)
+      activerecord (>= 3.2.0)
+      squeel (~> 1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -161,9 +169,6 @@ GEM
       rgeo (>= 0.3.20)
     rgeo-geojson (0.2.3)
       rgeo (>= 0.3.7)
-    rocket_tag (0.5.6)
-      activerecord (>= 3.2.0)
-      squeel (~> 1.0.0)
     rolify (3.2.0)
     sass (3.2.5)
     sass-rails (3.2.6)
@@ -239,7 +244,7 @@ DEPENDENCIES
   responders
   rgeo
   rgeo-geojson
-  rocket_tag
+  rocket_tag!
   rolify
   sass-rails (~> 3.2.3)
   therubyracer (= 0.10.1)
