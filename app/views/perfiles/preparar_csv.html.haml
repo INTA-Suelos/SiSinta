@@ -20,7 +20,7 @@
 
     #perfiles.checks.span-22.last
       - @atributos.each do |a|
-        .span-6.last.campo{class: cycle('celeste_oscuro', 'celeste')}
+        .span-3.campo{class: cycle('celeste_oscuro', 'celeste')}
           = label_tag do
             = check_box_tag("atributos[]", a, @marcados.include?(a)) + a.to_s.humanize
 
