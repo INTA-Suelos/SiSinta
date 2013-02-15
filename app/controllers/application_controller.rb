@@ -162,4 +162,9 @@ class ApplicationController < ActionController::Base
     def permitir_url
       "#{url_for(@recurso)}/permitir"
     end
+
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'el' }
+    end
 end

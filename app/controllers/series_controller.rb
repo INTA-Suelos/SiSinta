@@ -1,9 +1,10 @@
 # encoding: utf-8
 class SeriesController < AutorizadoController
+  has_scope :pagina, default: 1
+  has_scope :per, as: :filas
 
   before_filter :preparar, only: [:index]
   before_filter :ordenar, only: [:index]
-  before_filter :paginar, only: [:index]
 
   before_filter :asociar_perfiles, only: [:update]
 
@@ -14,17 +15,8 @@ class SeriesController < AutorizadoController
 
   def index
     @titulo = "Series de suelos"
-    @series = PaginadorDecorator.decorate @series
 
-    respond_to do |format|
-      format.html do
-        if request.xhr?   # solicitud ajax para la paginación
-          render :index,  layout: false,
-                          locals: { series: @series.pagina(params[:pagina]) }
-        end
-      end
-      format.json { render json: @series }
-    end
+    respond_with @series = PaginadorDecorator.decorate(apply_scopes(@series))
   end
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
@@ -41,59 +33,48 @@ class SeriesController < AutorizadoController
     @serie = @serie.decorate
     @titulo = "Serie #{@serie.nombre_y_simbolo}"
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @serie }
-    end
+    respond_with @serie
   end
 
   def new
     @busqueda_perfil = Perfil.search
     @titulo = 'Nueva serie'
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @serie }
-    end
+    respond_with @serie
   end
 
   def edit
     @busqueda_perfil = Perfil.search
     @serie = @serie.decorate
     @titulo = "Editando serie #{@serie.nombre_y_simbolo}"
+
+    respond_with @serie
   end
 
   def create
-    respond_to do |format|
-      if @serie.save
-        format.html { buscar_perfiles_o_guardar }
-        format.json { render json: @serie, status: :created, location: @serie }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @serie.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a edit
+    opciones = if @serie.save
+      { location: serie_o_buscar_perfiles }
+    else
+        { }
     end
+
+    respond_with @serie, opciones
   end
 
   def update
-    respond_to do |format|
-      if @serie.update_attributes(params[:serie])
-        format.html { buscar_perfiles_o_guardar }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @serie.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a edit
+    opciones = if @serie.update_attributes(params[:serie])
+      { location: serie_o_buscar_perfiles }
+    else
+        { }
     end
+
+    respond_with @serie, opciones
   end
 
   def destroy
-    @serie.destroy
-
-    respond_to do |format|
-      format.html { redirect_to series_url }
-      format.json { head :no_content }
-    end
+    respond_with @serie.destroy
   end
 
   private
@@ -106,13 +87,16 @@ class SeriesController < AutorizadoController
       end
     end
 
-    def buscar_perfiles_o_guardar
+    def serie_o_buscar_perfiles
       case params[:commit]
-      when 'Buscar'
+      when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = serie_path(@serie)
-        redirect_to seleccionar_perfiles_path(q: params[:q])
+        seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.seleccionar.submit')
+        # Venimos de perfil#seleccionar, asique redirigimos a edit
+        edit_serie_path(@serie)
       else
-        redirect_to @serie, notice: I18n.t("messages.#{params[:action]}d",  model: 'Serie')
+        @serie
       end
     end
 
@@ -134,12 +118,6 @@ class SeriesController < AutorizadoController
       @series = @series.order("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
-    # Agrega la paginación al scope en curso
-    def paginar
-      @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
-      @series = @series.pagina(params[:pagina]).per(params[:filas])
-    end
-
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
     # el +nombre+ por default.
     def metodo_de_ordenamiento
@@ -147,4 +125,8 @@ class SeriesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'nombre'
     end
 
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'la' }
+    end
 end

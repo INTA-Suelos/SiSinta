@@ -65,6 +65,8 @@ class PerfilesController < AutorizadoController
     opciones = if @perfil.save
       current_usuario.grant :miembro, @perfil
       { location: perfil_o_analisis }
+    else
+      { }
     end
 
     respond_with (@perfil = @perfil.decorate), opciones
@@ -84,6 +86,8 @@ class PerfilesController < AutorizadoController
     # Si falla, responders lo redirige a edit
     opciones = if @perfil.update_attributes(params[:perfil])
       { location: perfil_o_analisis }
+    else
+      { }
     end
 
     respond_with (@perfil = @perfil.decorate), opciones
@@ -122,9 +126,7 @@ class PerfilesController < AutorizadoController
 
   def almacenar
     # Perfiles recién seleccionados y los ya viejos
-    self.perfiles_seleccionados = (
-      self.perfiles_seleccionados + Array.wrap(params[:perfil_ids])
-    ).uniq
+    (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
 
     redirect_to preparar_csv_perfiles_path
   end
@@ -184,14 +186,14 @@ class PerfilesController < AutorizadoController
           p.first if p.last[:_destroy]
         end.reject { |elemento| elemento.nil? }
       end
-      self.perfiles_seleccionados = self.perfiles_seleccionados - remover
+      self.perfiles_seleccionados -= remover unless remover.nil?
 
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
-      when 'Buscar'
+      when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
-      when 'Exportar'
+      when t('perfiles.preparar_csv.submit')
         # Nada, continuamos a procesar_csv
       else
         # Nada, continuamos a procesar_csv
@@ -213,10 +215,4 @@ class PerfilesController < AutorizadoController
     def checks_csv_marcados=(checks)
       current_usuario.update_attribute :checks_csv_perfiles, checks
     end
-
-    # Para los mensajes del flash de responders
-    def interpolation_options
-      { el_la: 'el' }
-    end
-
 end
