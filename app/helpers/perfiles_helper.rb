@@ -58,6 +58,8 @@ module PerfilesHelper
         "Editando perfil #{@perfil.numero}"
       when 'preparar_csv'
         'Exportar perfiles'
+      when 'permisos'
+        "Permisos para el perfil #{@recurso.numero}"
       else
         nil
     end

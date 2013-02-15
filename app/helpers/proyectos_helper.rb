@@ -12,6 +12,8 @@ module ProyectosHelper
         'Nuevo proyecto'
       when 'edit'
         "Editando #{@proyecto.nombre}"
+      when 'permisos'
+        "Permisos para el proyecto #{@recurso.nombre}"
       else
         nil
     end

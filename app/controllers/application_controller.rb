@@ -55,7 +55,6 @@ class ApplicationController < ActionController::Base
 
   # GET /:controlador/:id/permisos
   def permisos
-    @titulo = "Permisos"
     @recurso = recurso
     @controlador = params[:controller]
     @miembros = Usuario.miembros(@recurso).collect {|u| u.id}

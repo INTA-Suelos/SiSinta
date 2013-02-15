@@ -12,6 +12,8 @@ module SeriesHelper
         'Nueva serie'
       when 'edit'
         "Editando serie #{@serie.nombre_y_simbolo}"
+      when 'permisos'
+        "Permisos para la serie #{@recurso.nombre_y_simbolo}"
       else
         nil
     end
