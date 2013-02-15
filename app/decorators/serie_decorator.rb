@@ -1,5 +1,5 @@
 class SerieDecorator < ApplicationDecorator
-  decorates_association :perfiles
+  decorates_association :perfiles, with: PaginadorDecorator
 
   def to_s
     source.nombre
