@@ -1,5 +1,8 @@
 #lista
-  .botonera= render 'botonera_indice'
+  .botonera
+    #paginacion
+      = paginate @usuarios
+      = elegir_filas 'usuarios'
 
   = form_tag usuarios_path, method: :put do |f|
 
@@ -15,4 +18,4 @@
 
     = submit_tag
 
-  .botonera= render 'botonera_indice'
+  = volver_arriba

@@ -176,4 +176,8 @@ module ApplicationHelper
   def subtitulo
     nil
   end
+
+  def volver_arriba(id = nil)
+    link_to 'Volver arriba', id || '#', class: 'volver-arriba'
+  end
 end
