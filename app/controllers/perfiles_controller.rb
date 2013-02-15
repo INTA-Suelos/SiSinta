@@ -18,7 +18,6 @@ class PerfilesController < AutorizadoController
   before_filter :cargar_perfiles_seleccionados, only: [:preparar_csv, :procesar_csv]
 
   def index
-    @titulo = "Perfiles"
     @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
 
     respond_with @perfiles
@@ -43,17 +42,14 @@ class PerfilesController < AutorizadoController
   end
 
   def show
-    @titulo = "Perfil #{@perfil.numero}"
     respond_with @perfil = @perfil.decorate
   end
 
   def new
-    @titulo = 'Nuevo perfil'
     respond_with @perfil = @perfil.decorate
   end
 
   def edit
-    @titulo = "Editando perfil #{@perfil.numero}"
     respond_with @perfil = @perfil.decorate
   end
 

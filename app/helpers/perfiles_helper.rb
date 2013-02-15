@@ -46,4 +46,22 @@ module PerfilesHelper
     )
   end
 
+  def titulo
+    titulo_de_la_accion = case params[:action]
+      when 'index'
+        'Perfiles'
+      when 'show'
+        "Perfil #{@perfil.numero}"
+      when 'new'
+        'Nuevo perfil'
+      when 'edit'
+        "Editando perfil #{@perfil.numero}"
+      when 'preparar_csv'
+        'Exportar perfiles'
+      else
+        nil
+    end
+    super(titulo_de_la_accion)
+  end
+
 end

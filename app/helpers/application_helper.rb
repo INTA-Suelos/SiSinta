@@ -159,4 +159,9 @@ module ApplicationHelper
       ['Formulario clásico de Etchevere', 'completa']
     ]
   end
+
+  def titulo(extra = nil)
+    "SiSINTA#{extra.nil? ? nil : " | #{extra}"}"
+  end
+
 end
