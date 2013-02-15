@@ -11,11 +11,11 @@ class PerfilesController < AutorizadoController
   skip_authorization_check                    only: [:index, :geo]
 
   before_filter :preparar,  only: [:index, :geo, :seleccionar,
-                                   :preparar_csv, :procesar_csv ]
+                                   :exportar, :procesar_csv ]
   before_filter :ordenar,   only: [:index, :geo, :seleccionar,
-                                   :preparar_csv, :procesar_csv ]
+                                   :exportar, :procesar_csv ]
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
-  before_filter :cargar_perfiles_seleccionados, only: [:preparar_csv, :procesar_csv]
+  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
 
   def index
     @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
@@ -94,7 +94,7 @@ class PerfilesController < AutorizadoController
   end
 
   # Preparar los atributos a exportar/importar en CSV
-  def preparar_csv
+  def exportar
     @busqueda_perfil = Perfil.search(params[:q])
     @atributos = Perfil.atributos_y_asociaciones :excepto =>
       [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
@@ -124,7 +124,7 @@ class PerfilesController < AutorizadoController
     # Perfiles recién seleccionados y los ya viejos
     (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
 
-    redirect_to preparar_csv_perfiles_path
+    redirect_to exportar_perfiles_path
   end
 
   protected
@@ -189,7 +189,7 @@ class PerfilesController < AutorizadoController
       when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
-      when t('perfiles.preparar_csv.submit')
+      when t('perfiles.exportar.submit')
         # Nada, continuamos a procesar_csv
       else
         # Nada, continuamos a procesar_csv

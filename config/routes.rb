@@ -17,7 +17,7 @@ SiSINTA::Application.routes.draw do
     r.resources :perfiles do
       collection do
         get   'geo'
-        get   'preparar_csv'
+        get   'exportar'
         post  'procesar_csv'
         put   'almacenar'
         get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
@@ -42,7 +42,7 @@ SiSINTA::Application.routes.draw do
 
     r.resources :horizontes, only: :index do
       collection do
-        get   'preparar_csv'
+        get   'exportar'
         post  'procesar_csv'
       end
     end

@@ -16,7 +16,7 @@ es:
   perfiles:
     seleccionar:
       submit: "Seleccionar y volver"
-    preparar_csv:
+    exportar:
       submit: "Exportar"
 
   comunes:

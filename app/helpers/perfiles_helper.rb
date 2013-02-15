@@ -56,7 +56,7 @@ module PerfilesHelper
         'Nuevo perfil'
       when 'edit'
         "Editando perfil #{@perfil.numero}"
-      when 'preparar_csv'
+      when 'exportar'
         'Exportar perfiles'
       when 'permisos'
         "Permisos para el perfil #{@recurso.numero}"
