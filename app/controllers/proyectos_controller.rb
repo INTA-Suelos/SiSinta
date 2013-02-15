@@ -12,28 +12,20 @@ class ProyectosController < AutorizadoController
   skip_authorization_check                    only: [:index, :show]
 
   def index
-    @titulo = "Proyectos"
-
     respond_with @proyectos = PaginadorDecorator.decorate(apply_scopes(@proyectos))
   end
 
   def show
-    @titulo = @proyecto.nombre
-
     respond_with @proyecto = @proyecto.decorate
   end
 
   def new
     @busqueda_perfil = Perfil.search
-    @titulo = 'Nuevo proyecto'
-
     respond_with @proyecto = @proyecto.decorate
   end
 
   def edit
     @busqueda_perfil = Perfil.search
-    @titulo = "Editando #{@proyecto.nombre}"
-
     respond_with @proyecto = @proyecto.decorate
   end
 
