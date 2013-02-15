@@ -7,14 +7,18 @@ es:
             fecha:
               future: "todavía no llega"
 
-  messages:
-    created:  "La creación de %{model} fue exitosa."
-    updated:  "La actualización de %{model} fue exitosa."
-    destroyed: "La eliminación de %{model} fue exitosa."
-    error: "Ocurrió algún error con la actualización."
-
-  confirmar:  "¿En serio?"
+  confirmar:  "¿En serio? Es irreversible."
   roles:
     admin:      "Administrador"
     miembro:    "Miembro"
     autorizado: "Autorizado"
+
+  perfiles:
+    seleccionar:
+      submit: "Seleccionar y volver"
+    preparar_csv:
+      submit: "Exportar"
+
+  comunes:
+    perfiles_asociados:
+      submit: "Buscar"

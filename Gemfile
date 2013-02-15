@@ -33,6 +33,8 @@ gem 'rgeo'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
 # Controladores
+gem 'responders'
+gem 'has_scope'
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
 

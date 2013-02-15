@@ -1,6 +1,6 @@
-.botonera= link_to 'Nuevo proyecto', new_proyecto_path
-
 #lista
+  .botonera= render 'botonera_index'
+
   %table#proyectos
     %thead
       %tr
@@ -24,4 +24,4 @@
             = '|'
             = link_to 'Eliminar', proyecto, confirm: t(:confirmar), method: :delete
 
-.botonera= link_to 'Nuevo proyecto', new_proyecto_path
+  .botonera= render 'botonera_index'

@@ -1,8 +1,14 @@
 # encoding: utf-8
 require 'csv'
+require "application_responder"
 
 class ApplicationController < ActionController::Base
   include BrowserDetect, ApplicationHelper
+
+  # Responders
+  self.responder = ApplicationResponder
+  respond_to :html
+  respond_to :json, only: :autocompletar
 
   protect_from_forgery
 
@@ -155,5 +161,10 @@ class ApplicationController < ActionController::Base
 
     def permitir_url
       "#{url_for(@recurso)}/permitir"
+    end
+
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'el' }
     end
 end

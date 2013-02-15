@@ -12,8 +12,3 @@ jQuery ->
   $.extend etiquetas, comun
 
   $('#q_tags_name_cont').autocomplete etiquetas
-
-  $('#serie form').nestedFields({
-    containerSelector: 'tbody',
-    itemSelector: 'tr'
-  })
