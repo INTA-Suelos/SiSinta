@@ -8,9 +8,10 @@ class SeriesController < AutorizadoController
 
   before_filter :asociar_perfiles, only: [:update]
 
-  # La acción +index+ funciona anónimamente
+  # La acción +index+ funciona anónimamente, pero igual uso a CanCan para que
+  # cargue el recurso
   skip_before_filter :authenticate_usuario!,  only: [:index]
-  skip_load_and_authorize_resource            only: [:index]
+  skip_authorize_resource                     only: [:index]
   skip_authorization_check                    only: [:index]
 
   def index
@@ -52,11 +53,11 @@ class SeriesController < AutorizadoController
   end
 
   def create
-    # Si falla, responders lo redirige a edit
+    # Si falla, responders lo redirige a new
     opciones = if @serie.save
       { location: serie_o_buscar_perfiles }
     else
-        { }
+      { }
     end
 
     respond_with @serie, opciones
@@ -67,7 +68,7 @@ class SeriesController < AutorizadoController
     opciones = if @serie.update_attributes(params[:serie])
       { location: serie_o_buscar_perfiles }
     else
-        { }
+      { }
     end
 
     respond_with @serie, opciones
@@ -87,6 +88,7 @@ class SeriesController < AutorizadoController
       end
     end
 
+    # TODO Ver si se puede hacer con polymorphic urls
     def serie_o_buscar_perfiles
       case params[:commit]
       when t('comunes.perfiles_asociados.submit')
