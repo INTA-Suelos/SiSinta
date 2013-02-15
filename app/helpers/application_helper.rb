@@ -159,10 +159,4 @@ module ApplicationHelper
       ['Formulario clásico de Etchevere', 'completa']
     ]
   end
-
-  # Para determinar el elemento activo de la paginación
-  def activo?(elemento)
-    elemento == @activo ? 'activo' : nil
-  end
-
 end

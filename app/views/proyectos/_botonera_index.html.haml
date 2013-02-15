@@ -1,0 +1,6 @@
+- if can? :create, @proyecto
+  = link_to 'Nuevo proyecto', new_proyecto_path
+
+#paginacion
+  = paginate @proyectos
+  = elegir_filas 'proyectos'

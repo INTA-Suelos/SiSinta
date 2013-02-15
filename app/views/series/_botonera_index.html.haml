@@ -2,10 +2,5 @@
   = link_to 'Nueva serie', new_serie_path
 
 #paginacion
-  = paginate @series, remote: true
-  #filas
-    Mostrar
-    = link_to '10', series_path(filas: 10), remote: true, id: activo?('10')
-    = link_to '20', series_path(filas: 20), remote: true, id: activo?('20')
-    = link_to '50', series_path(filas: 50), remote: true, id: activo?('50')
-    filas
+  = paginate @series
+  = elegir_filas 'series'

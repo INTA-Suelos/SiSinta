@@ -1,5 +1,7 @@
 # encoding: utf-8
 module PerfilesHelper
+  include PaginacionHelper
+
   # Para checkear si debería estar marcado o no el checkbox de la subclase
   # correspondiente
   def tildada?(s)

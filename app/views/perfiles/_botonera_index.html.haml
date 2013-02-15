@@ -2,10 +2,5 @@
   = link_to "Nuevo perfil", new_perfil_path
 
 #paginacion
-  = paginate @perfiles, remote: true
-  #filas
-    Mostrar
-    = link_to '10', perfiles_path(filas: 10), remote: true, id: activo?('10')
-    = link_to '20', perfiles_path(filas: 20), remote: true, id: activo?('20')
-    = link_to '50', perfiles_path(filas: 50), remote: true, id: activo?('50')
-    filas
+  = paginate @perfiles
+  = elegir_filas 'perfiles'
