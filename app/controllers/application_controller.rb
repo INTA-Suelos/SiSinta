@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # Responders
   self.responder = ApplicationResponder
   respond_to :html
+  respond_to :json, only: :autocompletar
 
   protect_from_forgery
 
