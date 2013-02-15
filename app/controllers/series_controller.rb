@@ -15,8 +15,6 @@ class SeriesController < AutorizadoController
   skip_authorization_check                    only: [:index]
 
   def index
-    @titulo = "Series de suelos"
-
     respond_with @series = PaginadorDecorator.decorate(apply_scopes(@series))
   end
 
@@ -31,25 +29,17 @@ class SeriesController < AutorizadoController
   end
 
   def show
-    @serie = @serie.decorate
-    @titulo = "Serie #{@serie.nombre_y_simbolo}"
-
-    respond_with @serie
+    respond_with @serie = @serie.decorate
   end
 
   def new
     @busqueda_perfil = Perfil.search
-    @titulo = 'Nueva serie'
-
     respond_with @serie
   end
 
   def edit
     @busqueda_perfil = Perfil.search
-    @serie = @serie.decorate
-    @titulo = "Editando serie #{@serie.nombre_y_simbolo}"
-
-    respond_with @serie
+    respond_with @serie = @serie.decorate
   end
 
   def create

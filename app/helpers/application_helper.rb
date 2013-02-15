@@ -160,8 +160,20 @@ module ApplicationHelper
     ]
   end
 
-  def titulo(extra = nil)
-    "SiSINTA#{extra.nil? ? nil : " | #{extra}"}"
+  # Título de la página para el +<head>+ por defecto, extra se determina en el
+  # helper de cada controlador, dependiendo de la acción
+  def titulo_de_la_aplicacion(extra = nil)
+    extra ||= titulo_de_la_accion
+    "#{extra.nil? ? nil : "#{extra} | "}SiSINTA"
   end
 
+  # Por defecto, no se usa nada. Esto va en la cabecera.
+  def titulo_de_la_accion
+    nil
+  end
+
+  # Por defecto, no se usa nada. Esto va en la cabecera, debajo de +titulo+
+  def subtitulo
+    nil
+  end
 end

@@ -46,8 +46,8 @@ module PerfilesHelper
     )
   end
 
-  def titulo
-    titulo_de_la_accion = case params[:action]
+  def titulo_de_la_accion
+    case params[:action]
       when 'index'
         'Perfiles'
       when 'show'
@@ -61,7 +61,5 @@ module PerfilesHelper
       else
         nil
     end
-    super(titulo_de_la_accion)
   end
-
 end
