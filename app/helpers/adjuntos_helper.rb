@@ -9,4 +9,30 @@ module AdjuntosHelper
       ".#{ext}"
     end
   end
+
+  def titulo_de_la_accion
+    case params[:action]
+      when 'index'
+        "Archivos adjuntos"
+      when 'show'
+        "Datos del adjunto"
+      when 'new'
+        "Subir adjunto"
+      when 'edit'
+        "Editando adjunto"
+      else
+        nil
+    end
+  end
+
+  def subtitulo
+    case params[:action]
+      when 'index', 'new'
+        "Para el perfil #{@perfil.numero}"
+      when 'show', 'edit'
+        @adjunto.archivo_file_name
+      else
+        nil
+    end
+  end
 end

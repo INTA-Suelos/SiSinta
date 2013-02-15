@@ -48,7 +48,6 @@ class AdjuntosController < AutorizadoController
 
   def new
     @adjunto = Adjunto.new
-    @titulo = 'Subir adjunto'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -74,7 +73,6 @@ class AdjuntosController < AutorizadoController
 
   def edit
     @adjunto = Adjunto.find(params[:id])
-    @titulo = "Editando adjunto de perfil #{@perfil.numero}"
   end
 
   def descargar
