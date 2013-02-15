@@ -14,7 +14,7 @@ class ProyectosController < AutorizadoController
   def index
     @titulo = "Proyectos"
 
-    respond_with @proyectos = PaginadorDecorator.decorate(@proyectos)
+    respond_with @proyectos = PaginadorDecorator.decorate(apply_scopes(@proyectos))
   end
 
   def show
