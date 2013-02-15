@@ -5,7 +5,6 @@ class GruposController < AutorizadoController
   # GET /grupos.json
   def index
     @grupos = Grupo.all(:order => 'descripcion ASC')
-    @titulo = "Grupos"
 
     respond_to do |format|
       format.html # index.html.{erb,haml}
@@ -25,7 +24,6 @@ class GruposController < AutorizadoController
   # GET /grupos/new.json
   def new
     @grupo = Grupo.new
-    @titulo = 'Nuevo grupo'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +52,6 @@ class GruposController < AutorizadoController
   # GET /grupos/1.json
   def show
     @grupo = Grupo.find(params[:id])
-    @titulo = @grupo.codigo
 
     respond_to do |format|
       format.html # show.html.erb
@@ -94,7 +91,6 @@ class GruposController < AutorizadoController
   # GET /grupos/1/edit
   def edit
     @grupo = Grupo.find(params[:id])
-    @titulo = "Editando grupo #{@grupo.codigo}"
   end
 
 end

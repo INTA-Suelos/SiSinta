@@ -5,7 +5,6 @@ class FasesController < AutorizadoController
   # GET /fases.json
   def index
     @fases = Fase.all(:order => 'nombre ASC')
-    @titulo = "Fases"
 
     respond_to do |format|
       format.html # index.html.{erb,haml}
@@ -27,7 +26,6 @@ class FasesController < AutorizadoController
   # GET /fases/new.json
   def new
     @fase = Fase.new
-    @titulo = 'Nueva fase'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,7 +54,6 @@ class FasesController < AutorizadoController
   # GET /fases/1.json
   def show
     @fase = Fase.find(params[:id])
-    @titulo = @fase.codigo
 
     respond_to do |format|
       format.html # show.html.erb
@@ -96,7 +93,6 @@ class FasesController < AutorizadoController
   # GET /fases/1/edit
   def edit
     @fase = Fase.find(params[:id])
-    @titulo = "Editando fase #{@fase.codigo}"
   end
 
 end
