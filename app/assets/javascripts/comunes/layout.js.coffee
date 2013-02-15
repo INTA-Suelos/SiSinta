@@ -1,12 +1,20 @@
 # Manejador para remover perfiles asociados con javascript, derivado del de
 # awesome_nested_fields
 $(document)
-  .on 'click', '#perfiles_asociados .borrar a', (evt) ->
+  .on 'click', '#perfiles_asociados .borrar a', (evento) ->
     # Anula el click y el movimiendo de pantalla
-    evt.preventDefault()
+    evento.preventDefault()
     # El link y el checkbox son hermanos en el mismo td
     $(this).siblings('input.destroy').prop "checked", true
     $(this).parents('tr').hide()
+
+# Invierte el estado de los checkboxes relacionados
+$(document)
+  .on 'click', '#check_marcar', ->
+    estado = not $('#marcar_tag').hasClass('desaparecer')
+    $('#marcar_tag, #desmarcar_tag').toggleClass('desaparecer')
+    $('.checks input[type=checkbox]').each ->
+      $(this).prop 'checked', estado
 
 jQuery ->
 

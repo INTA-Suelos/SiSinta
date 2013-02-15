@@ -12,7 +12,7 @@
         %th.marcar
           #marcar_tag= label_tag 'check_marcar', 'Marcar todo'
           #desmarcar_tag.desaparecer= label_tag 'check_marcar', 'Desmarcar todo'
-          = check_box_tag 'check_marcar', id: 'check_marcar'
+          = check_box_tag 'check_marcar', true, id: 'check_marcar', checked: true
 
     %tbody
       = render @perfiles
