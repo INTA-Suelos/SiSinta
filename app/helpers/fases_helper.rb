@@ -1,5 +1,7 @@
 # encoding: utf-8
 module FasesHelper
+  include PaginacionHelper
+
   def titulo_de_la_accion
     case params[:action]
       when 'index'
