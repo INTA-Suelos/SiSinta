@@ -70,6 +70,15 @@ module ExtensionModelos
         clase.find(self.send("#{asociacion}_ids").sort))
     end
 
+    # Atributos virtuales para usar con el FormBuilder, para nulificar una
+    # asociación en vez de destruirla con _destroy
+    def anular
+      false
+    end
+    def anular=(asociacion)
+      self.send("#{asociacion}=", nil)
+    end
+
   end
 
 end

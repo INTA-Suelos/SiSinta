@@ -24,4 +24,11 @@ class ExtensionModelosTest < ActiveSupport::TestCase
     assert !(sin_ambos.include?(:numero) and sin_ambos.include?(:ubicacion)), "no filtra varias"
   end
 
+  test "debería nulificar la asociación" do
+    p = build_stubbed(:perfil, fase: build_stubbed(:fase))
+    assert_not_nil p.fase
+    p.anular = 'fase'
+    assert_nil p.fase
+  end
+
 end
