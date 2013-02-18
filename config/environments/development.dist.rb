@@ -14,15 +14,12 @@ SiSINTA::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  #config.action_mailer.raise_delivery_errors = false
-
   # Para testear Devise
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default charset: "utf-8"
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -57,5 +54,25 @@ SiSINTA::Application.configure do
     Bullet.console = true
     Bullet.disable_browser_cache = true
   end
+
+  # Configuración de ejemplo para riseup.net
+  ActionMailer::Base.smtp_settings = {
+    address: 'mail.riseup.net',
+
+    # usar TLS
+    enable_starttls_auto: true,
+
+    # puerto para TLS
+    port:                 587,
+
+    # dominio desde el que enviamos
+    domain:               'dominio.com.ar',
+
+    user_name:            'nombre de usuario',
+    password:             'password',
+
+    # envía en texto plano pero envuelto en TLS
+    authentication:       :plain
+  }
 
 end
