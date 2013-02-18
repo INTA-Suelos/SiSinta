@@ -1,33 +1,31 @@
 # encoding: utf-8
 class AnalisisController < AutorizadoController
+  responders :collection
 
-  # La acción +index+ carga sus propios análisis
-  load_and_authorize_resource :perfil
+  # Salteo el default de AutorizadoController
   skip_load_and_authorize_resource
-  skip_authorization_check
+  # Cargo los análisis a través del perfil
+  load_and_authorize_resource :perfil
+  load_and_authorize_resource through: :perfil
 
-  # GET /analisis
-  # GET /analisis.json
+  before_filter :decorar, only: [:index, :edit]
+
   def index
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @perfil.analisis }
-    end
+    respond_with @perfil, @analisis
   end
 
-  # PUT /perfil/1/analisis
-  # PUT /perfil/1/analisis.json
+  def edit
+    respond_with @perfil, @analisis
+  end
+
   def update
-    respond_to do |format|
-      if @perfil.update_attributes(params[:perfil])
-        format.html { redirect_to perfil_analisis_index_path(@perfil),
-                      notice: I18n.t('messages.updated', model: 'Analisis') }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @perfil.errors, status: :unprocessable_entity }
-      end
-    end
+    @perfil.update_attributes(params[:perfil])
+    respond_with @perfil, @analisis
   end
 
+  private
+
+    def decorar
+      @perfil = @perfil.decorate
+    end
 end

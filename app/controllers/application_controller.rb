@@ -117,11 +117,6 @@ class ApplicationController < ActionController::Base
                                             "#{atributo}" => elemento.send(atributo)]}
     end
 
-    # Carga el perfil al que pertenece el modelo anidado
-    def cargar_perfil
-      @perfil = Perfil.find(params[:perfil_id])
-    end
-
     # Devuelve un csv en base a los atributos del modelo
     #
     # * *Args*    :

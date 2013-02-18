@@ -163,12 +163,12 @@
             placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, '% Satur. (S + H)'
-          = f.fields_for :analisis, @analisis do |f_a|
+          = f.fields_for :analisis do |f_a|
             %td.dato= f_a.text_field :saturacion_s_h, disabled: bloqueado,
             placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Densidad aparente'
-          = f.fields_for :analisis, @analisis do |f_a|
+          = f.fields_for :analisis do |f_a|
             %td.dato= f_a.text_field :densidad_aparente, disabled: bloqueado
 
     .acciones.span-4.last= f.submit 'Actualizar datos' unless bloqueado
