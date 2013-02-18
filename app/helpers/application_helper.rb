@@ -177,7 +177,31 @@ module ApplicationHelper
     nil
   end
 
+  # Un simple link para volver al tope de la página
   def volver_arriba(id = nil)
     link_to 'Volver arriba', id || '#', class: 'volver-arriba'
   end
+
+  # Genera un checkbox construido para modificar la asociación anidada,
+  # determinando si hay que anularla o destruirla
+  def destruir_o_anular_perfiles(asociacion, id, alias_de_la_asociacion = nil)
+    hash = "#{asociacion}[perfiles_attributes]"
+    hash << "[#{id}][#{anular_o_destruir}]"
+    valor = case anular_o_destruir
+      when '_destroy'
+        true
+      when 'anular'
+        alias_de_la_asociacion || asociacion
+      else
+        false
+    end
+    check_box_tag hash, valor, false, class: 'destroy'
+  end
+
+  # La asociación va a ser nulificada, a menos que se sobreescriba este método
+  # para devolver '_destroy', por ejemplo en el caso de las asociaciones HABTM.
+  def anular_o_destruir
+    'anular'
+  end
+
 end

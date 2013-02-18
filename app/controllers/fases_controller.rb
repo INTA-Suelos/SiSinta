@@ -31,7 +31,8 @@ class FasesController < AutorizadoController
   end
 
   def update
-    respond_with @fase = @fase.update_attributes(params[:fase])
+    @fase.update_attributes(params[:fase])
+    respond_with @fase
   end
 
   def destroy

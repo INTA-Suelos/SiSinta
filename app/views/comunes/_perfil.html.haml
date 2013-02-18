@@ -2,7 +2,7 @@
   - unless bloqueado
     %td.borrar.centrado
       = link_to 'X', '#', class: 'remove remover'
-      = check_box_tag "#{param}[perfiles_attributes][#{perfil.id}][_destroy]", true, false, class: 'destroy'
+      = destruir_o_anular_perfiles param, perfil.id
       = hidden_field_tag "#{param}[perfiles_attributes][#{perfil.id}][id]", perfil.id
   %td.nombre
     = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
