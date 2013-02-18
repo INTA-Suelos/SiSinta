@@ -1,6 +1,12 @@
-.botonera= render 'botonera_indice'
-
 #lista
+  .botonera
+    - if can? :create, Grupo
+      = link_to "Nuevo grupo", new_grupo_path
+
+    #paginacion
+      = paginate @grupos
+      = elegir_filas 'grupos'
+
   %table#grupos.centrado
     %thead
       %tr
@@ -11,4 +17,4 @@
     %tbody
       = render @grupos
 
-.botonera= render 'botonera_indice'
+= volver_arriba

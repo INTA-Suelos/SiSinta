@@ -5,6 +5,7 @@ class FasesController < AutorizadoController
 
   def index
     @fases = PaginadorDecorator.decorate apply_scopes(@fases)
+
     respond_with @fases
   end
 

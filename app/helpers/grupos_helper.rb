@@ -1,5 +1,7 @@
 # encoding: utf-8
 module GruposHelper
+  include PaginacionHelper
+
   def titulo_de_la_accion
     case params[:action]
       when 'index'
@@ -9,7 +11,7 @@ module GruposHelper
       when 'new'
         'Nuevo subgrupo'
       when 'edit'
-        "Editando subgrupo #{@fase.descripcion}"
+        "Editando subgrupo #{@grupo.descripcion}"
       else
         nil
     end
