@@ -1,7 +1,8 @@
 %table#perfiles_asociados
   %thead
     %tr
-      %th.borrar.centrado X
+      - unless bloqueado
+        %th.borrar.centrado
       %th.nombre          Nombre
       %th.numero.centrado Número
       %th.ubicacion       Ubicación
@@ -13,7 +14,7 @@
       - perfiles.each do |perfil|
         = fields_for perfil do |builder|
           = render partial: 'comunes/perfil',
-              locals: { f: builder, perfil: perfil, param: param }
+              locals: { f: builder, perfil: perfil, param: param, bloqueado: bloqueado }
     - else
       %tr.empty
         %td{colspan: 3} Ningún perfil todavía.

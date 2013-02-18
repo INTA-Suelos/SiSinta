@@ -20,6 +20,6 @@
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do
 
         .span-21.campo= render partial: 'comunes/perfiles_asociados',
-          locals: { perfiles: @proyecto.perfiles, param: 'proyecto' }
+          locals: { perfiles: @proyecto.perfiles, param: 'proyecto', bloqueado: true }
 
 .botonera= render 'botonera_mostrar'

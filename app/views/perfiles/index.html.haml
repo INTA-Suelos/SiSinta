@@ -1,5 +1,11 @@
 #lista
-  .botonera= render 'botonera_index'
+  .botonera
+    - if can? :create, Perfil
+      = link_to "Nuevo perfil", new_perfil_path
+
+    #paginacion
+      = paginate @perfiles
+      = elegir_filas 'perfiles'
 
   %table
     %thead
@@ -14,4 +20,4 @@
     %tbody
       = render @perfiles
 
-  .botonera= render 'botonera_index'
+  = volver_arriba

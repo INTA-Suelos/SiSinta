@@ -1,3 +1,3 @@
 class ProyectoDecorator < ApplicationDecorator
-  decorates_association :perfiles
+  decorates_association :perfiles, with: PaginadorDecorator
 end

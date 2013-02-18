@@ -12,7 +12,7 @@ class Perfil < ActiveRecord::Base
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
                   :capacidad_attributes, :humedad_attributes,
                   :pedregosidad_attributes, :erosion_attributes, :etiquetas,
-                  :reconocedores, :grupo, :serie_attributes,
+                  :reconocedores, :grupo, :serie_attributes, :anular,
                   :horizontes_attributes, :analisis_attributes
 
   attr_taggable :etiquetas

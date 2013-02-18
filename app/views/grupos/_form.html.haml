@@ -2,7 +2,7 @@
 
   = f.error_messages
 
-  = field_set_tag @titulo, class: 'celeste_oscuro span-23 last' do
+  = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-23 last' do
 
     = field_set_tag 'Definición', class: 'celeste plegable span-22 last' do
       .span-18.campo
@@ -17,10 +17,8 @@
     - unless nuevo
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do
 
-        .span-21.last
-          - if @grupo.perfiles.any?
-            = render partial: 'perfiles/lista', locals: {perfiles: @grupo.perfiles}
-          - else
-            .empty.centrado No hay perfiles asociados
+        .span-21.last= render partial: 'comunes/perfiles_asociados',
+          locals: { perfiles: @grupo.perfiles, param: 'grupo', bloqueado: bloqueado }
 
-    .acciones.span-4.last= f.submit
+    - unless bloqueado
+      .acciones.span-4.last= f.submit

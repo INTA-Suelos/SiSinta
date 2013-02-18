@@ -2,6 +2,7 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :ubicacion
   decorates_association :serie
   decorates_association :proyecto
+  decorates_association :fase
 
   def fecha
     source.fecha.try :to_s, :dma

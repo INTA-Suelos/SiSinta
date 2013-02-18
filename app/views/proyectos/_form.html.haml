@@ -28,6 +28,6 @@
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
 
         .span-22.campo= render partial: 'comunes/perfiles_asociados',
-          locals: { perfiles: @proyecto.perfiles, param: 'proyecto' }
+          locals: { perfiles: @proyecto.perfiles, param: 'proyecto', bloqueado: defined?(bloqueado) }
 
       .acciones.span-4.last= f.submit
