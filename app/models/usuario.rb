@@ -1,9 +1,10 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
-  rolify :role_cname => 'Rol'
+  rolify role_cname: 'Rol'
   store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
   has_many :perfiles, inverse_of: :usuario
+
   after_initialize :asignar_valores_por_defecto
 
   # Include default devise modules. Others available are:
@@ -15,7 +16,7 @@ class Usuario < ActiveRecord::Base
   attr_accessible :nombre, :email, :password, :password_confirmation,
                   :remember_me, :config, :current_password, :ficha, :srid
 
-  # Arregla cierto problema con rolify y las inflecciones
+  # FIXME Workarround para cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
   alias_method :role_ids=, :rol_ids=
 

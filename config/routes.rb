@@ -1,5 +1,6 @@
 # encoding: utf-8
 SiSINTA::Application.routes.draw do
+
   # TODO buscar en todos los modelos con un index agregador
 
   root to: 'inicio#index'
@@ -64,6 +65,13 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :proyectos
+
+    r.resources :equipos do
+      member do
+        get   'permisos'
+        post  'permitir'
+      end
+    end
 
     scope "/admin" do
       r.resources :usuarios, only: [:index, :destroy] do
