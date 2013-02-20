@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PerfilDecorator < ApplicationDecorator
   decorates_association :ubicacion
   decorates_association :serie
