@@ -7,8 +7,8 @@ class PermisosController < AutorizadoController
 
   def edit
     @controlador = params[:controller]
-    @miembros = Usuario.miembros(@recurso).collect(&:id)
-    @usuarios = Usuario.all
+    @actuales = Usuario.miembros(@recurso).collect(&:id)
+    @equipos = Equipo.all
     respond_with @recurso = @recurso.decorate
   end
 

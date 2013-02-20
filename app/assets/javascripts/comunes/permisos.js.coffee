@@ -1,6 +1,6 @@
 jQuery ->
 
   $("#usuarios.multiselect").multiselect({
-    locale: 'es'
+    locale: 'sisinta'
     splitRatio: 0.5
   })

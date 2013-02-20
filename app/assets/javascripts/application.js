@@ -10,6 +10,5 @@
 //= require jquery.nested-fields
 //= require tinymce-jquery
 //= require jquery-multiselect
-//= require locales/jquery-multiselect-es
 //= require_tree ./jquery
 //= require_tree ./comunes
