@@ -5,6 +5,6 @@ class Equipo < ActiveRecord::Base
   resourcify role_cname: 'Rol'
 
   def miembros
-    Usuario.with_role :miembro, self
+    Usuario.miembros self
   end
 end

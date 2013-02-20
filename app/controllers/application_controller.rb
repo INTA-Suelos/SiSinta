@@ -59,24 +59,19 @@ class ApplicationController < ActionController::Base
     @controlador = params[:controller]
     @miembros = Usuario.miembros(@recurso).collect {|u| u.id}
     @usuarios = Usuario.all
-    @recurso = @recurso.decorate
-    render 'comunes/permisos'
+    respond_with @recurso = @recurso.decorate
   end
 
   # POST /:controlador/:id/permitir
   def permitir
     @recurso = recurso
 
-    respond_to do |format|
-      if Usuario.find(params["usuario_ids"]).each { |u| u.grant :miembro, @recurso }
-        format.html { redirect_to permisos_url,
-                      notice: I18n.t('messages.updated', model: @recurso.class) }
-        format.json { head :ok }
-      else
-        format.html { render action: "permisos" }
-        format.json { render json: @recurso.errors, status: :unprocessable_entity }
-      end
+    # Destruyo el rol para reasignarlo entero
+    @recurso.roles(:miembro).first.try :destroy
+    if usuarios = params["usuario_ids"]
+      Usuario.find(usuarios).each { |u| u.grant :miembro, @recurso }
     end
+    respond_with @recurso = recurso
   end
 
   # Métodos de BrowserDetect

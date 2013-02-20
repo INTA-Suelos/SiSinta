@@ -68,7 +68,7 @@ SiSINTA::Application.routes.draw do
 
     r.resources :equipos do
       member do
-        get   'permisos'
+        get   'miembros' => 'equipos#permisos', as: 'permisos'
         post  'permitir'
       end
     end
