@@ -9,7 +9,7 @@
     = '|'
     = link_to 'Editar', edit_perfil_path(perfil)
     = '|'
-    = link_to 'Permisos', permisos_perfil_path(perfil)
+    = link_to 'Permisos', permisos_path(modelo: 'perfil', id: perfil)
     = '|'
     = link_to 'Eliminar', perfil,
         data: { confirm: t(:confirmar) }, method: :delete

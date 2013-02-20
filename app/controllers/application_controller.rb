@@ -53,27 +53,6 @@ class ApplicationController < ActionController::Base
     RGeo::GeoJSON.encode factory.feature_collection(features)
   end
 
-  # GET /:controlador/:id/permisos
-  def permisos
-    @recurso = recurso
-    @controlador = params[:controller]
-    @miembros = Usuario.miembros(@recurso).collect {|u| u.id}
-    @usuarios = Usuario.all
-    respond_with @recurso = @recurso.decorate
-  end
-
-  # POST /:controlador/:id/permitir
-  def permitir
-    @recurso = recurso
-
-    # Destruyo el rol para reasignarlo entero
-    @recurso.roles(:miembro).first.try :destroy
-    if usuarios = params["usuario_ids"]
-      Usuario.find(usuarios).each { |u| u.grant :miembro, @recurso }
-    end
-    respond_with @recurso = recurso
-  end
-
   # Métodos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 
@@ -82,9 +61,6 @@ class ApplicationController < ActionController::Base
 
   # Para ordenar las columnas
   helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
-
-  # Para los permisos
-  helper_method :permitir_url
 
   protected
 
@@ -137,19 +113,6 @@ class ApplicationController < ActionController::Base
 
     def direccion_de_ordenamiento
       %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
-    end
-
-    # TODO filtrar por modelos existentes
-    def recurso
-      Kernel.const_get(params[:controller].classify).find(params[:id])
-    end
-
-    def permisos_url
-      "#{url_for(@recurso)}/permisos"
-    end
-
-    def permitir_url
-      "#{url_for(@recurso)}/permitir"
     end
 
     # Para los mensajes del flash de responders

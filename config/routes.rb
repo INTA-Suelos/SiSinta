@@ -13,6 +13,9 @@ SiSINTA::Application.routes.draw do
   masculinos  = { new: "nuevo", edit: "editar" }
   femeninos   = { new: "nueva", edit: "editar" }
 
+  get 'permisos/:modelo/:id' => 'permisos#edit',    as: 'permisos'
+  put 'permisos/:modelo/:id' => 'permisos#update',  as: 'permitir'
+
   with_options path_names: masculinos do |r|
 
     r.resources :perfiles do
@@ -23,10 +26,6 @@ SiSINTA::Application.routes.draw do
         put   'almacenar'
         get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
         get   'seleccionar'
-      end
-      member do
-        get   'permisos'
-        post  'permitir'
       end
 
       r.resources :analisis, only: :index do
@@ -66,12 +65,7 @@ SiSINTA::Application.routes.draw do
 
     r.resources :proyectos
 
-    r.resources :equipos do
-      member do
-        get   'miembros' => 'equipos#permisos', as: 'permisos'
-        post  'permitir'
-      end
-    end
+    r.resources :equipos
 
     scope "/admin" do
       r.resources :usuarios, only: [:index, :destroy] do
@@ -92,10 +86,6 @@ SiSINTA::Application.routes.draw do
     r.resources :series do
       collection do
         get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
-      end
-      member do
-        get   'permisos'
-        post  'permitir'
       end
     end
 

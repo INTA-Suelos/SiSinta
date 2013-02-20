@@ -2,10 +2,10 @@
   - if can? :read, @recurso
     = link_to 'Mostrar', @recurso
     = '|'
-  = link_to 'Volver', "/#{@controlador}"
+  = link_to 'Volver', @recurso.class
 
 #permiso
-  = form_tag permitir_url, method: :post, html: { class: 'span-24' } do |f|
+  = form_tag permitir_url, method: :put, html: { class: 'span-24' } do |f|
 
     = field_set_tag "Miembros de #{@recurso}", class: 'celeste_oscuro span-23 last' do
 
