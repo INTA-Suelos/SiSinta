@@ -10,8 +10,8 @@
     = field_set_tag "Miembros de #{@recurso}", class: 'celeste_oscuro span-23 last' do
 
       #multiselect-wrap
-        = select_tag('usuario_ids[]',
+        = select_tag('usuarios',
             options_from_collection_for_select(@usuarios, :id, :nombre, @miembros),
-            multiple: true, class: 'multiselect span-22 last')
+            multiple: true, name: 'usuario_ids[]', class: 'multiselect span-22 last')
 
       .acciones.span-4.last= submit_tag 'Asignar'
