@@ -31,7 +31,7 @@ class Ability
     @usuario = usuario || Usuario.new # guest user (not logged in)
 
     @perfiles = [Perfil, Horizonte, Analisis, Adjunto]
-    @basicos = [Grupo, Fase, Proyecto, Serie]
+    @basicos = [Grupo, Fase, Proyecto, Serie, Equipo]
 
     if @usuario.has_role? :admin
       administrador

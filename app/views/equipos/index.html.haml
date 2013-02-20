@@ -1,0 +1,20 @@
+#lista
+  .botonera
+    - if can? :create, Equipo
+      = link_to "Nuevo equipo de trabajo", new_equipo_path
+
+    #paginacion
+      = paginate @equipos
+      = elegir_filas 'equipos'
+
+  %table
+    %thead
+      %tr
+        %th.nombre=   sort_link Equipo.ransack, :nombre
+        %th.miembros  Miembros
+        %th.acciones
+
+    %tbody
+      = render @equipos
+
+  = volver_arriba

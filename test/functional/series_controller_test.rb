@@ -31,5 +31,4 @@ class SeriesControllerTest < ActionController::TestCase
     assert json.first.include?('simbolo'), "debe devolver el simbolo"
   end
 
-
 end
