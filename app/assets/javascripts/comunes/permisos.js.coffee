@@ -1,7 +1,6 @@
 jQuery ->
 
-  $("#permiso .multiselect").multiselect({
-      dividerLocation: 0.5
-      pressEnterKeyToAddAll: true
-      sortable: false
+  $("#usuarios.multiselect").multiselect({
+    locale: 'es'
+    splitRatio: 0.5
   })
