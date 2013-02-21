@@ -9,6 +9,7 @@ class PermisosController < AutorizadoController
     @controlador = params[:controller]
     @actuales = Usuario.miembros(@recurso).collect(&:id)
     @equipos = Equipo.all
+    @usuarios = Usuario.all
     respond_with @recurso = @recurso.decorate
   end
 

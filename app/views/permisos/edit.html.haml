@@ -11,7 +11,7 @@
 
       #multiselect-wrap
         = select_tag('usuarios',
-            option_groups_from_collection_for_select(@equipos, :miembros, :nombre, :id, :nombre, @actuales),
+            grouped_options_for_select(array_equipos_y_usuarios(@equipos, @usuarios), @actuales),
             multiple: true, name: 'usuario_ids[]', class: 'multiselect span-22 last')
 
       .acciones.span-4.last= submit_tag 'Asignar'
