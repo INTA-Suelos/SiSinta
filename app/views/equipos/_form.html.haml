@@ -8,9 +8,27 @@
 
       = field_set_tag 'Datos del equipo de trabajo', class: 'celeste plegable span-23 last' do
 
-        .span-19.campo
+        .span-22.campo
           .span-2= f.label :nombre
-          .span-17.last= f.text_field :nombre, autofocus: true, required: true
+          .span-20.last= f.text_field :nombre, autofocus: true, required: true
           = ayuda_para('equipo.nombre')
+
+      = field_set_tag 'Miembros', class: 'celeste plegable span-23 last' do
+
+        .span-22.campo
+          #miembros.centrado
+            .span-2.centrado= link_to '+', '#', class: "agregar add"
+            .span-10.nombre Nombre
+            .span-10.last.email Email
+        .items
+          = f.nested_fields_for :miembros,
+            new_object: @equipo.miembro_preparado, show_empty: true,
+            render_template: false do |fu|
+            - if fu
+              .item= render partial: 'usuario', locals: {f: fu}
+            - else
+              .span-22.empty No hay miembros
+
+          = nested_fields_templates
 
       .acciones.span-4.last= f.submit

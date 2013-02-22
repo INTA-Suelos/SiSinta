@@ -69,7 +69,10 @@ SiSINTA::Application.routes.draw do
 
     scope "/admin" do
       r.resources :usuarios, only: [:index, :destroy] do
-        put 'update', on: :collection
+        collection do
+          put 'update'
+          get 'autocompletar/:atributo' => 'usuarios#autocompletar', as: 'autocompletar'
+        end
       end
     end
 
