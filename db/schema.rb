@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218155447) do
+ActiveRecord::Schema.define(:version => 20130222200640) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(:version => 20130218155447) do
   end
 
   add_index "equipos", ["nombre"], :name => "index_equipos_on_nombre", :unique => true
+
+  create_table "equipos_usuarios", :id => false, :force => true do |t|
+    t.integer "equipo_id"
+    t.integer "usuario_id"
+  end
+
+  add_index "equipos_usuarios", ["usuario_id", "equipo_id"], :name => "index_equipos_usuarios_on_usuario_id_and_equipo_id"
 
   create_table "erosiones", :force => true do |t|
     t.integer "subclase_id"

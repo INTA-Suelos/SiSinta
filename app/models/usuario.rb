@@ -4,6 +4,7 @@ class Usuario < ActiveRecord::Base
   store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
   has_many :perfiles, inverse_of: :usuario
+  has_and_belongs_to_many :equipos
 
   after_initialize :asignar_valores_por_defecto
 
