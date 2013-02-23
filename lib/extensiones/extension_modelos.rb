@@ -33,6 +33,7 @@ module ExtensionModelos
       # variable de instancia @asociaciones
       define_method "#{asociacion}_ids=" do |ids|
         super Array.wrap(ids)
+        # FIXME wat!
         cargar_ids_para :subclase, SubclaseDeCapacidad
       end
 
