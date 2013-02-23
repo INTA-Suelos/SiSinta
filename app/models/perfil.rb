@@ -82,8 +82,13 @@ class Perfil < ActiveRecord::Base
     # el perfil sólo se puede crear una serie, nunca modificarla
     # TODO  Encontrar la manera de validar la unicidad de simbolo, como +validate_associated_records_for_serie+
     if nombre
-      self.serie = Serie.find_or_create_by_nombre(nombre) do |serie|
-        serie.simbolo = simbolo
+      _simbolo = simbolo
+      self.serie = Serie.find_or_create_by_nombre(nombre)
+
+      # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
+      # una serie existente desde un perfil.
+      unless self.serie.simbolo.present? or _simbolo.nil?
+        self.serie.update_attribute(:simbolo, _simbolo)
       end
 
       # Si este perfil es modal, queda como único modal de la serie
