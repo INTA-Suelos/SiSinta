@@ -78,13 +78,19 @@ class Perfil < ActiveRecord::Base
 
   # Se crea una serie si no existe ya
   def autosave_associated_records_for_serie
-    # Si la serie ya existe no actualiza el símbolo. En otras palabras, sólo se
-    # puede crear una serie desde el perfil, nunca modificarla
-    # TODO  Encontrar la manera de validar la unicidad de simbolo, como
-    # TODO    +validate_associated_records_for_serie+
+    # Si la serie ya existe no actualiza el símbolo. En otras palabras, desde
+    # el perfil sólo se puede crear una serie, nunca modificarla
+    # TODO  Encontrar la manera de validar la unicidad de simbolo, como +validate_associated_records_for_serie+
     if nombre
       self.serie = Serie.find_or_create_by_nombre(nombre) do |serie|
         serie.simbolo = simbolo
+      end
+
+      # Si este perfil es modal, queda como único modal de la serie
+      if modal
+        self.serie.perfiles.each do |p|
+          p.update_attribute(:modal, false) unless p == self
+        end
       end
     end
   end

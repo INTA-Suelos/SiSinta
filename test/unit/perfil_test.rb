@@ -93,4 +93,13 @@ class PerfilTest < ActiveSupport::TestCase
     assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Juan Salvo'
   end
 
+  test "queda como único perfil modal de la serie" do
+    serie = create(:serie)
+    primer_modal = create(:perfil, modal: true, serie: serie)
+    assert_equal 1, serie.perfiles.size
+    nuevo_modal = create(:perfil, modal: true, serie: serie)
+    assert_equal 2, serie.perfiles.size
+    assert nuevo_modal.reload.modal, "Le sacó el modal al nuevo modal"
+    refute primer_modal.reload.modal, "No le sacó el modal al primer modal"
+  end
 end
