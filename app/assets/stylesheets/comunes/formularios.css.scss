@@ -4,7 +4,7 @@ form {
   line-height: $altura_linea;
 
   input {
-    width: inherit !important;
+    width: 100%;
   }
 
   input[type="number"] {
@@ -13,11 +13,10 @@ form {
     color: #000000;
   }
 
-  select {  width: 100%;  }
+  select { width: 100%; }
 
   input[type="checkbox"] {
     margin-left: 2px;
-    width: auto !important;
   }
 
   textarea {
