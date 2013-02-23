@@ -71,3 +71,5 @@ jQuery ->
     afterInsert: ->
       $('.munsell').autocomplete(hvc)
   })
+
+  $('select.compacto').select2()

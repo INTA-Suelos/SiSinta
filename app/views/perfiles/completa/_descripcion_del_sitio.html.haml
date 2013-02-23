@@ -127,10 +127,10 @@
   .span-11.last.campo
     = f.fields_for :humedad do |fh|
       .span-2= fh.label :clase_id, "Distrib. de la humedad"
-      .span-4= fh.collection_select :clase_id, clases_de_humedad, :id, :valor,
+      .span-3= fh.collection_select :clase_id, clases_de_humedad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      .span-4.last= fh.collection_select :subclase_id, subclases_de_humedad, :id, :valor,
-      { include_blank: true }, { disabled: bloqueado }
+      .span-5.last= fh.collection_select :subclase_id, subclases_de_humedad,
+      :id, :valor, {}, { multiple: true, disabled: bloqueado, class: 'compacto' }
       = ayuda_para('Perfil.humedad')
 
   .span-11.campo
