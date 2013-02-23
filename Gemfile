@@ -51,10 +51,12 @@ end
 gem 'thin'
 gem 'SyslogLogger', require: 'syslog/logger'
 
-group :development do
-  gem 'pry'
+group :test, :development do
   gem 'pry-rails'
   gem 'hirb'
+end
+
+group :development do
   gem 'bullet'
 end
 

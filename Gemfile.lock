@@ -237,7 +237,6 @@ DEPENDENCIES
   paperclip
   param_protected
   pg
-  pry
   pry-rails
   rails (= 3.2.12)
   ransack
