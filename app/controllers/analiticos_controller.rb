@@ -4,7 +4,7 @@ class AnaliticosController < AutorizadoController
 
   # Salteo el default de AutorizadoController
   skip_load_and_authorize_resource
-  # Cargo los análisis a través del perfil
+  # Cargo los datos analíticos a través del perfil
   load_and_authorize_resource :perfil
 
   before_filter :decorar, only: [:index, :edit]

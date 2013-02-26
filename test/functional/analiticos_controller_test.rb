@@ -26,10 +26,10 @@ class AnaliticosControllerTest < ActionController::TestCase
     get :edit, perfil_id: @perfil.id
     assert_response :success
     assert_not_nil assigns(:perfil), "No asigna el perfil en 'editar'"
-    assert_not_nil assigns(:analiticos), "No asigna los análisis en 'editar'"
+    assert_not_nil assigns(:analiticos), "No asigna los analíticos en 'editar'"
   end
 
-  test "debería actualizar los análisis" do
+  test "debería actualizar los analíticos" do
     put :update, perfil_id: @perfil.id, perfil: attributes_for(:perfil)
 
     # FIXME Está redirigiendo pero el test falla :|

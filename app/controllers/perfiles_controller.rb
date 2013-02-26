@@ -155,7 +155,7 @@ class PerfilesController < AutorizadoController
     end
 
     # Determina si el usuario terminó de editar el perfil o va a seguir con los
-    # análisis
+    # datos analíticos
     # TODO Revisar que envíe al edit
     def perfil_o_analiticos
       params[:analiticos].present? ? edit_perfil_analiticos_path(@perfil) : @perfil

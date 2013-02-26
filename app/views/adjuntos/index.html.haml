@@ -4,7 +4,7 @@
       = link_to 'Mostrar perfil', @perfil
       = '|'
     - if can? :read, @perfil.analiticos
-      = link_to 'Mostrar análisis', perfil_analiticos_path(@perfil)
+      = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)
       = '|'
     - if can? :create, @adjunto
       = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)
