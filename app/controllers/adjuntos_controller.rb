@@ -8,6 +8,7 @@ class AdjuntosController < AutorizadoController
   before_filter :decorar, only: [:index, :show, :edit, :new]
 
   def index
+    @adjuntos = @perfil.adjuntos
     respond_with @perfil, @adjuntos
   end
 
