@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/bradphelan/rocket_tag.git
+  remote: https://github.com/bradphelan/rocket_tag.git
   revision: a47b3340621dc36afa5559458eec9512384a87ba
   specs:
     rocket_tag (0.5.6)

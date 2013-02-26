@@ -23,7 +23,7 @@ gem 'ransack'
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
-gem 'rocket_tag', github: 'bradphelan/rocket_tag'
+gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
 
