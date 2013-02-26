@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Grupo < ActiveRecord::Base
-  attr_accessible :codigo, :descripcion
+  attr_accessible :codigo, :descripcion, :perfiles_attributes
 
   has_many :perfiles, inverse_of: :grupo
 
@@ -8,7 +8,5 @@ class Grupo < ActiveRecord::Base
   validates_uniqueness_of :descripcion
   validates_presence_of :descripcion
 
-  def to_s
-    descripcion
-  end
+  accepts_nested_attributes_for :perfiles
 end

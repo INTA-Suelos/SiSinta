@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
   rolify :role_cname => 'Rol'
-  store :config, accessors: [:ficha, :srid]
+  store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
   has_many :perfiles, inverse_of: :usuario
   after_initialize :asignar_valores_por_defecto

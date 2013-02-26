@@ -1,0 +1,18 @@
+%tr{class: cycle("odd", "even")}
+  - unless bloqueado
+    %td.borrar.centrado
+      = link_to 'X', '#', class: 'remove remover'
+      = destruir_o_anular_perfiles param, perfil.id
+      = hidden_field_tag "#{param}[perfiles_attributes][#{perfil.id}][id]", perfil.id
+  %td.nombre
+    = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
+  %td.numero.centrado
+    = link_to perfil.numero, perfil, class: 'perfil_numero'
+  %td.ubicacion
+    = f.label :ubicacion, perfil.ubicacion, class: 'perfil_ubicacion'
+  %td.fecha.centrado
+    = f.label :fecha, perfil.fecha
+  %td.modal.centrado
+    = f.label :modal, "✓" if perfil.modal?
+  %td.acciones
+    = link_to 'Ver', perfil

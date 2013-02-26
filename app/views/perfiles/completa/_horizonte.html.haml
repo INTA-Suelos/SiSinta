@@ -1,0 +1,92 @@
+.span-1.centrado= link_to 'x', '#horizontes', class: "remover #{'remove' unless bloqueado}"
+.span-2.campo
+  = h.text_field :tipo, disabled: bloqueado
+  = ayuda_para 'Horizonte.tipo'
+.span-1.campo
+  = h.text_field :profundidad_superior, disabled: bloqueado, placeholder: 'cm', class: 'prof_sup'
+  = ayuda_para 'Horizonte.profundidad_superior'
+.span-1.campo
+  = h.text_field :profundidad_inferior, disabled: bloqueado, placeholder: 'cm', class: 'prof_inf'
+  = ayuda_para 'Horizonte.profundidad_inferior'
+.span-4
+  = h.fields_for :limite do |hl|
+    .span-2.campo
+      = hl.collection_select :tipo_id, tipos_de_limite, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Limite.tipo'
+    .span-2.last.campo
+      = hl.collection_select :forma_id, formas_de_limite, :id,
+        :valor, { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Limite.forma'
+.span-4
+  = h.fields_for :color_seco do |hc|
+    .span-2.campo
+      = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
+      = ayuda_para 'Horizonte.color_seco'
+  = h.fields_for :color_humedo do |hc|
+    .span-2.last.campo
+      = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
+      = ayuda_para 'Horizonte.color_humedo'
+.span-3
+  .span-3.last.campo
+    = h.collection_select :textura_id, texturas, :id, :clase,
+      { include_blank: true }, { disabled: bloqueado }
+    = ayuda_para 'Horizonte.textura'
+.span-6
+  = h.fields_for :estructura do |he|
+    .span-2.campo
+      = he.collection_select :tipo_id, tipos_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Estructura.tipo'
+    .span-2.campo
+      = he.collection_select :clase_id, clases_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Estructura.clase'
+    .span-2.last.campo
+      = he.collection_select :grado_id, grados_de_estructura, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Estructura.grado'
+.span-8
+  =h.fields_for :consistencia do |hc|
+    .span-2.campo
+      = hc.collection_select :en_seco_id, consistencias_en_seco, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Consistencia.en_seco'
+    .span-2.campo
+      = hc.collection_select :en_humedo_id, consistencias_en_humedo, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Consistencia.en_humedo'
+    .span-2.campo
+      = hc.collection_select :plasticidad_id, plasticidades_de_consistencia, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Consistencia.plasticidad'
+    .span-2.last.campo
+      = hc.collection_select :adhesividad_id, adhesividades_de_consistencia, :id, :valor,
+        { include_blank: true }, { disabled: bloqueado }
+      = ayuda_para 'Consistencia.adhesividad'
+.span-1.campo
+  = h.text_field :ph, disabled: bloqueado
+  = ayuda_para 'Horizonte.ph'
+.span-1.campo
+  = h.text_field :co3, disabled: bloqueado
+  = ayuda_para 'Horizonte.co3'
+.span-2.campo
+  = h.text_field :concreciones, disabled: bloqueado
+  = ayuda_para 'Horizonte.concreciones'
+.span-2.campo
+  = h.text_field :barnices, disabled: bloqueado
+  = ayuda_para 'Horizonte.barnices'
+.span-2.campo
+  = h.text_field :moteados, disabled: bloqueado
+  = ayuda_para 'Horizonte.moteados'
+.span-unaymedia.campo
+  = h.text_field :humedad, disabled: bloqueado
+  = ayuda_para 'Horizonte.humedad'
+.span-1.campo
+  = h.text_field :raices, disabled: bloqueado
+  = ayuda_para 'Horizonte.raices'
+.span-3.last.campo
+  = h.text_field :formaciones_especiales, disabled: bloqueado
+  = ayuda_para 'Horizonte.formaciones_especiales'
+
+.oculto= h.check_box :_destroy

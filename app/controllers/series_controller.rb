@@ -1,32 +1,21 @@
 # encoding: utf-8
 class SeriesController < AutorizadoController
+  has_scope :pagina, default: 1
+  has_scope :per, as: :filas
 
   before_filter :preparar, only: [:index]
   before_filter :ordenar, only: [:index]
-  before_filter :paginar, only: [:index]
 
   before_filter :asociar_perfiles, only: [:update]
 
-  # La acción +index+ funciona anónimamente
+  # La acción +index+ funciona anónimamente, pero igual uso a CanCan para que
+  # cargue el recurso
   skip_before_filter :authenticate_usuario!,  only: [:index]
-  skip_load_and_authorize_resource            only: [:index]
+  skip_authorize_resource                     only: [:index]
   skip_authorization_check                    only: [:index]
 
-  # GET /series
-  # GET /series.json
   def index
-    @titulo = "Series de suelos"
-    @series = @series.decorate
-
-    respond_to do |format|
-      format.html do
-        if request.xhr?   # solicitud ajax para la paginación
-          render :index,  layout: false,
-                          locals: { series: @series.pagina(params[:pagina]) }
-        end
-      end
-      format.json { render json: @series }
-    end
+    respond_with @series = PaginadorDecorator.decorate(apply_scopes(@series))
   end
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
@@ -39,75 +28,44 @@ class SeriesController < AutorizadoController
     end
   end
 
-  # GET /series/1
-  # GET /series/1.json
   def show
-    @serie = @serie.decorate
-    @titulo = "Serie #{@serie.nombre} (#{@serie.simbolo})"
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @serie }
-    end
+    respond_with @serie = @serie.decorate
   end
 
-  # GET /series/new
-  # GET /series/new.json
   def new
-    @busqueda = Perfil.search
-    @titulo = 'Nueva serie'
-    @serie = SerieDecorator.decorate(@serie)
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @serie }
-    end
+    @busqueda_perfil = Perfil.search
+    respond_with @serie
   end
 
-  # GET /series/1/edit
   def edit
-    @busqueda = Perfil.search
-    @titulo = "Editando serie #{@serie.nombre}"
-    @serie = SerieDecorator.new(@serie)
+    @busqueda_perfil = Perfil.search
+    respond_with @serie = @serie.decorate
   end
 
-  # POST /series
-  # POST /series.json
   def create
-    respond_to do |format|
-      if @serie.save
-        format.html { buscar_perfiles_o_guardar }
-        format.json { render json: @serie, status: :created, location: @serie }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @serie.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a new
+    opciones = if @serie.save
+      { location: serie_o_buscar_perfiles }
+    else
+      { }
     end
+
+    respond_with @serie, opciones
   end
 
-  # PUT /series/1
-  # PUT /series/1.json
   def update
-    respond_to do |format|
-      if @serie.update_attributes(params[:serie])
-        format.html { buscar_perfiles_o_guardar }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @serie.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a edit
+    opciones = if @serie.update_attributes(params[:serie])
+      { location: serie_o_buscar_perfiles }
+    else
+      { }
     end
+
+    respond_with @serie, opciones
   end
 
-  # DELETE /series/1
-  # DELETE /series/1.json
   def destroy
-    @serie.destroy
-
-    respond_to do |format|
-      format.html { redirect_to series_url }
-      format.json { head :ok }
-    end
+    respond_with @serie.destroy
   end
 
   private
@@ -120,13 +78,17 @@ class SeriesController < AutorizadoController
       end
     end
 
-    def buscar_perfiles_o_guardar
+    # TODO Ver si se puede hacer con polymorphic urls
+    def serie_o_buscar_perfiles
       case params[:commit]
-      when 'Buscar'
-        session[:origen] = serie_path(@serie)
-        redirect_to perfiles_path(format: :seleccion, q: params[:q])
+      when t('comunes.perfiles_asociados.submit')
+        session[:despues_de_seleccionar] = serie_path(@serie)
+        seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.seleccionar.submit')
+        # Venimos de perfil#seleccionar, asique redirigimos a edit
+        edit_serie_path(@serie)
       else
-        redirect_to @serie, notice: I18n.t("messages.#{params[:action]}d",  model: 'Serie')
+        @serie
       end
     end
 
@@ -148,12 +110,6 @@ class SeriesController < AutorizadoController
       @series = @series.order("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
-    # Agrega la paginación al scope en curso
-    def paginar
-      @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
-      @series = @series.pagina(params[:pagina]).per(params[:filas])
-    end
-
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
     # el +nombre+ por default.
     def metodo_de_ordenamiento
@@ -161,4 +117,8 @@ class SeriesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'nombre'
     end
 
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'la' }
+    end
 end

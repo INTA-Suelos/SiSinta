@@ -1,9 +1,3 @@
-class ProyectoDecorator < Draper::Base
-  decorates :proyecto
-  decorates_association :perfiles
-
-  def nuevo_perfil
-    PerfilDecorator.new(Perfil.new)
-  end
-
+class ProyectoDecorator < ApplicationDecorator
+  decorates_association :perfiles, with: PaginadorDecorator
 end

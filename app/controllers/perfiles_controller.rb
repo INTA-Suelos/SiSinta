@@ -1,54 +1,38 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
+  has_scope :pagina, default: 1
+  has_scope :per, as: :filas
 
-  before_filter :preparar,  only: [:index, :geo,
-                                   :preparar_csv, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo,
-                                   :preparar_csv, :procesar_csv ]
-  before_filter :paginar,   only: [:index]
+  respond_to :json, only: :geo
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
   skip_load_and_authorize_resource            only: [:index, :geo]
   skip_authorization_check                    only: [:index, :geo]
 
-  # GET /perfiles
-  # GET /perfiles.json
+  before_filter :preparar,  only: [:index, :geo, :seleccionar,
+                                   :exportar, :procesar_csv ]
+  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
+                                   :exportar, :procesar_csv ]
+  before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
+  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
+
   def index
-    @titulo = "Perfiles"
-    @perfiles = PerfilDecorator.decorate(@perfiles)
-    respond_to do |format|
-      format.html do
-        if request.xhr?   # solicitud ajax para la paginación
-          render :index,  layout: false,
-                          locals: { perfiles: @perfiles.pagina(params[:pagina]) }
-        end
-      end
-      format.json { render  json: @perfiles,
-                            only: [ :id,
-                                    :numero,
-                                    :nombre,
-                                    :ubicacion,
-                                    :fecha      ] }
-      format.seleccion do
-        @regresar = session.delete :origen
-        render layout: 'application.html'
-      end
-    end
+    @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
+
+    respond_with @perfiles
   end
 
   # GET /perfiles/geo.json
   def geo
-    respond_to do |format|
-      format.json { render json: como_geojson(
-                    @perfiles.select { |c| c.ubicacion.try(:coordenadas?) },
-                    :geometria)   }
-    end
+    @perfiles = como_geojson(
+      @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
+    )
+    respond_with @perfiles
   end
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
   # el que consultar, controlando el input del usuario.
-  #
   def autocompletar
     case params[:atributo]
       when 'numero'         then super(Perfil, :numero)
@@ -57,103 +41,90 @@ class PerfilesController < AutorizadoController
     end
   end
 
-  # GET /perfiles/1
-  # GET /perfiles/1.json
   def show
-    @perfil = PerfilDecorator.new(@perfil)
-    @titulo = "Perfil #{@perfil.numero}"
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @perfil }
-    end
+    respond_with @perfil = @perfil.decorate
   end
 
-  # GET /perfiles/new
-  # GET /perfiles/new.json
   def new
-    @perfil = PerfilDecorator.new(@perfil)
-    @titulo = 'Nuevo perfil'
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @perfil }
-    end
+    respond_with @perfil = @perfil.decorate
   end
 
-  # GET /perfiles/1/edit
   def edit
-    @perfil = PerfilDecorator.new(@perfil)
-    @titulo = "Editando perfil #{@perfil.numero}"
+    respond_with @perfil = @perfil.decorate
   end
 
-  # POST /perfiles
-  # POST /perfiles.json
+  # Cada usuario es propietario y "miembro" de los perfiles que crea
   def create
     @perfil.usuario = current_usuario
 
-    respond_to do |format|
-      if @perfil.save
-        # Cada usuario es miembro de los perfiles que crea
-        current_usuario.grant :miembro, @perfil
-        format.html { redirect_to perfil_o_analisis,
-                      notice: I18n.t('messages.created', model: 'Perfil') }
-        format.json { render json: @perfil, status: :created, location: @perfil }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @perfil.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a new
+    opciones = if @perfil.save
+      current_usuario.grant :miembro, @perfil
+      { location: perfil_o_analisis }
+    else
+      { }
     end
+
+    respond_with (@perfil = @perfil.decorate), opciones
   end
 
-  # PUT /perfiles/1
-  # PUT /perfiles/1.json
   def update
     # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
     # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
     # la especificación de html, asique lo corrijo.
+    # TODO Ver cómo hacerlo desde la vista?
     begin
       params[:perfil][:capacidad_attributes][:subclase_ids] ||= []
     rescue
       # Nada que hacer porque no hay capacidad asociada.
     end
 
-    respond_to do |format|
-      if @perfil.update_attributes(params[:perfil])
-        format.html { redirect_to perfil_o_analisis,
-                      notice: I18n.t('messages.updated', model: 'Perfil') }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @perfil.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a edit
+    opciones = if @perfil.update_attributes(params[:perfil])
+      { location: perfil_o_analisis }
+    else
+      { }
     end
+
+    respond_with (@perfil = @perfil.decorate), opciones
   end
 
-  # DELETE /perfiles/1
-  # DELETE /perfiles/1.json
   def destroy
-    @perfil.destroy
-
-    respond_to do |format|
-      format.html { redirect_to perfiles_url }
-      format.json { head :ok }
-    end
+    respond_with @perfil.destroy
   end
 
   # Preparar los atributos a exportar/importar en CSV
-  #
-  def preparar_csv
+  def exportar
+    @busqueda_perfil = Perfil.search(params[:q])
     @atributos = Perfil.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :horizontes ]
+      [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
+        :reconocedores_taggings ]
 
-    respond_to do |format|
-      format.html
+    @marcados = if self.checks_csv_marcados.any?
+      self.checks_csv_marcados.map(&:to_sym)
+    else
+      [ :id, :numero, :fecha, :serie ]
     end
+
+    respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
   def procesar_csv
-    super(@perfiles, 'perfiles')
+    self.perfiles_seleccionados = nil
+    super(@perfiles.decorate, 'perfiles')
+  end
+
+  def seleccionar
+    @continuar = session.delete :despues_de_seleccionar
+
+    respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
+  end
+
+  def almacenar
+    # Perfiles recién seleccionados y los ya viejos
+    (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
+
+    redirect_to exportar_perfiles_path
   end
 
   protected
@@ -161,7 +132,7 @@ class PerfilesController < AutorizadoController
     # Prepara el scope para la lista de perfiles
     def preparar
       # Selecciono sólo lo que necesito en el index
-      @perfiles ||= Perfil.joins(:ubicacion, :serie)
+      @perfiles ||= Perfil.includes(:ubicacion, :serie)
         .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
@@ -183,13 +154,9 @@ class PerfilesController < AutorizadoController
       @perfiles = @perfiles.order("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
-    # Agrega la paginación al scope en curso
-    def paginar
-      @activo = %w[10 20 50].include?(params[:filas]) ? params[:filas] : '20'
-      @perfiles = @perfiles.pagina(params[:pagina]).per(params[:filas])
-    end
-
-    # Determina la ruta a la que reenvia
+    # Determina si el usuario terminó de editar el perfil o va a seguir con los
+    # análisis
+    # TODO Revisar que envíe al edit
     def perfil_o_analisis
       params[:analisis].present? ? edit_perfil_analisis_index_path(@perfil) : @perfil
     end
@@ -201,4 +168,47 @@ class PerfilesController < AutorizadoController
         ].include?(params[:por]) ? params[:por] : 'fecha'
     end
 
+    def cargar_perfiles_seleccionados
+      @perfiles = @perfiles.where(id: perfiles_seleccionados)
+    end
+
+    def buscar_perfiles_o_exportar
+      # Guarda los checkboxes que estaban marcados
+      self.checks_csv_marcados = params[:atributos]
+
+      # Perfiles con +_destroy+ marcado
+      remover = if params[:csv].present?
+        params[:csv][:perfiles_attributes].each.collect do |p|
+          p.first if p.last[:_destroy]
+        end.reject { |elemento| elemento.nil? }
+      end
+      self.perfiles_seleccionados -= remover unless remover.nil?
+
+      # Dirije la navegación según el botón que apretó el usuario
+      case params[:commit]
+      when t('comunes.perfiles_asociados.submit')
+        session[:despues_de_seleccionar] = almacenar_perfiles_path
+        redirect_to seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.exportar.submit')
+        # Nada, continuamos a procesar_csv
+      else
+        # Nada, continuamos a procesar_csv
+      end
+    end
+
+    def perfiles_seleccionados
+      Array.wrap session[:perfiles_seleccionados]
+    end
+
+    def perfiles_seleccionados=(perfiles)
+      session[:perfiles_seleccionados] = perfiles
+    end
+
+    def checks_csv_marcados
+      Array.wrap current_usuario.checks_csv_perfiles
+    end
+
+    def checks_csv_marcados=(checks)
+      current_usuario.update_attribute :checks_csv_perfiles, checks
+    end
 end

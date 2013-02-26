@@ -14,67 +14,47 @@
 # determinar las reglas de inflección para el castellano. Rails necesita
 # poder pluralizar y singularizar para trabajar con la base de datos
 ActiveSupport::Inflector.inflections do |inflect|
-  # Modelos
-  inflect.irregular 'perfil', 'perfiles'
+  # Terminan en 'e'
   inflect.irregular 'horizonte', 'horizontes'
-  inflect.irregular 'analisis', 'analisis'
-  inflect.irregular 'usuario', 'usuarios'
-  inflect.irregular 'color', 'colores'
-  inflect.irregular 'color_seco', 'colores_secos'
-  inflect.irregular 'color_humedo', 'colores_humedos'
-  inflect.irregular 'adjunto', 'adjuntos'
   inflect.irregular 'serie', 'series'
   inflect.irregular 'paisaje', 'paisajes'
   inflect.irregular 'fase', 'fases'
-  inflect.irregular 'grupo', 'grupos'
-  inflect.irregular 'rol', 'roles'
-  inflect.irregular 'ubicacion', 'ubicaciones'
-  inflect.irregular 'proyecto', 'proyectos'
-
-  # Modelos <=> Lookups
-  inflect.irregular 'consistencia', 'consistencias'
-  inflect.irregular 'estructura', 'estructuras'
   inflect.irregular 'limite', 'limites'
-  inflect.irregular 'capacidad', 'capacidades'
-
-  # Lookups
-  inflect.irregular 'textura_de_horizonte', 'texturas_de_horizonte'
-  inflect.irregular 'clase_de_capacidad', 'clases_de_capacidad'
-  inflect.irregular 'subclase_de_capacidad', 'subclases_de_capacidad'
-  inflect.irregular 'escurrimiento', 'escurrimientos'
   inflect.irregular 'pendiente', 'pendientes'
-  inflect.irregular 'permeabilidad', 'permeabilidades'
   inflect.irregular 'relieve', 'relieves'
-  inflect.irregular 'anegamiento', 'anegamientos'
-  inflect.irregular 'posicion', 'posiciones'
   inflect.irregular 'drenaje', 'drenajes'
-  inflect.irregular 'sal', 'sales'
-  inflect.irregular 'uso_de_la_tierra', 'usos_de_la_tierra'
-  inflect.irregular 'ayuda', 'ayudas'
-  inflect.irregular 'tipo_de_estructura', 'tipos_de_estructura'
-  inflect.irregular 'clase_de_estructura', 'clases_de_estructura'
-  inflect.irregular 'grado_de_estructura', 'grados_de_estructura'
-  inflect.irregular 'plasticidad_de_consistencia', 'plasticidades_de_consistencia'
-  inflect.irregular 'adhesividad_de_consistencia', 'adhesividades_de_consistencia'
+  inflect.irregular 'clase', 'clases'
+
+  # No contables
+  inflect.uncountable 'analisis'
+
+  # Adjetivadas
+  inflect.irregular 'color_seco', 'colores_secos'
+  inflect.irregular 'color_humedo', 'colores_humedos'
+
+  # Sustantivo + preposición + sustantivo
+  inflect.plural(/^(.*)(_del?_.*)$/i, '\1s\2')
+  inflect.plural(/^(.*)([^aeéiou])(_del?_.*)$/i, '\1\2es\3')
+  inflect.plural(/^(.*)([aeiou]s)(_del?_.*)$/i, '\1\2\3')
+  inflect.plural(/^(.*)z(_del?_.*)$/i, '\1ces\2')
+  inflect.plural(/^(.*)á([sn])(_del?_.*)$/i, '\1a\2es\3')
+  inflect.plural(/^(.*)é([sn])(_del?_.*)$/i, '\1e\2es\3')
+  inflect.plural(/^(.*)í([sn])(_del?_.*)$/i, '\1i\2es\3')
+  inflect.plural(/^(.*)ó([sn])(_del?_.*)$/i, '\1o\2es\3')
+  inflect.plural(/^(.*)ú([sn])(_del?_.*)$/i, '\1u\2es\3')
+
+  inflect.singular(/^(.*)s(_del?_.*)$/i, '\1\2')
+  inflect.singular(/^(.*)es(_del?_.*)$/i, '\1\2')
+
   inflect.irregular 'consistencia_en_seco', 'consistencias_en_seco'
   inflect.irregular 'consistencia_en_humedo', 'consistencias_en_humedo'
-  inflect.irregular 'tipo_de_limite', 'tipos_de_limite'
-  inflect.irregular 'forma_de_limite', 'formas_de_limite'
-  inflect.irregular 'formato_de_coordenadas', 'formatos_de_coordenadas'
-  inflect.irregular 'pedregosidad', 'pedregosidades'
-  inflect.irregular 'subclase_de_pedregosidad', 'subclases_de_pedregosidad'
-  inflect.irregular 'clase_de_pedregosidad', 'clases_de_pedregosidad'
-  inflect.irregular 'humedad', 'humedades'
+  inflect.irregular 'clase_de_capacidad', 'clases_de_capacidad'
   inflect.irregular 'clase_de_humedad', 'clases_de_humedad'
-  inflect.irregular 'subclase_de_humedad', 'subclases_de_humedad'
-  inflect.irregular 'erosion', 'erosiones'
   inflect.irregular 'clase_de_erosion', 'clases_de_erosion'
-  inflect.irregular 'subclase_de_erosion', 'subclases_de_erosion'
+  inflect.irregular 'clase_de_pedregosidad', 'clases_de_pedregosidad'
+  inflect.irregular 'clase_de_estructura', 'clases_de_estructura'
 
-  # Atajos
-  inflect.irregular 'clase', 'clases'
-  inflect.irregular 'subclase', 'subclases'
-  inflect.irregular 'tipo', 'tipos'
-  inflect.irregular 'grado', 'grados'
-  inflect.irregular 'forma', 'formas'
+  # Se mantienen en inglés
+  inflect.irregular 'tag', 'tags'
+  inflect.irregular 'tagging', 'taggings'
 end

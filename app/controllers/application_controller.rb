@@ -1,8 +1,14 @@
 # encoding: utf-8
 require 'csv'
+require "application_responder"
 
 class ApplicationController < ActionController::Base
   include BrowserDetect, ApplicationHelper
+
+  # Responders
+  self.responder = ApplicationResponder
+  respond_to :html
+  respond_to :json, only: :autocompletar
 
   protect_from_forgery
 
@@ -49,7 +55,6 @@ class ApplicationController < ActionController::Base
 
   # GET /:controlador/:id/permisos
   def permisos
-    @titulo = "Permisos"
     @recurso = recurso
     @controlador = params[:controller]
     @miembros = Usuario.miembros(@recurso).collect {|u| u.id}
@@ -112,38 +117,27 @@ class ApplicationController < ActionController::Base
                                             "#{atributo}" => elemento.send(atributo)]}
     end
 
-    # Carga el perfil al que pertenece el modelo anidado
-    #
-    def cargar_perfil
-      @perfil = Perfil.find(params[:perfil_id])
-    end
-
     # Devuelve un csv en base a los atributos del modelo
     #
     # * *Args*    :
     #   - +coleccion+ -> coleccion a convertir en CSV
     #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
-    # * *Returns* :
-    #   - La lista de coincidencias mapeada en +json+
-
-    def procesar_csv(coleccion = {}, prefijo = 'csv')
-
+    def procesar_csv(coleccion = [], prefijo = 'csv')
       @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
 
       @encabezado = true if params[:incluir_encabezado]
 
       @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-        @atributos = params[:atributos].keys.sort
+        @atributos = params[:atributos].try :sort
 
         csv << @atributos if @encabezado
 
         coleccion.each do |miembro|
-          csv << miembro.como_arreglo(@atributos)
+          csv << miembro.to_array(@atributos)
         end
       end
 
       send_data @respuesta, :filename => @archivo
-
     end
 
     def direccion_de_ordenamiento
@@ -163,4 +157,8 @@ class ApplicationController < ActionController::Base
       "#{url_for(@recurso)}/permitir"
     end
 
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'el' }
+    end
 end

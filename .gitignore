@@ -3,7 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
-.*swp
+.*sw[po]
 TODO
 
 # Archivos que se generan en el deploy
@@ -16,5 +16,6 @@ db/datos
 # TODO automatizar copia con rake
 config/database.yml
 config/environments/production.rb
+config/environments/development.rb
 config/initializers/devise.rb
 config/initializers/secret_token.rb

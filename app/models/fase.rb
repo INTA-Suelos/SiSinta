@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Fase < ActiveRecord::Base
-  attr_accessible :nombre, :codigo
+  attr_accessible :nombre, :codigo, :perfiles_attributes
 
   has_many :perfiles, inverse_of: :fase
 
@@ -8,7 +8,5 @@ class Fase < ActiveRecord::Base
   validates_uniqueness_of :nombre
   validates_presence_of :nombre
 
-  def to_s
-    nombre
-  end
+  accepts_nested_attributes_for :perfiles
 end

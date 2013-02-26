@@ -1,0 +1,10 @@
+es:
+  flash:
+    actions:
+      create:
+        notice: 'Se creó %{el_la} %{resource_name} correctamente.'
+      update:
+        notice: 'Se actualizó %{el_la} %{resource_name} correctamente.'
+      destroy:
+        notice: 'Se destruyó %{el_la} %{resource_name} correctamente.'
+        alert: 'No se pudo destruir %{el_la} %{resource_name}.'

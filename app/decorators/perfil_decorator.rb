@@ -1,6 +1,8 @@
-class PerfilDecorator < Draper::Base
-  decorates :perfil
+class PerfilDecorator < ApplicationDecorator
   decorates_association :ubicacion
+  decorates_association :serie
+  decorates_association :proyecto
+  decorates_association :fase
 
   def fecha
     source.fecha.try :to_s, :dma
@@ -14,12 +16,7 @@ class PerfilDecorator < Draper::Base
     source.reconocedores.join(', ')
   end
 
-  def numero
-    source.numero.blank? ? '-' : source.numero
-  end
-
   def to_s
     source.numero || source.nombre
   end
-
 end

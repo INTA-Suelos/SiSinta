@@ -1,6 +1,12 @@
-.botonera= link_to 'Nuevo proyecto', new_proyecto_path
-
 #lista
+  .botonera
+    - if can? :create, @proyecto
+      = link_to 'Nuevo proyecto', new_proyecto_path
+
+    #paginacion
+      = paginate @proyectos
+      = elegir_filas 'proyectos'
+
   %table#proyectos
     %thead
       %tr
@@ -24,4 +30,4 @@
             = '|'
             = link_to 'Eliminar', proyecto, confirm: t(:confirmar), method: :delete
 
-.botonera= link_to 'Nuevo proyecto', new_proyecto_path
+  = volver_arriba

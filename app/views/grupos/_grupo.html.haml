@@ -7,4 +7,4 @@
     = link_to 'Editar', edit_grupo_path(grupo)
     = '|'
     = link_to 'Eliminar', grupo, method: :delete,
-        data: { confirm: "#{t :confirmar} #{grupo.perfiles.any? ? "Esto va a dejar sin grupo a #{pluralize(grupo.perfiles.size, 'perfil')}." : nil } " }
+        data: { confirm: "#{t :confirmar} #{grupo.perfiles.any? ? "Esto va a dejar sin subgrupo a #{pluralize(grupo.perfiles.size, 'perfil')}." : nil } " }

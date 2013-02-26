@@ -3,10 +3,6 @@ require './test/test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
 
-  test "debería convertir el modelo a Array" do
-    assert_instance_of Array, build(:perfil).como_arreglo, "no devuelve Array"
-  end
-
   test "debería buscar y cargar las asociaciones" do
     existente = create(:fase).nombre
     assert_no_difference ('Fase.count') do
@@ -26,6 +22,13 @@ class ExtensionModelosTest < ActiveSupport::TestCase
     assert !sin_atributo.include?(:numero), "no filtra un atributo"
     assert !sin_asociacion.include?(:ubicacion), "no filtra una asociación"
     assert !(sin_ambos.include?(:numero) and sin_ambos.include?(:ubicacion)), "no filtra varias"
+  end
+
+  test "debería nulificar la asociación" do
+    p = build_stubbed(:perfil, fase: build_stubbed(:fase))
+    assert_not_nil p.fase
+    p.anular = 'fase'
+    assert_nil p.fase
   end
 
 end

@@ -10,7 +10,7 @@
       = '|'
       - flash.each do |name, msg|
         = content_tag :div, msg, class: 'mensaje', id: "flash_#{name}" if msg.is_a?(String)
-    %h1.titulo= @titulo
-    %p.subtitulo= @subtitulo
+    %h1.titulo= titulo_de_la_accion
+    %p.subtitulo= subtitulo
   #logo_sisinta
     = link_to image_tag("sisinta.png", alt: 'SiSINTA'), '/'

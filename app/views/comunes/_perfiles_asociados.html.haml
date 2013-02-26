@@ -1,0 +1,30 @@
+%table#perfiles_asociados
+  %thead
+    %tr
+      - unless bloqueado
+        %th.borrar.centrado
+      %th.nombre          Nombre
+      %th.numero.centrado Número
+      %th.ubicacion       Ubicación
+      %th.fecha.centrado  Fecha
+      %th.modal.centrado  ¿Es modal?
+      %th.acciones
+  %tbody
+    - if perfiles.any?
+      - perfiles.each do |perfil|
+        = fields_for perfil do |builder|
+          = render partial: 'comunes/perfil',
+              locals: { f: builder, perfil: perfil, param: param, bloqueado: bloqueado }
+    - else
+      %tr.empty
+        %td{colspan: 3} Ningún perfil todavía.
+
+- if @busqueda_perfil.present?
+  = field_set_tag 'Agregar más perfiles', class: 'celeste_oscuro plegable' do
+    #busqueda_perfil
+      = search_form_for @busqueda_perfil do |b|
+        .span-8= b.text_field :ubicacion_descripcion_or_serie_nombre_or_numero_cont
+
+        .span-3=  b.label :tags_name_cont, "con estas etiquetas"
+        .span-8= b.text_field :tags_name_cont
+        .span-2.last= b.submit t(".submit"), id: :seleccion

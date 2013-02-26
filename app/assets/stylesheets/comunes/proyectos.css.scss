@@ -1,7 +1,6 @@
 @import "constantes";
 
 #proyecto {
-
   #descripcion {
     margin-bottom: 0.5em;
   }
@@ -13,20 +12,4 @@
   #proyecto_cita {
     height: $altura_linea * 4;
   }
-
-  #perfiles {
-    label {
-      font-weight: normal;
-      font-size: small;
-    }
-
-    .borrar   { width: 1%;  }
-    .nombre   { width: 77%; }
-    .numero   { width: 10%;
-                text-align: center; }
-    .fecha    { width: 10%; }
-    .acciones { width: 2%; }
-
-  }
-
 }

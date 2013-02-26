@@ -6,7 +6,6 @@ class UsuariosController < AutorizadoController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @titulo = "Administración de usuarios y grupos"
     respond_to do |format|
       format.html do
         if request.xhr?

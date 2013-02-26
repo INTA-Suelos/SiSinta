@@ -12,7 +12,7 @@ class Perfil < ActiveRecord::Base
                   :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
                   :capacidad_attributes, :humedad_attributes,
                   :pedregosidad_attributes, :erosion_attributes, :etiquetas,
-                  :reconocedores, :grupo, :serie_attributes,
+                  :reconocedores, :grupo, :serie_attributes, :anular,
                   :horizontes_attributes, :analisis_attributes
 
   attr_taggable :etiquetas
@@ -57,7 +57,7 @@ class Perfil < ActiveRecord::Base
   belongs_to_active_hash :sal
   belongs_to_active_hash :uso_de_la_tierra
 
-  has_many :analisis, through: :horizontes
+  has_many :analisis, through: :horizontes, order: 'profundidad_muestra ASC, horizonte_id ASC'
 
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles, validate: false
@@ -78,13 +78,24 @@ class Perfil < ActiveRecord::Base
 
   # Se crea una serie si no existe ya
   def autosave_associated_records_for_serie
-    # Si la serie ya existe no actualiza el símbolo. En otras palabras, sólo se
-    # puede crear una serie desde el perfil, nunca modificarla
-    # TODO  Encontrar la manera de validar la unicidad de simbolo, como
-    # TODO    +validate_associated_records_for_serie+
+    # Si la serie ya existe no actualiza el símbolo. En otras palabras, desde
+    # el perfil sólo se puede crear una serie, nunca modificarla
+    # TODO  Encontrar la manera de validar la unicidad de simbolo, como +validate_associated_records_for_serie+
     if nombre
-      self.serie = Serie.find_or_create_by_nombre(nombre) do |serie|
-        serie.simbolo = simbolo
+      _simbolo = simbolo
+      self.serie = Serie.find_or_create_by_nombre(nombre)
+
+      # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
+      # una serie existente desde un perfil.
+      unless self.serie.simbolo.present? or _simbolo.nil?
+        self.serie.update_attribute(:simbolo, _simbolo)
+      end
+
+      # Si este perfil es modal, queda como único modal de la serie
+      if modal
+        self.serie.perfiles.each do |p|
+          p.update_attribute(:modal, false) unless p == self
+        end
       end
     end
   end

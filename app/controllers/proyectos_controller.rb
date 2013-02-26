@@ -1,94 +1,58 @@
 # encoding: utf-8
 class ProyectosController < AutorizadoController
-
-  # Las acciones +index+ y +show+ funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [:index, :show]
-  skip_load_and_authorize_resource            only: [:index, :show]
-  skip_authorization_check                    only: [:index, :show]
+  has_scope :pagina, default: 1
+  has_scope :per, as: :filas
 
   before_filter :asociar_perfiles,            only: [:update]
 
-  # GET /proyectos
-  # GET /proyectos.json
+  # Las acciones +index+ y +show+ funcionan anónimamente, pero igual uso a
+  # CanCan para que cargue el recurso
+  skip_before_filter :authenticate_usuario!,  only: [:index, :show]
+  skip_authorize_resource                     only: [:index, :show]
+  skip_authorization_check                    only: [:index, :show]
+
   def index
-    @proyectos = Proyecto.all
-    @titulo = "Proyectos"
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @proyectos }
-    end
+    respond_with @proyectos = PaginadorDecorator.decorate(apply_scopes(@proyectos))
   end
 
-  # GET /proyectos/1
-  # GET /proyectos/1.json
   def show
-    @proyecto = Proyecto.find(params[:id]).decorate
-    @titulo = @proyecto.nombre
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @proyecto }
-    end
+    respond_with @proyecto = @proyecto.decorate
   end
 
-  # GET /proyectos/new
-  # GET /proyectos/new.json
   def new
-    @busqueda = Perfil.search
-    @titulo = 'Nuevo proyecto'
-    @proyecto = ProyectoDecorator.decorate(@proyecto)
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @proyecto }
-    end
+    @busqueda_perfil = Perfil.search
+    respond_with @proyecto = @proyecto.decorate
   end
 
-  # GET /proyectos/1/edit
   def edit
-    @busqueda = Perfil.search
-    @titulo = "Editando #{@proyecto.nombre}"
-    @proyecto = ProyectoDecorator.decorate(@proyecto)
+    @busqueda_perfil = Perfil.search
+    respond_with @proyecto = @proyecto.decorate
   end
 
-  # POST /proyectos
-  # POST /proyectos.json
   def create
-    respond_to do |format|
-      if @proyecto.save
-        format.html { buscar_perfiles_o_guardar }
-        format.json { render json: @proyecto, status: :created, location: @proyecto }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @proyecto.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a new
+    opciones = if @proyecto.save
+      { location: proyecto_o_buscar_perfiles }
+    else
+      { }
     end
+
+    respond_with @proyecto, opciones
   end
 
-  # PUT /proyectos/1
-  # PUT /proyectos/1.json
   def update
-    respond_to do |format|
-      if @proyecto.update_attributes(params[:proyecto])
-        format.html { buscar_perfiles_o_guardar }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @proyecto.errors, status: :unprocessable_entity }
-      end
+    # Si falla, responders lo redirige a edit
+    opciones = if @proyecto.update_attributes(params[:proyecto])
+      { location: proyecto_o_buscar_perfiles }
+    else
+      { }
     end
+
+    respond_with @proyecto, opciones
   end
 
-  # DELETE /proyectos/1
-  # DELETE /proyectos/1.json
   def destroy
-    @proyecto.destroy
-
-    respond_to do |format|
-      format.html { redirect_to proyectos_url }
-      format.json { head :no_content }
-    end
+    respond_with @proyecto.destroy
   end
 
   private
@@ -101,13 +65,17 @@ class ProyectosController < AutorizadoController
       end
     end
 
-    def buscar_perfiles_o_guardar
+    # TODO Ver si se puede hacer con polymorphic urls
+    def proyecto_o_buscar_perfiles
       case params[:commit]
-      when 'Buscar'
-        session[:origen] = proyecto_path(@proyecto)
-        redirect_to perfiles_path(format: :seleccion, q: params[:q])
+      when t('comunes.perfiles_asociados.submit')
+        session[:despues_de_seleccionar] = proyecto_path(@proyecto)
+        seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.seleccionar.submit')
+        # Venimos de perfil#seleccionar, asique redirigimos a edit
+        edit_proyecto_path(@proyecto)
       else
-        redirect_to @proyecto, notice: I18n.t("messages.#{params[:action]}d", model: 'Proyecto')
+        @proyecto
       end
     end
 

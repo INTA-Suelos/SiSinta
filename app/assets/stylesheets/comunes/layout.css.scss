@@ -2,6 +2,7 @@
 
 body {
   border-top: 15px solid black;
+  margin-bottom: 1em;
 }
 
 .container {
@@ -136,7 +137,6 @@ ul.menu_usuarios {
 
     .plegable {
       &:hover { cursor: pointer; }
-      & + .submenu { display: none; }
     }
   }
 
@@ -166,17 +166,6 @@ label {
 #lista {
   table {
     background: $celeste_oscuro;
-  }
-  #paginacion {
-    float: right;
-
-    #filas {
-      float: right;
-
-      #activo {
-        font-weight: bold;
-      }
-    }
   }
 }
 

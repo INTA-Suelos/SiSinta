@@ -7,17 +7,14 @@ class HorizontesController < AutorizadoController
   # GET /horizontes
   # GET /horizontess.json
   def index
-    @titulo = "Lista de horizontes"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render  json: @horizontes }
     end
   end
 
-  #
   # Preparar los atributos a exportar/importar en CSV
-  #
-  def preparar_csv
+  def exportar
     @atributos = Horizonte.atributos_y_asociaciones :excepto =>
       [ :created_at, :updated_at, :analisis ]
 

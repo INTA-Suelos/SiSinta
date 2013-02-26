@@ -28,9 +28,48 @@ form.completa {
 }
 
 #lista {
-  #modal {  width: 50px; }
+  .fecha      { width: 5%; }
+  .serie      { width: 15%; }
+  .ubicacion  { width: 45%; }
+  .numero     { width: 5%; }
+  .modal      { width: 5%; }
+  .acciones   { width: 25%; }
+  .checks     { display: none }
 }
 
-.marcar {
-  width: 80px;
+#busqueda_perfiles {
+  td.acciones { display: none; }
+  .checks     { display: table-cell; }
+  .serie      { width: 20%; }
+  .ubicacion  { width: 50%; }
+  th.marcar, .checks {  width: 15%;
+                        text-align: center; }
+}
+
+// Cuando hay una lista de perfiles asociados al modelo en cuestión, se usa
+// este id, con este estilo por default
+#perfiles_asociados {
+  label {
+    font-weight: normal;
+    font-size: small;
+  }
+
+  .borrar     { width: 1%;
+                color: $rojo_inta;
+    // Si hay javascript lo muestro y oculto el checkbox
+    a {         display: none; } }
+  .nombre     { width: 15%; }
+  .numero     { width: 10%;
+                text-align: center; }
+  .ubicacion  { width: 52%; }
+  .fecha      { width: 10%; }
+  .modal      { width: 10%; }
+  .acciones   { width: 2%; }
+}
+
+.show {
+  #perfiles_asociados {
+    .borrar { display: none; }
+    .acciones { display: 3%; }
+  }
 }

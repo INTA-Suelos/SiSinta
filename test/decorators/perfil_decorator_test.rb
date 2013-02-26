@@ -10,7 +10,7 @@ class PerfilDecoratorTest < ActiveSupport::TestCase
 
   test "decora la ubicación" do
     @perfil.ubicacion = create(:ubicacion)
-    assert_kind_of Draper::Base, PerfilDecorator.decorate(@perfil).ubicacion
+    assert_kind_of UbicacionDecorator, PerfilDecorator.decorate(@perfil).ubicacion
   end
 
   test "usa día/mes/año para la fecha" do

@@ -1,189 +1,191 @@
 = field_set_tag 'Descripción del sitio', class: 'celeste plegable span-22 last' do
 
-  = f.fields_for :ubicacion do |f_u|
+  = f.fields_for :ubicacion do |fu|
     .span-4.campo
-      .span-2= f_u.label :mosaico
-      .span-2.last= f_u.text_field :mosaico, disabled: bloqueado
-      = ayuda_para('ubicacion.mosaico')
+      .span-2= fu.label :mosaico
+      .span-2.last= fu.text_field :mosaico, disabled: bloqueado,
+        placeholder: fu.object.pista(:mosaico)
+      = fu.object.ayuda(:mosaico)
     .span-4.campo
-      .span-2= f_u.label :recorrido
-      .span-2.last= f_u.text_field :recorrido, disabled: bloqueado
-      = ayuda_para('ubicacion.recorrido')
+      .span-2= fu.label :recorrido
+      .span-2.last= fu.text_field :recorrido, disabled: bloqueado
+      = fu.object.ayuda(:recorrido)
     .span-4.campo
-      .span-2= f_u.label :aerofoto
-      .span-2.last= f_u.text_field :aerofoto, disabled: bloqueado
-      = ayuda_para('ubicacion.aerofoto')
+      .span-2= fu.label :aerofoto
+      .span-2.last= fu.text_field :aerofoto, disabled: bloqueado
+      = fu.object.ayuda(:aerofoto)
   .span-5.campo
     .span-2= f.label :fecha
     .span-3.last= f.text_field :fecha, class: 'fecha',
-      disabled: bloqueado, required: true
-    = ayuda_para('perfil.fecha')
+      disabled: bloqueado, required: true, placeholder: f.object.pista(:fecha)
+    = f.object.ayuda(:fecha)
   .span-4.last.campo
     .span-2= f.label :numero, "Número"
-    .span-2.last= f.text_field :numero, disabled: bloqueado
-    = ayuda_para('perfil.numero')
+    .span-2.last= f.text_field :numero, disabled: bloqueado,
+      placeholder: f.object.pista(:numero)
+    = f.object.ayuda(:numero)
 
   .span-11.campo
     = f.fields_for :fase do |ff|
       .span-2= ff.label :nombre, 'Fase'
       .span-9.last= ff.text_field :nombre, disabled: bloqueado
-      = ayuda_para('fase.nombre')
+      = ayuda_para('Fase.nombre')
   .span-11.last.campo
     = f.fields_for :grupo do |fg|
       .span-2= fg.label :descripcion, 'Subgrupo'
       .span-8.last= fg.text_field :descripcion, disabled: bloqueado
-      = ayuda_para('grupo.descripcion')
+      = ayuda_para('Grupo.descripcion')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'
-  = f.fields_for :capacidad do |f_c|
+  = f.fields_for :capacidad do |fc|
     .span-7.campo
-      .span-2= f_c.label :clase_id
-      .span-5.last= f_c.collection_select :clase_id, clases, :id, :codigo,
+      .span-2= fc.label :clase_id
+      .span-5.last= fc.collection_select :clase_id, clases, :id, :codigo,
         { include_blank: true }, { disabled: bloqueado }
-      = ayuda_para('capacidad.clase')
+      = ayuda_para('Capacidad.clase')
     .span-11.last.campo
-      .span-2= f_c.label :subclases, 'Limitaciones principales'
+      .span-2= fc.label :subclases, 'Limitaciones principales'
       .prepend-2.span-6.last
         - subclases.each do |s|
           = label_tag s.codigo
           = check_box_tag "perfil[capacidad_attributes][subclase_ids][]",
             s.id, tildada?(s), disabled: bloqueado
-      = ayuda_para('capacidad.subclases')
+      = ayuda_para('Capacidad.subclases')
 
   .span-2= label_tag nil, 'Ubicación', class: 'subtitulo'
-  = f.fields_for :ubicacion do |f_u|
+  = f.fields_for :ubicacion do |fu|
     .span-20.last.campo
-      .span-2= f_u.label :descripcion
-      .span-17.last= f_u.text_field :descripcion, disabled: bloqueado
-      = ayuda_para('ubicacion.descripcion')
+      .span-2= fu.label :descripcion
+      .span-17.last= fu.text_field :descripcion, disabled: bloqueado
+      = fu.object.ayuda(:descripcion)
     .prepend-2.span-9.campo
       .span-2= label_tag nil, 'Coordenadas'
       .coordenada-y
         .label-tag
-          = f_u.label :y, 'lat/y'
+          = fu.label :y, 'lat/y'
         .input-tag
-          = f_u.text_field :y, disabled: bloqueado
-        = ayuda_para('ubicacion.y')
+          = fu.text_field :y, disabled: bloqueado
+        = fu.object.ayuda(:y)
       .coordenada-x
         .label-tag
-          = f_u.label :x, 'lon/x'
+          = fu.label :x, 'lon/x'
         .input-tag
-          = f_u.text_field :x, disabled: bloqueado
-        = ayuda_para('ubicacion.x')
+          = fu.text_field :x, disabled: bloqueado
+        = fu.object.ayuda(:x)
     .span-11.last.campo
-      .span-2= f_u.label :srid, 'Formato'
-      .span-8.last= f_u.collection_select :srid, formatos_de_coordenadas, :srid,
+      .span-2= fu.label :srid, 'Formato'
+      .span-8.last= fu.collection_select :srid, formatos_de_coordenadas, :srid,
         :descripcion, {}, disabled: bloqueado
-      = ayuda_para('ubicacion.formato')
+      = fu.object.ayuda(:formato)
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'
-  = f.fields_for :paisaje do |f_p|
+  = f.fields_for :paisaje do |fp|
     .span-9.campo
-      .span-2= f_p.label :tipo
-      .span-7.last= f_p.text_field :tipo, disabled: bloqueado
-      = ayuda_para('paisaje.tipo')
+      .span-2= fp.label :tipo
+      .span-7.last= fp.text_field :tipo, disabled: bloqueado
+      = ayuda_para('Paisaje.tipo')
     .span-5.campo
-      .span-2= f_p.label :forma
-      .span-3.last= f_p.text_field :forma, disabled: bloqueado
-      = ayuda_para('paisaje.forma')
+      .span-2= fp.label :forma
+      .span-3.last= fp.text_field :forma, disabled: bloqueado
+      = ayuda_para('Paisaje.forma')
     .span-6.last.campo
-      .span-2= f_p.label :simbolo, 'Símbolo'
-      .span-3.last= f_p.text_field :simbolo, disabled: bloqueado
-      = ayuda_para('paisaje.simbolo')
+      .span-2= fp.label :simbolo, 'Símbolo'
+      .span-3.last= fp.text_field :simbolo, disabled: bloqueado
+      = ayuda_para('Paisaje.simbolo')
 
   .span-22.last.campo
     .span-4= f.label :vegetacion_o_cultivos, 'Vegetación natural o cultivos'
     .span-17= f.text_field :vegetacion_o_cultivos, disabled: bloqueado
-    = ayuda_para('perfil.vegetacion_o_cultivos')
+    = f.object.ayuda(:vegetacion_o_cultivos)
 
   .span-11.campo
     .span-2= f.label :material_original
     .span-9.last= f.text_field :material_original, disabled: bloqueado
-    = ayuda_para('perfil.material_original')
+    = f.object.ayuda(:material_original)
   .span-11.last.campo
     .span-2= f.label :drenaje_id
     .span-8.last= f.collection_select :drenaje_id, drenajes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.drenaje')
+    = f.object.ayuda(:drenaje)
 
   .span-11.campo
     .span-2= f.label :relieve_id
     .span-9.last= f.collection_select :relieve_id, relieves, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.relieve')
+    = f.object.ayuda(:relieve)
   .span-11.last.campo
     .span-2= f.label :anegamiento_id
     .span-8.last= f.collection_select :anegamiento_id, anegamientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.anegamiento')
+    = f.object.ayuda(:anegamiento)
 
   .span-11.campo
     .span-2= f.label :posicion_id, "Posición"
     .span-9.last= f.collection_select :posicion_id, posiciones, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.posicion')
+    = f.object.ayuda(:posicion)
   .span-11.last.campo
-    = f.fields_for :humedad do |f_h|
-      .span-2= f_h.label :clase_id, "Distrib. de la humedad"
-      .span-4= f_h.collection_select :clase_id, clases_de_humedad, :id, :valor,
+    = f.fields_for :humedad do |fh|
+      .span-2= fh.label :clase_id, "Distrib. de la humedad"
+      .span-4= fh.collection_select :clase_id, clases_de_humedad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      .span-4.last= f_h.collection_select :subclase_id, subclases_de_humedad, :id, :valor,
+      .span-4.last= fh.collection_select :subclase_id, subclases_de_humedad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      = ayuda_para('perfil.humedad')
+      = ayuda_para('Perfil.humedad')
 
   .span-11.campo
     .span-2= f.label :pendiente_id
     .span-9.last= f.collection_select :pendiente_id, pendientes, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.pendiente')
+    = f.object.ayuda(:pendiente)
   .span-5.campo
     .span-2= f.label :cobertura_vegetal, "Cobertura vegetal"
     .span-3.last= f.text_field :cobertura_vegetal,
       disabled: bloqueado, placeholder: '%'
-    = ayuda_para('perfil.cobertura_vegetal')
+    = f.object.ayuda(:cobertura_vegetal)
   .span-6.last.campo
     .span-2= f.label :profundidad_napa, "Profundidad de la napa"
     .span-3.last= f.text_field :profundidad_napa,
       disabled: bloqueado, placeholder: 'cm'
-    = ayuda_para('perfil.profundidad_napa')
+    = f.object.ayuda(:profundidad_napa)
 
   .span-11.campo
     .span-2= f.label :escurrimiento_id
     .span-9.last= f.collection_select :escurrimiento_id,
       escurrimientos, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.escurrimiento')
+    = f.object.ayuda(:escurrimiento)
   .span-11.last.campo
     .span-2= f.label :sal_id, 'Sales'
     .span-8.last= f.collection_select :sal_id, sales, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.sal')
+    = f.object.ayuda(:sal)
 
   .span-11.campo
     .span-2= f.label :permeabilidad_id
     .span-9.last= f.collection_select :permeabilidad_id,
       permeabilidades, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.permeabilidad')
+    = f.object.ayuda(:permeabilidad)
   .span-11.last.campo
-    = f.fields_for :pedregosidad do |f_h|
-      .span-2= f_h.label :clase_id, "Pedreg. o rocosidad"
-      .span-4= f_h.collection_select :clase_id, clases_de_pedregosidad, :id, :valor,
+    = f.fields_for :pedregosidad do |fh|
+      .span-2= fh.label :clase_id, "Pedreg. o rocosidad"
+      .span-4= fh.collection_select :clase_id, clases_de_pedregosidad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      .span-4.last= f_h.collection_select :subclase_id, subclases_de_pedregosidad, :id, :valor,
+      .span-4.last= fh.collection_select :subclase_id, subclases_de_pedregosidad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      = ayuda_para('perfil.pedregosidad')
+      = f.object.ayuda(:pedregosidad)
 
   .span-11.campo
-    = f.fields_for :erosion do |f_h|
-      .span-2= f_h.label :clase_id, "Erosión"
-      .span-4= f_h.collection_select :subclase_id, subclases_de_erosion, :id, :valor,
+    = f.fields_for :erosion do |fe|
+      .span-2= fe.label :clase_id, "Erosión"
+      .span-4= fe.collection_select :subclase_id, subclases_de_erosion, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      .span-5.last= f_h.collection_select :clase_id, clases_de_erosion, :id, :valor,
+      .span-5.last= fe.collection_select :clase_id, clases_de_erosion, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      = ayuda_para('perfil.erosion')
+      = f.object.ayuda(:erosion)
   .span-11.last.campo
     .span-2= f.label :uso_de_la_tierra_id, "Uso de la tierra"
     .span-8.last= f.collection_select :uso_de_la_tierra_id, usos_de_la_tierra, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-    = ayuda_para('perfil.uso_de_la_tierra')
+    = f.object.ayuda(:uso_de_la_tierra)

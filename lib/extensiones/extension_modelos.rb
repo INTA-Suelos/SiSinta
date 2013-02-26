@@ -56,13 +56,6 @@ module ExtensionModelos
 
   included do
 
-    def como_arreglo(filtro = nil)
-      filtro ||= attributes.keys.flatten
-      filtro.inject([]) do |arreglo, atributo|
-        arreglo << self.send(atributo)
-      end
-    end
-
     # asociacion_ids = @asociaciones.collect(&:id).uniq.sort
     def guardar_ids_para(asociacion)
       self.send(
@@ -75,6 +68,15 @@ module ExtensionModelos
       instance_variable_set(
         "@#{asociacion.to_s.pluralize}",
         clase.find(self.send("#{asociacion}_ids").sort))
+    end
+
+    # Atributos virtuales para usar con el FormBuilder, para nulificar una
+    # asociación en vez de destruirla con _destroy
+    def anular
+      false
+    end
+    def anular=(asociacion)
+      self.send("#{asociacion}=", nil)
     end
 
   end

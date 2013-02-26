@@ -1,5 +1,7 @@
 # encoding: utf-8
 module PerfilesHelper
+  include PaginacionHelper
+
   # Para checkear si debería estar marcado o no el checkbox de la subclase
   # correspondiente
   def tildada?(s)
@@ -44,4 +46,22 @@ module PerfilesHelper
     )
   end
 
+  def titulo_de_la_accion
+    case params[:action]
+      when 'index'
+        'Perfiles'
+      when 'show'
+        "Perfil #{@perfil.numero}"
+      when 'new'
+        'Nuevo perfil'
+      when 'edit'
+        "Editando perfil #{@perfil.numero}"
+      when 'exportar'
+        'Exportar perfiles'
+      when 'permisos'
+        "Permisos para el perfil #{@recurso.numero}"
+      else
+        nil
+    end
+  end
 end

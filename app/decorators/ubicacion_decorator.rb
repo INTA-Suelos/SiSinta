@@ -1,6 +1,4 @@
-class UbicacionDecorator < Draper::Base
-  decorates :ubicacion
-
+class UbicacionDecorator < ApplicationDecorator
   # Transforma del srid real al preferido por el usuario
   def transformar
     @coordenadas ||= Ubicacion.transformar(source.srid, h.current_usuario.srid, source.x, source.y)
@@ -30,6 +28,15 @@ class UbicacionDecorator < Draper::Base
 
   def to_s
     source.descripcion
+  end
+
+  def mapa(ancho = 400, alto = 300, zoom = 9)
+    h.image_tag "http://maps.google.com/maps/api/staticmap?size=#{
+                  ancho}x#{
+                  alto}&sensor=false&zoom=#{
+                  zoom}&maptype=hybrid&markers=#{
+                  source.latitud}%2C#{
+                  source.longitud}"
   end
 
 end
