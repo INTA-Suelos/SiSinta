@@ -59,6 +59,7 @@ end
 group :development do
   gem 'bullet'
   gem 'capistrano'
+  gem 'capistrano-rbenv'
 end
 
 group :test do

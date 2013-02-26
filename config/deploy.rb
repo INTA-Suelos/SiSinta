@@ -1,4 +1,5 @@
-require "bundler/capistrano"
+require 'bundler/capistrano'
+require 'capistrano-rbenv'
 
 set :application, "SiSINTA"
 
@@ -25,6 +26,9 @@ set :assets_prefix, "estaticos"
 set :rake, "RAILS_ENV=production bundle exec rake"
 
 set :config_path, fetch(:config_path, "tmp/config")
+
+set :rbenv_ruby_version, '1.9.3-p392'
+set :rbenv_ruby_dependencies, [] # Instalamos las dependencias a mano
 
 namespace :deploy do
   namespace :assets do
