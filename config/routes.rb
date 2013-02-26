@@ -28,7 +28,7 @@ SiSINTA::Application.routes.draw do
         post  'permitir'
       end
 
-      r.resources :analisis, only: :index do
+      r.resources :analiticos, only: :index do
         collection do
           get 'edit'
           put 'update'

@@ -13,7 +13,7 @@ class Perfil < ActiveRecord::Base
                   :capacidad_attributes, :humedad_attributes,
                   :pedregosidad_attributes, :erosion_attributes, :etiquetas,
                   :reconocedores, :grupo, :serie_attributes, :anular,
-                  :horizontes_attributes, :analisis_attributes
+                  :horizontes_attributes, :analiticos_attributes
 
   attr_taggable :etiquetas
   attr_taggable :reconocedores
@@ -57,7 +57,7 @@ class Perfil < ActiveRecord::Base
   belongs_to_active_hash :sal
   belongs_to_active_hash :uso_de_la_tierra
 
-  has_many :analisis, through: :horizontes, order: 'profundidad_muestra ASC, horizonte_id ASC'
+  has_many :analiticos, through: :horizontes, order: 'profundidad_muestra ASC, horizonte_id ASC'
 
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles, validate: false
@@ -71,7 +71,7 @@ class Perfil < ActiveRecord::Base
                                 :humedad, :erosion,
                                 limit: 1, allow_destroy: true
   accepts_nested_attributes_for :grupo, :fase, :serie, limit: 1, reject_if: :all_blank
-  accepts_nested_attributes_for :horizontes, :analisis, allow_destroy: true
+  accepts_nested_attributes_for :horizontes, :analiticos, allow_destroy: true
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true

@@ -1,6 +1,6 @@
 # encoding: utf-8
 FactoryGirl.define do
-  factory :analisis do
+  factory :analitico do
     horizonte
     registro { rand(100) }
     humedad           { generate :porcentaje }

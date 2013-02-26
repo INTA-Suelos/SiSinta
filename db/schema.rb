@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20121210234341) do
     t.string   "notas"
   end
 
-  create_table "analisis", :force => true do |t|
+  create_table "analiticos", :force => true do |t|
     t.integer  "registro"
     t.decimal  "humedad",             :precision => 4, :scale => 2
     t.decimal  "s"
@@ -248,10 +248,10 @@ ActiveRecord::Schema.define(:version => 20121210234341) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true

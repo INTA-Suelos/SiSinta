@@ -25,9 +25,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'drenaje', 'drenajes'
   inflect.irregular 'clase', 'clases'
 
-  # No contables
-  inflect.uncountable 'analisis'
-
   # Adjetivadas
   inflect.irregular 'color_seco', 'colores_secos'
   inflect.irregular 'color_humedo', 'colores_humedos'
