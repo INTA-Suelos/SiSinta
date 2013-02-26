@@ -57,7 +57,7 @@ class Perfil < ActiveRecord::Base
   belongs_to_active_hash :sal
   belongs_to_active_hash :uso_de_la_tierra
 
-  has_many :analisis, through: :horizontes
+  has_many :analisis, through: :horizontes, order: 'profundidad_muestra ASC, horizonte_id ASC'
 
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles, validate: false
