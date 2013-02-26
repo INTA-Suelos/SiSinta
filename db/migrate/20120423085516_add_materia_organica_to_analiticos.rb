@@ -1,6 +1,6 @@
-class AddMateriaOrganicaToAnalisis < ActiveRecord::Migration
+class AddMateriaOrganicaToAnaliticos < ActiveRecord::Migration
   def change
-    add_column :analisis, :materia_organica_c, :float
-    add_column :analisis, :materia_organica_n, :float
+    add_column :analiticos, :materia_organica_c, :float
+    add_column :analiticos, :materia_organica_n, :float
   end
 end

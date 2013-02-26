@@ -3,8 +3,8 @@
     - if can? :read, @perfil
       = link_to 'Mostrar perfil', @perfil
       = '|'
-    - if can? :read, @perfil.analisis
-      = link_to 'Mostrar análisis', perfil_analisis_index_path(@perfil)
+    - if can? :read, @perfil.analiticos
+      = link_to 'Mostrar análisis', perfil_analiticos_path(@perfil)
       = '|'
     - if can? :create, @adjunto
       = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)

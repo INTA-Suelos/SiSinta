@@ -1,5 +1,5 @@
-class AddProfundidadMuestraToAnalisis < ActiveRecord::Migration
+class AddProfundidadMuestraToAnaliticos < ActiveRecord::Migration
   def change
-    add_column :analisis, :profundidad_muestra, :string
+    add_column :analiticos, :profundidad_muestra, :string
   end
 end

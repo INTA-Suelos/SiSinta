@@ -60,7 +60,7 @@ class PerfilesController < AutorizadoController
     # Si falla, responders lo redirige a new
     opciones = if @perfil.save
       current_usuario.grant :miembro, @perfil
-      { location: perfil_o_analisis }
+      { location: perfil_o_analiticos }
     else
       { }
     end
@@ -81,7 +81,7 @@ class PerfilesController < AutorizadoController
 
     # Si falla, responders lo redirige a edit
     opciones = if @perfil.update_attributes(params[:perfil])
-      { location: perfil_o_analisis }
+      { location: perfil_o_analiticos }
     else
       { }
     end
@@ -157,8 +157,8 @@ class PerfilesController < AutorizadoController
     # Determina si el usuario terminó de editar el perfil o va a seguir con los
     # análisis
     # TODO Revisar que envíe al edit
-    def perfil_o_analisis
-      params[:analisis].present? ? edit_perfil_analisis_index_path(@perfil) : @perfil
+    def perfil_o_analiticos
+      params[:analiticos].present? ? edit_perfil_analiticos_path(@perfil) : @perfil
     end
 
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según

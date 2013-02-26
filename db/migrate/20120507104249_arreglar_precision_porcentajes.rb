@@ -1,6 +1,6 @@
 class ArreglarPrecisionPorcentajes < ActiveRecord::Migration
   def up
-    change_table :analisis do |t|
+    change_table :analiticos do |t|
       t.change :materia_organica_c, :decimal, precision: 4, scale: 2
       t.change :materia_organica_n, :decimal, precision: 4, scale: 2
       t.change :saturacion_t,       :decimal, precision: 4, scale: 2
@@ -22,7 +22,7 @@ class ArreglarPrecisionPorcentajes < ActiveRecord::Migration
   end
 
   def down
-    change_table :analisis do |t|
+    change_table :analiticos do |t|
       t.change :materia_organica_c, :decimal, precision: 3, scale: 2
       t.change :materia_organica_n, :decimal, precision: 3, scale: 2
       t.change :saturacion_t,       :decimal, precision: 3, scale: 2

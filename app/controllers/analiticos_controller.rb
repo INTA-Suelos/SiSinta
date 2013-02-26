@@ -1,5 +1,5 @@
 # encoding: utf-8
-class AnalisisController < AutorizadoController
+class AnaliticosController < AutorizadoController
   responders :collection
 
   # Salteo el default de AutorizadoController
@@ -10,19 +10,19 @@ class AnalisisController < AutorizadoController
   before_filter :decorar, only: [:index, :edit]
 
   def index
-    @analisis = @perfil.analisis
-    respond_with @perfil, @analisis
+    @analiticos = @perfil.analiticos
+    respond_with @perfil, @analiticos
   end
 
   def edit
-    @analisis = @perfil.analisis
-    respond_with @perfil, @analisis
+    @analiticos = @perfil.analiticos
+    respond_with @perfil, @analiticos
   end
 
   def update
     @perfil.update_attributes(params[:perfil])
-    @analisis = @perfil.analisis.first
-    respond_with @perfil, @analisis
+    @analiticos = @perfil.analiticos.first
+    respond_with @perfil, @analiticos
   end
 
   private
