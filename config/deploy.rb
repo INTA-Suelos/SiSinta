@@ -29,6 +29,10 @@ set :config_path, fetch(:config_path, "tmp/config")
 
 set :rbenv_ruby_version, '1.9.3-p392'
 set :rbenv_ruby_dependencies, [] # Instalamos las dependencias a mano
+# Path para que capistrano detecte rbenv
+set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
+
+set :bundle_flags, "--deployment --quiet --binstubs"
 
 namespace :deploy do
   namespace :assets do
