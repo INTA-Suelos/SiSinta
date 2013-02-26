@@ -58,6 +58,7 @@ end
 
 group :development do
   gem 'bullet'
+  gem 'capistrano'
 end
 
 group :test do
