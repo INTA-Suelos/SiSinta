@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/bradphelan/rocket_tag.git
+  remote: https://github.com/bradphelan/rocket_tag.git
   revision: a47b3340621dc36afa5559458eec9512384a87ba
   specs:
     rocket_tag (0.5.6)
@@ -52,6 +52,14 @@ GEM
     bullet (4.3.0)
       uniform_notifier
     cancan (1.6.9)
+    capistrano (2.14.1)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-rbenv (0.0.8)
+      capistrano
     cocaine (0.4.2)
     coderay (1.0.8)
     coffee-rails (3.2.2)
@@ -88,6 +96,7 @@ GEM
       haml (~> 3.1)
       railties (>= 3.1, < 4.1)
     has_scope (0.5.1)
+    highline (1.6.15)
     hike (1.2.1)
     hirb (0.7.1)
     i18n (0.6.1)
@@ -112,6 +121,13 @@ GEM
     multi_json (1.6.0)
     multiselectjs_rails (0.3.1)
       railties (~> 3.1)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.6.3)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     orm_adapter (0.4.0)
     paperclip (3.4.0)
       activemodel (>= 3.0.0)
@@ -221,6 +237,8 @@ DEPENDENCIES
   browser_detect
   bullet
   cancan
+  capistrano
+  capistrano-rbenv
   coffee-rails (~> 3.2.1)
   devise
   draper
