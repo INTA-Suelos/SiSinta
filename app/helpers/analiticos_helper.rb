@@ -1,5 +1,5 @@
 # encoding: utf-8
-module AnalisisHelper
+module AnaliticosHelper
   def h_plus_label
     ("H." + content_tag(:sup, '+') + " de cambio").html_safe
   end

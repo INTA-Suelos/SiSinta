@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Analisis < ActiveRecord::Base
+class Analitico < ActiveRecord::Base
   attr_accessible :registro, :horizonte_attributes, :profundidad_muestra,
                   :materia_organica_c, :materia_organica_n, :humedad, :s, :t,
                   :ph_pasta, :ph_h2o, :ph_kcl, :resistencia_pasta, :base_ca,
