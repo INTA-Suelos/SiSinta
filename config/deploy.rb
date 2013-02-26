@@ -43,6 +43,8 @@ namespace :configs do
   desc "Crea el directorio para los archivos de configuración"
   task :directorios, roles: :app do
     run "mkdir -p #{shared_path}/config"
+
+    run "mkdir -p #{shared_path}/sockets"
   end
 
   desc "Copia los archivos de configuración iniciales"
@@ -63,6 +65,9 @@ namespace :configs do
     run "ln -s #{shared_path}/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
     run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -s #{shared_path}/config/production.rb #{release_path}/config/environments/production.rb"
+
+    run "mkdir -p #{release_path}/tmp"
+    run "ln -s #{shared_path}/sockets #{release_path}/tmp/"
   end
 end
 
