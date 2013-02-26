@@ -5,7 +5,7 @@
   = link_to 'Permisos', permisos_perfil_path(@perfil)
   = '|'
 - if can? :update, @perfil.analiticos
-  = link_to 'Editar analíticos', edit_perfil_analiticos_path(@perfil)
+  = link_to 'Editar analíticos', editar_todos_perfil_analiticos_path(@perfil)
   = '|'
 - if can? :create, @perfil.adjuntos.build
   = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)

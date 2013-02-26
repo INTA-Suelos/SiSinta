@@ -14,12 +14,12 @@ class AnaliticosController < AutorizadoController
     respond_with @perfil, @analiticos
   end
 
-  def edit
+  def editar_todos
     @analiticos = @perfil.analiticos
     respond_with @perfil, @analiticos
   end
 
-  def update
+  def update_todos
     @perfil.update_attributes(params[:perfil])
     @analiticos = @perfil.analiticos.first
     respond_with @perfil, @analiticos

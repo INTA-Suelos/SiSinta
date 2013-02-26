@@ -158,7 +158,7 @@ class PerfilesController < AutorizadoController
     # datos analíticos
     # TODO Revisar que envíe al edit
     def perfil_o_analiticos
-      params[:analiticos].present? ? edit_perfil_analiticos_path(@perfil) : @perfil
+      params[:analiticos].present? ? editar_todos_perfil_analiticos_path(@perfil) : @perfil
     end
 
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
