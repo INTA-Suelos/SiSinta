@@ -17,8 +17,7 @@
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Horizonte'
           = f.fields_for :analiticos do |f_a|
-            = f_a.fields_for :horizonte do |f_h|
-              %td.dato= f_h.text_field :tipo, disabled: true
+            %td.dato= text_field_tag nil, f_a.object.horizonte.tipo, disabled: true
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Profundidad'
           = f.fields_for :analiticos do |f_a|
