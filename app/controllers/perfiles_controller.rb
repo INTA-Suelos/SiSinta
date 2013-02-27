@@ -3,6 +3,8 @@ class PerfilesController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
+  load_and_authorize_resource
+
   respond_to :json, only: :geo
 
   # Las acciones +index+ y +geo+ funcionan anónimamente

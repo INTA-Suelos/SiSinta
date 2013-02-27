@@ -2,27 +2,25 @@
 class AnaliticosController < AutorizadoController
   responders :collection
 
-  # Salteo el default de AutorizadoController
-  skip_load_and_authorize_resource
-  # Cargo los datos analíticos a través del perfil
+  # Carga los datos analíticos a través del perfil
   load_and_authorize_resource :perfil
+  load_and_authorize_resource through: :perfil
 
   before_filter :decorar, only: [:index, :edit]
 
   def index
-    @analiticos = @perfil.analiticos
     respond_with @perfil, @analiticos
   end
 
   def editar_todos
-    @analiticos = @perfil.analiticos
     respond_with @perfil, @analiticos
   end
 
   def update_todos
     @perfil.update_attributes(params[:perfil])
-    @analiticos = @perfil.analiticos.first
-    respond_with @perfil, @analiticos
+    respond_with @perfil, @analiticos,
+      location: perfil_analiticos_path(@perfil),
+      notice: t('flash.analiticos.update_todos.notice')
   end
 
   private

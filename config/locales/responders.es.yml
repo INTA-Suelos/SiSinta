@@ -1,4 +1,6 @@
 es:
+  #   flash.cars.create.status
+  #   flash.actions.create.status
   flash:
     actions:
       create:
@@ -8,3 +10,6 @@ es:
       destroy:
         notice: 'Se destruyó %{el_la} %{resource_name} correctamente.'
         alert: 'No se pudo destruir %{el_la} %{resource_name}.'
+    analiticos:
+      update_todos:
+        notice: 'Se actualizaron los datos analíticos correctamente.'
