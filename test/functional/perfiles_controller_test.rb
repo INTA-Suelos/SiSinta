@@ -88,4 +88,51 @@ class PerfilesControllerTest < ActionController::TestCase
     assert json.first.include?('numero'), "debe devolver el número"
   end
 
+  test "debería ir a 'editar todos' si está autorizado" do
+    loguearse_como :autorizado
+    perfil = create(:perfil)
+
+    get :editar_analiticos, id: perfil.to_param
+    assert_response :success
+    assert_not_nil assigns(:perfil), "No asigna el perfil en 'editar'"
+  end
+
+  test "debería actualizar los analíticos de a varios" do
+    loguearse_como :autorizado
+
+    perfil = create(:perfil)
+    5.times do
+      perfil.horizontes.create(attributes_for(:horizonte))
+    end
+
+    # TODO por qué me dice que analitico.horizonte es nil?
+    put :update_analiticos, id: perfil.to_param, perfil: {
+      analiticos_attributes: { perfil.analiticos.first.id => attributes_for(:analitico) }
+    }
+
+    assert_redirected_to perfil_analiticos_path(perfil)
+  end
+
+  test "rutea a editar_todos" do
+    perfil = create(:perfil)
+    assert_routing({
+      path: "/perfiles/#{perfil.to_param}/editar_analiticos",
+      method: :get
+    },{
+      controller: 'perfiles', action: 'editar_analiticos',
+      id: perfil.to_param
+    })
+  end
+
+  test "rutea a update_todos" do
+    perfil = create(:perfil)
+    assert_routing({
+      path: "/perfiles/#{perfil.to_param}/update_analiticos",
+      method: :put
+    },{
+      controller: 'perfiles', action: 'update_analiticos',
+      id: perfil.to_param
+    })
+  end
+
 end
