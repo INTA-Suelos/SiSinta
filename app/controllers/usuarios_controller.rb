@@ -1,5 +1,6 @@
 # encoding: utf-8
 class UsuariosController < AutorizadoController
+  load_and_authorize_resource
 
   before_filter :paginar, only: [:index]
 

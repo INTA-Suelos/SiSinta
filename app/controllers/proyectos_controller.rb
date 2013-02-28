@@ -3,6 +3,8 @@ class ProyectosController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
+  load_and_authorize_resource
+
   before_filter :asociar_perfiles,            only: [:update]
 
   # Las acciones +index+ y +show+ funcionan anónimamente, pero igual uso a

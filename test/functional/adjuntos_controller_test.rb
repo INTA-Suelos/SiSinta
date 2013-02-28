@@ -11,6 +11,36 @@ class AdjuntosControllerTest < ActionController::TestCase
     @request.env["HTTP_REFERER"] = "/perfiles/#{@perfil.to_param}/adjuntos"
   end
 
+  test "rutea a index" do
+    assert_routing({
+      path: "/perfiles/#{@perfil.to_param}/adjuntos",
+      method: :get
+    },{
+      controller: 'adjuntos', action: 'index',
+      perfil_id: @perfil.to_param
+    })
+  end
+
+  test "rutea a show" do
+    assert_routing({
+      path: "/perfiles/#{@perfil.to_param}/adjuntos/#{@adjunto.to_param}",
+      method: :get
+    },{
+      controller: 'adjuntos', action: 'show',
+      perfil_id: @perfil.to_param, id: @adjunto.to_param
+    })
+  end
+
+  test "rutea a descargar" do
+    assert_routing({
+      path: "/perfiles/#{@perfil.to_param}/adjuntos/#{@adjunto.to_param}/descargar",
+      method: :get
+    },{
+      controller: 'adjuntos', action: 'descargar',
+      perfil_id: @perfil.to_param, id: @adjunto.to_param
+    })
+  end
+
   test "muestra los adjuntos del perfil" do
     get :index, perfil_id: @perfil.id
     assert_response :success

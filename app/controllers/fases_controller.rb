@@ -3,6 +3,8 @@ class FasesController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
+  load_and_authorize_resource
+
   def index
     @fases = PaginadorDecorator.decorate apply_scopes(@fases)
 

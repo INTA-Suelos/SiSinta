@@ -33,7 +33,7 @@ class Perfil < ActiveRecord::Base
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
 
-  has_many :horizontes,   dependent: :destroy, inverse_of: :perfil
+  has_many :horizontes,   dependent: :destroy, inverse_of: :perfil, order: 'profundidad_inferior ASC'
   has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil
   has_one :capacidad,     dependent: :destroy, inverse_of: :perfil
   has_one :ubicacion,     dependent: :destroy, inverse_of: :perfil
@@ -57,7 +57,8 @@ class Perfil < ActiveRecord::Base
   belongs_to_active_hash :sal
   belongs_to_active_hash :uso_de_la_tierra
 
-  has_many :analiticos, through: :horizontes, order: 'profundidad_muestra ASC, horizonte_id ASC'
+  has_many :analiticos, through: :horizontes, include: :horizonte,
+    order: 'profundidad_muestra ASC, horizonte_id ASC'
 
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles, validate: false

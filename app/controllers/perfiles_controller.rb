@@ -3,6 +3,8 @@ class PerfilesController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
+  load_and_authorize_resource
+
   respond_to :json, only: :geo
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
@@ -127,6 +129,20 @@ class PerfilesController < AutorizadoController
     redirect_to exportar_perfiles_path
   end
 
+  def editar_analiticos
+    respond_with @perfil = @perfil.decorate
+  end
+
+  def update_analiticos
+    @perfil.update_attributes(params[:perfil])
+    @perfil = @perfil.decorate
+    respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
+      if @perfil.errors.any?
+        format.html { render action: 'editar_analiticos' }
+      end
+    end
+  end
+
   protected
 
     # Prepara el scope para la lista de perfiles
@@ -158,7 +174,7 @@ class PerfilesController < AutorizadoController
     # datos analíticos
     # TODO Revisar que envíe al edit
     def perfil_o_analiticos
-      params[:analiticos].present? ? edit_perfil_analiticos_path(@perfil) : @perfil
+      params[:analiticos].present? ? editar_todos_perfil_analiticos_path(@perfil) : @perfil
     end
 
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
