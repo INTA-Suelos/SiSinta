@@ -12,17 +12,6 @@ class AnaliticosController < AutorizadoController
     respond_with @perfil, @analiticos
   end
 
-  def editar_todos
-    respond_with @perfil, @analiticos
-  end
-
-  def update_todos
-    @perfil.update_attributes(params[:perfil])
-    respond_with @perfil, @analiticos,
-      location: perfil_analiticos_path(@perfil),
-      notice: t('flash.analiticos.update_todos.notice')
-  end
-
   private
 
     def decorar

@@ -10,6 +10,7 @@ es:
       destroy:
         notice: 'Se destruyó %{el_la} %{resource_name} correctamente.'
         alert: 'No se pudo destruir %{el_la} %{resource_name}.'
-    analiticos:
-      update_todos:
+    perfiles:
+      update_analiticos:
         notice: 'Se actualizaron los datos analíticos correctamente.'
+        alert:  'No pudieron modificarse todos los datos analíticos.'

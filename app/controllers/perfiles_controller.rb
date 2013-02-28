@@ -129,6 +129,19 @@ class PerfilesController < AutorizadoController
     redirect_to exportar_perfiles_path
   end
 
+  def editar_analiticos
+    respond_with @perfil = @perfil.decorate
+  end
+
+  def update_analiticos
+    @perfil.update_attributes(params[:perfil])
+    respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
+      if @perfil.errors.any?
+        format.html { render action: 'editar_analiticos' }
+      end
+    end
+  end
+
   protected
 
     # Prepara el scope para la lista de perfiles

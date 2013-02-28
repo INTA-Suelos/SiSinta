@@ -1,7 +1,17 @@
-.botonera= render 'botonera_mostrar'
+.botonera
+  - if can? :update, @perfil
+    = link_to 'Editar', editar_analiticos_perfil_path(@perfil)
+    = '|'
+  - if can? :read, @perfil
+    = link_to 'Mostrar perfil', @perfil
+    = '|'
+  - if can? :read, @perfil.adjuntos.build
+    = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
+    = '|'
+  = link_to 'Volver', perfiles_path
 
 = render partial: 'tabla', locals: {  perfil: @perfil,
                                       analiticos: @analiticos,
                                       bloqueado: true }
 
-.botonera= render 'botonera_mostrar'
+= volver_arriba
