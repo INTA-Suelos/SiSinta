@@ -135,6 +135,7 @@ class PerfilesController < AutorizadoController
 
   def update_analiticos
     @perfil.update_attributes(params[:perfil])
+    @perfil = @perfil.decorate
     respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
       if @perfil.errors.any?
         format.html { render action: 'editar_analiticos' }
