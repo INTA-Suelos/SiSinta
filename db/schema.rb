@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301174457) do
+ActiveRecord::Schema.define(:version => 20130301185655) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(:version => 20130301174457) do
     t.decimal  "saturacion_t",        :precision => 5, :scale => 2
     t.decimal  "saturacion_s_h",      :precision => 5, :scale => 2
     t.decimal  "densidad_aparente"
-    t.integer  "materia_organica_cn"
     t.string   "profundidad_muestra"
     t.decimal  "agua_3_atm",          :precision => 5, :scale => 2
+    t.decimal  "materia_organica_cn", :precision => 2, :scale => 1
   end
 
   create_table "capacidades", :force => true do |t|
