@@ -40,16 +40,13 @@
   = f.fields_for :capacidad do |fc|
     .span-7.campo
       .span-2= fc.label :clase_id
-      .span-5.last= fc.collection_select :clase_id, clases, :id, :codigo,
+      .span-5.last= fc.collection_select :clase_id, clases_de_capacidad, :id, :codigo,
         { include_blank: true }, { disabled: bloqueado }
       = ayuda_para('Capacidad.clase')
     .span-11.last.campo
-      .span-2= fc.label :subclases, 'Limitaciones principales'
-      .prepend-2.span-6.last
-        - subclases.each do |s|
-          = label_tag s.codigo
-          = check_box_tag "perfil[capacidad_attributes][subclase_ids][]",
-            s.id, tildada?(s), disabled: bloqueado
+      .span-2= fc.label :subclase_ids, 'Limitaciones principales'
+      .span-8.last= fc.collection_select :subclase_ids, subclases_de_capacidad,
+        :id, :codigo, {}, { multiple: true, disabled: bloqueado, class: 'compacto' }
       = ayuda_para('Capacidad.subclases')
 
   .span-2= label_tag nil, 'Ubicación', class: 'subtitulo'
@@ -129,7 +126,7 @@
       .span-2= fh.label :clase_id, "Distrib. de la humedad"
       .span-3= fh.collection_select :clase_id, clases_de_humedad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
-      .span-5.last= fh.collection_select :subclase_id, subclases_de_humedad,
+      .span-5.last= fh.collection_select :subclase_ids, subclases_de_humedad,
       :id, :valor, {}, { multiple: true, disabled: bloqueado, class: 'compacto' }
       = ayuda_para('Perfil.humedad')
 

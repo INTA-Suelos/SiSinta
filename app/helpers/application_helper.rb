@@ -38,11 +38,11 @@ module ApplicationHelper
   end
 
   # Variables para acceder desde la vista y armar las tablas de lookup
-  def subclases
+  def subclases_de_capacidad
     @subclases ||= SubclaseDeCapacidad.all
   end
 
-  def clases
+  def clases_de_capacidad
     @clases ||= ClaseDeCapacidad.all
   end
 
