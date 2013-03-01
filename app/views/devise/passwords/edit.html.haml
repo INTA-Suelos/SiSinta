@@ -1,0 +1,20 @@
+= form_for(resource, as: resource_name, url: password_path(resource_name),
+  html: { method: :put, class: 'span-24' }) do |f|
+
+  = field_set_tag 'Cambiando el password', class: 'celeste_oscuro span-24' do
+
+    = devise_error_messages!
+    = f.hidden_field :reset_password_token
+
+    .span-24
+      .span-3= f.label :password, 'Password nuevo'
+      .span-9= f.password_field :password
+
+    .span-24
+      .span-3= f.label :password_confirmation, 'Confirmá tu nuevo password'
+      .span-9= f.password_field :password_confirmation
+      .span-12.consejo.last (exactamente igual que arriba)
+
+    .span-4= f.submit 'Cambiar mi password'
+
+= render partial: "devise/shared/links"

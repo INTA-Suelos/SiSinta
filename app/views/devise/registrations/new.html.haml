@@ -1,0 +1,25 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+
+  = field_set_tag 'Completá tus datos', class: 'celeste_oscuro span-24' do
+
+    = devise_error_messages!
+
+    .span-24
+      .span-3= f.label :nombre
+      .span-9.last= f.text_field :nombre
+
+    .span-24
+      .span-3= f.label :email
+      .span-9.last= f.email_field :email
+
+    .span-24
+      .span-3= f.label :password
+      .span-9= f.password_field :password
+
+    .span-24
+      .span-3= f.label :password_confirmation, 'Confirmación del password'
+      .span-9.last= f.password_field :password_confirmation
+
+  .span-4= f.submit "Registrarse"
+
+= render partial: "devise/shared/links"

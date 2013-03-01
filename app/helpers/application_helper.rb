@@ -169,7 +169,35 @@ module ApplicationHelper
 
   # Por defecto, no se usa nada. Esto va en la cabecera.
   def titulo_de_la_accion
-    nil
+    case params[:controller]
+      when 'devise/registrations'
+        case params[:action]
+          when 'edit'
+            'Detalles de la cuenta'
+          when 'new'
+            'Creación de la cuenta'
+          else
+            nil
+        end
+      when 'devise/sessions'
+        case params[:action]
+          when 'new'
+            'Ingresar al sistema'
+          else
+            nil
+        end
+      when 'devise/passwords'
+        case params[:action]
+          when 'edit'
+            'Cambiar el password'
+          when 'new'
+            'Generar un nuevo password'
+          else
+            nil
+        end
+      else
+        nil
+    end
   end
 
   # Por defecto, no se usa nada. Esto va en la cabecera, debajo de +titulo+
