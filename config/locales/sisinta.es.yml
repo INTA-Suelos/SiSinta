@@ -22,3 +22,7 @@ es:
   comunes:
     perfiles_asociados:
       submit: "Buscar"
+  devise:
+    failure:
+      usuario:
+        not_found_in_database: "¿Te registraste, no?"
