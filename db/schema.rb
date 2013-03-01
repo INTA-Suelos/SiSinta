@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210234341) do
+ActiveRecord::Schema.define(:version => 20130301050136) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -137,9 +137,9 @@ ActiveRecord::Schema.define(:version => 20121210234341) do
   end
 
   create_table "humedades", :force => true do |t|
-    t.integer "subclase_id"
     t.integer "clase_id"
     t.integer "perfil_id"
+    t.text    "subclase_ids"
   end
 
   create_table "limites", :force => true do |t|
