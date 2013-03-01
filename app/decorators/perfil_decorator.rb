@@ -5,6 +5,7 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :proyecto
   decorates_association :fase
   decorates_association :adjuntos, with: PaginadorDecorator
+  decorates_association :analiticos
 
   def fecha
     source.fecha.try :to_s, :dma

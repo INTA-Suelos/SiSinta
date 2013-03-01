@@ -5,13 +5,13 @@
   - if can? :read, @perfil
     = link_to 'Mostrar perfil', @perfil
     = '|'
-  - if can? :read, @perfil.adjuntos.build
+  - if can? :read, @perfil => Adjunto
     = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
     = '|'
   = link_to 'Volver', perfiles_path
 
 = render partial: 'tabla', locals: {  perfil: @perfil,
-                                      analiticos: @analiticos,
+                                      analiticos: @perfil.analiticos,
                                       bloqueado: true }
 
 = volver_arriba

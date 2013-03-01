@@ -7,7 +7,7 @@
   - if can? :read, @perfil
     = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)
     = '|'
-  - if can? :read, @perfil.adjuntos.build
+  - if can? :read, @perfil => Adjunto
     = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
     = '|'
   = link_to 'Volver', perfiles_path

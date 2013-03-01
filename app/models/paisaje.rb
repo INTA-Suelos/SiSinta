@@ -6,6 +6,7 @@ class Paisaje < ActiveRecord::Base
 
   validates_presence_of :perfil
 
+  # TODO A un decorator
   def to_s
     "#{tipo} #{forma} #{simbolo}".chomp
   end

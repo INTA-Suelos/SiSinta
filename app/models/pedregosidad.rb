@@ -13,6 +13,7 @@ class Pedregosidad < ActiveRecord::Base
 
   validates_presence_of :perfil
 
+  # TODO A un decorator
   def to_s
     "#{clase.try(:to_str)} #{subclase}"
   end

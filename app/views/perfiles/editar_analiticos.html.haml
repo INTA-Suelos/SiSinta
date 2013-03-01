@@ -8,7 +8,7 @@
   = link_to 'Volver', perfiles_path
 
 = render partial: 'analiticos/tabla', locals: {  perfil: @perfil,
-                                      analiticos: @analiticos,
+                                      analiticos: @perfil.analiticos,
                                       bloqueado: false }
 
 = volver_arriba
