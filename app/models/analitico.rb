@@ -32,37 +32,4 @@ class Analitico < ActiveRecord::Base
   accepts_nested_attributes_for :horizonte
 
   delegate :publico, to: :perfil
-
-  def materia_organica_cn_before_type_cast
-    begin
-      read_attribute(:materia_organica_cn) || (materia_organica_c/materia_organica_n).round
-    rescue
-      nil
-    end
-  end
-
-  def profundidad_muestra_before_type_cast
-    read_attribute(:profundidad_muestra) || self.horizonte.try(:rango_profundidad)
-  end
-
-  def agua_util_before_type_cast
-    begin
-      read_attribute(:agua_util) || (agua_3_atm - agua_15_atm)
-    rescue
-      nil
-    end
-  end
-
-  def profundidad_muestra
-    profundidad_muestra_before_type_cast
-  end
-
-  def materia_organica_cn
-    materia_organica_cn_before_type_cast
-  end
-
-  def agua_util
-    agua_util_before_type_cast
-  end
-
 end

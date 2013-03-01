@@ -14,17 +14,6 @@ class AnaliticoTest < ActiveSupport::TestCase
     assert_equal 4, @analitico.materia_organica_cn
   end
 
-  test 'devuelve la relación entre las materias orgánicas o cero' do
-    assert_equal nil, @analitico.materia_organica_cn
-    @analitico.materia_organica_c = 4
-    assert_equal nil, @analitico.materia_organica_cn
-    @analitico.materia_organica_c = nil
-    @analitico.materia_organica_n = 2
-    assert_equal nil, @analitico.materia_organica_cn
-    @analitico.materia_organica_c = 4
-    assert_equal 2, @analitico.materia_organica_cn
-  end
-
   test 'permite asignación masiva de ciertos atributos' do
     assert Analitico.create(attributes_for(:analitico))
   end
