@@ -50,4 +50,15 @@ class CapacidadTest < ActiveSupport::TestCase
     assert SubclaseDeCapacidad.first.respond_to? :capacidades
   end
 
+  test "ignora elementos vacíos" do
+    capacidad = build_stubbed(:capacidad)
+    capacidad.subclase_ids = [1, '', nil, 2]
+    assert_equal [1, 2], capacidad.subclase_ids
+  end
+
+  test "ignora ids inexistentes" do
+    capacidad = build_stubbed(:capacidad)
+    capacidad.subclase_ids = [1, 2, (SubclaseDeCapacidad.count + 1)]
+    assert_equal [1, 2], capacidad.subclase_ids
+  end
 end

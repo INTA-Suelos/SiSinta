@@ -52,4 +52,15 @@ class HumedadTest < ActiveSupport::TestCase
     assert SubclaseDeHumedad.first.respond_to? :humedades
   end
 
+  test "ignora elementos vacíos" do
+    humedad = build_stubbed(:humedad)
+    humedad.subclase_ids = [1, '', nil, 2]
+    assert_equal [1, 2], humedad.subclase_ids
+  end
+
+  test "ignora ids inexistentes" do
+    humedad = build_stubbed(:humedad)
+    humedad.subclase_ids = [1, 2, (SubclaseDeHumedad.count + 1)]
+    assert_equal [1, 2], humedad.subclase_ids
+  end
 end

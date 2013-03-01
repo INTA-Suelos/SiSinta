@@ -32,7 +32,7 @@ module ExtensionModelos
       # Defino el método asociacion_ids= que sincroniza la serialización con la
       # variable de instancia @asociaciones
       define_method "#{asociacion}_ids=" do |ids|
-        super Array.wrap(ids)
+        super Array.wrap(ids.reject(&:blank?))
         cargar_ids_para asociacion, clase
       end
 

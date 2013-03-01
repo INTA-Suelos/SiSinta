@@ -71,16 +71,6 @@ class PerfilesController < AutorizadoController
   end
 
   def update
-    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
-    # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
-    # la especificación de html, asique lo corrijo.
-    # TODO Ver cómo hacerlo desde la vista?
-    begin
-      params[:perfil][:capacidad_attributes][:subclase_ids] ||= []
-    rescue
-      # Nada que hacer porque no hay capacidad asociada.
-    end
-
     # Si falla, responders lo redirige a edit
     opciones = if @perfil.update_attributes(params[:perfil])
       { location: perfil_o_analiticos }
