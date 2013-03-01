@@ -8,7 +8,7 @@
   - if can? :update, @perfil.analiticos
     = link_to 'Editar analíticos', editar_analiticos_perfil_path(@perfil)
     = '|'
-  - if can? :create, @perfil.adjuntos.build
+  - if can? :create, @perfil => Adjunto
     = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)
     = '|'
   = link_to 'Volver', perfiles_path
