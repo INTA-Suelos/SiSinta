@@ -15,6 +15,8 @@ class Perfil < ActiveRecord::Base
                   :reconocedores, :grupo, :serie_attributes, :anular,
                   :horizontes_attributes, :analiticos_attributes
 
+  normalize_attributes :observaciones
+
   attr_taggable :etiquetas
   attr_taggable :reconocedores
 

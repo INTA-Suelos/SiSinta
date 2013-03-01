@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301050136) do
+ActiveRecord::Schema.define(:version => 20130301074031) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(:version => 20130301050136) do
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
-    t.string   "observaciones"
     t.boolean  "publico",               :default => false
     t.integer  "usuario_id"
     t.integer  "relieve_id"
@@ -191,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20130301050136) do
     t.integer  "uso_de_la_tierra_id"
     t.string   "vegetacion_o_cultivos"
     t.integer  "serie_id"
+    t.text     "observaciones"
   end
 
   create_table "perfiles_proyectos", :id => false, :force => true do |t|
@@ -248,10 +248,10 @@ ActiveRecord::Schema.define(:version => 20130301050136) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
