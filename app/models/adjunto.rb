@@ -10,9 +10,4 @@ class Adjunto < ActiveRecord::Base
   def extension
     File.extname(archivo.path).delete('.')
   end
-
-  def to_s
-    archivo.try(:path)
-  end
-
 end

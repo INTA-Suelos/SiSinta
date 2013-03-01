@@ -1,15 +1,5 @@
 # encoding: utf-8
 module AdjuntosHelper
-  def icono_para_extension(ext)
-    archivo = "iconos/file_extension_#{ext}.png"
-
-    if File.exists? "app/assets/images/#{archivo}"
-      image_tag archivo, alt: ext
-    else
-      ".#{ext}"
-    end
-  end
-
   def titulo_de_la_accion
     case params[:action]
       when 'index'

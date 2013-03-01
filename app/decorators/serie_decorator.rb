@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SerieDecorator < ApplicationDecorator
   decorates_association :perfiles, with: PaginadorDecorator
 

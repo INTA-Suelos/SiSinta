@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UbicacionDecorator < ApplicationDecorator
   # Transforma del srid real al preferido por el usuario
   def transformar

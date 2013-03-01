@@ -1,7 +1,7 @@
 %tr
   %td.nombre= link_to adjunto.archivo.original_filename,
     descargar_perfil_adjunto_path(@perfil, adjunto)
-  %td.icono= icono_para_extension(adjunto.extension)
+  %td.icono= adjunto.icono
   %td= number_to_human_size(adjunto.archivo_file_size)
   %td.notas= adjunto.notas
   %td.acciones

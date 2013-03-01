@@ -8,7 +8,7 @@
 
       .span-21.last
         - if bloqueado
-          .span-1.icono= icono_para_extension(@adjunto.extension)
+          .span-1.icono= adjunto.icono
           .span-18= label_tag :archivo, @adjunto.archivo_file_name
           .span-2.last= label_tag :mb, number_to_human_size(@adjunto.archivo_file_size)
         - else

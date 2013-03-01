@@ -47,5 +47,7 @@ class AdjuntosController < AutorizadoController
 
     def decorar
       @perfil = @perfil.decorate
+      @adjunto = @adjunto.decorate unless @adjunto.nil?
+      @adjuntos = PaginadorDecorator.decorate(@adjuntos) unless @adjuntos.nil?
     end
 end

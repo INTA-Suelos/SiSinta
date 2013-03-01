@@ -17,6 +17,7 @@ class Capacidad < ActiveRecord::Base
 
   validates_presence_of :perfil
 
+  # TODO A un decorator
   def to_s
     cadena = "#{clase_de_capacidad.try(:to_str)}"
     subclases.each do |sc|
