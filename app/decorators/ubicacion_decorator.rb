@@ -36,7 +36,7 @@ class UbicacionDecorator < ApplicationDecorator
                   alto}&sensor=false&zoom=#{
                   zoom}&maptype=hybrid&markers=#{
                   source.latitud}%2C#{
-                  source.longitud}"
+                  source.longitud}" unless x.blank? or y.blank?
   end
 
 end

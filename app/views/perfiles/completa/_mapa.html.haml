@@ -1,3 +1,4 @@
-= field_set_tag 'Ubicación', id: 'ubicacion', class: 'celeste plegable span-22 last' do
-  .span-21.last.campo
-    .centrado= f.object.ubicacion.mapa
+- unless f.object.ubicacion.coordenadas.blank?
+  = field_set_tag 'Ubicación', id: 'ubicacion', class: 'celeste plegable span-22 last' do
+    .span-21.last.campo
+      .centrado= f.object.ubicacion.mapa
