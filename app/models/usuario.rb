@@ -6,7 +6,7 @@ class Usuario < ActiveRecord::Base
   has_many :perfiles, inverse_of: :usuario
   has_and_belongs_to_many :equipos
 
-  after_initialize :asignar_valores_por_defecto
+  after_create :asignar_valores_por_defecto
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,6 +16,8 @@ class Usuario < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
                   :remember_me, :config, :current_password, :ficha, :srid
+
+  validates_presence_of :ficha, :srid, on: :update
 
   # FIXME Workarround para cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
