@@ -46,7 +46,7 @@ class AbilityTest < ActiveSupport::TestCase
   test "los miembros de algo pueden administrarlo" do
     miembro = create(:usuario)
     perfil = create(:perfil)
-    miembro.grant :miembro, perfil
+    miembro.grant 'Miembro', perfil
     permisos = Ability.new miembro
 
     assert permisos.can?(:modificar, perfil),

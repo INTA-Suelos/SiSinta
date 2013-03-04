@@ -4,7 +4,7 @@ require './test/test_helper'
 class AdjuntosControllerTest < ActionController::TestCase
 
   setup do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     @adjunto = create(:adjunto)
     @perfil = @adjunto.perfil
     @adjuntos = Array.wrap(@adjunto)

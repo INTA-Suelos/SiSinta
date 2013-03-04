@@ -13,10 +13,10 @@ class Ability
     @basicos =  [ Grupo, Fase, Proyecto, Serie ]
     @recursos = @perfiles + @basicos
 
-    if @usuario.has_role? :admin
+    if @usuario.admin?
       administrador
     else
-      if @usuario.has_role? :autorizado
+      if @usuario.autorizado?
         autorizado
       else
         miembro
@@ -43,7 +43,7 @@ class Ability
     # requisito de rolify
     def miembro
       [Serie, Perfil].each do |recurso|
-        can :modificar, recurso,  id: recurso.with_role('miembro', @usuario).map {|s| s.id}
+        can :modificar, recurso,  id: recurso.with_role('Miembro', @usuario).map {|s| s.id}
       end
       invitado
     end

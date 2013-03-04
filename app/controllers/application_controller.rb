@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     @recurso = recurso
 
     respond_to do |format|
-      if Usuario.find(params["usuario_ids"]).each { |u| u.grant :miembro, @recurso }
+      if Usuario.find(params["usuario_ids"]).each { |u| u.grant 'Miembro', @recurso }
         format.html { redirect_to permisos_url,
                       notice: I18n.t('messages.updated', model: @recurso.class) }
         format.json { head :ok }

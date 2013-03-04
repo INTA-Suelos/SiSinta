@@ -61,7 +61,7 @@ class PerfilesController < AutorizadoController
 
     # Si falla, responders lo redirige a new
     opciones = if @perfil.save
-      current_usuario.grant :miembro, @perfil
+      current_usuario.grant 'Miembro', @perfil
       { location: perfil_o_analiticos }
     else
       { }

@@ -4,7 +4,7 @@ require './test/test_helper'
 class SeriesControllerTest < ActionController::TestCase
 
   test "debería devolver nombre para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     termino = create(:serie).nombre
 
     get :autocompletar, atributo: 'nombre', term: termino
@@ -18,7 +18,7 @@ class SeriesControllerTest < ActionController::TestCase
   end
 
   test "debería devolver símbolo para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     termino = create(:serie).simbolo
 
     get :autocompletar, atributo: 'simbolo', term: termino
