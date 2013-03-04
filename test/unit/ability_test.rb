@@ -4,7 +4,7 @@ require './test/test_helper'
 class AbilityTest < ActiveSupport::TestCase
 
   test "los administradores pueden tocar todo" do
-    admin = create(:usuario, rol: :admin)
+    admin = create(:usuario, rol: 'Administrador')
     permisos = Ability.new admin
 
     permisos.recursos.each do |recurso|
@@ -14,7 +14,7 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los usuarios autorizados pueden ver cualquier objeto" do
-    autorizado = create(:usuario, rol: :autorizado)
+    autorizado = create(:usuario, rol: 'Autorizado')
     permisos = Ability.new autorizado
 
     perfil_ajeno = build_stubbed(:perfil, usuario: create(:usuario))
@@ -27,7 +27,7 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los usuarios autorizados pueden crear objetos propios" do
-    autorizado = create(:usuario, rol: :autorizado)
+    autorizado = create(:usuario, rol: 'Autorizado')
     permisos = Ability.new autorizado
 
     permisos.recursos.each do |recurso|
@@ -36,11 +36,13 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los usuarios autorizados pueden manejar sus propios objetos" do
-    autorizado = create(:usuario, rol: :autorizado)
+    autorizado = create(:usuario, rol: 'Autorizado')
     permisos = Ability.new autorizado
     perfil = build_stubbed(:perfil, usuario: autorizado)
+    perfil_anonimo = build_stubbed(:perfil, usuario: nil)
 
     assert permisos.can?(:manage, perfil), "Debe poder administrar sus recursos"
+    assert permisos.cannot?(:manage, perfil_anonimo), "No deben poder administrar otros"
   end
 
   test "los miembros de algo pueden administrarlo" do

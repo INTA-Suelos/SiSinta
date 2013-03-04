@@ -2,7 +2,6 @@
 require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
-
   test "el test accede al controlador" do
     assert_instance_of PerfilesController, @controller
   end
@@ -35,25 +34,26 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar' si está autorizado" do
-    loguearse_como 'Autorizado'
-
-    get :edit, id: create(:perfil).to_param
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
+    get :edit, id: perfil.to_param
     assert_response :success
   end
 
   test "actualiza un perfil si está autorizado" do
-    loguearse_como 'Autorizado'
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
 
-    perfil = create(:perfil)
     @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
-    put :update, id: perfil.to_param, perfil: attributes_for(:perfil)
+    put :update, id: perfil.to_param, perfil: { observaciones: 'agudas' }
     assert_redirected_to perfil_path(assigns(:perfil))
+    assert_equal 'agudas', assigns(:perfil).observaciones
   end
 
   test "elimina un perfil si está autorizado" do
-    loguearse_como 'Autorizado'
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
 
-    perfil = create(:perfil)
     assert_difference('Perfil.count', -1) do
       delete :destroy, id: perfil.to_param
     end
@@ -89,23 +89,22 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar_analiticos' si está autorizado" do
-    loguearse_como 'Autorizado'
-    perfil = create(:perfil)
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
 
     get :editar_analiticos, id: perfil.to_param
     assert_response :success
-    assert_not_nil assigns(:perfil), "No asigna el perfil en 'editar'"
+    assert_not_nil assigns(:perfil), "Debe asignar el perfil en 'editar'"
   end
 
   test "actualiza todos los datos analíticos" do
-    loguearse_como 'Autorizado'
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
 
-    perfil = create(:perfil)
     5.times do
       perfil.horizontes.create(attributes_for(:horizonte))
     end
 
-    # TODO por qué me dice que analitico.horizonte es nil?
     put :update_analiticos, id: perfil.to_param, perfil: {
       analiticos_attributes: {
         perfil.analiticos.first.id => attributes_for(:analitico, id: perfil.analiticos.first.id)

@@ -2,25 +2,20 @@
 require './test/test_helper'
 
 class ProyectosControllerTest < ActionController::TestCase
-  setup do
-    @proyecto = create(:proyecto)
-    @request.env["HTTP_REFERER"] = "/proyectos/"
-  end
-
-  test "debería ir al index sin loguearse" do
+  test "accede a la lista de proyectos sin loguearse" do
+    assert_nil @controller.current_usuario
     get :index
     assert_response :success
-    assert_not_nil assigns(:proyectos)
   end
 
-  test "debería ir a 'nuevo' si está autorizado" do
+  test "va a 'nuevo' si está autorizado" do
     loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
-  test "debería crear un proyecto si está autorizado" do
+  test "crea un proyecto si está autorizado" do
     loguearse_como 'Autorizado'
 
     assert_difference('Proyecto.count') do
@@ -30,33 +25,35 @@ class ProyectosControllerTest < ActionController::TestCase
     assert_redirected_to proyecto_path(assigns(:proyecto))
   end
 
-  test "debería mostrar un proyecto sin loguearse" do
-    get :show, id: @proyecto
+  test "muestra un proyecto sin loguearse" do
+    get :show, id: create(:proyecto)
     assert_response :success
   end
 
-  test "debería ir a 'editar' si está autorizado" do
-    loguearse_como 'Autorizado'
+  test "va a 'editar' si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
 
-    get :edit, id: @proyecto
+    get :edit, id: create(:proyecto, usuario: usuario)
     assert_response :success
   end
 
-  test "debería actualizar un proyecto si está autorizado" do
-    loguearse_como 'Autorizado'
+  test "actualiza un proyecto si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+    proyecto = create(:proyecto, usuario: usuario)
 
-    put :update, id: @proyecto, proyecto: attributes_for(:proyecto)
+    put :update, id: proyecto, proyecto: { nombre: 'Flaco Pantera 3' }
     assert_redirected_to proyecto_path(assigns(:proyecto))
+    assert_equal 'Flaco Pantera 3', assigns(:proyecto).nombre
   end
 
-  test "debería eliminar un proyecto si está autorizado" do
-    loguearse_como 'Autorizado'
+  test "elimina un proyecto si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+    proyecto = create(:proyecto, usuario: usuario)
 
     assert_difference('Proyecto.count', -1) do
-      delete :destroy, id: @proyecto
+      delete :destroy, id: proyecto
     end
 
     assert_redirected_to proyectos_path
   end
-
 end

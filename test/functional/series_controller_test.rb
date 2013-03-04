@@ -2,8 +2,62 @@
 require './test/test_helper'
 
 class SeriesControllerTest < ActionController::TestCase
+  test "accede a la lista de series sin loguearse" do
+    assert_nil @controller.current_usuario
+    get :index
+    assert_response :success
+  end
 
-  test "debería devolver nombre para términos parciales" do
+  test "va a 'nuevo' si está autorizado" do
+    loguearse_como 'Autorizado'
+
+    get :new
+    assert_response :success
+  end
+
+  test "crea una serie si está autorizado" do
+    loguearse_como 'Autorizado'
+
+    assert_difference('Serie.count') do
+      post :create, serie: attributes_for(:serie)
+    end
+
+    assert_redirected_to serie_path(assigns(:serie))
+  end
+
+  test "muestra una serie sin loguearse" do
+    get :show, id: create(:serie)
+    assert_response :success
+  end
+
+  test "va a 'editar' si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+
+    get :edit, id: create(:serie, usuario: usuario)
+    assert_response :success
+  end
+
+  test "actualiza una serie si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+    serie = create(:serie, usuario: usuario)
+
+    put :update, id: serie, serie: { nombre: 'de Fibonacci' }
+    assert_redirected_to serie_path(assigns(:serie))
+    assert_equal 'de Fibonacci', assigns(:serie).nombre
+  end
+
+  test "elimina una serie si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+    serie = create(:serie, usuario: usuario)
+
+    assert_difference('Serie.count', -1) do
+      delete :destroy, id: serie
+    end
+
+    assert_redirected_to series_path
+  end
+
+  test "devuelve nombre para términos parciales" do
     loguearse_como 'Autorizado'
     termino = create(:serie).nombre
 
@@ -17,7 +71,7 @@ class SeriesControllerTest < ActionController::TestCase
     assert json.first.include?('nombre'), "debe devolver el nombre"
   end
 
-  test "debería devolver símbolo para términos parciales" do
+  test "devuelve símbolo para términos parciales" do
     loguearse_como 'Autorizado'
     termino = create(:serie).simbolo
 
@@ -30,6 +84,4 @@ class SeriesControllerTest < ActionController::TestCase
     assert json.first.include?('label'), "debe devolver el label"
     assert json.first.include?('simbolo'), "debe devolver el simbolo"
   end
-
-
 end

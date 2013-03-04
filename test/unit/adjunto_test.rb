@@ -13,12 +13,11 @@ class AdjuntoTest < ActiveSupport::TestCase
   end
 
   test 'delega publico a perfil' do
-    adjunto = create(:adjunto)
-    assert_equal adjunto.perfil.publico, adjunto.publico
-    adjunto.perfil.publico = !adjunto.perfil.publico
-    assert_equal adjunto.perfil.publico, adjunto.publico
-    adjunto.perfil = nil
-    assert_nil adjunto.publico
+    perfil = create(:perfil)
+    adjunto = create(:adjunto, perfil: perfil)
+    assert_equal perfil.publico, adjunto.publico
+    perfil.publico = !perfil.publico
+    assert_equal perfil.publico, adjunto.publico
   end
 
 end
