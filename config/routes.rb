@@ -52,8 +52,8 @@ SiSINTA::Application.routes.draw do
       end
     end
 
-    r.resource :usuarios, only: [] do
-      put 'configurar', on: :member
+    r.resources :usuarios, only: [:index, :destroy, :update] do
+      put 'update_varios', on: :collection
     end
 
     r.resources :colores, only: [] do
@@ -63,13 +63,6 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :proyectos
-
-    scope "/admin" do
-      r.resources :usuarios, only: [:index, :destroy] do
-        put 'update', on: :collection
-      end
-    end
-
   end
 
   with_options path_names: femeninos do |r|

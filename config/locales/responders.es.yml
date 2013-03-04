@@ -14,3 +14,6 @@ es:
       update_analiticos:
         notice: 'Se actualizaron los datos analíticos correctamente.'
         alert:  'No pudieron modificarse todos los datos analíticos.'
+    usuarios:
+      update:
+        notice: 'Tu cuenta fue actualizada'
