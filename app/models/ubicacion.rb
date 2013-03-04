@@ -18,7 +18,8 @@ class Ubicacion < ActiveRecord::Base
   alias_attribute :longitud, :x
   alias_attribute :latitud,  :y
 
-  belongs_to :perfil, :inverse_of => :ubicacion
+  belongs_to :perfil, inverse_of: :ubicacion
+  delegate :publico, :usuario, :usuario_id, to: :perfil
 
   validates_presence_of :perfil
   validates_inclusion_of :x,  in: config.rango_x, allow_blank: true,

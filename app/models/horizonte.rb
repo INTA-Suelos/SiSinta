@@ -40,7 +40,7 @@ class Horizonte < ActiveRecord::Base
                           in: 0..500, allow_nil: true,
                           message: "debe estar entre 0 y 500 cm"
 
-  delegate :publico, to: :perfil
+  delegate :publico, :usuario, :usuario_id, to: :perfil
 
   # Se crea un color si no existe ya
   def autosave_associated_records_for_color_seco

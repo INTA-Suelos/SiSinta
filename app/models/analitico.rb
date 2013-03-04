@@ -31,5 +31,5 @@ class Analitico < ActiveRecord::Base
 
   accepts_nested_attributes_for :horizonte
 
-  delegate :publico, to: :perfil
+  delegate :publico, :usuario, :usuario_id, to: :horizonte
 end
