@@ -1,0 +1,20 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+
+  = field_set_tag 'Completá tus datos', class: 'celeste_oscuro span-24' do
+
+    .span-24
+      .span-3= f.label :email
+      .span-9.last= f.email_field :email
+
+    .span-24
+      .span-3= f.label :password
+      .span-9= f.password_field :password
+
+    - if devise_mapping.rememberable?
+      .span-24
+        .span-3= f.label :remember_me, 'Recordarme'
+        .span-9= f.check_box :remember_me
+
+  .span-4= f.submit "Entrar"
+
+= render partial: "devise/shared/links"

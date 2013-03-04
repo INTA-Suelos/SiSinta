@@ -2,13 +2,13 @@
 class AdjuntosController < AutorizadoController
   responders :collection
 
+  # Carga los adjuntos a través del perfil
   load_and_authorize_resource :perfil
   load_and_authorize_resource through: :perfil
 
   before_filter :decorar, only: [:index, :show, :edit, :new]
 
   def index
-    @adjuntos = @perfil.adjuntos
     respond_with @perfil, @adjuntos
   end
 
@@ -47,5 +47,7 @@ class AdjuntosController < AutorizadoController
 
     def decorar
       @perfil = @perfil.decorate
+      @adjunto = @adjunto.decorate unless @adjunto.nil?
+      @adjuntos = PaginadorDecorator.decorate(@adjuntos) unless @adjuntos.nil?
     end
 end

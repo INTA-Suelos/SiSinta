@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class CapacidadTest < ActiveSupport::TestCase
 
-  test "debería cargar la clase asociada" do
+  test "carga la clase asociada" do
     atributos = { clase_id: ClaseDeCapacidad.first.id }
 
     assert_difference 'ClaseDeCapacidad.first.capacidades.count' do
@@ -11,7 +11,7 @@ class CapacidadTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería guardar la relación con una subclase" do
+  test "guarda la relación con una subclase" do
     capacidad = create(:capacidad, subclase_ids: [ SubclaseDeCapacidad.first.id ])
 
     assert capacidad.valid?
@@ -19,7 +19,7 @@ class CapacidadTest < ActiveSupport::TestCase
     assert capacidad.subclases.include?(SubclaseDeCapacidad.first), 'no agrega una subclase'
   end
 
-  test "debería guardar la relación con varias subclases" do
+  test "guarda la relación con varias subclases" do
     atributos = { subclase_ids: [ SubclaseDeCapacidad.first.id,
                                   SubclaseDeCapacidad.last.id   ] }
     capacidad = create(:capacidad, atributos)
@@ -31,11 +31,11 @@ class CapacidadTest < ActiveSupport::TestCase
     assert capacidad.subclases.include?(SubclaseDeCapacidad.last), 'no agrega varias subclases'
   end
 
-  test "debería negarse a cargar capacidad sin perfil" do
+  test "no carga capacidad sin perfil" do
     assert build_stubbed(:capacidad, :sin_perfil).invalid?, "una capacidad sin perfil es válida"
   end
 
-  test "debería poder acceder a sus asociaciones" do
+  test "puede acceder a sus asociaciones" do
     capacidad = build_stubbed(:capacidad)
     assert capacidad.respond_to? :clase
     assert capacidad.respond_to? :subclases
@@ -50,4 +50,15 @@ class CapacidadTest < ActiveSupport::TestCase
     assert SubclaseDeCapacidad.first.respond_to? :capacidades
   end
 
+  test "ignora elementos vacíos" do
+    capacidad = build_stubbed(:capacidad)
+    capacidad.subclase_ids = [1, '', nil, 2]
+    assert_equal [1, 2], capacidad.subclase_ids
+  end
+
+  test "ignora ids inexistentes" do
+    capacidad = build_stubbed(:capacidad)
+    capacidad.subclase_ids = [1, '2', (SubclaseDeCapacidad.count + 1)]
+    assert_equal [1, 2], capacidad.subclase_ids
+  end
 end

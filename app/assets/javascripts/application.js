@@ -9,6 +9,7 @@
 //= require jquery_ujs
 //= require jquery.nested-fields
 //= require tinymce-jquery
+//= require select2
 //= require ui.multiselect
 //= require locale/ui-multiselect-es
 //= require_tree ./jquery

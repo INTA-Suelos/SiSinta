@@ -4,7 +4,7 @@ require './test/test_helper'
 class UsuarioTest < ActiveSupport::TestCase
 
   setup do
-    @admin = create(:usuario, rol: :admin)
+    @admin = create(:usuario, rol: 'Administrador')
     @simple = create(:usuario, rol: "Invitado", config: { ficha: 'simple', srid: '4326' })
     @completo = create(:usuario, rol: "Autorizado")
   end
@@ -31,8 +31,9 @@ class UsuarioTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería comprobar el rol" do
-    assert @admin.admin?, "Un admin no es administrador"
+  test "comprueba el rol" do
+    assert build(:usuario, rol: 'Administrador').admin?, "Debe ser admin"
+    assert build(:usuario, rol: 'Autorizado').admin?, "Debe ser autorizado"
   end
 
   test "un usuario nuevo debería tener config por defecto" do
@@ -41,4 +42,17 @@ class UsuarioTest < ActiveSupport::TestCase
     assert_equal '4326',      Usuario.new.srid
   end
 
+  test "tiene o puede tener solo un rol global" do
+    usuario = create(:usuario)
+    assert usuario.rol_global.blank?
+
+    usuario.grant 'rey'
+    assert_equal 'rey', usuario.rol_global
+    assert usuario.has_role? 'rey'
+
+    usuario.rol_global = 'plebeyo'
+    assert_equal 'plebeyo', usuario.rol_global
+    assert usuario.has_role? 'plebeyo'
+    refute usuario.has_role? 'rey'
+  end
 end

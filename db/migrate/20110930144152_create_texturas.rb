@@ -9,7 +9,7 @@ class CreateTexturas < ActiveRecord::Migration
       t.decimal :arena_media,       :precision => 3, :scale => 1
       t.decimal :arena_gruesa,      :precision => 3, :scale => 1
       t.decimal :arena_muy_gruesa,  :precision => 3, :scale => 1
-      t.references :analisis
+      t.references :analitico
 
       t.timestamps
     end

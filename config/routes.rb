@@ -15,6 +15,9 @@ SiSINTA::Application.routes.draw do
   with_options path_names: masculinos do |r|
 
     r.resources :perfiles do
+
+      r.resources :analiticos, only: :index
+
       collection do
         get   'geo'
         get   'exportar'
@@ -23,16 +26,12 @@ SiSINTA::Application.routes.draw do
         get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
         get   'seleccionar'
       end
+
       member do
         get   'permisos'
         post  'permitir'
-      end
-
-      r.resources :analisis, only: :index do
-        collection do
-          get 'edit'
-          put 'update'
-        end
+        get   'editar_analiticos'
+        put   'update_analiticos'
       end
 
       r.resources :adjuntos do
@@ -53,8 +52,8 @@ SiSINTA::Application.routes.draw do
       end
     end
 
-    r.resource :usuarios, only: [] do
-      put 'configurar', on: :member
+    r.resources :usuarios, only: [:index, :destroy, :update] do
+      put 'update_varios', on: :collection
     end
 
     r.resources :colores, only: [] do
@@ -64,13 +63,6 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :proyectos
-
-    scope "/admin" do
-      r.resources :usuarios, only: [:index, :destroy] do
-        put 'update', on: :collection
-      end
-    end
-
   end
 
   with_options path_names: femeninos do |r|

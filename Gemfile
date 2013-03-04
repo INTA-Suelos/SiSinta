@@ -23,7 +23,7 @@ gem 'ransack'
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
-gem 'rocket_tag', github: 'bradphelan/rocket_tag'
+gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
 
@@ -46,6 +46,7 @@ group :assets do
   gem 'tinymce-rails'
   gem 'multiselectjs_rails'
   gem 'jquery-rails'
+  gem 'select2-rails'
 end
 
 gem 'thin'
@@ -58,6 +59,8 @@ end
 
 group :development do
   gem 'bullet'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
 end
 
 group :test do

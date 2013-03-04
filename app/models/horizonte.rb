@@ -11,11 +11,11 @@ class Horizonte < ActiveRecord::Base
                   :concreciones, :barnices, :moteados, :humedad, :raices,
                   :formaciones_especiales
 
-  after_create :create_analisis
+  after_create :create_analitico
 
   default_scope order('profundidad_superior ASC')
 
-  has_one :analisis,      dependent: :destroy, inverse_of: :horizonte
+  has_one :analitico,     dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte
   has_one :consistencia,  dependent: :destroy, inverse_of: :horizonte
   has_one :estructura,    dependent: :destroy, inverse_of: :horizonte
@@ -29,7 +29,7 @@ class Horizonte < ActiveRecord::Base
   belongs_to_active_hash :textura,  inverse_of: :horizontes,
                                     class_name: 'TexturaDeHorizonte'
 
-  accepts_nested_attributes_for :analisis, :limite, :consistencia,
+  accepts_nested_attributes_for :analitico, :limite, :consistencia,
                                 :estructura, :textura,
                                 limit: 1
   accepts_nested_attributes_for :color_seco, :color_humedo,
@@ -40,7 +40,7 @@ class Horizonte < ActiveRecord::Base
                           in: 0..500, allow_nil: true,
                           message: "debe estar entre 0 y 500 cm"
 
-  delegate :publico, to: :perfil
+  delegate :publico, :usuario, :usuario_id, to: :perfil
 
   # Se crea un color si no existe ya
   def autosave_associated_records_for_color_seco

@@ -6,6 +6,7 @@ class Lookup < ActiveYaml::Base
   # Lookup. Cada una busca el plural de su nombre acá.
   set_root_path "db/semillas"
 
+  # TODO Decorator de lookup?
   def to_str
     valor
   end

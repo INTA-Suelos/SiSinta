@@ -1,6 +1,19 @@
-.botonera= render 'botonera_editar'
+.botonera
+  - if can? :read, @perfil
+    = link_to 'Mostrar', @perfil
+    = '|'
+  - if can?(:update, @perfil) or can?(:modificar, @perfil)
+    = link_to 'Permisos', permisos_perfil_path(@perfil)
+    = '|'
+  - if can? :update, @perfil.analiticos
+    = link_to 'Editar analíticos', editar_analiticos_perfil_path(@perfil)
+    = '|'
+  - if can? :create, @perfil => Adjunto
+    = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)
+    = '|'
+  = link_to 'Volver', perfiles_path
 
 = render partial: current_usuario.ficha,
     locals: {perfil: @perfil, bloqueado: false}
 
-.botonera= render 'botonera_editar'
+= volver_arriba

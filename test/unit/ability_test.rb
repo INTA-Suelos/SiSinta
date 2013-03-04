@@ -3,57 +3,85 @@ require './test/test_helper'
 
 class AbilityTest < ActiveSupport::TestCase
 
-  setup do
-    @admin = build(:usuario, rol: :admin)
-    @autorizado = build(:usuario, rol: :autorizado)
-    @invitado = build(:usuario, rol: :invitado)
-    @recursos = [Perfil, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
+  test "los administradores pueden tocar todo" do
+    admin = create(:usuario, rol: :admin)
+    permisos = Ability.new admin
+
+    permisos.recursos.each do |recurso|
+      assert permisos.can?(:manage, recurso), "Debe poder administrar #{recurso}"
+    end
+    assert permisos.can?(:manage, Usuario), "Debe poder administrar Usuario"
   end
 
-  test "deberia permitirle todo al administrador" do
-    assert @admin.admin?, "No es administrador"
+  test "los usuarios autorizados pueden ver cualquier objeto" do
+    autorizado = create(:usuario, rol: :autorizado)
+    permisos = Ability.new autorizado
 
-    permisos = Ability.new @admin
+    perfil_ajeno = build_stubbed(:perfil, usuario: create(:usuario))
 
-    @recursos.each do |recurso|
-      assert permisos.can?(:manage, recurso.new), "No puede administrar #{recurso}"
+    assert permisos.can?(:read, perfil_ajeno), "Debe poder ver un perfil ajeno"
+    assert permisos.cannot(:update, perfil_ajeno), "No debe poder cambiar un perfil ajeno"
+    assert permisos.cannot(:destroy, perfil_ajeno), "No debe poder destruir un perfil ajeno"
+    assert permisos.cannot(:manage, perfil_ajeno), "No debe poder administrar un perfil ajeno"
+    assert permisos.cannot(:modificar, perfil_ajeno), "No debe poder modificar un perfil ajeno"
+  end
+
+  test "los usuarios autorizados pueden crear objetos propios" do
+    autorizado = create(:usuario, rol: :autorizado)
+    permisos = Ability.new autorizado
+
+    permisos.recursos.each do |recurso|
+      assert permisos.can?(:create, recurso), "Debe poder crear #{recurso}"
     end
   end
 
-  test "debería permitirle administrar objetos basicos a los autorizados" do
-    assert @autorizado.has_role?(:autorizado), "No es autorizado"
-    assert_equal 1, @autorizado.roles.size, "Tiene más de 1 rol"
+  test "los usuarios autorizados pueden manejar sus propios objetos" do
+    autorizado = create(:usuario, rol: :autorizado)
+    permisos = Ability.new autorizado
+    perfil = build_stubbed(:perfil, usuario: autorizado)
 
-    permisos = Ability.new @autorizado
-
-    (permisos.basicos + permisos.perfiles).each do |recurso|
-      assert permisos.can?(:manage, recurso.new), "No puede administrar #{recurso}"
-    end
-    assert permisos.cannot?(:manage, Usuario.new), "Puede administrar Usuario"
+    assert permisos.can?(:manage, perfil), "Debe poder administrar sus recursos"
   end
 
-  test "debería prohibirle a los invitados crear o modificar objetos" do
-    assert @invitado.has_role?(:invitado), "No es invitado"
-    assert_equal 1, @invitado.roles.size, "Tiene más de 1 rol"
-
-    permisos = Ability.new @invitado
-
-    @recursos.each do |recurso|
-      [:create, :update, :destroy].each do |realizar_accion|
-        assert permisos.cannot?(realizar_accion, recurso), "Puede #{realizar_accion} sobre #{recurso}"
-      end
-    end
-  end
-
-  test "debería permitirle a los miembros modificar un objeto" do
+  test "los miembros de algo pueden administrarlo" do
     miembro = create(:usuario)
     perfil = create(:perfil)
-    miembro.add_role :miembro, perfil
+    miembro.grant 'Miembro', perfil
     permisos = Ability.new miembro
+
     assert permisos.can?(:modificar, perfil),
       "No puede administrar un perfil del que es miembro"
     refute permisos.can?(:modificar, create(:perfil)),
       "Puede administrar un perfil del que no es miembro"
   end
 
+  test "los invitados no pueden crear o modificar recursos" do
+    invitado = create(:usuario)
+    permisos = Ability.new invitado
+
+    permisos.recursos.each do |recurso|
+      [:create, :update, :destroy].each do |accionar|
+        assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
+      end
+    end
+  end
+
+  test "los invitados sólo pueden leer recursos que son públicos" do
+    invitado = create(:usuario)
+    permisos = Ability.new invitado
+    perfil_privado = build_stubbed(:perfil)
+    perfil_publico = build_stubbed(:perfil, publico: true)
+
+    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver recursos privados"
+    assert permisos.can?(:read, perfil_publico), "Debe poder ver recursos públicos"
+  end
+
+  test "los invitados pueden leer recursos básicos" do
+    invitado = create(:usuario)
+    permisos = Ability.new invitado
+
+    permisos.recursos.each do |recurso|
+      assert permisos.can?(:read, recurso), "Debe poder leer recursos básicos"
+    end
+  end
 end

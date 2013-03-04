@@ -31,11 +31,12 @@ Creando usuario administrador con:
   password: cambiame
 
 MSG
+
 Usuario.create(
   nombre:   'Administra Administrador',
   email:    'admin@cambiame.com',
   password: 'cambiame'
-).add_role  :admin
+).grant 'Administrador'
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|

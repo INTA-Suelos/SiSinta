@@ -3,19 +3,19 @@ require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
 
-  test "debería acceder al controlador" do
+  test "el test accede al controlador" do
     assert_instance_of PerfilesController, @controller
   end
 
-  test "debería ir a 'nuevo' si está autorizado" do
-    loguearse_como :autorizado
+  test "va a 'nuevo' si está autorizado" do
+    loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
-  test "debería crear un perfil si está autorizado" do
-    loguearse_como :autorizado
+  test "crea un perfil si está autorizado" do
+    loguearse_como 'Autorizado'
 
     assert_difference('Perfil.count', 1) do
       post :create, perfil: attributes_for(:perfil)
@@ -24,8 +24,8 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "debería mostrar un perfil si está autorizado" do
-    loguearse_como :autorizado
+  test "muestra un perfil si está autorizado" do
+    loguearse_como 'Autorizado'
 
     @request.env["HTTP_REFERER"] = "/perfiles/"
 
@@ -34,15 +34,15 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "debería ir a 'editar' si está autorizado" do
-    loguearse_como :autorizado
+  test "va a 'editar' si está autorizado" do
+    loguearse_como 'Autorizado'
 
     get :edit, id: create(:perfil).to_param
     assert_response :success
   end
 
-  test "debería actualizar un perfil si está autorizado" do
-    loguearse_como :autorizado
+  test "actualiza un perfil si está autorizado" do
+    loguearse_como 'Autorizado'
 
     perfil = create(:perfil)
     @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
@@ -50,8 +50,8 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "debería eliminar un perfil si está autorizado" do
-    loguearse_como :autorizado
+  test "elimina un perfil si está autorizado" do
+    loguearse_como 'Autorizado'
 
     perfil = create(:perfil)
     assert_difference('Perfil.count', -1) do
@@ -61,21 +61,21 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfiles_path
   end
 
-  test "debería poder acceder a la lista de perfiles sin loguearse" do
+  test "accede a la lista de perfiles sin loguearse" do
     assert_nil @controller.current_usuario
     get :index
     assert_response :success
   end
 
-  test "debería poder acceder a los datos en geoJSON sin loguearse" do
+  test "accede a los datos en geoJSON sin loguearse" do
     assert_nil @controller.current_usuario
     @request.env["HTTP_REFERER"] = "/perfiles/"
     get :geo, format: :json
     assert_response :success
   end
 
-  test "debería devolver numero para términos parciales" do
-    loguearse_como :autorizado
+  test "devuelve numero para términos parciales" do
+    loguearse_como 'Autorizado'
     termino = create(:perfil).numero
 
     get :autocompletar, atributo: 'numero', term: termino
@@ -86,6 +86,55 @@ class PerfilesControllerTest < ActionController::TestCase
     assert json.first.include?('id'), "debe devolver el id"
     assert json.first.include?('label'), "debe devolver el label"
     assert json.first.include?('numero'), "debe devolver el número"
+  end
+
+  test "va a 'editar_analiticos' si está autorizado" do
+    loguearse_como 'Autorizado'
+    perfil = create(:perfil)
+
+    get :editar_analiticos, id: perfil.to_param
+    assert_response :success
+    assert_not_nil assigns(:perfil), "No asigna el perfil en 'editar'"
+  end
+
+  test "actualiza todos los datos analíticos" do
+    loguearse_como 'Autorizado'
+
+    perfil = create(:perfil)
+    5.times do
+      perfil.horizontes.create(attributes_for(:horizonte))
+    end
+
+    # TODO por qué me dice que analitico.horizonte es nil?
+    put :update_analiticos, id: perfil.to_param, perfil: {
+      analiticos_attributes: {
+        perfil.analiticos.first.id => attributes_for(:analitico, id: perfil.analiticos.first.id)
+      }
+    }
+
+    assert_redirected_to perfil_analiticos_path(perfil)
+  end
+
+  test "rutea a editar_analiticos" do
+    perfil = create(:perfil)
+    assert_routing({
+      path: "/perfiles/#{perfil.to_param}/editar_analiticos",
+      method: :get
+    },{
+      controller: 'perfiles', action: 'editar_analiticos',
+      id: perfil.to_param
+    })
+  end
+
+  test "rutea a update_analiticos" do
+    perfil = create(:perfil)
+    assert_routing({
+      path: "/perfiles/#{perfil.to_param}/update_analiticos",
+      method: :put
+    },{
+      controller: 'perfiles', action: 'update_analiticos',
+      id: perfil.to_param
+    })
   end
 
 end

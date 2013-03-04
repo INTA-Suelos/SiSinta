@@ -14,7 +14,7 @@ class UbicacionDecoratorTest < ActionController::TestCase
 
   # TODO Averiguar por qué falla el test pero anda el código
   test "debería devolver las coordenadas proyectadas según las preferencias" do
-    @usuario = loguearse_como :administrador
+    @usuario = loguearse_como 'Administrador'
     @usuario.srid = 22195
     assert_equal @usuario.srid, UbicacionDecorator.decorate(@lugar).srid
 

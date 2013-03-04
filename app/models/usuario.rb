@@ -13,7 +13,8 @@ class Usuario < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :config, :current_password, :ficha, :srid
+                  :remember_me, :config, :current_password, :ficha, :srid,
+                  :rol_global
 
   # Arregla cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
@@ -26,16 +27,27 @@ class Usuario < ActiveRecord::Base
                         "roles.name" => "miembro")
   end
 
-  def to_s
-    nombre
-  end
-
   def usa_ficha?(tipo)
     ficha == tipo
   end
 
   def admin?
-    has_role? :admin
+    has_role? 'Administrador'
+  end
+
+  def autorizado?
+    has_role? 'Autorizado'
+  end
+
+  # Nombre del rol global (debería haber sólo uno)
+  def rol_global
+    self.roles.globales.first.try(:name)
+  end
+
+  # Asigno un rol global (Administrador, Autorizado), revocando los anteriores
+  def rol_global=(nuevo_rol)
+    self.roles.globales.each { |rol| self.revoke rol.name }
+    self.grant nuevo_rol
   end
 
   protected

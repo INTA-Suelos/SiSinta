@@ -1,8 +1,11 @@
+# encoding: utf-8
 class PerfilDecorator < ApplicationDecorator
   decorates_association :ubicacion
   decorates_association :serie
   decorates_association :proyecto
   decorates_association :fase
+  decorates_association :adjuntos, with: PaginadorDecorator
+  decorates_association :analiticos
 
   def fecha
     source.fecha.try :to_s, :dma

@@ -3,6 +3,8 @@ class PerfilesController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
+  load_and_authorize_resource
+
   respond_to :json, only: :geo
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
@@ -59,8 +61,8 @@ class PerfilesController < AutorizadoController
 
     # Si falla, responders lo redirige a new
     opciones = if @perfil.save
-      current_usuario.grant :miembro, @perfil
-      { location: perfil_o_analisis }
+      current_usuario.grant 'Miembro', @perfil
+      { location: perfil_o_analiticos }
     else
       { }
     end
@@ -69,19 +71,9 @@ class PerfilesController < AutorizadoController
   end
 
   def update
-    # Para poder eliminar subclases de capacidad mediante los checkboxes, tengo
-    # que garantizar que haya un arreglo vacío. El formulario devuelve nil por
-    # la especificación de html, asique lo corrijo.
-    # TODO Ver cómo hacerlo desde la vista?
-    begin
-      params[:perfil][:capacidad_attributes][:subclase_ids] ||= []
-    rescue
-      # Nada que hacer porque no hay capacidad asociada.
-    end
-
     # Si falla, responders lo redirige a edit
     opciones = if @perfil.update_attributes(params[:perfil])
-      { location: perfil_o_analisis }
+      { location: perfil_o_analiticos }
     else
       { }
     end
@@ -127,6 +119,20 @@ class PerfilesController < AutorizadoController
     redirect_to exportar_perfiles_path
   end
 
+  def editar_analiticos
+    respond_with @perfil = @perfil.decorate
+  end
+
+  def update_analiticos
+    @perfil.update_attributes(params[:perfil])
+    @perfil = @perfil.decorate
+    respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
+      if @perfil.errors.any?
+        format.html { render action: 'editar_analiticos' }
+      end
+    end
+  end
+
   protected
 
     # Prepara el scope para la lista de perfiles
@@ -155,10 +161,10 @@ class PerfilesController < AutorizadoController
     end
 
     # Determina si el usuario terminó de editar el perfil o va a seguir con los
-    # análisis
+    # datos analíticos
     # TODO Revisar que envíe al edit
-    def perfil_o_analisis
-      params[:analisis].present? ? edit_perfil_analisis_index_path(@perfil) : @perfil
+    def perfil_o_analiticos
+      params[:analiticos].present? ? editar_analiticos_perfil_path(@perfil) : @perfil
     end
 
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según

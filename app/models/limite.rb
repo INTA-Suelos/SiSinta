@@ -9,4 +9,5 @@ class Limite < ActiveRecord::Base
   belongs_to_active_hash :tipo, inverse_of: :limites, class_name: 'TipoDeLimite'
 
   validates_presence_of :horizonte
+  delegate :publico, :usuario, :usuario_id, to: :horizonte
 end
