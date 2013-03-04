@@ -6,6 +6,7 @@ class Serie < ActiveRecord::Base
 
   has_many :perfiles
   has_one :perfil_modal, class_name: 'Perfil', conditions: { modal: true }
+  belongs_to :usuario
 
   accepts_nested_attributes_for :perfiles
 

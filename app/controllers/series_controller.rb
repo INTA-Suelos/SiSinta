@@ -12,9 +12,9 @@ class SeriesController < AutorizadoController
 
   # La acción +index+ funciona anónimamente, pero igual uso a CanCan para que
   # cargue el recurso
-  skip_before_filter :authenticate_usuario!,  only: [:index]
-  skip_authorize_resource                     only: [:index]
-  skip_authorization_check                    only: [:index]
+  skip_before_filter :authenticate_usuario!,  only: [:index, :show]
+  skip_authorize_resource                     only: [:index, :show]
+  skip_authorization_check                    only: [:index, :show]
 
   def index
     respond_with @series = PaginadorDecorator.decorate(apply_scopes(@series))

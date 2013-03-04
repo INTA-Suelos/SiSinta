@@ -3,7 +3,10 @@ class Usuario < ActiveRecord::Base
   rolify :role_cname => 'Rol'
   store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
+  # TODO cambiar relacion a 'creador'
   has_many :perfiles, inverse_of: :usuario
+  has_many :proyectos, inverse_of: :usuario
+  has_many :series, inverse_of: :usuario
   after_initialize :asignar_valores_por_defecto
 
   # Include default devise modules. Others available are:

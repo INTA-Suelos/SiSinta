@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304072216) do
+ActiveRecord::Schema.define(:version => 20130304111756) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20130304072216) do
     t.text     "cita"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "usuario_id"
   end
 
   add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
@@ -224,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20130304072216) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.integer  "cantidad_de_perfiles", :default => 0, :null => false
+    t.integer  "usuario_id"
   end
 
   create_table "taggings", :force => true do |t|
