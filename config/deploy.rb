@@ -7,9 +7,6 @@ server            "sisinta.inta.gov.ar", :app, :web, :db, primary: true
 set :user,        "sisinta"
 set :deploy_to,   "/srv/sisinta/app"
 
-# Si no se la mandás con cap -S branch='rama' deploy, usa 'master'
-set :branch, fetch(:branch, "master")
-
 set :use_sudo,    false
 set :ssh_options, { forward_agent: true}
 
@@ -35,6 +32,11 @@ set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 set :bundle_flags, "--deployment --quiet --binstubs"
 
 namespace :deploy do
+  desc "Genera un backup en .yml"
+  task :backup do
+    run "cd #{current_path}; #{rake} db:data:dump_dir; mv db/20* #{shared_path}/backups-yml" 
+  end
+
   namespace :assets do
     desc "Construye los estilos nuevos de paperclip"
     task :refresh_styles, roles: :app do
@@ -47,7 +49,7 @@ namespace :configs do
   desc "Crea el directorio para los archivos de configuración"
   task :directorios, roles: :app do
     run "mkdir -p #{shared_path}/config"
-
+    run "mkdir -p #{shared_path}/backups-yml"
     run "mkdir -p #{shared_path}/sockets"
   end
 
@@ -77,4 +79,5 @@ end
 
 after   "deploy:setup",           "configs:directorios"
 after   "deploy:setup",           "configs:archivos"
+before  "deploy:finalize_update", "deploy:backup"
 before  "deploy:finalize_update", "configs:links"

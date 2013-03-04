@@ -27,6 +27,6 @@
   = field_set_tag "Agregar perfiles para exportar", class: 'celeste span-22 last plegable' do
 
     .span-21.campo= render partial: 'comunes/perfiles_asociados',
-      locals: { perfiles: @perfiles, param: 'csv' }
+      locals: { perfiles: @perfiles, param: 'csv', bloqueado: false }
 
   .acciones.span-4= submit_tag t('.submit')
