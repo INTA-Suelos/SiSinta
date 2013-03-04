@@ -1,4 +1,5 @@
 # encoding: utf-8
+# TODO Separar por funcion en diferentes módulos e incluirlos en los modelos explícitamente
 module ExtensionModelos
   extend ActiveSupport::Concern
 
@@ -32,7 +33,7 @@ module ExtensionModelos
       # Defino el método asociacion_ids= que sincroniza la serialización con la
       # variable de instancia @asociaciones
       define_method "#{asociacion}_ids=" do |ids|
-        super Array.wrap(ids.reject(&:blank?).reject { |id| id > clase.count })
+        super Array.wrap(ids.reject(&:blank?).map(&:to_i).reject { |id| id > clase.count })
         cargar_ids_para asociacion, clase
       end
 

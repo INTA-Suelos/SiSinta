@@ -10,4 +10,9 @@ module UsuariosHelper
         nil
     end
   end
+
+  def roles_globales(seleccionado)
+    options_for_select [  ['Administrador', 'Administrador' ],
+                          ['Autorizado',    'Autorizado'    ] ], seleccionado
+  end
 end

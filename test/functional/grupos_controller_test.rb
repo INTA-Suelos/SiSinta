@@ -11,7 +11,7 @@ class GruposControllerTest < ActionController::TestCase
   end
 
   test "debería devolver descripcion para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     @termino = create(:grupo).descripcion
     get :autocompletar, atributo: 'descripcion', term: @termino
     assert_response :success

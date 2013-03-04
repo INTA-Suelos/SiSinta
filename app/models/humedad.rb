@@ -16,6 +16,7 @@ class Humedad < ActiveRecord::Base
   attr_accessor :subclases
 
   validates_presence_of :perfil
+  delegate :publico, :usuario, :usuario_id, to: :perfil
 
   # TODO A un decorator
   def to_s

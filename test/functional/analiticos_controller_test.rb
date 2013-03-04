@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class AnaliticosControllerTest < ActionController::TestCase
   test "debería ir al índice de analíticos si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     get :index, perfil_id: create(:perfil).to_param
     assert_response :success

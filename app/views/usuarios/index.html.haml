@@ -4,18 +4,19 @@
       = paginate @usuarios
       = elegir_filas 'usuarios'
 
-  = form_tag usuarios_path, method: :put do |f|
+  = form_tag update_varios_usuarios_path, method: :put do
 
-    %table#roles.centrado
+    %table#usuarios
       %thead
         %tr
-          %th{colspan: 2} Usuario
-          %th{colspan: 2} Email
+          %th.nombre  Usuario
+          %th.email   Email
+          %th.rol     Rol
           %th.acciones
 
       %tbody
         = render @usuarios
 
-    = submit_tag
+    .span-4= submit_tag 'Actualizar'
 
   = volver_arriba

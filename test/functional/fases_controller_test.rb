@@ -11,7 +11,7 @@ class FasesControllerTest < ActionController::TestCase
   end
 
   test "debería devolver nombre para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     @termino = create(:fase).nombre
     get :autocompletar, atributo: 'nombre', term: @termino
     assert_response :success

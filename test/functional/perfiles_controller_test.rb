@@ -8,14 +8,14 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "va a 'nuevo' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
   test "crea un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     assert_difference('Perfil.count', 1) do
       post :create, perfil: attributes_for(:perfil)
@@ -25,7 +25,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "muestra un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     @request.env["HTTP_REFERER"] = "/perfiles/"
 
@@ -35,14 +35,14 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     get :edit, id: create(:perfil).to_param
     assert_response :success
   end
 
   test "actualiza un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     perfil = create(:perfil)
     @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
@@ -51,7 +51,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "elimina un perfil si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     perfil = create(:perfil)
     assert_difference('Perfil.count', -1) do
@@ -75,7 +75,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "devuelve numero para términos parciales" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     termino = create(:perfil).numero
 
     get :autocompletar, atributo: 'numero', term: termino
@@ -89,7 +89,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar_analiticos' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
     perfil = create(:perfil)
 
     get :editar_analiticos, id: perfil.to_param
@@ -98,7 +98,7 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "actualiza todos los datos analíticos" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     perfil = create(:perfil)
     5.times do

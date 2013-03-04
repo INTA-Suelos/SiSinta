@@ -58,7 +58,7 @@ class CapacidadTest < ActiveSupport::TestCase
 
   test "ignora ids inexistentes" do
     capacidad = build_stubbed(:capacidad)
-    capacidad.subclase_ids = [1, 2, (SubclaseDeCapacidad.count + 1)]
+    capacidad.subclase_ids = [1, '2', (SubclaseDeCapacidad.count + 1)]
     assert_equal [1, 2], capacidad.subclase_ids
   end
 end

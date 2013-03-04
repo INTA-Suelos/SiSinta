@@ -15,4 +15,5 @@ class Consistencia < ActiveRecord::Base
                                 inverse_of: :consistencias
 
   validates_presence_of :horizonte
+  delegate :publico, :usuario, :usuario_id, to: :horizonte
 end

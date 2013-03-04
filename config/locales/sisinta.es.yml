@@ -28,6 +28,10 @@ es:
       submit: "Seleccionar y volver"
     exportar:
       submit: "Exportar"
+  usuarios:
+    update_varios:
+      notice: 'Los usuarios se actualizaron correctamente.'
+      alert: 'Hubo algún problema al actualizar los usuarios.'
 
   comunes:
     perfiles_asociados:

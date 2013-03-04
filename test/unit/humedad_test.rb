@@ -60,7 +60,7 @@ class HumedadTest < ActiveSupport::TestCase
 
   test "ignora ids inexistentes" do
     humedad = build_stubbed(:humedad)
-    humedad.subclase_ids = [1, 2, (SubclaseDeHumedad.count + 1)]
+    humedad.subclase_ids = [1, '2', (SubclaseDeHumedad.count + 1)]
     assert_equal [1, 2], humedad.subclase_ids
   end
 end

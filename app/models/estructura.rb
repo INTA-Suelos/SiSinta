@@ -10,4 +10,5 @@ class Estructura < ActiveRecord::Base
   belongs_to_active_hash :grado, inverse_of: :estructuras, class_name: 'GradoDeEstructura'
 
   validates_presence_of :horizonte
+  delegate :publico, :usuario, :usuario_id, to: :horizonte
 end
