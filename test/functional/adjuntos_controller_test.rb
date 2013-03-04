@@ -2,70 +2,76 @@
 require './test/test_helper'
 
 class AdjuntosControllerTest < ActionController::TestCase
-
-  setup do
-    loguearse_como 'Autorizado'
-    @adjunto = create(:adjunto)
-    @perfil = @adjunto.perfil
-    @adjuntos = Array.wrap(@adjunto)
-    @request.env["HTTP_REFERER"] = "/perfiles/#{@perfil.to_param}/adjuntos"
-  end
-
   test "rutea a index" do
     assert_routing({
-      path: "/perfiles/#{@perfil.to_param}/adjuntos",
+      path: "/perfiles/1/adjuntos",
       method: :get
     },{
       controller: 'adjuntos', action: 'index',
-      perfil_id: @perfil.to_param
+      perfil_id: '1'
     })
   end
 
   test "rutea a show" do
     assert_routing({
-      path: "/perfiles/#{@perfil.to_param}/adjuntos/#{@adjunto.to_param}",
+      path: "/perfiles/1/adjuntos/2",
       method: :get
     },{
       controller: 'adjuntos', action: 'show',
-      perfil_id: @perfil.to_param, id: @adjunto.to_param
+      perfil_id: '1', id: '2'
     })
   end
 
   test "rutea a descargar" do
     assert_routing({
-      path: "/perfiles/#{@perfil.to_param}/adjuntos/#{@adjunto.to_param}/descargar",
+      path: "/perfiles/1/adjuntos/2/descargar",
       method: :get
     },{
       controller: 'adjuntos', action: 'descargar',
-      perfil_id: @perfil.to_param, id: @adjunto.to_param
+      perfil_id: '1', id: '2'
     })
   end
 
   test "muestra los adjuntos del perfil" do
-    get :index, perfil_id: @perfil.id
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
+    3.times do
+      create(:adjunto, perfil: perfil)
+    end
+
+    get :index, perfil_id: perfil.id
     assert_response :success
     assert_not_nil assigns(:perfil), "No asigna @perfil"
     assert_not_nil assigns(:adjuntos), "No asigna @adjuntos"
-    assert_equal @adjuntos.sort, assigns(:adjuntos).sort
+    assert_equal perfil.adjuntos.count, assigns(:adjuntos).count
   end
 
   test "sólo muestra los adjuntos del perfil solicitado" do
+    loguearse_como 'Autorizado'
+
     get :index, perfil_id: create(:perfil).id
     assert_not_nil assigns(:perfil), "No asigna @perfil"
     assert assigns(:adjuntos).empty?, "Asigna @adjuntos"
   end
 
-  test "ir a 'editar' si está autorizado" do
-    get :edit, id: @adjunto.to_param, perfil_id: @perfil.id
+  test "va a 'editar' si está autorizado" do
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
+    adjunto = perfil.adjuntos.create attributes_for(:adjunto)
+
+    get :edit, id: adjunto, perfil_id: perfil.id
     assert_response :success
-    assert_not_nil assigns(:perfil), "No asigna @perfil"
-    assert_not_nil assigns(:adjunto), "No asigna @adjunto"
+    assert_not_nil assigns(:perfil), "Debe asignar @perfil"
+    assert_not_nil assigns(:adjunto), "Debe asignar @adjunto"
   end
 
   test "actualizar un adjunto si está autorizado" do
-    put :update, id: @adjunto.to_param, adjuntos: attributes_for(:adjunto), perfil_id: @perfil.id
+    usuario = loguearse_como 'Autorizado'
+    perfil = create(:perfil, usuario: usuario)
+    adjunto = perfil.adjuntos.create attributes_for(:adjunto)
 
-    assert_redirected_to perfil_adjuntos_path(@perfil)
+    put :update, id: adjunto, adjunto: { notas: 'de alevosía' }, perfil_id: perfil.id
+    assert_redirected_to perfil_adjuntos_path(perfil)
+    assert_equal 'de alevosía', adjunto.reload.notas
   end
-
 end

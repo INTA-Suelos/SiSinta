@@ -2,41 +2,29 @@
 require './test/test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
+  test "tiene en cuenta las preferencias de ficha del usuario" do
+    default = create(:usuario)
+    simple = create(:usuario, config: { ficha: 'especial', srid: '4326' })
 
-  setup do
-    @admin = create(:usuario, rol: 'Administrador')
-    @simple = create(:usuario, rol: "Invitado", config: { ficha: 'simple', srid: '4326' })
-    @completo = create(:usuario, rol: "Autorizado")
+    assert default.usa_ficha?('completa'), 'Debe usar la ficha completa por default'
+    assert simple.usa_ficha?('especial'), 'Debe poder especificar su propia ficha'
   end
 
-  test "debería tener en cuenta preferencias de ficha del usuario" do
-    assert @simple.usa_ficha?('simple'), 'El método ? no devuelve el valor correcto de la variable'
-    assert !@completo.usa_ficha?('simple'), 'El método ? no devuelve el valor correcto de la variable'
-    @nuevo = Usuario.new config: { ficha: 'simple' }
-    assert @nuevo.usa_ficha?('simple'), 'No se puede pasar la preferencia en la creación'
-  end
+  test "detecta administradores" do
+    admin = create(:usuario, rol: 'Administrador')
+    refute admin.roles.blank?, "No carga los roles de la DB"
+    assert admin.admin?, "Debería ser admin"
 
-  test "debería responder correctamente sobre si es admin" do
-    assert !@admin.roles.blank?, "No carga los roles de la DB"
-    assert @admin.admin?, "Debería ser admin"
-    assert !@simple.admin?, "No debería ser admin"
-  end
-
-  test "debería crear correctamente al usuario" do
-    assert_nothing_raised do
-      @u = build(:usuario)
-      assert @u.save, "No guarda al usuario"
-      @u.grant :admin
-      assert @u.has_role?(:admin), "No guarda el rol"
-    end
+    otro = create(:usuario)
+    refute otro.admin?, "No debería ser admin"
   end
 
   test "comprueba el rol" do
     assert build(:usuario, rol: 'Administrador').admin?, "Debe ser admin"
-    assert build(:usuario, rol: 'Autorizado').admin?, "Debe ser autorizado"
+    assert build(:usuario, rol: 'Autorizado').autorizado?, "Debe ser autorizado"
   end
 
-  test "un usuario nuevo debería tener config por defecto" do
+  test "un usuario nuevo tiene config por defecto" do
     assert_instance_of Hash, Usuario.new.config
     assert_equal 'completa',  Usuario.new.ficha
     assert_equal '4326',      Usuario.new.srid
