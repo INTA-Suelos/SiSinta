@@ -4,11 +4,12 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery.min
-//= require jquery-ui.min
+//= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.nested-fields
 //= require tinymce-jquery
 //= require jquery-multiselect
+//= require autocomplete-rails
 //= require_tree ./jquery
 //= require_tree ./comunes
