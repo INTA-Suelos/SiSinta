@@ -13,7 +13,7 @@ class EquiposController < AutorizadoController
   end
 
   def new
-    respond_with @equipo 
+    respond_with @equipo = @equipo.decorate
   end
 
   def edit
@@ -22,7 +22,7 @@ class EquiposController < AutorizadoController
 
   def create
     @equipo.save
-    respond_with @equipo 
+    respond_with @equipo = @equipo.decorate
   end
 
   def update
