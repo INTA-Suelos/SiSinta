@@ -5,26 +5,11 @@
   = link_to 'Volver', equipos_path
 
 #equipo
-
   = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
 
-    = fields_for @equipo do |f|
+    - if @equipo.miembros.any?
+      = field_set_tag 'Miembros', class: 'celeste plegable span-23 last' do
 
-      = field_set_tag 'Datos del equipo', class: 'celeste span-23 last' do
-
-        .span-22
-          .span-2= f.label 'Nombre'
-          .span-20.last= @equipo.nombre
-
-        - if @equipo.miembros.any?
-          = field_set_tag 'Miembros', class: 'celeste plegable span-22 last' do
-
-            %table#miembros.centrado
-              %thead
-                %tr
-                  %th{colspan: 2} Usuario
-                  %th{colspan: 2} Email
-                  %th.acciones
-
-              %tbody
-                = render @equipo.miembros, bloqueado: true
+        #miembros
+          = render partial: 'miembro', collection: @equipo.miembros,
+            locals: { bloqueado: true }

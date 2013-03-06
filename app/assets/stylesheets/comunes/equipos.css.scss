@@ -8,6 +8,11 @@
 
 #equipo {
   #miembros {
+    .borrar     { width: 1%;
+                  color: $rojo_inta;
+      // Si hay javascript lo muestro y oculto el checkbox
+      a {         display: none; } }
+
     .nombre { width: 40%; }
     .email  { width: 40%; }
   }

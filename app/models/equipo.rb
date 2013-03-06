@@ -3,7 +3,7 @@ class Equipo < ActiveRecord::Base
 
   has_and_belongs_to_many :miembros, class_name: 'Usuario'
 
-  accepts_nested_attributes_for :miembros
+  accepts_nested_attributes_for :miembros, allow_destroy: true
 
   # Permite utilizar roles sobre este modelo
   resourcify role_cname: 'Rol'
