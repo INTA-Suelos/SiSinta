@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304111756) do
+ActiveRecord::Schema.define(:version => 20130306020810) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130304111756) do
 
   create_table "analiticos", :force => true do |t|
     t.integer  "registro"
-    t.decimal  "humedad",             :precision => 5, :scale => 2
+    t.decimal  "humedad",             :precision => 5,  :scale => 2
     t.decimal  "s"
     t.decimal  "t"
     t.decimal  "ph_pasta"
@@ -37,30 +37,30 @@ ActiveRecord::Schema.define(:version => 20130304111756) do
     t.decimal  "base_mg"
     t.decimal  "base_k"
     t.decimal  "base_na"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.integer  "horizonte_id"
-    t.decimal  "arcilla",             :precision => 5, :scale => 2
-    t.decimal  "materia_organica_c",  :precision => 5, :scale => 2
-    t.decimal  "materia_organica_n",  :precision => 6, :scale => 3
-    t.decimal  "limo_2_20",           :precision => 5, :scale => 2
-    t.decimal  "limo_2_50",           :precision => 5, :scale => 2
-    t.decimal  "arena_muy_fina",      :precision => 5, :scale => 2
-    t.decimal  "arena_fina",          :precision => 5, :scale => 2
-    t.decimal  "arena_media",         :precision => 5, :scale => 2
-    t.decimal  "arena_gruesa",        :precision => 5, :scale => 2
-    t.decimal  "arena_muy_gruesa",    :precision => 5, :scale => 2
-    t.decimal  "ca_co3",              :precision => 5, :scale => 2
-    t.decimal  "agua_15_atm",         :precision => 5, :scale => 2
-    t.decimal  "agua_util",           :precision => 5, :scale => 2
+    t.decimal  "arcilla",             :precision => 5,  :scale => 2
+    t.decimal  "materia_organica_c",  :precision => 5,  :scale => 2
+    t.decimal  "materia_organica_n",  :precision => 6,  :scale => 3
+    t.decimal  "limo_2_20",           :precision => 5,  :scale => 2
+    t.decimal  "limo_2_50",           :precision => 5,  :scale => 2
+    t.decimal  "arena_muy_fina",      :precision => 5,  :scale => 2
+    t.decimal  "arena_fina",          :precision => 5,  :scale => 2
+    t.decimal  "arena_media",         :precision => 5,  :scale => 2
+    t.decimal  "arena_gruesa",        :precision => 5,  :scale => 2
+    t.decimal  "arena_muy_gruesa",    :precision => 5,  :scale => 2
+    t.decimal  "ca_co3",              :precision => 5,  :scale => 2
+    t.decimal  "agua_15_atm",         :precision => 5,  :scale => 2
+    t.decimal  "agua_util",           :precision => 5,  :scale => 2
     t.decimal  "conductividad"
     t.decimal  "h"
-    t.decimal  "saturacion_t",        :precision => 5, :scale => 2
-    t.decimal  "saturacion_s_h",      :precision => 5, :scale => 2
+    t.decimal  "saturacion_t",        :precision => 5,  :scale => 2
+    t.decimal  "saturacion_s_h",      :precision => 5,  :scale => 2
     t.decimal  "densidad_aparente"
     t.string   "profundidad_muestra"
-    t.decimal  "agua_3_atm",          :precision => 5, :scale => 2
-    t.decimal  "materia_organica_cn", :precision => 2, :scale => 1
+    t.decimal  "agua_3_atm",          :precision => 5,  :scale => 2
+    t.decimal  "materia_organica_cn", :precision => 20, :scale => 1
   end
 
   create_table "capacidades", :force => true do |t|
