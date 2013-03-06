@@ -36,9 +36,10 @@ class UsuarioTest < ActiveSupport::TestCase
   end
 
   test "un usuario nuevo debería tener config por defecto" do
-    assert_instance_of Hash, Usuario.new.config
-    assert_equal 'completa',  Usuario.new.ficha
-    assert_equal '4326',      Usuario.new.srid
+    usuario = create(:usuario)
+    assert_instance_of Hash, usuario.config
+    assert_equal 'completa', usuario.ficha
+    assert_equal '4326', usuario.srid
   end
 
 end
