@@ -27,7 +27,7 @@ class UbicacionDecorator < ApplicationDecorator
   end
 
   def to_s
-    source.descripcion
+    source.descripcion || transformar || ''
   end
 
   def mapa(ancho = 400, alto = 300, zoom = 9)
