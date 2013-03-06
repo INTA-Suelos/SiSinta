@@ -72,7 +72,7 @@ class AnaliticoTest < ActiveSupport::TestCase
     assert_equal 100, a.materia_organica_n
   end
 
-  test 'usa precisión 0.0 en materia_organica_cn' do
+  test 'usa precisión 000000000000000000.0 en materia_organica_cn' do
     a = build(:analitico, horizonte: build(:horizonte),
       materia_organica_cn: 0.3 )
 
@@ -81,8 +81,8 @@ class AnaliticoTest < ActiveSupport::TestCase
     a.reload
     assert_equal 0.3, a.materia_organica_cn
 
-    a.update_attribute('materia_organica_cn', 9.9)
+    a.update_attribute('materia_organica_cn', 999999999999999999.9)
     a.reload
-    assert_equal 9.9, a.materia_organica_cn
+    assert_equal 999999999999999999.9, a.materia_organica_cn.to_f
   end
 end

@@ -1,6 +1,7 @@
 # encoding: utf-8
 class SerieDecorator < ApplicationDecorator
   decorates_association :perfiles, with: PaginadorDecorator
+  decorates_association :usuario
 
   def to_s
     source.nombre

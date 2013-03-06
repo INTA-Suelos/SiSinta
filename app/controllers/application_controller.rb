@@ -16,8 +16,11 @@ class ApplicationController < ActionController::Base
 
   # CanCan necesita un método *current_user* y Devise genera la función
   # en base al nombre del modelo, que en nuestro caso es Usuario
+  def current_usuario
+    super.try(:decorate)
+  end
   def current_user
-    current_usuario
+    self.current_usuario
   end
 
   # Completa variables de instancia para usar en las vistas con información sobre el navegador de la

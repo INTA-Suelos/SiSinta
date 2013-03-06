@@ -6,6 +6,7 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :fase
   decorates_association :adjuntos, with: PaginadorDecorator
   decorates_association :analiticos
+  decorates_association :usuario
 
   def fecha
     source.fecha.try :to_s, :dma
