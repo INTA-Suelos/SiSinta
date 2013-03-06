@@ -117,4 +117,13 @@ class PerfilTest < ActiveSupport::TestCase
     assert nuevo_modal.reload.modal, "Le sacó el modal al nuevo modal"
     refute primer_modal.reload.modal, "No le sacó el modal al primer modal"
   end
+
+  test 'no permite números duplicados dentro de la serie' do
+    serie = create(:serie)
+    perfil = create(:perfil, serie: serie, numero: 'unico')
+    repetido = build(:perfil, serie: serie, numero: 'unico')
+    assert repetido.invalid?
+    assert repetido.errors.messages[:numero].include?(
+      I18n.t('activerecord.errors.models.perfil.attributes.numero.no_es_unico_en_la_serie'))
+  end
 end

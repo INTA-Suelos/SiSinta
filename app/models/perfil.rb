@@ -29,7 +29,9 @@ class Perfil < ActiveRecord::Base
                            ubicacion.descripcion as ubicacion,
                            perfiles.numero, perfiles.modal')
 
-  validate :fecha_no_puede_ser_futura, :numero_es_unico_dentro_de_una_serie
+  before_validation :asociar_serie, :asociar_fase, :asociar_grupo
+
+  validate :fecha_no_es_del_futuro, :numero_es_unico_dentro_de_una_serie
   validates_presence_of :fecha
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
@@ -63,10 +65,9 @@ class Perfil < ActiveRecord::Base
     order: 'profundidad_muestra ASC, horizonte_id ASC'
 
   belongs_to :usuario,  inverse_of: :perfiles
-  belongs_to :fase,     inverse_of: :perfiles, validate: false
-  belongs_to :grupo,    inverse_of: :perfiles, validate: false
-  belongs_to :serie,    inverse_of: :perfiles, validate: false,
-                        counter_cache: :cantidad_de_perfiles
+  belongs_to :fase,     inverse_of: :perfiles
+  belongs_to :grupo,    inverse_of: :perfiles
+  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles
 
   has_and_belongs_to_many :proyectos
 
@@ -78,56 +79,6 @@ class Perfil < ActiveRecord::Base
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
-
-  # Se crea una serie si no existe ya
-  def autosave_associated_records_for_serie
-    # Si la serie ya existe no actualiza el símbolo. En otras palabras, desde
-    # el perfil sólo se puede crear una serie, nunca modificarla
-    # TODO  Encontrar la manera de validar la unicidad de simbolo, como +validate_associated_records_for_serie+
-    if nombre
-      _simbolo = simbolo
-      self.serie = Serie.find_or_create_by_nombre(nombre)
-
-      # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
-      # una serie existente desde un perfil.
-      unless self.serie.simbolo.present? or _simbolo.nil?
-        self.serie.update_attribute(:simbolo, _simbolo)
-      end
-
-      # Si este perfil es modal, queda como único modal de la serie
-      if modal
-        self.serie.perfiles.each do |p|
-          p.update_attribute(:modal, false) unless p == self
-        end
-      end
-    end
-  end
-
-  # Se crea una fase si no existe ya
-  def autosave_associated_records_for_fase
-    if fase.try(:nombre?)
-      self.fase = Fase.find_or_create_by_nombre(fase.nombre)
-    end
-  end
-
-  # Se crea un grupo si no existe ya
-  def autosave_associated_records_for_grupo
-    if grupo.try(:descripcion?)
-      self.grupo = Grupo.find_or_create_by_descripcion(grupo.descripcion)
-    end
-  end
-
-  # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
-  def fecha_no_puede_ser_futura
-    if fecha? and fecha > Date.today
-      errors.add(:fecha, :future)
-    end
-  end
-
-  # TODO Comprueba que numero sea único dentro de una serie
-  def numero_es_unico_dentro_de_una_serie
-    true
-  end
 
   # Prepara un hash para que RGeo genere geojson
   def propiedades_publicas
@@ -143,8 +94,59 @@ class Perfil < ActiveRecord::Base
     self.ubicacion.try(:coordenadas)
   end
 
-  def to_s
-    self.to_param
-  end
+  private
 
+    # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
+    def fecha_no_es_del_futuro
+      if fecha? and fecha > Date.today
+        errors.add :fecha, :es_del_futuro
+      end
+    end
+
+    # Comprueba que no hay otros perfiles en la serie con el mismo número
+    def numero_es_unico_dentro_de_una_serie
+      if self.serie
+        otros_perfiles = self.serie.perfiles.reject { |p| p.id == self.id }
+        if otros_perfiles.collect(&:numero).include?(self.numero)
+          errors.add :numero, :no_es_unico_en_la_serie 
+        end
+      end
+    end
+
+    # Se crea una serie sólo si no existe ya
+    def asociar_serie
+      # Si la serie ya existe no actualiza el símbolo. En otras palabras, desde
+      # el perfil sólo se puede crear una serie, nunca modificarla
+      if nombre
+        _simbolo = simbolo
+        self.serie = Serie.find_or_create_by_nombre(nombre)
+
+        # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
+        # una serie existente desde un perfil.
+        unless self.serie.simbolo.present? or _simbolo.nil?
+          self.serie.update_attribute(:simbolo, _simbolo)
+        end
+
+        # Si este perfil es modal, queda como único modal de la serie
+        if modal
+          self.serie.perfiles.each do |p|
+            p.update_attribute(:modal, false) unless p == self
+          end
+        end
+      end
+    end
+
+    # Se crea una fase sólo si no existe ya
+    def asociar_fase
+      if fase.try(:nombre?)
+        self.fase = Fase.find_or_create_by_nombre(fase.nombre)
+      end
+    end
+
+    # Se crea un grupo sólo si no existe ya
+    def asociar_grupo
+      if grupo.try(:descripcion?)
+        self.grupo = Grupo.find_or_create_by_descripcion(grupo.descripcion)
+      end
+    end
 end

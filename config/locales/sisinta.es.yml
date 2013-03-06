@@ -7,7 +7,9 @@ es:
         perfil:
           attributes:
             fecha:
-              future: "todavía no llega"
+              es_del_futuro: "todavía no llega"
+            numero:
+              no_es_unico_en_la_serie: "debe ser único dentro de una misma serie"
     models:
       analitico: 'Datos analíticos'
     attributes:
