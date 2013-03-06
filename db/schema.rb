@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306020810) do
+ActiveRecord::Schema.define(:version => 20130306140728) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20130306020810) do
 
   create_table "fases", :force => true do |t|
     t.string "codigo", :limit => 2
-    t.string "nombre", :limit => 15
+    t.string "nombre"
   end
 
   add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true

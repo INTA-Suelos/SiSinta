@@ -72,7 +72,7 @@ class AnaliticoTest < ActiveSupport::TestCase
     assert_equal 100, a.materia_organica_n
   end
 
-  test 'usa precisión infinito.0 en materia_organica_cn' do
+  test 'usa precisión 000000000000000000.0 en materia_organica_cn' do
     a = build(:analitico, horizonte: build(:horizonte),
       materia_organica_cn: 0.3 )
 
