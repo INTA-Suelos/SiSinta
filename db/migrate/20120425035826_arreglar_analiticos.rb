@@ -1,6 +1,6 @@
-class ArreglarAnalisis < ActiveRecord::Migration
+class ArreglarAnaliticos < ActiveRecord::Migration
   def up
-    change_table :analisis do |t|
+    change_table :analiticos do |t|
       t.remove :carbono, :nitrogeno
 
       t.change :materia_organica_c, :decimal, precision: 3, scale: 2
@@ -18,7 +18,7 @@ class ArreglarAnalisis < ActiveRecord::Migration
   end
 
   def down
-    change_table :analisis do |t|
+    change_table :analiticos do |t|
       t.decimal  "carbono",            :precision => 4, :scale => 2
       t.decimal  "nitrogeno",          :precision => 4, :scale => 3
 

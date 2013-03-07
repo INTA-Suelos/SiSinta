@@ -33,10 +33,15 @@ class PerfilTest < ActiveSupport::TestCase
   end
 
   test "debería crear una serie cuando no existe" do
+    atributos_de_la_serie = attributes_for(:serie)
     assert_difference 'Serie.count', 1, "No crea la serie a partir del perfil" do
       create :perfil,
-        serie_attributes: attributes_for(:serie).slice(:nombre, :simbolo)
+        serie_attributes: atributos_de_la_serie.slice(:nombre, :simbolo)
     end
+    serie = Serie.find_by_nombre(atributos_de_la_serie[:nombre])
+    assert_not_nil serie
+    assert_equal atributos_de_la_serie[:nombre], serie.nombre
+    assert_equal atributos_de_la_serie[:simbolo], serie.simbolo
   end
 
   test "debería crear una fase cuando no existe" do
@@ -53,13 +58,23 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería asociar una serie si existe" do
+  test "debería asociar una serie si existe, sin editar el símbolo" do
     serie = create(:serie)
     assert_no_difference 'Serie.count', "Crea una serie nueva" do
-      perfil = create :perfil,
-        serie_attributes: serie.serializable_hash.slice("nombre", "simbolo")
+      perfil = create(:perfil, serie_attributes: { nombre: serie.nombre, simbolo: 'no' })
       assert_equal serie, perfil.serie, "No le carga la serie existente"
     end
+    assert_not_equal 'no', serie.reload.simbolo
+  end
+
+  test "debería cargar el símbolo cuando la serie no lo tiene" do
+    serie = create(:serie, simbolo: nil)
+    assert_no_difference 'Serie.count', "Crea una serie nueva" do
+      perfil = create :perfil,
+        serie_attributes: serie.serializable_hash.slice("nombre").merge(simbolo: 'si')
+      assert_equal serie, perfil.serie, "No le carga la serie existente"
+    end
+    assert_equal 'si', serie.reload.simbolo, "No le carga el símbolo a una serie existente"
   end
 
   test "debería asociar una fase si existe" do
@@ -93,4 +108,13 @@ class PerfilTest < ActiveSupport::TestCase
     assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Juan Salvo'
   end
 
+  test "queda como único perfil modal de la serie" do
+    serie = create(:serie)
+    primer_modal = create(:perfil, modal: true, serie: serie)
+    assert_equal 1, serie.perfiles.size
+    nuevo_modal = create(:perfil, modal: true, serie: serie)
+    assert_equal 2, serie.perfiles.size
+    assert nuevo_modal.reload.modal, "Le sacó el modal al nuevo modal"
+    refute primer_modal.reload.modal, "No le sacó el modal al primer modal"
+  end
 end

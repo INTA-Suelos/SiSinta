@@ -16,7 +16,7 @@ class HorizontesController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   def exportar
     @atributos = Horizonte.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :analisis ]
+      [ :created_at, :updated_at, :analitico ]
 
     respond_to do |format|
       format.html

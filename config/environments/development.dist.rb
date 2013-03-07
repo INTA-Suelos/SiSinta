@@ -44,9 +44,6 @@ SiSINTA::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # Logger de producción
-  config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'SiSINTA')
-
   # Bullet
   config.after_initialize do
     Bullet.enable = true

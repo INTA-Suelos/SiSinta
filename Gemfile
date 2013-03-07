@@ -24,7 +24,7 @@ gem 'rails3-jquery-autocomplete'
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
-gem 'rocket_tag', github: 'bradphelan/rocket_tag'
+gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
 
@@ -52,11 +52,15 @@ end
 gem 'thin'
 gem 'SyslogLogger', require: 'syslog/logger'
 
-group :development do
-  gem 'pry'
+group :test, :development do
   gem 'pry-rails'
   gem 'hirb'
+end
+
+group :development do
   gem 'bullet'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
 end
 
 group :test do

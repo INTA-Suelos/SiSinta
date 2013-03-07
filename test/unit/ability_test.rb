@@ -7,7 +7,7 @@ class AbilityTest < ActiveSupport::TestCase
     @admin = build(:usuario, rol: :admin)
     @autorizado = build(:usuario, rol: :autorizado)
     @invitado = build(:usuario, rol: :invitado)
-    @recursos = [Perfil, Horizonte, Grupo, Fase, Analisis, Adjunto, Usuario]
+    @recursos = [Perfil, Horizonte, Grupo, Fase, Analitico, Adjunto, Usuario]
   end
 
   test "deberia permitirle todo al administrador" do

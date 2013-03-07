@@ -6,7 +6,7 @@ class InflectionTest < ActiveSupport::TestCase
   test "debería singularizar lo simple" do
     assert_equal 'perfil', 'perfiles'.singularize
     assert_equal 'horizonte', 'horizontes'.singularize
-    assert_equal 'analisis', 'analisis'.singularize
+    assert_equal 'analitico', 'analiticos'.singularize
     assert_equal 'usuario', 'usuarios'.singularize
     assert_equal 'color', 'colores'.singularize
     assert_equal 'adjunto', 'adjuntos'.singularize
@@ -69,7 +69,7 @@ class InflectionTest < ActiveSupport::TestCase
   test "debería pluralizar lo simple" do
     assert_equal 'perfiles', 'perfil'.pluralize
     assert_equal 'horizontes', 'horizonte'.pluralize
-    assert_equal 'analisis', 'analisis'.pluralize
+    assert_equal 'analiticos', 'analitico'.pluralize
     assert_equal 'usuarios', 'usuario'.pluralize
     assert_equal 'colores', 'color'.pluralize
     assert_equal 'adjuntos', 'adjunto'.pluralize

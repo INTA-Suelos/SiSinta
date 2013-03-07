@@ -1,6 +1,6 @@
 @import "constantes";
 
-#tabla_analisis {
+#tabla_analiticos {
 
   border-spacing: 1px;
 
@@ -13,23 +13,24 @@
     margin: 0;
   }
 
-  .dato * {
-    max-width: 80px;
-    text-align: right;
-  }
-
-  #titulos {
-    width: 70px;
+  .dato {
+    border: 1px solid transparent;
+    input {
+      width: 100%;
+      text-align: right;
+    }
   }
 
   .largo {
     min-width: 82px;
 
-    label { font-size: xx-small;}
+    label {
+      font-size: xx-small;
+    }
   }
 
   .titulo {
-    border: 1px solid #ccc;
+    border: 1px solid $gris;
     padding: 0 5px;
   }
 }

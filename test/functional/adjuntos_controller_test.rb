@@ -11,7 +11,7 @@ class AdjuntosControllerTest < ActionController::TestCase
     @request.env["HTTP_REFERER"] = "/perfiles/#{@perfil.to_param}/adjuntos"
   end
 
-  test "debería mostrar los adjuntos del perfil" do
+  test "muestra los adjuntos del perfil" do
     get :index, perfil_id: @perfil.id
     assert_response :success
     assert_not_nil assigns(:perfil), "No asigna @perfil"
@@ -19,14 +19,20 @@ class AdjuntosControllerTest < ActionController::TestCase
     assert_equal @adjuntos.sort, assigns(:adjuntos).sort
   end
 
-  test "debería ir a 'editar' si está autorizado" do
+  test "sólo muestra los adjuntos del perfil solicitado" do
+    get :index, perfil_id: create(:perfil).id
+    assert_not_nil assigns(:perfil), "No asigna @perfil"
+    assert assigns(:adjuntos).empty?, "Asigna @adjuntos"
+  end
+
+  test "ir a 'editar' si está autorizado" do
     get :edit, id: @adjunto.to_param, perfil_id: @perfil.id
     assert_response :success
     assert_not_nil assigns(:perfil), "No asigna @perfil"
     assert_not_nil assigns(:adjunto), "No asigna @adjunto"
   end
 
-  test "debería actualizar un adjunto si está autorizado" do
+  test "actualizar un adjunto si está autorizado" do
     put :update, id: @adjunto.to_param, adjuntos: attributes_for(:adjunto), perfil_id: @perfil.id
 
     assert_redirected_to perfil_adjuntos_path(@perfil)

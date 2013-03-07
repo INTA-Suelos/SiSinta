@@ -28,7 +28,7 @@ SiSINTA::Application.routes.draw do
         get   'seleccionar'
       end
 
-      r.resources :analisis, only: :index do
+      r.resources :analiticos, only: :index do
         collection do
           get 'edit'
           put 'update'

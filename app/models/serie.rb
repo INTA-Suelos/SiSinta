@@ -6,6 +6,7 @@ class Serie < ActiveRecord::Base
   resourcify role_cname: 'Rol'
 
   has_many :perfiles
+  has_one :perfil_modal, class_name: 'Perfil', conditions: { modal: true }
 
   accepts_nested_attributes_for :perfiles
 

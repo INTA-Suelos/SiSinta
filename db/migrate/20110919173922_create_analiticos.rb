@@ -1,6 +1,6 @@
-class CreateAnalisis < ActiveRecord::Migration
+class CreateAnaliticos < ActiveRecord::Migration
   def change
-    create_table :analisis do |t|
+    create_table :analiticos do |t|
       t.integer :registro
       t.decimal :humedad
       t.decimal :s
