@@ -1,3 +1,15 @@
 .botonera= link_to 'Volver', equipos_path
 
-= render 'form'
+#equipo
+  = form_for @equipo do |f|
+
+    = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
+
+      = f.error_messages
+
+      = field_set_tag 'Datos del equipo de trabajo', class: 'celeste plegable span-23 last' do
+
+        .span-22.campo
+          .span-2= f.label :nombre
+          .span-20.last= f.text_field :nombre, autofocus: true, required: true
+          = ayuda_para('equipo.nombre')
