@@ -1,0 +1,8 @@
+.fila.span-22.last
+  = fields_for miembro do |f|
+    - unless bloqueado
+      .span-1.centrado.borrar
+        = link_to 'X', '#', class: 'remove remover'
+        = destruir_o_anular 'miembros', 'equipo', miembro.id
+        = hidden_field_tag "equipo[miembros_attributes][#{miembro.id}][id]", miembro.id
+    .last{class: bloqueado ? 'span-21' : 'span-20'}= "#{miembro.nombre} (#{miembro.email})"

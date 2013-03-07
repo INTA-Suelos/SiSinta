@@ -174,3 +174,10 @@ table {
     text-align: right;
   }
 }
+
+.fila {
+  padding: 5px;
+  &:nth-child(odd) {
+    background-color: white;
+  }
+}

@@ -1,0 +1,10 @@
+%tr
+  %td.serie=      equipo.nombre
+  %td.miembros=   equipo.miembros.count
+  %td.acciones
+    = link_to 'Mostrar', equipo
+    = '|'
+    = link_to 'Editar', edit_equipo_path(equipo)
+    = '|'
+    = link_to 'Eliminar', equipo,
+        data: { confirm: t(:confirmar) }, method: :delete

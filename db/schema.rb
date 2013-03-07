@@ -87,6 +87,21 @@ ActiveRecord::Schema.define(:version => 20130306140728) do
     t.integer  "plasticidad_id"
   end
 
+  create_table "equipos", :force => true do |t|
+    t.string   "nombre",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "equipos", ["nombre"], :name => "index_equipos_on_nombre", :unique => true
+
+  create_table "equipos_usuarios", :id => false, :force => true do |t|
+    t.integer "equipo_id"
+    t.integer "usuario_id"
+  end
+
+  add_index "equipos_usuarios", ["usuario_id", "equipo_id"], :name => "index_equipos_usuarios_on_usuario_id_and_equipo_id"
+
   create_table "erosiones", :force => true do |t|
     t.integer "subclase_id"
     t.integer "clase_id"

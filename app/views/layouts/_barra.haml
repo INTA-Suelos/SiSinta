@@ -33,10 +33,15 @@
     %ul.submenu
       %li= link_to 'Ver', proyectos_path
 
-- if current_usuario.try(:admin?)
-  %ul#administracion.menu
+%ul#administracion.menu
+  - if current_usuario.try(:admin?)
     %li
       .plegable Usuarios
       %ul.submenu
         %li
           = link_to 'Ver', usuarios_path
+  %li
+    .plegable Equipos
+    %ul.submenu
+      %li
+        = link_to 'Ver', equipos_path

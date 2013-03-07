@@ -10,7 +10,7 @@ class Ability
     @perfiles = [ Perfil, Horizonte, Analitico, Adjunto, Erosion, Ubicacion,
                   Humedad, Paisaje, Pedregosidad, Limite, Consistencia,
                   Estructura, Color ]
-    @basicos =  [ Grupo, Fase, Proyecto, Serie ]
+    @basicos =  [ Grupo, Fase, Proyecto, Serie, Equipo]
     @recursos = @perfiles + @basicos
 
     alias_action :autocompletar, :exportar, to: :read
@@ -32,6 +32,7 @@ class Ability
   # Lógica de cada rol
   private
 
+    # FIXME Que no sea el único que puede acceder a los datos de usuarios
     def administrador
       can :manage, :all
     end
