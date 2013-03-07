@@ -48,6 +48,7 @@ class Ability
   # Lógica de cada rol
   private
 
+    # FIXME Que no sea el único que puede acceder a los datos de usuarios
     def administrador
       can :manage, :all
     end

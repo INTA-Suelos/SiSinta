@@ -26,11 +26,28 @@ class EquiposController < AutorizadoController
   end
 
   def update
-    @equipo.update_attributes params[:equipo] 
-    respond_with @equipo 
+    # Si falla, responders lo redirige a edit
+    opciones = if @equipo.update_attributes(params[:equipo])
+      { location: mostrar_o_editar }
+    else
+      { }
+    end
+
+    respond_with (@equipo = @equipo.decorate), opciones
   end
 
   def destroy
     respond_with @equipo.destroy
   end
+
+  private
+
+    def mostrar_o_editar
+      case params[:commit]
+        when t('equipos.form.agregar_miembro')
+          edit_equipo_path(@equipo)
+        else
+          # Nada, va a mostrar
+      end
+    end
 end

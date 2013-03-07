@@ -1,5 +1,7 @@
 # encoding: utf-8
 class UsuariosController < AutorizadoController
+  autocomplete :usuario, :nombre, full: true, extra_data: [:email]
+  autocomplete :usuario, :email, full: true, extra_data: [:nombre]
 
   before_filter :paginar, only: [:index]
 

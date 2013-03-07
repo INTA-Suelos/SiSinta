@@ -9,7 +9,7 @@ $(document)
     $(this).parents('.fila').hide()
 
 jQuery ->
-  # Oculto el checkbox y muestro el link de awesome_nested_fields, que sólo
-  # funciona con js
+  # Oculto el checkbox y muestro la X, que sólo funciona con js
   $('#miembros .borrar a').toggle()
   $('#miembros .borrar input').toggle()
+  $('#x.borrar').toggle()

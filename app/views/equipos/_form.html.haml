@@ -16,7 +16,23 @@
         = field_set_tag 'Miembros', class: 'celeste plegable span-23 last' do
 
           #miembros
+            #x.span-1.append-21.borrar X
             = render partial: 'miembro', collection: @equipo.miembros,
               locals: { bloqueado: false }
+
+          = f.fields_for :nuevo_miembro do |fm|
+            #agregar_miembro.span-22.last
+              = fm.hidden_field :id
+              .span-2= fm.label :nombre
+              .span-8.nombre= fm.autocomplete_field :nombre,
+                autocomplete_usuario_nombre_usuarios_path,
+                update_elements: { id: '#equipo_nuevo_miembro_id',
+                  email: '#equipo_nuevo_miembro_email' }
+              .span-2= fm.label :email
+              .span-8.email= fm.autocomplete_field :email,
+                autocomplete_usuario_email_usuarios_path,
+                update_elements: { id: '#equipo_nuevo_miembro_id',
+                  nombre: '#equipo_nuevo_miembro_nombre' }
+              .span-2.last= f.submit t('.agregar_miembro')
 
       .acciones.span-4.last= f.submit

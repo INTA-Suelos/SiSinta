@@ -18,6 +18,9 @@ es:
       submit: "Seleccionar y volver"
     exportar:
       submit: "Exportar"
+  equipos:
+    form:
+      agregar_miembro: "Agregar"
 
   comunes:
     perfiles_asociados:
