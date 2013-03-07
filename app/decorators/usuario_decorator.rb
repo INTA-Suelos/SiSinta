@@ -5,4 +5,8 @@ class UsuarioDecorator < ApplicationDecorator
   def to_s
     source.nombre
   end
+
+  def to_opcion
+    [ "#{source.nombre} - #{source.email}" , source.id ]
+  end
 end

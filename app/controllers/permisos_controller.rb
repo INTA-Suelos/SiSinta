@@ -3,13 +3,12 @@ class PermisosController < AutorizadoController
   skip_load_and_authorize_resource
   skip_authorization_check
 
-  before_filter :cargar_recurso
+  before_filter :cargar_recursos
 
   def edit
     @controlador = params[:controller]
-    @actuales = Usuario.miembros(@recurso).collect(&:id)
-    @equipos = Equipo.all
-    @usuarios = Usuario.all
+    @ids = Usuario.miembros(@recurso).collect(&:id)
+    @actuales = UsuarioDecorator.decorate_collection @usuarios.find(@ids)
     respond_with @recurso = @recurso.decorate
   end
 
@@ -24,15 +23,16 @@ class PermisosController < AutorizadoController
 
   private
 
-    def cargar_recurso
+    def cargar_recursos
       @recurso = case params[:modelo]
-        when 'perfil', 'equipo'
+        when 'perfil', 'serie'
           modelo.accessible_by(current_ability).find(params[:id])
         else
           raise ActionController::RoutingError.new(
             "No se puede asignar permisos para #{params[:modelo]}"
           )
       end
+      @usuarios = Usuario.accessible_by(current_ability).includes(:equipos).decorate
       authorize! params[:action], @recurso
     end
 

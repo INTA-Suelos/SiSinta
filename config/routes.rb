@@ -53,8 +53,13 @@ SiSINTA::Application.routes.draw do
       end
     end
 
-    r.resource :usuarios, only: [] do
+    r.resources :usuarios, only: [:index, :destroy] do
       put 'configurar', on: :member
+      collection do
+        get :autocomplete_usuario_nombre
+        get :autocomplete_usuario_email
+        put 'update'
+      end
     end
 
     r.resources :colores, only: [] do
@@ -66,16 +71,6 @@ SiSINTA::Application.routes.draw do
     r.resources :proyectos
 
     r.resources :equipos
-
-    scope "/admin" do
-      r.resources :usuarios, only: [:index, :destroy] do
-        collection do
-          put 'update'
-          get 'autocompletar/:atributo' => 'usuarios#autocompletar', as: 'autocompletar'
-        end
-      end
-    end
-
   end
 
   with_options path_names: femeninos do |r|
