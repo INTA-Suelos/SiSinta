@@ -37,12 +37,18 @@ class AbilityTest < ActiveSupport::TestCase
 
   test "los usuarios autorizados pueden manejar sus propios objetos" do
     autorizado = create(:usuario, rol: 'Autorizado')
+    otro_usuario = create(:usuario, rol: 'Administrador')
     permisos = Ability.new autorizado
-    perfil = build_stubbed(:perfil, usuario: autorizado)
-    perfil_anonimo = build_stubbed(:perfil, usuario: nil)
 
-    assert permisos.can?(:manage, perfil), "Debe poder administrar sus recursos"
-    assert permisos.cannot?(:manage, perfil_anonimo), "No deben poder administrar otros"
+    [:perfil, :equipo, :proyecto, :serie].collect do |modelo|
+      propio = build_stubbed(modelo, usuario: autorizado)
+      ajeno = build_stubbed(modelo, usuario: otro_usuario)
+      huerfano = build_stubbed(modelo, usuario: nil)
+
+      assert permisos.can?(:manage, propio), "Debe poder administrar sus recursos"
+      assert permisos.cannot?(:manage, ajeno), "No deben poder administrar otros"
+      assert permisos.cannot?(:manage, huerfano), "No deben poder administrar otros"
+    end
   end
 
   test "los miembros de algo pueden administrarlo" do

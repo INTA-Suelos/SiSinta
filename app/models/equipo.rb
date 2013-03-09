@@ -1,6 +1,7 @@
 class Equipo < ActiveRecord::Base
-  attr_accessible :nombre, :miembros_attributes, :nuevo_miembro
+  attr_accessible :nombre, :miembros_attributes, :nuevo_miembro, :usuario
 
+  belongs_to :usuario
   has_and_belongs_to_many :miembros, class_name: 'Usuario'
 
   accepts_nested_attributes_for :miembros, allow_destroy: true

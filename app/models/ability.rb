@@ -13,7 +13,8 @@ class Ability
     @basicos =  [ Grupo, Fase, Proyecto, Serie, Equipo]
     @recursos = @perfiles + @basicos
 
-    alias_action :autocompletar, :exportar, to: :read
+    alias_action  :autocompletar, :exportar, :autocomplete_usuario_nombre,
+                  :autocomplete_usuario_email, to: :read
     alias_action :editar_analiticos, :update_analiticos, to: :update
     alias_action :permitir, to: :manage
 
@@ -41,7 +42,7 @@ class Ability
       can :read, recursos
       can :create, recursos
       can :manage, perfiles, usuario_id: @usuario.id
-      can :manage, [ Proyecto, Serie ], usuario_id: @usuario.id
+      can :manage, [ Equipo, Proyecto, Serie ], usuario_id: @usuario.id
     end
 
     # Usuario miembro de un perfil. Usamos una acción personalizada para

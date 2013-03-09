@@ -2,27 +2,22 @@
 require './test/test_helper'
 
 class EquiposControllerTest < ActionController::TestCase
-
-  setup do
-    @request.env["HTTP_REFERER"] = "/equipos/"
-  end
-
-  test "debería ir al index si está autorizado" do
-    loguearse_como :autorizado
+  test "muestra la lista de equipos si está autorizado" do
+    loguearse_como 'Autorizado'
     get :index
     assert_response :success
     assert_not_nil assigns(:equipos)
   end
 
   test "debería ir a 'nuevo' si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
   test "debería crear un equipo si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
     assert_difference('Equipo.count') do
       post :create, equipo: attributes_for(:equipo)
@@ -32,32 +27,34 @@ class EquiposControllerTest < ActionController::TestCase
   end
 
   test "debería mostrar un equipo si está autorizado" do
-    loguearse_como :autorizado
+    loguearse_como 'Autorizado'
 
-    get :show, id: create(:equipo).to_param
+    get :show, id: create(:equipo)
     assert_response :success
   end
 
   test "debería ir a 'editar' si está autorizado" do
-    loguearse_como :autorizado
+    usuario = loguearse_como 'Autorizado'
+    equipo = create(:equipo, usuario: usuario)
 
-    get :edit, id: create(:equipo).to_param
+    get :edit, id: equipo
     assert_response :success
   end
 
   test "debería actualizar un equipo si está autorizado" do
-    loguearse_como :autorizado
+    usuario = loguearse_como 'Autorizado'
+    equipo = create(:equipo, usuario: usuario)
 
-    put :update, id: create(:equipo).to_param, equipo: attributes_for(:equipo)
+    put :update, id: equipo, equipo: attributes_for(:equipo)
     assert_redirected_to equipo_path(assigns(:equipo))
   end
 
   test "debería eliminar un equipo si está autorizado" do
-    loguearse_como :autorizado
+    usuario = loguearse_como 'Autorizado'
+    equipo = create(:equipo, usuario: usuario)
 
-    equipo = create(:equipo)
     assert_difference('Equipo.count', -1) do
-      delete :destroy, id: equipo.to_param
+      delete :destroy, id: equipo
     end
 
     assert_redirected_to equipos_path
