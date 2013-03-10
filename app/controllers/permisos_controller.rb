@@ -24,19 +24,21 @@ class PermisosController < AutorizadoController
   private
 
     def cargar_recursos
-      @recurso = case params[:modelo]
-        when 'perfil', 'serie'
-          modelo.accessible_by(current_ability).find(params[:id])
-        else
-          raise ActionController::RoutingError.new(
-            "No se puede asignar permisos para #{params[:modelo]}"
-          )
-      end
+      @recurso = buscar_recurso_accesible(params[:modelo], params[:id])
       @usuarios = Usuario.accessible_by(current_ability).includes(:equipos).decorate
       authorize! params[:action], @recurso
     end
 
-    def modelo
-      Kernel.const_get(params[:modelo].classify)
+    # Carga la clase del modelo según la url y el recurso si es accesible por
+    # el usuario actual
+    def buscar_recurso_accesible(modelo, id)
+      case modelo
+        when 'perfil', 'serie', 'proyecto'
+          Kernel.const_get(modelo.classify)
+        else
+          raise ActionController::RoutingError.new(
+            "No se puede asignar permisos para #{modelo}"
+          )
+      end.accessible_by(current_ability).find(id)
     end
 end

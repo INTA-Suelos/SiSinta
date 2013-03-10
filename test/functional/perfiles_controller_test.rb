@@ -115,24 +115,22 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "rutea a editar_analiticos" do
-    perfil = create(:perfil)
     assert_routing({
-      path: "/perfiles/#{perfil.to_param}/editar_analiticos",
+      path: "/perfiles/345/editar_analiticos",
       method: :get
     },{
       controller: 'perfiles', action: 'editar_analiticos',
-      id: perfil.to_param
+      id: '345'
     })
   end
 
   test "rutea a update_analiticos" do
-    perfil = create(:perfil)
     assert_routing({
-      path: "/perfiles/#{perfil.to_param}/update_analiticos",
+      path: "/perfiles/123/update_analiticos",
       method: :put
     },{
       controller: 'perfiles', action: 'update_analiticos',
-      id: perfil.to_param
+      id: '123'
     })
   end
 
