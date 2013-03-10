@@ -19,4 +19,17 @@ class UsuariosControllerTest < ActionController::TestCase
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end
 
+  test "devuelve nombre para términos parciales" do
+    loguearse_como 'Administrador'
+    termino = create(:usuario).nombre
+
+    get :autocomplete_usuario_nombre, term: termino
+    assert_response :success
+    assert_equal  Usuario.where("nombre like '%#{termino}%'").size,
+                  json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('value'), "debe devolver el nombre"
+  end
 end

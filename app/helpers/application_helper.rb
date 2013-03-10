@@ -212,24 +212,21 @@ module ApplicationHelper
 
   # Genera un checkbox construido para modificar la asociación anidada,
   # determinando si hay que anularla o destruirla
-  def destruir_o_anular_perfiles(asociacion, id, alias_de_la_asociacion = nil)
-    hash = "#{asociacion}[perfiles_attributes]"
-    hash << "[#{id}][#{anular_o_destruir}]"
-    valor = case anular_o_destruir
+  def destruir_o_anular(recursos, asociacion, id, opciones = {})
+    opciones.reverse_merge!({
+      alias_de_la_asociacion: nil,
+      metodo: '_destroy'
+    })
+    hash = "#{asociacion}[#{recursos}_attributes]"
+    hash << "[#{id}][#{opciones[:metodo]}]"
+    valor = case opciones[:metodo]
       when '_destroy'
         true
       when 'anular'
-        alias_de_la_asociacion || asociacion
+        opciones[:alias_de_la_asociacion] || asociacion
       else
         false
     end
     check_box_tag hash, valor, false, class: 'destroy'
   end
-
-  # La asociación va a ser nulificada, a menos que se sobreescriba este método
-  # para devolver '_destroy', por ejemplo en el caso de las asociaciones HABTM.
-  def anular_o_destruir
-    'anular'
-  end
-
 end

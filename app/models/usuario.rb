@@ -1,13 +1,15 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
-  rolify :role_cname => 'Rol'
+  rolify role_cname: 'Rol'
   store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
   # TODO cambiar relacion a 'creador'
   has_many :perfiles, inverse_of: :usuario
   has_many :proyectos, inverse_of: :usuario
   has_many :series, inverse_of: :usuario
-  after_initialize :asignar_valores_por_defecto
+  has_and_belongs_to_many :equipos
+
+  before_create :asignar_valores_por_defecto
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -19,7 +21,9 @@ class Usuario < ActiveRecord::Base
                   :remember_me, :config, :current_password, :ficha, :srid,
                   :rol_global
 
-  # Arregla cierto problema con rolify y las inflecciones
+  validates_presence_of :ficha, :srid, on: :update
+
+  # FIXME Workarround para cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
   alias_method :role_ids=, :rol_ids=
 

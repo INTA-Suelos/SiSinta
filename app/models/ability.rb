@@ -10,10 +10,11 @@ class Ability
     @perfiles = [ Perfil, Horizonte, Analitico, Adjunto, Erosion, Ubicacion,
                   Humedad, Paisaje, Pedregosidad, Limite, Consistencia,
                   Estructura, Color ]
-    @basicos =  [ Grupo, Fase, Proyecto, Serie ]
+    @basicos =  [ Grupo, Fase, Proyecto, Serie, Equipo]
     @recursos = @perfiles + @basicos
 
-    alias_action :autocompletar, :exportar, to: :read
+    alias_action  :autocompletar, :exportar, :autocomplete_usuario_nombre,
+                  :autocomplete_usuario_email, to: :read
     alias_action :editar_analiticos, :update_analiticos, to: :update
     alias_action :permitir, to: :manage
 
@@ -32,6 +33,7 @@ class Ability
   # Lógica de cada rol
   private
 
+    # FIXME Que no sea el único que puede acceder a los datos de usuarios
     def administrador
       can :manage, :all
     end
@@ -40,7 +42,8 @@ class Ability
       can :read, recursos
       can :create, recursos
       can :manage, perfiles, usuario_id: @usuario.id
-      can :manage, [ Proyecto, Serie ], usuario_id: @usuario.id
+      can :manage, [ Equipo, Proyecto, Serie ], usuario_id: @usuario.id
+      can :update, Equipo, miembros: { id: @usuario.id }
     end
 
     # Usuario miembro de un perfil. Usamos una acción personalizada para
@@ -58,5 +61,4 @@ class Ability
       can :read, perfiles, publico: true
       can :read, basicos
     end
-
 end

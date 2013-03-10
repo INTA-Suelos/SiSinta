@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306140728) do
+ActiveRecord::Schema.define(:version => 20130307230755) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -86,6 +86,22 @@ ActiveRecord::Schema.define(:version => 20130306140728) do
     t.integer  "adhesividad_id"
     t.integer  "plasticidad_id"
   end
+
+  create_table "equipos", :force => true do |t|
+    t.string   "nombre",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "usuario_id"
+  end
+
+  add_index "equipos", ["nombre"], :name => "index_equipos_on_nombre", :unique => true
+
+  create_table "equipos_usuarios", :id => false, :force => true do |t|
+    t.integer "equipo_id"
+    t.integer "usuario_id"
+  end
+
+  add_index "equipos_usuarios", ["usuario_id", "equipo_id"], :name => "index_equipos_usuarios_on_usuario_id_and_equipo_id"
 
   create_table "erosiones", :force => true do |t|
     t.integer "subclase_id"
@@ -250,10 +266,10 @@ ActiveRecord::Schema.define(:version => 20130306140728) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true

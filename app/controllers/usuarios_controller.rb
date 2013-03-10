@@ -1,5 +1,8 @@
 # encoding: utf-8
 class UsuariosController < AutorizadoController
+  autocomplete :usuario, :nombre, full: true, extra_data: [:email]
+  autocomplete :usuario, :email, full: true, extra_data: [:nombre]
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 

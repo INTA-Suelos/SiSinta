@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Serie < ActiveRecord::Base
   attr_accessible :nombre, :descripcion, :simbolo, :perfiles_attributes
 

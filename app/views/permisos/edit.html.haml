@@ -1,0 +1,18 @@
+.botonera
+  - if can? :read, @recurso
+    = link_to 'Mostrar', @recurso
+    = '|'
+  = link_to 'Volver', @recurso.class
+
+#permiso
+  = form_tag permitir_url, method: :put, html: { class: 'span-24' } do |f|
+
+    = field_set_tag "#{@usuarios.size} usuarios administran #{@recurso}",
+      class: 'celeste_oscuro span-23 last' do
+
+      #multiselect-wrap
+        = select_tag('usuarios',
+            grouped_options_for_select(usuarios_en_equipos(@usuarios), @ids),
+            multiple: true, name: 'usuario_ids[]', class: 'multiselect span-22 last')
+
+      .acciones.span-4.last= submit_tag 'Asignar'

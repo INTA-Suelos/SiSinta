@@ -8,5 +8,6 @@
  *= require jquery
  *= require select2
  *= require ui.multiselect
+ *= require jquery-multiselect
  *= require_tree ./comunes
 */

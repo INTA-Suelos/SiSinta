@@ -1,5 +1,6 @@
 # encoding: utf-8
 SiSINTA::Application.routes.draw do
+
   # TODO buscar en todos los modelos con un index agregador
 
   root to: 'inicio#index'
@@ -11,6 +12,9 @@ SiSINTA::Application.routes.draw do
   # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
   masculinos  = { new: "nuevo", edit: "editar" }
   femeninos   = { new: "nueva", edit: "editar" }
+
+  get 'permisos/:modelo/:id' => 'permisos#edit',    as: 'permisos'
+  put 'permisos/:modelo/:id' => 'permisos#update',  as: 'permitir'
 
   with_options path_names: masculinos do |r|
 
@@ -53,7 +57,11 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :usuarios, only: [:index, :destroy, :update] do
-      put 'update_varios', on: :collection
+      collection do
+        put 'update_varios'
+        get 'autocomplete_usuario_nombre'
+        get 'autocomplete_usuario_email'
+      end
     end
 
     r.resources :colores, only: [] do
@@ -63,6 +71,8 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :proyectos
+
+    r.resources :equipos
   end
 
   with_options path_names: femeninos do |r|
@@ -76,10 +86,6 @@ SiSINTA::Application.routes.draw do
     r.resources :series do
       collection do
         get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
-      end
-      member do
-        get   'permisos'
-        post  'permitir'
       end
     end
 
