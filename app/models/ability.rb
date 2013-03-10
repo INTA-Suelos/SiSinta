@@ -43,6 +43,7 @@ class Ability
       can :create, recursos
       can :manage, perfiles, usuario_id: @usuario.id
       can :manage, [ Equipo, Proyecto, Serie ], usuario_id: @usuario.id
+      can :update, Equipo, miembros: { id: @usuario.id }
     end
 
     # Usuario miembro de un perfil. Usamos una acción personalizada para
@@ -60,5 +61,4 @@ class Ability
       can :read, perfiles, publico: true
       can :read, basicos
     end
-
 end

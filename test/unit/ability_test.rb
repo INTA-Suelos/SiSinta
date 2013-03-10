@@ -51,6 +51,15 @@ class AbilityTest < ActiveSupport::TestCase
     end
   end
 
+  test "los miembros de un equipo pueden editar el equipo y agregar miembros" do
+    equipo = create(:equipo, miembros: 3)
+    equipo.miembros.each do |miembro|
+      miembro.grant 'Autorizado'
+      permisos = Ability.new miembro
+      assert permisos.can?(:update, equipo), "Un miembro debe poder actualizar sus equipos"
+    end
+  end
+
   test "los miembros de algo pueden administrarlo" do
     miembro = create(:usuario)
     perfil = create(:perfil)
