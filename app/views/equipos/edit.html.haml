@@ -2,9 +2,6 @@
   - if can? :read, @equipo
     = link_to 'Mostrar', @equipo
     = '|'
-  - if can?(:update, @equipo) or can?(:modificar, @equipo)
-    = link_to 'Permisos', permisos_path(modelo: 'equipo', id: @equipo)
-    = '|'
   = link_to 'Volver', equipos_path
 
 = render 'form'

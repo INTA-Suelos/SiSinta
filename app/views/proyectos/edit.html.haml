@@ -1,5 +1,12 @@
-.botonera= render 'botonera_editar'
+.botonera
+  - if can? :read, @proyecto
+    = link_to 'Mostrar', @proyecto
+    = '|'
+  - if can?(:update, @proyecto) or can?(:modificar, @proyecto)
+    = link_to 'Permisos', permisos_path(modelo: 'proyecto', id: @proyecto)
+    = '|'
+  = link_to 'Volver', proyectos_path
 
 = render 'form'
 
-.botonera= render 'botonera_editar'
+= volver_arriba

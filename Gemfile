@@ -8,6 +8,7 @@ gem 'yaml_db'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
+gem 'devise-i18n'
 gem 'cancan'
 gem 'param_protected'
 gem 'rolify'

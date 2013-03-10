@@ -115,25 +115,78 @@ class PerfilesControllerTest < ActionController::TestCase
   end
 
   test "rutea a editar_analiticos" do
-    perfil = create(:perfil)
     assert_routing({
-      path: "/perfiles/#{perfil.to_param}/editar_analiticos",
+      path: "/perfiles/345/editar_analiticos",
       method: :get
     },{
       controller: 'perfiles', action: 'editar_analiticos',
-      id: perfil.to_param
+      id: '345'
     })
   end
 
   test "rutea a update_analiticos" do
-    perfil = create(:perfil)
     assert_routing({
-      path: "/perfiles/#{perfil.to_param}/update_analiticos",
+      path: "/perfiles/123/update_analiticos",
       method: :put
     },{
       controller: 'perfiles', action: 'update_analiticos',
-      id: perfil.to_param
+      id: '123'
     })
   end
 
+  test "rutea a exportar" do
+    assert_routing({
+      path: "/perfiles/exportar",
+      method: :get
+    },{
+      controller: 'perfiles', action: 'exportar'
+    })
+  end
+
+  test "rutea a procesar_csv" do
+    assert_routing({
+      path: "/perfiles/procesar_csv",
+      method: :post
+    },{
+      controller: 'perfiles', action: 'procesar_csv'
+    })
+  end
+
+  test "rutea a geo.json" do
+    assert_routing({
+      path: "/perfiles/geo.json",
+      method: :get
+    },{
+      controller: 'perfiles', action: 'geo', format: 'json'
+    })
+  end
+
+  test "rutea a almacenar" do
+    assert_routing({
+      path: "/perfiles/almacenar",
+      method: :put
+    },{
+      controller: 'perfiles', action: 'almacenar'
+    })
+  end
+
+  test "almacena una lista de perfiles temporalmente" do
+    loguearse_como 'Autorizado'
+    @request.env["HTTP_REFERER"] = "/perfiles/"
+
+    put :almacenar, perfil_ids: [1, 2, 3]
+
+    assert_equal %w{1 2 3}, @controller.send(:perfiles_seleccionados),
+      "Debe almacenar una lista de perfiles"
+    assert_redirected_to exportar_perfiles_path
+  end
+
+  test "rutea a seleccionar_perfiles" do
+    assert_routing({
+      path: "/perfiles/seleccionar",
+      method: :get
+    },{
+      controller: 'perfiles', action: 'seleccionar'
+    })
+  end
 end

@@ -1,4 +1,10 @@
-.botonera= render 'botonera_mostrar'
+.botonera
+  - if can? :update, @proyecto
+    = link_to 'Editar', edit_proyecto_path(@proyecto)
+    = '|'
+    = link_to 'Permisos', permisos_path(modelo: 'proyecto', id: @proyecto)
+    = '|'
+  = link_to 'Volver', proyectos_path
 
 #proyecto.span-24.show
   = fields_for @proyecto do |f|
@@ -22,4 +28,4 @@
         .span-21.campo= render partial: 'comunes/perfiles_asociados',
           locals: { perfiles: @proyecto.perfiles, param: 'proyecto', bloqueado: true }
 
-.botonera= render 'botonera_mostrar'
+= volver_arriba

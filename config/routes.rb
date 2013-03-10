@@ -32,8 +32,6 @@ SiSINTA::Application.routes.draw do
       end
 
       member do
-        get   'permisos'
-        post  'permitir'
         get   'editar_analiticos'
         put   'update_analiticos'
       end
