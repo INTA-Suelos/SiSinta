@@ -6,10 +6,10 @@
   valor:  agrícola
 - id:     2
   valor:  ganadero
-  - id:   3
-  valor:  agricolo-ganadero  
-  - id:   4
-  valor:  ganadero-agricola
+- id:     3
+  valor:  agricolo-ganadero
+- id:     4
+  valor:  ganadero-agrícola
 - id:     5
   valor:  frutícola
 - id:     6

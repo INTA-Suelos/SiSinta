@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307230755) do
+ActiveRecord::Schema.define(:version => 20130310105428) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
