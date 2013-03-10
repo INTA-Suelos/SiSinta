@@ -7,16 +7,20 @@
 - id:     2
   valor:  ganadero
 - id:     3
-  valor:  frutícola
+  valor:  agricolo-ganadero
 - id:     4
-  valor:  hortícola
+  valor:  ganadero-agrícola
 - id:     5
-  valor:  bosque/monte
+  valor:  frutícola
 - id:     6
-  valor:  natural
+  valor:  hortícola
 - id:     7
-  valor:  bosque implantado
+  valor:  bosque/monte
 - id:     8
-  valor:  tierra improductiva
+  valor:  natural
 - id:     9
+  valor:  bosque implantado
+- id:     10
+  valor:  tierra improductiva
+- id:     11
   valor:  miscelánea
