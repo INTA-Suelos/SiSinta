@@ -1,4 +1,10 @@
-.botonera= render 'botonera_mostrar'
+.botonera
+  - if can?(:update, @serie) or can?(:modificar, @serie)
+    = link_to 'Editar', edit_serie_path(@serie)
+    = '|'
+    = link_to 'Permisos', permisos_path(modelo: 'serie', id: @serie)
+    = '|'
+  = link_to 'Volver', series_path
 
 #serie.span-24.show
   = fields_for @serie do |f|
@@ -20,4 +26,4 @@
         .span-21.campo= render partial: 'comunes/perfiles_asociados',
           locals: { perfiles: @serie.perfiles, param: 'serie', bloqueado: true }
 
-.botonera= render 'botonera_mostrar'
+= volver_arriba

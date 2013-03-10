@@ -1,7 +1,0 @@
-- if can? :read, @serie
-  = link_to 'Mostrar', @serie
-  = '|'
-- if can?(:update, @serie) or can?(:modificar, @serie)
-  = link_to 'Permisos', permisos_path(modelo: 'serie', id: @serie)
-  = '|'
-= link_to 'Volver', series_path
