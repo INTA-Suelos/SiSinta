@@ -2,7 +2,7 @@
   - if can?(:update, @perfil) or can?(:modificar, @perfil)
     = link_to 'Editar', edit_perfil_path(@perfil)
     = '|'
-    = link_to 'Permisos', permisos_perfil_path(@perfil)
+    = link_to 'Permisos', permisos_path(modelo: 'perfil', id: @perfil)
     = '|'
   - if can? :read, @perfil
     = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)

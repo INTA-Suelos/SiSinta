@@ -28,6 +28,8 @@
             = '|'
             = link_to 'Editar', edit_proyecto_path(proyecto)
             = '|'
+            = link_to 'Permisos', permisos_path(modelo: 'proyecto', id: proyecto)
+            = '|'
             = link_to 'Eliminar', proyecto, confirm: t(:confirmar), method: :delete
 
   = volver_arriba

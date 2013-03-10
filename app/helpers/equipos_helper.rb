@@ -12,8 +12,6 @@ module EquiposHelper
         'Nuevo equipo'
       when 'edit'
         "Editando equipo #{@equipo.nombre}"
-      when 'permisos'
-        "Permisos para el equipo #{@recurso.nombre}"
       else
         nil
     end
