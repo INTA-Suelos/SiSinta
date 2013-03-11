@@ -106,7 +106,9 @@ class Perfil < ActiveRecord::Base
     # Comprueba que no hay otros perfiles en la serie con el mismo número
     def numero_es_unico_dentro_de_una_serie
       if self.serie
-        otros_perfiles = self.serie.perfiles.reject { |p| p.id == self.id }
+        otros_perfiles = self.serie.perfiles.reject do |p|
+          p.id == self.id or p.numero.blank?
+        end
         if otros_perfiles.collect(&:numero).include?(self.numero)
           errors.add :numero, :no_es_unico_en_la_serie 
         end
