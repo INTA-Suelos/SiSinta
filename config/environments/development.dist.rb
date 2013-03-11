@@ -49,7 +49,6 @@ SiSINTA::Application.configure do
     Bullet.enable = true
     Bullet.bullet_logger = true
     Bullet.console = true
-    Bullet.disable_browser_cache = true
   end
 
   # Configuración de ejemplo para riseup.net
