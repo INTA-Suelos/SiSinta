@@ -120,6 +120,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcached (1.5.0)
     method_source (0.8.1)
     mime-types (1.21)
     minitest (4.6.2)
@@ -168,6 +169,8 @@ GEM
       railties (= 3.2.12)
     rails3-jquery-autocomplete (1.0.11)
       rails (~> 3.0)
+    rails3_libmemcached_store (0.5.1)
+      memcached
     railties (3.2.12)
       actionpack (= 3.2.12)
       activesupport (= 3.2.12)
@@ -269,6 +272,7 @@ DEPENDENCIES
   pry-rails
   rails (= 3.2.12)
   rails3-jquery-autocomplete
+  rails3_libmemcached_store
   ransack
   responders
   rgeo
