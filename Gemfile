@@ -34,12 +34,13 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
-# Controladores
+## Controladores
 gem 'responders'
 gem 'has_scope'
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
 
+## Assets
 group :assets do
   gem 'sass-rails', "  ~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
@@ -51,9 +52,12 @@ group :assets do
   gem 'select2-rails'
 end
 
+## Server
 gem 'thin'
 gem 'SyslogLogger', require: 'syslog/logger'
+gem 'rails3_libmemcached_store'
 
+## Desarrollo
 group :test, :development do
   gem 'pry-rails'
   gem 'hirb'

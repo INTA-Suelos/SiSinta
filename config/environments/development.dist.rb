@@ -12,7 +12,10 @@ SiSINTA::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+
+  # Habilito el cache para pruebas
+  config.action_controller.perform_caching = true
+  config.cache_store = :libmemcached_store
 
   # Para testear Devise
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
@@ -49,7 +52,6 @@ SiSINTA::Application.configure do
     Bullet.enable = true
     Bullet.bullet_logger = true
     Bullet.console = true
-    Bullet.disable_browser_cache = true
   end
 
   # Configuración de ejemplo para riseup.net
