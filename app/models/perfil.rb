@@ -103,7 +103,8 @@ class Perfil < ActiveRecord::Base
       end
     end
 
-    # Comprueba que no hay otros perfiles en la serie con el mismo número
+    # Comprueba que no hay otros perfiles en la serie con el mismo número.
+    # Permite nil en número.
     def numero_es_unico_dentro_de_una_serie
       if self.serie
         otros_perfiles = self.serie.perfiles.reject do |p|
@@ -117,8 +118,6 @@ class Perfil < ActiveRecord::Base
 
     # Se crea una serie sólo si no existe ya
     def asociar_serie
-      # Si la serie ya existe no actualiza el símbolo. En otras palabras, desde
-      # el perfil sólo se puede crear una serie, nunca modificarla
       if nombre
         _simbolo = simbolo
         self.serie = Serie.find_or_create_by_nombre(nombre)
