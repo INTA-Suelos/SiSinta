@@ -37,9 +37,6 @@ jQuery ->
   grupos =
     source: "/grupos/autocompletar/descripcion"
 
-  hvc =
-    source: "/colores/autocompletar/hvc"
-
   nombres =
     source: "/series/autocompletar/nombre"
 
@@ -53,7 +50,6 @@ jQuery ->
   # extendemos los objetos con las características comunes
   $.extend fases, comun
   $.extend grupos, comun
-  $.extend hvc, comun
   $.extend nombres, comun
   $.extend simbolos, comun
   $.extend etiquetas, comun, autocompletar_varios
@@ -61,16 +57,12 @@ jQuery ->
 
   $('#perfil_fase_attributes_nombre').autocomplete fases
   $('#perfil_grupo_attributes_descripcion').autocomplete grupos
-  $('.munsell').autocomplete hvc
   $('#perfil_etiquetas').autocomplete etiquetas
   $('#perfil_reconocedores').autocomplete reconocedores
   $('#perfil_serie_attributes_nombre').autocomplete nombres
   $('#perfil_serie_attributes_simbolo').autocomplete simbolos
 
-  $('.completa').nestedFields({
-    afterInsert: ->
-      $('.munsell').autocomplete(hvc)
-  })
+  $('.completa').nestedFields()
 
   $('select.compacto').select2()
   $('.compacto').css('width', '100%')

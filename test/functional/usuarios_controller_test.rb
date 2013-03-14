@@ -19,7 +19,7 @@ class UsuariosControllerTest < ActionController::TestCase
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end
 
-  test "devuelve nombre para términos parciales" do
+  test "autocompleta nombre" do
     loguearse_como 'Administrador'
     termino = create(:usuario).nombre
 

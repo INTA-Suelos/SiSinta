@@ -21,11 +21,13 @@
 .span-4
   = h.fields_for :color_seco do |hc|
     .span-2.campo
-      = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
+      = hc.autocomplete_field :hvc, autocompletar_hvc_colores_path,
+        disabled: bloqueado
       = ayuda_para 'Horizonte.color_seco'
   = h.fields_for :color_humedo do |hc|
     .span-2.last.campo
-      = hc.text_field :hvc, disabled: bloqueado, class: 'munsell'
+      = hc.autocomplete_field :hvc, autocompletar_hvc_colores_path,
+        disabled: bloqueado
       = ayuda_para 'Horizonte.color_humedo'
 .span-3
   .span-3.last.campo

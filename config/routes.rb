@@ -64,7 +64,8 @@ SiSINTA::Application.routes.draw do
 
     r.resources :colores, only: [] do
       collection do
-        get 'autocompletar/:atributo' => 'colores#autocompletar', as: 'autocompletar'
+        get 'autocompletar_hvc' => 'colores#autocomplete_color_hvc'
+        get 'autocompletar_rgb' => 'colores#autocomplete_color_rgb'
       end
     end
 
