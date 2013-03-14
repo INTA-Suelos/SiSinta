@@ -1,0 +1,19 @@
+#busqueda
+  = search_form_for @perfiles do |f|
+
+    = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
+
+      = fields_for @busqueda do |fb|
+
+        = fb.error_messages
+
+        .span-23.campo
+          .span-2= fb.label :nombre
+          .span-19.last= fb.text_field :nombre, autofocus: true, required: true
+
+      = field_set_tag 'Parámetros', class: 'celeste plegable span-23 last' do
+
+        .span-4=  f.label :serie_nombre_or_numero_cont, "Por nombre o número"
+        .span-16.last= f.text_field :serie_nombre_or_numero_cont
+
+    .acciones.span-4.last= f.submit

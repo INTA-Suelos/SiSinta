@@ -13,8 +13,10 @@ SiSINTA::Application.routes.draw do
   masculinos  = { new: "nuevo", edit: "editar" }
   femeninos   = { new: "nueva", edit: "editar" }
 
-  get 'permisos/:modelo/:id' => 'permisos#edit',    as: 'permisos'
-  put 'permisos/:modelo/:id' => 'permisos#update',  as: 'permitir'
+  scope 'permisos' do
+    get ':modelo/:id' => 'permisos#edit',    as: 'permisos'
+    put ':modelo/:id' => 'permisos#update',  as: 'permitir'
+  end
 
   with_options path_names: masculinos do |r|
 
@@ -86,6 +88,8 @@ SiSINTA::Application.routes.draw do
         get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
       end
     end
+
+    r.resource :busqueda
 
   end
 end
