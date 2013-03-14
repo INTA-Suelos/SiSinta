@@ -27,4 +27,8 @@ class Capacidad < ActiveRecord::Base
     return cadena
   end
 
+  def serializable_hash(opciones = { })
+    opciones[:include] = { :subclases }
+    super(opciones)
+  end
 end
