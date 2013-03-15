@@ -84,7 +84,8 @@ SiSINTA::Application.routes.draw do
 
     r.resources :series do
       collection do
-        get 'autocompletar/:atributo' => 'series#autocompletar', as: 'autocompletar'
+        get 'autocompletar_nombre' => 'series#autocomplete_serie_nombre'
+        get 'autocompletar_simbolo' => 'series#autocomplete_serie_simbolo'
       end
     end
 

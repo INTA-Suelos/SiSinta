@@ -31,26 +31,15 @@ jQuery ->
         response(data)
       )
 
-  nombres =
-    source: "/series/autocompletar/nombre"
-
-  simbolos =
-    source: "/series/autocompletar/simbolo"
-
   etiquetas = {}
-
   reconocedores = {}
 
   # extendemos los objetos con las características comunes
-  $.extend nombres, comun
-  $.extend simbolos, comun
   $.extend etiquetas, comun, autocompletar_varios
   $.extend reconocedores, comun, autocompletar_varios
 
   $('#perfil_etiquetas').autocomplete etiquetas
   $('#perfil_reconocedores').autocomplete reconocedores
-  $('#perfil_serie_attributes_nombre').autocomplete nombres
-  $('#perfil_serie_attributes_simbolo').autocomplete simbolos
 
   $('.completa').nestedFields()
 

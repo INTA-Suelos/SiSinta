@@ -189,4 +189,12 @@ class PerfilesControllerTest < ActionController::TestCase
       controller: 'perfiles', action: 'seleccionar'
     })
   end
+
+  test "_form incluye tags para autocompletar" do
+    loguearse_como 'Autorizado'
+    get :new
+
+    assert_select '#perfil_serie_attributes_simbolo'
+    assert_select '#perfil_serie_attributes_nombre'
+  end
 end
