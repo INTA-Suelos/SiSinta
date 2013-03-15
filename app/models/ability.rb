@@ -16,6 +16,7 @@ class Ability
     alias_action  :autocomplete_usuario_nombre,
                   :autocomplete_usuario_email,
                   :autocomplete_grupo_descripcion,
+                  :autocomplete_serie_nombre,
                   :autocomplete_color_rgb,
                   :autocomplete_color_hvc,                to: :read
     alias_action  :autocompletar, :exportar,              to: :read

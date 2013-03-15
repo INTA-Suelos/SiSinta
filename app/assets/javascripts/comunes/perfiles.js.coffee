@@ -31,9 +31,6 @@ jQuery ->
         response(data)
       )
 
-  fases =
-    source: "/fases/autocompletar/nombre"
-
   nombres =
     source: "/series/autocompletar/nombre"
 
@@ -45,13 +42,11 @@ jQuery ->
   reconocedores = {}
 
   # extendemos los objetos con las características comunes
-  $.extend fases, comun
   $.extend nombres, comun
   $.extend simbolos, comun
   $.extend etiquetas, comun, autocompletar_varios
   $.extend reconocedores, comun, autocompletar_varios
 
-  $('#perfil_fase_attributes_nombre').autocomplete fases
   $('#perfil_etiquetas').autocomplete etiquetas
   $('#perfil_reconocedores').autocomplete reconocedores
   $('#perfil_serie_attributes_nombre').autocomplete nombres

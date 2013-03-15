@@ -78,7 +78,7 @@ SiSINTA::Application.routes.draw do
 
     r.resources :fases do
       collection do
-        get 'autocompletar/:atributo' => 'fases#autocompletar', as: 'autocompletar'
+        get 'autocompletar_nombre' => 'fases#autocomplete_fase_nombre'
       end
     end
 
