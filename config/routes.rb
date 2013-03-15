@@ -50,7 +50,7 @@ SiSINTA::Application.routes.draw do
 
     r.resources :grupos do
       collection do
-        get 'autocompletar/:atributo' => 'grupos#autocompletar', as: 'autocompletar'
+        get 'autocompletar_descripcion' => 'grupos#autocomplete_grupo_descripcion'
       end
     end
 

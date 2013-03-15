@@ -1,22 +1,21 @@
 # encoding: utf-8
 class GruposController < AutorizadoController
+  autocomplete :grupo, :descripcion, full: true
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:autocomplete_grupo_descripcion]
+
+  with_options only: [:autocomplete_grupo_descripcion] do |o|
+    o.skip_before_filter :authenticate_usuario!
+    o.skip_authorization_check
+  end
 
   def index
     @grupos = PaginadorDecorator.decorate apply_scopes(@grupos)
 
     respond_with @grupos
-  end
-
-  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que consultar, controlando el input del usuario.
-  def autocompletar
-    case params[:atributo]
-      when 'descripcion' then super(Grupo, :descripcion)
-    end
   end
 
   def new
