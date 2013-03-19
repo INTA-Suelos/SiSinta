@@ -28,7 +28,8 @@ SiSINTA::Application.configure do
   # cookies. %d es para que Rails distribuya la carga entre 4 (%d va de 0 a 3)
   # servidores virtuales, que pueden ser el mismo, pero que engaña al navegador
   # para que haga más solicitudes
-  config.action_controller.asset_host = "http://cache%d.cambiame"
+  # TODO Configurar el webserver?
+  #config.action_controller.asset_host = "http://cache%d.cambiame"
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -53,7 +54,7 @@ SiSINTA::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( ie.css, print.css )
+  config.assets.precompile += %w( ie.css print.css )
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
