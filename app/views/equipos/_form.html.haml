@@ -25,12 +25,12 @@
               = fm.hidden_field :id
               .span-2= fm.label :nombre
               .span-7.nombre= fm.autocomplete_field :nombre,
-                autocomplete_usuario_nombre_usuarios_path,
+                autocompletar_nombre_usuarios_path,
                 update_elements: { id: '#equipo_nuevo_miembro_id',
                   email: '#equipo_nuevo_miembro_email' }
               .span-2= fm.label :email
               .span-7.email= fm.autocomplete_field :email,
-                autocomplete_usuario_email_usuarios_path,
+                autocompletar_email_usuarios_path,
                 update_elements: { id: '#equipo_nuevo_miembro_id',
                   nombre: '#equipo_nuevo_miembro_nombre' }
               .span-3.last= f.submit t('.agregar_miembro')
