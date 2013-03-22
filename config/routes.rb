@@ -27,7 +27,6 @@ SiSINTA::Application.routes.draw do
         get   'exportar'
         post  'procesar_csv'
         put   'almacenar'
-        get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
         get   'seleccionar'
         get   'autocompletar_reconocedores' => 'perfiles#autocomplete_reconocedores_name'
         get   'autocompletar_etiquetas'     => 'perfiles#autocomplete_etiquetas_name'

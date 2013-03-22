@@ -22,8 +22,8 @@ class Ability
                   :autocomplete_serie_nombre,
                   :autocomplete_serie_simbolo,
                   :autocomplete_color_rgb,
-                  :autocomplete_color_hvc,                to: :read
-    alias_action  :autocompletar, :exportar,              to: :read
+                  :autocomplete_color_hvc,
+                  :exportar,                              to: :read
     alias_action  :editar_analiticos, :update_analiticos, to: :update
 
     if @usuario.admin?
