@@ -73,8 +73,7 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los invitados no pueden crear o modificar recursos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+    permisos = Ability.new
 
     permisos.recursos.each do |recurso|
       [:create, :update, :destroy].each do |accionar|
@@ -84,8 +83,7 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los invitados sólo pueden leer recursos que son públicos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+    permisos = Ability.new
     perfil_privado = build_stubbed(:perfil)
     perfil_publico = build_stubbed(:perfil, publico: true)
 
@@ -94,8 +92,7 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "los invitados pueden leer recursos básicos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+    permisos = Ability.new
 
     permisos.recursos.each do |recurso|
       assert permisos.can?(:read, recurso), "Debe poder leer recursos básicos"
