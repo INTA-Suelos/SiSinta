@@ -2,6 +2,8 @@
 class PerfilesController < AutorizadoController
   autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+  autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
 
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
@@ -37,14 +39,6 @@ class PerfilesController < AutorizadoController
       @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
     )
     respond_with @perfiles
-  end
-
-  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que consultar, controlando el input del usuario.
-  def autocompletar
-    case params[:atributo]
-      when 'etiquetas'      then super(Perfil.tags(on: :etiquetas), :name)
-    end
   end
 
   def show

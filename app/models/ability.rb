@@ -18,6 +18,7 @@ class Ability
                   :autocomplete_grupo_descripcion,
                   :autocomplete_fase_nombre,
                   :autocomplete_reconocedores_name,
+                  :autocomplete_etiquetas_name,
                   :autocomplete_serie_nombre,
                   :autocomplete_serie_simbolo,
                   :autocomplete_color_rgb,
@@ -64,8 +65,9 @@ class Ability
         can :modificar, recurso,  id: recurso.with_role('Miembro', @usuario).map {|s| s.id}
       end
 
-      # Los miembros de algo pueden autocompletar los reconocedores
+      # Los miembros de algo pueden autocompletar los reconocedores y etiquetas
       can :autocomplete_reconocedores_name, Perfil
+      can :autocomplete_etiquetas_name, Perfil
 
       # Todos los miembros tienen permisos de invitados
       invitado

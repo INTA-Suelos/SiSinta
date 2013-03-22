@@ -197,4 +197,18 @@ class PerfilesControllerTest < ActionController::TestCase
     assert json.first.include?('label'), "debe devolver el label"
     assert json.first.include?('value'), "debe devolver el nombre"
   end
+
+  test "autocompleta etiquetas" do
+    loguearse_como 'Autorizado'
+    perfil = create(:perfil, publico: true, etiquetas: 'tibio, caliente')
+
+    get :autocomplete_etiquetas_name, term: 'io'
+    assert_response :success
+    assert_equal  RocketTag::Tag.where("name like '%io%'").size,
+                  json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('value'), "debe devolver el nombre"
+  end
 end

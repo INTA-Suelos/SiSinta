@@ -45,7 +45,7 @@ class AbilityTest < ActiveSupport::TestCase
       ajeno = build_stubbed(modelo, usuario: otro_usuario)
       huerfano = build_stubbed(modelo, usuario: nil)
 
-      assert permisos.can?(:manage, propio), "Debe poder administrar sus recursos"
+      assert permisos.can?(:manage, propio), "Deben poder administrar sus recursos"
       assert permisos.cannot?(:manage, ajeno), "No deben poder administrar otros"
       assert permisos.cannot?(:manage, huerfano), "No deben poder administrar otros"
     end
@@ -80,6 +80,8 @@ class AbilityTest < ActiveSupport::TestCase
 
     assert permisos.can?(:autocomplete_reconocedores_name, Perfil),
       "Debe poder autocompletar los reconocedores si es miembro de algún perfil"
+    assert permisos.can?(:autocomplete_etiquetas_name, Perfil),
+      "Debe poder autocompletar las etiquetas si es miembro de algún perfil"
   end
 
   test "los invitados no pueden crear o modificar recursos" do
