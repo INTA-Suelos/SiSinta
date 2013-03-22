@@ -6,6 +6,14 @@ GIT
       activerecord (>= 3.2.0)
       squeel (~> 1.0.0)
 
+GIT
+  remote: https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git
+  revision: 8ce28c5bf9fe0a78d0f88ffd978f7709722d8fd2
+  branch: scopes-with-parameters
+  specs:
+    rails3-jquery-autocomplete (1.0.11)
+      rails (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -167,8 +175,6 @@ GEM
       activesupport (= 3.2.12)
       bundler (~> 1.0)
       railties (= 3.2.12)
-    rails3-jquery-autocomplete (1.0.11)
-      rails (~> 3.0)
     rails3_libmemcached_store (0.5.1)
       memcached
     railties (3.2.12)
@@ -271,7 +277,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 3.2.12)
-  rails3-jquery-autocomplete
+  rails3-jquery-autocomplete!
   rails3_libmemcached_store
   ransack
   responders

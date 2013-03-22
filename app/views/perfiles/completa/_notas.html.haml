@@ -10,8 +10,9 @@
     = f.object.ayuda :etiquetas
   .span-21.last.campo
     .span-2= f.label :reconocedores
-    .span-19.last= f.text_field :reconocedores, disabled: bloqueado,
-      data: { url: autocompletar_perfiles_path(:reconocedores) }
+    .span-19.last= f.autocomplete_field :reconocedores,
+      autocompletar_reconocedores_perfiles_path, data: { delimiter: ', '},
+      disabled: bloqueado
     = f.object.ayuda :reconocedores
   - if f.object.usuario.present?
     .span-21.last.campo

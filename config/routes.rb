@@ -29,6 +29,7 @@ SiSINTA::Application.routes.draw do
         put   'almacenar'
         get   'autocompletar/:atributo' => 'perfiles#autocompletar', as: 'autocompletar'
         get   'seleccionar'
+        get   'autocompletar_reconocedores' => 'perfiles#autocomplete_reconocedores_name'
       end
 
       member do

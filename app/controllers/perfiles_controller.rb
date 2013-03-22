@@ -1,5 +1,8 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
+  autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
@@ -41,7 +44,6 @@ class PerfilesController < AutorizadoController
   def autocompletar
     case params[:atributo]
       when 'etiquetas'      then super(Perfil.tags(on: :etiquetas), :name)
-      when 'reconocedores'  then super(Perfil.tags(on: :reconocedores), :name)
     end
   end
 

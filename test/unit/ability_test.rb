@@ -72,6 +72,16 @@ class AbilityTest < ActiveSupport::TestCase
       "Puede administrar un perfil del que no es miembro"
   end
 
+  test "los miembros de algo pueden autocompletar tags" do
+    miembro = create(:usuario)
+    perfil = create(:perfil)
+    miembro.grant 'Miembro', perfil
+    permisos = Ability.new miembro
+
+    assert permisos.can?(:autocomplete_reconocedores_name, Perfil),
+      "Debe poder autocompletar los reconocedores si es miembro de algún perfil"
+  end
+
   test "los invitados no pueden crear o modificar recursos" do
     permisos = Ability.new
 
@@ -82,13 +92,13 @@ class AbilityTest < ActiveSupport::TestCase
     end
   end
 
-  test "los invitados sólo pueden leer recursos que son públicos" do
+  test "los invitados sólo pueden leer perfiles que son públicos" do
     permisos = Ability.new
     perfil_privado = build_stubbed(:perfil)
     perfil_publico = build_stubbed(:perfil, publico: true)
 
-    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver recursos privados"
-    assert permisos.can?(:read, perfil_publico), "Debe poder ver recursos públicos"
+    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver perfiles privados"
+    assert permisos.can?(:read, perfil_publico), "Debe poder ver perfiles públicos"
   end
 
   test "los invitados pueden leer recursos básicos" do

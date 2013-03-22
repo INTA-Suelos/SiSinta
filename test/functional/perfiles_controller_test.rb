@@ -183,4 +183,18 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_select '#perfil_serie_attributes_simbolo'
     assert_select '#perfil_serie_attributes_nombre'
   end
+
+  test "autocompleta reconocedores" do
+    loguearse_como 'Autorizado'
+    perfil = create(:perfil, publico: true, reconocedores: 'juan salvo')
+
+    get :autocomplete_reconocedores_name, term: 'jua'
+    assert_response :success
+    assert_equal  RocketTag::Tag.where("name like '%jua%'").size,
+                  json.size
+
+    assert json.first.include?('id'), "debe devolver el id"
+    assert json.first.include?('label'), "debe devolver el label"
+    assert json.first.include?('value'), "debe devolver el nombre"
+  end
 end

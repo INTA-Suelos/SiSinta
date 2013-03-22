@@ -32,14 +32,11 @@ jQuery ->
       )
 
   etiquetas = {}
-  reconocedores = {}
 
   # extendemos los objetos con las características comunes
   $.extend etiquetas, comun, autocompletar_varios
-  $.extend reconocedores, comun, autocompletar_varios
 
   $('#perfil_etiquetas').autocomplete etiquetas
-  $('#perfil_reconocedores').autocomplete reconocedores
 
   $('.completa').nestedFields()
 
