@@ -74,20 +74,6 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "devuelve numero para términos parciales" do
-    loguearse_como 'Autorizado'
-    termino = create(:perfil).numero
-
-    get :autocompletar, atributo: 'numero', term: termino
-    assert_response :success
-    assert_equal  Perfil.where("numero like '%#{termino}%'").size,
-                  json.size
-
-    assert json.first.include?('id'), "debe devolver el id"
-    assert json.first.include?('label'), "debe devolver el label"
-    assert json.first.include?('numero'), "debe devolver el número"
-  end
-
   test "va a 'editar_analiticos' si está autorizado" do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
