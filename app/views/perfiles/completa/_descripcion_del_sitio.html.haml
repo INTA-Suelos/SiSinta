@@ -28,12 +28,14 @@
   .span-11.campo
     = f.fields_for :fase do |ff|
       .span-2= ff.label :nombre, 'Fase'
-      .span-9.last= ff.text_field :nombre, disabled: bloqueado
+      .span-9.last= ff.autocomplete_field :nombre,
+        autocompletar_nombre_fases_path, disabled: bloqueado
       = ayuda_para('Fase.nombre')
   .span-11.last.campo
     = f.fields_for :grupo do |fg|
       .span-2= fg.label :descripcion, 'Subgrupo'
-      .span-8.last= fg.text_field :descripcion, disabled: bloqueado
+      .span-8.last= fg.autocomplete_field :descripcion,
+        autocompletar_descripcion_grupos_path, disabled: bloqueado
       = ayuda_para('Grupo.descripcion')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'

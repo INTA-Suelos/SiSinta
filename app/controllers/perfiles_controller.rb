@@ -1,21 +1,28 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
+  autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+  autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index, :geo]
 
   respond_to :json, only: :geo
 
   # Las acciones +index+ y +geo+ funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
-  skip_load_and_authorize_resource            only: [:index, :geo]
-  skip_authorization_check                    only: [:index, :geo]
+  with_options only: [:index, :geo] do |o|
+    o.skip_before_filter :authenticate_usuario!
+    o.skip_authorization_check
+  end
 
-  before_filter :preparar,  only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
+  with_options only: [:index, :geo, :seleccionar, :exportar, :procesar_csv] do |o|
+    o.before_filter :preparar
+    o.before_filter :ordenar
+  end
+
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
 
@@ -27,20 +34,11 @@ class PerfilesController < AutorizadoController
 
   # GET /perfiles/geo.json
   def geo
+    # TODO refactor con decoradores
     @perfiles = como_geojson(
       @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
     )
     respond_with @perfiles
-  end
-
-  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que consultar, controlando el input del usuario.
-  def autocompletar
-    case params[:atributo]
-      when 'numero'         then super(Perfil, :numero)
-      when 'etiquetas'      then super(Perfil.tags(on: :etiquetas), :name)
-      when 'reconocedores'  then super(Perfil.tags(on: :reconocedores), :name)
-    end
   end
 
   def show

@@ -13,6 +13,7 @@
 //= require ui.multiselect
 //= require locale/ui-multiselect-es
 //= require jquery-multiselect
+// TODO I18nalizar autocomplete-rails
 //= require autocomplete-rails
 //= require_tree ./jquery
 //= require_tree ./comunes

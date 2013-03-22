@@ -9,6 +9,7 @@
       .span-16.last= b.text_field :serie_nombre_or_numero_cont
 
       .span-4=  b.label :tags_name_cont, "y etiqueta"
-      .span-16.last= b.text_field :tags_name_cont
+      .span-16.last= b.autocomplete_field :tags_name_cont,
+        autocompletar_etiquetas_perfiles_path, data: { delimiter: ', ' }
 
       .span-2= b.submit "Buscar"

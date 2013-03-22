@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PermisosController < AutorizadoController
 
   skip_load_and_authorize_resource

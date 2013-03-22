@@ -26,5 +26,7 @@
         .span-8= b.text_field :ubicacion_descripcion_or_serie_nombre_or_numero_cont
 
         .span-3=  b.label :tags_name_cont, "con estas etiquetas"
-        .span-8= b.text_field :tags_name_cont
+        .span-8= b.autocomplete_field :tags_name_cont,
+          autocompletar_etiquetas_perfiles_path, data: { delimiter: ', ' }
+
         .span-2.last= b.submit t(".submit"), id: :seleccion

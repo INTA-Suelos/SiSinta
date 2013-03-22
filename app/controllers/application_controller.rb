@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   # Responders
   self.responder = ApplicationResponder
   respond_to :html
-  respond_to :json, only: :autocompletar
 
   protect_from_forgery
 
@@ -29,11 +28,6 @@ class ApplicationController < ActionController::Base
   def descubrir_browser
     @ie = browser_is?('ie')
     @mobile = browser_is_mobile?
-  end
-
-  # GET /:controlador/autocompletar/:atributo
-  def autocompletar(modelo, atributo)
-    render json: lista_para_autocompletar(modelo, atributo)
   end
 
   # Transforma la colección +objetos+ en una lista de 'features' de GeoJSON.
@@ -66,30 +60,6 @@ class ApplicationController < ActionController::Base
   helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
 
   protected
-
-    # Devuelve una lista de coincidencias con el término de búsqueda para usar en el autocomplete de
-    # JQuery-UI. Cada controlador llama al método con un Modelo
-    #
-    # * *Args*    :
-    #   - +modelo+ -> La clase del modelo sobre el que hacer la búsqueda
-    #   - +atributo+ -> El atributo que buscar, como cadena o símbolo
-    # * *Returns* :
-    #   - La lista de coincidencias mapeada en +json+
-    #
-    def lista_para_autocompletar(modelo, atributo)
-      # Uso ARel porque me permite ignorar que el LIKE es case-sensitive en
-      # PostgreSQL pero insensitive en otros motores. En PostgreSQL se usa ILIKE
-      # para comparaciones case-insensitive (es una extensión exclusiva de
-      # PostgreSQL)
-      if params[:term]
-        conjunto = modelo.where modelo.arel_table[atributo].matches("%#{params[:term]}%")
-      else
-        conjunto = modelo.all
-      end
-      lista = conjunto.map {|elemento| Hash[:id => elemento.id,
-                                            :label => elemento.send(atributo),
-                                            "#{atributo}" => elemento.send(atributo)]}
-    end
 
     # Devuelve un csv en base a los atributos del modelo
     #

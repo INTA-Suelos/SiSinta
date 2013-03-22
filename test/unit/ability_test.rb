@@ -45,7 +45,7 @@ class AbilityTest < ActiveSupport::TestCase
       ajeno = build_stubbed(modelo, usuario: otro_usuario)
       huerfano = build_stubbed(modelo, usuario: nil)
 
-      assert permisos.can?(:manage, propio), "Debe poder administrar sus recursos"
+      assert permisos.can?(:manage, propio), "Deben poder administrar sus recursos"
       assert permisos.cannot?(:manage, ajeno), "No deben poder administrar otros"
       assert permisos.cannot?(:manage, huerfano), "No deben poder administrar otros"
     end
@@ -72,9 +72,20 @@ class AbilityTest < ActiveSupport::TestCase
       "Puede administrar un perfil del que no es miembro"
   end
 
+  test "los miembros de algo pueden autocompletar tags" do
+    miembro = create(:usuario)
+    perfil = create(:perfil)
+    miembro.grant 'Miembro', perfil
+    permisos = Ability.new miembro
+
+    assert permisos.can?(:autocomplete_reconocedores_name, Perfil),
+      "Debe poder autocompletar los reconocedores si es miembro de algún perfil"
+    assert permisos.can?(:autocomplete_etiquetas_name, Perfil),
+      "Debe poder autocompletar las etiquetas si es miembro de algún perfil"
+  end
+
   test "los invitados no pueden crear o modificar recursos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+    permisos = Ability.new
 
     permisos.recursos.each do |recurso|
       [:create, :update, :destroy].each do |accionar|
@@ -83,19 +94,17 @@ class AbilityTest < ActiveSupport::TestCase
     end
   end
 
-  test "los invitados sólo pueden leer recursos que son públicos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+  test "los invitados sólo pueden leer perfiles que son públicos" do
+    permisos = Ability.new
     perfil_privado = build_stubbed(:perfil)
     perfil_publico = build_stubbed(:perfil, publico: true)
 
-    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver recursos privados"
-    assert permisos.can?(:read, perfil_publico), "Debe poder ver recursos públicos"
+    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver perfiles privados"
+    assert permisos.can?(:read, perfil_publico), "Debe poder ver perfiles públicos"
   end
 
   test "los invitados pueden leer recursos básicos" do
-    invitado = create(:usuario)
-    permisos = Ability.new invitado
+    permisos = Ability.new
 
     permisos.recursos.each do |recurso|
       assert permisos.can?(:read, recurso), "Debe poder leer recursos básicos"

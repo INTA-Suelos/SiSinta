@@ -1,33 +1,31 @@
 # encoding: utf-8
 class SeriesController < AutorizadoController
+  autocomplete :serie, :nombre, full: true, extra_data: [:simbolo]
+  autocomplete :serie, :simbolo, full: true, extra_data: [:nombre]
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:autocomplete_serie_nombre,
+                                       :autocomplete_serie_simbolo]
+
+  with_options only: [:index, :show, :autocomplete_serie_nombre,
+                      :autocomplete_serie_simbolo] do |o|
+    o.skip_before_filter :authenticate_usuario!
+    o.skip_authorization_check
+  end
+
+  # Las acciones +index+ y +show+ funcionan anónimamente, pero igual uso a
+  # CanCan para que cargue el recurso
+  skip_authorize_resource                     only: [:index, :show]
 
   before_filter :preparar, only: [:index]
   before_filter :ordenar, only: [:index]
 
   before_filter :asociar_perfiles, only: [:update]
 
-  # La acción +index+ funciona anónimamente, pero igual uso a CanCan para que
-  # cargue el recurso
-  skip_before_filter :authenticate_usuario!,  only: [:index, :show]
-  skip_authorize_resource                     only: [:index, :show]
-  skip_authorization_check                    only: [:index, :show]
-
   def index
     respond_with @series = PaginadorDecorator.decorate(apply_scopes(@series))
-  end
-
-  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que consultar, controlando el input del usuario.
-  def autocompletar
-    case params[:atributo]
-      when 'nombre'       then super(Serie, :nombre)
-      when 'simbolo'      then super(Serie, :simbolo)
-      when 'descripcion'  then super(Serie, :descripcion)
-    end
   end
 
   def show

@@ -58,30 +58,30 @@ class SeriesControllerTest < ActionController::TestCase
   end
 
   test "devuelve nombre para términos parciales" do
-    loguearse_como 'Autorizado'
     termino = create(:serie).nombre
 
-    get :autocompletar, atributo: 'nombre', term: termino
+    get :autocomplete_serie_nombre, term: termino
     assert_response :success
     assert_equal  Serie.where("nombre like '%#{termino}%'").size,
                   json.size
 
     assert json.first.include?('id'), "debe devolver el id"
     assert json.first.include?('label'), "debe devolver el label"
-    assert json.first.include?('nombre'), "debe devolver el nombre"
+    assert json.first.include?('value'), "debe devolver el nombre"
+    assert json.first.include?('simbolo'), "debe incluir el simbolo"
   end
 
   test "devuelve símbolo para términos parciales" do
-    loguearse_como 'Autorizado'
     termino = create(:serie).simbolo
 
-    get :autocompletar, atributo: 'simbolo', term: termino
+    get :autocomplete_serie_simbolo, term: termino
     assert_response :success
     assert_equal  Serie.where("simbolo like '%#{termino}%'").size,
                   json.size
 
     assert json.first.include?('id'), "debe devolver el id"
     assert json.first.include?('label'), "debe devolver el label"
-    assert json.first.include?('simbolo'), "debe devolver el simbolo"
+    assert json.first.include?('value'), "debe devolver el simbolo"
+    assert json.first.include?('nombre'), "debe incluir el nombre"
   end
 end

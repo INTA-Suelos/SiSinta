@@ -59,4 +59,13 @@ class EquiposControllerTest < ActionController::TestCase
 
     assert_redirected_to equipos_path
   end
+
+  test "editar incluye tags para autocompletar" do
+    usuario = loguearse_como 'Autorizado'
+    get :edit, id: create(:equipo, usuario: usuario)
+
+    assert_select '#equipo_nuevo_miembro_id'
+    assert_select '#equipo_nuevo_miembro_email'
+    assert_select '#equipo_nuevo_miembro_nombre'
+  end
 end
