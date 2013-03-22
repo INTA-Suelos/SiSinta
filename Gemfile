@@ -54,7 +54,6 @@ end
 
 ## Server
 gem 'thin'
-gem 'SyslogLogger', require: 'syslog/logger'
 gem 'rails3_libmemcached_store'
 
 ## Desarrollo
