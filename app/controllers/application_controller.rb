@@ -36,26 +36,6 @@ class ApplicationController < ActionController::Base
     render json: lista_para_autocompletar(modelo, atributo)
   end
 
-  # Transforma la colección +objetos+ en una lista de 'features' de GeoJSON.
-  #
-  # * *Args*    :
-  #   - +objetos+ -> La colección de objetos a transformar
-  #   - +metodo_geom+ -> El método que invocar en cada miembro de +objetos+ que
-  #   determinará su geometría.
-  # * *Returns* :
-  #   - La lista de objetos en formato de features de la especificación GeoJSON.
-  #
-  def como_geojson(objetos, metodo_geom)
-    factory = RGeo::GeoJSON::EntityFactory.instance
-
-    features = []
-    objetos.each do |o|
-      features << factory.feature(o.send(metodo_geom), nil, o.propiedades_publicas)
-    end
-
-    RGeo::GeoJSON.encode factory.feature_collection(features)
-  end
-
   # Métodos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 

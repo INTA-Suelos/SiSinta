@@ -79,23 +79,11 @@ class Perfil < ActiveRecord::Base
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
+  delegate :coordenadas, to: :ubicacion, allow_nil: true
 
   # Scope con los que tienen definidas las coordenadas
   def self.geolocalizados
     joins(:ubicacion).where('ubicaciones.coordenadas is not ?', nil)
-  end
-
-  # Prepara un hash para que RGeo genere geojson
-  def propiedades_publicas
-    [:id, :numero, :nombre, :fecha].inject({}) do |hash, atributo|
-      hash[atributo] = self.try(atributo)
-      hash
-    end
-  end
-
-  # Devuelve el objeto con la geometría para RGeo
-  def geometria
-    self.ubicacion.try(:coordenadas)
   end
 
   private

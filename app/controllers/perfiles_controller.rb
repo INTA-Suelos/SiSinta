@@ -2,33 +2,35 @@
 class PerfilesController < AutorizadoController
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
+  has_scope :geolocalizados, type: :boolean, default: true, if: :geojson?
 
   load_and_authorize_resource
 
-  respond_to :json, only: :geo
+  respond_to :geojson, only: :index
 
-  # Las acciones +index+ y +geo+ funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
-  skip_load_and_authorize_resource            only: [:index, :geo]
-  skip_authorization_check                    only: [:index, :geo]
+  # +index+ funciona anónimamente
+  skip_before_filter :authenticate_usuario!,  only: :index
+  skip_load_and_authorize_resource            only: :index
+  skip_authorization_check                    only: :index
 
-  before_filter :preparar,  only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
+  before_filter :preparar,  only: [ :index, :seleccionar, :exportar,
+                                    :procesar_csv ]
+  before_filter :ordenar,   only: [ :index, :seleccionar, :exportar,
+                                    :procesar_csv ]
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
 
   def index
-    @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
+    @perfiles = apply_scopes(@perfiles)
 
-    respond_with @perfiles
-  end
-
-  # GET /perfiles/geo.json
-  def geo
-    @perfiles = como_geojson(@perfiles.geolocalizados, :geometria)
-    respond_with @perfiles
+    respond_with @perfiles do |format|
+      format.html do
+        @perfiles = PaginadorDecorator.decorate @perfiles
+      end
+      format.geojson do
+        render json: @perfiles, serializer: GeojsonCollectionSerializer
+      end
+    end
   end
 
   # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
@@ -214,5 +216,9 @@ class PerfilesController < AutorizadoController
 
     def checks_csv_marcados=(checks)
       current_usuario.update_attribute :checks_csv_perfiles, checks
+    end
+
+    def geojson?
+      params[:format] == 'geojson'
     end
 end

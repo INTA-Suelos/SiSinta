@@ -25,7 +25,6 @@ SiSINTA::Application.routes.draw do
       r.resources :analiticos, only: :index
 
       collection do
-        get   'geo'
         get   'exportar'
         post  'procesar_csv'
         put   'almacenar'
