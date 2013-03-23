@@ -27,9 +27,7 @@ class PerfilesController < AutorizadoController
 
   # GET /perfiles/geo.json
   def geo
-    @perfiles = como_geojson(
-      @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
-    )
+    @perfiles = como_geojson(@perfiles.geolocalizados, :geometria)
     respond_with @perfiles
   end
 
