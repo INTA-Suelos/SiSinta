@@ -26,9 +26,4 @@ class Humedad < ActiveRecord::Base
     end
     return cadena
   end
-
-  def serializable_hash(opciones = { })
-    opciones[:include] = { :subclases }
-    super(opciones)
-  end
 end

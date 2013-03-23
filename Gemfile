@@ -28,6 +28,7 @@ gem 'active_hash'
 gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
+gem 'active_model_serializers'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
