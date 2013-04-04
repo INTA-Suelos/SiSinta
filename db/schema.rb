@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314002003) do
+ActiveRecord::Schema.define(:version => 20130404053413) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -197,7 +197,6 @@ ActiveRecord::Schema.define(:version => 20130314002003) do
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.string   "material_original"
-    t.string   "esquema"
     t.integer  "fase_id"
     t.boolean  "modal",                 :default => false
     t.date     "fecha",                                    :null => false
@@ -274,10 +273,10 @@ ActiveRecord::Schema.define(:version => 20130314002003) do
     t.integer  "perfil_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
+    t.spatial  "coordenadas", :limit => {:srid=>4326, :type=>"point"}
   end
 
   add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
