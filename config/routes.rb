@@ -88,7 +88,7 @@ SiSINTA::Application.routes.draw do
       end
     end
 
-    r.resource :busqueda
+    r.resources :busquedas
 
   end
 end
