@@ -18,6 +18,7 @@ class BusquedasController < ApplicationController
 
   def new
     @perfiles = Perfil.search
+    @perfiles.build_grouping
     respond_with(@busqueda)
   end
 

@@ -1,0 +1,42 @@
+@import "constantes";
+
+form#perfil_search {
+
+  fieldset.consulta {
+
+    .fields {
+
+      &.grupo {
+        background-color: $celeste;
+      }
+
+      &.condition {
+        background-color: $celeste_oscuro;
+      }
+    }
+
+    .fields {
+      &.orden, &.value {
+        clear: both;
+      }
+
+      &.orden {
+        float: left;
+      }
+
+      &.value {
+        float: right;
+      }
+    }
+
+    button {
+      &.add_fields {
+        float: left;
+        clear: both;
+      }
+    }
+    select, input {
+      width: auto;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+= setup_search_form f
+
 = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
 
   = fields_for @busqueda do |fb|
@@ -8,12 +10,16 @@
       .span-2= fb.label :nombre
       .span-19.last= fb.text_field :nombre, autofocus: true, required: true
 
-  = field_set_tag 'Parámetros', class: 'celeste plegable span-23 last' do
+  = field_set_tag 'Consulta', class: 'consulta celeste span-23 last' do
 
-    .span-4=  f.label :serie_nombre_cont, "Nombre"
-    .span-16.last= f.text_field :serie_nombre_cont
+    = field_set_tag 'Ordenar por', class: 'celeste_oscuro span-22 last', id: 'orden' do
+      = f.sort_fields do |s|
+        = render 'sort_fields', f: s
+      = button_to_add_fields "Agregar", f, :sort
 
-    .span-4=  f.label :numero_cont, "Número"
-    .span-16.last= f.text_field :numero_cont
+    = field_set_tag 'Grupos de condiciones', class: 'celeste_oscuro span-22 last' do
+      = f.grouping_fields do |g|
+        = render 'grouping_fields', f: g
+      = button_to_add_fields "Agregar grupo", f, :grouping
 
 .acciones.span-4.last= f.submit
