@@ -1,41 +1,58 @@
 class BusquedasController < ApplicationController
   has_scope :search, as: :q, type: :hash, default: { }
 
+  load_and_authorize_resource
+
   def index
-    @busquedas = Busqueda.all
     respond_with(@busquedas)
   end
 
   def show
-    @busqueda = Busqueda.find(params[:id])
-    respond_with(@busqueda)
+    respond_to do |format|
+      format.html do
+        params[:q] = @busqueda.consulta
+        redirect_to seleccionar_perfiles_path(q: @busqueda.consulta)
+      end
+    end
   end
 
   def new
-    @perfiles = Perfil.ransack
-    @busqueda = Busqueda.new
+    @perfiles = Perfil.search
     respond_with(@busqueda)
   end
 
   def edit
-    @busqueda = Busqueda.find(params[:id])
+    @perfiles = Perfil.search(@busqueda.consulta)
   end
 
   def create
-    @busqueda = Busqueda.new(params[:busqueda])
-    @busqueda.save
-    respond_with(@busqueda)
+    @busqueda.consulta = params[:q]
+    @busqueda.usuario  = current_usuario
+
+    respond_with(@busqueda) do |format|
+      unless @busqueda.save
+        # vuelve a new (necesita el objeto de búsqueda de nuevo)
+        format.html do
+          @perfiles = Perfil.search params[:q]
+        end
+      end
+    end
   end
 
   def update
-    @busqueda = Busqueda.find(params[:id])
     @busqueda.update_attributes(params[:busqueda])
     respond_with(@busqueda)
   end
 
   def destroy
-    @busqueda = Busqueda.find(params[:id])
     @busqueda.destroy
     respond_with(@busqueda)
   end
+
+  private
+
+    # Para los mensajes del flash de responders
+    def interpolation_options
+      { el_la: 'la' }
+    end
 end
