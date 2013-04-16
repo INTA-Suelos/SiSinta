@@ -209,6 +209,9 @@ GEM
     select2-rails (3.3.1)
       sass-rails (>= 3.2)
       thor (~> 0.14)
+    sextant (0.2.3)
+      activesupport (>= 3.2)
+      rails (>= 3.2)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -287,6 +290,7 @@ DEPENDENCIES
   rolify
   sass-rails (~> 3.2.3)
   select2-rails
+  sextant
   therubyracer (= 0.10.1)
   thin
   tinymce-rails
