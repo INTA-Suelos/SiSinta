@@ -1,6 +1,6 @@
 #lista
   .botonera
-    - if can? :create, @serie
+    - if can? :create, Serie
       = link_to 'Nueva serie', new_serie_path
 
     #paginacion
@@ -12,7 +12,7 @@
       %tr
         %th= link_para_ordenar        :nombre,                'Nombre'
         %th= link_para_ordenar        :simbolo,               'Símbolo'
-        %th= link_para_ordenar        :descripcion,           'Descripcion'
+        %th= link_para_ordenar        :descripcion,           'Descripción'
         %th.numero= link_para_ordenar :cantidad_de_perfiles,  'Perfiles'
         %th.acciones
 
@@ -21,7 +21,7 @@
         %tr
           %td= serie.nombre
           %td= serie.simbolo
-          %td!= serie.descripcion.try(:truncate, 35)
+          %td= serie.descripcion.try(:truncate, 35)
           %td.numero= serie.perfiles.size
           %td.acciones
             = link_to 'Mostrar', serie
