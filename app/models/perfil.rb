@@ -31,7 +31,8 @@ class Perfil < ActiveRecord::Base
 
   before_validation :asociar_serie, :asociar_fase, :asociar_grupo
 
-  validate :fecha_no_es_del_futuro, :numero_es_unico_dentro_de_una_serie
+  validate :fecha_no_es_del_futuro
+  validates_uniqueness_of :numero, scope: :serie_id, message: :no_es_unico_en_la_serie
   validates_presence_of :fecha
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
@@ -100,18 +101,6 @@ class Perfil < ActiveRecord::Base
     def fecha_no_es_del_futuro
       if fecha? and fecha > Date.today
         errors.add :fecha, :es_del_futuro
-      end
-    end
-
-    # Comprueba que no hay otros perfiles en la serie con el mismo número
-    def numero_es_unico_dentro_de_una_serie
-      if self.serie
-        otros_perfiles = self.serie.perfiles.reject do |p|
-          p.id == self.id or p.numero.blank?
-        end
-        if otros_perfiles.collect(&:numero).include?(self.numero)
-          errors.add :numero, :no_es_unico_en_la_serie 
-        end
       end
     end
 
