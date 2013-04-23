@@ -1,13 +1,11 @@
 # encoding: utf-8
 class Capacidad < ActiveRecord::Base
-  extend ActiveHash::Associations::ActiveRecordExtensions
-
   attr_accessible :clase_id, :subclase_ids
 
   belongs_to :perfil, inverse_of: :capacidad
 
-  belongs_to_active_hash :clase,  inverse_of: :capacidades,
-                                  class_name: 'ClaseDeCapacidad'
+  has_lookup :clase, inverse_of: :capacidades,
+              class_name: 'ClaseDeCapacidad'
 
   # Pseudoasociación HABTM con SubclaseDeCapacidad. Permite modificarla
   # mediante   # +subclase_ids+ o mediante +subclases+
