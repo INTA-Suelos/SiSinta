@@ -2,7 +2,6 @@
 require './test/test_helper'
 
 class ExtensionModelosTest < ActiveSupport::TestCase
-
   test "debería buscar y cargar las asociaciones" do
     existente = create(:fase).nombre
     assert_no_difference ('Fase.count') do
@@ -23,12 +22,4 @@ class ExtensionModelosTest < ActiveSupport::TestCase
     assert !sin_asociacion.include?(:ubicacion), "no filtra una asociación"
     assert !(sin_ambos.include?(:numero) and sin_ambos.include?(:ubicacion)), "no filtra varias"
   end
-
-  test "debería nulificar la asociación" do
-    p = build_stubbed(:perfil, fase: build_stubbed(:fase))
-    assert_not_nil p.fase
-    p.anular = 'fase'
-    assert_nil p.fase
-  end
-
 end
