@@ -1,8 +1,5 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
-  extend ActiveHash::Associations::ActiveRecordExtensions
-
   attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
                   :consistencia, :estructura, :tipo, :profundidad_inferior,
                   :limite_attributes, :color_seco_attributes,
@@ -26,8 +23,7 @@ class Horizonte < ActiveRecord::Base
               inverse_of: :horizontes_en_seco, validate: false
   belongs_to :color_humedo, class_name: 'Color',
               inverse_of: :horizontes_en_humedo, validate: false
-  belongs_to_active_hash :textura,  inverse_of: :horizontes,
-                                    class_name: 'TexturaDeHorizonte'
+  has_lookup :textura, inverse_of: :horizontes, class_name: 'TexturaDeHorizonte'
 
   accepts_nested_attributes_for :analitico, :limite, :consistencia,
                                 :estructura, :textura,

@@ -1,0 +1,8 @@
+.botonera
+
+#busqueda
+  = search_form_for @perfiles, url: @busqueda, method: :put do |f|
+
+    = render partial: 'form', locals: { f: f }
+
+= volver_arriba

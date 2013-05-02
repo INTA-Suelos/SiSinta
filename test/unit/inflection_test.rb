@@ -36,6 +36,7 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'grado', 'grados'.singularize
     assert_equal 'forma', 'formas'.singularize
     assert_equal 'equipo', 'equipos'.singularize
+    assert_equal 'busqueda', 'busquedas'.singularize
   end
 
   test "debería singularizar palabras con adjetivo" do
@@ -102,6 +103,7 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'grados', 'grado'.pluralize
     assert_equal 'formas', 'forma'.pluralize
     assert_equal 'equipos', 'equipo'.pluralize
+    assert_equal 'busquedas', 'busqueda'.pluralize
   end
 
   test "debería pluralizar palabras con adjetivo" do

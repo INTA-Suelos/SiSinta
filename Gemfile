@@ -30,6 +30,7 @@ gem 'active_hash'
 gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
+gem 'active_model_serializers'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
@@ -68,6 +69,8 @@ group :development do
   gem 'bullet'
   gem 'capistrano'
   gem 'capistrano-rbenv'
+  # TODO remover en rails 4
+  gem 'sextant'
 end
 
 group :test do

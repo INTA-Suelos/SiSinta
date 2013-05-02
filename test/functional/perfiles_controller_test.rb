@@ -70,7 +70,7 @@ class PerfilesControllerTest < ActionController::TestCase
   test "accede a los datos en geoJSON sin loguearse" do
     assert_nil @controller.current_usuario
     @request.env["HTTP_REFERER"] = "/perfiles/"
-    get :geo, format: :json
+    get :index, format: 'geojson'
     assert_response :success
   end
 
@@ -135,15 +135,6 @@ class PerfilesControllerTest < ActionController::TestCase
       method: :post
     },{
       controller: 'perfiles', action: 'procesar_csv'
-    })
-  end
-
-  test "rutea a geo.json" do
-    assert_routing({
-      path: "/perfiles/geo.json",
-      method: :get
-    },{
-      controller: 'perfiles', action: 'geo', format: 'json'
     })
   end
 

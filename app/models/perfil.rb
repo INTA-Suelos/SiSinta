@@ -1,8 +1,5 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
-  # Nos da belongs_to_active_hash para las asociaciones con modelos estáticos
-  extend ActiveHash::Associations::ActiveRecordExtensions
-
   attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
                   :cobertura_vegetal, :posicion_id, :pendiente_id,
                   :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
@@ -47,20 +44,8 @@ class Perfil < ActiveRecord::Base
   has_one :erosion,       dependent: :destroy, inverse_of: :perfil
   has_one :pedregosidad,  dependent: :destroy, inverse_of: :perfil
 
-  # Tablas de lookup. Las asociaciones 1 a 1 pueden ser:
-  #   belongs_to => perfil tiene lookup_id
-  #   has_one => lookup tiene perfil_id
-  # Como los valores de estas tablas son un conjunto definido, se comparten
-  # entre todos los perfiles, aunque suene raro un belongs_to acá.
-  belongs_to_active_hash :escurrimiento
-  belongs_to_active_hash :pendiente
-  belongs_to_active_hash :permeabilidad
-  belongs_to_active_hash :relieve
-  belongs_to_active_hash :anegamiento
-  belongs_to_active_hash :posicion
-  belongs_to_active_hash :drenaje
-  belongs_to_active_hash :sal
-  belongs_to_active_hash :uso_de_la_tierra
+  has_lookups :escurrimiento, :pendiente, :permeabilidad, :relieve,
+              :anegamiento, :posicion, :drenaje, :sal, :uso_de_la_tierra
 
   has_many :analiticos, through: :horizontes, include: :horizonte,
     order: 'profundidad_muestra ASC, horizonte_id ASC'
@@ -80,19 +65,11 @@ class Perfil < ActiveRecord::Base
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
+  delegate :coordenadas, to: :ubicacion, allow_nil: true
 
-  # Prepara un hash para que RGeo genere geojson
-  def propiedades_publicas
-    [:id, :numero, :nombre, :fecha].inject({}) do |hash, atributo|
-      hash[atributo] = self.try(atributo)
-      hash
-    end
-  end
-
-  # Devuelve el objeto con la geometría para RGeo
-  #
-  def geometria
-    self.ubicacion.try(:coordenadas)
+  # Scope con los que tienen definidas las coordenadas
+  def self.geolocalizados
+    joins(:ubicacion).where('ubicaciones.coordenadas is not ?', nil)
   end
 
   private
