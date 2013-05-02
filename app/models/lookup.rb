@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Lookup < ActiveYaml::Base
   include ActiveHash::Associations
+  extend ActiveModel::Translation
 
   # Guardo en semillas todos los .yml con los datos de las clases que heredan de
   # Lookup. Cada una busca el plural de su nombre acá.
@@ -18,5 +19,10 @@ class Lookup < ActiveYaml::Base
     define_method asociacion.to_s.pluralize do
       clase.where(clase.arel_table["#{columna}_ids"].matches("%#{self.id}%"))
     end
+  end
+
+  # Así ransack sabe cómo "klasificarlos"
+  def self.klass
+    self
   end
 end
