@@ -167,7 +167,7 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "_form incluye tags para autocompletar" do
+  test "el formulario incluye tags para autocompletar" do
     loguearse_como 'Autorizado'
     get :new
 

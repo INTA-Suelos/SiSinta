@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class SesionTest < ActionDispatch::IntegrationTest
 
-  test "Inicia la sesión" do
+  test "inicia la sesión" do
     visit '/'
     click_link 'Entrar'
     assert_equal new_usuario_session_path, current_path
@@ -24,7 +24,7 @@ class SesionTest < ActionDispatch::IntegrationTest
             text: I18n.t('devise.sessions.signed_in')), "No se loguea"
   end
 
-  test "Termina la sesión" do
+  test "termina la sesión" do
     loguearse_como create(:usuario)
 
     click_link 'Salir'
