@@ -7,18 +7,18 @@ class PerfilesController < AutorizadoController
 
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
+  has_scope :geolocalizados, type: :boolean, default: true, if: :geojson?
 
-  load_and_authorize_resource except: [:index, :geo]
+  load_and_authorize_resource
 
-  respond_to :json, only: :geo
+  respond_to :geojson, only: :index
 
-  # Las acciones +index+ y +geo+ funcionan anónimamente
-  with_options only: [:index, :geo] do |o|
-    o.skip_before_filter :authenticate_usuario!
-    o.skip_authorization_check
-  end
+  # +index+ funciona anónimamente
+  skip_before_filter :authenticate_usuario!,  only: :index
+  skip_load_and_authorize_resource            only: :index
+  skip_authorization_check                    only: :index
 
-  with_options only: [:index, :geo, :seleccionar, :exportar, :procesar_csv] do |o|
+  with_options only: [:index, :seleccionar, :exportar, :procesar_csv] do |o|
     o.before_filter :preparar
     o.before_filter :ordenar
   end
@@ -27,18 +27,16 @@ class PerfilesController < AutorizadoController
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
 
   def index
-    @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
+    @perfiles = apply_scopes(@perfiles)
 
-    respond_with @perfiles
-  end
-
-  # GET /perfiles/geo.json
-  def geo
-    # TODO refactor con decoradores
-    @perfiles = como_geojson(
-      @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
-    )
-    respond_with @perfiles
+    respond_with @perfiles do |format|
+      format.html do
+        @perfiles = PaginadorDecorator.decorate @perfiles
+      end
+      format.geojson do
+        render json: @perfiles, serializer: GeojsonCollectionSerializer
+      end
+    end
   end
 
   def show
@@ -214,5 +212,9 @@ class PerfilesController < AutorizadoController
 
     def checks_csv_marcados=(checks)
       current_usuario.update_attribute :checks_csv_perfiles, checks
+    end
+
+    def geojson?
+      params[:format] == 'geojson'
     end
 end

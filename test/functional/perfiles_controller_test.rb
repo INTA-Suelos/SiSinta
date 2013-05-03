@@ -70,7 +70,7 @@ class PerfilesControllerTest < ActionController::TestCase
   test "accede a los datos en geoJSON sin loguearse" do
     assert_nil @controller.current_usuario
     @request.env["HTTP_REFERER"] = "/perfiles/"
-    get :geo, format: :json
+    get :index, format: 'geojson'
     assert_response :success
   end
 
@@ -138,15 +138,6 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a geo.json" do
-    assert_routing({
-      path: "/perfiles/geo.json",
-      method: :get
-    },{
-      controller: 'perfiles', action: 'geo', format: 'json'
-    })
-  end
-
   test "rutea a almacenar" do
     assert_routing({
       path: "/perfiles/almacenar",
@@ -176,7 +167,7 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "_form incluye tags para autocompletar" do
+  test "el formulario incluye tags para autocompletar" do
     loguearse_como 'Autorizado'
     get :new
 

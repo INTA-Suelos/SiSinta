@@ -46,19 +46,6 @@ class Ubicacion < ActiveRecord::Base
   #  "no implementado todavía"
   #end
 
-  # Sobreescribo el conversor default para que sea llamado por +to_json+ desde
-  # el controlador y devuelva geojson para las coordenadas.
-  #
-  def as_json(options={})
-    { :perfil_id => perfil_id,
-      :mosaico => mosaico,
-      :recorrido => recorrido,
-      :aerofoto => aerofoto,
-      :descripcion => descripcion,
-      :id => id,
-      :geojson => coordenadas_en_geojson }
-  end
-
   def punto
     "#{@x} #{@y}"
   end
@@ -70,10 +57,6 @@ class Ubicacion < ActiveRecord::Base
       @x = punto.x
       @y = punto.y
     end
-  end
-
-  def coordenadas_en_geojson
-    RGeo::GeoJSON.encode(coordenadas) if coordenadas?
   end
 
   def to_s

@@ -126,4 +126,15 @@ class PerfilTest < ActiveSupport::TestCase
     assert repetido.errors.messages[:numero].include?(
       I18n.t('activerecord.errors.models.perfil.attributes.numero.no_es_unico_en_la_serie'))
   end
+
+  test 'devuelve perfiles con coordenadas' do
+    con_todo = create :perfil, ubicacion: build(:ubicacion, x: 1, y: 1)
+    sin_coordenadas = create :perfil, ubicacion: build(:ubicacion)
+    sin_ubicacion = create :perfil
+
+    assert_equal 1, Perfil.geolocalizados.count,
+      'No debe devolver perfiles sin coordenadas'
+    assert_equal con_todo, Perfil.geolocalizados.first,
+      'Debe devolver perfiles con coodenadas cargadas'
+  end
 end

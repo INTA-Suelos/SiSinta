@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 ## DB
 gem 'pg'
@@ -30,6 +30,7 @@ gem 'active_hash'
 gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
+gem 'active_model_serializers'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
@@ -68,10 +69,14 @@ group :development do
   gem 'bullet'
   gem 'capistrano'
   gem 'capistrano-rbenv'
+  # TODO remover en rails 4
+  gem 'sextant'
 end
 
 group :test do
-  gem 'turn', require: false
+  gem 'turn'
   gem 'minitest'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
