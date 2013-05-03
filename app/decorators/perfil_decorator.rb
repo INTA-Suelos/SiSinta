@@ -10,7 +10,9 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :usuario
 
   def fecha
-    source.fecha.try :to_s, :dma
+    if source.fecha?
+      source.fecha.to_date.to_s :dma
+    end
   end
 
   def etiquetas

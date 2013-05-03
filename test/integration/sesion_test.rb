@@ -25,7 +25,7 @@ class SesionTest < ActionDispatch::IntegrationTest
   end
 
   test "termina la sesión" do
-    loguearse_como create(:usuario)
+    loguearse_como 'Invitado'
 
     click_link 'Salir'
 

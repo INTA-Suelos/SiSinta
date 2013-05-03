@@ -25,7 +25,7 @@
 - id:       7
   campo:    Perfil.fecha
   ayuda:    Fecha de toma de datos.
-  ejemplo:  'aaaa/mm/dd'
+  ejemplo:  'dd/mm/aaaa'
 - id:       8
   campo:    Perfil.numero
   ayuda:    Número/Nombre del perfil.

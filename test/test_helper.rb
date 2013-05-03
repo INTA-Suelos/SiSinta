@@ -46,12 +46,14 @@ class ActionDispatch::IntegrationTest
     Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
   end
 
-  def loguearse_como(usuario)
+  def loguearse_como(tipo_de_usuario)
+    @usuario = create :usuario, rol: tipo_de_usuario
     visit new_usuario_session_path
     within 'form' do
-      fill_in Usuario.human_attribute_name('email'),    with: usuario.email
-      fill_in Usuario.human_attribute_name('password'), with: usuario.password
+      fill_in Usuario.human_attribute_name('email'),    with: @usuario.email
+      fill_in Usuario.human_attribute_name('password'), with: @usuario.password
       click_button 'Entrar'
     end
+    return @usuario
   end
 end
