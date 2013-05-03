@@ -84,16 +84,6 @@ class PerfilesController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   def exportar
     @busqueda_perfil = Perfil.search(params[:q])
-    @atributos = Perfil.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
-        :reconocedores_taggings ]
-
-    @marcados = if self.checks_csv_marcados.any?
-      self.checks_csv_marcados.map(&:to_sym)
-    else
-      [ :id, :numero, :fecha, :serie ]
-    end
-
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
@@ -176,8 +166,9 @@ class PerfilesController < AutorizadoController
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      self.checks_csv_marcados = params[:atributos]
+      current_usuario.checks_csv_perfiles = params[:atributos]
 
+      # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
       remover = if params[:csv].present?
         params[:csv][:perfiles_attributes].each.collect do |p|
@@ -186,6 +177,7 @@ class PerfilesController < AutorizadoController
       end
       self.perfiles_seleccionados -= remover unless remover.nil?
 
+      # TODO refactorizar en service object
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
       when t('comunes.perfiles_asociados.submit')
@@ -204,14 +196,6 @@ class PerfilesController < AutorizadoController
 
     def perfiles_seleccionados=(perfiles)
       session[:perfiles_seleccionados] = perfiles
-    end
-
-    def checks_csv_marcados
-      Array.wrap current_usuario.checks_csv_perfiles
-    end
-
-    def checks_csv_marcados=(checks)
-      current_usuario.update_attribute :checks_csv_perfiles, checks
     end
 
     def geojson?
