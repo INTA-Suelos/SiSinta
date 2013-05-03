@@ -74,7 +74,9 @@ group :development do
 end
 
 group :test do
-  gem 'turn', require: false
+  gem 'turn'
   gem 'minitest'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
