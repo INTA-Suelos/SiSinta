@@ -47,11 +47,10 @@ class ActionDispatch::IntegrationTest
   end
 
   def loguearse_como(usuario)
-    click_link 'Entrar'
+    visit new_usuario_session_path
     within 'form' do
-      fill_in Usuario.human_attribute_name('email'),    with: u.email
-      fill_in Usuario.human_attribute_name('password'), with: u.password
-
+      fill_in Usuario.human_attribute_name('email'),    with: usuario.email
+      fill_in Usuario.human_attribute_name('password'), with: usuario.password
       click_button 'Entrar'
     end
   end
