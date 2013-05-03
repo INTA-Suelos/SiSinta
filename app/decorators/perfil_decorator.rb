@@ -8,6 +8,8 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :adjuntos, with: PaginadorDecorator
   decorates_association :analiticos
   decorates_association :usuario
+  decorates_association :humedad
+  decorates_association :capacidad
 
   def fecha
     if source.fecha?
