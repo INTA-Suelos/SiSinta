@@ -42,4 +42,22 @@ module PerfilesHelper
         nil
     end
   end
+
+  def atributos
+    @atributos ||= CSVSerializer.new(Perfil.new).encabezado
+  end
+
+  def marcados
+    @marcados ||= if self.checks_csv_marcados.any?
+      self.checks_csv_marcados
+    else
+      %w{ id numero fecha serie ubicacion }
+    end
+  end
+
+  protected
+
+    def checks_csv_marcados
+      Array.wrap current_usuario.checks_csv_perfiles
+    end
 end

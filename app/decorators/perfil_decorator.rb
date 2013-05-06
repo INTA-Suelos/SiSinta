@@ -8,6 +8,8 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :adjuntos, with: PaginadorDecorator
   decorates_association :analiticos
   decorates_association :usuario
+  decorates_association :humedad
+  decorates_association :capacidad
 
   def fecha
     if source.fecha?
@@ -46,6 +48,7 @@ class PerfilDecorator < ApplicationDecorator
       h.limite        || h.build_limite
       h.consistencia  || h.build_consistencia
       h.estructura    || h.build_estructura
+      h.analitico     || h.build_analitico
     end
     self
   end

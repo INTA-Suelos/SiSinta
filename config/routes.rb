@@ -26,7 +26,7 @@ SiSINTA::Application.routes.draw do
 
       collection do
         get   'exportar'
-        post  'procesar_csv'
+        post  'procesar'
         put   'almacenar'
         get   'seleccionar'
         get   'autocompletar_reconocedores' => 'perfiles#autocomplete_reconocedores_name'
@@ -40,13 +40,6 @@ SiSINTA::Application.routes.draw do
 
       r.resources :adjuntos do
         get 'descargar', on: :member
-      end
-    end
-
-    r.resources :horizontes, only: :index do
-      collection do
-        get   'exportar'
-        post  'procesar_csv'
       end
     end
 
