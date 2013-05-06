@@ -123,9 +123,8 @@ class PerfilesController < AutorizadoController
 
     # Prepara el scope para la lista de perfiles
     def preparar
-      # Selecciono sólo lo que necesito en el index
+      # Precargar las asociaciones que necesita el index
       @perfiles ||= Perfil.includes(:ubicacion, :serie)
-        .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
 
@@ -166,7 +165,7 @@ class PerfilesController < AutorizadoController
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      current_usuario.checks_csv_perfiles = params[:atributos]
+      current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
 
       # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
