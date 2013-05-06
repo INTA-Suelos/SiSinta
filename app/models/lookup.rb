@@ -1,14 +1,15 @@
 # encoding: utf-8
 class Lookup < ActiveYaml::Base
   include ActiveHash::Associations
+  include ActiveModel::Serializers::JSON
+  extend ActiveModel::Translation
 
   # Guardo en semillas todos los .yml con los datos de las clases que heredan de
   # Lookup. Cada una busca el plural de su nombre acá.
   set_root_path "db/semillas"
 
-  # TODO Decorator de lookup?
   def to_str
-    valor
+    self.valor
   end
   alias_method :to_str, :to_s
 
@@ -21,4 +22,8 @@ class Lookup < ActiveYaml::Base
     end
   end
 
+  # Así ransack sabe cómo "klasificarlos"
+  def self.klass
+    self
+  end
 end

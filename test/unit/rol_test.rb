@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class RolTest < ActiveSupport::TestCase
 
-  test "Agrega miembros a los perfiles" do
+  test "agrega miembros a los perfiles" do
     usuario = create(:usuario)
     perfil = create(:perfil)
     usuario.grant 'Miembro', perfil

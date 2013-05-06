@@ -1,0 +1,22 @@
+.botonera
+  - if can? :create, Busqueda
+    = link_to 'Nueva búsqueda', new_busqueda_path
+
+%table#busquedas
+  %thead
+    %tr
+      %th Nombre
+      %th.acciones
+
+  %tbody
+    - @busquedas.each do |busqueda|
+      %tr
+        %td= busqueda.nombre
+        %td.acciones
+          = link_to 'Resultados', busqueda
+          = '|'
+          = link_to 'Editar', edit_busqueda_path(busqueda)
+          = '|'
+          = link_to 'Eliminar', busqueda, confirm: t(:confirmar), method: :delete
+
+= volver_arriba

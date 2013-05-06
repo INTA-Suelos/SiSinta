@@ -126,4 +126,42 @@ class PerfilTest < ActiveSupport::TestCase
     assert repetido.errors.messages[:numero].include?(
       I18n.t('activerecord.errors.models.perfil.attributes.numero.no_es_unico_en_la_serie'))
   end
+
+  test 'devuelve perfiles con coordenadas' do
+    con_todo = create :perfil, ubicacion: build(:ubicacion, x: 1, y: 1)
+    sin_coordenadas = create :perfil, ubicacion: build(:ubicacion)
+    sin_ubicacion = create :perfil
+
+    assert_equal 1, Perfil.geolocalizados.count,
+      'No debe devolver perfiles sin coordenadas'
+    assert_equal con_todo, Perfil.geolocalizados.first,
+      'Debe devolver perfiles con coodenadas cargadas'
+  end
+
+  test 'el serializer funciona para los atributos' do
+    perfil = create(:perfil_completo)
+    hash = PerfilSerializer.new(perfil).serializable_hash
+
+    hash[:id].must_equal perfil.id
+    hash[:fecha].must_equal perfil.fecha
+    hash[:numero].must_equal perfil.numero
+    hash[:modal].must_equal perfil.modal
+    hash[:profundidad_napa].must_equal perfil.profundidad_napa
+    hash[:cobertura_vegetal].must_equal perfil.cobertura_vegetal
+    hash[:material_original].must_equal perfil.material_original
+    hash[:vegetacion_o_cultivos].must_equal perfil.vegetacion_o_cultivos
+    hash[:observaciones].must_equal perfil.observaciones
+
+    # Lookups
+    %i{ drenaje relieve posicion pendiente escurrimiento permeabilidad
+        anegamiento uso_de_la_tierra }.each do |lookup|
+      hash[lookup].must_equal LookupSerializer.new(perfil.send(lookup)).serializable_hash
+    end
+    hash[:sales].must_equal LookupSerializer.new(perfil.sal).serializable_hash
+
+    hash[:usuario].blank?.must_equal true
+    hash[:publico].blank?.must_equal true
+    hash[:created_at].blank?.must_equal true
+    hash[:updated_at].blank?.must_equal true
+  end
 end

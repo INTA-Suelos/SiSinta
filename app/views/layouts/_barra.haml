@@ -11,7 +11,7 @@
         Exportar
         %ul.submenu
           %li= link_to 'a CSV', exportar_perfiles_path
-          %li= link_to 'a GeoJSON', geo_perfiles_path(format: :json)
+          %li= link_to 'a GeoJSON', perfiles_path(format: :geojson)
       %li
         Subgrupos
         %ul.submenu
@@ -21,13 +21,6 @@
         %ul.submenu
           %li= link_to 'Ver', fases_path
 
-  %li
-    .plegable Horizontes
-    %ul.submenu
-      %li
-        Exportar
-        %ul.submenu
-          %li= link_to 'a CSV', exportar_horizontes_path
   %li
     .plegable Proyectos
     %ul.submenu

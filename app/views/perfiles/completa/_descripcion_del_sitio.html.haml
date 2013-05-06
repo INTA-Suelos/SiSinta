@@ -16,7 +16,7 @@
       = fu.object.ayuda(:aerofoto)
   .span-5.campo
     .span-2= f.label :fecha
-    .span-3.last= f.text_field :fecha, class: 'fecha',
+    .span-3.last= f.text_field :fecha, value: f.object.fecha, class: 'fecha',
       disabled: bloqueado, required: true, placeholder: f.object.pista(:fecha)
     = f.object.ayuda(:fecha)
   .span-4.last.campo
@@ -28,12 +28,14 @@
   .span-11.campo
     = f.fields_for :fase do |ff|
       .span-2= ff.label :nombre, 'Fase'
-      .span-9.last= ff.text_field :nombre, disabled: bloqueado
+      .span-9.last= ff.autocomplete_field :nombre,
+        autocompletar_nombre_fases_path, disabled: bloqueado
       = ayuda_para('Fase.nombre')
   .span-11.last.campo
     = f.fields_for :grupo do |fg|
       .span-2= fg.label :descripcion, 'Subgrupo'
-      .span-8.last= fg.text_field :descripcion, disabled: bloqueado
+      .span-8.last= fg.autocomplete_field :descripcion,
+        autocompletar_descripcion_grupos_path, disabled: bloqueado
       = ayuda_para('Grupo.descripcion')
 
   .span-4= label_tag nil, 'Clasificación utilitaria', class: 'subtitulo'

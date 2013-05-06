@@ -7,6 +7,7 @@ class Usuario < ActiveRecord::Base
   has_many :perfiles, inverse_of: :usuario
   has_many :proyectos, inverse_of: :usuario
   has_many :series, inverse_of: :usuario
+  has_many :busquedas, inverse_of: :usuario
   has_and_belongs_to_many :equipos
 
   before_create :asignar_valores_por_defecto

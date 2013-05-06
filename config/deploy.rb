@@ -31,12 +31,24 @@ set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
 set :bundle_flags, "--deployment --quiet --binstubs"
 
-namespace :deploy do
+set :backup_remoto, 'backups-yml'
+set :backup_local, 'tmp/backups'
+
+namespace :backup do
   desc "Genera un backup en .yml"
-  task :backup do
-    run "cd #{current_path}; #{rake} db:data:dump_dir; mv db/20* #{shared_path}/backups-yml" 
+  task :default do
+    run "cd #{current_path}; #{rake} db:data:dump_dir; mv db/20* #{shared_path}/#{backup_remoto}"
   end
 
+  desc "Copia los backups generados a localhost"
+  task :localmente, roles: :db do
+    find_servers_for_task(current_task).each do |server|
+      puts run_locally "rsync -av #{user}@#{server.host}:#{shared_path}/#{backup_remoto}/ #{backup_local}"
+    end
+  end
+end
+
+namespace :deploy do
   namespace :assets do
     desc "Construye los estilos nuevos de paperclip"
     task :refresh_styles, roles: :app do
@@ -79,5 +91,5 @@ end
 
 after   "deploy:setup",           "configs:directorios"
 after   "deploy:setup",           "configs:archivos"
-before  "deploy:finalize_update", "deploy:backup"
+before  "deploy:finalize_update", "backup"
 before  "deploy:finalize_update", "configs:links"

@@ -1,45 +1,47 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
+  autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+  autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
+    scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
+
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
+  has_scope :geolocalizados, type: :boolean, default: true, if: :geojson?
 
   load_and_authorize_resource
 
-  respond_to :json, only: :geo
+  respond_to :geojson, only: :index
+  respond_to :csv, only: [ :index, :procesar ]
 
-  # Las acciones +index+ y +geo+ funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [:index, :geo]
-  skip_load_and_authorize_resource            only: [:index, :geo]
-  skip_authorization_check                    only: [:index, :geo]
+  # +index+ funciona anónimamente
+  skip_before_filter :authenticate_usuario!,  only: :index
+  skip_load_and_authorize_resource            only: :index
+  skip_authorization_check                    only: :index
 
-  before_filter :preparar,  only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
-  before_filter :ordenar,   only: [:index, :geo, :seleccionar,
-                                   :exportar, :procesar_csv ]
-  before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
-  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
+  with_options only: [:index, :seleccionar, :exportar, :procesar] do |o|
+    o.before_filter :preparar
+    o.before_filter :ordenar
+  end
+
+  before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
+  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
 
   def index
-    @perfiles = PaginadorDecorator.decorate apply_scopes(@perfiles)
+    @perfiles = apply_scopes(@perfiles)
 
-    respond_with @perfiles
-  end
-
-  # GET /perfiles/geo.json
-  def geo
-    @perfiles = como_geojson(
-      @perfiles.select { |c| c.ubicacion.try(:coordenadas?) }, :geometria
-    )
-    respond_with @perfiles
-  end
-
-  # Extendemos +ApplicationController#autocompletar+ y definimos el modelo sobre
-  # el que consultar, controlando el input del usuario.
-  def autocompletar
-    case params[:atributo]
-      when 'numero'         then super(Perfil, :numero)
-      when 'etiquetas'      then super(Perfil.tags(on: :etiquetas), :name)
-      when 'reconocedores'  then super(Perfil.tags(on: :reconocedores), :name)
+    respond_with @perfiles do |format|
+      format.html do
+        @perfiles = PaginadorDecorator.decorate @perfiles
+      end
+      format.geojson do
+        render json: @perfiles, serializer: GeojsonCollectionSerializer
+      end
+      format.csv do
+        send_data CSVSerializer.new(@perfiles).as_csv(
+          headers: true, checks: current_usuario.checks_csv_perfiles
+        ), filename: archivo_csv
+      end
     end
   end
 
@@ -88,22 +90,19 @@ class PerfilesController < AutorizadoController
   # Preparar los atributos a exportar/importar en CSV
   def exportar
     @busqueda_perfil = Perfil.search(params[:q])
-    @atributos = Perfil.atributos_y_asociaciones :excepto =>
-      [ :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
-        :reconocedores_taggings ]
-
-    @marcados = if self.checks_csv_marcados.any?
-      self.checks_csv_marcados.map(&:to_sym)
-    else
-      [ :id, :numero, :fecha, :serie ]
-    end
-
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
-  def procesar_csv
+  def procesar
     self.perfiles_seleccionados = nil
-    super(@perfiles.decorate, 'perfiles')
+
+    respond_with @perfiles, location: nil do |format|
+      format.csv do
+        send_data CSVSerializer.new(@perfiles).as_csv(
+          headers: true, checks: current_usuario.checks_csv_perfiles
+        ), filename: archivo_csv
+      end
+    end
   end
 
   def seleccionar
@@ -137,9 +136,8 @@ class PerfilesController < AutorizadoController
 
     # Prepara el scope para la lista de perfiles
     def preparar
-      # Selecciono sólo lo que necesito en el index
+      # Precargar las asociaciones que necesita el index
       @perfiles ||= Perfil.includes(:ubicacion, :serie)
-        .select('fecha, modal, numero, perfiles.id, serie_id')
       @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
     end
 
@@ -175,13 +173,14 @@ class PerfilesController < AutorizadoController
     end
 
     def cargar_perfiles_seleccionados
-      @perfiles = @perfiles.where(id: perfiles_seleccionados)
+      @perfiles = @perfiles.where(id: perfiles_seleccionados).uniq
     end
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      self.checks_csv_marcados = params[:atributos]
+      current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
 
+      # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
       remover = if params[:csv].present?
         params[:csv][:perfiles_attributes].each.collect do |p|
@@ -190,15 +189,16 @@ class PerfilesController < AutorizadoController
       end
       self.perfiles_seleccionados -= remover unless remover.nil?
 
+      # TODO refactorizar en service object
       # Dirije la navegación según el botón que apretó el usuario
       case params[:commit]
       when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
       when t('perfiles.exportar.submit')
-        # Nada, continuamos a procesar_csv
+        # Nada, continuamos a procesar
       else
-        # Nada, continuamos a procesar_csv
+        # Nada, continuamos a procesar
       end
     end
 
@@ -210,11 +210,11 @@ class PerfilesController < AutorizadoController
       session[:perfiles_seleccionados] = perfiles
     end
 
-    def checks_csv_marcados
-      Array.wrap current_usuario.checks_csv_perfiles
+    def geojson?
+      params[:format] == 'geojson'
     end
 
-    def checks_csv_marcados=(checks)
-      current_usuario.update_attribute :checks_csv_perfiles, checks
+    def archivo_csv
+      "perfiles_#{Date.today.strftime('%Y-%m-%d')}.csv"
     end
 end
