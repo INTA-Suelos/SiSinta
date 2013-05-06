@@ -92,4 +92,5 @@ end
 after   "deploy:setup",           "configs:directorios"
 after   "deploy:setup",           "configs:archivos"
 before  "deploy:finalize_update", "backup"
+after   "backup",                 "backup:localmente"
 before  "deploy:finalize_update", "configs:links"

@@ -138,7 +138,7 @@ class PerfilesController < AutorizadoController
     def preparar
       # Precargar las asociaciones que necesita el index
       @perfiles ||= Perfil.includes(:ubicacion, :serie)
-      @perfiles = @perfiles.search(params[:q]).result if params[:q].present?
+      @perfiles = @perfiles.search(params[:q]).result.uniq if params[:q].present?
     end
 
     # Ordena los resultados según las columnas de la lista. Si son columnas de
