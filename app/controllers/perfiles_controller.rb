@@ -12,20 +12,20 @@ class PerfilesController < AutorizadoController
   load_and_authorize_resource
 
   respond_to :geojson, only: :index
-  respond_to :csv, only: [ :index, :procesar_csv ]
+  respond_to :csv, only: [ :index, :procesar ]
 
   # +index+ funciona anónimamente
   skip_before_filter :authenticate_usuario!,  only: :index
   skip_load_and_authorize_resource            only: :index
   skip_authorization_check                    only: :index
 
-  with_options only: [:index, :seleccionar, :exportar, :procesar_csv] do |o|
+  with_options only: [:index, :seleccionar, :exportar, :procesar] do |o|
     o.before_filter :preparar
     o.before_filter :ordenar
   end
 
-  before_filter :buscar_perfiles_o_exportar,    only: [:procesar_csv]
-  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar_csv]
+  before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
+  before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
 
   def index
     @perfiles = apply_scopes(@perfiles)
@@ -93,7 +93,7 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
-  def procesar_csv
+  def procesar
     self.perfiles_seleccionados = nil
 
     respond_with @perfiles, location: nil do |format|
@@ -196,9 +196,9 @@ class PerfilesController < AutorizadoController
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
       when t('perfiles.exportar.submit')
-        # Nada, continuamos a procesar_csv
+        # Nada, continuamos a procesar
       else
-        # Nada, continuamos a procesar_csv
+        # Nada, continuamos a procesar
       end
     end
 

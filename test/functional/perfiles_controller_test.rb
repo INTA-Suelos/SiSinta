@@ -129,12 +129,12 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a procesar_csv" do
+  test "rutea a procesar" do
     assert_routing({
-      path: "/perfiles/procesar_csv",
+      path: "/perfiles/procesar",
       method: :post
     },{
-      controller: 'perfiles', action: 'procesar_csv'
+      controller: 'perfiles', action: 'procesar'
     })
   end
 

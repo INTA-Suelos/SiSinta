@@ -41,29 +41,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    # Devuelve un csv en base a los atributos del modelo
-    #
-    # * *Args*    :
-    #   - +coleccion+ -> coleccion a convertir en CSV
-    #   - +nombre+ -> prefijo para el nombre del archivo +.csv+
-    def procesar_csv(coleccion = [], prefijo = 'csv')
-      @archivo = "#{prefijo}_#{Date.today.strftime('%Y-%m-%d')}.csv"
-
-      @encabezado = true if params[:incluir_encabezado]
-
-      @respuesta = CSV.generate(:headers => @encabezado) do |csv|
-        @atributos = params[:atributos].try :sort
-
-        csv << @atributos if @encabezado
-
-        coleccion.each do |miembro|
-          csv << miembro.to_array(@atributos)
-        end
-      end
-
-      send_data @respuesta, :filename => @archivo
-    end
-
     def direccion_de_ordenamiento
       %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
     end
