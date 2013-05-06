@@ -1,3 +1,3 @@
 class SerieSerializer < ActiveModel::Serializer
-  attributes :id, :nombre, :simbolo, :descripcion
+  attributes :nombre, :simbolo, :descripcion
 end

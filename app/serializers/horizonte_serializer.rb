@@ -4,7 +4,8 @@ class HorizonteSerializer < ActiveModel::Serializer
               :moteados, :humedad, :raices, :formaciones_especiales
 
   has_one :analitico
-  has_one :limite
+  has_one :limite, serializer: LimiteDeHorizonteSerializer
   has_one :consistencia
   has_one :estructura
+  has_one :textura, serializer: LookupSerializer
 end

@@ -26,9 +26,4 @@ class PerfilSerializer < ActiveModel::Serializer
     l.has_one :drenaje
     l.has_one :posicion
   end
-
-  def to_csv(columnas)
-    hash = HashWithIndifferentAccess.new(self.serializable_hash)
-    hash.sort.select {|i| columnas.include? i.first}.flatten_tree.values
-  end
 end
