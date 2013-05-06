@@ -48,6 +48,7 @@ class PerfilDecorator < ApplicationDecorator
       h.limite        || h.build_limite
       h.consistencia  || h.build_consistencia
       h.estructura    || h.build_estructura
+      h.analitico     || h.build_analitico
     end
     self
   end

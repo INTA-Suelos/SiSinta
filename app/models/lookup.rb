@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Lookup < ActiveYaml::Base
   include ActiveHash::Associations
+  include ActiveModel::Serializers::JSON
   extend ActiveModel::Translation
 
   # Guardo en semillas todos los .yml con los datos de las clases que heredan de

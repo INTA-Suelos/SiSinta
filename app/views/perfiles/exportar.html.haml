@@ -1,4 +1,4 @@
-= form_tag 'procesar_csv', class: 'span-24 last', id: 'csv'
+= form_tag procesar_csv_perfiles_path(format: :csv), class: 'span-24 last', id: 'csv'
 
 = field_set_tag "Exportar a CSV", class: 'celeste_oscuro span-23 last' do
 
@@ -21,7 +21,7 @@
     -# TODO usar fields_for?
     #perfiles.checks.span-22.last
       - atributos.each do |a|
-        .span-3.campo{class: cycle('celeste_oscuro', 'celeste')}
+        .span-7.campo{class: cycle('celeste_oscuro', 'celeste')}
           = label_tag do
             = check_box_tag("atributos[]", a, marcados.include?(a)) + a.to_s.humanize
 

@@ -12,6 +12,7 @@ class PerfilesController < AutorizadoController
   load_and_authorize_resource
 
   respond_to :geojson, only: :index
+  respond_to :csv, only: [ :index, :procesar_csv ]
 
   # +index+ funciona anónimamente
   skip_before_filter :authenticate_usuario!,  only: :index
@@ -35,6 +36,11 @@ class PerfilesController < AutorizadoController
       end
       format.geojson do
         render json: @perfiles, serializer: GeojsonCollectionSerializer
+      end
+      format.csv do
+        send_data CSVSerializer.new(@perfiles).as_csv(
+          headers: true, checks: current_usuario.checks_csv_perfiles
+        ), filename: archivo_csv
       end
     end
   end
@@ -89,7 +95,14 @@ class PerfilesController < AutorizadoController
 
   def procesar_csv
     self.perfiles_seleccionados = nil
-    super(@perfiles.decorate, 'perfiles')
+
+    respond_with @perfiles, location: nil do |format|
+      format.csv do
+        send_data CSVSerializer.new(@perfiles).as_csv(
+          headers: true, checks: current_usuario.checks_csv_perfiles
+        ), filename: archivo_csv
+      end
+    end
   end
 
   def seleccionar
@@ -160,7 +173,7 @@ class PerfilesController < AutorizadoController
     end
 
     def cargar_perfiles_seleccionados
-      @perfiles = @perfiles.where(id: perfiles_seleccionados)
+      @perfiles = @perfiles.where(id: perfiles_seleccionados).uniq
     end
 
     def buscar_perfiles_o_exportar
@@ -199,5 +212,9 @@ class PerfilesController < AutorizadoController
 
     def geojson?
       params[:format] == 'geojson'
+    end
+
+    def archivo_csv
+      "perfiles_#{Date.today.strftime('%Y-%m-%d')}.csv"
     end
 end

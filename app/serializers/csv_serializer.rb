@@ -1,18 +1,25 @@
+# encoding: utf-8
 class CSVSerializer < ActiveModel::ArraySerializer
   def as_csv(*args)
     o = args.extract_options!
 
     CSV.generate(headers: o[:headers]) do |csv|
       csv << encabezado(o[:checks]) if csv.headers
-      object.each do |recurso|
-        csv << recurso.active_model_serializer.new(recurso).to_csv(o[:checks])
+      object.each do |perfil|
+        perfil.horizontes.each do |horizonte|
+          csv << CSVHorizonteSerializer.new(horizonte).to_csv(o[:checks])
+        end
       end
     end
   end
 
-  def encabezado(columnas)
-    hash = HashWithIndifferentAccess.new(stub.serializable_hash)
-    hash.sort.select {|i| columnas.include? i.first}.flatten_tree.keys
+  def encabezado(columnas = nil)
+    lista = HashWithIndifferentAccess.new(stub.serializable_hash).sort.flatten_tree
+    if columnas.present?
+      lista.select {|i| columnas.include? i}
+    else
+      lista
+    end.keys
   end
 
   private
@@ -26,8 +33,9 @@ class CSVSerializer < ActiveModel::ArraySerializer
         object
       end.class.new.decorate
 
-      # TODO desacoplar de Perfil
+      # TODO desacoplar
       s.horizontes.build
-      s.active_model_serializer.new(s.preparar)
+      s.preparar
+      CSVHorizonteSerializer.new(s.horizontes.first)
     end
 end

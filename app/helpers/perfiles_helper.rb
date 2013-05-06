@@ -44,16 +44,14 @@ module PerfilesHelper
   end
 
   def atributos
-    @atributos ||= Perfil.atributos_y_asociaciones(excepto: [
-      :created_at, :updated_at, :adjuntos, :horizontes, :etiquetas_taggings,
-      :reconocedores_taggings, :taggings, :usuario, :roles ])
+    @atributos ||= CSVSerializer.new(Perfil.new).encabezado
   end
 
   def marcados
-    @marcados = if self.checks_csv_marcados.any?
-      self.checks_csv_marcados.map(&:to_sym)
+    @marcados ||= if self.checks_csv_marcados.any?
+      self.checks_csv_marcados
     else
-      [ :id, :numero, :fecha, :serie, :ubicacion ]
+      %w{ id numero fecha serie ubicacion }
     end
   end
 
