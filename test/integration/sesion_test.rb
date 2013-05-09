@@ -21,7 +21,7 @@ class SesionTest < ActionDispatch::IntegrationTest
 
     assert_equal root_path, current_path
     assert page.has_css?('#flash_notice.mensaje',
-            text: I18n.t('devise.sessions.signed_in')), "No se loguea"
+            text: I18n.t('devise.sessions.signed_in')), "Debe poder loguearse"
   end
 
   test "termina la sesión" do
@@ -31,6 +31,6 @@ class SesionTest < ActionDispatch::IntegrationTest
 
     assert_equal root_path, current_path
     assert page.has_css?('#flash_notice.mensaje',
-            text: I18n.t('devise.sessions.signed_out')), "No cierra sesión"
+            text: I18n.t('devise.sessions.signed_out')), "Debe poder cerrar su sesión"
   end
 end
