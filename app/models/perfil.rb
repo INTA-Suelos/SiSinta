@@ -53,7 +53,7 @@ class Perfil < ActiveRecord::Base
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles
   belongs_to :grupo,    inverse_of: :perfiles
-  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles
+  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles, validate: false
 
   has_and_belongs_to_many :proyectos
 
