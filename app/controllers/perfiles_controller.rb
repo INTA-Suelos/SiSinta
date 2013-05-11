@@ -5,8 +5,8 @@ class PerfilesController < AutorizadoController
   autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
 
-  has_scope :pagina, default: 1
-  has_scope :per, as: :filas
+  has_scope :pagina, default: 1, unless: :geojson?
+  has_scope :per, as: :filas, unless: :geojson?
   has_scope :geolocalizados, type: :boolean, default: true, if: :geojson?
 
   load_and_authorize_resource
