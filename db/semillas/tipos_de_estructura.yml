@@ -31,10 +31,10 @@
 - id:     14
   valor:  columnar
 - id:     15
-  valor:  laminar
-- id:     16
   valor:  agregados laminares o platiformes
-- id:     17
+- id:     16
   valor:  masiva
-- id:     18
+- id:     17
   valor:  grano suelto
+- id:     18
+  valor:  laminar
