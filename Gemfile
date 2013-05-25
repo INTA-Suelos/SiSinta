@@ -77,6 +77,8 @@ group :test do
   gem 'turn'
   gem 'minitest'
   gem 'factory_girl_rails'
-  gem 'capybara'
+  gem 'capybara', '~> 2.0.3'
+  gem 'capybara-webkit'
+  gem 'capybara_minitest_spec'
   gem 'database_cleaner'
 end

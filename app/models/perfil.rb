@@ -12,7 +12,7 @@ class Perfil < ActiveRecord::Base
                   :reconocedores, :grupo, :serie_attributes, :anular,
                   :horizontes_attributes, :analiticos_attributes
 
-  normalize_attributes :observaciones
+  normalize_attributes :observaciones, :numero
 
   attr_taggable :etiquetas
   attr_taggable :reconocedores
@@ -29,7 +29,8 @@ class Perfil < ActiveRecord::Base
   before_validation :asociar_serie, :asociar_fase, :asociar_grupo
 
   validate :fecha_no_es_del_futuro
-  validates_uniqueness_of :numero, scope: :serie_id, message: :no_es_unico_en_la_serie
+  validates_uniqueness_of :numero, scope: :serie_id, message: :no_es_unico_en_la_serie,
+                          allow_nil: true, allow_blank: true
   validates_presence_of :fecha
   validates_numericality_of :cobertura_vegetal,
                             greater_than_or_equal_to: 0, less_than: 101,
@@ -53,7 +54,7 @@ class Perfil < ActiveRecord::Base
   belongs_to :usuario,  inverse_of: :perfiles
   belongs_to :fase,     inverse_of: :perfiles
   belongs_to :grupo,    inverse_of: :perfiles
-  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles, validate: false
+  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles
 
   has_and_belongs_to_many :proyectos
 

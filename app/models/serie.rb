@@ -11,6 +11,6 @@ class Serie < ActiveRecord::Base
 
   accepts_nested_attributes_for :perfiles
 
-  validates_uniqueness_of :nombre, :simbolo, allow_blank: true
+  validates_uniqueness_of :nombre, :simbolo, allow_blank: true, allow_nil: true
   validates_presence_of   :nombre
 end
