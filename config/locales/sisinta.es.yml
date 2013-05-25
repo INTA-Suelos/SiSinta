@@ -13,6 +13,8 @@ es:
     models:
       analitico: 'Datos analíticos'
     attributes:
+      serie:
+        simbolo: 'Símbolo'
       perfil:
         analiticos: 'Datos analíticos'
       analitico:

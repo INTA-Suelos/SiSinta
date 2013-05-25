@@ -56,4 +56,9 @@ class ActionDispatch::IntegrationTest
     end
     return @usuario
   end
+
+  # Datos requeridos para submitear un perfil
+  def completar_datos_de_perfil_requeridos
+    fill_in Perfil.human_attribute_name('fecha'),    with: '23/3/1987'
+  end
 end
