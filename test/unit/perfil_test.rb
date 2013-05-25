@@ -32,7 +32,7 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería crear una serie cuando no existe" do
+  test "crea una serie cuando no existe" do
     atributos_de_la_serie = attributes_for(:serie)
     assert_difference 'Serie.count', 1, "No crea la serie a partir del perfil" do
       create :perfil,
@@ -58,7 +58,7 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería asociar una serie si existe, sin editar el símbolo" do
+  test "asocia la serie si existe, sin cambiar el símbolo" do
     serie = create(:serie)
     assert_no_difference 'Serie.count', "Crea una serie nueva" do
       perfil = create(:perfil, serie_attributes: { nombre: serie.nombre, simbolo: 'no' })
@@ -67,7 +67,7 @@ class PerfilTest < ActiveSupport::TestCase
     assert_not_equal 'no', serie.reload.simbolo
   end
 
-  test "debería cargar el símbolo cuando la serie no lo tiene" do
+  test "carga el símbolo cuando la serie no tiene" do
     serie = create(:serie, simbolo: nil)
     assert_no_difference 'Serie.count', "Crea una serie nueva" do
       perfil = create :perfil,
