@@ -16,11 +16,7 @@ class UbicacionDecorator < ApplicationDecorator
   end
 
   def srid
-    begin
-      h.current_usuario.srid.to_i
-    rescue NoMethodError
-      4326
-    end
+    (h.current_usuario.try(:srid) || 4326).to_i
   end
 
   def redondear(numero)
