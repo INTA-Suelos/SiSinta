@@ -4,6 +4,7 @@ require 'capistrano-rbenv'
 load 'lib/recipes/backup'
 load 'lib/recipes/configs'
 load 'lib/recipes/precompilar_localmente'
+load 'lib/recipes/thin'
 
 set :application, 'SiSINTA'
 
@@ -47,8 +48,6 @@ namespace :deploy do
     end
   end
 end
-
-# TODO sudo /etc/init.d/thin restart
 
 after   'deploy:setup',           'configs:directorios'
 after   'deploy:setup',           'configs:archivos'
