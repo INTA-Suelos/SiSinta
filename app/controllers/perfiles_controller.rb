@@ -144,18 +144,16 @@ class PerfilesController < AutorizadoController
     # Ordena los resultados según las columnas de la lista. Si son columnas de
     # texto, las normaliza a lowercase.
     def ordenar
+      @perfiles = @perfiles.joins(:ubicacion, :serie)
       case @metodo = metodo_de_ordenamiento
-      when 'ubicacion'
-        @perfiles =
-          @perfiles.joins(:ubicacion)
-                    .select('perfiles.*, ubicaciones.descripcion')
-        @metodo = 'lower(ubicaciones.descripcion)'
-      when 'nombre', 'numero'
-        @metodo = "lower(#{@metodo})"
-      else
-        # A los date y boolean no se les aplica lower()
+        when 'ubicacion'
+          @metodo = 'lower(ubicaciones.descripcion)'
+        when 'nombre', 'numero'
+          @metodo = "lower(#{@metodo})"
+        else
+          # A los date y boolean no se les aplica lower()
       end
-      @perfiles = @perfiles.order("#{@metodo} #{direccion_de_ordenamiento}")
+      @perfiles = @perfiles.reorder("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
     # Determina si el usuario terminó de editar el perfil o va a seguir con los
