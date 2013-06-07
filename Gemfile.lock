@@ -239,9 +239,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
-    sextant (0.2.3)
-      activesupport (>= 3.2)
-      rails (>= 3.2)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -327,7 +324,6 @@ DEPENDENCIES
   rolify
   sass-rails (~> 3.2.3)
   select2-rails
-  sextant
   therubyracer
   thin
   tinymce-rails
