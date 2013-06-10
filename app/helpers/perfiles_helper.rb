@@ -55,6 +55,16 @@ module PerfilesHelper
     end
   end
 
+  # Define el método a usar por el formulario de selección de perfiles
+  def metodo_de_seleccion
+    @metodo_de_seleccion ||= (params[:metodo] || :put)
+  end
+
+  # Para que la vista averigue a dónde envía el formulario de selección
+  def siguiente_url
+    @continuar
+  end
+
   protected
 
     def checks_csv_marcados
