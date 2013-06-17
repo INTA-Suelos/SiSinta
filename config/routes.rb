@@ -28,7 +28,8 @@ SiSINTA::Application.routes.draw do
         get   'exportar'
         post  'procesar'
         put   'almacenar'
-        get   'seleccionar'
+        put   'derivar'
+        match 'seleccionar', via: [:get, :post]
         get   'autocompletar_reconocedores' => 'perfiles#autocomplete_reconocedores_name'
         get   'autocompletar_etiquetas'     => 'perfiles#autocomplete_etiquetas_name'
       end

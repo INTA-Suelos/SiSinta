@@ -8,7 +8,8 @@
 
     .span-23.campo
       .span-2= fb.label :nombre
-      .span-19.last= fb.text_field :nombre, autofocus: true, required: true
+      .span-17= fb.text_field :nombre, autofocus: true
+      .span-4.last (si querés guardarla)
 
   = field_set_tag 'Consulta', class: 'consulta celeste span-23 last' do
 
@@ -22,4 +23,4 @@
         = render 'grouping_fields', f: g
       = button_to_add_fields "Agregar grupo", f, :grouping
 
-.acciones.span-4.last= f.submit
+  .acciones.span-4.last= f.submit

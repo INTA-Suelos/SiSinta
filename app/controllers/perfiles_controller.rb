@@ -106,7 +106,7 @@ class PerfilesController < AutorizadoController
   end
 
   def seleccionar
-    @continuar = session.delete :despues_de_seleccionar
+    @continuar = session.delete(:despues_de_seleccionar) || derivar_perfiles_path
 
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
@@ -115,7 +115,24 @@ class PerfilesController < AutorizadoController
     # Perfiles recién seleccionados y los ya viejos
     (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
 
+    # TODO redirigir según el botón apretado en +seleccionar+ (e.g. puede
+    # dirigir a exportar, a eliminar, a rrrear)
     redirect_to exportar_perfiles_path
+  end
+
+  def derivar
+    # TODO refactorizar en service object
+    # Dirije la navegación según el botón que apretó el usuario
+    case params[:commit]
+    when t('perfiles.seleccionar.volver')
+      redirect_to session[:volver_a]
+    when t('perfiles.seleccionar.exportar')
+      # Usa la acción directamente ya que hace su propia redirección y
+      # redirect_to no puede enviar PUTs
+      almacenar
+    else
+      redirect_to perfiles_path # Default amigable
+    end
   end
 
   def editar_analiticos
@@ -181,8 +198,8 @@ class PerfilesController < AutorizadoController
       # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
       remover = if params[:csv].present?
-        params[:csv][:perfiles_attributes].each.collect do |p|
-          p.first if p.last[:_destroy]
+        params[:csv][:perfiles_attributes].each_pair.collect do |id, atributos|
+          id if marcado_para_remover?(atributos)
         end.reject { |elemento| elemento.nil? }
       end
       self.perfiles_seleccionados -= remover unless remover.nil?
@@ -214,5 +231,9 @@ class PerfilesController < AutorizadoController
 
     def archivo_csv
       "perfiles_#{Date.today.strftime('%Y-%m-%d')}.csv"
+    end
+
+    def marcado_para_remover?(hash)
+      hash[:_destroy].present? or hash[:anular].present?
     end
 end

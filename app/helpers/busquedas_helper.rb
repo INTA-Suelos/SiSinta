@@ -5,11 +5,20 @@ module BusquedasHelper
       when 'index'
         'Tus búsquedas'
       when 'show'
-        "Resultados de #{@busqueda.nombre}"
+        "Resultados"
       when 'new'
         'Nueva búsqueda'
       when 'edit'
-        "Modificar búsqueda #{@busqueda.nombre}"
+        "Modificar búsqueda"
+      else
+        nil
+    end
+  end
+
+  def subtitulo
+    case params[:action]
+      when 'show', 'edit'
+        "#{@busqueda.nombre}"
       else
         nil
     end

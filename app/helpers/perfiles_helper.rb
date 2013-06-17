@@ -38,6 +38,19 @@ module PerfilesHelper
         'Exportar perfiles'
       when 'permisos'
         "Permisos para el perfil #{@recurso.numero}"
+      when 'seleccionar'
+        "Seleccionar perfiles"
+      else
+        nil
+    end
+  end
+
+  def subtitulo
+    case params[:action]
+      when 'seleccionar'
+        if nombre = params[:busqueda]
+          "Resultados de #{nombre}"
+        end
       else
         nil
     end

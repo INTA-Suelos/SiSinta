@@ -10,8 +10,12 @@ class BusquedasController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        params[:q] = @busqueda.consulta
-        redirect_to seleccionar_perfiles_path(q: @busqueda.consulta)
+        params[:q] = @busqueda.consulta # TODO why?
+        session[:volver_a] = busquedas_path
+        redirect_to seleccionar_perfiles_path(
+          q: @busqueda.consulta,
+          busqueda: @busqueda.nombre
+        )
       end
     end
   end
@@ -34,7 +38,8 @@ class BusquedasController < ApplicationController
       unless @busqueda.save
         # vuelve a new (necesita el objeto de búsqueda de nuevo)
         format.html do
-          @perfiles = Perfil.search params[:q]
+          session[:volver_a] = new_busqueda_path
+          redirect_to seleccionar_perfiles_path(q: params[:q])
         end
       end
     end
