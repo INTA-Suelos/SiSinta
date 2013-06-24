@@ -17,9 +17,12 @@ es:
         simbolo: 'Símbolo'
       perfil:
         analiticos: 'Datos analíticos'
+        publico:    'Público'
       analitico:
         ph_kcl: 'pH en KCL (1:2,5)'
         ph_h2o: 'pH en H2O (1:2,5)'
+      busqueda:
+        publico:  'Pública'
 
   confirmar:  "¿En serio? Es irreversible."
   roles:
@@ -40,6 +43,9 @@ es:
   equipos:
     form:
       agregar_miembro: "Agregar"
+  busquedas:
+    edit:
+      submit: 'Actualizar'
 
   comunes:
     perfiles_asociados:

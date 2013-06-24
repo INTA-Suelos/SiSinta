@@ -3,7 +3,7 @@ module BusquedasHelper
   def titulo_de_la_accion
     case params[:action]
       when 'index'
-        'Tus búsquedas'
+        'Búsquedas'
       when 'show'
         "Resultados"
       when 'new'

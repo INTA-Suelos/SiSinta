@@ -6,10 +6,15 @@
 
     = fb.error_messages
 
-    .span-23.campo
-      .span-2= fb.label :nombre
-      .span-17= fb.text_field :nombre, autofocus: true
-      .span-4.last (si querés guardarla)
+    - if usuario_signed_in?
+      .span-23.last.campo
+        .span-2= fb.label :nombre
+        .span-17= fb.text_field :nombre, autofocus: true
+        .span-4.last (si querés guardarla)
+      .span-23.last.campo
+        .span-2= fb.label :publico
+        .span-21.last= fb.check_box :publico
+        = fb.object.ayuda :publico
 
   = field_set_tag 'Consulta', class: 'consulta celeste span-23 last' do
 

@@ -207,3 +207,13 @@
 - id:       67
   campo:    Proyecto.cita
   ayuda:    Ayuda no disponible.
+- id:       68
+  campo:    Perfil.publico
+  ayuda:    "Marcar esto hace al perfil, los horizontes y sus datos analíticos
+            asociados accesibles públicamente, sin necesidad de tener un
+            usuario en el sitio."
+- id:       69
+  campo:    Busqueda.publico
+  ayuda:    "Marcar esto lista la búsqueda para todos los usuarios y los
+            visitantes sin usuario en el sitio. Aún así, los resultados están
+            limitados a los perfiles que pueden ver normalmente."

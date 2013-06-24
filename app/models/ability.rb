@@ -23,7 +23,11 @@ class Ability
                   :autocomplete_serie_simbolo,
                   :autocomplete_color_rgb,
                   :autocomplete_color_hvc,
-                  :exportar,                              to: :read
+                  :seleccionar,
+                  :derivar,
+                  :almacenar,
+                  :exportar,
+                  :procesar,                              to: :read
     alias_action  :editar_analiticos, :update_analiticos, to: :update
 
     if @usuario.admin?
@@ -77,5 +81,6 @@ class Ability
     def invitado
       can :read, perfiles, publico: true
       can :read, basicos
+      can :create, Busqueda
     end
 end

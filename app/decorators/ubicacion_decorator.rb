@@ -2,7 +2,7 @@
 class UbicacionDecorator < ApplicationDecorator
   # Transforma del srid real al preferido por el usuario
   def transformar
-    @coordenadas ||= Ubicacion.transformar(source.srid, h.current_usuario.srid, source.x, source.y)
+    @coordenadas ||= Ubicacion.transformar(source.srid, self.srid, source.x, source.y)
   end
 
   # x de acuerdo al SRID preferido

@@ -81,6 +81,6 @@ module PerfilesHelper
   protected
 
     def checks_csv_marcados
-      Array.wrap current_usuario.checks_csv_perfiles
+      Array.wrap current_usuario.try(:checks_csv_perfiles)
     end
 end

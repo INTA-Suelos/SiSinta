@@ -2,21 +2,11 @@
   - if can? :create, Busqueda
     = link_to 'Nueva búsqueda', new_busqueda_path
 
-%table#busquedas
-  %thead
-    %tr
-      %th Nombre
-      %th.acciones
+- if usuario_signed_in?
+  = render partial: 'busquedas', object: @busquedas,
+           locals: { caption: 'Tus búsquedas', columna_publicas: true }
 
-  %tbody
-    - @busquedas.each do |busqueda|
-      %tr
-        %td= busqueda.nombre
-        %td.acciones
-          = link_to 'Resultados', busqueda
-          = '|'
-          = link_to 'Renombrar', edit_busqueda_path(busqueda)
-          = '|'
-          = link_to 'Eliminar', busqueda, confirm: t(:confirmar), method: :delete
+= render partial: 'busquedas', object: @busquedas_publicas,
+         locals: { caption: 'Búsquedas públicas', columna_publicas: false }
 
 = volver_arriba

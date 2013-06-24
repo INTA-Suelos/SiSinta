@@ -14,8 +14,11 @@ class PerfilesController < AutorizadoController
   respond_to :geojson, only: :index
   respond_to :csv, only: [ :index, :procesar ]
 
-  # +index+ funciona anónimamente
-  skip_before_filter :authenticate_usuario!,  only: :index
+  # acciones que funcionan anónimamente
+  skip_before_filter :authenticate_usuario!,  only: [ :index, :seleccionar,
+                                                      :derivar, :almacenar,
+                                                      :exportar, :show,
+                                                      :procesar ]
   skip_load_and_authorize_resource            only: :index
   skip_authorization_check                    only: :index
 
@@ -39,7 +42,7 @@ class PerfilesController < AutorizadoController
       end
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          headers: true, checks: current_usuario.checks_csv_perfiles
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
         ), filename: archivo_csv
       end
     end
@@ -99,7 +102,7 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles, location: nil do |format|
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          headers: true, checks: current_usuario.checks_csv_perfiles
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
         ), filename: archivo_csv
       end
     end
@@ -193,7 +196,9 @@ class PerfilesController < AutorizadoController
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+      if usuario_signed_in?
+        current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+      end
 
       # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
