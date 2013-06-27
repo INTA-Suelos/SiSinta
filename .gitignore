@@ -4,7 +4,7 @@ log/*.log
 tmp/
 .sass-cache/
 .*sw[po]
-TODO
+TODO*
 
 # Archivos que se generan en el deploy
 public/estaticos
