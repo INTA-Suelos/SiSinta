@@ -4,7 +4,7 @@
   = f.attribute_fields do |a|
     = render 'attribute_fields', f: a
 
-  = f.predicate_select
+  = f.predicate_select compounds: false
 
   = f.value_fields do |v|
     = render 'value_fields', f: v
