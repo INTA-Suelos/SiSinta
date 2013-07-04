@@ -73,6 +73,18 @@ class Perfil < ActiveRecord::Base
     joins(:ubicacion).where('ubicaciones.coordenadas is not ?', nil)
   end
 
+  ransacker :etiquetas, formatter: proc { |v|
+      Perfil.tagged_with(Array.wrap(v.strip), on: :etiquetas).pluck(:id)
+    } do |parent|
+    parent.table[:id]
+  end
+
+  ransacker :reconocedores, formatter: proc { |v|
+      Perfil.tagged_with(Array.wrap(v.strip), on: :reconocedores).pluck(:id)
+    } do |parent|
+    parent.table[:id]
+  end
+
   private
 
     # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.
