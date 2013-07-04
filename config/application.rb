@@ -22,7 +22,8 @@ module SiSINTA
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/lib/extensiones/)
+    config.autoload_paths += ["#{config.root}/lib/extensiones/",
+                              "#{config.root}/lib/helpers/" ]
 
     config.action_controller.include_all_helpers = false
 
