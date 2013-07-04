@@ -1,6 +1,6 @@
 = setup_search_form f
 
-= field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
+= field_set_tag titulo_de_la_accion, class: 'celeste_oscuro' do
 
   = fields_for @busqueda do |fb|
 
@@ -16,14 +16,14 @@
         .span-21.last= fb.check_box :publico
         = fb.object.ayuda :publico
 
-  = field_set_tag 'Consulta', class: 'consulta celeste span-23 last' do
+  = field_set_tag 'Consulta', class: 'consulta celeste' do
 
-    = field_set_tag 'Ordenar por', class: 'celeste_oscuro span-22 last', id: 'orden' do
+    = field_set_tag 'Ordenar por', class: 'celeste_oscuro', id: 'orden' do
       = f.sort_fields do |s|
         = render 'sort_fields', f: s
       = button_to_add_fields "Agregar", f, :sort
 
-    = field_set_tag 'Grupos de condiciones', class: 'celeste_oscuro span-22 last' do
+    = field_set_tag 'Grupos de condiciones', class: 'celeste_oscuro' do
       = f.grouping_fields do |g|
         = render 'grouping_fields', f: g
       = button_to_add_fields "Agregar grupo", f, :grouping
