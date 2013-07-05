@@ -85,6 +85,10 @@ class Perfil < ActiveRecord::Base
     parent.table[:id]
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['created_at', 'updated_at']
+  end
+
   private
 
     # Validación para comprobar que no se guarda un perfil que aún no ha ocurrido.

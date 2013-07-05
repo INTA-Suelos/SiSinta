@@ -9,10 +9,15 @@ class Capacidad < ActiveRecord::Base
 
   # Pseudoasociación HABTM con SubclaseDeCapacidad. Permite modificarla
   # mediante   # +subclase_ids+ o mediante +subclases+
+  # TODO ransackerizar subclase_ids
   serialize :subclase_ids, Array
   guardar_como_arreglo :subclase, SubclaseDeCapacidad
   attr_accessor :subclases
 
   validates_presence_of :perfil
   delegate :publico, :usuario, :usuario_id, to: :perfil
+
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['perfil_id', 'id']
+  end
 end

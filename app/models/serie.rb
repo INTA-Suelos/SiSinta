@@ -13,4 +13,8 @@ class Serie < ActiveRecord::Base
 
   validates_uniqueness_of :nombre, :simbolo, allow_blank: true, allow_nil: true
   validates_presence_of   :nombre
+
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
+  end
 end
