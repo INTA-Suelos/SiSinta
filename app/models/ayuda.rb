@@ -2,7 +2,7 @@
 class Ayuda < Lookup
   include ActiveHash::Enum
 
-  # Lo declaro para que ActiveHash genere el finder
+  # Declarar los campos para los que ActiveHash debe pregenerar finders
   field :campo
 
   # Garantiza que 'campo' sea único y genera constantes del tipo Ayuda::CAMPO
@@ -11,5 +11,4 @@ class Ayuda < Lookup
   def to_s
     ayuda
   end
-
 end
