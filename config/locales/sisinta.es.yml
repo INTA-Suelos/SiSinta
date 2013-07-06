@@ -10,6 +10,10 @@ es:
               es_del_futuro: "todavía no llega"
             numero:
               no_es_unico_en_la_serie: "debe ser único dentro de una misma serie"
+        erosion:
+          attributes:
+            clase:
+              debe_estar_en_blanco: "la clase debe estar en blanco si la subclase es Acumulación"
     models:
       analitico: 'Datos analíticos'
     attributes:
