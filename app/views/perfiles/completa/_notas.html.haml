@@ -20,3 +20,8 @@
       .span-2= f.label :usuario, "Cargado por"
       .span-19.last= f.text_field :usuario, disabled: true
       = f.object.ayuda :usuario
+  .span-21.last.campo
+    .span-2= f.label :publico
+    .span-19.last= f.check_box :publico,
+      disabled: bloqueado
+    = f.object.ayuda :publico

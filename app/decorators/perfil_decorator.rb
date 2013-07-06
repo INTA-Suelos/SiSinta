@@ -52,4 +52,8 @@ class PerfilDecorator < ApplicationDecorator
     end
     self
   end
+
+  def numero
+    source.numero || source.to_param
+  end
 end

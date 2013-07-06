@@ -1,5 +1,5 @@
 #busqueda_perfiles
-  = form_tag @continuar, method: :put, class: 'span-24'
+  = form_tag siguiente_url, method: metodo_de_seleccion, class: 'span-24'
 
   %table
     %thead
@@ -17,4 +17,6 @@
     %tbody
       = render @perfiles
 
-  .acciones.span-4= submit_tag t('.submit')
+  .acciones
+    .span-4= submit_tag t('.volver')
+    .span-4= submit_tag t('.exportar')

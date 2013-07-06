@@ -22,7 +22,8 @@ module SiSINTA
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/lib/extensiones/)
+    config.autoload_paths += ["#{config.root}/lib/extensiones/",
+                              "#{config.root}/lib/helpers/" ]
 
     config.action_controller.include_all_helpers = false
 
@@ -54,7 +55,7 @@ module SiSINTA
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '0.2.8'
+    config.assets.version = '0.2.9'
 
     # Traduzco el path
     config.assets.prefix = "/estaticos"

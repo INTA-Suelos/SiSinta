@@ -69,8 +69,6 @@ group :development do
   gem 'bullet'
   gem 'capistrano'
   gem 'capistrano-rbenv'
-  # TODO remover en rails 4
-  gem 'sextant'
 end
 
 group :test do

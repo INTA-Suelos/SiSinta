@@ -6,12 +6,19 @@
   %li
     .plegable Perfiles
     %ul.submenu
+      - if can? :create, Perfil
+        %li= link_to 'Nuevo', new_perfil_path
       %li= link_to 'Ver', perfiles_path
       %li
         Exportar
         %ul.submenu
           %li= link_to 'a CSV', exportar_perfiles_path
           %li= link_to 'a GeoJSON', perfiles_path(format: :geojson)
+      %li
+        Búsquedas
+        %ul.submenu
+          %li= link_to 'Nueva', new_busqueda_path
+          %li= link_to 'Guardadas', busquedas_path
       %li
         Subgrupos
         %ul.submenu

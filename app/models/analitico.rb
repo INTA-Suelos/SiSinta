@@ -30,4 +30,8 @@ class Analitico < ActiveRecord::Base
   accepts_nested_attributes_for :horizonte
 
   delegate :publico, :usuario, :usuario_id, to: :horizonte
+
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
+  end
 end

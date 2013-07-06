@@ -1,15 +1,26 @@
 # encoding: utf-8
 module BusquedasHelper
+  include RansackHelper
+
   def titulo_de_la_accion
     case params[:action]
       when 'index'
-        'Tus búsquedas'
+        'Búsquedas'
       when 'show'
-        "Resultados de #{@busqueda.nombre}"
+        "Resultados"
       when 'new'
         'Nueva búsqueda'
       when 'edit'
-        "Modificar búsqueda #{@busqueda.nombre}"
+        "Modificar búsqueda"
+      else
+        nil
+    end
+  end
+
+  def subtitulo
+    case params[:action]
+      when 'show', 'edit'
+        "#{@busqueda.nombre}"
       else
         nil
     end

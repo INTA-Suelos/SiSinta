@@ -10,6 +10,10 @@ es:
               es_del_futuro: "todavía no llega"
             numero:
               no_es_unico_en_la_serie: "debe ser único dentro de una misma serie"
+        erosion:
+          attributes:
+            clase:
+              debe_estar_en_blanco: "la clase debe estar en blanco si la subclase es Acumulación"
     models:
       analitico: 'Datos analíticos'
     attributes:
@@ -17,9 +21,12 @@ es:
         simbolo: 'Símbolo'
       perfil:
         analiticos: 'Datos analíticos'
+        publico:    'Público'
       analitico:
         ph_kcl: 'pH en KCL (1:2,5)'
         ph_h2o: 'pH en H2O (1:2,5)'
+      busqueda:
+        publico:  'Pública'
 
   confirmar:  "¿En serio? Es irreversible."
   roles:
@@ -29,7 +36,8 @@ es:
 
   perfiles:
     seleccionar:
-      submit: "Seleccionar y volver"
+      volver: 'Volver'
+      exportar: 'Exportar selección'
     exportar:
       submit: "Exportar"
   usuarios:
@@ -39,6 +47,9 @@ es:
   equipos:
     form:
       agregar_miembro: "Agregar"
+  busquedas:
+    edit:
+      submit: 'Actualizar'
 
   comunes:
     perfiles_asociados:
