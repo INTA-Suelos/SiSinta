@@ -38,6 +38,19 @@ module PerfilesHelper
         'Exportar perfiles'
       when 'permisos'
         "Permisos para el perfil #{@recurso.numero}"
+      when 'seleccionar'
+        "Seleccionar perfiles"
+      else
+        nil
+    end
+  end
+
+  def subtitulo
+    case params[:action]
+      when 'seleccionar'
+        if nombre = params[:busqueda]
+          "Resultados de #{nombre}"
+        end
       else
         nil
     end
@@ -55,9 +68,19 @@ module PerfilesHelper
     end
   end
 
+  # Define el método a usar por el formulario de selección de perfiles
+  def metodo_de_seleccion
+    @metodo_de_seleccion ||= (params[:metodo] || :put)
+  end
+
+  # Para que la vista averigue a dónde envía el formulario de selección
+  def siguiente_url
+    @continuar
+  end
+
   protected
 
     def checks_csv_marcados
-      Array.wrap current_usuario.checks_csv_perfiles
+      Array.wrap current_usuario.try(:checks_csv_perfiles)
     end
 end

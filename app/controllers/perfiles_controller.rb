@@ -14,8 +14,11 @@ class PerfilesController < AutorizadoController
   respond_to :geojson, only: :index
   respond_to :csv, only: [ :index, :procesar ]
 
-  # +index+ funciona anónimamente
-  skip_before_filter :authenticate_usuario!,  only: :index
+  # acciones que funcionan anónimamente
+  skip_before_filter :authenticate_usuario!,  only: [ :index, :seleccionar,
+                                                      :derivar, :almacenar,
+                                                      :exportar, :show,
+                                                      :procesar ]
   skip_load_and_authorize_resource            only: :index
   skip_authorization_check                    only: :index
 
@@ -39,7 +42,7 @@ class PerfilesController < AutorizadoController
       end
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          headers: true, checks: current_usuario.checks_csv_perfiles
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
         ), filename: archivo_csv
       end
     end
@@ -99,14 +102,14 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles, location: nil do |format|
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          headers: true, checks: current_usuario.checks_csv_perfiles
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
         ), filename: archivo_csv
       end
     end
   end
 
   def seleccionar
-    @continuar = session.delete :despues_de_seleccionar
+    @continuar = session.delete(:despues_de_seleccionar) || derivar_perfiles_path
 
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
@@ -115,7 +118,24 @@ class PerfilesController < AutorizadoController
     # Perfiles recién seleccionados y los ya viejos
     (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
 
+    # TODO redirigir según el botón apretado en +seleccionar+ (e.g. puede
+    # dirigir a exportar, a eliminar, a rrrear)
     redirect_to exportar_perfiles_path
+  end
+
+  def derivar
+    # TODO refactorizar en service object
+    # Dirije la navegación según el botón que apretó el usuario
+    case params[:commit]
+    when t('perfiles.seleccionar.volver')
+      redirect_to session[:volver_a]
+    when t('perfiles.seleccionar.exportar')
+      # Usa la acción directamente ya que hace su propia redirección y
+      # redirect_to no puede enviar PUTs
+      almacenar
+    else
+      redirect_to perfiles_path # Default amigable
+    end
   end
 
   def editar_analiticos
@@ -144,18 +164,16 @@ class PerfilesController < AutorizadoController
     # Ordena los resultados según las columnas de la lista. Si son columnas de
     # texto, las normaliza a lowercase.
     def ordenar
+      @perfiles = @perfiles.joins(:ubicacion, :serie)
       case @metodo = metodo_de_ordenamiento
-      when 'ubicacion'
-        @perfiles =
-          @perfiles.joins(:ubicacion)
-                    .select('perfiles.*, ubicaciones.descripcion')
-        @metodo = 'lower(ubicaciones.descripcion)'
-      when 'nombre', 'numero'
-        @metodo = "lower(#{@metodo})"
-      else
-        # A los date y boolean no se les aplica lower()
+        when 'ubicacion'
+          @metodo = 'lower(ubicaciones.descripcion)'
+        when 'nombre', 'numero'
+          @metodo = "lower(#{@metodo})"
+        else
+          # A los date y boolean no se les aplica lower()
       end
-      @perfiles = @perfiles.order("#{@metodo} #{direccion_de_ordenamiento}")
+      @perfiles = @perfiles.reorder("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
     # Determina si el usuario terminó de editar el perfil o va a seguir con los
@@ -178,13 +196,15 @@ class PerfilesController < AutorizadoController
 
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
-      current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+      if usuario_signed_in?
+        current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+      end
 
       # TODO extraer a método propio
       # Perfiles con +_destroy+ marcado
       remover = if params[:csv].present?
-        params[:csv][:perfiles_attributes].each.collect do |p|
-          p.first if p.last[:_destroy]
+        params[:csv][:perfiles_attributes].each_pair.collect do |id, atributos|
+          id if marcado_para_remover?(atributos)
         end.reject { |elemento| elemento.nil? }
       end
       self.perfiles_seleccionados -= remover unless remover.nil?
@@ -216,5 +236,9 @@ class PerfilesController < AutorizadoController
 
     def archivo_csv
       "perfiles_#{Date.today.strftime('%Y-%m-%d')}.csv"
+    end
+
+    def marcado_para_remover?(hash)
+      hash[:_destroy].present? or hash[:anular].present?
     end
 end

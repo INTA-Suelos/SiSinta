@@ -17,4 +17,7 @@ class Pedregosidad < ActiveRecord::Base
     "#{clase.try(:to_str)} #{subclase}"
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
+  end
 end

@@ -1,0 +1,23 @@
+%table.busquedas
+  %caption= caption
+  %thead
+    %tr
+      %th.nombre Nombre
+      - if columna_publicas
+        %th.publica ¿Es pública?
+      %th.acciones
+
+  %tbody
+    - busquedas.each do |busqueda|
+      %tr
+        %td.nombre= busqueda.nombre
+        - if columna_publicas
+          %td.publica= "✓" if busqueda.publica?
+        %td.acciones
+          = link_to 'Resultados', busqueda
+          - if can? :manage, busqueda
+            = '|'
+            = link_to 'Editar', edit_busqueda_path(busqueda)
+          - if can? :manage, busqueda
+            = '|'
+            = link_to 'Eliminar', busqueda, confirm: t(:confirmar), method: :delete

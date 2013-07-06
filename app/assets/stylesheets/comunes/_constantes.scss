@@ -72,3 +72,24 @@ $tierra_claro:    lighten($tierra, 15%);
   .label-tag { width:  25px;
           margin: 6px 6px 6px 0; }
 }
+
+// Mixin de bootstrap
+// TODO sacar después de migrar a bootstrap
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.clearfix {
+  @include clearfix();
+}

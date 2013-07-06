@@ -18,9 +18,4 @@ module ProyectosHelper
         nil
     end
   end
-
-  # Por defecto anulamos, en ApplicationHelper
-  def anular_o_destruir
-    '_destroy'
-  end
 end

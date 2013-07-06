@@ -1,8 +1,23 @@
 .botonera
+  = link_to 'Volver', busquedas_path
 
 #busqueda
   = search_form_for @perfiles, url: @busqueda, method: :put do |f|
 
-    = render partial: 'form', locals: { f: f }
+    = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
+
+      = fields_for @busqueda do |fb|
+
+        = fb.error_messages
+
+        .span-23.campo
+          .span-2= fb.label :nombre
+          .span-17= fb.text_field :nombre, autofocus: true, required: true
+        .span-23.last.campo
+          .span-2= fb.label :publico
+          .span-21.last= fb.check_box :publico
+          = fb.object.ayuda :publico
+
+      .acciones.span-4.last= f.submit
 
 = volver_arriba

@@ -172,6 +172,9 @@ label {
 table {
   .numero {
     text-align: right;
+    &.centrado {
+      @include centrado;
+    }
   }
 }
 

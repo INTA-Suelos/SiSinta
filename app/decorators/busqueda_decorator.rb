@@ -1,3 +1,3 @@
 # encoding: utf-8
-class BusquedaDecorator < Draper::Decorator
+class BusquedaDecorator < ApplicationDecorator
 end
