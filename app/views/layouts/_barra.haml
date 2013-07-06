@@ -6,6 +6,8 @@
   %li
     .plegable Perfiles
     %ul.submenu
+      - if can? :create, Perfil
+        %li= link_to 'Nuevo', new_perfil_path
       %li= link_to 'Ver', perfiles_path
       %li
         Exportar
