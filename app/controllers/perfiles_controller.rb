@@ -168,10 +168,13 @@ class PerfilesController < AutorizadoController
       case @metodo = metodo_de_ordenamiento
         when 'ubicacion'
           @metodo = 'lower(ubicaciones.descripcion)'
-        when 'nombre', 'numero'
-          @metodo = "lower(#{@metodo})"
+        when 'nombre'
+          @metodo = "lower(series.#{@metodo})"
+        when 'numero'
+          @metodo = "lower(perfiles.#{@metodo})"
         else
           # A los date y boolean no se les aplica lower()
+          @metodo = "perfiles.#{@metodo}"
       end
       @perfiles = @perfiles.reorder("#{@metodo} #{direccion_de_ordenamiento}")
     end
