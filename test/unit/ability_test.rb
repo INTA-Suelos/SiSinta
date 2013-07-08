@@ -88,16 +88,8 @@ class AbilityTest < ActiveSupport::TestCase
     permisos = Ability.new
 
     permisos.recursos.each do |recurso|
-      case recurso.name
-        when 'Busqueda'
-          [:update, :destroy].each do |accionar|
-            assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
-          end
-          assert permisos.can?(:create, recurso), "No debe poder create sobre #{recurso}"
-        else
-          [:create, :update, :destroy].each do |accionar|
-            assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
-          end
+      [:create, :update, :destroy].each do |accionar|
+        assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
       end
     end
   end
