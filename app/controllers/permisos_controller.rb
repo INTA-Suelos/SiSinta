@@ -9,7 +9,7 @@ class PermisosController < AutorizadoController
   def edit
     @controlador = params[:controller]
     @ids = Usuario.miembros(@recurso).collect(&:id)
-    @actuales = UsuarioDecorator.decorate_collection @usuarios.find(@ids)
+    @actuales = UsuarioDecorator.decorate_collection Usuario.find(@ids)
     respond_with @recurso = @recurso.decorate
   end
 
