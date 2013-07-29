@@ -2,8 +2,7 @@
 require './test/test_helper'
 require 'perfiles_helper'
 
-class PerfilesHelperTest < ActionController::TestCase
-
+class PerfilesHelperTest < ActionView::TestCase
   setup do
     # Para poder stubear params
     @helper = Struct.new(:params).new

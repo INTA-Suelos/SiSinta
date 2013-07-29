@@ -1,10 +1,8 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class PerfilDecoratorTest < ActiveSupport::TestCase
-
+class PerfilDecoratorTest < Draper::TestCase
   def setup
-    ApplicationController.new.view_context
     @perfil = build_stubbed(:perfil)
   end
 
@@ -17,5 +15,4 @@ class PerfilDecoratorTest < ActiveSupport::TestCase
     @perfil.fecha = Date.new
     assert_equal Date.new.to_s(:dma), PerfilDecorator.decorate(@perfil).fecha
   end
-
 end
