@@ -10,7 +10,7 @@ class CSVSerializer < ActiveModel::ArraySerializer
     CSV.generate(headers: o[:headers]) do |csv|
       csv << encabezado(o[:checks], o[:base]) if csv.headers
       object.each do |perfil|
-        perfil.horizontes.each do |horizonte|
+        perfil.decorate.preparar.horizontes.each do |horizonte|
           csv << CSVHorizonteSerializer.new(horizonte).to_csv(o[:checks])
         end
       end
@@ -31,6 +31,7 @@ class CSVSerializer < ActiveModel::ArraySerializer
 
     # Construye un objeto con todas las asociaciones iniciadas para determinar
     # los nombres de columnas del csv a partir de las llaves del hash
+    # TODO desacoplar de Perfil y Horizonte
     def stub(base = nil)
       s = if base.present?
         base
@@ -40,11 +41,11 @@ class CSVSerializer < ActiveModel::ArraySerializer
         rescue NoMethodError
           object
         end.class
-      end.new.decorate
+      end.new
 
-      # TODO desacoplar
+      # Preparar todas las asociaciones
       s.horizontes.build
-      s.preparar
-      CSVHorizonteSerializer.new(s.horizontes.first)
+      s.decorate.preparar
+      CSVHorizonteSerializer.new HorizonteDecorator.decorate(s.horizontes.first)
     end
 end

@@ -7,20 +7,16 @@ class UbicacionDecorator < ApplicationDecorator
 
   # x de acuerdo al SRID preferido
   def x
-    redondear transformar.try(:x)
+    Ubicacion.redondear transformar.try(:x)
   end
 
   # y de acuerdo al SRID preferido
   def y
-    redondear transformar.try(:y)
+    Ubicacion.redondear transformar.try(:y)
   end
 
   def srid
-    (h.current_usuario.try(:srid) || 4326).to_i
-  end
-
-  def redondear(numero)
-    numero.try(:round, SiSINTA::Application.config.precision)
+    (usuario.try(:srid) || 4326).to_i
   end
 
   def to_s
@@ -36,4 +32,9 @@ class UbicacionDecorator < ApplicationDecorator
                   source.longitud}" unless x.blank? or y.blank?
   end
 
+  private
+
+    def usuario
+      context[:usuario] || h.try(:current_usuario)
+    end
 end
