@@ -37,7 +37,7 @@ es:
   perfiles:
     seleccionar:
       volver: 'Volver'
-      exportar: 'Exportar selección'
+      exportar: 'Seleccionar'
     exportar:
       submit: "Exportar"
   usuarios:

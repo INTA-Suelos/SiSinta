@@ -102,7 +102,9 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles, location: nil do |format|
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
+          # FIXME No permite exportar a usuarios anónimos
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles),
+          base: Perfil
         ), filename: archivo_csv
       end
     end

@@ -10,6 +10,7 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :usuario
   decorates_association :humedad
   decorates_association :capacidad
+  decorates_association :horizontes
 
   def fecha
     if source.fecha?

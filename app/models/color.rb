@@ -9,10 +9,5 @@ class Color < ActiveRecord::Base
   validates_uniqueness_of :hvc
   # TODO validate_format_of :hvc
 
-  # TODO A un decorator
-  def to_s
-    hvc
-  end
-
   # TODO rgb nil? aproximar
 end
