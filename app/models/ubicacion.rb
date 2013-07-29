@@ -68,7 +68,7 @@ class Ubicacion < ActiveRecord::Base
       grados, minutos, segundos = coordenada.to_s.split(' ').push(0,0,0).map {|i| i.to_f}
       decimal = grados.abs + minutos/60 + segundos/3600
       decimal *= -1 if grados < 0
-      return decimal.round config.precision
+      return self.redondear(decimal)
     end
   end
 
@@ -89,6 +89,10 @@ class Ubicacion < ActiveRecord::Base
         factory: fabrica_destino,
         project: proyectar)
     end
+  end
+
+  def self.redondear(numero)
+    numero.try(:round, config.precision)
   end
 
   def coordenadas=(c)
@@ -117,5 +121,4 @@ class Ubicacion < ActiveRecord::Base
       @y = coordenadas.y if coordenadas
       @srid = 4326
     end
-
 end
