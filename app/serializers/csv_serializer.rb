@@ -10,7 +10,9 @@ class CSVSerializer < ActiveModel::ArraySerializer
     CSV.generate(headers: o[:headers]) do |csv|
       csv << encabezado(o[:checks], o[:base]) if csv.headers
       object.each do |perfil|
-        perfil.decorate.preparar.horizontes.each do |horizonte|
+        if perfil.horizontes.empty? then perfil.horizontes.build end
+        perfil.decorate.preparar
+        perfil.horizontes.each do |horizonte|
           csv << CSVHorizonteSerializer.new(horizonte).to_csv(o[:checks])
         end
       end
