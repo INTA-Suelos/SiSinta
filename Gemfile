@@ -61,6 +61,7 @@ gem 'rails3_libmemcached_store'
 
 ## Desarrollo
 gem 'minitest-rails'
+gem 'version'
 
 group :test, :development do
   gem 'pry-rails'

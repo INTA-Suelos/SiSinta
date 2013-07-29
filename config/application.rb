@@ -63,5 +63,8 @@ module SiSINTA
 
     # Traduzco el path
     config.assets.prefix = "/estaticos"
+
+    # Manejo de versiones en la aplicación
+    is_versioned
   end
 end
