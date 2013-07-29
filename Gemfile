@@ -60,6 +60,8 @@ gem 'thin'
 gem 'rails3_libmemcached_store'
 
 ## Desarrollo
+gem 'minitest-rails'
+
 group :test, :development do
   gem 'pry-rails'
   gem 'hirb'
@@ -73,7 +75,6 @@ end
 
 group :test do
   gem 'turn'
-  gem 'minitest'
   gem 'factory_girl_rails'
   gem 'capybara', '~> 2.0.3'
   gem 'capybara-webkit'
