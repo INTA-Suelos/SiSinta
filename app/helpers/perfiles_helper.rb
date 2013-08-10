@@ -16,12 +16,7 @@ module PerfilesHelper
     Horizonte.new(
       profundidad_superior:
         @perfil.horizontes.empty? ? 0 : @perfil.horizontes.last.profundidad_inferior,
-      color_seco: Color.new,
-      color_humedo: Color.new,
-      limite: Limite.new,
-      consistencia: Consistencia.new,
-      estructura: Estructura.new
-    )
+    ).decorate.preparar
   end
 
   def titulo_de_la_accion
