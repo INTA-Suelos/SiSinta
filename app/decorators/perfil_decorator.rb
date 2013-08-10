@@ -43,13 +43,8 @@ class PerfilDecorator < ApplicationDecorator
     source.humedad       ||= Humedad.new
     source.pedregosidad  ||= Pedregosidad.new
     source.erosion       ||= Erosion.new
-    source.horizontes.each do |h|
-      h.color_seco    || h.build_color_seco
-      h.color_humedo  || h.build_color_humedo
-      h.limite        || h.build_limite
-      h.consistencia  || h.build_consistencia
-      h.estructura    || h.build_estructura
-      h.analitico     || h.build_analitico
+    horizontes.each do |h|
+      h.preparar
     end
     self
   end
