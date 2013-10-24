@@ -24,6 +24,16 @@ class ActionController::TestCase
     return @usuario
   end
 
+  # FIXME rediseñar los tests usando esto
+  def autorizar
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @ability.can :manage, :all
+    @controller.stub(:current_ability, @ability) do
+      yield
+    end
+  end
+
   def json
     ActiveSupport::JSON.decode @response.body
   end
