@@ -29,7 +29,7 @@ module HasLookups
       lookup = lookup.to_s
 
       # Define la relación con el ActiveHash
-      belongs_to_active_hash lookup, opciones_para_active_hash
+      belongs_to lookup, opciones_para_active_hash
 
       # Define un ransacker para cada lookup. Esto sirve para poder hacer
       # búsquedas con Ransack por el valor del lookup aunque la base de datos
