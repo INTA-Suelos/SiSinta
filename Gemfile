@@ -26,7 +26,7 @@ gem 'rails3-jquery-autocomplete',
 
 ## Modelos
 gem 'paperclip'
-gem 'active_hash'
+gem 'active_hash', github: 'mauriciopasquier/active_hash', branch: 'custom-assoc-name'
 gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
 gem 'inflections'
