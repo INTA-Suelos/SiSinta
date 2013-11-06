@@ -10,4 +10,6 @@ require 'action_dispatch/session/libmemcached_store'
 # (create the session table with "rails generate session_migration")
 # SiSINTA::Application.config.session_store :active_record_store
 
-SiSINTA::Application.config.session_store = :libmemcached_store, { namespace: '_session', expire_after: 1800 }
+SiSINTA::Application.configure do
+  config.session_store :libmemcached_store, namespace: '_session', expire_after: 1800
+end
