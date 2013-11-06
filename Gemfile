@@ -57,7 +57,7 @@ end
 
 ## Server
 gem 'thin'
-gem 'rails3_libmemcached_store'
+gem 'libmemcached_store'
 
 ## Desarrollo
 gem 'minitest-rails'
