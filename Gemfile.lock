@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/mauriciopasquier/active_hash.git
-  revision: 2e9b3c3c65d7e216cb539f603cacdbbbbe15d979
-  branch: custom-assoc-name
-  specs:
-    active_hash (1.2.0)
-      activesupport (>= 2.2.2)
-
-GIT
   remote: https://github.com/bradphelan/rocket_tag.git
   revision: a47b3340621dc36afa5559458eec9512384a87ba
   specs:
@@ -38,6 +30,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_hash (1.2.3)
+      activesupport (>= 2.2.2)
     active_model_serializers (0.8.1)
       activemodel (>= 3.0)
     activemodel (3.2.14)
@@ -295,7 +289,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_hash!
+  active_hash
   active_model_serializers
   activerecord-postgis-adapter
   attribute_normalizer
