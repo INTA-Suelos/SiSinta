@@ -23,6 +23,7 @@ class PerfilSerializerTest < ActiveSupport::TestCase
     end
     hash[:sales].must_equal LookupSerializer.new(perfil.sal).serializable_hash
 
+    # Campos no serializables
     hash[:usuario].blank?.must_equal true
     hash[:publico].blank?.must_equal true
     hash[:created_at].blank?.must_equal true
