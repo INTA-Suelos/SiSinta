@@ -2,12 +2,12 @@
 class CSVSerializer < ActiveModel::ArraySerializer
   # Opciones:
   # - headers: true o false para incluir headers o no
-  # - checls: array de nombres datos a incluir
+  # - checks: array de nombres datos a incluir
   # - base: clase de la que derivar un encabezado sin filas
   def as_csv(*args)
     o = args.extract_options!
 
-    CSV.generate(headers: o[:headers]) do |csv|
+    CSV.generate(headers: o[:headers], force_quotes: true) do |csv|
       csv << encabezado(o[:checks], o[:base]) if csv.headers
       object.each do |perfil|
         if perfil.horizontes.empty? then perfil.horizontes.build end
