@@ -3,18 +3,18 @@ require './test/test_helper'
 
 class UsuariosControllerTest < ActionController::TestCase
 
-  test "debería loguear al usuario" do
+  test "loguea al usuario" do
     @simple = loguearse_como "Invitado"
     assert_equal @simple, @controller.current_usuario
   end
 
-  test "current_user debería ser igual que current_usuario" do
+  test "current_user y current_usuario son equivalentes" do
     @simple = loguearse_como "Invitado"
     assert_not_nil @controller.current_usuario, "no hay un usuario logueado"
     assert_equal @controller.current_usuario, @controller.current_user, "devuelven diferentes cosas"
   end
 
-  test "el usuario logueado debería ser admin" do
+  test "el usuario logueado como 'Administrador' es admin" do
     @admin = loguearse_como 'Administrador'
     assert @controller.current_usuario.admin?, "el usuario no es admin"
   end

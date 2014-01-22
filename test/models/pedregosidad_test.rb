@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class PedregrosidadTest < ActiveSupport::TestCase
 
-  test "debería cargar la clase asociada" do
+  test "carga la clase asociada" do
     atributos = { clase_id: ClaseDePedregosidad.last.id }
 
     assert_difference 'ClaseDePedregosidad.last.pedregosidades.count' do
@@ -11,11 +11,11 @@ class PedregrosidadTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería negarse a cargar pedregosidad sin perfil" do
+  test "no carga pedregosidad sin perfil" do
     assert build_stubbed(:pedregosidad, :sin_perfil).invalid?, "Una pedregosidad sin perfil es válida"
   end
 
-  test "debería poder acceder a sus asociaciones" do
+  test "accede a sus asociaciones" do
     pedregosidad = build_stubbed(:pedregosidad)
     assert pedregosidad.respond_to? :clase
     assert pedregosidad.respond_to? :subclase

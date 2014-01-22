@@ -9,14 +9,14 @@ class EquiposControllerTest < ActionController::TestCase
     assert_not_nil assigns(:equipos)
   end
 
-  test "debería ir a 'nuevo' si está autorizado" do
+  test "va a 'nuevo' si está autorizado" do
     loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
-  test "debería crear un equipo si está autorizado" do
+  test "crea un equipo si está autorizado" do
     loguearse_como 'Autorizado'
 
     assert_difference('Equipo.count') do
@@ -26,14 +26,14 @@ class EquiposControllerTest < ActionController::TestCase
     assert_redirected_to equipo_path(assigns(:equipo))
   end
 
-  test "debería mostrar un equipo si está autorizado" do
+  test "muestra un equipo si está autorizado" do
     loguearse_como 'Autorizado'
 
     get :show, id: create(:equipo)
     assert_response :success
   end
 
-  test "debería ir a 'editar' si está autorizado" do
+  test "va a 'editar' si está autorizado" do
     usuario = loguearse_como 'Autorizado'
     equipo = create(:equipo, usuario: usuario)
 
@@ -41,7 +41,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "debería actualizar un equipo si está autorizado" do
+  test "actualiza un equipo si está autorizado" do
     usuario = loguearse_como 'Autorizado'
     equipo = create(:equipo, usuario: usuario)
 
@@ -49,7 +49,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_redirected_to equipo_path(assigns(:equipo))
   end
 
-  test "debería eliminar un equipo si está autorizado" do
+  test "elimina un equipo si está autorizado" do
     usuario = loguearse_como 'Autorizado'
     equipo = create(:equipo, usuario: usuario)
 
