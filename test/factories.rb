@@ -5,7 +5,7 @@ include ActionDispatch::TestProcess
 FactoryGirl.define do
   sequence :cadena_unica, 'a'
 
-  sequence :porcentaje do |n|
+  sequence :porcentaje do
     rand(100) * 0.01
   end
 
