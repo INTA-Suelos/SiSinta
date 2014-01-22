@@ -1,6 +1,7 @@
 // Gemas y vendored
 //= require jquery
-//= require jquery-ui
+// TODO revisar qué componentes necesito específicamente
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.nested-fields
 //= require tinymce-jquery

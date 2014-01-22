@@ -2,7 +2,7 @@
 require './test/test_helper'
 
 class ApplicationDecoratorTest < Draper::TestCase
-  test "debería convertir el modelo a Array" do
+  test "convierte el modelo a Array" do
     assert_instance_of Array, PerfilDecorator.decorate(build(:perfil)).to_array, "no devuelve Array"
   end
 end

@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class InflectionTest < ActiveSupport::TestCase
 
-  test "debería singularizar lo simple" do
+  test "singulariza lo simple" do
     assert_equal 'perfil', 'perfiles'.singularize
     assert_equal 'horizonte', 'horizontes'.singularize
     assert_equal 'analitico', 'analiticos'.singularize
@@ -39,12 +39,12 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'busqueda', 'busquedas'.singularize
   end
 
-  test "debería singularizar palabras con adjetivo" do
+  test "singulariza palabras con adjetivo" do
     assert_equal 'color_seco', 'colores_secos'.singularize
     assert_equal 'color_humedo', 'colores_humedos'.singularize
   end
 
-  test "debería singularizar las relaciones de pertenencia" do
+  test "singulariza las relaciones de pertenencia" do
     assert_equal 'textura_de_horizonte', 'texturas_de_horizonte'.singularize
     assert_equal 'clase_de_capacidad', 'clases_de_capacidad'.singularize
     assert_equal 'subclase_de_capacidad', 'subclases_de_capacidad'.singularize
@@ -67,7 +67,7 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'subclase_de_erosion', 'subclases_de_erosion'.singularize
   end
 
-  test "debería pluralizar lo simple" do
+  test "pluraliza lo simple" do
     assert_equal 'perfiles', 'perfil'.pluralize
     assert_equal 'horizontes', 'horizonte'.pluralize
     assert_equal 'analiticos', 'analitico'.pluralize
@@ -106,12 +106,12 @@ class InflectionTest < ActiveSupport::TestCase
     assert_equal 'busquedas', 'busqueda'.pluralize
   end
 
-  test "debería pluralizar palabras con adjetivo" do
+  test "pluraliza palabras con adjetivo" do
     assert_equal 'colores_secos', 'color_seco'.pluralize
     assert_equal 'colores_humedos', 'color_humedo'.pluralize
   end
 
-  test "debería pluralizar las relaciones de pertenencia" do
+  test "pluraliza las relaciones de pertenencia" do
     assert_equal 'texturas_de_horizonte', 'textura_de_horizonte'.pluralize
     assert_equal 'clases_de_capacidad', 'clase_de_capacidad'.pluralize
     assert_equal 'subclases_de_capacidad', 'subclase_de_capacidad'.pluralize

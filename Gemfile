@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
 ## DB
 gem 'pg'
@@ -52,6 +52,7 @@ group :assets do
   gem 'tinymce-rails'
   gem 'multiselectjs_rails'
   gem 'jquery-rails'
+  gem 'jquery-ui-rails'
   gem 'select2-rails'
 end
 

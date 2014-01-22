@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class FasesControllerTest < ActionController::TestCase
 
-  test "debería devolver nombre para términos parciales" do
+  test "autocompleta nombre" do
     termino = create(:fase).nombre
     get :autocomplete_fase_nombre, term: termino
     assert_response :success

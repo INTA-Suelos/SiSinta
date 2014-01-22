@@ -3,16 +3,16 @@ require './test/test_helper'
 
 class PerfilTest < ActiveSupport::TestCase
 
-  test "debería prohibir guardar perfiles sin fecha" do
+  test "no guarda perfiles sin fecha" do
     c = Perfil.new
     assert c.invalid?, "no se puede guardar sin la fecha"
   end
 
-  test "debería prohibir fechas del futuro" do
+  test "no guarda fechas del futuro" do
     assert build_stubbed(:perfil_futuro).invalid?, "la fecha es del futuro"
   end
 
-  test "debería cargar el paisaje asociado" do
+  test "carga el paisaje asociado" do
     atributos = attributes_for(:perfil).merge(
       paisaje_attributes: { simbolo: "Ps" })
     assert_difference 'Paisaje.count' do
@@ -22,7 +22,7 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería cargar la ubicación asociada" do
+  test "carga la ubicación asociada" do
     atributos = attributes_for(:perfil).merge(
       ubicacion_attributes: { descripcion: "Somewhere over the rainbow" } )
     assert_difference 'Ubicacion.count' do
@@ -44,14 +44,14 @@ class PerfilTest < ActiveSupport::TestCase
     assert_equal atributos_de_la_serie[:simbolo], serie.simbolo
   end
 
-  test "debería crear una fase cuando no existe" do
+  test "crea una fase cuando no existe" do
     assert_difference 'Fase.count', 1, "No crea la fase a partir del perfil" do
       create :perfil,
         fase_attributes: attributes_for(:fase).slice(:nombre)
     end
   end
 
-  test "debería crear un grupo cuando no existe" do
+  test "crea un grupo cuando no existe" do
     assert_difference 'Grupo.count', 1, "No crea el grupo a partir del perfil" do
       create :perfil,
         grupo_attributes: attributes_for(:grupo).slice(:descripcion)
@@ -77,7 +77,7 @@ class PerfilTest < ActiveSupport::TestCase
     assert_equal 'si', serie.reload.simbolo, "No le carga el símbolo a una serie existente"
   end
 
-  test "debería asociar una fase si existe" do
+  test "asocia una fase si existe" do
     fase = create(:fase)
     assert_no_difference 'Fase.count', "Crea una fase nueva" do
       perfil = create :perfil,
@@ -86,7 +86,7 @@ class PerfilTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería asociar un grupo si existe" do
+  test "asocia un grupo si existe" do
     grupo = create(:grupo)
     assert_no_difference 'Grupo.count', "Crea un grupo nuevo" do
       perfil = create :perfil,

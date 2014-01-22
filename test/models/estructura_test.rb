@@ -7,7 +7,7 @@ class EstructuraTest < ActiveSupport::TestCase
     @estructura = build_stubbed(:estructura)
   end
 
-  test "debería poder acceder a sus asociaciones" do
+  test "accede a sus asociaciones" do
     assert @estructura.respond_to? :tipo
     assert @estructura.respond_to? :clase
     assert @estructura.respond_to? :grado

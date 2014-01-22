@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class ErosionTest < ActiveSupport::TestCase
 
-  test "debería cargar la clase asociada" do
+  test "carga la clase asociada" do
     atributos = { clase_id: ClaseDeErosion.last.id }
 
     assert_difference 'ClaseDeErosion.last.erosiones.count' do
@@ -11,11 +11,11 @@ class ErosionTest < ActiveSupport::TestCase
     end
   end
 
-  test "debería negarse a cargar erosion sin perfil" do
+  test "no carga erosion sin perfil" do
     assert build_stubbed(:erosion, :sin_perfil).invalid?, "una erosion sin perfil es válida"
   end
 
-  test "debería poder acceder a sus asociaciones" do
+  test "accede a sus asociaciones" do
     erosion = build_stubbed(:erosion)
     assert erosion.respond_to? :clase
     assert erosion.respond_to? :subclase

@@ -64,7 +64,7 @@ class PerfilesTest < ActionDispatch::IntegrationTest
     serie.perfiles.count.must_equal 1
   end
 
-  test "asignar un símbolo a la serie a través del perfil" do
+  test "asigna un símbolo a la serie a través del perfil" do
     usuario = loguearse_como 'Autorizado'
 
     serie = create(:serie, simbolo: nil)

@@ -7,7 +7,7 @@ class ConsistenciaTest < ActiveSupport::TestCase
     @consistencia = build_stubbed(:consistencia)
   end
 
-  test "debería poder acceder a sus asociaciones" do
+  test "accede a sus asociaciones" do
     assert @consistencia.respond_to? :en_seco, "falla en_seco"
     assert @consistencia.respond_to? :en_humedo, "falla en_humedo"
     assert @consistencia.respond_to? :adhesividad, "falla adhesividad"

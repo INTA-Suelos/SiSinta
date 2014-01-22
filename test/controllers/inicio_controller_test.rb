@@ -3,7 +3,7 @@ require './test/test_helper'
 
 class InicioControllerTest < ActionController::TestCase
 
-  test "should get index" do
+  test "va al inicio" do
     get :index
     assert_response :success
   end
