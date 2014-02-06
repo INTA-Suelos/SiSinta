@@ -13,5 +13,4 @@ class Rol < ActiveRecord::Base
   def to_param
     nombre
   end
-
 end

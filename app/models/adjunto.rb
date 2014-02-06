@@ -5,6 +5,8 @@ class Adjunto < ActiveRecord::Base
   has_attached_file :archivo, { url: '/estaticos/:id/:filename',
                                 path: Rails.configuration.adjunto_path }
 
+  validates_attachment :archivo, file_type_ignorance: true
+
   delegate :publico, :usuario, :usuario_id, to: :perfil
 
   def extension

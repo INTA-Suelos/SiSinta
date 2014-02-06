@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 
 ## DB
 gem 'pg'
@@ -11,7 +11,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancan'
 gem 'param_protected'
-gem 'rolify'
+gem 'rolify', '~> 3.2.0'
 
 ## Presentación
 gem 'dynamic_form'
@@ -29,7 +29,7 @@ gem 'paperclip'
 gem 'active_hash'
 gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
 gem 'attribute_normalizer'
-gem 'inflections'
+gem 'inflections', '0.0.5', require: 'inflections/es'
 gem 'active_model_serializers'
 
 ## GIS
@@ -45,8 +45,8 @@ gem 'browser_detect'
 
 ## Assets
 group :assets do
-  gem 'sass-rails', "  ~> 3.2.3"
-  gem 'coffee-rails', "~> 3.2.1"
+  gem 'sass-rails', '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'uglifier'
   gem 'tinymce-rails'
@@ -71,7 +71,7 @@ end
 
 group :development do
   gem 'bullet'
-  gem 'capistrano'
+  gem 'capistrano', '< 3'
   gem 'capistrano-rbenv'
 end
 
