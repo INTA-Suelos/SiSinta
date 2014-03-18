@@ -44,12 +44,12 @@ gem 'has_scope'
 gem 'browser_detect'
 
 ## Assets
+gem 'tinymce-rails'
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'uglifier'
-  gem 'tinymce-rails'
   gem 'multiselectjs_rails'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
