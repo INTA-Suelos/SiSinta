@@ -5,6 +5,12 @@ El **Sistema de Información de Suelos del [INTA]** es un [SIG], hecho con
 [PostGIS] y [Rails], para almacenar y procesar los datos de muestras de suelos
 del instituto.
 
+Cómo contribuir
+---------------
+
+Para contribuir a SiSINTA es importante leer la [Guía de contribución](https://github.com/INTA-Suelos/SiSinta/blob/master/CONTRIBUTING.md).
+
+
 Instalación
 -----------
 
