@@ -166,7 +166,9 @@ class PerfilesController < AutorizadoController
     # Ordena los resultados según las columnas de la lista. Si son columnas de
     # texto, las normaliza a lowercase.
     def ordenar
-      @perfiles = @perfiles.joins(:ubicacion, :serie)
+      # Usar outer join con serie para que no excluya los perfiles sin serie
+      @perfiles = @perfiles.joins{ubicacion}.joins{serie.outer}
+
       case @metodo = metodo_de_ordenamiento
         when 'ubicacion'
           @metodo = 'lower(ubicaciones.descripcion)'
