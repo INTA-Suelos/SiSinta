@@ -52,4 +52,8 @@ class PerfilDecorator < ApplicationDecorator
   def numero
     source.numero || source.to_param
   end
+
+  def link_a_serie
+    h.link_to nombre, serie, class: 'perfil_nombre' if serie.present?
+  end
 end

@@ -34,6 +34,7 @@ module ApplicationHelper
     columna = columna.to_s  # para permitir símbolos
     titulo ||= columna.titleize
     direccion = (columna == metodo_de_ordenamiento && direccion_de_ordenamiento == "asc") ? "desc" : "asc"
+    # TODO ver cómo agregar los `request.query_parameters` actuales sin perder el join
     link_to titulo, por: columna, direccion: direccion
   end
 

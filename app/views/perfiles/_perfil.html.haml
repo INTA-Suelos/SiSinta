@@ -1,7 +1,7 @@
 %tr
   %td.fecha=      perfil.fecha
   %td.serie
-    = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
+    = perfil.link_a_serie
   %td.ubicacion=  perfil.ubicacion.try(:descripcion).try(:truncate, 70)
   %td.numero.centrado
     = link_to perfil.numero, perfil, class: 'perfil_numero'
