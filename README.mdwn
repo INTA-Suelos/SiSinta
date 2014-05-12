@@ -8,7 +8,7 @@ del instituto.
 Cómo contribuir
 ---------------
 
-Para contribuir a SiSINTA es importante leer la [Guía de contribución](https://github.com/INTA-Suelos/SiSinta/blob/master/CONTRIBUTING.md).
+Para contribuir a SiSINTA es importante leer la [Guía de contribución](CONTRIBUTING.md).
 
 
 Instalación
