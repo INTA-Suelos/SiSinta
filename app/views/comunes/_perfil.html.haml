@@ -5,7 +5,7 @@
       = destruir_o_anular 'perfiles', param, perfil.id, metodo: 'anular'
       = hidden_field_tag "#{param}[perfiles_attributes][#{perfil.id}][id]", perfil.id
   %td.serie
-    = link_to perfil.nombre, perfil.serie, class: 'perfil_nombre'
+    = perfil.link_a_serie
   %td.numero.centrado
     = link_to perfil.numero, perfil, class: 'perfil_numero'
   %td.ubicacion
