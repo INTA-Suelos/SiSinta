@@ -2,7 +2,7 @@
 FactoryGirl.define do
   factory :analitico do
     registro { rand(100) }
-    humedad           { generate :porcentaje }
+    humedad           { generate(:porcentaje).round 2 }
     s                 { generate :porcentaje }
     t                 { generate :porcentaje }
     ph_pasta          { generate :porcentaje }
