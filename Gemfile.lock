@@ -69,7 +69,7 @@ GEM
     bullet (4.9.0)
       activesupport
       uniform_notifier (~> 1.6.0)
-    cancan (1.6.10)
+    cancancan (1.8.0)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -269,6 +269,11 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       polyamorous (~> 0.5.0)
+    strong_parameters (0.2.3)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -312,7 +317,7 @@ DEPENDENCIES
   awesome_print
   browser_detect
   bullet
-  cancan
+  cancancan
   capistrano (< 3)
   capistrano-rbenv
   capybara (~> 2.0.3)
@@ -348,6 +353,7 @@ DEPENDENCIES
   rolify (~> 3.2.0)
   sass-rails
   select2-rails
+  strong_parameters
   therubyracer
   thin
   tinymce-rails

@@ -9,8 +9,9 @@ gem 'yaml_db'
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
 gem 'devise-i18n'
-gem 'cancan'
+gem 'cancancan'
 gem 'rolify', '~> 3.2.0'
+gem 'strong_parameters'
 
 ## Presentación
 gem 'dynamic_form'
