@@ -1,17 +1,5 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
-  attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
-                  :cobertura_vegetal, :posicion_id, :pendiente_id,
-                  :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
-                  :uso_de_la_tierra_id, :material_original, :esquema,
-                  :fase_id, :modal, :observaciones, :publico, :relieve_id,
-                  :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
-                  :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
-                  :capacidad_attributes, :humedad_attributes,
-                  :pedregosidad_attributes, :erosion_attributes, :etiquetas,
-                  :reconocedores, :grupo, :serie_attributes, :anular,
-                  :horizontes_attributes, :analiticos_attributes
-
   normalize_attributes :observaciones, :numero
 
   attr_taggable :etiquetas

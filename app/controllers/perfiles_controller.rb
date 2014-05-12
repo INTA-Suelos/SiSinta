@@ -77,7 +77,7 @@ class PerfilesController < AutorizadoController
 
   def update
     # Si falla, responders lo redirige a edit
-    opciones = if @perfil.update_attributes(params[:perfil])
+    opciones = if @perfil.update_attributes(perfil_params)
       { location: perfil_o_analiticos }
     else
       { }
@@ -145,7 +145,7 @@ class PerfilesController < AutorizadoController
   end
 
   def update_analiticos
-    @perfil.update_attributes(params[:perfil])
+    @perfil.update_attributes(perfil_params)
     @perfil = @perfil.decorate
     respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
       if @perfil.errors.any?
@@ -155,6 +155,36 @@ class PerfilesController < AutorizadoController
   end
 
   protected
+
+    def perfil_params
+      params.require(:perfil).permit(
+        :modal, :fecha, :numero, :vegetacion_o_cultivos, :material_original,
+        :drenaje_id, :relieve_id, :anegamiento_id, :posicion_id, :pendiente_id,
+        :cobertura_vegetal, :profundidad_napa, :escurrimiento_id, :sal_id,
+        :permeabilidad_id, :uso_de_la_tierra_id, :observaciones, :etiquetas,
+        :reconocedores, :publico,
+        serie_attributes: %i{ nombre simbolo id },
+        ubicacion_attributes: %i{
+          mosaico recorrido aerofoto id descripcion y x srid },
+        fase_attributes: %i{ nombre id },
+        grupo_attributes: %i{ descripcion id },
+        capacidad_attributes: [ :id, :clase_id, subclase_ids: [] ],
+        paisaje_attributes: %i{ tipo forma simbolo id },
+        humedad_attributes: [ :id, :clase_id, subclase_ids: [] ],
+        pedregosidad_attributes: %i{ clase_id subclase_id id },
+        erosion_attributes: %i{ subclase_id clase_id id },
+        horizontes_attributes: [
+          :tipo, :profundidad_superior, :profundidad_inferior, :textura_id,
+          :ph, :co3, :concreciones, :barnices, :moteados, :humedad, :raices,
+          :formaciones_especiales, :_destroy, :id,
+          limite_attributes: %i{ tipo_id forma_id id },
+          color_seco_attributes: %i{ hvc },
+          color_humedo_attributes: %i{ hvc },
+          estructura_attributes: %i{ tipo_id clase_id grado_id id },
+          consistencia_attributes: %i{ en_seco_id en_humedo_id plasticidad_id adhesividad_id id }
+        ]
+      )
+    end
 
     # Prepara el scope para la lista de perfiles
     def preparar

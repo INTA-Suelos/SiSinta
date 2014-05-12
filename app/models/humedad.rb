@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Humedad < ActiveRecord::Base
-  attr_accessible :clase_id, :subclase_ids
-
   belongs_to :perfil, inverse_of: :humedad
 
   has_lookup :clase, inverse_of: :humedades, class_name: 'ClaseDeHumedad'
