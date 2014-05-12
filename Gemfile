@@ -81,6 +81,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara', '~> 2.0.3'
   gem 'capybara-webkit'
-  gem 'capybara_minitest_spec'
   gem 'database_cleaner'
+  gem 'minitest-rails-capybara'
 end
