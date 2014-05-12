@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.18'
 
 ## DB
 gem 'pg'
