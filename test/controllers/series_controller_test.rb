@@ -8,7 +8,7 @@ class SeriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "va a 'nuevo' si está autorizado" do
+  test "va a 'nueva' si está autorizado" do
     loguearse
 
     autorizar { get :new }
