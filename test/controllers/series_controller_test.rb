@@ -9,17 +9,20 @@ class SeriesControllerTest < ActionController::TestCase
   end
 
   test "va a 'nuevo' si está autorizado" do
-    loguearse_como 'Autorizado'
+    loguearse
 
-    get :new
+    autorizar { get :new }
+
     assert_response :success
   end
 
   test "crea una serie si está autorizado" do
-    loguearse_como 'Autorizado'
+    loguearse
 
     assert_difference('Serie.count') do
-      post :create, serie: attributes_for(:serie)
+      autorizar do
+        post :create, serie: attributes_for(:serie)
+      end
     end
 
     assert_redirected_to serie_path(assigns(:serie))
@@ -31,27 +34,40 @@ class SeriesControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar' si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
 
-    get :edit, id: create(:serie, usuario: usuario)
+    autorizar do
+      get :edit, id: create(:serie, usuario: usuario)
+    end
+
     assert_response :success
   end
 
   test "actualiza una serie si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     serie = create(:serie, usuario: usuario)
 
-    put :update, id: serie, serie: { nombre: 'de Fibonacci' }
+    autorizar do
+      put :update, id: serie, serie: {
+        nombre: 'de Fibonacci', simbolo: 'fi', descripcion: 'Larga'
+      }
+    end
+
     assert_redirected_to serie_path(assigns(:serie))
+    assert_equal serie.id, assigns(:serie).id
     assert_equal 'de Fibonacci', assigns(:serie).nombre
+    assert_equal 'fi', assigns(:serie).simbolo
+    assert_equal 'Larga', assigns(:serie).descripcion
   end
 
   test "elimina una serie si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     serie = create(:serie, usuario: usuario)
 
     assert_difference('Serie.count', -1) do
-      delete :destroy, id: serie
+      autorizar do
+        delete :destroy, id: serie
+      end
     end
 
     assert_redirected_to series_path
