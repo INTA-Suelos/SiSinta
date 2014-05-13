@@ -26,7 +26,7 @@ gem 'rails3-jquery-autocomplete',
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
-gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
+gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
 gem 'active_model_serializers'

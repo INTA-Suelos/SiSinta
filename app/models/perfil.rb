@@ -2,10 +2,9 @@
 class Perfil < ActiveRecord::Base
   normalize_attributes :observaciones, :numero
 
-  attr_taggable :etiquetas
-  attr_taggable :reconocedores
+  acts_as_taggable_on :etiquetas, :reconocedores
 
-  # Permite utilizar roles sobre este modelo
+  # Permite utilizar roles de rolify sobre este modelo
   resourcify role_cname: 'Rol'
 
   scope :modales, where(modal: 'true')
@@ -61,12 +60,14 @@ class Perfil < ActiveRecord::Base
     joins(:ubicacion).where('ubicaciones.coordenadas is not ?', nil)
   end
 
+  # TODO agregar any: true para permitir combinar?
   ransacker :etiquetas, formatter: proc { |v|
       Perfil.tagged_with(Array.wrap(v.strip), on: :etiquetas).pluck(:id)
     } do |parent|
     parent.table[:id]
   end
 
+  # TODO agregar any: true para permitir combinar?
   ransacker :reconocedores, formatter: proc { |v|
       Perfil.tagged_with(Array.wrap(v.strip), on: :reconocedores).pluck(:id)
     } do |parent|
