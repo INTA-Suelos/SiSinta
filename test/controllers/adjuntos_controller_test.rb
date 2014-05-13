@@ -33,13 +33,16 @@ class AdjuntosControllerTest < ActionController::TestCase
   end
 
   test "muestra los adjuntos del perfil" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     3.times do
       create(:adjunto, perfil: perfil)
     end
 
-    get :index, perfil_id: perfil.id
+    autorizar do
+      get :index, perfil_id: perfil.id
+    end
+
     assert_response :success
     assert_not_nil assigns(:perfil), "No asigna @perfil"
     assert_not_nil assigns(:adjuntos), "No asigna @adjuntos"
@@ -47,30 +50,39 @@ class AdjuntosControllerTest < ActionController::TestCase
   end
 
   test "sólo muestra los adjuntos del perfil solicitado" do
-    loguearse_como 'Autorizado'
+    loguearse
 
-    get :index, perfil_id: create(:perfil).id
+    autorizar do
+      get :index, perfil_id: create(:perfil).id
+    end
+
     assert_not_nil assigns(:perfil), "No asigna @perfil"
     assert assigns(:adjuntos).empty?, "Asigna @adjuntos"
   end
 
   test "va a 'editar' si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     adjunto = perfil.adjuntos.create attributes_for(:adjunto)
 
-    get :edit, id: adjunto, perfil_id: perfil.id
+    autorizar do
+      get :edit, id: adjunto, perfil_id: perfil.id
+    end
+
     assert_response :success
     assert_not_nil assigns(:perfil), "Debe asignar @perfil"
     assert_not_nil assigns(:adjunto), "Debe asignar @adjunto"
   end
 
   test "actualizar un adjunto si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     adjunto = perfil.adjuntos.create attributes_for(:adjunto)
 
-    put :update, id: adjunto, adjunto: { notas: 'de alevosía' }, perfil_id: perfil.id
+    autorizar do
+      put :update, id: adjunto, adjunto: { notas: 'de alevosía' }, perfil_id: perfil.id
+    end
+
     assert_redirected_to perfil_adjuntos_path(perfil)
     assert_equal 'de alevosía', adjunto.reload.notas
   end

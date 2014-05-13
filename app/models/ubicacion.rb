@@ -1,8 +1,5 @@
 # encoding: utf-8
 class Ubicacion < ActiveRecord::Base
-  attr_accessible :mosaico, :recorrido, :aerofoto, :descripcion, :y, :x, :srid,
-                  :coordenadas
-
   before_validation :arreglar_coordenadas
   after_initialize :cargar_x_y
 

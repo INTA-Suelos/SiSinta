@@ -44,7 +44,7 @@ class ProyectosController < AutorizadoController
 
   def update
     # Si falla, responders lo redirige a edit
-    opciones = if @proyecto.update_attributes(params[:proyecto])
+    opciones = if @proyecto.update_attributes(proyecto_params)
       { location: proyecto_o_buscar_perfiles }
     else
       { }
@@ -58,6 +58,18 @@ class ProyectosController < AutorizadoController
   end
 
   private
+
+    def proyecto_params
+      # TODO Pasar a require cuando reformule la asociación de perfiles
+      if params[:proyecto].present?
+        params.require(:proyecto).permit(
+          :nombre, :cita, :descripcion,
+          perfiles_attributes: %i{ id anular }
+        )
+      else
+        params.permit :perfil_ids
+      end
+    end
 
     def asociar_perfiles
       if params[:perfil_ids]

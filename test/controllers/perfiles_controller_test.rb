@@ -86,18 +86,30 @@ class PerfilesControllerTest < ActionController::TestCase
   test "actualiza todos los datos analíticos" do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
+    perfil.horizontes.create(attributes_for(:horizonte))
 
-    5.times do
-      perfil.horizontes.create(attributes_for(:horizonte))
-    end
+    analitico = attributes_for(:analitico, id: perfil.analiticos.first.id)
 
     put :update_analiticos, id: perfil.to_param, perfil: {
-      analiticos_attributes: {
-        perfil.analiticos.first.id => attributes_for(:analitico, id: perfil.analiticos.first.id)
-      }
+      analiticos_attributes: { '0' => analitico }
     }
 
     assert_redirected_to perfil_analiticos_path(perfil)
+    perfil.reload
+
+    assert_equal analitico[:registro], perfil.analiticos.first.registro
+    assert_equal analitico[:humedad], perfil.analiticos.first.humedad.to_f
+    assert_equal analitico[:s], perfil.analiticos.first.s.to_f
+    assert_equal analitico[:t], perfil.analiticos.first.t.to_f
+    assert_equal analitico[:ph_pasta], perfil.analiticos.first.ph_pasta.to_f
+    assert_equal analitico[:ph_h2o], perfil.analiticos.first.ph_h2o.to_f
+    assert_equal analitico[:ph_kcl], perfil.analiticos.first.ph_kcl.to_f
+    assert_equal analitico[:resistencia_pasta], perfil.analiticos.first.resistencia_pasta.to_f
+    assert_equal analitico[:base_ca], perfil.analiticos.first.base_ca.to_f
+    assert_equal analitico[:base_mg], perfil.analiticos.first.base_mg.to_f
+    assert_equal analitico[:base_k], perfil.analiticos.first.base_k.to_f
+    assert_equal analitico[:base_na], perfil.analiticos.first.base_na.to_f
+    assert_equal analitico[:profundidad_muestra], perfil.analiticos.first.profundidad_muestra
   end
 
   test "rutea a editar_analiticos" do

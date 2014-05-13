@@ -32,7 +32,7 @@ class GruposController < AutorizadoController
   end
 
   def update
-    @grupo.update_attributes(params[:grupo])
+    @grupo.update_attributes(grupo_params)
 
     respond_with @grupo
   end
@@ -44,4 +44,10 @@ class GruposController < AutorizadoController
   def edit
     respond_with @grupo = @grupo.decorate
   end
+
+  private
+
+    def grupo_params
+      params.require(:grupo).permit :descripcion, :codigo
+    end
 end

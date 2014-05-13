@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Serie < ActiveRecord::Base
-  attr_accessible :nombre, :descripcion, :simbolo, :perfiles_attributes
-
   # Permite utilizar roles sobre este modelo
   resourcify role_cname: 'Rol'
 

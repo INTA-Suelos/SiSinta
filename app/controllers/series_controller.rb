@@ -55,7 +55,7 @@ class SeriesController < AutorizadoController
 
   def update
     # Si falla, responders lo redirige a edit
-    opciones = if @serie.update_attributes(params[:serie])
+    opciones = if @serie.update_attributes(serie_params)
       { location: serie_o_buscar_perfiles }
     else
       { }
@@ -69,6 +69,18 @@ class SeriesController < AutorizadoController
   end
 
   private
+
+    def serie_params
+      # TODO Pasar a require cuando reformule la asociación de perfiles
+      if params[:serie].present?
+        params.require(:serie).permit(
+          :nombre, :simbolo, :descripcion,
+          perfiles_attributes: %i{ id anular }
+        )
+      else
+        params.permit :perfil_ids
+      end
+    end
 
     def asociar_perfiles
       if params[:perfil_ids]

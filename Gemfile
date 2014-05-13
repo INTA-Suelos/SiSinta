@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.18'
 
 ## DB
 gem 'pg'
@@ -9,9 +9,9 @@ gem 'yaml_db'
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
 gem 'devise-i18n'
-gem 'cancan'
-gem 'param_protected'
+gem 'cancancan'
 gem 'rolify', '~> 3.2.0'
+gem 'strong_parameters'
 
 ## Presentación
 gem 'dynamic_form'
@@ -21,8 +21,7 @@ gem 'kaminari'
 gem 'draper'
 gem 'ransack'
 gem 'rails3-jquery-autocomplete',
-  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git',
-  branch: 'scopes-with-parameters'
+  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git'
 
 ## Modelos
 gem 'paperclip'
@@ -46,11 +45,12 @@ gem 'browser_detect'
 ## Assets
 gem 'tinymce-rails'
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
-  gem 'multiselectjs_rails'
+  # FIXME No hay release compatible con rails4
+  gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
   gem 'select2-rails'
@@ -81,6 +81,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara', '~> 2.0.3'
   gem 'capybara-webkit'
-  gem 'capybara_minitest_spec'
   gem 'database_cleaner'
+  gem 'minitest-rails-capybara'
 end
