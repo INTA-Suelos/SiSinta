@@ -5,13 +5,13 @@
     = f.object.ayuda :observaciones
   .span-21.last.campo
     .span-2= f.label :etiquetas
-    .span-19.last= f.autocomplete_field :etiquetas,
+    .span-19.last= f.autocomplete_field :etiqueta_list,
       autocompletar_etiquetas_perfiles_path, data: { delimiter: ', ' },
       disabled: bloqueado
     = f.object.ayuda :etiquetas
   .span-21.last.campo
     .span-2= f.label :reconocedores
-    .span-19.last= f.autocomplete_field :reconocedores,
+    .span-19.last= f.autocomplete_field :reconocedor_list,
       autocompletar_reconocedores_perfiles_path, data: { delimiter: ', ' },
       disabled: bloqueado
     = f.object.ayuda :reconocedores

@@ -98,14 +98,14 @@ class PerfilTest < ActiveSupport::TestCase
   test "guarda y devuelve bien los tags" do
     perfil = create(:perfil)
 
-    perfil.reconocedores = [ "Juan Salvo", "Favalli" ]
-    perfil.etiquetas = %w{ nevado }
+    perfil.reconocedor_list.add "Juan Salvo", "Favalli"
+    perfil.etiqueta_list.add 'nevado'
 
     assert perfil.save
 
-    assert Perfil.tags(on: :etiquetas).pluck(:name).include? 'nevado'
-    assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Favalli'
-    assert Perfil.tags(on: :reconocedores).pluck(:name).include? 'Juan Salvo'
+    assert Perfil.tags_on(:etiquetas).pluck(:name).include? 'nevado'
+    assert Perfil.tags_on(:reconocedores).pluck(:name).include? 'Favalli'
+    assert Perfil.tags_on(:reconocedores).pluck(:name).include? 'Juan Salvo'
   end
 
   test "queda como único perfil modal de la serie" do

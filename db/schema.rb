@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140513065857) do
+ActiveRecord::Schema.define(:version => 20140513073643) do
 
   create_table "adjuntos", :force => true do |t|
     t.integer  "perfil_id"
@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(:version => 20140513065857) do
     t.datetime "archivo_updated_at"
     t.string   "notas"
   end
-
-  create_table "alias_tags", :id => false, :force => true do |t|
-    t.integer "tag_id"
-    t.integer "alias_id"
-  end
-
-  add_index "alias_tags", ["alias_id"], :name => "index_alias_tags_on_alias_id"
-  add_index "alias_tags", ["tag_id"], :name => "index_alias_tags_on_tag_id"
 
   create_table "analiticos", :force => true do |t|
     t.integer  "registro"

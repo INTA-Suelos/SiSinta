@@ -1,8 +1,10 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
-  autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
+  autocomplete :reconocedores, :name, full: true,
+    class_name: 'ActsAsTaggableOn::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
-  autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
+  autocomplete :etiquetas, :name, full: true,
+    class_name: 'ActsAsTaggableOn::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
 
   has_scope :pagina, default: 1, unless: :geojson?
@@ -161,8 +163,8 @@ class PerfilesController < AutorizadoController
         :modal, :fecha, :numero, :vegetacion_o_cultivos, :material_original,
         :drenaje_id, :relieve_id, :anegamiento_id, :posicion_id, :pendiente_id,
         :cobertura_vegetal, :profundidad_napa, :escurrimiento_id, :sal_id,
-        :permeabilidad_id, :uso_de_la_tierra_id, :observaciones, :etiquetas,
-        :reconocedores, :publico,
+        :permeabilidad_id, :uso_de_la_tierra_id, :observaciones, :etiqueta_list,
+        :reconocedor_list, :publico,
         serie_attributes: %i{ nombre simbolo id },
         ubicacion_attributes: %i{
           mosaico recorrido aerofoto id descripcion y x srid },
