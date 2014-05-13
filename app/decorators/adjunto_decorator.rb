@@ -11,8 +11,10 @@ class AdjuntoDecorator < ApplicationDecorator
     archivo = "iconos/file_extension_#{ext}.png"
     if File.exists? "app/assets/images/#{archivo}"
       h.image_tag archivo, alt: ext
-    else
+    elsif ext.present?
       ".#{ext}"
+    else
+      ''
     end
   end
 end
