@@ -17,11 +17,6 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :config, :current_password, :ficha, :srid,
-                  :rol_global
-
   validates_presence_of :ficha, :srid, on: :update
 
   # FIXME Workarround para cierto problema con rolify y las inflecciones
