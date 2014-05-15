@@ -1,11 +1,7 @@
 # encoding: utf-8
 require File.expand_path('../boot', __FILE__)
 
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "sprockets/railtie"
+require 'rails/all'
 
 # PostGIS adapter includes a special railtie that provides support for PostGIS databases
 # in ActiveRecord’s rake tasks. This railtie is required in order to run, e.g., rake test. To
@@ -51,11 +47,6 @@ module SiSINTA
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
-
-    # Desactivar protección de asignación en masa (protected_attributes) porque
-    # usamos strong_parameters
-    # TODO sacar con rails 4
-    config.active_record.whitelist_attributes = false
 
     # Enable the asset pipeline
     config.assets.enabled = true
