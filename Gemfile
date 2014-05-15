@@ -44,7 +44,8 @@ gem 'browser_detect'
 ## Assets
 gem 'tinymce-rails'
 group :assets do
-  gem 'sass-rails'
+  # FIXME descongelar versión con rails 4.1.x (https://github.com/rails/sass-rails/issues/191#issuecomment-39155285)
+  gem 'sass-rails', '4.0.2'
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
