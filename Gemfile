@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.18'
+gem 'rails', '4.0.5'
 
 ## DB
 gem 'pg'
@@ -11,7 +11,6 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
 gem 'rolify', '~> 3.2.0'
-gem 'strong_parameters'
 
 ## Presentación
 gem 'dynamic_form'
@@ -49,7 +48,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
-  # FIXME No hay release compatible con rails4
+  # FIXME Todavía no hay release compatible con rails4
   gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
