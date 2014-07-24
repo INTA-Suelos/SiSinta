@@ -5,7 +5,7 @@ class Equipo < ActiveRecord::Base
   accepts_nested_attributes_for :miembros, allow_destroy: true
 
   # Permite utilizar roles sobre este modelo
-  resourcify role_cname: 'Rol'
+  resourcify :roles, role_cname: 'Rol'
 
   def nuevo_miembro
     Usuario.new

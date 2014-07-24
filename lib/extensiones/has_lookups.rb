@@ -35,7 +35,7 @@ module HasLookups
       # búsquedas con Ransack por el valor del lookup aunque la base de datos
       # guarde el ID
       ransacker lookup, formatter: proc { |v|
-          lookup.classify.constantize.find_by_valor(v).id
+          lookup.classify.constantize.where(valor: v).first.id
         } do |parent|
         parent.table["#{lookup}_id"]
       end

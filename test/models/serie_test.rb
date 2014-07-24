@@ -2,7 +2,6 @@
 require './test/test_helper'
 
 class SerieTest < ActiveSupport::TestCase
-
   test "requiere el nombre" do
     assert build_stubbed(:serie_anonima).invalid?, "Valida sin nombre"
   end
@@ -25,5 +24,4 @@ class SerieTest < ActiveSupport::TestCase
     serie.reload
     assert_equal 1, serie.cantidad_de_perfiles, "No actualiza el contador"
   end
-
 end

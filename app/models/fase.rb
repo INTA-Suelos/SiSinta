@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Fase < ActiveRecord::Base
-  has_many :perfiles, inverse_of: :fase
+  has_many :perfiles
 
   validates_uniqueness_of :codigo, allow_blank: true, allow_nil: true
   validates_uniqueness_of :nombre

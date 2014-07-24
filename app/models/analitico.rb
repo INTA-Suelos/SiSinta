@@ -1,14 +1,5 @@
 # encoding: utf-8
 class Analitico < ActiveRecord::Base
-  attr_accessible :registro, :horizonte_attributes, :profundidad_muestra,
-                  :materia_organica_c, :materia_organica_n, :humedad, :s, :t,
-                  :ph_pasta, :ph_h2o, :ph_kcl, :resistencia_pasta, :base_ca,
-                  :base_mg, :base_k, :base_na, :arcilla, :limo_2_20, :limo_2_50,
-                  :arena_muy_fina, :arena_fina, :arena_gruesa, :arena_media,
-                  :arena_muy_gruesa, :ca_co3, :agua_15_atm, :agua_util,
-                  :conductividad, :h, :saturacion_t, :saturacion_s_h,
-                  :densidad_aparente, :materia_organica_cn, :agua_3_atm
-
   belongs_to :horizonte
   has_one :perfil, through: :horizonte
 
