@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.18'
+gem 'rails', '4.0.8'
 
 ## DB
 gem 'pg'
@@ -10,8 +10,7 @@ gem 'yaml_db'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
-gem 'rolify', '~> 3.2.0'
-gem 'strong_parameters'
+gem 'rolify'
 
 ## Presentación
 gem 'dynamic_form'
@@ -30,6 +29,7 @@ gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
 gem 'active_model_serializers'
+gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
@@ -44,17 +44,16 @@ gem 'browser_detect'
 
 ## Assets
 gem 'tinymce-rails'
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'therubyracer'
-  gem 'uglifier'
-  # FIXME No hay release compatible con rails4
-  gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
-  gem 'jquery-rails'
-  gem 'jquery-ui-rails'
-  gem 'select2-rails'
-end
+# FIXME descongelar versión con rails 4.1.x (https://github.com/rails/sass-rails/issues/191#issuecomment-39155285)
+gem 'sass-rails', '4.0.2'
+gem 'coffee-rails'
+gem 'therubyracer'
+gem 'uglifier'
+# FIXME Todavía no hay release compatible con rails4
+gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'select2-rails'
 
 ## Server
 gem 'thin'
@@ -66,21 +65,21 @@ gem 'version'
 gem 'awesome_print'
 
 group :test, :development do
+  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'hirb'
 end
 
 group :development do
   gem 'bullet'
+  gem 'better_errors'
   gem 'capistrano', '< 3'
   gem 'capistrano-rbenv'
 end
 
 group :test do
   gem 'turn'
-  gem 'factory_girl_rails'
-  gem 'capybara', '~> 2.0.3'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'minitest-rails-capybara'
+  gem 'selenium-webdriver'
 end

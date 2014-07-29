@@ -1,23 +1,15 @@
 # encoding: utf-8
 require File.expand_path('../boot', __FILE__)
 
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "sprockets/railtie"
+require 'rails/all'
 
 # PostGIS adapter includes a special railtie that provides support for PostGIS databases
-# in ActiveRecord’s rake tasks. This railtie is required in order to run, e.g., rake test. To
-# install this railtie, you should add this line to your config/application.rb:
+# in ActiveRecord’s rake tasks. This railtie is required in order to run, e.g., rake test
 require 'active_record/connection_adapters/postgis_adapter/railtie'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require *Rails.groups(:assets => %w(development test))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module SiSINTA
   class Application < Rails::Application
@@ -31,13 +23,6 @@ module SiSINTA
 
     config.action_controller.include_all_helpers = false
 
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-    # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
@@ -48,14 +33,6 @@ module SiSINTA
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :password_confirmation]
-
-    # Desactivar protección de asignación en masa (protected_attributes) porque
-    # usamos strong_parameters
-    # TODO sacar con rails 4
-    config.active_record.whitelist_attributes = false
 
     # Enable the asset pipeline
     config.assets.enabled = true

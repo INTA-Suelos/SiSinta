@@ -10,5 +10,21 @@
  *= require select2
  *= require ui.multiselect
  *= require jquery-multiselect
- *= require_tree ./comunes
+ *
+ * Explicitar qué cargamos
+ *= require comunes/adjuntos
+ *= require comunes/analiticos
+ *= require comunes/busquedas
+ *= require comunes/csv
+ *= require comunes/equipos
+ *= require comunes/formularios
+ *= require comunes/inicio
+ *= require comunes/layout
+ *= require comunes/paginacion
+ *= require comunes/perfiles
+ *= require comunes/permisos
+ *= require comunes/proyectos
+ *= require comunes/select2-overrides
+ *= require comunes/series
+ *= require comunes/usuarios
 */

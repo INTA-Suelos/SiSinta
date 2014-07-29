@@ -16,7 +16,7 @@ class UsuariosController < AutorizadoController
   end
 
   def update
-    current_usuario.update_attributes(params[:usuario])
+    current_usuario.update_attributes(usuario_params)
     respond_with @usuario = current_usuario, location: :root
   end
 
@@ -39,6 +39,10 @@ class UsuariosController < AutorizadoController
   end
 
   private
+
+    def usuario_params
+      params.require(:usuario).permit :srid, :ficha
+    end
 
     def evitar_escalada_de_privilegios
       @usuarios = @usuarios.where('id <> ?', current_usuario.id)

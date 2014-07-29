@@ -1,12 +1,13 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class PerfilesTest < ActionDispatch::IntegrationTest
+feature 'Carga de perfiles' do
+  background { loguearse_como 'Autorizado' }
 
-  test "fecha en formato dd/mm/aaaa" do
-    usuario = loguearse_como 'Autorizado'
-    perfil = create(:perfil, usuario: usuario).decorate
+  after { logout }
 
+  scenario "fecha en formato dd/mm/aaaa" do
+    perfil = create(:perfil, usuario: @usuario)
     visit edit_perfil_path(perfil)
     current_path.must_equal edit_perfil_path(perfil)
 
@@ -21,9 +22,7 @@ class PerfilesTest < ActionDispatch::IntegrationTest
     perfil.reload.decorate.fecha.must_equal '23/03/1987'
   end
 
-  test "crea la serie a través del perfil" do
-    usuario = loguearse_como 'Autorizado'
-
+  scenario "crea la serie a través del perfil" do
     Serie.count.must_equal 0
 
     visit new_perfil_path
@@ -34,6 +33,7 @@ class PerfilesTest < ActionDispatch::IntegrationTest
       end
 
       completar_datos_de_perfil_requeridos
+
       click_button 'Crear Perfil'
     end
 
@@ -42,9 +42,7 @@ class PerfilesTest < ActionDispatch::IntegrationTest
     Serie.first.simbolo.must_equal 'Sa'
   end
 
-  test "asocia la serie a través del perfil" do
-    usuario = loguearse_como 'Autorizado'
-
+  scenario "asocia la serie a través del perfil" do
     serie = create(:serie)
     Serie.count.must_equal 1
     serie.perfiles.count.must_equal 0
@@ -64,9 +62,7 @@ class PerfilesTest < ActionDispatch::IntegrationTest
     serie.perfiles.count.must_equal 1
   end
 
-  test "asigna un símbolo a la serie a través del perfil" do
-    usuario = loguearse_como 'Autorizado'
-
+  scenario "asigna un símbolo a la serie a través del perfil" do
     serie = create(:serie, simbolo: nil)
     serie.simbolo.must_be_nil
 
