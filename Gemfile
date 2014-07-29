@@ -65,21 +65,21 @@ gem 'version'
 gem 'awesome_print'
 
 group :test, :development do
+  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'hirb'
 end
 
 group :development do
   gem 'bullet'
+  gem 'better_errors'
   gem 'capistrano', '< 3'
   gem 'capistrano-rbenv'
 end
 
 group :test do
   gem 'turn'
-  gem 'factory_girl_rails'
-  gem 'capybara', '~> 2.0.3'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'minitest-rails-capybara'
+  gem 'selenium-webdriver'
 end

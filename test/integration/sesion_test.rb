@@ -1,9 +1,8 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class SesionTest < ActionDispatch::IntegrationTest
-
-  test "inicia la sesión" do
+feature 'Sesión de usuario' do
+  background do
     visit '/'
     click_link 'Entrar'
     assert_equal new_usuario_session_path, current_path
@@ -18,19 +17,17 @@ class SesionTest < ActionDispatch::IntegrationTest
 
       click_button 'Entrar'
     end
-
-    assert_equal root_path, current_path
-    assert page.has_css?('#flash_notice.mensaje',
-            text: I18n.t('devise.sessions.signed_in')), "Debe poder loguearse"
   end
 
-  test "termina la sesión" do
-    loguearse_como 'Invitado'
+  scenario 'Después de loguearse avisa y va al root' do
+    current_path.must_equal root_path
+    page.must_have_selector '#flash_notice.mensaje', text: I18n.t('devise.sessions.signed_in')
+  end
 
+  scenario "Puede salir de la sesión" do
     click_link 'Salir'
 
-    assert_equal root_path, current_path
-    assert page.has_css?('#flash_notice.mensaje',
-            text: I18n.t('devise.sessions.signed_out')), "Debe poder cerrar su sesión"
+    current_path.must_equal root_path
+    page.must_have_selector '#flash_notice.mensaje', text: I18n.t('devise.sessions.signed_out')
   end
 end
