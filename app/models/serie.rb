@@ -7,9 +7,12 @@ class Serie < ActiveRecord::Base
   has_one :perfil_modal, ->{ where(modal: true) }, class_name: 'Perfil'
   belongs_to :usuario
 
+  has_lookup :provincia
+
   accepts_nested_attributes_for :perfiles
 
-  validates_uniqueness_of :nombre, :simbolo, allow_blank: true, allow_nil: true
+  validates_uniqueness_of :nombre, :simbolo, scope: :provincia_id,
+    allow_blank: true, allow_nil: true
   validates_presence_of   :nombre
 
   def self.ransackable_attributes(auth_object = nil)

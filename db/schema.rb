@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513073643) do
+ActiveRecord::Schema.define(version: 20140805070005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,7 +254,10 @@ ActiveRecord::Schema.define(version: 20140513073643) do
     t.datetime "updated_at",                       null: false
     t.integer  "cantidad_de_perfiles", default: 0, null: false
     t.integer  "usuario_id"
+    t.integer  "provincia_id"
   end
+
+  add_index "series", ["provincia_id"], :name => "index_series_on_provincia_id"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
