@@ -5,10 +5,10 @@ class Horizonte < ActiveRecord::Base
   # TODO sacar los defaults
   default_scope { order('profundidad_superior ASC') }
 
-  has_one :analitico,     dependent: :destroy
-  has_one :limite,        dependent: :destroy
-  has_one :consistencia,  dependent: :destroy
-  has_one :estructura,    dependent: :destroy
+  has_one :analitico,     dependent: :destroy, inverse_of: :horizonte
+  has_one :limite,        dependent: :destroy, inverse_of: :horizonte
+  has_one :consistencia,  dependent: :destroy, inverse_of: :horizonte
+  has_one :estructura,    dependent: :destroy, inverse_of: :horizonte
 
   belongs_to :perfil, inverse_of: :horizontes
 
