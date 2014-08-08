@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '4.0.8'
 
 ## DB
 gem 'pg'
@@ -9,9 +9,8 @@ gem 'yaml_db'
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
 gem 'devise-i18n'
-gem 'cancan'
-gem 'param_protected'
-gem 'rolify', '~> 3.2.0'
+gem 'cancancan'
+gem 'rolify'
 
 ## Presentación
 gem 'dynamic_form'
@@ -21,16 +20,16 @@ gem 'kaminari'
 gem 'draper'
 gem 'ransack'
 gem 'rails3-jquery-autocomplete',
-  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git',
-  branch: 'scopes-with-parameters'
+  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git'
 
 ## Modelos
 gem 'paperclip'
 gem 'active_hash'
-gem 'rocket_tag', git: 'https://github.com/bradphelan/rocket_tag.git'
+gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
 gem 'active_model_serializers'
+gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
@@ -45,16 +44,16 @@ gem 'browser_detect'
 
 ## Assets
 gem 'tinymce-rails'
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer'
-  gem 'uglifier'
-  gem 'multiselectjs_rails'
-  gem 'jquery-rails'
-  gem 'jquery-ui-rails'
-  gem 'select2-rails'
-end
+# FIXME descongelar versión con rails 4.1.x (https://github.com/rails/sass-rails/issues/191#issuecomment-39155285)
+gem 'sass-rails', '4.0.2'
+gem 'coffee-rails'
+gem 'therubyracer'
+gem 'uglifier'
+# FIXME Todavía no hay release compatible con rails4
+gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'select2-rails'
 
 ## Server
 gem 'thin'
@@ -66,21 +65,21 @@ gem 'version'
 gem 'awesome_print'
 
 group :test, :development do
+  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'hirb'
 end
 
 group :development do
   gem 'bullet'
+  gem 'better_errors'
   gem 'capistrano', '< 3'
   gem 'capistrano-rbenv'
 end
 
 group :test do
   gem 'turn'
-  gem 'factory_girl_rails'
-  gem 'capybara', '~> 2.0.3'
-  gem 'capybara-webkit'
-  gem 'capybara_minitest_spec'
   gem 'database_cleaner'
+  gem 'minitest-rails-capybara'
+  gem 'selenium-webdriver'
 end

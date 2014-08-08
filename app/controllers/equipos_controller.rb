@@ -29,7 +29,7 @@ class EquiposController < AutorizadoController
 
   def update
     # Si falla, responders lo redirige a edit
-    opciones = if @equipo.update_attributes(params[:equipo])
+    opciones = if @equipo.update_attributes(equipo_params)
       { location: mostrar_o_editar }
     else
       { }
@@ -43,6 +43,14 @@ class EquiposController < AutorizadoController
   end
 
   private
+
+    def equipo_params
+      params.require(:equipo).permit(
+        :nombre,
+        nuevo_miembro: %i{ id nombre email },
+        miembros_attributes: %i{ id _destroy }
+      )
+    end
 
     def mostrar_o_editar
       case params[:commit]

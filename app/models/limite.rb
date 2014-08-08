@@ -1,8 +1,6 @@
 # encoding: utf-8
 class Limite < ActiveRecord::Base
-  attr_accessible :tipo_id, :forma_id
-
-  belongs_to :horizonte, inverse_of: :limite
+  belongs_to :horizonte
   has_lookup :forma, inverse_of: :limites, class_name: 'FormaDeLimite'
   has_lookup :tipo, inverse_of: :limites, class_name: 'TipoDeLimite'
 

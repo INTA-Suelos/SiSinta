@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :descubrir_browser
+  before_filter :agregar_parametros_permitidos, if: :devise_controller?
 
   # CanCan necesita un método *current_user* y Devise genera la función
   # en base al nombre del modelo, que en nuestro caso es Usuario
@@ -40,6 +41,13 @@ class ApplicationController < ActionController::Base
   helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
 
   protected
+
+    def agregar_parametros_permitidos
+      devise_parameter_sanitizer.for(:account_update) << [
+        :nombre ]
+      devise_parameter_sanitizer.for(:sign_up) << [
+        :nombre ]
+    end
 
     def direccion_de_ordenamiento
       %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'

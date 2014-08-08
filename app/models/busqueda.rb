@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Busqueda < ActiveRecord::Base
-  attr_accessible :consulta, :nombre, :usuario, :publico
-
   store :consulta
 
   belongs_to :usuario
@@ -13,5 +11,5 @@ class Busqueda < ActiveRecord::Base
   # (+accesible+, o algo así)
   alias_attribute :publica, :publico
 
-  scope :publicas, where(publico: 'true')
+  scope :publicas, -> { where(publico: 'true') }
 end

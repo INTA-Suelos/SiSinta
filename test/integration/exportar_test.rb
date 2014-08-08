@@ -1,9 +1,8 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class ExportarTest < ActionDispatch::IntegrationTest
-
-  test "exporta csv" do
+feature 'Exportar CSV' do
+  scenario 'puede acceder a la página' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil_completo, usuario: usuario).decorate
 
@@ -12,5 +11,4 @@ class ExportarTest < ActionDispatch::IntegrationTest
 
     # TODO completar
   end
-
 end

@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Consistencia < ActiveRecord::Base
-  attr_accessible :en_seco_id, :en_humedo_id, :plasticidad_id, :adhesividad_id
-
   belongs_to :horizonte, inverse_of: :consistencia
   has_lookup :en_seco, class_name: 'ConsistenciaEnSeco',
               inverse_of: :consistencias

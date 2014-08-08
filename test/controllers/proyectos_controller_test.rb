@@ -9,17 +9,20 @@ class ProyectosControllerTest < ActionController::TestCase
   end
 
   test "va a 'nuevo' si está autorizado" do
-    loguearse_como 'Autorizado'
+    loguearse
 
-    get :new
+    autorizar { get :new }
+
     assert_response :success
   end
 
   test "crea un proyecto si está autorizado" do
-    loguearse_como 'Autorizado'
+    loguearse
 
     assert_difference('Proyecto.count') do
-      post :create, proyecto: attributes_for(:proyecto)
+      autorizar do
+        post :create, proyecto: attributes_for(:proyecto)
+      end
     end
 
     assert_redirected_to proyecto_path(assigns(:proyecto))
@@ -31,19 +34,30 @@ class ProyectosControllerTest < ActionController::TestCase
   end
 
   test "va a 'editar' si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
 
-    get :edit, id: create(:proyecto, usuario: usuario)
+    autorizar do
+      get :edit, id: create(:proyecto, usuario: usuario)
+    end
+
     assert_response :success
   end
 
   test "actualiza un proyecto si está autorizado" do
-    usuario = loguearse_como 'Autorizado'
+    usuario = loguearse
     proyecto = create(:proyecto, usuario: usuario)
 
-    put :update, id: proyecto, proyecto: { nombre: 'Flaco Pantera 3' }
+    autorizar do
+      put :update, id: proyecto, proyecto: {
+        nombre: 'Flaco Pantera 3', cita: 'Con ruido', descripcion: 'Metálica'
+      }
+    end
+
     assert_redirected_to proyecto_path(assigns(:proyecto))
+    assert_equal proyecto.id, assigns(:proyecto).id
     assert_equal 'Flaco Pantera 3', assigns(:proyecto).nombre
+    assert_equal 'Con ruido', assigns(:proyecto).cita
+    assert_equal 'Metálica', assigns(:proyecto).descripcion
   end
 
   test "elimina un proyecto si está autorizado" do

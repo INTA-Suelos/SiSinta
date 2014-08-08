@@ -17,7 +17,7 @@ class AdjuntosController < AutorizadoController
   end
 
   def update
-    @adjunto.update_attributes(params[:adjunto])
+    @adjunto.update_attributes(adjunto_params)
     respond_with @perfil, @adjunto
   end
 
@@ -44,6 +44,12 @@ class AdjuntosController < AutorizadoController
   end
 
   private
+
+    def adjunto_params
+      params.require(:adjunto).permit(
+        :notas, :archivo
+      )
+    end
 
     def decorar
       @perfil = @perfil.decorate

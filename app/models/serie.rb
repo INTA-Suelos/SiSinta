@@ -1,17 +1,18 @@
 # encoding: utf-8
 class Serie < ActiveRecord::Base
-  attr_accessible :nombre, :descripcion, :simbolo, :perfiles_attributes
-
   # Permite utilizar roles sobre este modelo
-  resourcify role_cname: 'Rol'
+  resourcify :roles, role_cname: 'Rol'
 
   has_many :perfiles
-  has_one :perfil_modal, class_name: 'Perfil', conditions: { modal: true }
+  has_one :perfil_modal, ->{ where(modal: true) }, class_name: 'Perfil'
   belongs_to :usuario
+
+  has_lookup :provincia
 
   accepts_nested_attributes_for :perfiles
 
-  validates_uniqueness_of :nombre, :simbolo, allow_blank: true, allow_nil: true
+  validates_uniqueness_of :nombre, :simbolo, scope: :provincia_id,
+    allow_blank: true, allow_nil: true
   validates_presence_of   :nombre
 
   def self.ransackable_attributes(auth_object = nil)

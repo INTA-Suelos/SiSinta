@@ -15,4 +15,10 @@
 //
 // Aplicación
 //= require_tree ./jquery
-//= require_tree ./comunes
+//
+//= require comunes/busquedas
+//= require comunes/equipos
+//= require comunes/formularios
+//= require comunes/layout
+//= require comunes/perfiles
+//= require comunes/permisos

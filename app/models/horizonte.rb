@@ -1,16 +1,9 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-  attr_accessible :profundidad_superior, :color_seco, :color_humedo, :limite,
-                  :consistencia, :estructura, :tipo, :profundidad_inferior,
-                  :limite_attributes, :color_seco_attributes,
-                  :color_humedo_attributes, :textura_id,
-                  :estructura_attributes, :consistencia_attributes, :ph, :co3,
-                  :concreciones, :barnices, :moteados, :humedad, :raices,
-                  :formaciones_especiales
-
   after_create :create_analitico
 
-  default_scope order('profundidad_superior ASC')
+  # TODO sacar los defaults
+  default_scope { order('profundidad_superior ASC') }
 
   has_one :analitico,     dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte
@@ -41,14 +34,14 @@ class Horizonte < ActiveRecord::Base
   # Se crea un color si no existe ya
   def autosave_associated_records_for_color_seco
     if color_seco.try(:hvc?)
-      self.color_seco = Color.find_or_create_by_hvc(color_seco.hvc)
+      self.color_seco = Color.find_or_create_by(hvc: color_seco.hvc)
     end
   end
 
   # Se crea un color si no existe ya
   def autosave_associated_records_for_color_humedo
     if color_humedo.try(:hvc?)
-      self.color_humedo = Color.find_or_create_by_hvc(color_humedo.hvc)
+      self.color_humedo = Color.find_or_create_by(hvc: color_humedo.hvc)
     end
   end
 

@@ -32,7 +32,7 @@ class FasesController < AutorizadoController
   end
 
   def update
-    @fase.update_attributes(params[:fase])
+    @fase.update_attributes(fase_params)
     respond_with @fase
   end
 
@@ -45,6 +45,10 @@ class FasesController < AutorizadoController
   end
 
   private
+
+    def fase_params
+      params.require(:fase).permit :nombre, :codigo
+    end
 
     # Para los mensajes del flash de responders
     def interpolation_options

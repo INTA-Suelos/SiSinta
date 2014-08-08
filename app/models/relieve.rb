@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Relieve < Lookup
-  has_many :perfiles, inverse_of: :relieve
+  has_many :perfiles
 
   field :valor
 end

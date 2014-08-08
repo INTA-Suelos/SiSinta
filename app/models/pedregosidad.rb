@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Pedregosidad < ActiveRecord::Base
-  attr_accessible :clase_id, :subclase_id
-
   belongs_to :perfil, inverse_of: :pedregosidad
 
   has_lookup :clase, inverse_of: :pedregosidades,

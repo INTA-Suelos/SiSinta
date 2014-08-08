@@ -1,0 +1,75 @@
+# Las provincias válidas para las series.
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+- id: 1
+  valor: Salta
+  slug: salta
+- id: 2
+  valor: Buenos Aires
+  slug: buenos-aires
+- id: 3
+  valor: Capital Federal
+  slug: capital-federal
+- id: 4
+  valor: San Luis
+  slug: san-luis
+- id: 5
+  valor: Entre Ríos
+  slug: entre-rios
+- id: 6
+  valor: La Rioja
+  slug: la-rioja
+- id: 7
+  valor: Santiago del Estero
+  slug: santiago-del-estero
+- id: 8
+  valor: Chaco
+  slug: chaco
+- id: 9
+  valor: San Juan
+  slug: san-juan
+- id: 10
+  valor: Catamarca
+  slug: catamarca
+- id: 11
+  valor: La Pampa
+  slug: la-pampa
+- id: 12
+  valor: Mendoza
+  slug: mendoza
+- id: 13
+  valor: Misiones
+  slug: misiones
+- id: 14
+  valor: Formosa
+  slug: formosa
+- id: 15
+  valor: Neuquén
+  slug: neuquen
+- id: 16
+  valor: Río Negro
+  slug: rio-negro
+- id: 17
+  valor: Santa Fe
+  slug: santa-fe
+- id: 18
+  valor: Tucumán
+  slug: tucuman
+- id: 19
+  valor: Chubut
+  slug: chubut
+- id: 20
+  valor: Tierra del Fuego
+  slug: tierra-del-fuego
+- id: 21
+  valor: Corrientes
+  slug: corrientes
+- id: 22
+  valor: Córdoba
+  slug: cordoba
+- id: 23
+  valor: Jujuy
+  slug: jujuy
+- id: 24
+  valor: Santa Cruz
+  slug: santa-cruz

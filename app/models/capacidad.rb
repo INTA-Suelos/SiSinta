@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Capacidad < ActiveRecord::Base
-  attr_accessible :clase_id, :subclase_ids
-
   belongs_to :perfil, inverse_of: :capacidad
 
   has_lookup :clase, inverse_of: :capacidades,

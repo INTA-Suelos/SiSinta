@@ -14,6 +14,10 @@ es:
           attributes:
             clase:
               debe_estar_en_blanco: "la clase debe estar en blanco si la subclase es Acumulación"
+        adjunto:
+          attributes:
+            archivo:
+              spoofed_media_type: "el tipo no coincide con su extensión"
     models:
       analitico: 'Datos analíticos'
     attributes:

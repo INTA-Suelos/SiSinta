@@ -4,10 +4,10 @@ class Usuario < ActiveRecord::Base
   store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
 
   # TODO cambiar relacion a 'creador'
-  has_many :perfiles, inverse_of: :usuario
-  has_many :proyectos, inverse_of: :usuario
-  has_many :series, inverse_of: :usuario
-  has_many :busquedas, inverse_of: :usuario
+  has_many :perfiles
+  has_many :proyectos
+  has_many :series
+  has_many :busquedas
   has_and_belongs_to_many :equipos
 
   before_create :asignar_valores_por_defecto
@@ -16,11 +16,6 @@ class Usuario < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :nombre, :email, :password, :password_confirmation,
-                  :remember_me, :config, :current_password, :ficha, :srid,
-                  :rol_global
 
   validates_presence_of :ficha, :srid, on: :update
 
@@ -47,14 +42,19 @@ class Usuario < ActiveRecord::Base
     has_role? 'Autorizado'
   end
 
+  # TODO Ver la manera de hacerlo a través de la asociación
+  def roles_globales
+    roles.where(resource_id: nil)
+  end
+
   # Nombre del rol global (debería haber sólo uno)
   def rol_global
-    self.roles.globales.first.try(:name)
+    roles_globales.first.try(:name)
   end
 
   # Asigno un rol global (Administrador, Autorizado), revocando los anteriores
   def rol_global=(nuevo_rol)
-    self.roles.globales.each { |rol| self.revoke rol.name }
+    roles_globales.each { |rol| self.revoke rol.name }
     self.grant nuevo_rol
   end
 

@@ -1,30 +1,13 @@
 # encoding: utf-8
 class Perfil < ActiveRecord::Base
-  attr_accessible :fecha, :numero, :drenaje_id, :profundidad_napa,
-                  :cobertura_vegetal, :posicion_id, :pendiente_id,
-                  :escurrimiento_id, :anegamiento_id, :grupo_id, :sal_id,
-                  :uso_de_la_tierra_id, :material_original, :esquema,
-                  :fase_id, :modal, :observaciones, :publico, :relieve_id,
-                  :ubicacion_attributes, :paisaje_attributes, :fase_attributes,
-                  :permeabilidad_id, :vegetacion_o_cultivos, :grupo_attributes,
-                  :capacidad_attributes, :humedad_attributes,
-                  :pedregosidad_attributes, :erosion_attributes, :etiquetas,
-                  :reconocedores, :grupo, :serie_attributes, :anular,
-                  :horizontes_attributes, :analiticos_attributes
-
   normalize_attributes :observaciones, :numero
 
-  attr_taggable :etiquetas
-  attr_taggable :reconocedores
+  acts_as_taggable_on :etiquetas, :reconocedores
 
-  # Permite utilizar roles sobre este modelo
-  resourcify role_cname: 'Rol'
+  # Permite utilizar roles de rolify sobre este modelo
+  resourcify :roles, role_cname: 'Rol'
 
-  scope :modales, where(modal: 'true')
-  scope :index,   joins(:ubicacion)
-                  .select('perfiles.fecha, perfiles.nombre,
-                           ubicacion.descripcion as ubicacion,
-                           perfiles.numero, perfiles.modal')
+  scope :modales, ->{ where(modal: 'true') }
 
   before_validation :asociar_serie, :asociar_fase, :asociar_grupo
 
@@ -36,7 +19,8 @@ class Perfil < ActiveRecord::Base
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
 
-  has_many :horizontes,   dependent: :destroy, inverse_of: :perfil, order: 'profundidad_inferior ASC'
+  has_many :horizontes, -> { order('profundidad_inferior ASC') },
+    dependent: :destroy, inverse_of: :perfil
   has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil
   has_one :capacidad,     dependent: :destroy, inverse_of: :perfil
   has_one :ubicacion,     dependent: :destroy, inverse_of: :perfil
@@ -45,16 +29,17 @@ class Perfil < ActiveRecord::Base
   has_one :erosion,       dependent: :destroy, inverse_of: :perfil
   has_one :pedregosidad,  dependent: :destroy, inverse_of: :perfil
 
+  has_many :analiticos,
+    -> { includes(:horizonte).order('profundidad_muestra ASC, horizonte_id ASC') },
+    through: :horizontes
+
+  belongs_to :usuario
+  belongs_to :fase
+  belongs_to :grupo
+  belongs_to :serie, counter_cache: :cantidad_de_perfiles
+
   has_lookups :escurrimiento, :pendiente, :permeabilidad, :relieve,
               :anegamiento, :posicion, :drenaje, :sal, :uso_de_la_tierra
-
-  has_many :analiticos, through: :horizontes, include: :horizonte,
-    order: 'profundidad_muestra ASC, horizonte_id ASC'
-
-  belongs_to :usuario,  inverse_of: :perfiles
-  belongs_to :fase,     inverse_of: :perfiles
-  belongs_to :grupo,    inverse_of: :perfiles
-  belongs_to :serie,    inverse_of: :perfiles, counter_cache: :cantidad_de_perfiles
 
   has_and_belongs_to_many :proyectos
 
@@ -73,12 +58,14 @@ class Perfil < ActiveRecord::Base
     joins(:ubicacion).where('ubicaciones.coordenadas is not ?', nil)
   end
 
+  # TODO agregar any: true para permitir combinar?
   ransacker :etiquetas, formatter: proc { |v|
       Perfil.tagged_with(Array.wrap(v.strip), on: :etiquetas).pluck(:id)
     } do |parent|
     parent.table[:id]
   end
 
+  # TODO agregar any: true para permitir combinar?
   ransacker :reconocedores, formatter: proc { |v|
       Perfil.tagged_with(Array.wrap(v.strip), on: :reconocedores).pluck(:id)
     } do |parent|
@@ -87,6 +74,13 @@ class Perfil < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at']
+  end
+
+  def self.index
+    joins(:ubicacion)
+      .select('perfiles.fecha, perfiles.nombre,
+        ubicacion.descripcion as ubicacion,
+        perfiles.numero, perfiles.modal')
   end
 
   private
@@ -104,7 +98,7 @@ class Perfil < ActiveRecord::Base
       # el perfil sólo se puede crear una serie, nunca modificarla
       if nombre
         _simbolo = simbolo
-        self.serie = Serie.find_or_create_by_nombre(nombre)
+        self.serie = Serie.find_or_create_by(nombre: nombre)
 
         # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
         # una serie existente desde un perfil.
@@ -124,14 +118,14 @@ class Perfil < ActiveRecord::Base
     # Se crea una fase sólo si no existe ya
     def asociar_fase
       if fase.try(:nombre?)
-        self.fase = Fase.find_or_create_by_nombre(fase.nombre)
+        self.fase = Fase.find_or_create_by(nombre: fase.nombre)
       end
     end
 
     # Se crea un grupo sólo si no existe ya
     def asociar_grupo
       if grupo.try(:descripcion?)
-        self.grupo = Grupo.find_or_create_by_descripcion(grupo.descripcion)
+        self.grupo = Grupo.find_or_create_by(descripcion: grupo.descripcion)
       end
     end
 end

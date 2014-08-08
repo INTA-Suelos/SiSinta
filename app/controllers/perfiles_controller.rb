@@ -1,8 +1,10 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
-  autocomplete :reconocedores, :name, full: true, class_name: 'RocketTag::Tag',
+  autocomplete :reconocedores, :name, full: true,
+    class_name: 'ActsAsTaggableOn::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
-  autocomplete :etiquetas, :name, full: true, class_name: 'RocketTag::Tag',
+  autocomplete :etiquetas, :name, full: true,
+    class_name: 'ActsAsTaggableOn::Tag',
     scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
 
   has_scope :pagina, default: 1, unless: :geojson?
@@ -77,7 +79,7 @@ class PerfilesController < AutorizadoController
 
   def update
     # Si falla, responders lo redirige a edit
-    opciones = if @perfil.update_attributes(params[:perfil])
+    opciones = if @perfil.update_attributes(perfil_params)
       { location: perfil_o_analiticos }
     else
       { }
@@ -145,7 +147,7 @@ class PerfilesController < AutorizadoController
   end
 
   def update_analiticos
-    @perfil.update_attributes(params[:perfil])
+    @perfil.update_attributes(perfil_params)
     @perfil = @perfil.decorate
     respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
       if @perfil.errors.any?
@@ -155,6 +157,43 @@ class PerfilesController < AutorizadoController
   end
 
   protected
+
+    def perfil_params
+      params.require(:perfil).permit(
+        :modal, :fecha, :numero, :vegetacion_o_cultivos, :material_original,
+        :drenaje_id, :relieve_id, :anegamiento_id, :posicion_id, :pendiente_id,
+        :cobertura_vegetal, :profundidad_napa, :escurrimiento_id, :sal_id,
+        :permeabilidad_id, :uso_de_la_tierra_id, :observaciones, :etiqueta_list,
+        :reconocedor_list, :publico,
+        serie_attributes: %i{ nombre simbolo id },
+        ubicacion_attributes: %i{
+          mosaico recorrido aerofoto id descripcion y x srid },
+        fase_attributes: %i{ nombre id },
+        grupo_attributes: %i{ descripcion id },
+        capacidad_attributes: [ :id, :clase_id, subclase_ids: [] ],
+        paisaje_attributes: %i{ tipo forma simbolo id },
+        humedad_attributes: [ :id, :clase_id, subclase_ids: [] ],
+        pedregosidad_attributes: %i{ clase_id subclase_id id },
+        erosion_attributes: %i{ subclase_id clase_id id },
+        horizontes_attributes: [
+          :tipo, :profundidad_superior, :profundidad_inferior, :textura_id,
+          :ph, :co3, :concreciones, :barnices, :moteados, :humedad, :raices,
+          :formaciones_especiales, :_destroy, :id,
+          limite_attributes: %i{ tipo_id forma_id id },
+          color_seco_attributes: %i{ hvc },
+          color_humedo_attributes: %i{ hvc },
+          estructura_attributes: %i{ tipo_id clase_id grado_id id },
+          consistencia_attributes: %i{ en_seco_id en_humedo_id plasticidad_id adhesividad_id id },
+        ],
+        analiticos_attributes: %i{
+          registro profundidad_muestra materia_organica_c materia_organica_n
+          materia_organica_cn arcilla limo_2_20 limo_2_50 arena_muy_fina
+          arena_fina arena_media arena_gruesa arena_muy_gruesa ca_co3 humedad
+          agua_3_atm agua_15_atm agua_util ph_pasta ph_h2o ph_kcl
+          resistencia_pasta conductividad base_ca base_mg base_k base_na s h t
+          saturacion_t saturacion_s_h densidad_aparente id }
+      )
+    end
 
     # Prepara el scope para la lista de perfiles
     def preparar
