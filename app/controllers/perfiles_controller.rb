@@ -222,11 +222,16 @@ class PerfilesController < AutorizadoController
       @perfiles = @perfiles.reorder("#{@metodo} #{direccion_de_ordenamiento}")
     end
 
-    # Determina si el usuario terminó de editar el perfil o va a seguir con los
-    # datos analíticos
-    # TODO Revisar que envíe al edit
+    # Determina a dónde redirigir de acuerdo al submit del formulario.
     def perfil_o_analiticos
-      params[:analiticos].present? ? editar_analiticos_perfil_path(@perfil) : @perfil
+      case params[:commit]
+      when t('helpers.submit.perfil.analiticos')
+        editar_analiticos_perfil_path(@perfil)
+      when t('helpers.submit.perfil.cambiar_ficha')
+        edit_perfil_path(@perfil)
+      else
+        @perfil
+      end
     end
 
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según

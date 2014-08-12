@@ -2,6 +2,10 @@
 
   = f.error_messages
 
+  .seleccionar-ficha.prepend-12.span-12.last
+    = select_tag :ficha, options_for_select(lista_de_fichas, current_usuario.ficha), class: 'span-8'
+    = f.submit t('helpers.submit.perfil.cambiar_ficha'), class: 'span-4 last'
+
   = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
     .span-23.last
@@ -35,4 +39,4 @@
 
     .acciones.span-8.last
       .span-4= f.submit unless bloqueado
-      .span-4.last= f.submit('Datos Analíticos', name: 'analiticos') unless bloqueado
+      .span-4.last= f.submit t('helpers.submit.perfil.analiticos') unless bloqueado

@@ -54,7 +54,13 @@ es:
   busquedas:
     edit:
       submit: 'Actualizar'
-
   comunes:
     perfiles_asociados:
       submit: "Buscar"
+  helpers:
+    submit:
+      perfil:
+        create: 'Crear %{model}'
+        edit: 'Actualizar %{model}'
+        analiticos: 'Datos Analíticos'
+        cambiar_ficha: 'Cambiar'
