@@ -74,3 +74,22 @@ form.completa {
     .acciones { display: 3%; }
   }
 }
+
+.seleccionar-ficha {
+  float: right;
+  width: 50%;
+
+  select, input {
+    display: inline;
+    float: right;
+  }
+
+  select {
+    margin-right: 2em;
+    width: 70%;
+  }
+
+  input {
+    width: 20%;
+  }
+}
