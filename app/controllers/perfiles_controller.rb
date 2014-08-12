@@ -231,7 +231,7 @@ class PerfilesController < AutorizadoController
         editar_analiticos_perfil_path(@perfil)
       when t('helpers.submit.perfil.cambiar_ficha')
         # Un filter carga @ficha con este valor en la siguiente solicitud
-        session[:ficha] = params[:ficha]
+        session[:ficha] = Ficha.find_by_valor(params[:ficha]).try(:valor)
         edit_perfil_path(@perfil)
       else
         @perfil
