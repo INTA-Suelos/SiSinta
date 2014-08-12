@@ -61,6 +61,7 @@ class Usuario < ActiveRecord::Base
   protected
 
     def asignar_valores_por_defecto
+      # TODO cambiar la asociación de ficha.valor a ficha.id
       self.ficha ||= 'completa' # Ficha con la que cargar un perfil
       self.srid  ||= '4326'     # SRID para mostrar las coordenadas
     end
