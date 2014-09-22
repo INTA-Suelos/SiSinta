@@ -29,7 +29,7 @@ class PerfilesController < AutorizadoController
     o.before_filter :ordenar
   end
 
-  before_filter :seleccionar_ficha, only: [:edit, :new]
+  before_filter :seleccionar_ficha, only: [:edit, :new, :show]
 
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
