@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :usuario do
     nombre { generate :cadena_unica }
     email
-    password "algún password inolvidable"
+    password 'algún password inolvidable'
 
     ignore { rol nil }
     after(:build) do |usuario, params|
