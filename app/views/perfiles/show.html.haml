@@ -12,7 +12,7 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
-= render partial: current_usuario.try(:ficha) || 'completa',
-    locals: { perfil: @perfil, bloqueado: true }
+-# TODO issue #41
+= render partial: ficha, locals: { perfil: @perfil, bloqueado: true }
 
 = volver_arriba

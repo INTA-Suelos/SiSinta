@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.8'
+gem 'rails', '4.0.10'
 
 ## DB
 gem 'pg'
@@ -10,7 +10,7 @@ gem 'yaml_db'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
-gem 'rolify'
+gem 'rolify', '~> 3.4'
 
 ## Presentación
 gem 'dynamic_form'
@@ -28,7 +28,7 @@ gem 'active_hash'
 gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.8.0'
 gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS

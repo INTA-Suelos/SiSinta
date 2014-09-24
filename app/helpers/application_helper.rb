@@ -155,10 +155,9 @@ module ApplicationHelper
     @subclases_de_erosion ||= SubclaseDeErosion.all
   end
 
+  # Lista de las fichas de acuerdo al formato que esperan los helper de selects
   def lista_de_fichas
-    [
-      ['Formulario clásico de Etchevere', 'completa']
-    ]
+    Ficha.all.collect { |f| [f.descripcion, f.valor] }
   end
 
   # Título de la página para el +<head>+ por defecto, extra se determina en el

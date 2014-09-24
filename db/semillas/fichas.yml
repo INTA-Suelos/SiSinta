@@ -1,0 +1,7 @@
+# Las diferentes plantillas de carga que entiende el sistema
+# El id es de uso interno, y si se lo cambia se corre el riesgo de perder
+# asociaciones previas.
+#
+- id:     1
+  valor:  'completa'
+  descripcion: 'Formulario clásico de Etchevere'

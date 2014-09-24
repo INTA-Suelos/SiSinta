@@ -1,8 +1,6 @@
 # encoding: utf-8
+# TODO buscar en todos los modelos con un index agregador
 SiSINTA::Application.routes.draw do
-
-  # TODO buscar en todos los modelos con un index agregador
-
   root to: 'inicio#index'
   get 'inicio/index'
 
@@ -71,7 +69,6 @@ SiSINTA::Application.routes.draw do
   end
 
   with_options path_names: femeninos do |r|
-
     r.resources :fases do
       collection do
         get 'autocompletar_nombre' => 'fases#autocomplete_fase_nombre'
@@ -86,6 +83,5 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :busquedas
-
   end
 end

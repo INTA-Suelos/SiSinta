@@ -73,6 +73,12 @@ module PerfilesHelper
     @continuar
   end
 
+  # La ficha o plantilla de carga que seleccionó el usuario en la acción
+  # anterior o la que definió en su usuario
+  def ficha
+    @ficha
+  end
+
   protected
 
     def checks_csv_marcados
