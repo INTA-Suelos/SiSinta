@@ -39,3 +39,6 @@ SiSINTA::Application.configure do
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-dev:url'
 end
+
+# FIXME why!
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'

@@ -1,5 +1,5 @@
 class GeojsonPerfilSerializer < ActiveModel::Serializer
-  attributes :id, :numero, :fecha, :clase, :serie
+  attributes :id, :numero, :fecha, :clase, :serie, :url
 
   def as_json(*args)
     self.to_feature
@@ -11,6 +11,11 @@ class GeojsonPerfilSerializer < ActiveModel::Serializer
   end
 
   def serie
-    object.serie.nombre
+    { 'nombre' => object.serie.nombre,
+      'url' => serie_url(object.serie) }
+  end
+
+  def url
+    perfil_url object
   end
 end
