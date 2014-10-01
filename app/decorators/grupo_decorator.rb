@@ -3,6 +3,10 @@ class GrupoDecorator < ApplicationDecorator
   decorates_association :perfiles, with: PaginadorDecorator
 
   def to_s
-    source.descripcion
+    descripcion
+  end
+
+  def descripcion
+    source.try(:descripcion) || ''
   end
 end

@@ -3,6 +3,10 @@ class FaseDecorator < ApplicationDecorator
   decorates_association :perfiles, with: PaginadorDecorator
 
   def to_s
-    source.nombre
+    nombre
+  end
+
+  def nombre
+    source.try(:nombre) || ''
   end
 end

@@ -9,5 +9,9 @@ FactoryGirl.define do
       recorrido 'mmm..'
       aerofoto '1'
     end
+
+    trait :con_coordenadas do
+      coordenadas 'POINT(45.0 55.0)'
+    end
   end
 end
