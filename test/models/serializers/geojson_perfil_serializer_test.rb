@@ -38,4 +38,12 @@ class GeojsonPerfilSerializerTest < ActiveSupport::TestCase
   test 'incluye un link anidado a la serie' do
     assert_equal serie_url(@perfil.serie), @geojson.properties['serie']['url']
   end
+
+  test 'si el perfil no tiene serie el geojson no tiene serie' do
+    @geojson = GeojsonPerfilSerializer.new(
+      create(:perfil_para_geojson, serie: nil).decorate
+    ).as_json
+
+    assert_nil @geojson.properties['serie']
+  end
 end
