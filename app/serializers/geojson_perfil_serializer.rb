@@ -1,5 +1,5 @@
 class GeojsonPerfilSerializer < ActiveModel::Serializer
-  attributes :id, :numero, :nombre, :fecha
+  attributes :id, :numero, :fecha, :clase, :serie
 
   def as_json(*args)
     self.to_feature
@@ -8,5 +8,9 @@ class GeojsonPerfilSerializer < ActiveModel::Serializer
   def to_feature
     factory = RGeo::GeoJSON::EntityFactory.instance
     factory.feature(object.coordenadas, nil, attributes)
+  end
+
+  def serie
+    object.serie.nombre
   end
 end
