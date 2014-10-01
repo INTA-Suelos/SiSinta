@@ -12,7 +12,7 @@ class GeojsonPerfilSerializer < ActiveModel::Serializer
 
   def serie
     { 'nombre' => object.serie.nombre,
-      'url' => serie_url(object.serie) }
+      'url' => serie_url(object.serie) } if object.serie.present?
   end
 
   def url
