@@ -63,8 +63,13 @@ class PerfilDecorator < ApplicationDecorator
     FaseDecorator.new source.try(:fase)
   end
 
-  # En el GeoJSON le decimos `clase` a grupo + fase
+  # En el GeoJSON le decimos `clase` a grupo + fase. Sólo se muestra si el
+  # perfil es público o el usuario puede leerlo.
   def clase
-    [grupo.descripcion, fase.nombre].join(' ').strip
+    if publico? || h.can?(:read, source)
+      [grupo.descripcion, fase.nombre].join(' ').strip
+    else
+      'No disponible'
+    end
   end
 end
