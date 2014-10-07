@@ -36,8 +36,8 @@ feature 'Carga de perfiles' do
 
       within 'form' do
         within '#serie' do
-          fill_in Serie.human_attribute_name('nombre'),    with: 'Sarasa'
-          fill_in Serie.human_attribute_name('simbolo'),    with: 'Sa'
+          fill_in Serie.human_attribute_name('nombre'),   with: 'Sarasa'
+          fill_in Serie.human_attribute_name('simbolo'),  with: 'Sa'
         end
 
         click_button 'Actualizar Perfil'
@@ -56,8 +56,8 @@ feature 'Carga de perfiles' do
 
       within 'form' do
         within '#serie' do
-          fill_in Serie.human_attribute_name('nombre'),    with: serie.nombre
-          fill_in Serie.human_attribute_name('simbolo'),    with: serie.simbolo
+          fill_in Serie.human_attribute_name('nombre'),   with: serie.nombre
+          fill_in Serie.human_attribute_name('simbolo'),  with: serie.simbolo
         end
 
         click_button 'Actualizar Perfil'
@@ -75,8 +75,8 @@ feature 'Carga de perfiles' do
 
       within 'form' do
         within '#serie' do
-          fill_in Serie.human_attribute_name('nombre'),    with: serie.nombre
-          fill_in Serie.human_attribute_name('simbolo'),    with: 'Fa'
+          fill_in Serie.human_attribute_name('nombre'),   with: serie.nombre
+          fill_in Serie.human_attribute_name('simbolo'),  with: 'Fa'
         end
 
         click_button 'Actualizar Perfil'
