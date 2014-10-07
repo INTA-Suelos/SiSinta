@@ -42,7 +42,6 @@ class Ability
         invitado
       end
     end
-
   end
 
   # Lógica de cada rol
