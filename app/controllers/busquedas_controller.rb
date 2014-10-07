@@ -7,14 +7,15 @@ class BusquedasController < ApplicationController
 
   def index
     @busquedas_publicas = Busqueda.publicas
+
     if usuario_signed_in?
       @busquedas_publicas = @busquedas_publicas.where('usuario_id <> ?', current_usuario.id)
     end
+
     respond_with(@busquedas)
   end
 
   def show
-
     respond_to do |format|
       format.html do
         params[:q] = @busqueda.consulta # TODO why?
@@ -30,16 +31,18 @@ class BusquedasController < ApplicationController
   def new
     @perfiles = Perfil.search
     @perfiles.build_grouping
+
     respond_with(@busqueda = @busqueda.decorate)
   end
 
   def edit
     @perfiles = Perfil.search(@busqueda.consulta)
+
     respond_with @busqueda = @busqueda.decorate
   end
 
   def create
-    @busqueda.consulta = params[:q]
+    @busqueda.consulta = params.require(:q)
     @busqueda.usuario  = current_usuario
 
     respond_with(@busqueda) do |format|
@@ -47,23 +50,31 @@ class BusquedasController < ApplicationController
         # vuelve a new (necesita el objeto de búsqueda de nuevo)
         format.html do
           session[:volver_a] = new_busqueda_path
-          redirect_to seleccionar_perfiles_path(q: params[:q])
+          redirect_to seleccionar_perfiles_path(q: params.require(:q))
         end
       end
     end
   end
 
   def update
-    @busqueda.update_attributes(params[:busqueda])
+    @busqueda.update_attributes busqueda_params
+
     respond_with(@busqueda)
   end
 
   def destroy
     @busqueda.destroy
+
     respond_with(@busqueda)
   end
 
   private
+
+    def busqueda_params
+      if usuario_signed_in?
+        params.require(:busqueda).permit(:nombre, :publico)
+      end
+    end
 
     # Para los mensajes del flash de responders
     def interpolation_options
