@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'csv'
-require "application_responder"
+require 'application_responder'
 
 class ApplicationController < ActionController::Base
   include BrowserDetect, ApplicationHelper

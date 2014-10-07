@@ -57,7 +57,8 @@ gem 'select2-rails'
 
 ## Server
 gem 'thin'
-gem 'libmemcached_store'
+# TODO revisar configuración de compresión
+gem 'dalli'
 
 ## Desarrollo
 gem 'minitest-rails'
