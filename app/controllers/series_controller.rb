@@ -74,7 +74,7 @@ class SeriesController < AutorizadoController
       # TODO Pasar a require cuando reformule la asociación de perfiles
       if params[:serie].present?
         params.require(:serie).permit(
-          :nombre, :simbolo, :descripcion,
+          :nombre, :simbolo, :descripcion, :provincia_id,
           perfiles_attributes: %i{ id anular }
         )
       else
@@ -125,7 +125,7 @@ class SeriesController < AutorizadoController
     # Revisa el input del usuario para los métodos de ordenamiento. Ordena según
     # el +nombre+ por default.
     def metodo_de_ordenamiento
-      %w[ nombre simbolo descripcion cantidad_de_perfiles
+      %w[ nombre simbolo provincia_id cantidad_de_perfiles
         ].include?(params[:por]) ? params[:por] : 'nombre'
     end
 

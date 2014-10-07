@@ -8,4 +8,6 @@ class Provincia < Lookup
   field :slug
 
   enum_accessor :slug
+
+  alias_attribute :nombre, :valor
 end
