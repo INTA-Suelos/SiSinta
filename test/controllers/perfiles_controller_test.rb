@@ -2,18 +2,18 @@
 require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
-  test "el test accede al controlador" do
+  test 'el test accede al controlador' do
     assert_instance_of PerfilesController, @controller
   end
 
-  test "va a 'nuevo' si está autorizado" do
+  test 'va a nuevo si está autorizado' do
     loguearse_como 'Autorizado'
 
     get :new
     assert_response :success
   end
 
-  test "crea un perfil si está autorizado" do
+  test 'crea un perfil si está autorizado' do
     loguearse_como 'Autorizado'
 
     assert_difference('Perfil.count', 1) do
@@ -23,34 +23,34 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfil_path(assigns(:perfil))
   end
 
-  test "muestra un perfil si está autorizado" do
+  test 'muestra un perfil si está autorizado' do
     loguearse_como 'Autorizado'
 
-    @request.env["HTTP_REFERER"] = "/perfiles/"
+    @request.env['HTTP_REFERER'] = '/perfiles/'
 
     get :show, id: create(:perfil).to_param
 
     assert_response :success
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
     get :edit, id: perfil.to_param
     assert_response :success
   end
 
-  test "actualiza un perfil si está autorizado" do
+  test 'actualiza un perfil si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
 
-    @request.env["HTTP_REFERER"] = "/perfiles/#{perfil.to_param}"
+    @request.env['HTTP_REFERER'] = "/perfiles/#{perfil.to_param}"
     put :update, id: perfil.to_param, perfil: { observaciones: 'agudas' }
     assert_redirected_to perfil_path(assigns(:perfil))
     assert_equal 'agudas', assigns(:perfil).observaciones
   end
 
-  test "elimina un perfil si está autorizado" do
+  test 'elimina un perfil si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
 
@@ -61,29 +61,29 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_redirected_to perfiles_path
   end
 
-  test "accede a la lista de perfiles sin loguearse" do
+  test 'accede a la lista de perfiles sin loguearse' do
     assert_nil @controller.current_usuario
     get :index
     assert_response :success
   end
 
-  test "accede a los datos en geoJSON sin loguearse" do
+  test 'accede a los datos en geoJSON sin loguearse' do
     assert_nil @controller.current_usuario
-    @request.env["HTTP_REFERER"] = "/perfiles/"
+    @request.env['HTTP_REFERER'] = '/perfiles/'
     get :index, format: 'geojson'
     assert_response :success
   end
 
-  test "va a 'editar_analiticos' si está autorizado" do
+  test 'va a editar_analiticos si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
 
     get :editar_analiticos, id: perfil.to_param
     assert_response :success
-    assert_not_nil assigns(:perfil), "Debe asignar el perfil en 'editar'"
+    assert_not_nil assigns(:perfil), 'Debe asignar el perfil en editar'
   end
 
-  test "actualiza todos los datos analíticos" do
+  test 'actualiza todos los datos analíticos' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
     perfil.horizontes.create(attributes_for(:horizonte))
@@ -112,9 +112,9 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal analitico[:profundidad_muestra], perfil.analiticos.first.profundidad_muestra
   end
 
-  test "rutea a editar_analiticos" do
+  test 'rutea a editar_analiticos' do
     assert_routing({
-      path: "/perfiles/345/editar_analiticos",
+      path: '/perfiles/345/editar_analiticos',
       method: :get
     },{
       controller: 'perfiles', action: 'editar_analiticos',
@@ -122,9 +122,9 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a update_analiticos" do
+  test 'rutea a update_analiticos' do
     assert_routing({
-      path: "/perfiles/123/update_analiticos",
+      path: '/perfiles/123/update_analiticos',
       method: :put
     },{
       controller: 'perfiles', action: 'update_analiticos',
@@ -132,54 +132,54 @@ class PerfilesControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a exportar" do
+  test 'rutea a exportar' do
     assert_routing({
-      path: "/perfiles/exportar",
+      path: '/perfiles/exportar',
       method: :get
     },{
       controller: 'perfiles', action: 'exportar'
     })
   end
 
-  test "rutea a procesar" do
+  test 'rutea a procesar' do
     assert_routing({
-      path: "/perfiles/procesar",
+      path: '/perfiles/procesar',
       method: :post
     },{
       controller: 'perfiles', action: 'procesar'
     })
   end
 
-  test "rutea a almacenar" do
+  test 'rutea a almacenar' do
     assert_routing({
-      path: "/perfiles/almacenar",
+      path: '/perfiles/almacenar',
       method: :put
     },{
       controller: 'perfiles', action: 'almacenar'
     })
   end
 
-  test "almacena una lista de perfiles temporalmente" do
+  test 'almacena una lista de perfiles temporalmente' do
     loguearse_como 'Autorizado'
-    @request.env["HTTP_REFERER"] = "/perfiles/"
+    @request.env['HTTP_REFERER'] = '/perfiles/'
 
     put :almacenar, perfil_ids: [1, 2, 3]
 
     assert_equal %w{1 2 3}, @controller.send(:perfiles_seleccionados),
-      "Debe almacenar una lista de perfiles"
+      'Debe almacenar una lista de perfiles'
     assert_redirected_to exportar_perfiles_path
   end
 
-  test "rutea a seleccionar_perfiles" do
+  test 'rutea a seleccionar_perfiles' do
     assert_routing({
-      path: "/perfiles/seleccionar",
+      path: '/perfiles/seleccionar',
       method: :get
     },{
       controller: 'perfiles', action: 'seleccionar'
     })
   end
 
-  test "el formulario incluye tags para autocompletar" do
+  test 'el formulario incluye tags para autocompletar' do
     loguearse_como 'Autorizado'
     get :new
 
@@ -187,11 +187,11 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_select '#perfil_serie_attributes_nombre'
   end
 
-  test "autocompleta reconocedores" do
+  test 'autocompleta reconocedores' do
     skip 'resolver después de actualizar la interfaz y la búsqueda'
   end
 
-  test "autocompleta etiquetas" do
+  test 'autocompleta etiquetas' do
     skip 'resolver después de actualizar la interfaz y la búsqueda'
   end
 end

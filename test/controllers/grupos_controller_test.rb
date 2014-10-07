@@ -2,7 +2,7 @@
 require './test/test_helper'
 
 class GruposControllerTest < ActionController::TestCase
-  test "autocompleta descripción" do
+  test 'autocompleta descripción' do
     termino = create(:grupo).descripcion
 
     get :autocomplete_grupo_descripcion, term: termino
@@ -10,12 +10,12 @@ class GruposControllerTest < ActionController::TestCase
     assert_equal  Grupo.where("descripcion like '%#{termino}%'").size,
                   json.size
 
-    assert json.first.include?('id'), "debe devolver el id"
-    assert json.first.include?('label'), "debe devolver el label"
-    assert json.first.include?('value'), "debe devolver la descripción"
+    assert json.first.include?('id'), 'debe devolver el id'
+    assert json.first.include?('label'), 'debe devolver el label'
+    assert json.first.include?('value'), 'debe devolver la descripción'
   end
 
-  test "va a 'nuevo' si está autorizado" do
+  test 'va a nuevo si está autorizado' do
     loguearse
 
     autorizar { get :new }
@@ -35,7 +35,7 @@ class GruposControllerTest < ActionController::TestCase
     assert_redirected_to grupo_path(assigns(:grupo))
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     loguearse
     grupo = create(:grupo)
 
@@ -46,7 +46,7 @@ class GruposControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "actualiza un grupo si está autorizado" do
+  test 'actualiza un grupo si está autorizado' do
     loguearse
     grupo = create(:grupo)
     params = attributes_for(:grupo)

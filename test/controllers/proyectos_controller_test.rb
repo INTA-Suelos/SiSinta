@@ -2,13 +2,13 @@
 require './test/test_helper'
 
 class ProyectosControllerTest < ActionController::TestCase
-  test "accede a la lista de proyectos sin loguearse" do
+  test 'accede a la lista de proyectos sin loguearse' do
     assert_nil @controller.current_usuario
     get :index
     assert_response :success
   end
 
-  test "va a 'nuevo' si está autorizado" do
+  test 'va a nuevo si está autorizado' do
     loguearse
 
     autorizar { get :new }
@@ -16,7 +16,7 @@ class ProyectosControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "crea un proyecto si está autorizado" do
+  test 'crea un proyecto si está autorizado' do
     loguearse
 
     assert_difference('Proyecto.count') do
@@ -28,12 +28,12 @@ class ProyectosControllerTest < ActionController::TestCase
     assert_redirected_to proyecto_path(assigns(:proyecto))
   end
 
-  test "muestra un proyecto sin loguearse" do
+  test 'muestra un proyecto sin loguearse' do
     get :show, id: create(:proyecto)
     assert_response :success
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     usuario = loguearse
 
     autorizar do
@@ -43,7 +43,7 @@ class ProyectosControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "actualiza un proyecto si está autorizado" do
+  test 'actualiza un proyecto si está autorizado' do
     usuario = loguearse
     proyecto = create(:proyecto, usuario: usuario)
 
@@ -60,7 +60,7 @@ class ProyectosControllerTest < ActionController::TestCase
     assert_equal 'Metálica', assigns(:proyecto).descripcion
   end
 
-  test "elimina un proyecto si está autorizado" do
+  test 'elimina un proyecto si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     proyecto = create(:proyecto, usuario: usuario)
 

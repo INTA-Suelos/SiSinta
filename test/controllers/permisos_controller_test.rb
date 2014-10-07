@@ -2,9 +2,9 @@
 require './test/test_helper'
 
 class PermisosControllerTest < ActionController::TestCase
-  test "rutea a permisos (edit)" do
+  test 'rutea a permisos (edit)' do
     assert_routing({
-      path: "/permisos/perfil/345",
+      path: '/permisos/perfil/345',
       method: :get
     },{
       controller: 'permisos', action: 'edit', modelo: 'perfil',
@@ -12,9 +12,9 @@ class PermisosControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a permitir (update)" do
+  test 'rutea a permitir (update)' do
     assert_routing({
-      path: "/permisos/perfil/345",
+      path: '/permisos/perfil/345',
       method: :put
     },{
       controller: 'permisos', action: 'update', modelo: 'perfil',
@@ -22,7 +22,7 @@ class PermisosControllerTest < ActionController::TestCase
     })
   end
 
-  test "filtra los modelos habilitados para permisos" do
+  test 'filtra los modelos habilitados para permisos' do
     usuario = loguearse_como 'Autorizado'
 
     %w{perfil proyecto serie}.each do |modelo|
