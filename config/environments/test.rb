@@ -4,7 +4,7 @@ SiSINTA::Application.configure do
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
-  # your test database is "scratch space" for the test suite and is wiped
+  # your test database is 'scratch space' for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
 
@@ -15,7 +15,9 @@ SiSINTA::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance.
   config.serve_static_assets  = true
-  config.static_cache_control = "public, max-age=3600"
+  config.static_cache_control = 'public, max-age=3600'
+
+  config.cache_store = :dalli_store
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -38,7 +40,6 @@ SiSINTA::Application.configure do
   # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-dev:url'
-end
 
-# FIXME why!
-Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+end

@@ -16,5 +16,4 @@ class AutorizadoController < ApplicationController
     flash[:error] = I18n.t 'unauthorized.default'
     volver
   end
-
 end
