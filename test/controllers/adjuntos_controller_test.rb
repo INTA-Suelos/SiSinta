@@ -2,9 +2,9 @@
 require './test/test_helper'
 
 class AdjuntosControllerTest < ActionController::TestCase
-  test "rutea a index" do
+  test 'rutea a index' do
     assert_routing({
-      path: "/perfiles/1/adjuntos",
+      path: '/perfiles/1/adjuntos',
       method: :get
     },{
       controller: 'adjuntos', action: 'index',
@@ -12,9 +12,9 @@ class AdjuntosControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a show" do
+  test 'rutea a show' do
     assert_routing({
-      path: "/perfiles/1/adjuntos/2",
+      path: '/perfiles/1/adjuntos/2',
       method: :get
     },{
       controller: 'adjuntos', action: 'show',
@@ -22,9 +22,9 @@ class AdjuntosControllerTest < ActionController::TestCase
     })
   end
 
-  test "rutea a descargar" do
+  test 'rutea a descargar' do
     assert_routing({
-      path: "/perfiles/1/adjuntos/2/descargar",
+      path: '/perfiles/1/adjuntos/2/descargar',
       method: :get
     },{
       controller: 'adjuntos', action: 'descargar',
@@ -32,7 +32,7 @@ class AdjuntosControllerTest < ActionController::TestCase
     })
   end
 
-  test "muestra los adjuntos del perfil" do
+  test 'muestra los adjuntos del perfil' do
     usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     3.times do
@@ -44,23 +44,23 @@ class AdjuntosControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_not_nil assigns(:perfil), "No asigna @perfil"
-    assert_not_nil assigns(:adjuntos), "No asigna @adjuntos"
+    assert_not_nil assigns(:perfil), 'No asigna @perfil'
+    assert_not_nil assigns(:adjuntos), 'No asigna @adjuntos'
     assert_equal perfil.adjuntos.count, assigns(:adjuntos).count
   end
 
-  test "sólo muestra los adjuntos del perfil solicitado" do
+  test 'sólo muestra los adjuntos del perfil solicitado' do
     loguearse
 
     autorizar do
       get :index, perfil_id: create(:perfil).id
     end
 
-    assert_not_nil assigns(:perfil), "No asigna @perfil"
-    assert assigns(:adjuntos).empty?, "Asigna @adjuntos"
+    assert_not_nil assigns(:perfil), 'No asigna @perfil'
+    assert assigns(:adjuntos).empty?, 'Asigna @adjuntos'
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     adjunto = perfil.adjuntos.create attributes_for(:adjunto)
@@ -70,11 +70,11 @@ class AdjuntosControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_not_nil assigns(:perfil), "Debe asignar @perfil"
-    assert_not_nil assigns(:adjunto), "Debe asignar @adjunto"
+    assert_not_nil assigns(:perfil), 'Debe asignar @perfil'
+    assert_not_nil assigns(:adjunto), 'Debe asignar @adjunto'
   end
 
-  test "actualizar un adjunto si está autorizado" do
+  test 'actualizar un adjunto si está autorizado' do
     usuario = loguearse
     perfil = create(:perfil, usuario: usuario)
     adjunto = perfil.adjuntos.create attributes_for(:adjunto)

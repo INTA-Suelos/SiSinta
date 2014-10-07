@@ -64,7 +64,7 @@ class PerfilesController < AutorizadoController
     respond_with @perfil = @perfil.decorate
   end
 
-  # Cada usuario es propietario y "miembro" de los perfiles que crea
+  # Cada usuario es propietario y 'miembro' de los perfiles que crea
   def create
     @perfil.usuario = current_usuario
 
@@ -167,7 +167,7 @@ class PerfilesController < AutorizadoController
         :cobertura_vegetal, :profundidad_napa, :escurrimiento_id, :sal_id,
         :permeabilidad_id, :uso_de_la_tierra_id, :observaciones, :etiqueta_list,
         :reconocedor_list, :publico,
-        serie_attributes: %i{ nombre simbolo id },
+        serie_attributes: %i{ nombre simbolo provincia_id id },
         ubicacion_attributes: %i{
           mosaico recorrido aerofoto id descripcion y x srid },
         fase_attributes: %i{ nombre id },

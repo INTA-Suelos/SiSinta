@@ -15,14 +15,14 @@ SiSINTA::Application.configure do
 
   # Habilito el cache para pruebas
   config.action_controller.perform_caching = true
-  config.cache_store = :libmemcached_store
+  config.cache_store = :dalli_store
 
   # Para testear Devise
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default charset: "utf-8"
+  config.action_mailer.default charset: 'utf-8'
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -68,5 +68,4 @@ SiSINTA::Application.configure do
     # envía en texto plano pero envuelto en TLS
     authentication:       :plain
   }
-
 end

@@ -2,7 +2,7 @@
 require './test/test_helper'
 
 class EquiposControllerTest < ActionController::TestCase
-  test "muestra la lista de equipos si está autorizado" do
+  test 'muestra la lista de equipos si está autorizado' do
     loguearse
 
     autorizar do
@@ -13,7 +13,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_not_nil assigns(:equipos)
   end
 
-  test "va a 'nuevo' si está autorizado" do
+  test 'va a nuevo si está autorizado' do
     loguearse
 
     autorizar do
@@ -23,7 +23,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "crea un equipo si está autorizado" do
+  test 'crea un equipo si está autorizado' do
     loguearse
 
     assert_difference('Equipo.count') do
@@ -35,7 +35,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_redirected_to equipo_path(assigns(:equipo))
   end
 
-  test "muestra un equipo si está autorizado" do
+  test 'muestra un equipo si está autorizado' do
     loguearse
 
     autorizar do
@@ -45,7 +45,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
@@ -56,7 +56,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "actualiza un equipo si está autorizado" do
+  test 'actualiza un equipo si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
@@ -67,7 +67,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_redirected_to equipo_path(assigns(:equipo))
   end
 
-  test "elimina un equipo si está autorizado" do
+  test 'elimina un equipo si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
@@ -80,7 +80,7 @@ class EquiposControllerTest < ActionController::TestCase
     assert_redirected_to equipos_path
   end
 
-  test "editar incluye tags para autocompletar" do
+  test 'editar incluye tags para autocompletar' do
     usuario = loguearse
 
     autorizar do

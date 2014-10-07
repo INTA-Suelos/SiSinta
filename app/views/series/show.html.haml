@@ -11,13 +11,15 @@
 
     = field_set_tag 'Datos de la serie', class: 'celeste_oscuro span-23 last' do
 
-      .span-22
+      .span-22.last
         .span-2= f.label 'Nombre'
-        .span-16= @serie.nombre
-        .span-2= f.label 'Simbolo'
+        .span-8= @serie.nombre
+        .span-2= f.label 'Provincia'
+        .span-6= @serie.provincia.try(:nombre)
+        .span-2= f.label 'Símbolo'
         .span-2.last= @serie.simbolo
 
-      .span-22
+      .span-22.last
         .span-2= f.label 'Descripción'
         .span-20.last!= @serie.descripcion
 

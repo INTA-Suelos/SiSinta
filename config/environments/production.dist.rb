@@ -23,7 +23,7 @@ SiSINTA::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  # Defaults to Rails.root.join("public/assets")
+  # Defaults to Rails.root.join('public/assets')
   config.assets.manifest = Rails.root.join('public/estaticos')
 
   # Especifica un host diferente para los assets, así no tienen sobrecarga por
@@ -34,7 +34,7 @@ SiSINTA::Application.configure do
   #config.action_controller.asset_host = "http://cache%d.cambiame"
 
   # Specifies the header that your server uses for sending files
-  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+  # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for apache
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -48,22 +48,22 @@ SiSINTA::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-  config.cache_store = :libmemcached_store
+  config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  # config.action_controller.asset_host = 'http://assets.example.com'
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( ie.css print.css )
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
-  config.action_mailer.default_url_options = { :host => 'cambiame' }
+  config.action_mailer.default_url_options = { host: 'cambiame' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default charset: 'utf-8'
 
   # Enable threaded mode
   # config.threadsafe!

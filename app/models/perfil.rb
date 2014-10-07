@@ -51,6 +51,7 @@ class Perfil < ActiveRecord::Base
 
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
+  delegate :provincia,  to: :serie, allow_nil: true
   delegate :coordenadas, to: :ubicacion, allow_nil: true
 
   # Scope con los que tienen definidas las coordenadas
@@ -98,7 +99,8 @@ class Perfil < ActiveRecord::Base
       # el perfil sólo se puede crear una serie, nunca modificarla
       if nombre
         _simbolo = simbolo
-        self.serie = Serie.find_or_create_by(nombre: nombre)
+        # TODO debería pasar el usuario?
+        self.serie = Serie.find_or_create_by(nombre: nombre, provincia_id: provincia.try(:id))
 
         # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
         # una serie existente desde un perfil.

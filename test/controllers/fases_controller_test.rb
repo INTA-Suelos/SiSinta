@@ -2,19 +2,19 @@
 require './test/test_helper'
 
 class FasesControllerTest < ActionController::TestCase
-  test "autocompleta nombre" do
+  test 'autocompleta nombre' do
     termino = create(:fase).nombre
     get :autocomplete_fase_nombre, term: termino
     assert_response :success
     assert_equal  Fase.where("nombre like '%#{termino}%'").size,
                   json.size
 
-    assert json.first.include?('id'), "debe devolver el id"
-    assert json.first.include?('label'), "debe devolver el label"
-    assert json.first.include?('value'), "debe devolver el nombre"
+    assert json.first.include?('id'), 'debe devolver el id'
+    assert json.first.include?('label'), 'debe devolver el label'
+    assert json.first.include?('value'), 'debe devolver el nombre'
   end
 
-  test "va a 'nueva' si está autorizado" do
+  test 'va a nueva si está autorizado' do
     loguearse
 
     autorizar { get :new }
@@ -34,7 +34,7 @@ class FasesControllerTest < ActionController::TestCase
     assert_redirected_to fase_path(assigns(:fase))
   end
 
-  test "va a 'editar' si está autorizado" do
+  test 'va a editar si está autorizado' do
     loguearse
 
     autorizar do
@@ -44,7 +44,7 @@ class FasesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "actualiza una fase si está autorizado" do
+  test 'actualiza una fase si está autorizado' do
     loguearse
     fase = create(:fase)
     params = attributes_for(:fase)

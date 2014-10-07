@@ -10,18 +10,18 @@
   %table#series
     %thead
       %tr
+        %th= link_para_ordenar        :provincia_id,          'Provincia'
         %th= link_para_ordenar        :nombre,                'Nombre'
         %th= link_para_ordenar        :simbolo,               'Símbolo'
-        %th= link_para_ordenar        :descripcion,           'Descripción'
         %th.numero= link_para_ordenar :cantidad_de_perfiles,  'Perfiles'
         %th.acciones
 
     %tbody
       - @series.each do |serie|
         %tr
+          %td= serie.provincia.try(:nombre)
           %td= serie.nombre
           %td= serie.simbolo
-          %td= serie.descripcion.try(:truncate, 35)
           %td.numero= serie.perfiles.size
           %td.acciones
             = link_to 'Mostrar', serie
