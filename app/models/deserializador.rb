@@ -47,6 +47,28 @@ class Deserializador
     end
   end
 
+  # Itera sobre los perfiles y sus horizontes (agrupados por +parsear_csv+) y
+  # construye los modelos correspondientes a través de +deserializar_perfiles+.
+  #
+  # perfiles - un Hash como el que devuelve +parsear_csv+ con perfiles ya
+  #            acumulados.
+  # usuario  - el email del usuario que carga los perfiles (default: nil).
+  #
+  # Devuelve una colección de Perfiles instanciados con los datos
+  # correspondientes.
+  def self.construir_perfiles(perfiles, usuario = nil)
+    deserializar_perfiles(perfiles, usuario).map do |deserializador|
+      deserializador.construir
+    end
+  end
+
+  # Construye todos los objetos necesarios en el orden correspondiente
+  #
+  # Devuelve el Perfil instanciado
+  def construir
+    construir_horizontes construir_perfil
+  end
+
   # Construye un nuevo Perfil y sus asociaciones unitarias en base a los datos
   # de inicialización.
   #

@@ -4,6 +4,7 @@ require './test/test_helper'
 describe Deserializador do
   describe 'Parser' do
     let(:archivo) { Rails.root.join('test', 'data', 'cosas.csv') }
+    let(:perfiles) { Deserializador.parsear_csv(archivo, :llave) }
 
     describe '.parsear_csv' do
       subject { Deserializador.parsear_csv(archivo, :llave) }
@@ -39,7 +40,6 @@ describe Deserializador do
     end
 
     describe '.deserializar_perfiles' do
-      let(:perfiles) { Deserializador.parsear_csv(archivo, :llave) }
       subject { Deserializador.deserializar_perfiles(perfiles) }
 
       it 'instancia un Deserializador por Perfil' do
@@ -57,6 +57,20 @@ describe Deserializador do
 
         Deserializador.stub :new, spec do
           Deserializador.deserializar_perfiles(perfiles, 'juan@salvo.com.ar')
+        end
+      end
+    end
+
+    describe '.construir_perfiles' do
+      subject { Deserializador.construir_perfiles(perfiles) }
+
+      it 'instancia un Perfil por llave' do
+        subject.size.must_equal perfiles.size
+      end
+
+      it 'devuelve una colección de Perfil' do
+        subject.each do |p|
+          p.must_be_instance_of Perfil
         end
       end
     end
