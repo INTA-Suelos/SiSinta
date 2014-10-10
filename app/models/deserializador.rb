@@ -22,7 +22,7 @@ class Deserializador
   #
   # Devuelve un Hash donde la llave es un id de la columna `id` y el valor es
   # un Array de CSV::Row con los horizontes de ese id.
-  def self.parsear_perfiles_de_csv(archivo, llave, perfiles = {})
+  def self.parsear_csv(archivo, llave, perfiles = {})
     CSV.foreach archivo, headers: true do |f|
       id_temporal = f[llave.to_s]
 
@@ -30,6 +30,21 @@ class Deserializador
       perfiles[id_temporal] << f
     end
     perfiles
+  end
+
+  # Itera sobre los perfiles y sus horizontes (agrupados por +parsear_csv+) y
+  # construye un Deserializador por cada perfil.
+  #
+  # perfiles - un Hash como el que devuelve +parsear_csv+ con perfiles ya
+  #            acumulados.
+  # usuario  - el email del usuario que carga los perfiles (default: nil).
+  #
+  # Devuelve una colección de Deserializadores instanciados con los datos de
+  # cada perfil.
+  def self.deserializar_perfiles(perfiles, usuario = nil)
+    perfiles.map do |_, horizontes|
+      Deserializador.new(horizontes, usuario)
+    end
   end
 
   # Construye un nuevo Perfil y sus asociaciones unitarias en base a los datos
