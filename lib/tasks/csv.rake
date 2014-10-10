@@ -9,7 +9,7 @@ namespace :sisinta do
 
       # El archivo .csv
       if (archivo = ENV['archivo']).present? && File.exists?(archivo)
-        perfiles = Deserializador.parsear_perfiles_de_csv archivo
+        perfiles = Deserializador.parsear_perfiles_de_csv archivo, :id
 
         perfiles.each do |id, horizontes|
           des = Deserializador.new(horizontes, usuario)

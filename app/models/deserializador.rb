@@ -22,9 +22,9 @@ class Deserializador
   #
   # Devuelve un Hash donde la llave es un id de la columna `id` y el valor es
   # un Array de CSV::Row con los horizontes de ese id.
-  def self.parsear_perfiles_de_csv(archivo, perfiles = {})
+  def self.parsear_perfiles_de_csv(archivo, llave, perfiles = {})
     CSV.foreach archivo, headers: true do |f|
-      id_temporal = f['id']
+      id_temporal = f[llave.to_s]
 
       perfiles[id_temporal] ||= []
       perfiles[id_temporal] << f
