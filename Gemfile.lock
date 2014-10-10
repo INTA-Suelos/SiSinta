@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/mauriciopasquier/yaml_db.git
+  revision: 58b5f0a167c2def187c1ebbc9f57210324efab8e
+  branch: order-join-tables
+  specs:
+    yaml_db (0.2.3)
+
+GIT
   remote: https://github.com/activerecord-hackery/squeel.git
   revision: f5a810ca2713b59dcafc6eeac1b80e4098d02e77
   specs:
@@ -286,7 +293,6 @@ GEM
     websocket (1.2.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -343,4 +349,4 @@ DEPENDENCIES
   turn
   uglifier
   version
-  yaml_db
+  yaml_db!
