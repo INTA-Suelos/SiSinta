@@ -9,16 +9,12 @@ namespace :sisinta do
 
       # El archivo .csv
       if (archivo = ENV['archivo']).present? && File.exists?(archivo)
-        perfiles = Deserializador.parsear_perfiles_de_csv archivo
+        perfiles = Deserializador.parsear_csv archivo, :id
 
-        perfiles.each do |id, horizontes|
-          des = Deserializador.new(horizontes, usuario)
-
-          perfil = des.construir_horizontes(des.construir_perfil)
-
+        Deserializador.construir_perfiles(perfiles, usuario).each do |perfil|
           unless perfil.save
-            puts "Ocurrió un error con el perfil #{id} y estos horizontes:"
-            ap horizontes
+            puts "Ocurrió un error con estos horizontes:"
+            ap perfil.horizontes
           end
         end
       else

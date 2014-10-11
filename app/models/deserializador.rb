@@ -1,5 +1,5 @@
 # encoding: utf-8
-# Clase para procesar archivos CSV y convertirlos a modelos del sistema.
+# Procesa archivos CSV y los convierte en modelos del sistema.
 class Deserializador
   attr_accessor :horizontes, :usuario
 
@@ -7,6 +7,7 @@ class Deserializador
   #
   # horizontes - todos los CSV::Row de un mismo perfil.
   # usuario    - el email del usuario que carga los perfiles (default: nil).
+  # FIXME aceptar el perfil_id: [horizontes] en vez de sólo [horizontes]
   def initialize(horizontes, usuario = nil)
     @horizontes = horizontes
     @usuario = usuario
@@ -21,14 +22,51 @@ class Deserializador
   #
   # Devuelve un Hash donde la llave es un id de la columna `id` y el valor es
   # un Array de CSV::Row con los horizontes de ese id.
-  def self.parsear_perfiles_de_csv(archivo, perfiles = {})
+  def self.parsear_csv(archivo, llave, perfiles = {})
     CSV.foreach archivo, headers: true do |f|
-      id_temporal = f['id']
+      id_temporal = f[llave.to_s]
 
       perfiles[id_temporal] ||= []
       perfiles[id_temporal] << f
     end
     perfiles
+  end
+
+  # Itera sobre los perfiles y sus horizontes (agrupados por +parsear_csv+) y
+  # construye un Deserializador por cada perfil.
+  #
+  # perfiles - un Hash como el que devuelve +parsear_csv+ con perfiles ya
+  #            acumulados.
+  # usuario  - el email del usuario que carga los perfiles (default: nil).
+  #
+  # Devuelve una colección de Deserializadores instanciados con los datos de
+  # cada perfil.
+  def self.deserializar_perfiles(perfiles, usuario = nil)
+    perfiles.map do |_, horizontes|
+      Deserializador.new(horizontes, usuario)
+    end
+  end
+
+  # Itera sobre los perfiles y sus horizontes (agrupados por +parsear_csv+) y
+  # construye los modelos correspondientes a través de +deserializar_perfiles+.
+  #
+  # perfiles - un Hash como el que devuelve +parsear_csv+ con perfiles ya
+  #            acumulados.
+  # usuario  - el email del usuario que carga los perfiles (default: nil).
+  #
+  # Devuelve una colección de Perfiles instanciados con los datos
+  # correspondientes.
+  def self.construir_perfiles(perfiles, usuario = nil)
+    deserializar_perfiles(perfiles, usuario).map do |deserializador|
+      deserializador.construir
+    end
+  end
+
+  # Construye todos los objetos necesarios en el orden correspondiente
+  #
+  # Devuelve el Perfil instanciado
+  def construir
+    construir_horizontes construir_perfil
   end
 
   # Construye un nuevo Perfil y sus asociaciones unitarias en base a los datos
@@ -37,54 +75,54 @@ class Deserializador
   # Devuelve el Perfil con los datos cargados
   def construir_perfil
     Perfil.new(
-      usuario_id: usuario,
-      numero: p['perfil_numero'],
-      profundidad_napa: p['perfil_profundidad_napa'],
-      cobertura_vegetal: p['perfil_cobertura_vegetal'],
-      material_original: p['perfil_material_original'],
-      modal: p['perfil_modal'],
-      fecha: p['perfil_fecha'],
-      vegetacion_o_cultivos: p['perfil_vegetacion_o_cultivos'],
-      observaciones: p['perfil_observaciones'],
+      usuario_id: construir_usuario.try(:id),
+      numero: datos['perfil_numero'],
+      profundidad_napa: datos['perfil_profundidad_napa'],
+      cobertura_vegetal: datos['perfil_cobertura_vegetal'],
+      material_original: datos['perfil_material_original'],
+      modal: datos['perfil_modal'],
+      fecha: datos['perfil_fecha'],
+      vegetacion_o_cultivos: datos['perfil_vegetacion_o_cultivos'],
+      observaciones: datos['perfil_observaciones'],
       capacidad_attributes: {
-        clase_id: ClaseDeCapacidad.find_by_valor(p['perfil_capacidad_clase']) },
+        clase_id: ClaseDeCapacidad.find_by_valor(datos['perfil_capacidad_clase']) },
       ubicacion_attributes: {
-        descripcion: p['perfil_ubicacion_descripcion'],
-        recorrido: p['perfil_ubicacion_recorrido'],
-        mosaico: p['perfil_ubicacion_mosaico'],
-        aerofoto: p['perfil_ubicacion_aerofoto'],
-        coordenadas: p['perfil_ubicacion_coordenadas'] },
+        descripcion: datos['perfil_ubicacion_descripcion'],
+        recorrido: datos['perfil_ubicacion_recorrido'],
+        mosaico: datos['perfil_ubicacion_mosaico'],
+        aerofoto: datos['perfil_ubicacion_aerofoto'],
+        coordenadas: datos['perfil_ubicacion_coordenadas'] },
       paisaje_attributes: {
-        tipo: p['perfil_paisaje_tipo'],
-        forma: p['perfil_paisaje_forma'],
-        simbolo: p['perfil_paisaje_simbolo'] },
+        tipo: datos['perfil_paisaje_tipo'],
+        forma: datos['perfil_paisaje_forma'],
+        simbolo: datos['perfil_paisaje_simbolo'] },
       humedad_attributes: {
-        clase_id: ClaseDeHumedad.find_by_valor(p['perfil_humedad_clase']) },
+        clase_id: ClaseDeHumedad.find_by_valor(datos['perfil_humedad_clase']) },
       erosion_attributes: {
-        clase_id: ClaseDeErosion.find_by_valor(p['perfil_erosion_clase']),
-        subclase_id: SubclaseDeErosion.find_by_valor(p['perfil_erosion_subclase']) },
+        clase_id: ClaseDeErosion.find_by_valor(datos['perfil_erosion_clase']),
+        subclase_id: SubclaseDeErosion.find_by_valor(datos['perfil_erosion_subclase']) },
       pedregosidad_attributes: {
-        clase_id: ClaseDePedregosidad.find_by_valor(p['perfil_pedregosidad_clase']),
-        subclase_id: SubclaseDePedregosidad.find_by_valor(p['perfil_pedregosidad_subclase']) },
+        clase_id: ClaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_clase']),
+        subclase_id: SubclaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_subclase']) },
       serie_attributes: {
-        nombre: p['perfil_serie_nombre'],
-        simbolo: p['perfil_serie_simbolo'],
-        provincia_id: Provincia.find_by_valor(p['perfil_serie_provincia']) },
+        nombre: datos['perfil_serie_nombre'],
+        simbolo: datos['perfil_serie_simbolo'],
+        provincia_id: Provincia.find_by_valor(datos['perfil_serie_provincia']) },
       grupo_attributes: {
-        codigo: p['perfil_grupo_codigo'],
-        descripcion: p['perfil_grupo_descripcion'] },
+        codigo: datos['perfil_grupo_codigo'],
+        descripcion: datos['perfil_grupo_descripcion'] },
       fase_attributes: {
-        codigo: p['perfil_fase_codigo'],
-        nombre: p['perfil_fase_nombre'] },
-      sal_id: Sal.find_by_valor(p['perfil_sales']),
-      uso_de_la_tierra_id: UsoDeLaTierra.find_by_valor(p['perfil_uso_de_la_tierra'].try(:downcase)),
-      relieve_id: Relieve.find_by_valor(p['perfil_relieve'].try(:downcase)),
-      permeabilidad_id: Permeabilidad.find_by_valor(p['perfil_permeabilidad'].try(:downcase)),
-      escurrimiento_id: Escurrimiento.find_by_valor(p['perfil_escurrimiento'].try(:downcase)),
-      pendiente_id: Pendiente.find_by_valor(p['perfil_pendiente'].try(:downcase)),
-      anegamiento_id: Anegamiento.find_by_valor(p['perfil_anegamiento'].try(:downcase)),
-      drenaje_id: Drenaje.find_by_valor(p['perfil_drenaje'].try(:downcase)),
-      posicion_id: Posicion.find_by_valor(p['perfil_posicion'].try(:downcase))
+        codigo: datos['perfil_fase_codigo'],
+        nombre: datos['perfil_fase_nombre'] },
+      sal_id: Sal.find_by_valor(datos['perfil_sales']),
+      uso_de_la_tierra_id: UsoDeLaTierra.find_by_valor(datos['perfil_uso_de_la_tierra'].try(:downcase)),
+      relieve_id: Relieve.find_by_valor(datos['perfil_relieve'].try(:downcase)),
+      permeabilidad_id: Permeabilidad.find_by_valor(datos['perfil_permeabilidad'].try(:downcase)),
+      escurrimiento_id: Escurrimiento.find_by_valor(datos['perfil_escurrimiento'].try(:downcase)),
+      pendiente_id: Pendiente.find_by_valor(datos['perfil_pendiente'].try(:downcase)),
+      anegamiento_id: Anegamiento.find_by_valor(datos['perfil_anegamiento'].try(:downcase)),
+      drenaje_id: Drenaje.find_by_valor(datos['perfil_drenaje'].try(:downcase)),
+      posicion_id: Posicion.find_by_valor(datos['perfil_posicion'].try(:downcase))
     )
   end
 
@@ -164,6 +202,14 @@ class Deserializador
     end and return perfil
   end
 
+  # Instancia el usuario en base al email con que se inicializó el
+  # Deserializador.
+  #
+  # Devuelve el Usuario instanciado.
+  def construir_usuario
+    Usuario.find_by(email: usuario)
+  end
+
   private
 
     # Interno: Extrae los datos del perfil de una de las filas. Asume que las
@@ -174,5 +220,5 @@ class Deserializador
     def datos_del_perfil
       horizontes.first
     end
-    alias_method :p, :datos_del_perfil
+    alias_method :datos, :datos_del_perfil
 end
