@@ -75,4 +75,14 @@ describe Deserializador do
       end
     end
   end
+
+  describe 'Builder' do
+    let(:usuario) { create(:usuario) }
+    let(:csv) { CSVSerializer.new([build(:perfil)]).as_csv headers: true }
+    subject { Deserializador.new(csv.parse_csv, usuario.email).construir }
+
+    it 'construye al usuario por el email' do
+      subject.usuario_id.must_equal usuario.id
+    end
+  end
 end

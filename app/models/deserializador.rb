@@ -75,7 +75,7 @@ class Deserializador
   # Devuelve el Perfil con los datos cargados
   def construir_perfil
     Perfil.new(
-      usuario_id: usuario,
+      usuario_id: construir_usuario.try(:id),
       numero: datos['perfil_numero'],
       profundidad_napa: datos['perfil_profundidad_napa'],
       cobertura_vegetal: datos['perfil_cobertura_vegetal'],
@@ -200,6 +200,14 @@ class Deserializador
           forma_id: FormaDeLimite.find_by_valor(h['limite_forma']) }
       )
     end and return perfil
+  end
+
+  # Instancia el usuario en base al email con que se inicializó el
+  # Deserializador.
+  #
+  # Devuelve el Usuario instanciado.
+  def construir_usuario
+    Usuario.find_by(email: usuario)
   end
 
   private
