@@ -80,7 +80,6 @@ group :development do
 end
 
 group :test do
-  gem 'turn'
   gem 'database_cleaner'
   gem 'minitest-rails-capybara'
   gem 'selenium-webdriver'
