@@ -13,7 +13,7 @@ class PerfilesController < AutorizadoController
 
   load_and_authorize_resource
 
-  respond_to :geojson, only: :index
+  respond_to :geojson, only: [:index, :show]
   respond_to :csv, only: [ :index, :procesar ]
 
   # acciones que funcionan anónimamente
@@ -53,7 +53,16 @@ class PerfilesController < AutorizadoController
   end
 
   def show
-    respond_with @perfil = @perfil.decorate
+    respond_with @perfil = @perfil.decorate do |format|
+      # Serializar como una colección de un sólo miembro
+      format.geojson do
+        if @perfil.geolocalizado?
+          render json: [@perfil], serializer: GeojsonCollectionSerializer
+        else
+          render json: true, status: :no_content
+        end
+      end
+    end
   end
 
   def new

@@ -68,4 +68,6 @@ SiSINTA::Application.configure do
     # envía en texto plano pero envuelto en TLS
     authentication:       :plain
   }
+
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 end

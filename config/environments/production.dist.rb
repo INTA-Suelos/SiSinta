@@ -78,4 +78,6 @@ SiSINTA::Application.configure do
   # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-prod:url'
+
+  Rails.application.routes.default_url_options[:host] = 'cambiame'
 end

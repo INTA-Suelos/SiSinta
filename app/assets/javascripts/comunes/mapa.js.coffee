@@ -1,7 +1,9 @@
 jQuery ->
   # Empezar mostrando toda Argentina por default
   zoom = $('#mapa').data('zoom') || 4
-  map = L.map('mapa').setView([-40, -65], zoom)
+  centro = $('#mapa').data('centro') || [-40, -65]
+
+  map = L.map('mapa').setView(centro, zoom)
 
   # Capa de tiles de MapBox
   # TODO Ver cómo cargar la de geointa o el ign
@@ -23,5 +25,6 @@ jQuery ->
       L.geoJson().addData(data)
     ).addTo(map)
 
-    # Encuadrar todos los puntos en el mapa
-    map.fitBounds puntos.getBounds()
+    # Encuadrar todos los puntos en el mapa a menos que definamos un centro
+    unless $('#mapa').data('centro')
+      map.fitBounds puntos.getBounds()
