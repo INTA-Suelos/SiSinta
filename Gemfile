@@ -1,4 +1,5 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 gem 'rails', '4.0.10'
 
@@ -56,6 +57,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
 gem 'leaflet-rails'
+gem 'rails-assets-leaflet.markercluster'
 
 ## Server
 gem 'thin'
