@@ -55,6 +55,7 @@ gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselect
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
+gem 'leaflet-rails'
 
 ## Server
 gem 'thin'

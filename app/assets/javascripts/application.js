@@ -12,6 +12,7 @@
 // TODO I18nalizar autocomplete-rails
 //= require autocomplete-rails
 //= require ransack-search
+//= require leaflet
 //
 // Aplicación
 //= require_tree ./jquery

@@ -10,6 +10,7 @@
  *= require select2
  *= require ui.multiselect
  *= require jquery-multiselect
+ *= require leaflet
  *
  * Explicitar qué cargamos
  *= require comunes/adjuntos
