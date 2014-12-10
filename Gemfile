@@ -21,8 +21,7 @@ gem 'awesome_nested_fields'
 gem 'kaminari'
 gem 'draper'
 gem 'ransack'
-gem 'rails3-jquery-autocomplete',
-  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git'
+gem 'rails3-jquery-autocomplete'
 
 ## Modelos
 gem 'paperclip'
