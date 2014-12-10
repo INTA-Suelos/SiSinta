@@ -17,7 +17,6 @@ $(document)
       $(this).prop 'checked', estado
 
 jQuery ->
-
   $('.fecha').datepicker()
 
   $('.menu .plegable + .submenu').toggle()

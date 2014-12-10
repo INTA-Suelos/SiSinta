@@ -25,6 +25,10 @@ form.completa {
   .coordenada-x { @include coordenada(0px);
                   padding-right: 0; }
 
+  #mapa {
+    height: 300px;
+    width: inherit;
+  }
 }
 
 // TODO acotar a la vista específica

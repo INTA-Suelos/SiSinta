@@ -52,7 +52,7 @@ class Perfil < ActiveRecord::Base
   delegate :nombre,   to: :serie, allow_nil: true
   delegate :simbolo,  to: :serie, allow_nil: true
   delegate :provincia,  to: :serie, allow_nil: true
-  delegate :coordenadas, to: :ubicacion, allow_nil: true
+  delegate :coordenadas, :geolocalizado?, to: :ubicacion, allow_nil: true
 
   # Scope con los que tienen definidas las coordenadas
   def self.geolocalizados

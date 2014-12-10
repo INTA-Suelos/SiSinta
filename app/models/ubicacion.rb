@@ -24,40 +24,8 @@ class Ubicacion < ActiveRecord::Base
   validates_inclusion_of :y,  in: config.rango_y, allow_blank: true,
                               message: "No está dentro del rango permitido"
 
-  # Convierte el nombre del mosaico guardardo a coordenadas. Por ejemplo, el
-  # mosaico +3760-2-2+ resultaría en las coordenadas -60,708333333 -36,083333333
-  # según los siguientes cálculos:
-  #   latitud
-  #     - 60° 42' 30" == - (60 + 42/60 + 30/3600) == -60,708333333
-  #   longitud
-  #     - 36° 05' 00" == - (36 + 05/60 + 00/3600) == -36,083333333
-  #
-  # * *Args*    :
-  #   - ++ ->
-  # * *Returns* :
-  #   -
-  # * *Raises* :
-  #   - ++ ->
-  #
-  #def aproximar
-  #  "no implementado todavía"
-  #end
-
-  def punto
-    "#{@x} #{@y}"
-  end
-
-  def punto=(punto)
-    if punto.instance_of? String then
-      @x, @y = punto.split(' ')
-    else
-      @x = punto.x
-      @y = punto.y
-    end
-  end
-
-  def to_s
-    punto
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
   end
 
   def self.grados_a_decimal(coordenada)
@@ -67,10 +35,6 @@ class Ubicacion < ActiveRecord::Base
       decimal *= -1 if grados < 0
       return self.redondear(decimal)
     end
-  end
-
-  def transformar_a_wgs84!(srid, x, y)
-    self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
   end
 
   def self.transformar_de_wgs84_a(srid, x, y)
@@ -92,14 +56,36 @@ class Ubicacion < ActiveRecord::Base
     numero.try(:round, config.precision)
   end
 
+  def punto
+    "#{@x} #{@y}"
+  end
+
+  def punto=(punto)
+    if punto.instance_of? String then
+      @x, @y = punto.split(' ')
+    else
+      @x = punto.x
+      @y = punto.y
+    end
+  end
+
+  def to_s
+    punto
+  end
+
+  def transformar_a_wgs84!(srid, x, y)
+    self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
+  end
+
   def coordenadas=(c)
     super(c)
     cargar_x_y
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
+  def geolocalizado?
+    coordenadas.present?
   end
+  alias_method :geolocalizada?, :geolocalizado?
 
   private
 

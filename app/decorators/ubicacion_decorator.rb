@@ -23,13 +23,9 @@ class UbicacionDecorator < ApplicationDecorator
     source.descripcion || transformar || ''
   end
 
-  def mapa(ancho = 400, alto = 300, zoom = 9)
-    h.image_tag "http://maps.google.com/maps/api/staticmap?size=#{
-                  ancho}x#{
-                  alto}&sensor=false&zoom=#{
-                  zoom}&maptype=hybrid&markers=#{
-                  source.latitud}%2C#{
-                  source.longitud}" unless x.blank? or y.blank?
+  def mapa(zoom = 9)
+    h.content_tag :div, nil, id: 'mapa',
+      data: { geojson: h.perfil_path(perfil, format: :geojson), zoom: zoom, centro: [y, x] }
   end
 
   private

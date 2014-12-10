@@ -10,6 +10,7 @@ class PerfilesControllerTest < ActionController::TestCase
     loguearse_como 'Autorizado'
 
     get :new
+
     assert_response :success
   end
 
@@ -25,7 +26,6 @@ class PerfilesControllerTest < ActionController::TestCase
 
   test 'muestra un perfil si está autorizado' do
     loguearse_como 'Autorizado'
-
     @request.env['HTTP_REFERER'] = '/perfiles/'
 
     get :show, id: create(:perfil).to_param
@@ -33,19 +33,43 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'no muestra un perfil sin ubicación en geoJSON' do
+    loguearse_como 'Autorizado'
+    @request.env['HTTP_REFERER'] = '/perfiles/'
+
+    get :show, id: create(:perfil).to_param, format: :geojson
+
+    assert_response :no_content
+  end
+
+  test 'muestra un perfil geolocalizado en geoJSON si está autorizado' do
+    loguearse_como 'Autorizado'
+    @request.env['HTTP_REFERER'] = '/perfiles/'
+
+    get :show, id: create(:ubicacion, :con_coordenadas).perfil.to_param,
+      format: :geojson
+
+    assert_response :success
+    assert_equal 'FeatureCollection', json['type']
+    assert_equal 1, json['features'].size
+  end
+
   test 'va a editar si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
+
     get :edit, id: perfil.to_param
+
     assert_response :success
   end
 
   test 'actualiza un perfil si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
-
     @request.env['HTTP_REFERER'] = "/perfiles/#{perfil.to_param}"
+
     put :update, id: perfil.to_param, perfil: { observaciones: 'agudas' }
+
     assert_redirected_to perfil_path(assigns(:perfil))
     assert_equal 'agudas', assigns(:perfil).observaciones
   end
@@ -63,15 +87,22 @@ class PerfilesControllerTest < ActionController::TestCase
 
   test 'accede a la lista de perfiles sin loguearse' do
     assert_nil @controller.current_usuario
+
     get :index
+
     assert_response :success
   end
 
   test 'accede a los datos en geoJSON sin loguearse' do
     assert_nil @controller.current_usuario
+    create(:ubicacion, :con_coordenadas)
     @request.env['HTTP_REFERER'] = '/perfiles/'
+
     get :index, format: 'geojson'
+
     assert_response :success
+    assert_equal 'FeatureCollection', json['type']
+    assert_equal Perfil.geolocalizados.count, json['features'].size
   end
 
   test 'va a editar_analiticos si está autorizado' do
@@ -79,6 +110,7 @@ class PerfilesControllerTest < ActionController::TestCase
     perfil = create(:perfil, usuario: usuario)
 
     get :editar_analiticos, id: perfil.to_param
+
     assert_response :success
     assert_not_nil assigns(:perfil), 'Debe asignar el perfil en editar'
   end
@@ -87,7 +119,6 @@ class PerfilesControllerTest < ActionController::TestCase
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
     perfil.horizontes.create(attributes_for(:horizonte))
-
     analitico = attributes_for(:analitico, id: perfil.analiticos.first.id)
 
     put :update_analiticos, id: perfil.to_param, perfil: {
@@ -181,6 +212,7 @@ class PerfilesControllerTest < ActionController::TestCase
 
   test 'el formulario incluye tags para autocompletar' do
     loguearse_como 'Autorizado'
+
     get :new
 
     assert_select '#perfil_serie_attributes_simbolo'

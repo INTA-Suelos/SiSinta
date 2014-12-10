@@ -12,6 +12,8 @@
 // TODO I18nalizar autocomplete-rails
 //= require autocomplete-rails
 //= require ransack-search
+//= require leaflet
+//= require leaflet.markercluster/dist/leaflet.markercluster-src
 //
 // Aplicación
 //= require_tree ./jquery
@@ -22,3 +24,4 @@
 //= require comunes/layout
 //= require comunes/perfiles
 //= require comunes/permisos
+//= require comunes/mapa

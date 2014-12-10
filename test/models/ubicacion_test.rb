@@ -11,13 +11,18 @@ class UbicacionTest < ActiveSupport::TestCase
     @c = create(:ubicacion, x: @x, y: @y)
   end
 
-  test "no carga la ubicación sin perfil" do
-    assert Ubicacion.new(@atributos).invalid?, "una ubicación sin perfil es válida"
-    assert @u.valid?, "una ubicación sólo con perfil es válida"
+  test 'no carga la ubicación sin perfil' do
+    assert Ubicacion.new(@atributos).invalid?, 'una ubicación sin perfil es válida'
+    assert @u.valid?, 'una ubicación sólo con perfil es válida'
   end
 
-  test "no guarda un punto mal formado" do
+  test 'no guarda un punto mal formado' do
     assert Ubicacion.new(:coordenadas => 'rms').invalid?, "permite guardar 'rms' como latitud/longitud"
+  end
+
+  test 'sabe si está geolocalizada' do
+    assert @c.geolocalizada?
+    refute build(:ubicacion).geolocalizada?
   end
 
   test "la longitud (x) sólo está entre #{SiSINTA::Application.config.rango_x}" do
@@ -54,38 +59,38 @@ class UbicacionTest < ActiveSupport::TestCase
     end
   end
 
-  test "las coordenadas están en SRID 4326" do
+  test 'las coordenadas están en SRID 4326' do
     srid = @c.coordenadas.srid
     assert 4326 == srid, "#{srid} es un SRID incorrecto"
   end
 
-  test "punto, x e y manejan coordenadas correctamente" do
+  test 'punto, x e y manejan coordenadas correctamente' do
     u = Ubicacion.new x: 22.1, y: 33.2
-    assert_equal "22.1 33.2", u.punto
+    assert_equal '22.1 33.2', u.punto
     assert 22.1 == u.x
     assert 33.2 == u.y
   end
 
-  test "maneja las coordenadas negativas correctamente" do
-    assert_equal Ubicacion.grados_a_decimal("-40 30"), -40.5
-    assert_equal Ubicacion.grados_a_decimal("-179 50 30"), -179.841667
+  test 'maneja las coordenadas negativas correctamente' do
+    assert_equal Ubicacion.grados_a_decimal('-40 30'), -40.5
+    assert_equal Ubicacion.grados_a_decimal('-179 50 30'), -179.841667
   end
 
-  test "aproxima las coordenadas según mosaico-recorrido-aerofoto" do
-    skip "no implementado todavía"
+  test 'aproxima las coordenadas según mosaico-recorrido-aerofoto' do
+    skip 'no implementado todavía'
     #u = build_stubbed(:ubicacion, :vieja_escuela)
     #assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
-  test "soporta proj4" do
+  test 'soporta proj4' do
     assert RGeo::CoordSys::Proj4::supported?
   end
 
-  test "soporta GEOS" do
+  test 'soporta GEOS' do
     assert RGeo::Geos::supported?
   end
 
-  test "hace alguna transformación" do
+  test 'hace alguna transformación' do
     ues = [ Ubicacion.transformar(22177, 4326, '7180428.8164', '7550269.2664'),
             Ubicacion.transformar(4326, 22177, '-54', '-26') ]
 
@@ -96,32 +101,32 @@ class UbicacionTest < ActiveSupport::TestCase
     end
   end
 
-  test "transformar a WGS 84" do
+  test 'transformar a WGS 84' do
     @u.transformar_a_wgs84!(22177, '7180428.8164', '7550269.2664')
     assert_equal 4326, @u.srid
-    assert @u.coordenadas.present?, "No carga las coordenadas nuevas"
+    assert @u.coordenadas.present?, 'No carga las coordenadas nuevas'
   end
 
-  test "(lat,lon) corresponde a (y,x)" do
+  test '(lat,lon) corresponde a (y,x)' do
     assert_equal @c.latitud, @y
     assert_equal @c.longitud, @x
     assert_equal @c.coordenadas.x, @x
     assert_equal @c.coordenadas.y, @y
   end
 
-  test "convierte a GeoJSON" do
+  test 'convierte a GeoJSON' do
     feature = RGeo::GeoJSON::EntityFactory.instance.feature @c.coordenadas
-    assert_respond_to feature, :geometry, "No responde a 'geometry'"
+    assert_respond_to feature, :geometry, 'No responde a .geometry'
     geojson = RGeo::GeoJSON.encode(feature)
-    assert_equal Hash.new, geojson["properties"]
-    assert_equal "Feature", geojson["type"]
-    assert_equal "Point", geojson["geometry"]["type"]
-    assert_equal [-61.85, -34.1725], geojson["geometry"]["coordinates"]
+    assert_equal Hash.new, geojson['properties']
+    assert_equal 'Feature', geojson['type']
+    assert_equal 'Point', geojson['geometry']['type']
+    assert_equal [-61.85, -34.1725], geojson['geometry']['coordinates']
   end
 
-  test "elimina las coordenadas con datos en blanco" do
+  test 'elimina las coordenadas con datos en blanco' do
     assert_not_nil @c.coordenadas
-    @c.x, @c.y = "", ""
+    @c.x, @c.y = '', ''
     @c.save
     assert_nil @c.coordenadas
     @c.x, @c.y = nil, nil
