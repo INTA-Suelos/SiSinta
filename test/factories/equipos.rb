@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :equipo do
     nombre { generate :cadena_unica }
 
-    ignore { miembros 0 }
+    transient { miembros 0 }
     after(:build) do |equipo, params|
       params.miembros.times do
         equipo.miembros << build(:usuario)

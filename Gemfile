@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-gem 'rails', '4.0.10'
+gem 'rails', '4.0.12'
 
 ## DB
 gem 'pg'
