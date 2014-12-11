@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Horizonte < ActiveRecord::Base
-  after_create :create_analitico
+  after_create :create_analitico, unless: :analitico_present?
 
   # TODO sacar los defaults
   default_scope { order('profundidad_superior ASC') }
@@ -30,6 +30,7 @@ class Horizonte < ActiveRecord::Base
                           message: "debe estar entre 0 y 500 cm"
 
   delegate :publico, :usuario, :usuario_id, to: :perfil
+  delegate :present?, to: :analitico, prefix: true
 
   # Se crea un color si no existe ya
   def autosave_associated_records_for_color_seco

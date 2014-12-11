@@ -4,21 +4,14 @@ namespace :sisinta do
   namespace :importar do
     desc "Importar perfiles de csv en el formato que exportamos"
     task :csv => :environment do
-
-      usuario = Usuario.find_by(email: ENV['usuario'])
-
       # El archivo .csv
       if (archivo = ENV['archivo']).present? && File.exists?(archivo)
-        perfiles = Deserializador.parsear_perfiles_de_csv archivo
+        perfiles = Deserializador.parsear_csv archivo, :id
 
-        perfiles.each do |id, horizontes|
-          des = Deserializador.new(horizontes, usuario)
-
-          perfil = des.construir_horizontes(des.construir_perfil)
-
+        Deserializador.construir_perfiles(perfiles, ENV['usuario']).each do |perfil|
           unless perfil.save
-            puts "Ocurrió un error con el perfil #{id} y estos horizontes:"
-            ap horizontes
+            puts "Ocurrió un error con estos horizontes:"
+            ap perfil.horizontes
           end
         end
       else

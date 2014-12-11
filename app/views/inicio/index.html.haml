@@ -1,13 +1,16 @@
 #bienvenida
-  %h2 Bienvenido a SiSINTA
+  .span-10
+    %h2 Bienvenido a SiSINTA
 
-  %p= "Actualmente hay #{Perfil.count} perfiles cargados en #{Serie.count} series."
+    %h3 Búsqueda de perfiles
 
-  %h3 Búsqueda de perfiles
+    %p Actualmente hay #{Perfil.count} perfiles cargados en #{Serie.count} series.
 
-  .span-20
     = search_form_for @busqueda do |b|
-      .span-4=  b.label :serie_nombre_or_numero_cont, "Por nombre o número"
-      .span-16.last= b.text_field :serie_nombre_or_numero_cont
+      .span-4=  b.label :serie_nombre_or_numero_cont, 'Por nombre o número'
+      .span-6.last= b.text_field :serie_nombre_or_numero_cont
 
-      .span-2= b.submit "Buscar"
+      .span-2= b.submit 'Buscar'
+
+  .span-14.last
+    #mapa{ data: { geojson: perfiles_path(format: :geojson) }}

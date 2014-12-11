@@ -16,7 +16,7 @@ Instalación
 
 ### Base de datos
 
-1. [PostgreSQL] 9.1
+1. [PostgreSQL] 9.1 (o superior)
 
     Nos conectamos como el usuario *postgres* y creamos al usuario (por ejemplo
     *sisinta*), con password encriptado:
@@ -31,7 +31,7 @@ Instalación
 
     Luego reiniciamos o recargamos la configuración.
 
-2. [PostGIS] 1.5
+2. [PostGIS] 1.5 (o superior)
 
     Siempre como el usuario *postgres*, creamos un template específico para la
     aplicación, con el que se crearán las bases de datos con postgis ya
@@ -60,7 +60,7 @@ Instalación
 
         $ psql -c "UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_sisinta';"
 
-3.  [GEOS] 3.2
+3.  [GEOS] 3.2 (o superior)
 
 4.  [Proj4]
 

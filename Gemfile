@@ -1,10 +1,12 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
-gem 'rails', '4.0.10'
+gem 'rails', '4.0.12'
 
 ## DB
 gem 'pg'
-gem 'yaml_db'
+# Rama con un parche para que las join tables salgan ordenadas
+gem 'yaml_db', github: 'mauriciopasquier/yaml_db', branch: 'order-join-tables'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
@@ -19,8 +21,7 @@ gem 'awesome_nested_fields'
 gem 'kaminari'
 gem 'draper'
 gem 'ransack'
-gem 'rails3-jquery-autocomplete',
-  git: 'https://github.com/mauriciopasquier/rails3-jquery-autocomplete.git'
+gem 'rails3-jquery-autocomplete'
 
 ## Modelos
 gem 'paperclip'
@@ -54,6 +55,8 @@ gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselect
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
+gem 'leaflet-rails'
+gem 'rails-assets-leaflet.markercluster'
 
 ## Server
 gem 'thin'
@@ -79,7 +82,6 @@ group :development do
 end
 
 group :test do
-  gem 'turn'
   gem 'database_cleaner'
   gem 'minitest-rails-capybara'
   gem 'selenium-webdriver'
