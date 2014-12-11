@@ -16,10 +16,12 @@ GIT
 
 GIT
   remote: https://github.com/mauriciopasquier/yaml_db.git
-  revision: 58b5f0a167c2def187c1ebbc9f57210324efab8e
+  revision: 79fe6a5d82ce9572cd4895d6ae832b0be99ba11f
   branch: order-join-tables
   specs:
-    yaml_db (0.2.3)
+    yaml_db (0.3.0)
+      rails (>= 3.0, < 4.3)
+      rake (>= 0.8.7)
 
 GEM
   remote: https://rubygems.org/
