@@ -6,7 +6,7 @@ gem 'rails', '4.0.12'
 ## DB
 gem 'pg'
 # Rama con un parche para que las join tables salgan ordenadas
-gem 'yaml_db', github: 'mauriciopasquier/yaml_db', branch: 'order-join-tables'
+gem 'yaml_db', git: 'https://github.com/mauriciopasquier/yaml_db.git', branch: 'order-join-tables'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'

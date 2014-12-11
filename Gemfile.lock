@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/mauriciopasquier/yaml_db.git
-  revision: 58b5f0a167c2def187c1ebbc9f57210324efab8e
-  branch: order-join-tables
-  specs:
-    yaml_db (0.2.3)
-
-GIT
   remote: https://github.com/activerecord-hackery/squeel.git
   revision: 96b6b0ef45d371b7493b89787ddc87d3197d45d5
   specs:
@@ -20,6 +13,13 @@ GIT
   specs:
     multiselectjs_rails (0.3.2)
       railties (>= 3.1)
+
+GIT
+  remote: https://github.com/mauriciopasquier/yaml_db.git
+  revision: 58b5f0a167c2def187c1ebbc9f57210324efab8e
+  branch: order-join-tables
+  specs:
+    yaml_db (0.2.3)
 
 GEM
   remote: https://rubygems.org/
