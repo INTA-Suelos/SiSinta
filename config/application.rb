@@ -38,7 +38,7 @@ module SiSINTA
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '0.3.7'
+    config.assets.version = '0.3.8'
 
     # Traduzco el path
     config.assets.prefix = '/estaticos'

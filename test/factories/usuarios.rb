@@ -5,7 +5,7 @@ FactoryGirl.define do
     email
     password 'algún password inolvidable'
 
-    ignore { rol nil }
+    transient { rol nil }
     after(:build) do |usuario, params|
       usuario.grant(params.rol) if params.rol
     end
