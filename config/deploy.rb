@@ -16,13 +16,6 @@ set :keep_releases, 5
 set :rbenv_ruby, '2.1.2'
 set :rbenv_type, :user
 
-set :linked_files, %w{
-  config/database.yml
-  config/environments/production.rb
-  config/initializers/secret_token.rb
-  config/initializers/devise.rb
-}
-
 # rails
 set :assets_prefix, 'estaticos'
 set :linked_dirs, %w{
@@ -33,4 +26,10 @@ set :linked_dirs, %w{
   tmp/sockets
   vendor/bundle
   public/system
+}
+set :linked_files, %w{
+  config/database.yml
+  config/environments/production.rb
+  config/initializers/secret_token.rb
+  config/initializers/devise.rb
 }
