@@ -8,6 +8,7 @@ TODO*
 
 # Archivos que se generan en el deploy
 public/estaticos
+.capistrano
 
 # Backup de los datos
 db/datos

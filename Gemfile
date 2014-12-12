@@ -77,7 +77,7 @@ end
 group :development do
   gem 'bullet'
   gem 'better_errors'
-  gem 'capistrano', '< 3'
+  gem 'capistrano-rails'
   gem 'capistrano-rbenv'
 end
 
