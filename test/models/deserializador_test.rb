@@ -77,11 +77,32 @@ class DeserializadorTest < ActiveSupport::TestCase
 
   describe 'Builder' do
     let(:usuario) { create(:usuario) }
-    let(:csv) { CSVSerializer.new([build(:perfil)]).as_csv headers: true }
-    subject { Deserializador.new(csv.parse_csv, usuario.email).construir }
+    let(:csv) do
+      CSVSerializer.new([build(:perfil)]).as_csv(headers: true).parse_csv
+    end
 
-    it 'construye al usuario por el email' do
-      _(subject.usuario_id).must_equal usuario.id
+    it 'acepta un usuario' do
+      deserializador = Deserializador.new(csv, usuario).construir
+
+      _(deserializador.usuario).must_equal usuario
+    end
+
+    it 'acepta un email' do
+      deserializador = Deserializador.new(csv, usuario.email).construir
+
+      _(deserializador.usuario).must_equal usuario
+    end
+
+    it 'acepta nil' do
+      deserializador = Deserializador.new(csv, nil).construir
+
+      _(deserializador.usuario).must_equal nil
+    end
+
+    it 'acepta nada' do
+      deserializador = Deserializador.new(csv).construir
+
+      _(deserializador.usuario).must_equal nil
     end
   end
 end

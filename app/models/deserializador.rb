@@ -9,7 +9,7 @@ class Deserializador
   # FIXME aceptar el perfil_id: [horizontes] en vez de sólo [horizontes]
   def initialize(horizontes, usuario = nil)
     @horizontes = horizontes
-    @usuario = usuario
+    self.usuario = usuario
   end
 
   # Agrupa cada fila (un horizonte) del archivo, de acuerdo a la columna 'id',
@@ -74,7 +74,7 @@ class Deserializador
   # Devuelve el Perfil con los datos cargados
   def construir_perfil
     Perfil.new(
-      usuario_id: construir_usuario.try(:id),
+      usuario_id: usuario.to_param,
       numero: datos['perfil_numero'],
       profundidad_napa: datos['perfil_profundidad_napa'],
       cobertura_vegetal: datos['perfil_cobertura_vegetal'],
@@ -203,12 +203,16 @@ class Deserializador
     end and return perfil
   end
 
-  # Instancia el usuario en base al email con que se inicializó el
-  # Deserializador.
+  # Guarda o instancia al usuario en base al email.
   #
   # Devuelve el Usuario instanciado.
-  def construir_usuario
-    Usuario.find_by(email: usuario)
+  def usuario=(usuario_o_email)
+    @usuario = case usuario_o_email
+      when String
+        Usuario.find_by(email: usuario_o_email)
+      else
+        usuario_o_email
+      end
   end
 
   private
