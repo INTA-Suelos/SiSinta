@@ -7,9 +7,9 @@ class Deserializador
   # horizontes - todos los CSV::Row de un mismo perfil.
   # usuario    - el email del usuario que carga los perfiles (default: nil).
   # FIXME aceptar el perfil_id: [horizontes] en vez de sólo [horizontes]
-  def initialize(horizontes, usuario = nil)
+  def initialize(horizontes, opciones = {})
     @horizontes = horizontes
-    self.usuario = usuario
+    self.usuario = opciones[:usuario]
   end
 
   # Agrupa cada fila (un horizonte) del archivo, de acuerdo a la columna 'id',
@@ -40,9 +40,9 @@ class Deserializador
   #
   # Devuelve una colección de Deserializadores instanciados con los datos de
   # cada perfil.
-  def self.deserializar_perfiles(perfiles, usuario = nil)
+  def self.deserializar_perfiles(perfiles, opciones = {})
     perfiles.map do |_, horizontes|
-      Deserializador.new(horizontes, usuario)
+      Deserializador.new(horizontes, opciones)
     end
   end
 
@@ -55,8 +55,8 @@ class Deserializador
   #
   # Devuelve una colección de Perfiles instanciados con los datos
   # correspondientes.
-  def self.construir_perfiles(perfiles, usuario = nil)
-    deserializar_perfiles(perfiles, usuario).map do |deserializador|
+  def self.construir_perfiles(perfiles, opciones = {})
+    deserializar_perfiles(perfiles, opciones).map do |deserializador|
       deserializador.construir
     end
   end

@@ -52,10 +52,12 @@ class DeserializadorTest < ActiveSupport::TestCase
       end
 
       it 'pasa el usuario a los deserializadores' do
-        spec = lambda { |perfiles, usuario| _(usuario).must_equal 'juan@salvo.com.ar' }
+        spec = lambda do |perfiles, opciones|
+          _(opciones[:usuario]).must_equal 'juan@salvo.com.ar'
+        end
 
         Deserializador.stub :new, spec do
-          Deserializador.deserializar_perfiles(perfiles, 'juan@salvo.com.ar')
+          Deserializador.deserializar_perfiles(perfiles, usuario: 'juan@salvo.com.ar')
         end
       end
     end
@@ -76,33 +78,36 @@ class DeserializadorTest < ActiveSupport::TestCase
   end
 
   describe 'Builder' do
-    let(:usuario) { create(:usuario) }
     let(:csv) do
       CSVSerializer.new([build(:perfil)]).as_csv(headers: true).parse_csv
     end
 
-    it 'acepta un usuario' do
-      deserializador = Deserializador.new(csv, usuario).construir
+    describe '#usuario' do
+      let(:usuario) { create(:usuario) }
 
-      _(deserializador.usuario).must_equal usuario
-    end
+      it 'acepta un usuario' do
+        deserializador = Deserializador.new(csv, usuario: usuario).construir
 
-    it 'acepta un email' do
-      deserializador = Deserializador.new(csv, usuario.email).construir
+        _(deserializador.usuario).must_equal usuario
+      end
 
-      _(deserializador.usuario).must_equal usuario
-    end
+      it 'acepta un email' do
+        deserializador = Deserializador.new(csv, usuario: usuario.email).construir
 
-    it 'acepta nil' do
-      deserializador = Deserializador.new(csv, nil).construir
+        _(deserializador.usuario).must_equal usuario
+      end
 
-      _(deserializador.usuario).must_equal nil
-    end
+      it 'acepta nil' do
+        deserializador = Deserializador.new(csv, usuario: nil).construir
 
-    it 'acepta nada' do
-      deserializador = Deserializador.new(csv).construir
+        _(deserializador.usuario).must_equal nil
+      end
 
-      _(deserializador.usuario).must_equal nil
+      it 'acepta nada' do
+        deserializador = Deserializador.new(csv).construir
+
+        _(deserializador.usuario).must_equal nil
+      end
     end
   end
 end
