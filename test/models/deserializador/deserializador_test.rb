@@ -41,13 +41,13 @@ class DeserializadorTest < ActiveSupport::TestCase
     describe '.deserializar_perfiles' do
       subject { Deserializador.deserializar_perfiles(perfiles) }
 
-      it 'instancia un Deserializador por Perfil' do
+      it 'instancia un Constructor por Perfil' do
         _(subject.size).must_equal perfiles.size
       end
 
-      it 'devuelve una colección de Deserializador' do
+      it 'devuelve una colección de Constructores' do
         subject.each do |d|
-          _(d).must_be_instance_of Deserializador
+          _(d).must_be_instance_of Deserializador::Constructor
         end
       end
 
@@ -56,7 +56,7 @@ class DeserializadorTest < ActiveSupport::TestCase
           _(opciones[:usuario]).must_equal 'juan@salvo.com.ar'
         end
 
-        Deserializador.stub :new, spec do
+        Deserializador::Constructor.stub :new, spec do
           Deserializador.deserializar_perfiles(perfiles, usuario: 'juan@salvo.com.ar')
         end
       end
@@ -79,67 +79,6 @@ class DeserializadorTest < ActiveSupport::TestCase
         subject.each do |p|
           p.wont_be :persisted?
         end
-      end
-    end
-  end
-
-  describe 'Builder' do
-    let(:csv) do
-      CSV.parse CSVSerializer.new([build(:perfil)]).as_csv(headers: true), headers: true
-    end
-
-    describe '#usuario' do
-      let(:usuario) { create(:usuario) }
-
-      it 'acepta un usuario' do
-        deserializador = Deserializador.new(csv, usuario: usuario).construir
-
-        _(deserializador.usuario).must_equal usuario
-      end
-
-      it 'acepta un email' do
-        deserializador = Deserializador.new(csv, usuario: usuario.email).construir
-
-        _(deserializador.usuario).must_equal usuario
-      end
-
-      it 'acepta nil' do
-        deserializador = Deserializador.new(csv, usuario: nil).construir
-
-        _(deserializador.usuario).must_equal nil
-      end
-
-      it 'acepta nada' do
-        deserializador = Deserializador.new(csv).construir
-
-        _(deserializador.usuario).must_equal nil
-      end
-    end
-
-    describe '#actualizar?' do
-      it 'crea los datos por omisión' do
-        Deserializador.new(csv).actualizar?.must_equal false
-      end
-
-      it 'permite actualizar' do
-        Deserializador.new(csv, actualizar: true).actualizar?.must_equal true
-      end
-    end
-
-    describe '#construir_perfil' do
-      it 'es nuevo por omisión' do
-        Deserializador.new(csv).construir_perfil.wont_be :persisted?
-      end
-
-      it 'es existente si hay que actualizar' do
-        perfil_existente = create(:perfil_completo)
-        perfil_instanciado = Deserializador.new(
-          CSV.parse(CSVSerializer.new([perfil_existente]).as_csv(headers: true), headers: true),
-          actualizar: true
-        ).construir_perfil
-
-        perfil_instanciado.must_be :persisted?
-        perfil_instanciado.must_equal perfil_existente
       end
     end
   end

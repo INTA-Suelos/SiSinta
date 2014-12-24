@@ -25,6 +25,11 @@ class Minitest::Spec
 
   before { DatabaseCleaner.start }
   after { DatabaseCleaner.clean }
+
+  # Convierte un perfil en CSV::Rows
+  def perfil_a_csv(perfil)
+    CSV.parse(CSVSerializer.new([perfil]).as_csv(headers: true), headers: true)
+  end
 end
 
 # Helpers para los controladores
