@@ -74,12 +74,18 @@ class DeserializadorTest < ActiveSupport::TestCase
           _(p).must_be_instance_of Perfil
         end
       end
+
+      it 'instancia perfiles nuevos por omisión' do
+        subject.each do |p|
+          p.wont_be :persisted?
+        end
+      end
     end
   end
 
   describe 'Builder' do
     let(:csv) do
-      CSVSerializer.new([build(:perfil)]).as_csv(headers: true).parse_csv
+      CSV.parse CSVSerializer.new([build(:perfil)]).as_csv(headers: true), headers: true
     end
 
     describe '#usuario' do
@@ -107,6 +113,33 @@ class DeserializadorTest < ActiveSupport::TestCase
         deserializador = Deserializador.new(csv).construir
 
         _(deserializador.usuario).must_equal nil
+      end
+    end
+
+    describe '#actualizar?' do
+      it 'crea los datos por omisión' do
+        Deserializador.new(csv).actualizar?.must_equal false
+      end
+
+      it 'permite actualizar' do
+        Deserializador.new(csv, actualizar: true).actualizar?.must_equal true
+      end
+    end
+
+    describe '#construir_perfil' do
+      it 'es nuevo por omisión' do
+        Deserializador.new(csv).construir_perfil.wont_be :persisted?
+      end
+
+      it 'es existente si hay que actualizar' do
+        perfil_existente = create(:perfil_completo)
+        perfil_instanciado = Deserializador.new(
+          CSV.parse(CSVSerializer.new([perfil_existente]).as_csv(headers: true), headers: true),
+          actualizar: true
+        ).construir_perfil
+
+        perfil_instanciado.must_be :persisted?
+        perfil_instanciado.must_equal perfil_existente
       end
     end
   end

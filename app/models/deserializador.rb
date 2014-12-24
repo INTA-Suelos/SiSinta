@@ -1,6 +1,6 @@
 # Procesa archivos CSV y los convierte en modelos del sistema.
 class Deserializador
-  attr_accessor :horizontes, :usuario
+  attr_accessor :horizontes, :usuario, :actualizar
 
   # Inicializar un Deserializador para un perfil determinado.
   #
@@ -9,6 +9,7 @@ class Deserializador
   # FIXME aceptar el perfil_id: [horizontes] en vez de sólo [horizontes]
   def initialize(horizontes, opciones = {})
     @horizontes = horizontes
+    @actualizar = opciones[:actualizar]
     self.usuario = opciones[:usuario]
   end
 
@@ -73,7 +74,9 @@ class Deserializador
   #
   # Devuelve el Perfil con los datos cargados
   def construir_perfil
-    Perfil.new(
+    perfil = actualizar? ? Perfil.find(datos['perfil_id']) : Perfil.new
+
+    perfil.assign_attributes(
       usuario_id: usuario.to_param,
       numero: datos['perfil_numero'],
       profundidad_napa: datos['perfil_profundidad_napa'],
@@ -124,6 +127,8 @@ class Deserializador
       posicion_id: Posicion.find_by(valor: datos['perfil_posicion'].try(:downcase)).to_param,
       sal_id: Sal.find_by(valor: datos['perfil_sales']).to_param
     )
+
+    return perfil
   end
 
   # Construye Horizontes y sus asociaciones unitarias a partir de los datos con
@@ -213,6 +218,10 @@ class Deserializador
       else
         usuario_o_email
       end
+  end
+
+  def actualizar?
+    actualizar == true
   end
 
   private
