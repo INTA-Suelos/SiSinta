@@ -1,6 +1,6 @@
 module Deserializador
   class Constructor
-    attr_accessor :horizontes, :usuario, :actualizar
+    attr_accessor :horizontes, :usuario, :actualizar, :perfil
 
     # Inicializar un Constructor para un perfil determinado.
     #
@@ -25,8 +25,6 @@ module Deserializador
     #
     # Devuelve el Perfil con los datos cargados
     def construir_perfil
-      perfil = actualizar? ? Perfil.find(datos['perfil_id']) : Perfil.new
-
       perfil.assign_attributes(
         usuario_id: usuario.to_param,
         numero: datos['perfil_numero'],
@@ -82,6 +80,10 @@ module Deserializador
       return perfil
     end
 
+    def perfil
+      @perfil ||= actualizar? ? Perfil.find(datos['perfil_id']) : Perfil.new
+    end
+
     # Construye Horizontes y sus asociaciones unitarias a partir de los datos con
     # los que se inicializó el Deserializador, asociándolos a un Perfil
     # determinado por parámetro.
@@ -91,7 +93,10 @@ module Deserializador
     # Devuelve el Perfil con los horizontes cargados
     def construir_horizontes(perfil)
       horizontes.each do |h|
-        perfil.horizontes.build(
+
+        horizonte = actualizar? ? perfil.horizontes.find(h['id']) : perfil.horizontes.build
+
+        horizonte.assign_attributes(
           profundidad_inferior: h['profundidad_inferior'],
           profundidad_superior: h['profundidad_superior'],
           barnices: h['barnices'],
@@ -167,7 +172,7 @@ module Deserializador
         when String
           Usuario.find_by(email: usuario_o_email)
         else
-          usuario_o_email
+          actualizar? ? perfil.usuario : usuario_o_email
         end
     end
 
