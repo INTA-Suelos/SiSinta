@@ -10,6 +10,10 @@ describe Deserializador::Constructor do
   let(:perfil_actualizado) do
     Deserializador::Constructor.new(perfil_a_csv(perfil_existente), actualizar: true)
   end
+  let(:datos_a_actualizar) { build(:perfil_completo, id: perfil_existente.id) }
+  let(:actualizado) do
+    Deserializador::Constructor.new(perfil_a_csv(datos_a_actualizar), actualizar: true)
+  end
 
   describe '#usuario' do
     let(:usuario) { create(:usuario) }
@@ -60,11 +64,6 @@ describe Deserializador::Constructor do
   end
 
   describe '#construir_perfil' do
-    let(:datos_a_actualizar) { build(:perfil_completo, id: perfil_existente.id) }
-    let(:actualizado) do
-      Deserializador::Constructor.new(perfil_a_csv(datos_a_actualizar), actualizar: true)
-    end
-
     it 'es nuevo por omisión' do
       Deserializador::Constructor.new(csv).construir_perfil.wont_be :persisted?
     end
@@ -76,7 +75,7 @@ describe Deserializador::Constructor do
       perfil.must_equal perfil_existente
     end
 
-    it 'actualiza los datos' do
+    it 'actualiza los datos del perfil' do
       perfil = actualizado.construir
 
       %w{
@@ -117,8 +116,18 @@ describe Deserializador::Constructor do
       end
     end
 
-    it 'actualiza los datos' do
-      flunk 'falta implementar'
+    it 'actualiza los datos de los horizontes' do
+      perfil = perfil_actualizado.construir
+
+      perfil.horizontes.size.must_equal datos_a_actualizar.horizontes.size
+      perfil.horizontes.each do |h|
+        %w{
+          id profundidad_inferior profundidad_superior barnices co3 moteados ph
+          raices tipo concreciones formaciones_especiales humedad textura_id
+        }.each do |atributo|
+          h.send(atributo).must_equal datos_a_actualizar.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
+        end
+      end
     end
   end
 end
