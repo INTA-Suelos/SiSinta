@@ -24,7 +24,7 @@ FactoryGirl.define do
 
       modal true
       publico true
-      profundidad_napa { rand }
+      profundidad_napa { rand.round(15) }
       cobertura_vegetal { rand }
       material_original { generate :cadena_unica }
       vegetacion_o_cultivos { generate :cadena_unica }
