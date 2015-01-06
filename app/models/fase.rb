@@ -2,9 +2,12 @@
 class Fase < ApplicationRecord
   has_many :perfiles
 
-  validates_uniqueness_of :codigo, allow_blank: true, allow_nil: true
-  validates_uniqueness_of :nombre
-  validates_presence_of :nombre
+  validates :codigo,
+    uniqueness: { allow_blank: true, allow_nil: true },
+    length: { maximum: 2 }
+  validates :nombre,
+    uniqueness: true,
+    presence: true
 
   accepts_nested_attributes_for :perfiles
 end

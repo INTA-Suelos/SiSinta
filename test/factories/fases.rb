@@ -2,7 +2,7 @@
 # modelos que pasen la validación.
 FactoryGirl.define do
   factory :fase do
-    codigo { generate(:cadena_unica).slice(0, 2) }
+    codigo { generate(:cadena_unica).first 2 }
     nombre { generate :cadena_unica }
   end
 end
