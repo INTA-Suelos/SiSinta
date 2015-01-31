@@ -5,6 +5,13 @@ jQuery ->
 
   map = L.map('mapa').setView(centro, zoom)
 
+  preparar_puntos = (punto, capa) ->
+    capa.bindPopup(
+      "<a target='_blank' title='Serie' href='#{punto.properties.serie.url}'>#{
+        punto.properties.serie.nombre || 'Serie'}</a> - " +
+      "<a target='_blank' title='Perfil' href='#{punto.properties.url}'>#{
+        punto.properties.numero || 'Perfil'}</a>")
+
   # Capa de tiles de MapBox
   # TODO Ver cómo cargar la de geointa o el ign
   L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -22,7 +29,9 @@ jQuery ->
     puntos = new L.MarkerClusterGroup()
     puntos.addLayer(
       # Agregar capa de geoJson
-      L.geoJson().addData(data)
+      L.geoJson(data, {
+        onEachFeature: preparar_puntos
+      })
     ).addTo(map)
 
     # Encuadrar todos los puntos en el mapa a menos que definamos un centro
