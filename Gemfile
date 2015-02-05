@@ -79,6 +79,7 @@ group :development do
   gem 'better_errors'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
+  gem 'brakeman', require: false
 end
 
 group :test do
