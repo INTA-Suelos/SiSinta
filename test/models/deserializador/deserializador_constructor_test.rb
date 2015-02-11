@@ -13,7 +13,10 @@ describe Deserializador::Constructor do
   end
 
   let(:csv) { perfil_a_csv perfil_nuevo }
-  let(:constructor_actualizado) do
+  let(:constructor_creador) do
+    Deserializador::Constructor.new(csv)
+  end
+  let(:constructor_actualizador) do
     Deserializador::Constructor.new(perfil_a_csv(perfil_cambiado), actualizar: true)
   end
 
@@ -82,28 +85,34 @@ describe Deserializador::Constructor do
 
   describe '#actualizar?' do
     it 'crea los datos por omisión' do
-      Deserializador::Constructor.new(csv).actualizar?.must_equal false
+      constructor_creador.actualizar?.must_equal false
     end
 
     it 'registra si hay que actualizar' do
-      constructor_actualizado.actualizar?.must_equal true
+      constructor_actualizador.actualizar?.must_equal true
     end
   end
 
   describe '#construir_perfil' do
     it 'es nuevo por omisión' do
-      Deserializador::Constructor.new(csv).construir_perfil.wont_be :persisted?
+      constructor_creador.construir_perfil.wont_be :persisted?
+    end
+
+    it 'crea el perfil' do
+      lambda do
+        constructor_creador.construir_perfil.save.must_equal true
+      end.must_change 'Perfil.count'
     end
 
     it 'si hay que actualizar carga el existente' do
-      perfil = constructor_actualizado.construir_perfil
+      perfil = constructor_actualizador.construir_perfil
 
       perfil.must_be :persisted?
       perfil.must_equal perfil_existente
     end
 
     it 'carga un perfil con datos cambiados' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
       perfil.must_be :changed?
       atributos_de_perfil.each do |atributo|
@@ -112,9 +121,12 @@ describe Deserializador::Constructor do
     end
 
     it 'actualiza el perfil' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
-      perfil.save.must_equal true
+      lambda do
+        perfil.save.must_equal true
+      end.must_change 'Perfil.count', 0
+
       perfil_existente.reload
       atributos_de_perfil.each do |atributo|
         perfil_existente.send(atributo).must_equal perfil_cambiado.send(atributo), "Falla #{atributo}"
@@ -122,7 +134,7 @@ describe Deserializador::Constructor do
     end
 
     it 'no actualiza el usuario' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
       perfil.usuario_id.wont_equal perfil_cambiado.usuario_id
       perfil.usuario_id.must_equal perfil_existente.usuario_id
@@ -130,18 +142,25 @@ describe Deserializador::Constructor do
   end
 
   describe '#construir_horizontes' do
-    let(:perfil_creado) { Deserializador::Constructor.new(csv).construir }
-
     it 'son nuevos si el perfil es nuevo' do
-      perfil_creado.horizontes.any?.must_equal true
+      perfil = constructor_creador.construir
 
-      perfil_creado.horizontes.each do |horizonte|
+      perfil.horizontes.any?.must_equal true
+      perfil.horizontes.each do |horizonte|
         horizonte.wont_be :persisted?
       end
     end
 
+    it 'crea el perfil y sus horizontes' do
+      perfil = constructor_creador.construir
+
+      lambda do
+        perfil.save.must_equal true
+      end.must_change 'Horizonte.count'
+    end
+
     it 'son existentes si estamos actualizando' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
       perfil.horizontes.any?.must_equal true
       perfil.horizontes.each do |horizonte|
@@ -150,7 +169,7 @@ describe Deserializador::Constructor do
     end
 
     it 'carga horizontes con datos actualizados' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
       perfil.must_be :changed?
       perfil.horizontes.size.must_equal perfil_existente.horizontes.size
@@ -162,9 +181,12 @@ describe Deserializador::Constructor do
     end
 
     it 'actualiza los horizontes' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
-      perfil.save.must_equal true
+      lambda do
+        perfil.save.must_equal true
+      end.must_change 'Horizonte.count', 0
+
       perfil_existente.reload.horizontes.each do |h|
         atributos_de_horizonte.each do |atributo|
           h.send(atributo).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
@@ -172,8 +194,16 @@ describe Deserializador::Constructor do
       end
     end
 
+    it 'crea los analíticos' do
+      perfil = constructor_creador.construir
+
+      lambda do
+        perfil.save.must_equal true
+      end.must_change 'Analitico.count'
+    end
+
     it 'carga analíticos con datos actualizados' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
       perfil.must_be :changed?
       perfil.analiticos.size.must_equal perfil_existente.horizontes.size
@@ -185,9 +215,12 @@ describe Deserializador::Constructor do
     end
 
     it 'actualiza los analíticos' do
-      perfil = constructor_actualizado.construir
+      perfil = constructor_actualizador.construir
 
-      perfil.save.must_equal true
+      lambda do
+        perfil.save.must_equal true
+      end.must_change 'Analitico.count', 0
+
       perfil_existente.reload.analiticos.each do |a|
         atributos_de_analitico.each do |atributo|
           a.send(atributo).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"

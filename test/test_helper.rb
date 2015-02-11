@@ -22,6 +22,9 @@ end
 
 class Minitest::Spec
   include FactoryGirl::Syntax::Methods
+  # Incluye assert_difference
+  # TODO sacar después de actualizar a rails 4.1?
+  include ActiveSupport::Testing::Assertions
 
   before { DatabaseCleaner.start }
   after { DatabaseCleaner.clean }
