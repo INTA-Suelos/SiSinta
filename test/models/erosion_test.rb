@@ -7,7 +7,7 @@ class ErosionTest < ActiveSupport::TestCase
     atributos = { clase_id: ClaseDeErosion.last.id }
 
     assert_difference 'ClaseDeErosion.last.erosiones.count' do
-      assert create(:erosion).update_attributes(atributos)
+      assert create(:erosion, :con_perfil).update_attributes(atributos)
     end
   end
 

@@ -7,7 +7,7 @@ class HumedadTest < ActiveSupport::TestCase
     atributos = { clase_id: ClaseDeHumedad.last.id }
 
     assert_difference 'ClaseDeHumedad.last.humedades.count' do
-      assert create(:humedad).update_attributes(atributos)
+      assert create(:humedad, :con_perfil).update_attributes(atributos)
     end
   end
 
@@ -16,7 +16,7 @@ class HumedadTest < ActiveSupport::TestCase
   end
 
   test "guarda la relación con una subclase" do
-    humedad = create(:humedad, subclase_ids: [ SubclaseDeHumedad.first.id ])
+    humedad = create(:humedad, :con_perfil, subclase_ids: [ SubclaseDeHumedad.first.id ])
 
     assert humedad.valid?
     assert humedad.subclase_ids.include?(SubclaseDeHumedad.first.id),
@@ -28,7 +28,7 @@ class HumedadTest < ActiveSupport::TestCase
   test "guarda la relación con varias subclases" do
     atributos = { subclase_ids: [ SubclaseDeHumedad.first.id,
                                   SubclaseDeHumedad.last.id   ] }
-    humedad = create(:humedad, atributos)
+    humedad = create(:humedad, :con_perfil, atributos)
 
     assert humedad.valid?
     assert humedad.subclase_ids.include?(SubclaseDeHumedad.first.id), 'no agrega varias subclases'
