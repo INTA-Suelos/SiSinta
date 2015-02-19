@@ -61,7 +61,7 @@ class SeriesController < AutorizadoController
       { }
     end
 
-    respond_with @serie, opciones
+    respond_with (@serie = @serie.decorate), opciones
   end
 
   def destroy
