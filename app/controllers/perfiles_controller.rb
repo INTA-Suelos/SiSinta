@@ -306,7 +306,8 @@ class PerfilesController < AutorizadoController
       hash[:_destroy].present? or hash[:anular].present?
     end
 
+    # TODO Deshardcodear la ficha default
     def seleccionar_ficha
-      @ficha = session.delete(:ficha) || current_usuario.ficha
+      @ficha = session.delete(:ficha) || current_usuario.try(:ficha) || 'completa'
     end
 end
