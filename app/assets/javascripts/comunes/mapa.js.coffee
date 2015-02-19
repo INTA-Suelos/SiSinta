@@ -6,11 +6,15 @@ jQuery ->
   map = L.map('mapa').setView(centro, zoom)
 
   preparar_puntos = (punto, capa) ->
-    capa.bindPopup(
+    serie = if punto.properties.serie
       "<a target='_blank' title='Serie' href='#{punto.properties.serie.url}'>#{
-        punto.properties.serie.nombre || 'Serie'}</a> - " +
-      "<a target='_blank' title='Perfil' href='#{punto.properties.url}'>#{
-        punto.properties.numero || 'Perfil'}</a>")
+        punto.properties.serie.nombre || 'Serie'}</a> - "
+    else
+      ''
+    capa.bindPopup(
+      serie + "<a target='_blank' title='Perfil' href='#{punto.properties.url}'>#{
+        punto.properties.numero || 'Perfil'}</a>"
+    )
 
   # Capa de tiles de MapBox
   # TODO Ver cómo cargar la de geointa o el ign
