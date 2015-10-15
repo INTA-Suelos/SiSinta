@@ -58,6 +58,11 @@ gem 'select2-rails'
 gem 'leaflet-rails'
 gem 'rails-assets-leaflet.markercluster'
 
+# Paquetes de bower
+source 'https://rails-assets.org' do
+  gem 'rails-assets-leaflet-plugins'
+end
+
 ## Server
 gem 'thin'
 # TODO revisar configuración de compresión

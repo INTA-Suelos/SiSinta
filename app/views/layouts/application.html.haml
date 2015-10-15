@@ -2,11 +2,15 @@
 %html{'xml:lang' => 'es_AR', 'xmlns' => 'http://www.w3.org/1999/xhtml'}
   %head
     %title= titulo_de_la_aplicacion
-    = stylesheet_link_tag     "application", media: 'all'
-    = stylesheet_link_tag     "print", media: 'print'
-    = stylesheet_link_tag     "ie" if @ie
-    = javascript_include_tag  "application"
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'print', media: 'print'
+    = stylesheet_link_tag 'ie' if @ie
+
+    = javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry'
+    = javascript_include_tag 'application'
+
     = csrf_meta_tags
+
     = favicon_link_tag image_path('favicon.png'), type: 'image/png'
     = favicon_link_tag image_path('favicon144.png'), type: 'image/png', rel: 'apple-touch-icon'
   %body.celeste
