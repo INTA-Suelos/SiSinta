@@ -17,11 +17,11 @@ class PerfilDecorator < ApplicationDecorator
   end
 
   def etiquetas
-    source.etiquetas.join(', ')
+    source.etiqueta_list.join(', ')
   end
 
   def reconocedores
-    source.reconocedores.join(', ')
+    source.reconocedor_list.join(', ')
   end
 
   def to_s
