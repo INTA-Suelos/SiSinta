@@ -1,51 +1,94 @@
 # encoding: utf-8
 require './test/test_helper'
 
-class PerfilDecoratorTest < Draper::TestCase
-  def setup
-    @perfil = build_stubbed :perfil, publico: true
-    @decorador = PerfilDecorator.decorate @perfil
+describe PerfilDecorator do
+  let(:perfil) { build_stubbed :perfil, publico: true }
+  let(:decorador) { PerfilDecorator.decorate perfil }
+
+  describe 'asociaciones' do
+    it 'decora la ubicación' do
+      perfil.ubicacion = create(:ubicacion)
+
+      decorador.ubicacion.must_be_kind_of UbicacionDecorator
+    end
+
+    it 'decora grupo nulo' do
+      decorador.grupo.object.must_be_nil
+
+      decorador.grupo.must_be_instance_of GrupoDecorator
+    end
+
+    it 'decora fase nula' do
+      decorador.fase.object.must_be_nil
+
+      decorador.fase.must_be_instance_of FaseDecorator
+    end
   end
 
-  test 'decora la ubicación' do
-    @perfil.ubicacion = create(:ubicacion)
+  describe '#fecha' do
+    it 'está en formato día/mes/año' do
+      perfil.fecha = Date.new 1999, 5, 29
 
-    assert_kind_of UbicacionDecorator, @decorador.ubicacion
+      decorador.fecha.must_equal '29/05/1999'
+    end
   end
 
-  test 'usa día/mes/año para la fecha' do
-    @perfil.fecha = Date.new
+  describe '#clase' do
+    it 'es fase y grupo concatenados' do
+      perfil.build_grupo descripcion: 'grupo lindo'
+      perfil.build_fase nombre: 'fase buena'
 
-    assert_equal Date.new.to_s(:dma), @decorador.fecha
+      decorador.clase.must_equal 'grupo lindo fase buena'
+    end
+
+    it 'es una cadena vacía sin fase ni grupo' do
+      decorador.clase.must_equal ''
+    end
+
+    it 'no está disponible para los perfiles privados' do
+      perfil.publico = false
+      h = Minitest::Mock.new.expect :can?, false, [:read, perfil]
+
+      decorador.stub :h, h do
+        decorador.clase.must_equal 'No disponible'
+      end
+    end
+
+    it 'está disponible para los perfiles privados si el usuario tiene acceso' do
+      perfil.publico = false
+      h = Minitest::Mock.new.expect :can?, true, [:read, perfil]
+
+      decorador.stub :h, h do
+        decorador.clase.wont_equal 'No disponible'
+      end
+    end
   end
 
-  test 'devuelve nil decorado para grupo nulo' do
-    assert_instance_of GrupoDecorator, @decorador.grupo
-    assert_nil @decorador.grupo.object
+  describe '#etiquetas' do
+    it 'devuelve una cadena vacía si no hay' do
+      perfil.etiquetas.must_be :empty?
+
+      decorador.etiquetas.must_equal ''
+    end
+
+    it 'devuelve las etiquetas unidas con ,' do
+      perfil.etiqueta_list.add 'uno', 'dos'
+
+      decorador.etiquetas.must_equal 'uno, dos'
+    end
   end
 
-  test 'devuelve nil decorado para fase nula' do
-    assert_instance_of FaseDecorator, @decorador.fase
-    assert_nil @decorador.fase.object
-  end
+  describe '#reconocedores' do
+    it 'devuelve una cadena vacía si no hay' do
+      perfil.reconocedores.must_be :empty?
 
-  test 'sin fase ni grupo clase es una cadena vacía' do
-    assert_equal '', @decorador.clase
-  end
+      decorador.reconocedores.must_equal ''
+    end
 
-  test 'fase y grupo se concatenan simplemente para formar la clase' do
-    @perfil.build_grupo descripcion: 'grupo lindo'
-    @perfil.build_fase nombre: 'fase buena'
+    it 'devuelve las reconocedores unidas con ,' do
+      perfil.reconocedor_list.add 'uno', 'dos'
 
-    assert_equal 'grupo lindo fase buena', @decorador.clase
-  end
-
-  test 'la clase no está disponible para los perfiles privados' do
-    @perfil.publico = false
-    h = Minitest::Mock.new.expect :can?, false, [:read, @perfil]
-
-    @decorador.stub :h, h do
-      assert_equal 'No disponible', @decorador.clase
+      decorador.reconocedores.must_equal 'uno, dos'
     end
   end
 end
