@@ -1,8 +1,15 @@
-# encoding: utf-8
 require './test/test_helper'
 
-class FaseDecoratorTest < Draper::TestCase
-  test 'si decora nil nombre es una cadena vacía' do
-    assert_equal '', FaseDecorator.new(nil).nombre
+describe FaseDecorator do
+  subject { build(:fase) }
+
+  describe '#nombre' do
+    it 'devuelve el nombre del objeto decorado' do
+      FaseDecorator.new(subject).nombre.must_equal subject.nombre
+    end
+
+    it 'devuelve una cadena vacía sin objeto decorado' do
+      FaseDecorator.new(nil).nombre.must_equal ''
+    end
   end
 end

@@ -14,6 +14,7 @@
 //= require ransack-search
 //= require leaflet
 //= require leaflet.markercluster/dist/leaflet.markercluster-src
+//= require leaflet-plugins
 //
 // Aplicación
 //= require_tree ./jquery
