@@ -237,6 +237,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.12)
       sprockets-rails (~> 2.0)
+    rails-assets-leaflet-plugins (1.3.11)
     rails-assets-leaflet.markercluster (0.4.0)
     rails3-jquery-autocomplete (1.0.14)
       rails (>= 3.0)
@@ -367,6 +368,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 4.0.12)
+  rails-assets-leaflet-plugins!
   rails-assets-leaflet.markercluster
   rails3-jquery-autocomplete
   ransack
