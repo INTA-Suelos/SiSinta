@@ -20,7 +20,7 @@ class AnaliticoTest < ActiveSupport::TestCase
 
   test 'usa precisión 000.00 en los porcentajes' do
     a = build(:analitico, horizonte: build(:horizonte),
-      humedad: 99.99,
+      humedad: 99.98,
       arcilla: 0.01,
       materia_organica_c: 100,
       limo_2_20: 0.04,
@@ -40,13 +40,13 @@ class AnaliticoTest < ActiveSupport::TestCase
     assert a.valid?
     a.save
     a.reload
-    assert_equal 99.99, a.humedad.to_f  # TODO por qué no lo convierte?
+    assert_equal 99.98, a.humedad
     assert_equal 0.01, a.arcilla
     assert_equal 100, a.materia_organica_c
     assert_equal 0.04, a.limo_2_20
     assert_equal 100, a.limo_2_50
     assert_equal 0.06, a.arena_muy_fina
-    assert_equal 100, a.arena_fina.to_f  # TODO por qué no lo convierte?
+    assert_equal 100.00, a.arena_fina
     assert_equal 0.08, a.arena_media
     assert_equal 0.09, a.arena_gruesa
     assert_equal 0.10, a.arena_muy_gruesa
