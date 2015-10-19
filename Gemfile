@@ -56,10 +56,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
 gem 'leaflet-rails'
-gem 'rails-assets-leaflet.markercluster'
 
 # Paquetes de bower
 source 'https://rails-assets.org' do
+  gem 'rails-assets-leaflet.markercluster'
   gem 'rails-assets-leaflet-plugins'
 end
 

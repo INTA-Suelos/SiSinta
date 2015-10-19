@@ -369,7 +369,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.0.12)
   rails-assets-leaflet-plugins!
-  rails-assets-leaflet.markercluster
+  rails-assets-leaflet.markercluster!
   rails3-jquery-autocomplete
   ransack
   responders
