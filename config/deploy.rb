@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.3.4'
+lock '3.4.0'
 
 set :application, 'SiSINTA'
 set :repo_url, 'https://github.com/INTA-Suelos/SiSinta.git'
@@ -19,7 +19,6 @@ set :rbenv_type, :user
 # rails
 set :assets_prefix, 'estaticos'
 set :linked_dirs, %w{
-  bin
   log
   tmp/pids
   tmp/cache
@@ -33,3 +32,5 @@ set :linked_files, %w{
   config/initializers/secret_token.rb
   config/initializers/devise.rb
 }
+
+after 'deploy:finished', 'deploy:restart'
