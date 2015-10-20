@@ -6,12 +6,12 @@ describe Capacidad do
 
   it 'carga la clase asociada' do
     lambda do
-      create(:capacidad).update_attributes clase_id: ClaseDeCapacidad.first.id
+      create(:capacidad, :con_perfil).update_attributes clase_id: ClaseDeCapacidad.first.id
     end.must_change'ClaseDeCapacidad.first.capacidades.count'
   end
 
   it 'guarda la relación con una subclase' do
-    capacidad = create(:capacidad, subclase_ids: [ SubclaseDeCapacidad.first.id ])
+    capacidad = create(:capacidad, :con_perfil, subclase_ids: [ SubclaseDeCapacidad.first.id ])
 
     capacidad.must_be :valid?
     capacidad.subclase_ids.include?(SubclaseDeCapacidad.first.id).must_equal true
@@ -21,7 +21,7 @@ describe Capacidad do
   it 'guarda la relación con varias subclases' do
     atributos = { subclase_ids: [ SubclaseDeCapacidad.first.id,
                                   SubclaseDeCapacidad.last.id   ] }
-    capacidad = create(:capacidad, atributos)
+    capacidad = create(:capacidad, :con_perfil, atributos)
 
     capacidad.must_be :valid?
     capacidad.subclase_ids.include?(SubclaseDeCapacidad.first.id).must_equal true

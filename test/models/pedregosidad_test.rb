@@ -7,7 +7,7 @@ class PedregrosidadTest < ActiveSupport::TestCase
     atributos = { clase_id: ClaseDePedregosidad.last.id }
 
     assert_difference 'ClaseDePedregosidad.last.pedregosidades.count' do
-      assert create(:pedregosidad).update_attributes(atributos)
+      assert create(:pedregosidad, :con_perfil).update_attributes(atributos)
     end
   end
 

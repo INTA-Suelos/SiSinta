@@ -18,5 +18,9 @@ FactoryGirl.define do
     perfil nil
   end
 
+  trait :con_perfil do
+    perfil
+  end
+
   # TODO agregar todos los campos en las fábricas
 end

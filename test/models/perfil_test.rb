@@ -139,7 +139,7 @@ class PerfilTest < ActiveSupport::TestCase
   end
 
   test 'sabe si está geolocalizado' do
-    assert build(:ubicacion, :con_coordenadas).perfil.geolocalizado?
-    refute build(:ubicacion).perfil.geolocalizado?
+    assert build(:ubicacion, :con_perfil, :con_coordenadas).perfil.geolocalizado?
+    refute build(:ubicacion, :con_perfil).perfil.geolocalizado?
   end
 end

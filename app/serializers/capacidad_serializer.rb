@@ -1,4 +1,8 @@
 class CapacidadSerializer < ActiveModel::Serializer
+  attributes :subclases
   has_one  :clase, serializer: ClaseDeCapacidadSerializer
-  has_many :subclases, serializer: SubclaseDeCapacidadSerializer
+
+  def subclases
+    object.subclases.collect(&:codigo).join ', '
+  end
 end

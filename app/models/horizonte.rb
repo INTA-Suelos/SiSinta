@@ -18,9 +18,11 @@ class Horizonte < ActiveRecord::Base
               inverse_of: :horizontes_en_humedo, validate: false
   has_lookup :textura, inverse_of: :horizontes, class_name: 'TexturaDeHorizonte'
 
-  accepts_nested_attributes_for :analitico, :limite, :consistencia,
-                                :estructura, :textura,
+  accepts_nested_attributes_for :limite, :consistencia, :estructura, :textura,
                                 limit: 1
+  # TODO testear si todos pueden ser update_only
+  accepts_nested_attributes_for :analitico,
+                                limit: 1, update_only: true
   accepts_nested_attributes_for :color_seco, :color_humedo,
                                 reject_if: :all_blank
 

@@ -13,19 +13,21 @@ FactoryGirl.define do
       serie
       fase
       grupo
-      capacidad
-      ubicacion
-      paisaje
-      humedad
-      erosion
-      pedregosidad
+
+      association :capacidad, strategy: :build
+      association :ubicacion, strategy: :build
+      association :paisaje, strategy: :build
+      association :humedad, strategy: :build
+      association :erosion, strategy: :build
+      association :pedregosidad, strategy: :build
+
       modal true
       publico true
-      profundidad_napa { rand }
+      profundidad_napa { rand.round(15) }
       cobertura_vegetal { rand }
-      material_original 'sarasa'
-      vegetacion_o_cultivos 'sarasa'
-      observaciones 'sarasa'
+      material_original { generate :cadena_unica }
+      vegetacion_o_cultivos { generate :cadena_unica }
+      observaciones { generate :cadena_unica }
 
       # lookups
       drenaje_id          { rand(Drenaje.count) + 1 }
@@ -38,8 +40,8 @@ FactoryGirl.define do
       sal_id              { rand(Sal.count) + 1 }
       uso_de_la_tierra_id { rand(UsoDeLaTierra.count) + 1 }
 
-      after :create do |perfil|
-        perfil.horizontes << create(:horizonte)
+      after :create do |perfil, fabrica|
+        FactoryGirl.create_list :horizonte_completo, 1, perfil: perfil
       end
     end
 
@@ -47,7 +49,7 @@ FactoryGirl.define do
     factory :perfil_para_geojson do
       publico true
       serie
-      association :ubicacion, :con_coordenadas
+      association :ubicacion, :con_coordenadas, strategy: :build
     end
   end
 end

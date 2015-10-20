@@ -6,12 +6,16 @@ namespace :sisinta do
     task :csv => :environment do
       # El archivo .csv
       if (archivo = ENV['archivo']).present? && File.exists?(archivo)
-        perfiles = Deserializador.parsear_csv archivo, :id
+        actualizar = ENV['actualizar'].present?
+        perfil_id = ENV['id'] || 'id'
 
-        Deserializador.construir_perfiles(perfiles, ENV['usuario']).each do |perfil|
+        perfiles = Deserializador.parsear_csv archivo, perfil_id
+
+        Deserializador.construir_perfiles(perfiles,
+          usuario: ENV['usuario'], actualizar: actualizar
+        ).each do |perfil|
           unless perfil.save
-            puts "Ocurrió un error con estos horizontes:"
-            ap perfil.horizontes
+            ap perfil.errors.messages
           end
         end
       else

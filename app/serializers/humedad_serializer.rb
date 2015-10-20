@@ -1,4 +1,8 @@
 class HumedadSerializer < ActiveModel::Serializer
+  attributes :subclases
   has_one  :clase, serializer: LookupSerializer
-  has_many :subclases, serializer: LookupSerializer
+
+  def subclases
+    object.subclases.collect(&:valor).join ', '
+  end
 end

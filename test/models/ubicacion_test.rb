@@ -5,10 +5,10 @@ class UbicacionTest < ActiveSupport::TestCase
 
   setup do
     @atributos = {}
-    @u = build_stubbed(:ubicacion)
+    @u = build_stubbed(:ubicacion, :con_perfil)
     @x = -61.85
     @y = -34.1725
-    @c = create(:ubicacion, x: @x, y: @y)
+    @c = create(:ubicacion, :con_perfil, x: @x, y: @y)
   end
 
   test 'no carga la ubicación sin perfil' do

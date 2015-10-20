@@ -46,7 +46,7 @@ class PerfilesControllerTest < ActionController::TestCase
     loguearse_como 'Autorizado'
     @request.env['HTTP_REFERER'] = '/perfiles/'
 
-    get :show, id: create(:ubicacion, :con_coordenadas).perfil.to_param,
+    get :show, id: create(:ubicacion, :con_perfil, :con_coordenadas).perfil.to_param,
       format: :geojson
 
     assert_response :success
@@ -95,7 +95,7 @@ class PerfilesControllerTest < ActionController::TestCase
 
   test 'accede a los datos en geoJSON sin loguearse' do
     assert_nil @controller.current_usuario
-    create(:ubicacion, :con_coordenadas)
+    create(:ubicacion, :con_perfil, :con_coordenadas)
     @request.env['HTTP_REFERER'] = '/perfiles/'
 
     get :index, format: 'geojson'
@@ -119,7 +119,7 @@ class PerfilesControllerTest < ActionController::TestCase
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)
     perfil.horizontes.create(attributes_for(:horizonte))
-    analitico = attributes_for(:analitico, id: perfil.analiticos.first.id)
+    analitico = attributes_for(:analitico, :con_datos, id: perfil.analiticos.first.id)
 
     put :update_analiticos, id: perfil.to_param, perfil: {
       analiticos_attributes: { '0' => analitico }
