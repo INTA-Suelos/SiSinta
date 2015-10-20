@@ -13,6 +13,6 @@ FactoryGirl.define do
     base_mg           { generate :porcentaje }
     base_k            { generate :porcentaje }
     base_na           { generate :porcentaje }
-    profundidad_muestra "2 - 10"
+    profundidad_muestra '2 - 10'
   end
 end

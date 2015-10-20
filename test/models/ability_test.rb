@@ -1,121 +1,139 @@
 # encoding : utf-8
 require './test/test_helper'
 
-class AbilityTest < ActiveSupport::TestCase
+describe Ability do
+  describe 'administradoras' do
+    let(:admin) { create(:usuario, rol: 'Administrador') }
+    let(:permisos) { Ability.new admin }
 
-  test "los administradores pueden tocar todo" do
-    admin = create(:usuario, rol: 'Administrador')
-    permisos = Ability.new admin
-
-    permisos.recursos.each do |recurso|
-      assert permisos.can?(:manage, recurso), "Debe poder administrar #{recurso}"
-    end
-    assert permisos.can?(:manage, Usuario), "Debe poder administrar Usuario"
-  end
-
-  test "los usuarios autorizados pueden ver cualquier objeto" do
-    autorizado = create(:usuario, rol: 'Autorizado')
-    permisos = Ability.new autorizado
-
-    perfil_ajeno = build_stubbed(:perfil, usuario: create(:usuario))
-
-    assert permisos.can?(:read, perfil_ajeno), "Debe poder ver un perfil ajeno"
-    assert permisos.cannot(:update, perfil_ajeno), "No debe poder cambiar un perfil ajeno"
-    assert permisos.cannot(:destroy, perfil_ajeno), "No debe poder destruir un perfil ajeno"
-    assert permisos.cannot(:manage, perfil_ajeno), "No debe poder administrar un perfil ajeno"
-    assert permisos.cannot(:modificar, perfil_ajeno), "No debe poder modificar un perfil ajeno"
-  end
-
-  test "los usuarios autorizados pueden crear objetos propios" do
-    autorizado = create(:usuario, rol: 'Autorizado')
-    permisos = Ability.new autorizado
-
-    permisos.recursos.each do |recurso|
-      assert permisos.can?(:create, recurso), "Debe poder crear #{recurso}"
-    end
-  end
-
-  test "los usuarios autorizados pueden manejar sus propios objetos" do
-    autorizado = create(:usuario, rol: 'Autorizado')
-    otro_usuario = create(:usuario, rol: 'Administrador')
-    permisos = Ability.new autorizado
-
-    [:perfil, :equipo, :proyecto, :serie].collect do |modelo|
-      propio = build_stubbed(modelo, usuario: autorizado)
-      ajeno = build_stubbed(modelo, usuario: otro_usuario)
-      huerfano = build_stubbed(modelo, usuario: nil)
-
-      assert permisos.can?(:manage, propio), "Deben poder administrar sus recursos"
-      assert permisos.cannot?(:manage, ajeno), "No deben poder administrar otros"
-      assert permisos.cannot?(:manage, huerfano), "No deben poder administrar otros"
-    end
-  end
-
-  test "los miembros de un equipo pueden editar el equipo y agregar miembros" do
-    equipo = create(:equipo, miembros: 3)
-    equipo.miembros.each do |miembro|
-      miembro.grant 'Autorizado'
-      permisos = Ability.new miembro
-      assert permisos.can?(:update, equipo), "Un miembro debe poder actualizar sus equipos"
-    end
-  end
-
-  test "los miembros de algo pueden administrarlo" do
-    miembro = create(:usuario)
-    perfil = create(:perfil)
-    miembro.grant 'Miembro', perfil
-    permisos = Ability.new miembro
-
-    assert permisos.can?(:modificar, perfil),
-      "No puede administrar un perfil del que es miembro"
-    refute permisos.can?(:modificar, create(:perfil)),
-      "Puede administrar un perfil del que no es miembro"
-  end
-
-  test "los miembros de algo pueden autocompletar tags" do
-    miembro = create(:usuario)
-    perfil = create(:perfil)
-    miembro.grant 'Miembro', perfil
-    permisos = Ability.new miembro
-
-    assert permisos.can?(:autocomplete_reconocedores_name, Perfil),
-      "Debe poder autocompletar los reconocedores si es miembro de algún perfil"
-    assert permisos.can?(:autocomplete_etiquetas_name, Perfil),
-      "Debe poder autocompletar las etiquetas si es miembro de algún perfil"
-  end
-
-  test "los invitados no pueden crear o modificar recursos" do
-    permisos = Ability.new
-
-    permisos.recursos.each do |recurso|
-      case recurso.name
-        when 'Busqueda'
-          [:update, :destroy].each do |accionar|
-            assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
-          end
-          assert permisos.can?(:create, recurso), 'Debe poder crear búsquedas'
-        else
-          [:create, :update, :destroy].each do |accionar|
-            assert permisos.cannot?(accionar, recurso), "No debe poder #{accionar} sobre #{recurso}"
-          end
+    it 'pueden administrar cualquier recurso' do
+      permisos.recursos.each do |recurso|
+        permisos.can?(:manage, recurso).must_equal true, "Debe poder administrar #{recurso}"
       end
     end
+
+    it 'pueden administrar usuarios' do
+      permisos.can?(:manage, Usuario).must_equal true
+    end
   end
 
-  test "los invitados sólo pueden leer perfiles que son públicos" do
-    permisos = Ability.new
-    perfil_privado = build_stubbed(:perfil)
-    perfil_publico = build_stubbed(:perfil, publico: true)
+  describe 'autorizadas' do
+    let(:autorizado) { create :usuario, rol: 'Autorizado' }
+    let(:permisos) { Ability.new autorizado }
+    let(:otro_usuario) { create :usuario, rol: 'Administrador' }
 
-    assert permisos.cannot?(:read, perfil_privado), "No debe poder ver perfiles privados"
-    assert permisos.can?(:read, perfil_publico), "Debe poder ver perfiles públicos"
+    it 'pueden leer cualquier recurso' do
+      permisos.recursos.each do |recurso|
+        permisos.can?(:read, recurso).must_equal true, "Debe poder leer #{recurso}"
+      end
+    end
+
+    it 'pueden modificar perfiles propios' do
+      perfil_propio = build_stubbed :perfil, usuario: autorizado
+
+      permisos.can?(:update, perfil_propio).must_equal true
+      permisos.can?(:destroy, perfil_propio).must_equal true
+      permisos.can?(:manage, perfil_propio).must_equal true
+      permisos.can?(:modificar, perfil_propio).must_equal true
+    end
+
+    it 'no pueden modificar perfiles ajenos' do
+      perfil_ajeno = build_stubbed :perfil, usuario: create(:usuario)
+
+      permisos.can?(:update, perfil_ajeno).wont_equal true
+      permisos.can?(:destroy, perfil_ajeno).wont_equal true
+      permisos.can?(:manage, perfil_ajeno).wont_equal true
+      permisos.can?(:modificar, perfil_ajeno).wont_equal true
+    end
+
+    it 'pueden crear cualquier tipo de recurso' do
+      permisos.recursos.each do |recurso|
+        permisos.can?(:create, recurso).must_equal true, "Debe poder crear #{recurso}"
+      end
+    end
+
+    it 'pueden administrar sus propios objetos' do
+      [:perfil, :equipo, :proyecto, :serie].each do |modelo|
+        permisos.can?(:manage, build_stubbed(modelo, usuario: autorizado)).must_equal true
+      end
+    end
+
+    it 'no pueden administrar objetos que no poseen' do
+      [:perfil, :equipo, :proyecto, :serie].each do |modelo|
+        ajeno = build_stubbed(modelo, usuario: otro_usuario)
+        huerfano = build_stubbed(modelo, usuario: nil)
+
+        permisos.can?(:manage, ajeno).wont_equal true,
+          "No deben poder administrar un/a #{modelo} que no poseen"
+        permisos.can?(:manage, huerfano).wont_equal true,
+          "No deben poder administrar un/a #{modelo} que no poseen"
+      end
+    end
+
+    it 'pueden modificar el equipo al que pertenecen' do
+      equipo = create :equipo
+      equipo.miembros << autorizado
+
+      permisos.can?(:update, equipo).must_equal true
+    end
   end
 
-  test "los invitados pueden leer recursos básicos" do
-    permisos = Ability.new
+  describe 'miembros' do
+    let(:perfil) { create(:perfil) }
+    let(:miembro) do
+      usuario = create(:usuario)
+      usuario.grant 'Miembro', perfil
+      usuario
+    end
+    let(:permisos) { Ability.new miembro }
 
-    permisos.recursos.each do |recurso|
-      assert permisos.can?(:read, recurso), "Debe poder leer recursos básicos"
+    it 'pueden modificar perfiles para los que tienen permiso explícito' do
+      permisos.can?(:modificar, perfil).must_equal true
+    end
+
+    it 'no pueden modificar perfiles para los que no tienen permiso explícito' do
+      permisos.can?(:modificar, create(:perfil)).wont_equal true
+    end
+
+    it 'los miembros de algo pueden autocompletar tags' do
+      permisos.can?(:autocomplete_reconocedores_name, Perfil).must_equal true
+      permisos.can?(:autocomplete_etiquetas_name, Perfil).must_equal true
+    end
+  end
+
+  describe 'invitadas' do
+    let(:permisos) { Ability.new }
+
+    it 'no pueden crear ni modificar recursos' do
+      permisos.recursos.each do |recurso|
+        unless recurso.name == 'Busqueda'
+          [:create, :update, :destroy].each do |accionar|
+            permisos.can?(accionar, recurso).wont_equal true, "No debe poder #{accionar} sobre #{recurso}"
+          end
+        end
+      end
+    end
+
+    it 'pueden crear Busquedas' do
+      permisos.can?(:create, Busqueda).must_equal true
+    end
+
+    it 'pueden leer perfiles públicos' do
+      perfil_publico = build_stubbed(:perfil, publico: true)
+
+      permisos.can?(:read, perfil_publico).must_equal true
+    end
+
+    it 'no pueden leer perfiles privados' do
+      perfil_privado = build_stubbed(:perfil)
+
+      permisos.can?(:read, perfil_privado).wont_equal true
+    end
+
+    it 'pueden leer recursos básicos' do
+      permisos.recursos.each do |recurso|
+        permisos.can?(:read, recurso).must_equal true, "Debe poder leer #{recurso}"
+      end
     end
   end
 end
