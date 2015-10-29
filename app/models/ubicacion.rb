@@ -90,7 +90,7 @@ class Ubicacion < ActiveRecord::Base
   private
 
     def arreglar_coordenadas
-      if @srid.to_i.eql?(4326) or @srid.blank?
+      if @srid.to_i.eql?(4326) || @srid.blank?
         @x = Ubicacion.grados_a_decimal(@x)
         @y = Ubicacion.grados_a_decimal(@y)
       else

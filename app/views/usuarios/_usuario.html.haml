@@ -3,7 +3,7 @@
     %td.nombre= usuario.nombre
     %td.email= usuario.email
     %td.rol
-      - if can?(:update, usuario)
+      - if can? :update, usuario.object
         = f.select :rol_global, roles_globales(usuario.rol_global), include_blank: true
       - else
         = usuario.rol_global

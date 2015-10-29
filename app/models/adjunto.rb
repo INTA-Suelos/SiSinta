@@ -13,6 +13,6 @@ class Adjunto < ActiveRecord::Base
   delegate :publico, :usuario, :usuario_id, to: :perfil
 
   def extension
-    File.extname(archivo.path).delete('.')
+    File.extname(archivo.path.to_s).delete('.')
   end
 end

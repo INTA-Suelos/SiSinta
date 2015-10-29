@@ -1,8 +1,8 @@
 .botonera
-  - if can? :read, @proyecto
+  - if can? :read, @proyecto.object
     = link_to 'Mostrar', @proyecto
     = '|'
-  - if can?(:update, @proyecto) or can?(:modificar, @proyecto)
+  - if can?(:update, @proyecto.object) || can?(:modificar, @proyecto.object)
     = link_to 'Permisos', permisos_path(modelo: 'proyecto', id: @proyecto)
     = '|'
   = link_to 'Volver', proyectos_path

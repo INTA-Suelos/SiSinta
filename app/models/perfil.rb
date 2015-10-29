@@ -104,7 +104,7 @@ class Perfil < ActiveRecord::Base
 
         # Cargo el símbolo sólo si no tiene. No se puede modificar el símbolo de
         # una serie existente desde un perfil.
-        unless self.serie.simbolo.present? or _simbolo.nil?
+        unless self.serie.simbolo.present? || _simbolo.nil?
           self.serie.update_attribute(:simbolo, _simbolo)
         end
 

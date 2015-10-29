@@ -1,5 +1,5 @@
 .botonera
-  - if can? :update, @proyecto
+  - if can? :update, @proyecto.object
     = link_to 'Editar', edit_proyecto_path(@proyecto)
     = '|'
     = link_to 'Permisos', permisos_path(modelo: 'proyecto', id: @proyecto)
