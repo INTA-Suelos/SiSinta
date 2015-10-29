@@ -13,12 +13,14 @@ FactoryGirl.define do
       serie
       fase
       grupo
-      capacidad
-      ubicacion
-      paisaje
-      humedad
-      erosion
-      pedregosidad
+
+      association :capacidad, strategy: :build
+      association :ubicacion, strategy: :build
+      association :paisaje, strategy: :build
+      association :humedad, strategy: :build
+      association :erosion, strategy: :build
+      association :pedregosidad, strategy: :build
+
       modal true
       publico true
       profundidad_napa { rand }
@@ -47,7 +49,7 @@ FactoryGirl.define do
     factory :perfil_para_geojson do
       publico true
       serie
-      association :ubicacion, :con_coordenadas
+      association :ubicacion, :con_coordenadas, strategy: :build
     end
   end
 end

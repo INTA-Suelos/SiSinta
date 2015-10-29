@@ -7,7 +7,7 @@ describe PerfilDecorator do
 
   describe 'asociaciones' do
     it 'decora la ubicación' do
-      perfil.ubicacion = create(:ubicacion)
+      perfil.ubicacion = build(:ubicacion)
 
       decorador.ubicacion.must_be_kind_of UbicacionDecorator
     end
