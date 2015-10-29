@@ -303,7 +303,7 @@ class PerfilesController < AutorizadoController
     end
 
     def marcado_para_remover?(hash)
-      hash[:_destroy].present? or hash[:anular].present?
+      hash[:_destroy].present? || hash[:anular].present?
     end
 
     # TODO Deshardcodear la ficha default
