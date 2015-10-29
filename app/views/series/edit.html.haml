@@ -1,8 +1,8 @@
 .botonera
-  - if can? :read, @serie
+  - if can? :read, @serie.object
     = link_to 'Mostrar', @serie
     = '|'
-  - if can?(:update, @serie) or can?(:modificar, @serie)
+  - if can?(:update, @serie.object) || can?(:modificar, @serie.object)
     = link_to 'Permisos', permisos_path(modelo: 'serie', id: @serie)
     = '|'
   = link_to 'Volver', series_path

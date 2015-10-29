@@ -1,11 +1,11 @@
 .botonera
-  - if can? :update, @perfil
+  - if can? :update, @perfil.object
     = link_to 'Editar', editar_analiticos_perfil_path(@perfil)
     = '|'
-  - if can? :read, @perfil
+  - if can? :read, @perfil.object
     = link_to 'Mostrar perfil', @perfil
     = '|'
-  - if can? :read, @perfil => Adjunto
+  - if can? :read, @perfil.object => Adjunto
     = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
     = '|'
   = link_to 'Volver', perfiles_path

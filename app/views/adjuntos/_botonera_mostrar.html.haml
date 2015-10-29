@@ -1,7 +1,7 @@
-- if can? :read, @perfil
+- if can? :read, @perfil.object
   = link_to 'Mostrar perfil', @perfil
   = '|'
-- if can? :update, @adjunto
+- if can? :update, @adjunto.object
   = link_to 'Editar adjunto', edit_perfil_adjunto_path(@perfil, @adjunto)
   = '|'
 = link_to 'Volver', perfil_adjuntos_path

@@ -1,5 +1,5 @@
 .botonera
-  - if can? :read, @equipo
+  - if can? :read, @equipo.object
     = link_to 'Mostrar', @equipo
     = '|'
   = link_to 'Volver', equipos_path

@@ -1,5 +1,5 @@
 .botonera
-  - if can? :update, @equipo
+  - if can? :update, @equipo.object
     = link_to 'Editar', edit_equipo_path(@equipo)
     = '|'
   = link_to 'Volver', equipos_path

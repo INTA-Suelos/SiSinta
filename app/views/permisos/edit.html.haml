@@ -1,5 +1,5 @@
 .botonera
-  - if can? :read, @recurso
+  - if can? :read, @recurso.object
     = link_to 'Mostrar', @recurso
     = '|'
   = link_to 'Volver', @recurso.class

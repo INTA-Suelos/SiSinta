@@ -1,12 +1,12 @@
 #lista.span-24
   .botonera
-    - if can? :read, @perfil
+    - if can? :read, @perfil.object
       = link_to 'Mostrar perfil', @perfil
       = '|'
-    - if can? :read, @perfil.analiticos
+    - if can? :read, @perfil.analiticos.object
       = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)
       = '|'
-    - if can? :create, @adjunto
+    - if can?(:create, Adjunto) && can?(:update, @perfil.object)
       = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)
       = '|'
     = link_to 'Volver', perfiles_path
