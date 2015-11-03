@@ -7,8 +7,9 @@ class AddCantidadDePerfilesToSerie < ActiveRecord::Migration
       Serie.select(:id).all.each do |id|
         Serie.reset_counters(id, :perfiles)
       end
-    rescue
-      # Nada
+    rescue => e
+      Rails.logger.error "#{e.message} \n #{e.backtrace.join("\n ")}"
+      raise e
     end
   end
 end
