@@ -4,7 +4,7 @@
 
   .seleccionar-ficha
     = f.submit t('helpers.submit.perfil.cambiar_ficha')
-    = select_tag :ficha, options_for_select(lista_de_fichas, current_usuario.ficha)
+    = select_tag :ficha, options_for_select(lista_de_fichas, ficha)
 
   = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
