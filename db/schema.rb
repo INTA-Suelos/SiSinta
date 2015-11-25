@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028224008) do
+ActiveRecord::Schema.define(version: 20151125201718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20151028224008) do
     t.datetime "updated_at",                                   null: false
     t.integer  "horizonte_id"
     t.decimal  "arcilla",             precision: 5,  scale: 2
-    t.decimal  "materia_organica_c",  precision: 5,  scale: 2
-    t.decimal  "materia_organica_n",  precision: 6,  scale: 3
+    t.decimal  "carbono_organico_c",  precision: 5,  scale: 2
+    t.decimal  "carbono_organico_n",  precision: 6,  scale: 3
     t.decimal  "limo_2_20",           precision: 5,  scale: 2
     t.decimal  "limo_2_50",           precision: 5,  scale: 2
     t.decimal  "arena_muy_fina",      precision: 5,  scale: 2
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20151028224008) do
     t.decimal  "densidad_aparente"
     t.string   "profundidad_muestra"
     t.decimal  "agua_3_atm",          precision: 5,  scale: 2
-    t.decimal  "materia_organica_cn", precision: 20, scale: 1
+    t.decimal  "carbono_organico_cn", precision: 20, scale: 1
   end
 
   create_table "busquedas", force: true do |t|

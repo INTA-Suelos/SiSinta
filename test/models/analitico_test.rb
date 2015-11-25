@@ -8,7 +8,7 @@ describe Analitico do
     a = create(:analitico, horizonte: build(:horizonte),
       humedad: 99.98,
       arcilla: 0.01,
-      materia_organica_c: 100,
+      carbono_organico_c: 100,
       limo_2_20: 0.04,
       limo_2_50: '100',
       arena_muy_fina: 0.06,
@@ -25,7 +25,7 @@ describe Analitico do
 
     a.humedad.must_equal 99.98
     a.arcilla.must_equal 0.01
-    a.materia_organica_c.must_equal 100
+    a.carbono_organico_c.must_equal 100
     a.limo_2_20.must_equal 0.04
     a.limo_2_50.must_equal 100
     a.arena_muy_fina.must_equal 0.06
@@ -41,25 +41,25 @@ describe Analitico do
     a.agua_3_atm.must_equal 0.16
   end
 
-  describe '#materia_organica_cn' do
+  describe '#carbono_organico_cn' do
     it 'usa precisión 000.000' do
       a = create(:analitico, horizonte: build(:horizonte),
-        materia_organica_n: 0.004 )
+        carbono_organico_n: 0.004 )
 
-      a.reload.materia_organica_n.to_f.must_equal 0.004
+      a.reload.carbono_organico_n.to_f.must_equal 0.004
     end
   end
 
-  describe '#materia_organica_cn' do
+  describe '#carbono_organico_cn' do
     it 'usa precisión 000000000000000000.0' do
       a = create(:analitico, horizonte: build(:horizonte),
-        materia_organica_cn: 0.3)
+        carbono_organico_cn: 0.3)
 
-      a.materia_organica_cn.must_equal 0.3
+      a.carbono_organico_cn.must_equal 0.3
 
-      a.update_attribute :materia_organica_cn, 999999999999999999.9
+      a.update_attribute :carbono_organico_cn, 999999999999999999.9
 
-      a.reload.materia_organica_cn.to_f.must_equal 999999999999999999.9
+      a.reload.carbono_organico_cn.to_f.must_equal 999999999999999999.9
     end
   end
 end
