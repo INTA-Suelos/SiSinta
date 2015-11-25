@@ -197,8 +197,8 @@ class PerfilesController < AutorizadoController
           consistencia_attributes: %i{ en_seco_id en_humedo_id plasticidad_id adhesividad_id id },
         ],
         analiticos_attributes: %i{
-          registro profundidad_muestra materia_organica_c materia_organica_n
-          materia_organica_cn arcilla limo_2_20 limo_2_50 arena_muy_fina
+          registro profundidad_muestra carbono_organico_c carbono_organico_n
+          carbono_organico_cn arcilla limo_2_20 limo_2_50 arena_muy_fina
           arena_fina arena_media arena_gruesa arena_muy_gruesa ca_co3 humedad
           agua_3_atm agua_15_atm agua_util ph_pasta ph_h2o ph_kcl
           resistencia_pasta conductividad base_ca base_mg base_k base_na s h t

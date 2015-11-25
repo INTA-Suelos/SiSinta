@@ -14,17 +14,18 @@ end
 # tiene datos iniciales para la base de datos.
 def cargar_csv_de(archivo, configuracion = {})
   begin
-    puts "Cargando CSV de #{archivo} ..."
+    Rails.logger.info "Cargando CSV de #{archivo} ..."
+
     CSV.foreach "db/semillas/#{archivo}.csv", configuracion do |fila|
       yield fila
     end
   rescue => e
-    puts "No se pudo procesar #{archivo}: #{e}"
+    Rails.logger.error "No se pudo procesar #{archivo}: #{e}"
   end
 end
 
 # Carga el usuario administrador inicial
-puts <<MSG
+Rails.logger.info <<MSG
 
 Creando usuario administrador con:
   email:    admin@cambiame.com

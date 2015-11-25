@@ -7,9 +7,9 @@ class Analitico < ActiveRecord::Base
   validates_numericality_of :registro,:ph_pasta, :densidad_aparente, :ph_h2o,
                             :ph_kcl, :resistencia_pasta, :conductividad,
                             :base_ca, :base_mg, :base_k, :base_na, :s, :t, :h,
-                            :materia_organica_cn,
+                            :carbono_organico_cn,
                             allow_nil: true
-  validates_numericality_of :materia_organica_c, :materia_organica_n, :ca_co3,
+  validates_numericality_of :carbono_organico_c, :carbono_organico_n, :ca_co3,
                             :arcilla, :limo_2_20, :limo_2_50, :arena_muy_fina,
                             :arena_fina, :arena_media, :arena_gruesa,
                             :arena_muy_gruesa, :humedad, :agua_3_atm,

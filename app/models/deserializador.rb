@@ -162,8 +162,9 @@ class Deserializador
           base_k: h['analitico_base_k'],
           base_na: h['analitico_base_na'],
           arcilla: h['analitico_arcilla'],
-          materia_organica_c: h['analitico_materia_organica_c'],
-          materia_organica_n: h['analitico_materia_organica_n'],
+          carbono_organico_c: h['analitico_carbono_organico_c'],
+          carbono_organico_n: h['analitico_carbono_organico_n'],
+          carbono_organico_cn: h['analitico_carbono_organico_cn'],
           limo_2_20: h['analitico_limo_2_20'],
           limo_2_50: h['analitico_limo_2_50'],
           arena_muy_fina: h['analitico_arena_muy_fina'],
@@ -180,8 +181,7 @@ class Deserializador
           saturacion_s_h: h['analitico_saturacion_s_h'],
           densidad_aparente: h['analitico_densidad_aparente'],
           profundidad_muestra: h['analitico_profundidad_muestra'],
-          agua_3_atm: h['analitico_agua_3_atm'],
-          materia_organica_cn: h['analitico_materia_organica_cn'] },
+          agua_3_atm: h['analitico_agua_3_atm'] },
         color_humedo_attributes: {
           hvc: h['color_humedo_hvc'] },
         color_seco_attributes: {

@@ -1,4 +1,9 @@
 # encoding: utf-8
+# Definiciones de permisos para CanCanCan.
+#
+# Abilidades agregadas a las default:
+#
+#   - modificar: funciona como :update, pero sólo para instancias de modelo. Relacionado con rolify
 class Ability
   include CanCan::Ability
 

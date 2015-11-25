@@ -43,7 +43,7 @@ module PerfilesHelper
   def subtitulo
     case params[:action]
       when 'seleccionar'
-        if nombre = params[:busqueda]
+        if (nombre = params[:busqueda]).present?
           "Resultados de #{nombre}"
         end
       else
