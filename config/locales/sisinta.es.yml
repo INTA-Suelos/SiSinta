@@ -40,7 +40,7 @@ es:
 
   perfiles:
     seleccionar:
-      volver: 'Volver'
+      volver: 'Cancelar'
       exportar: 'Seleccionar'
     exportar:
       submit: "Exportar"
