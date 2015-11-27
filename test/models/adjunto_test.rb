@@ -22,8 +22,18 @@ describe Adjunto do
   end
 
   describe '#publico' do
-    it 'lo delega a perfil' do
+    it 'se sincroniza con su perfil al guardar' do
       perfil.update_attribute :publico, !adjunto.publico
+
+      adjunto.save && adjunto.publico.must_equal(perfil.publico)
+    end
+  end
+
+  describe '#sincronizar_visibilidad_perfil' do
+    it 'se sincroniza con su perfil' do
+      perfil.update_attribute :publico, !adjunto.publico
+
+      adjunto.sincronizar_visibilidad_perfil
 
       adjunto.publico.must_equal perfil.publico
     end

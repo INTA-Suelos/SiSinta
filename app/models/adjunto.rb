@@ -10,9 +10,19 @@ class Adjunto < ActiveRecord::Base
 
   validates_attachment :archivo, file_type_ignorance: true
 
-  delegate :publico, :usuario, :usuario_id, to: :perfil
+  before_save :sincronizar_visibilidad_perfil
+
+  # FIXME manejar por separado
+  delegate :usuario, :usuario_id, to: :perfil
 
   def extension
     File.extname(archivo.path.to_s).delete('.')
+  end
+
+  def sincronizar_visibilidad_perfil
+    self.publico = perfil.publico if perfil.present?
+
+    # Siempre anda
+    return true
   end
 end
