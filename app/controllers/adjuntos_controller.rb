@@ -31,6 +31,8 @@ class AdjuntosController < AutorizadoController
   end
 
   def create
+    @adjunto.usuario = current_usuario
+
     @perfil.adjuntos << @adjunto
     respond_with @perfil, @adjunto
   end
