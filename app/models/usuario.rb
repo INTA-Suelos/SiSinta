@@ -8,6 +8,7 @@ class Usuario < ActiveRecord::Base
   has_many :proyectos
   has_many :series
   has_many :busquedas
+  has_many :adjuntos
   has_and_belongs_to_many :equipos
 
   before_create :asignar_valores_por_defecto

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127022233) do
+ActiveRecord::Schema.define(version: 20151127051026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 20151127022233) do
     t.datetime "archivo_updated_at"
     t.string   "notas"
     t.boolean  "publico",              default: false
+    t.integer  "usuario_id"
   end
+
+  add_index "adjuntos", ["usuario_id"], :name => "index_adjuntos_on_usuario_id"
 
   create_table "analiticos", force: true do |t|
     t.integer  "registro"
