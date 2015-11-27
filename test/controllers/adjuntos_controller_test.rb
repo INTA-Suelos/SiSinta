@@ -86,4 +86,15 @@ class AdjuntosControllerTest < ActionController::TestCase
     assert_redirected_to perfil_adjuntos_path(perfil)
     assert_equal 'de alevosía', adjunto.reload.notas
   end
+
+  test 'crea un adjunto con el usuario actual' do
+    usuario = loguearse
+    perfil = create(:perfil, usuario: usuario)
+
+    autorizar do
+      put :create, adjunto: attributes_for(:adjunto), perfil_id: perfil.id
+    end
+
+    assert_equal assigns(:perfil).usuario, usuario
+  end
 end
