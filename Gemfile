@@ -20,7 +20,7 @@ gem 'awesome_nested_fields'
 gem 'kaminari'
 gem 'draper'
 gem 'ransack'
-gem 'rails3-jquery-autocomplete'
+gem 'rails-jquery-autocomplete'
 
 ## Modelos
 gem 'paperclip'

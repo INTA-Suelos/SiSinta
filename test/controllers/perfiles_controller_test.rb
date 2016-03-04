@@ -105,6 +105,20 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal Perfil.geolocalizados.count, json['features'].size
   end
 
+  test 'devuelve sólo perfiles públicos' do
+    assert_nil @controller.current_usuario
+    create(:ubicacion, :con_perfil, :con_coordenadas)
+    publico = create(:ubicacion, :con_perfil, :con_coordenadas)
+    publico.perfil.update_attribute :publico, true
+
+    @request.env['HTTP_REFERER'] = '/perfiles/'
+
+    get :index, publicos: 'true', format: 'geojson'
+
+    assert Perfil.count != Perfil.publicos.count
+    assert_equal Perfil.publicos.count, json['features'].size
+  end
+
   test 'va a editar_analiticos si está autorizado' do
     usuario = loguearse_como 'Autorizado'
     perfil = create(:perfil, usuario: usuario)

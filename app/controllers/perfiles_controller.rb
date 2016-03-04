@@ -1,15 +1,16 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
   autocomplete :reconocedores, :name, full: true,
-    class_name: 'ActsAsTaggableOn::Tag',
-    scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+    class_name: 'Tag',
+    scopes: [:reconocedores]
   autocomplete :etiquetas, :name, full: true,
-    class_name: 'ActsAsTaggableOn::Tag',
-    scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
+    class_name: 'Tag',
+    scopes: [:etiquetas]
 
   has_scope :pagina, default: 1, unless: :geojson?
   has_scope :per, as: :filas, unless: :geojson?
   has_scope :geolocalizados, type: :boolean, default: true, if: :geojson?
+  has_scope :publicos, type: :boolean, default: false, if: :publicos?
 
   load_and_authorize_resource
 
@@ -296,6 +297,10 @@ class PerfilesController < AutorizadoController
 
     def geojson?
       params[:format] == 'geojson'
+    end
+
+    def publicos?
+      params[:publicos] == 'true'
     end
 
     def archivo_csv

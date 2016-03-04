@@ -2,3 +2,6 @@
   = field_set_tag 'Ubicación', id: 'ubicacion', class: 'celeste plegable span-22 last' do
     .span-21.last.campo
       .centrado= f.object.ubicacion.mapa
+
+-# TODO Cargar dinámicamente desde un js
+= javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry'

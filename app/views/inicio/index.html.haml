@@ -13,7 +13,7 @@
       .span-2= b.submit 'Buscar'
 
   .span-14.last
-    #mapa{ data: { geojson: perfiles_path(format: :geojson) }}
+    #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson) }}
 
 -# TODO Cargar dinámicamente desde un js
 = javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry'
