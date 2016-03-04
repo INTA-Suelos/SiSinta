@@ -26,8 +26,8 @@ class Horizonte < ActiveRecord::Base
 
   validates_presence_of :perfil
   validates_inclusion_of  :profundidad_superior, :profundidad_inferior,
-                          in: 0..500, allow_nil: true,
-                          message: "debe estar entre 0 y 500 cm"
+                          in: 0..1000, allow_nil: true,
+                          message: 'debe estar entre 0 y 1000 cm'
 
   delegate :publico, :usuario, :usuario_id, to: :perfil
   delegate :present?, to: :analitico, prefix: true
