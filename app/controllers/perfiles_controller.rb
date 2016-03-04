@@ -1,11 +1,11 @@
 # encoding: utf-8
 class PerfilesController < AutorizadoController
   autocomplete :reconocedores, :name, full: true,
-    class_name: 'ActsAsTaggableOn::Tag',
-    scopes: [ { joins: :taggings }, { where: "taggings.context = 'reconocedores'"} ]
+    class_name: 'Tag',
+    scopes: [:reconocedores]
   autocomplete :etiquetas, :name, full: true,
-    class_name: 'ActsAsTaggableOn::Tag',
-    scopes: [ { joins: :taggings }, { where: "taggings.context = 'etiquetas'"} ]
+    class_name: 'Tag',
+    scopes: [:etiquetas]
 
   has_scope :pagina, default: 1, unless: :geojson?
   has_scope :per, as: :filas, unless: :geojson?
