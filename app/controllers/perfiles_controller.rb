@@ -14,8 +14,9 @@ class PerfilesController < AutorizadoController
 
   load_and_authorize_resource
 
+  respond_to :json, only: [:show]
   respond_to :geojson, only: [:index, :show]
-  respond_to :csv, only: [ :index, :procesar ]
+  respond_to :csv, only: [:index, :procesar]
 
   # acciones que funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [ :index, :seleccionar,
@@ -54,7 +55,7 @@ class PerfilesController < AutorizadoController
   end
 
   def show
-    respond_with @perfil = @perfil.decorate do |format|
+    respond_with @perfil do |format|
       # Serializar como una colección de un sólo miembro
       format.geojson do
         if @perfil.geolocalizado?
@@ -67,11 +68,11 @@ class PerfilesController < AutorizadoController
   end
 
   def new
-    respond_with @perfil = @perfil.decorate
+    respond_with @perfil
   end
 
   def edit
-    respond_with @perfil = @perfil.decorate
+    respond_with @perfil
   end
 
   # Cada usuario es propietario y 'miembro' de los perfiles que crea
