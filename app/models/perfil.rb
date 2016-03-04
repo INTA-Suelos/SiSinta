@@ -7,7 +7,8 @@ class Perfil < ActiveRecord::Base
   # Permite utilizar roles de rolify sobre este modelo
   resourcify :roles, role_cname: 'Rol'
 
-  scope :modales, ->{ where(modal: 'true') }
+  scope :modales, ->{ where(modal: true) }
+  scope :publicos, ->{ where(publico: true) }
 
   before_validation :asociar_serie, :asociar_fase, :asociar_grupo
 
