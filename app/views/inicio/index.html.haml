@@ -4,7 +4,7 @@
 
     %h3 Búsqueda de perfiles
 
-    %p Actualmente hay #{Perfil.count} perfiles cargados en #{Serie.count} series.
+    %p Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count} públicos) cargados en #{Serie.count} series.
 
     = search_form_for @busqueda do |b|
       .span-4=  b.label :serie_nombre_or_numero_cont, 'Por nombre o número'
