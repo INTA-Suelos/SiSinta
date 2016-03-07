@@ -13,6 +13,6 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
-= render partial: @ficha.identificador, locals: { perfil: @perfil.decorate, bloqueado: false }
+= render @ficha.identificador, perfil: @perfil.decorate, bloqueado: false
 
 = volver_arriba
