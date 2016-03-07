@@ -221,16 +221,16 @@ class PerfilesController < AutorizadoController
       # Usar outer join con serie para que no excluya los perfiles sin serie
       @perfiles = @perfiles.joins{ubicacion}.joins{serie.outer}
 
-      case @metodo = metodo_de_ordenamiento
-        when 'ubicacion'
-          @metodo = 'lower(ubicaciones.descripcion)'
-        when 'nombre'
-          @metodo = "lower(series.#{@metodo})"
-        when 'numero'
-          @metodo = "lower(perfiles.#{@metodo})"
-        else
-          # A los date y boolean no se les aplica lower()
-          @metodo = "perfiles.#{@metodo}"
+      case (@metodo = metodo_de_ordenamiento)
+      when 'ubicacion'
+        @metodo = 'lower(ubicaciones.descripcion)'
+      when 'nombre'
+        @metodo = "lower(series.#{@metodo})"
+      when 'numero'
+        @metodo = "lower(perfiles.#{@metodo})"
+      else
+        # A los date y boolean no se les aplica lower()
+        @metodo = "perfiles.#{@metodo}"
       end
       @perfiles = @perfiles.reorder("#{@metodo} #{direccion_de_ordenamiento}")
     end
