@@ -1,22 +1,10 @@
-# encoding: utf-8
-require 'csv'
 # En este archivo va la carga inicial de datos. La mayoría de estos datos
 # residen en db/semillas/, en diferentes archivos y formatos. Acá se realiza la
 # carga.
+require 'csv'
+require 'seeds_helper'
 
-# Carga el archivo en formato csv +archivo+,  del directorio +semillas+, que
-# tiene datos iniciales para la base de datos.
-def cargar_csv_de(archivo, configuracion = {})
-  begin
-    Rails.logger.info "Cargando CSV de #{archivo} ..."
-
-    CSV.foreach "db/semillas/#{archivo}.csv", configuracion do |fila|
-      yield fila
-    end
-  rescue => e
-    Rails.logger.error "No se pudo procesar #{archivo}: #{e}"
-  end
-end
+include SeedsHelper
 
 # Carga el usuario administrador inicial
 Rails.logger.info <<MSG
