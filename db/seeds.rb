@@ -4,12 +4,6 @@ require 'csv'
 # residen en db/semillas/, en diferentes archivos y formatos. Acá se realiza la
 # carga.
 
-# Carga el archivo de semillas +archivo+, en formato yaml (con erb embebido) del
-# directorio +semillas+, que tiene datos iniciales para la base de datos
-def cargar_yml_de(archivo)
-  YAML::load(ERB.new(IO.read("db/semillas/#{archivo}.yml")).result)
-end
-
 # Carga el archivo en formato csv +archivo+,  del directorio +semillas+, que
 # tiene datos iniciales para la base de datos.
 def cargar_csv_de(archivo, configuracion = {})
