@@ -3,6 +3,7 @@ require './test/test_helper'
 
 feature 'Carga de perfiles' do
   background do
+    create(:ficha, identificador: 'completa')
     @usuario = loguearse_como 'Autorizado'
     @perfil = create(:perfil, usuario: @usuario).decorate
     visit edit_perfil_path(@perfil)

@@ -10,6 +10,7 @@ class Usuario < ActiveRecord::Base
   has_many :busquedas
   has_many :adjuntos
   has_and_belongs_to_many :equipos
+  belongs_to :ficha
 
   before_create :asignar_valores_por_defecto
 
@@ -26,13 +27,13 @@ class Usuario < ActiveRecord::Base
 
   # TODO Deshardcodear el nombre del rol +miembro+
   scope :miembros, ->(recurso) do
-    joins(:roles).where("roles.resource_type" => recurso.class.to_s,
-                        "roles.resource_id" => recurso.id,
-                        "roles.name" => "miembro")
+    joins(:roles).where('roles.resource_type' => recurso.class.to_s,
+                        'roles.resource_id' => recurso.id,
+                        'roles.name' => 'miembro')
   end
 
   def usa_ficha?(tipo)
-    ficha == tipo
+    ficha.identificador == tipo
   end
 
   def admin?

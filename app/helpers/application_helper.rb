@@ -157,7 +157,7 @@ module ApplicationHelper
 
   # Lista de las fichas de acuerdo al formato que esperan los helper de selects
   def lista_de_fichas
-    Ficha.all.collect { |f| [f.descripcion, f.valor] }
+    Ficha.all.collect { |f| [f.nombre, f.identificador] }
   end
 
   # Título de la página para el +<head>+ por defecto, extra se determina en el
