@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420135022) do
+ActiveRecord::Schema.define(version: 20160420152059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 20160420135022) do
   add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
 
   create_table "fichas", force: true do |t|
-    t.string   "nombre"
-    t.string   "identificador"
+    t.string   "nombre",        null: false
+    t.string   "identificador", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
