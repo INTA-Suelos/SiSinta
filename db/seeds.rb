@@ -7,4 +7,5 @@ require 'seeds_helper'
 include SeedsHelper
 
 load 'db/semillas/admin.rb'
-load 'db/semillas/color.rb'
+load 'db/semillas/colores.rb'
+load 'db/semillas/fichas.rb'
