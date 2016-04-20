@@ -240,8 +240,8 @@ class PerfilesController < AutorizadoController
       when t('helpers.submit.perfil.analiticos')
         editar_analiticos_perfil_path(@perfil)
       when t('helpers.submit.perfil.cambiar_ficha')
-        # Un filter carga @ficha con este valor en la siguiente solicitud
-        session[:ficha] = Ficha.find_by_valor(params[:ficha]).try(:valor)
+        # Guardamos el id de la ficha para la siguiente solicitud
+        session[:ficha] = params[:ficha]
         edit_perfil_path(@perfil)
       else
         @perfil
@@ -311,8 +311,13 @@ class PerfilesController < AutorizadoController
       hash[:_destroy].present? || hash[:anular].present?
     end
 
-    # TODO Deshardcodear la ficha default
+    # La ficha o plantilla de carga que seleccionó el usuario en la acción
+    # anterior o la que definió en su usuario
     def seleccionar_ficha
-      @ficha = session.delete(:ficha) || current_usuario.try(:ficha) || 'completa'
+      @ficha = begin
+        Ficha.find session.delete(:ficha)
+      rescue ActiveRecord::RecordNotFound
+        current_usuario.try(:ficha) || Ficha.default
+      end
     end
 end

@@ -58,6 +58,7 @@ class Ability
     end
 
     def autorizado
+      can :manage, Usuario, id: @usuario.id
       can :read, recursos
       can :create, recursos
       can :manage, perfiles, usuario_id: @usuario.id

@@ -1,46 +1,46 @@
 require './test/test_helper'
 
-class UsuarioTest < ActiveSupport::TestCase
-  test "tiene en cuenta las preferencias de ficha del usuario" do
-    default = create(:usuario)
-    simple = create(:usuario, config: { ficha: 'especial', srid: '4326' })
+describe Usuario do
+  it 'sabe qué ficha usa' do
+    simple = create(:usuario, ficha: create(:ficha, identificador: 'especial'))
 
-    assert default.usa_ficha?('completa'), 'Debe usar la ficha completa por default'
-    assert simple.usa_ficha?('especial'), 'Debe poder especificar su propia ficha'
+    simple.usa_ficha?('especial').must_equal true, 'Debe poder especificar su propia ficha'
   end
 
-  test "detecta administradores" do
-    admin = create(:usuario, rol: 'Administrador')
-    refute admin.roles.blank?, "No carga los roles de la DB"
-    assert admin.admin?, "Debería ser admin"
-
-    otro = create(:usuario)
-    refute otro.admin?, "No debería ser admin"
+  describe '#config' do
+    it 'un usuario nuevo tiene config por defecto' do
+      usuario = create(:usuario)
+      assert_kind_of Hash, usuario.config
+      assert_equal '4326', usuario.srid
+    end
   end
 
-  test "comprueba el rol" do
-    assert build(:usuario, rol: 'Administrador').admin?, "Debe ser admin"
-    assert build(:usuario, rol: 'Autorizado').autorizado?, "Debe ser autorizado"
-  end
+  describe 'roles' do
+    it 'sabe si es admin' do
+      admin = create(:usuario, rol: 'Administrador')
+      refute admin.roles.blank?, 'No carga los roles de la DB'
+      assert admin.admin?, 'Debería ser admin'
 
-  test "un usuario nuevo tiene config por defecto" do
-    usuario = create(:usuario)
-    assert_kind_of Hash, usuario.config
-    assert_equal 'completa', usuario.ficha
-    assert_equal '4326', usuario.srid
-  end
+      otro = create(:usuario)
+      refute otro.admin?, 'No debería ser admin'
+    end
 
-  test "tiene o puede tener solo un rol global" do
-    usuario = create(:usuario)
-    assert usuario.rol_global.blank?
+    it 'sabe si es autorizado' do
+      assert build(:usuario, rol: 'Autorizado').autorizado?, 'Debe ser autorizado'
+    end
 
-    usuario.grant 'rey'
-    assert_equal 'rey', usuario.rol_global
-    assert usuario.has_role? 'rey'
+    it 'tiene o puede tener solo un rol global' do
+      usuario = create(:usuario)
+      assert usuario.rol_global.blank?
 
-    usuario.rol_global = 'plebeyo'
-    assert_equal 'plebeyo', usuario.rol_global
-    assert usuario.has_role? 'plebeyo'
-    refute usuario.has_role? 'rey'
+      usuario.grant 'rey'
+      assert_equal 'rey', usuario.rol_global
+      assert usuario.has_role? 'rey'
+
+      usuario.rol_global = 'plebeyo'
+      assert_equal 'plebeyo', usuario.rol_global
+      assert usuario.has_role? 'plebeyo'
+      refute usuario.has_role? 'rey'
+    end
   end
 end

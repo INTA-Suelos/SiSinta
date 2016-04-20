@@ -2,6 +2,10 @@
 require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
+  setup do
+    create(:ficha, identificador: 'completa')
+  end
+
   test 'el test accede al controlador' do
     assert_instance_of PerfilesController, @controller
   end
