@@ -1,4 +1,2 @@
-# encoding: utf-8
-class Ficha < Lookup
-  field :valor
+class Ficha < ActiveRecord::Base
 end

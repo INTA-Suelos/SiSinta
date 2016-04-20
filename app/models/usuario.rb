@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
   rolify role_cname: 'Rol'
-  store :config, accessors: [:ficha, :srid, :checks_csv_perfiles]
+  store :config, accessors: [:srid, :checks_csv_perfiles]
 
   # TODO cambiar relacion a 'creador'
   has_many :perfiles
@@ -62,9 +62,6 @@ class Usuario < ActiveRecord::Base
   protected
 
     def asignar_valores_por_defecto
-      # TODO cambiar la asociación de ficha.valor a ficha.id
-      self.ficha ||= 'completa' # Ficha con la que cargar un perfil
       self.srid  ||= '4326'     # SRID para mostrar las coordenadas
     end
-
 end

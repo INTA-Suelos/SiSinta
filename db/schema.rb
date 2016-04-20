@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127051026) do
+ActiveRecord::Schema.define(version: 20160420135022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,13 @@ ActiveRecord::Schema.define(version: 20151127051026) do
   end
 
   add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
+
+  create_table "fichas", force: true do |t|
+    t.string   "nombre"
+    t.string   "identificador"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "grupos", force: true do |t|
     t.string "codigo"
@@ -310,9 +317,11 @@ ActiveRecord::Schema.define(version: 20151127051026) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.text     "config"
+    t.integer  "ficha_id",               default: 1
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
+  add_index "usuarios", ["ficha_id"], :name => "index_usuarios_on_ficha_id"
   add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
 
   create_table "usuarios_roles", id: false, force: true do |t|
