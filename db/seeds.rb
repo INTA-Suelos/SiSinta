@@ -6,20 +6,23 @@ require 'seeds_helper'
 
 include SeedsHelper
 
-# Carga el usuario administrador inicial
-Rails.logger.info <<MSG
+# Sólo crear el administrador inicial si no hay usuarios
+unless Usuario.any?
+  # Carga el usuario administrador inicial
+  Rails.logger.info <<MSG
 
-Creando usuario administrador con:
-  email:    admin@cambiame.com
-  password: cambiame
+  Creando usuario administrador con:
+    email:    admin@cambiame.com
+    password: cambiame
 
 MSG
 
-Usuario.create(
-  nombre:   'Administra Administrador',
-  email:    'admin@cambiame.com',
-  password: 'cambiame'
-).grant 'Administrador'
+  Usuario.create(
+    nombre:   'Administra Administrador',
+    email:    'admin@cambiame.com',
+    password: 'cambiame'
+  ).grant 'Administrador'
+end
 
 # Carga la tabla de conversión de color Munsell
 cargar_csv_de('munsell', headers: true, col_sep: ',') do |color|
