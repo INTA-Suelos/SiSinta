@@ -313,7 +313,8 @@ class PerfilesController < AutorizadoController
     end
 
     # La ficha o plantilla de carga que seleccionó el usuario en la acción
-    # anterior o la que definió en su usuario
+    # anterior. Si no hay, se usa la que definió en su perfil de usuario. Si no
+    # hay usuario, usamos la default
     def seleccionar_ficha
       @ficha = begin
         Ficha.find session.delete(:ficha)

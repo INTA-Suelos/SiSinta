@@ -39,7 +39,8 @@
         = f.nested_fields_for :horizontes, new_object: horizonte_preparado,
             show_empty: true, render_template: false do |fh|
           - if fh
-            .item= render partial: 'perfiles/completa/horizonte', locals: {h: fh, bloqueado: bloqueado}
+            -# FIXME Deshardcodear con to_partial_path
+            .item= render partial: 'perfiles/clasico/horizonte', locals: {h: fh, bloqueado: bloqueado}
           - else
             .prepend-8.span-5.empty No hay horizontes cargados
 
