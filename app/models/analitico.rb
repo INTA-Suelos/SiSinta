@@ -27,6 +27,10 @@ class Analitico < ActiveRecord::Base
   end
 
   def porcentaje_mo
-    (carbono_organico_c.try :*, 1.724).try :round, 2
+    carbono_organico_c.present? ? (carbono_organico_c * 1.724).round(2) : nil
+  end
+
+  def psi
+    base_na.present? && t.present? ? (base_na / (t * 100.0)).round(1) : nil
   end
 end
