@@ -157,12 +157,11 @@ class PerfilesController < AutorizadoController
   end
 
   def editar_analiticos
-    respond_with @perfil = @perfil.decorate
+    respond_with @perfil
   end
 
   def update_analiticos
     @perfil.update_attributes(perfil_params)
-    @perfil = @perfil.decorate
     respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
       if @perfil.errors.any?
         format.html { render action: 'editar_analiticos' }
