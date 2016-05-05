@@ -12,6 +12,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
 gem 'rolify', '~> 3.4'
+gem 'rack-cors'
 
 ## Presentación
 gem 'dynamic_form'
