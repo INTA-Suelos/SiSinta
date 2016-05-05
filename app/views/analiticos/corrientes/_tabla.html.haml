@@ -160,7 +160,7 @@
               %td.dato= f_a.text_field :conductividad, disabled: bloqueado,
               placeholder: 'mmhos/cm'
         %tr
-          %td.titulo.largo{colspan: 1, rowspan: 4}= label_tag nil, 'Bases intercambiables'
+          %td.titulo.largo{colspan: 1, rowspan: 5}= label_tag nil, 'Bases intercambiables'
           %td.titulo= label_tag nil, 'Ca++'
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
@@ -180,6 +180,11 @@
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :base_na, disabled: bloqueado
+        %tr
+          %td.titulo= label_tag nil, 'Al+++'
+          - @perfil.analiticos.each do |a|
+            = f.fields_for 'analiticos_attributes[]', a do |f_a|
+              %td.dato= f_a.text_field :base_al, disabled: bloqueado
         %tr
           %td.titulo{colspan: 2}= label_tag nil, 'Valor S'
           - @perfil.analiticos.each do |a|

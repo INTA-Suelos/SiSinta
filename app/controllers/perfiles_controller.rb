@@ -203,7 +203,8 @@ class PerfilesController < AutorizadoController
           carbono_organico_cn arcilla limo_2_20 limo_2_50 arena_muy_fina
           arena_fina arena_media arena_gruesa arena_muy_gruesa ca_co3 humedad
           agua_3_atm agua_15_atm agua_util ph_pasta ph_h2o ph_kcl
-          resistencia_pasta conductividad base_ca base_mg base_k base_na s h t
+          resistencia_pasta conductividad base_ca base_mg base_k base_na base_al
+          s h t
           saturacion_t saturacion_s_h densidad_aparente id }
       )
     end

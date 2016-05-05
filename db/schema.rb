@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505195238) do
+ActiveRecord::Schema.define(version: 20160505232840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160505195238) do
     t.string   "profundidad_muestra"
     t.decimal  "agua_3_atm",          precision: 5,  scale: 2
     t.decimal  "carbono_organico_cn", precision: 20, scale: 1
+    t.decimal  "base_al"
   end
 
   create_table "busquedas", force: true do |t|
