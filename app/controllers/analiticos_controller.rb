@@ -8,15 +8,12 @@ class AnaliticosController < AutorizadoController
   load_and_authorize_resource :perfil
   load_and_authorize_resource through: :perfil
 
-  before_filter :decorar, only: [:index, :edit]
-
   def index
-    respond_with @perfil, @analiticos
-  end
-
-  private
-
-    def decorar
-      @perfil = @perfil.decorate
+    if @perfil.horizontes.empty?
+      flash[:alert] = t('.sin_horizontes')
+      redirect_to @perfil
+    else
+      respond_with @perfil, @analiticos
     end
+  end
 end
