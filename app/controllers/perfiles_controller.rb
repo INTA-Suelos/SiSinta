@@ -31,7 +31,8 @@ class PerfilesController < AutorizadoController
     o.before_filter :ordenar
   end
 
-  before_filter :seleccionar_ficha, only: [:edit, :new, :show]
+  # Carga la ficha con la que renderizar el perfil
+  before_filter :seleccionar_ficha, only: [:edit, :new, :show, :editar_analiticos]
 
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
@@ -240,10 +241,6 @@ class PerfilesController < AutorizadoController
       case params[:commit]
       when t('helpers.submit.perfil.analiticos')
         editar_analiticos_perfil_path(@perfil)
-      when t('helpers.submit.perfil.cambiar_ficha')
-        # Guardamos el id de la ficha para la siguiente solicitud
-        session[:ficha] = params[:ficha]
-        edit_perfil_path(@perfil)
       else
         @perfil
       end

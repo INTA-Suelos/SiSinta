@@ -10,8 +10,10 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
-= render partial: 'tabla', locals: {  perfil: @perfil.decorate,
-                                      analiticos: @perfil.analiticos,
-                                      bloqueado: true }
+  = render 'fichas/selector', origen: perfil_analiticos_path(@perfil)
+
+-# FIXME Inicializar un Model @ficha que responda a to_partial_path correctamente, o usar un Resolver
+= render "analiticos/#{@ficha.identificador}/tabla",
+    perfil: @perfil.decorate, analiticos: @perfil.analiticos, bloqueado: true
 
 = volver_arriba

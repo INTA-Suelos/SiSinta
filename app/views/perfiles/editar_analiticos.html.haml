@@ -7,7 +7,9 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
-= render partial: 'analiticos/tabla', locals: {  perfil: @perfil,
+  = render 'fichas/selector', origen: editar_analiticos_perfil_path(@perfil)
+
+= render partial: "analiticos/#{@ficha.identificador}/tabla", locals: {  perfil: @perfil,
                                       analiticos: @perfil.analiticos,
                                       bloqueado: false }
 
