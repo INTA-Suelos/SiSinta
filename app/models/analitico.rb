@@ -25,4 +25,8 @@ class Analitico < ActiveRecord::Base
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
   end
+
+  def porcentaje_mo
+    (carbono_organico_c.try :*, 1.724).try :round, 2
+  end
 end
