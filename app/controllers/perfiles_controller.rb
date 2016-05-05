@@ -311,15 +311,4 @@ class PerfilesController < AutorizadoController
     def marcado_para_remover?(hash)
       hash[:_destroy].present? || hash[:anular].present?
     end
-
-    # La ficha o plantilla de carga que seleccionó el usuario en la acción
-    # anterior. Si no hay, se usa la que definió en su perfil de usuario. Si no
-    # hay usuario, usamos la default
-    def seleccionar_ficha
-      @ficha = begin
-        Ficha.find session.delete(:ficha)
-      rescue ActiveRecord::RecordNotFound
-        current_usuario.try(:ficha) || Ficha.default
-      end
-    end
 end
