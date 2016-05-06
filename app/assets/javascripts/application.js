@@ -24,5 +24,6 @@
 //= require comunes/formularios
 //= require comunes/layout
 //= require comunes/perfiles
+//= require comunes/fichas
 //= require comunes/permisos
 //= require comunes/mapa

@@ -1,22 +1,20 @@
 .botonera
-  -# FIXME en vez de sacar el .object del decorador, dejar el modelo sin decorar accesible
-  - if can?(:update, @perfil.object) || can?(:modificar, @perfil.object)
+  - if can?(:update, @perfil) || can?(:modificar, @perfil)
     = link_to 'Editar', edit_perfil_path(@perfil)
     = '|'
     = link_to 'Permisos', permisos_path(modelo: 'perfil', id: @perfil)
     = '|'
-  -# FIXME en vez de sacar el .object del decorador, dejar el modelo sin decorar accesible
-  - if can? :read, @perfil.object
+  - if can? :read, @perfil
     = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)
     = '|'
-  -# FIXME en vez de sacar el .object del decorador, dejar el modelo sin decorar accesible
-  -# FIXME => ??
-  - if can? :read, @perfil.object => Adjunto
+  - if can? :read, @perfil => Adjunto
     = link_to 'Mostrar adjuntos', perfil_adjuntos_path(@perfil)
     = '|'
   = link_to 'Volver', perfiles_path
 
--# TODO issue #41
-= render partial: ficha, locals: { perfil: @perfil, bloqueado: true }
+  = render 'fichas/selector', origen: perfil_path(@perfil)
+
+-# TODO Hacer vista especial para el show (issue #41)
+= render @ficha.identificador, perfil: @perfil.decorate, bloqueado: true
 
 = volver_arriba

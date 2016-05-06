@@ -1,23 +1,23 @@
 es:
   errors:
-    format: "%{attribute}: %{message}"
+    format: '%{attribute}: %{message}'
   activerecord:
     errors:
       models:
         perfil:
           attributes:
             fecha:
-              es_del_futuro: "todavía no llega"
+              es_del_futuro: 'todavía no llega'
             numero:
-              no_es_unico_en_la_serie: "debe ser único dentro de una misma serie"
+              no_es_unico_en_la_serie: 'debe ser único dentro de una misma serie'
         erosion:
           attributes:
             clase:
-              debe_estar_en_blanco: "la clase debe estar en blanco si la subclase es Acumulación"
+              debe_estar_en_blanco: 'la clase debe estar en blanco si la subclase es Acumulación'
         adjunto:
           attributes:
             archivo:
-              spoofed_media_type: "el tipo no coincide con su extensión"
+              spoofed_media_type: 'el tipo no coincide con su extensión'
     models:
       analitico: 'Datos analíticos'
     attributes:
@@ -32,31 +32,34 @@ es:
       busqueda:
         publico:  'Pública'
 
-  confirmar:  "¿En serio? Es irreversible."
+  confirmar:  '¿En serio? Es irreversible.'
   roles:
-    admin:      "Administrador"
-    miembro:    "Miembro"
-    autorizado: "Autorizado"
+    admin:      'Administrador'
+    miembro:    'Miembro'
+    autorizado: 'Autorizado'
 
   perfiles:
     seleccionar:
       volver: 'Cancelar'
       exportar: 'Seleccionar'
     exportar:
-      submit: "Exportar"
+      submit: 'Exportar'
   usuarios:
     update_varios:
       notice: 'Los usuarios se actualizaron correctamente.'
       alert: 'Hubo algún problema al actualizar los usuarios.'
   equipos:
     form:
-      agregar_miembro: "Agregar"
+      agregar_miembro: 'Agregar'
+  analiticos:
+    index:
+      sin_horizontes: 'Este perfil no tiene horizontes cargados'
   busquedas:
     edit:
       submit: 'Actualizar'
   comunes:
     perfiles_asociados:
-      submit: "Buscar"
+      submit: 'Buscar'
   helpers:
     submit:
       perfil:

@@ -1,11 +1,11 @@
 .botonera
-  - if can? :read, @perfil.object
+  - if can? :read, @perfil
     = link_to 'Mostrar', @perfil
     = '|'
-  - if can?(:update, @perfil.object) || can?(:modificar, @perfil.object)
+  - if can?(:update, @perfil) || can?(:modificar, @perfil)
     = link_to 'Permisos', permisos_path(modelo: 'perfil', id: @perfil)
     = '|'
-  - if can? :update, @perfil.analiticos.object
+  - if can? :update, @perfil.analiticos
     = link_to 'Editar analíticos', editar_analiticos_perfil_path(@perfil)
     = '|'
   - if can? :create, @perfil => Adjunto
@@ -13,6 +13,8 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
-= render partial: ficha, locals: { perfil: @perfil, bloqueado: false }
+  = render 'fichas/selector', origen: edit_perfil_path(@perfil)
+
+= render @ficha.identificador, perfil: @perfil.decorate, bloqueado: false
 
 = volver_arriba

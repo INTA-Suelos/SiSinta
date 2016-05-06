@@ -2,6 +2,10 @@
 require './test/test_helper'
 
 class PerfilesControllerTest < ActionController::TestCase
+  setup do
+    create :ficha, :default
+  end
+
   test 'el test accede al controlador' do
     assert_instance_of PerfilesController, @controller
   end
@@ -154,7 +158,9 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal analitico[:base_mg], perfil.analiticos.first.base_mg.to_f
     assert_equal analitico[:base_k], perfil.analiticos.first.base_k.to_f
     assert_equal analitico[:base_na], perfil.analiticos.first.base_na.to_f
+    assert_equal analitico[:base_al], perfil.analiticos.first.base_al.to_f
     assert_equal analitico[:profundidad_muestra], perfil.analiticos.first.profundidad_muestra
+    assert_equal analitico[:p_ppm], perfil.analiticos.first.p_ppm
   end
 
   test 'rutea a editar_analiticos' do

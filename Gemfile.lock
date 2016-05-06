@@ -228,6 +228,7 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     rack (1.5.5)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.0.12)
@@ -368,6 +369,7 @@ DEPENDENCIES
   paperclip
   pg
   pry-rails
+  rack-cors
   rails (= 4.0.12)
   rails-assets-leaflet-plugins!
   rails-assets-leaflet.markercluster!

@@ -1,4 +1,8 @@
-# encoding: utf-8
-class Ficha < Lookup
-  field :valor
+class Ficha < ActiveRecord::Base
+  validates :nombre, presence: true, uniqueness: true
+  validates :identificador, presence: true, uniqueness: true
+
+  def self.default
+    where(default: true).first || Ficha.first
+  end
 end

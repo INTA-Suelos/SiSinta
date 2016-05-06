@@ -1,0 +1,6 @@
+.seleccionar-ficha
+  = form_for @ficha, method: :put, url: seleccionar_fichas_path do |f|
+    -# Guardamos el path al que volver después de seleccionar la ficha
+    = hidden_field_tag :origen, origen
+    = f.collection_select :id, Ficha.all, :id, :nombre
+    = f.submit t('helpers.submit.perfil.cambiar_ficha')

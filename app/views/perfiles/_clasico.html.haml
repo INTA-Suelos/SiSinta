@@ -1,10 +1,6 @@
-= form_for @perfil.preparar, html: { class: 'completa span-24' } do |f|
+= form_for perfil.preparar, html: { class: 'completa span-24' } do |f|
 
   = f.error_messages
-
-  .seleccionar-ficha
-    = f.submit t('helpers.submit.perfil.cambiar_ficha')
-    = select_tag :ficha, options_for_select(lista_de_fichas, ficha)
 
   = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
@@ -12,7 +8,7 @@
       .span-4.campo
         .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
         = f.check_box :modal, class: 'span-1 last', disabled: bloqueado
-        = f.object.ayuda :modal
+        = perfil.ayuda :modal
       #serie
         = f.fields_for :serie do |fs|
           .span-17.campo.last
@@ -21,26 +17,26 @@
               autocompletar_nombre_series_path,
               update_elements: { simbolo: '#perfil_serie_attributes_simbolo' },
               disabled: bloqueado
-            = f.object.ayuda :nombre
+            = perfil.ayuda :nombre
 
           .span-13.prepend-4.campo.last
             .span-2= fs.label :provincia
             .span-11.last= fs.collection_select :provincia_id, Provincia.all, :id, :nombre,
               { prompt: true }, disabled: bloqueado, required: true
-            = f.object.ayuda :provincia
+            = perfil.ayuda :provincia
           .span-4.prepend-media.last.campo
             .span-2= fs.label :simbolo
             .span-2.last= fs.autocomplete_field :simbolo,
               autocompletar_simbolo_series_path, disabled: bloqueado
-            = f.object.ayuda :simbolo
+            = perfil.ayuda :simbolo
 
-    = render partial: 'perfiles/completa/descripcion_del_sitio',
+    = render partial: 'perfiles/clasico/descripcion_del_sitio',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/descripcion_de_los_horizontes',
+    = render partial: 'perfiles/clasico/descripcion_de_los_horizontes',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/notas',
+    = render partial: 'perfiles/clasico/notas',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/mapa',
+    = render partial: 'perfiles/clasico/mapa',
         locals: {f: f, bloqueado: bloqueado}
 
     .acciones.span-8.last

@@ -83,5 +83,12 @@ SiSINTA::Application.routes.draw do
     end
 
     r.resources :busquedas
+
+    r.resources :fichas, only: [] do
+      collection do
+        # Seleccionar una ficha específica para renderizar
+        put 'seleccionar'
+      end
+    end
   end
 end

@@ -155,11 +155,6 @@ module ApplicationHelper
     @subclases_de_erosion ||= SubclaseDeErosion.all
   end
 
-  # Lista de las fichas de acuerdo al formato que esperan los helper de selects
-  def lista_de_fichas
-    Ficha.all.collect { |f| [f.descripcion, f.valor] }
-  end
-
   # Título de la página para el +<head>+ por defecto, extra se determina en el
   # helper de cada controlador, dependiendo de la acción
   def titulo_de_la_aplicacion(extra = nil)

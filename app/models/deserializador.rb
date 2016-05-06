@@ -152,7 +152,7 @@ class Deserializador
           registro: h['analitico_registro'],
           humedad: h['analitico_humedad'],
           s: h['analitico_s'],
-          h: h['analitico_t'],
+          t: h['analitico_t'],
           ph_pasta: h['analitico_ph_pasta'],
           ph_h2o: h['analitico_ph_h2o'],
           ph_kcl: h['analitico_ph_kcl'],
