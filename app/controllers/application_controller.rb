@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     # hay usuario, usamos la default
     def seleccionar_ficha
       @ficha = begin
-        Ficha.find session.delete(:ficha)
+        Ficha.find session[:ficha]
       rescue ActiveRecord::RecordNotFound
         current_usuario.try(:ficha) || Ficha.default
       end
