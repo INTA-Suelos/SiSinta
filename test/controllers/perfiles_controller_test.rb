@@ -160,6 +160,7 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal analitico[:base_na], perfil.analiticos.first.base_na.to_f
     assert_equal analitico[:base_al], perfil.analiticos.first.base_al.to_f
     assert_equal analitico[:profundidad_muestra], perfil.analiticos.first.profundidad_muestra
+    assert_equal analitico[:p_ppm], perfil.analiticos.first.p_ppm
   end
 
   test 'rutea a editar_analiticos' do

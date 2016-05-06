@@ -14,7 +14,7 @@ class Analitico < ActiveRecord::Base
                             :arena_fina, :arena_media, :arena_gruesa,
                             :arena_muy_gruesa, :humedad, :agua_3_atm,
                             :agua_15_atm, :agua_util, :saturacion_t,
-                            :saturacion_s_h,
+                            :saturacion_s_h, :p_ppm,
                             greater_than_or_equal_to: 0, less_than_or_equal_to: 100,
                             allow_nil: true
 

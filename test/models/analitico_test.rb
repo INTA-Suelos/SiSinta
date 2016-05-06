@@ -1,9 +1,6 @@
 require './test/test_helper'
 
 describe Analitico do
-
-  let(:analitico) { build_stubbed(:analitico) }
-
   it 'usa precisión 000.00 en los porcentajes' do
     a = create(:analitico, horizonte: build(:horizonte),
       humedad: 99.98,
@@ -60,6 +57,20 @@ describe Analitico do
       a.update_attribute :carbono_organico_cn, 999999999999999999.9
 
       a.reload.carbono_organico_cn.to_f.must_equal 999999999999999999.9
+    end
+  end
+
+  describe '#p_ppm' do
+    it 'está entre 0 y 100' do
+      build(:analitico, horizonte: build(:horizonte), p_ppm: 100.1).wont_be :valid?
+      build(:analitico, horizonte: build(:horizonte), p_ppm: 50.1).must_be :valid?
+      build(:analitico, horizonte: build(:horizonte), p_ppm: -0.1).wont_be :valid?
+    end
+
+    it 'usa precisión 000.0' do
+      a = create(:analitico, horizonte: build(:horizonte), p_ppm: 0.41 )
+
+      a.reload.p_ppm.to_f.must_equal 0.4
     end
   end
 end

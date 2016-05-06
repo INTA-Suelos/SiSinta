@@ -205,7 +205,7 @@ class PerfilesController < AutorizadoController
           agua_3_atm agua_15_atm agua_util ph_pasta ph_h2o ph_kcl
           resistencia_pasta conductividad base_ca base_mg base_k base_na base_al
           s h t
-          saturacion_t saturacion_s_h densidad_aparente id }
+          saturacion_t saturacion_s_h densidad_aparente p_ppm id }
       )
     end
 
