@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420153028) do
+ActiveRecord::Schema.define(version: 20160506002836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20160420153028) do
     t.string   "profundidad_muestra"
     t.decimal  "agua_3_atm",          precision: 5,  scale: 2
     t.decimal  "carbono_organico_cn", precision: 20, scale: 1
+    t.decimal  "base_al"
+    t.decimal  "p_ppm",               precision: 4,  scale: 1
   end
 
   create_table "busquedas", force: true do |t|
@@ -143,10 +145,11 @@ ActiveRecord::Schema.define(version: 20160420153028) do
   add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
 
   create_table "fichas", force: true do |t|
-    t.string   "nombre",        null: false
-    t.string   "identificador", null: false
+    t.string   "nombre",                        null: false
+    t.string   "identificador",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "default",       default: false
   end
 
   add_index "fichas", ["identificador"], :name => "index_fichas_on_identificador", :unique => true

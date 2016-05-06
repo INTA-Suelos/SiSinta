@@ -3,6 +3,6 @@ class Ficha < ActiveRecord::Base
   validates :identificador, presence: true, uniqueness: true
 
   def self.default
-    Ficha.find_by identificador: 'completa'
+    where(default: true).first || Ficha.first
   end
 end

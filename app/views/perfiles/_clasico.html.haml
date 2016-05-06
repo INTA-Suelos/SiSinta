@@ -2,10 +2,6 @@
 
   = f.error_messages
 
-  .seleccionar-ficha
-    = f.submit t('helpers.submit.perfil.cambiar_ficha')
-    = select_tag :ficha, options_from_collection_for_select(Ficha.all, :id, :nombre, @ficha.id)
-
   = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
 
     .span-23.last
@@ -34,13 +30,13 @@
               autocompletar_simbolo_series_path, disabled: bloqueado
             = perfil.ayuda :simbolo
 
-    = render partial: 'perfiles/completa/descripcion_del_sitio',
+    = render partial: 'perfiles/clasico/descripcion_del_sitio',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/descripcion_de_los_horizontes',
+    = render partial: 'perfiles/clasico/descripcion_de_los_horizontes',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/notas',
+    = render partial: 'perfiles/clasico/notas',
         locals: {f: f, bloqueado: bloqueado}
-    = render partial: 'perfiles/completa/mapa',
+    = render partial: 'perfiles/clasico/mapa',
         locals: {f: f, bloqueado: bloqueado}
 
     .acciones.span-8.last

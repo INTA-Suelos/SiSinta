@@ -31,7 +31,8 @@ class PerfilesController < AutorizadoController
     o.before_filter :ordenar
   end
 
-  before_filter :seleccionar_ficha, only: [:edit, :new, :show]
+  # Carga la ficha con la que renderizar el perfil
+  before_filter :seleccionar_ficha, only: [:edit, :new, :show, :editar_analiticos]
 
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
@@ -156,12 +157,11 @@ class PerfilesController < AutorizadoController
   end
 
   def editar_analiticos
-    respond_with @perfil = @perfil.decorate
+    respond_with @perfil
   end
 
   def update_analiticos
     @perfil.update_attributes(perfil_params)
-    @perfil = @perfil.decorate
     respond_with @perfil, location: perfil_analiticos_path(@perfil) do |format|
       if @perfil.errors.any?
         format.html { render action: 'editar_analiticos' }
@@ -203,8 +203,9 @@ class PerfilesController < AutorizadoController
           carbono_organico_cn arcilla limo_2_20 limo_2_50 arena_muy_fina
           arena_fina arena_media arena_gruesa arena_muy_gruesa ca_co3 humedad
           agua_3_atm agua_15_atm agua_util ph_pasta ph_h2o ph_kcl
-          resistencia_pasta conductividad base_ca base_mg base_k base_na s h t
-          saturacion_t saturacion_s_h densidad_aparente id }
+          resistencia_pasta conductividad base_ca base_mg base_k base_na base_al
+          s h t
+          saturacion_t saturacion_s_h densidad_aparente p_ppm id }
       )
     end
 
@@ -240,10 +241,6 @@ class PerfilesController < AutorizadoController
       case params[:commit]
       when t('helpers.submit.perfil.analiticos')
         editar_analiticos_perfil_path(@perfil)
-      when t('helpers.submit.perfil.cambiar_ficha')
-        # Guardamos el id de la ficha para la siguiente solicitud
-        session[:ficha] = params[:ficha]
-        edit_perfil_path(@perfil)
       else
         @perfil
       end
@@ -310,15 +307,5 @@ class PerfilesController < AutorizadoController
 
     def marcado_para_remover?(hash)
       hash[:_destroy].present? || hash[:anular].present?
-    end
-
-    # La ficha o plantilla de carga que seleccionó el usuario en la acción
-    # anterior o la que definió en su usuario
-    def seleccionar_ficha
-      @ficha = begin
-        Ficha.find session.delete(:ficha)
-      rescue ActiveRecord::RecordNotFound
-        current_usuario.try(:ficha) || Ficha.default
-      end
     end
 end

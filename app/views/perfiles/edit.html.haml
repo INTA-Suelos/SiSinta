@@ -13,6 +13,8 @@
     = '|'
   = link_to 'Volver', perfiles_path
 
+  = render 'fichas/selector', origen: edit_perfil_path(@perfil)
+
 = render @ficha.identificador, perfil: @perfil.decorate, bloqueado: false
 
 = volver_arriba
