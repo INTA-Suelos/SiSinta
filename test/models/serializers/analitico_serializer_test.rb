@@ -1,8 +1,8 @@
 require './test/test_helper'
 
-describe AnaliticoSerializer do
-  let(:analitico) { build(:analitico) }
+class AnaliticoSerializerTest < ActiveSupport::TestCase
   subject { AnaliticoSerializer.new(analitico) }
+  let(:analitico) { build(:analitico) }
 
   describe 'Ficha clasico' do
     it 'serializa cada atributo persistente' do
