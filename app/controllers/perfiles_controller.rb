@@ -32,7 +32,8 @@ class PerfilesController < AutorizadoController
   end
 
   # Carga la ficha con la que renderizar el perfil
-  before_filter :seleccionar_ficha, only: [:edit, :new, :show, :editar_analiticos]
+  before_filter :seleccionar_ficha,
+    only: [:edit, :new, :show, :editar_analiticos, :update_analiticos, :update]
 
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]
