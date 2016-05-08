@@ -2,10 +2,10 @@
 require './test/test_helper'
 
 class TexturaDeHorizonteSerializerTest < ActiveSupport::TestCase
-  test 'al serializar devuelve la clase' do
-    textura = TexturaDeHorizonte.first
-    serializer = TexturaDeHorizonteSerializer.new(textura)
+  subject { TexturaDeHorizonteSerializer.new(textura) }
+  let(:textura) { TexturaDeHorizonte.first }
 
-    serializer.serializable_hash.must_equal textura.clase
+  it 'al serializar devuelve la clase' do
+    subject.serializable_hash.must_equal textura.clase
   end
 end
