@@ -226,6 +226,7 @@
           %td.titulo{colspan: 2}= label_tag nil, 'P ppm'
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
-              %td.dato= f_a.text_field :p_ppm, disabled: bloqueado
+              %td.dato= f_a.text_field :p_ppm, disabled: bloqueado,
+              placeholder: '%'
 
     .acciones.span-4.last= f.submit 'Actualizar datos' unless bloqueado
