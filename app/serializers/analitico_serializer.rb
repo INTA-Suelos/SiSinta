@@ -6,5 +6,5 @@ class AnaliticoSerializer < ActiveModel::Serializer
               :arena_gruesa, :arena_muy_gruesa, :ca_co3, :agua_15_atm,
               :agua_util, :conductividad, :h, :saturacion_t, :saturacion_s_h,
               :densidad_aparente, :profundidad_muestra, :agua_3_atm,
-              :carbono_organico_cn
+              :carbono_organico_cn, :base_al, :p_ppm
 end

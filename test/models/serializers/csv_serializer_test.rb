@@ -1,35 +1,34 @@
-# encoding: utf-8
 require './test/test_helper'
 
 class CSVSerializerTest < ActiveSupport::TestCase
-  test 'genera un encabezado de todas las columnas' do
-    serializador = CSVSerializer.new [ create(:perfil) ]
+  subject { CSVSerializer.new [perfil] }
+  let(:perfil) { create(:perfil) }
 
+  it 'genera un encabezado de todas las columnas' do
     # FIXME no usar la lógica interna para los datos de prueba
-    todas_las_columnas = serializador.send(
+    todas_las_columnas = subject.send(
       :stub).serializable_hash.with_indifferent_access.sort.flatten_tree.keys
 
-    assert_equal todas_las_columnas, serializador.encabezado
+    todas_las_columnas.must_equal subject.encabezado
   end
 
-  test 'limita las columnas del encabezado' do
-    serializador = CSVSerializer.new [ create(:perfil) ]
+  it 'limita las columnas del encabezado' do
+    encabezado_restringido = ['analitico_registro', 'id', 'perfil_id']
 
-    assert_equal ['analitico_registro', 'id', 'perfil_id'],
-      serializador.encabezado( %w{id analitico_registro perfil_id} )
+    encabezado_restringido.must_equal subject.encabezado( %w{id analitico_registro perfil_id} )
   end
 
-  test 'convierte valores nulos en celdas vacías' do
-    perfil = create(:perfil, observaciones: nil)
-    serializador = CSVSerializer.new [ perfil ]
+  describe 'con valores nulos' do
+    let(:perfil) { create(:perfil, observaciones: nil) }
 
-    csv = CSV.parse(
-      serializador.as_csv(
+    it 'convierte valores nulos en celdas vacías' do
+      csv = CSV.parse(subject.as_csv(
         checks: ['perfil_id', 'perfil_observaciones', 'perfil_numero']
       )).first
 
-    assert_equal perfil.id.to_s,        csv[0]
-    assert_equal perfil.numero,         csv[1]
-    assert_equal '',                    csv[2]
+      assert_equal perfil.id.to_s,        csv[0]
+      assert_equal perfil.numero,         csv[1]
+      assert_equal '',                    csv[2]
+    end
   end
 end

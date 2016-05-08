@@ -1,24 +1,23 @@
-# encoding: utf-8
 require './test/test_helper'
 
 class GeojsonCollectionSerializerTest < ActiveSupport::TestCase
-  setup do
-    @serializador = GeojsonCollectionSerializer.new [ create(:perfil_para_geojson) ]
+  subject { GeojsonCollectionSerializer.new [perfil] }
+  let(:perfil) { create(:perfil_para_geojson) }
+
+  it 'es una colección de features' do
+    geojson = subject.as_json
+
+    geojson['type'].must_equal 'FeatureCollection'
+    geojson['features'].size.must_equal 1
+    geojson['features'].first['type'].must_equal 'Feature'
   end
 
-  test 'es una colección de features' do
-    geojson = @serializador.as_json
+  it 'decora los perfiles antes de serializar' do
+    decorame = Minitest::Mock.new.expect :decorate, subject.object.first.decorate
 
-    assert_equal 'FeatureCollection', geojson['type']
-    assert_equal 1, geojson['features'].size
-    assert_equal 'Feature', geojson['features'].first['type']
-  end
-
-  test 'decora los perfiles antes de serializar' do
-    decorame = Minitest::Mock.new.expect :decorate, @serializador.object.first.decorate
-
-    @serializador.stub :object, [decorame] do
-      @serializador.features and decorame.verify
+    subject.stub :object, [decorame] do
+      subject.features
+      decorame.verify
     end
   end
 end
