@@ -21,34 +21,34 @@ module PerfilesHelper
 
   def titulo_de_la_accion
     case params[:action]
-      when 'index'
-        'Perfiles'
-      when 'show'
-        "Perfil #{@perfil.numero}"
-      when 'new'
-        'Nuevo perfil'
-      when 'edit'
-        "Editando perfil #{@perfil.numero}"
-      when 'exportar'
-        'Exportar perfiles'
-      when 'permisos'
-        "Permisos para el perfil #{@recurso.numero}"
-      when 'seleccionar'
-        "Seleccionar perfiles"
-      else
-        nil
+    when 'index'
+      'Perfiles'
+    when 'show'
+      "Perfil #{@perfil.numero}"
+    when 'new'
+      'Nuevo perfil'
+    when 'edit'
+      "Editando perfil #{@perfil.numero}"
+    when 'exportar'
+      'Exportar perfiles'
+    when 'permisos'
+      "Permisos para el perfil #{@recurso.numero}"
+    when 'seleccionar'
+      "Seleccionar perfiles"
+    else
+      nil
     end
   end
 
   def subtitulo
     case params[:action]
-      when 'seleccionar'
-        nombre = params[:busqueda]
-        if nombre.present?
-          "Resultados de #{nombre}"
-        end
-      else
-        nil
+    when 'seleccionar'
+      nombre = params[:busqueda]
+      if nombre.present?
+        "Resultados de #{nombre}"
+      end
+    else
+      nil
     end
   end
 
