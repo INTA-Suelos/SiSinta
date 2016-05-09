@@ -4,7 +4,7 @@ class Analitico < ActiveRecord::Base
   has_one :perfil, through: :horizonte
 
   validates_presence_of :horizonte
-  validates_numericality_of :registro,:ph_pasta, :densidad_aparente, :ph_h2o,
+  validates_numericality_of :registro, :ph_pasta, :densidad_aparente, :ph_h2o,
                             :ph_kcl, :resistencia_pasta, :conductividad,
                             :base_ca, :base_mg, :base_k, :base_na, :base_al,
                             :s, :t, :h, :carbono_organico_cn,

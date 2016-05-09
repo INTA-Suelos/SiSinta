@@ -17,7 +17,9 @@ class PermisosController < AutorizadoController
     # Destruyo el rol para reasignarlo entero
     @recurso.roles(:miembro).first.try :destroy
 
-    if (usuarios = params["usuario_ids"]).present?
+    usuarios = params["usuario_ids"]
+
+    if usuarios.present?
       Usuario.find(usuarios).each { |u| u.grant :miembro, @recurso }
     end
 

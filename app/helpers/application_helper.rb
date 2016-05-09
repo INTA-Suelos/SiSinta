@@ -165,33 +165,39 @@ module ApplicationHelper
   # Por defecto, no se usa nada. Esto va en la cabecera.
   def titulo_de_la_accion
     case params[:controller]
-      when 'devise/registrations'
-        case params[:action]
-          when 'edit'
-            'Detalles de la cuenta'
-          when 'new'
-            'Creación de la cuenta'
-          else
-            nil
-        end
-      when 'devise/sessions'
-        case params[:action]
-          when 'new'
-            'Ingresar al sistema'
-          else
-            nil
-        end
-      when 'devise/passwords'
-        case params[:action]
-          when 'edit'
-            'Cambiar el password'
-          when 'new'
-            'Generar un nuevo password'
-          else
-            nil
-        end
+    when 'devise/registrations'
+
+      case params[:action]
+      when 'edit'
+        'Detalles de la cuenta'
+      when 'new'
+        'Creación de la cuenta'
       else
         nil
+      end
+
+    when 'devise/sessions'
+
+      case params[:action]
+      when 'new'
+        'Ingresar al sistema'
+      else
+        nil
+      end
+
+    when 'devise/passwords'
+
+      case params[:action]
+      when 'edit'
+        'Cambiar el password'
+      when 'new'
+        'Generar un nuevo password'
+      else
+        nil
+      end
+
+    else
+      nil
     end
   end
 
@@ -212,16 +218,19 @@ module ApplicationHelper
       alias_de_la_asociacion: nil,
       metodo: '_destroy'
     })
+
     hash = "#{asociacion}[#{recursos}_attributes]"
     hash << "[#{id}][#{opciones[:metodo]}]"
+
     valor = case opciones[:metodo]
-      when '_destroy'
-        true
-      when 'anular'
-        opciones[:alias_de_la_asociacion] || asociacion
-      else
-        false
+    when '_destroy'
+      true
+    when 'anular'
+      opciones[:alias_de_la_asociacion] || asociacion
+    else
+      false
     end
+
     check_box_tag hash, valor, false, class: 'destroy'
   end
 end

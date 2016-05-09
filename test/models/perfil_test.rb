@@ -119,8 +119,9 @@ class PerfilTest < ActiveSupport::TestCase
 
   test 'no permite números duplicados dentro de la serie' do
     serie = create(:serie)
-    perfil = create(:perfil, serie: serie, numero: 'unico')
+    create(:perfil, serie: serie, numero: 'unico')
     repetido = build(:perfil, serie: serie, numero: 'unico')
+
     assert repetido.invalid?
     assert repetido.errors.messages[:numero].include?(
       I18n.t('activerecord.errors.models.perfil.attributes.numero.no_es_unico_en_la_serie'))

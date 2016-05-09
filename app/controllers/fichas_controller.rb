@@ -3,7 +3,8 @@ class FichasController < ApplicationController
   # origen si el request es html
   def seleccionar
     session[:ficha] = ficha_params[:id]
-    redirect_to params[:origen]
+
+    redirect_to URI.parse(params[:origen]).path
   end
 
   protected

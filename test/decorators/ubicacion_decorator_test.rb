@@ -3,7 +3,7 @@ require './test/test_helper'
 
 describe UbicacionDecorator do
   let(:lugar) { build_stubbed :ubicacion, x: '-35.0', y: '-35.0' }
-  let(:usuario) { usuario = build_stubbed :usuario, config: { srid: 22195 } }
+  let(:usuario) { build_stubbed :usuario, config: { srid: 22195 } }
   let(:lugar_decorado) { UbicacionDecorator.decorate lugar, context: { usuario: usuario } }
 
   it 'devuelve coordenadas por default si no hay usuario logueado' do

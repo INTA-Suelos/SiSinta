@@ -1,7 +1,7 @@
 # encoding: utf-8
 module PermisosHelper
   # Para usar en +grouped_options_for_select+
-  def usuarios_en_equipos usuarios
+  def usuarios_en_equipos(usuarios)
     usuarios.inject(HashWithIndifferentAccess.new) do |e, u|
       u.equipos.each do |equipo|
         e[equipo.nombre] ||= []

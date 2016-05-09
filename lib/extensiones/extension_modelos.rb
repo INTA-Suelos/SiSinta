@@ -20,7 +20,7 @@ module ExtensionModelos
       atributos = self.attribute_names.map {|s| s.to_sym}.reject {|n| n =~ /_id$/ or excepto.include? n }
 
       # Rechazo las asociaciones de tipo +:through+
-      atributos << self.reflections.reject do |k,v|
+      atributos << self.reflections.reject do |k, v|
         not v.instance_of?(ActiveRecord::Reflection::AssociationReflection)
       end.keys.reject {|n| excepto.include? n}
       atributos.flatten.sort
