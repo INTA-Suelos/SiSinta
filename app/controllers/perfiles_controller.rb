@@ -147,7 +147,7 @@ class PerfilesController < AutorizadoController
     # Dirije la navegación según el botón que apretó el usuario
     case params[:commit]
     when t('perfiles.seleccionar.volver')
-      redirect_to session[:volver_a]
+      redirect_to URI.parse(session[:volver_a]).path
     when t('perfiles.seleccionar.exportar')
       # Usa la acción directamente ya que hace su propia redirección y
       # redirect_to no puede enviar PUTs
