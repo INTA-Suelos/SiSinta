@@ -77,8 +77,8 @@ class UbicacionTest < ActiveSupport::TestCase
 
   test 'aproxima las coordenadas según mosaico-recorrido-aerofoto' do
     skip 'no implementado todavía'
-    #u = build_stubbed(:ubicacion, :vieja_escuela)
-    #assert_equal '-60,708333333 -36,083333333', u.aproximar
+    # u = build_stubbed(:ubicacion, :vieja_escuela)
+    # assert_equal '-60,708333333 -36,083333333', u.aproximar
   end
 
   test 'soporta proj4' do

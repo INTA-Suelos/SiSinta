@@ -81,7 +81,7 @@ Devise.setup do |config|
 
   # [DEVISE] Devise.confirm_within= is deprecated. Please set
   # Devise.allow_unconfirmed_access_for= instead.
-  #config.confirm_within = 2.days
+  # config.confirm_within = 2.days
   config.allow_unconfirmed_access_for= 2.days
 
   # Defines which key will be used when confirming an account
@@ -102,14 +102,14 @@ Devise.setup do |config|
   # En devise 2.1.0:
   #   [DEVISE] Devise.use_salt_as_remember_token is deprecated and has no
   #   effect. Please remove it.
-  #config.use_salt_as_remember_token = true
+  # config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
   # config.cookie_options = {}
   # Devise.cookie_options= is deprecated. Please set
   # Devise.rememberable_options= instead.
-  #config.cookie_options = {:secure => true}
+  # config.cookie_options = {:secure => true}
   config.rememberable_options = {:secure => true}
 
   # ==> Configuration for :validatable
