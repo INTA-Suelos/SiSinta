@@ -57,6 +57,7 @@ class Ability
       can :manage, :all
     end
 
+    # TODO Debería incluir llamar a `miembro`?
     def autorizado
       can :manage, Usuario, id: @usuario.id
       can :read, recursos
