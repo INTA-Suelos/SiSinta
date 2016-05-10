@@ -2,16 +2,16 @@
 module AdjuntosHelper
   def titulo_de_la_accion
     case params[:action]
-      when 'index'
-        "Archivos adjuntos"
-      when 'show'
-        "Datos del adjunto"
-      when 'new'
-        "Subir adjunto"
-      when 'edit'
-        "Editando adjunto"
-      else
-        nil
+    when 'index'
+      "Archivos adjuntos"
+    when 'show'
+      "Datos del adjunto"
+    when 'new'
+      "Subir adjunto"
+    when 'edit'
+      "Editando adjunto"
+    else
+      nil
     end
   end
 

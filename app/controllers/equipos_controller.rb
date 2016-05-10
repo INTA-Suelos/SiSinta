@@ -54,10 +54,10 @@ class EquiposController < AutorizadoController
 
     def mostrar_o_editar
       case params[:commit]
-        when t('equipos.form.agregar_miembro')
-          edit_equipo_path(@equipo)
-        else
-          # Nada, va a mostrar
+      when t('equipos.form.agregar_miembro')
+        edit_equipo_path(@equipo)
+      else
+        # Nada, va a mostrar
       end
     end
 end

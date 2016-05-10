@@ -4,10 +4,10 @@ module UsuariosHelper
 
   def titulo_de_la_accion
     case params[:action]
-      when 'index'
-        "Administración de usuarios y grupos"
-      else
-        nil
+    when 'index'
+      "Administración de usuarios y grupos"
+    else
+      nil
     end
   end
 
