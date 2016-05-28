@@ -13,7 +13,7 @@
 //= require autocomplete-rails
 //= require ransack-search
 //= require leaflet
-//= require leaflet.markercluster/dist/leaflet.markercluster-src
+//= require leaflet.markercluster
 //= require leaflet-plugins
 //
 // Aplicación

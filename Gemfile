@@ -34,7 +34,7 @@ gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
-gem 'rgeo'
+gem 'rgeo', '~> 0.4.0'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
 ## Controladores
