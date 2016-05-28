@@ -2,37 +2,37 @@ require './test/test_helper'
 
 class PerfilSerializerTest < ActiveSupport::TestCase
   let(:perfil) { create(:perfil_completo) }
-  let(:hash) { subject.serializable_hash }
+  let(:datos) { subject.serializable_hash }
   subject { PerfilSerializer.new(perfil) }
 
   it 'serializa todos los lookups normales' do
     # Lookups
     %i{ drenaje relieve posicion pendiente escurrimiento permeabilidad
         anegamiento uso_de_la_tierra }.each do |lookup|
-      hash[lookup].must_equal LookupSerializer.new(perfil.send(lookup)).serializable_hash, "Falló #{lookup}"
+      datos[lookup].must_equal LookupSerializer.new(perfil.send(lookup)).serializable_hash, "Falló #{lookup}"
     end
   end
 
   it 'serializa la sal en plural' do
-    hash[:sales].must_equal LookupSerializer.new(perfil.sal).serializable_hash
+    datos[:sales].must_equal LookupSerializer.new(perfil.sal).serializable_hash
   end
 
   it 'serializa los campos normales' do
-    hash[:id].must_equal perfil.id
-    hash[:fecha].must_equal perfil.fecha
-    hash[:numero].must_equal perfil.numero
-    hash[:modal].must_equal perfil.modal
-    hash[:profundidad_napa].must_equal perfil.profundidad_napa
-    hash[:cobertura_vegetal].must_equal perfil.cobertura_vegetal
-    hash[:material_original].must_equal perfil.material_original
-    hash[:vegetacion_o_cultivos].must_equal perfil.vegetacion_o_cultivos
-    hash[:observaciones].must_equal perfil.observaciones
+    datos[:id].must_equal perfil.id
+    datos[:fecha].must_equal perfil.fecha
+    datos[:numero].must_equal perfil.numero
+    datos[:modal].must_equal perfil.modal
+    datos[:profundidad_napa].must_equal perfil.profundidad_napa
+    datos[:cobertura_vegetal].must_equal perfil.cobertura_vegetal
+    datos[:material_original].must_equal perfil.material_original
+    datos[:vegetacion_o_cultivos].must_equal perfil.vegetacion_o_cultivos
+    datos[:observaciones].must_equal perfil.observaciones
   end
 
   it 'no serializa algunos campos' do
-    hash[:usuario].blank?.must_equal true
-    hash[:publico].blank?.must_equal true
-    hash[:created_at].blank?.must_equal true
-    hash[:updated_at].blank?.must_equal true
+    datos[:usuario].blank?.must_equal true
+    datos[:publico].blank?.must_equal true
+    datos[:created_at].blank?.must_equal true
+    datos[:updated_at].blank?.must_equal true
   end
 end

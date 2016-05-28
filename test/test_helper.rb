@@ -16,12 +16,6 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 end
 
-class MiniTest::Unit::TestCase
-  # Para llamar a los métodos core de FactoryGirl directamente (build,
-  # build_stubbed, create, attributes_for, y los *_list)
-  include FactoryGirl::Syntax::Methods
-end
-
 # Helpers para los controladores
 class ActionController::TestCase
   include Devise::TestHelpers

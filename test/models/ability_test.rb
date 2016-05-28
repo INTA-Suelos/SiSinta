@@ -1,7 +1,7 @@
 # encoding : utf-8
 require './test/test_helper'
 
-describe Ability do
+class AbilityTest < ActiveSupport::TestCase
   describe 'administradoras' do
     let(:admin) { create(:usuario, rol: 'Administrador') }
     let(:permisos) { Ability.new admin }

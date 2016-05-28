@@ -1,6 +1,9 @@
 jQuery ->
   if $('#mapa').length
 
+    # Definir el path de los assets para las imágenes
+    L.Icon.Default.imagePath = '/estaticos/leaflet'
+
     # Genera el markup para cada punto del geoJson
     preparar_punto = (punto, capa) ->
       serie = if punto.properties.serie
