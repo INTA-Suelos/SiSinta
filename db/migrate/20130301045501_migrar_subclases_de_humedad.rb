@@ -2,7 +2,7 @@
 class MigrarSubclasesDeHumedad < ActiveRecord::Migration
 
   class Humedad < ActiveRecord::Base
-    attr_accessible :subclase_ids, :subclase_id
+    attr_accessor :subclase_ids, :subclase_id
     serialize :subclase_ids, Array
     guardar_como_arreglo :subclase, SubclaseDeCapacidad
   end

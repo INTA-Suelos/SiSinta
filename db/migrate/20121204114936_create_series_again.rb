@@ -5,7 +5,7 @@ class CreateSeriesAgain < ActiveRecord::Migration
       t.string :simbolo
       t.text :descripcion
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

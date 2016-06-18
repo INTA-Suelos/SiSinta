@@ -5,7 +5,7 @@ class CreateBusquedas < ActiveRecord::Migration
       t.integer :usuario_id
       t.string :nombre
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

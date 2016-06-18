@@ -7,7 +7,7 @@ class CreateConsistencias < ActiveRecord::Migration
       t.string :mojado_adhesividad
       t.string :mojado_plasticidad
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

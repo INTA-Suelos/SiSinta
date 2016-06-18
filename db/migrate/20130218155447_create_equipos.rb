@@ -3,7 +3,7 @@ class CreateEquipos < ActiveRecord::Migration
     create_table :equipos do |t|
       t.string :nombre, null: false
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index "equipos", ["nombre"],

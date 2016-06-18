@@ -1,33 +1,31 @@
 class RenombroCoordenadas < ActiveRecord::Migration
   def up
     drop_table :ubicaciones
-
     create_table :ubicaciones do |t|
-      t.point :coordenadas, :srid => 4326
+      t.st_point :coordenadas, srid: 4326, geographic: true
       t.string :descripcion
       t.references :calicata
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     change_table :ubicaciones do |t|
-      t.index :coordenadas, :spatial => true
+      t.index :coordenadas, using: :gist
     end
-
   end
 
   def down
     drop_table :ubicaciones
     create_table :ubicaciones do |t|
-      t.point :lat_lon, :srid => 4326
+      t.st_point :lat_lon, srid: 4326
       t.string :descripcion
       t.references :calicata
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     change_table :ubicaciones do |t|
-      t.index :lat_lon, :spatial => true
+      t.index :lat_lon, using: :gist
     end
   end
 end

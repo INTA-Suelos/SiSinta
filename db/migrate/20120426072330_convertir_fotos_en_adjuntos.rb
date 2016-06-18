@@ -3,7 +3,7 @@ class ConvertirFotosEnAdjuntos < ActiveRecord::Migration
     rename_table :fotos, :adjuntos
 
     change_table :adjuntos do |t|
-      t.has_attached_file :archivo
+      t.attachment :archivo
     end
   end
 

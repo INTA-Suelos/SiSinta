@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.15'
+gem 'rails', '4.2.6'
 
 ## DB
 gem 'pg'
@@ -34,7 +34,7 @@ gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
-gem 'rgeo', '~> 0.4.0'
+gem 'rgeo'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
 
 ## Controladores

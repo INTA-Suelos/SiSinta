@@ -4,7 +4,7 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :nombre
       t.boolean :ficha_simple
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

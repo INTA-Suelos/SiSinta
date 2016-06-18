@@ -18,7 +18,7 @@ class CreateCalicatas < ActiveRecord::Migration
       t.string :posicion
       t.references :serie
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

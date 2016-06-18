@@ -5,7 +5,7 @@ class CreateLimites < ActiveRecord::Migration
       t.string :forma
       t.references :horizonte
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
