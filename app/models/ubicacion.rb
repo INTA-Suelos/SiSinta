@@ -1,13 +1,6 @@
-# encoding: utf-8
 class Ubicacion < ActiveRecord::Base
-  before_validation :arreglar_coordenadas
-  after_initialize :cargar_x_y
-
   class_attribute :config
   self.config = SiSINTA::Application.config
-
-  set_rgeo_factory_for_column  :coordenadas,
-                               FormatoDeCoordenadas.srid(4326).fabrica
 
   attr_accessor :x, :y, :srid
 
@@ -18,11 +11,14 @@ class Ubicacion < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :ubicacion
   delegate :publico, :usuario, :usuario_id, to: :perfil
 
-  validates_presence_of :perfil
-  validates_inclusion_of :x,  in: config.rango_x, allow_blank: true,
-                              message: "No está dentro del rango permitido"
-  validates_inclusion_of :y,  in: config.rango_y, allow_blank: true,
-                              message: "No está dentro del rango permitido"
+  validates :perfil, presence: true
+  validates :x, inclusion: {
+    in: config.rango_x, allow_blank: true, message: "No está dentro del rango permitido" }
+  validates :y, inclusion: {
+    in: config.rango_y, allow_blank: true, message: "No está dentro del rango permitido" }
+
+  before_validation :arreglar_coordenadas
+  after_initialize :cargar_x_y
 
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
@@ -73,6 +69,7 @@ class Ubicacion < ActiveRecord::Base
     punto
   end
 
+  # FIXME Si el objeto ya tiene registrado un punto, por qué lo pasamos?
   def transformar_a_wgs84!(srid, x, y)
     self.coordenadas = Ubicacion.transformar(srid, 4326, x, y)
   end
@@ -82,6 +79,7 @@ class Ubicacion < ActiveRecord::Base
     cargar_x_y
   end
 
+  # TODO Invertir géneros
   def geolocalizado?
     coordenadas.present?
   end
@@ -89,19 +87,20 @@ class Ubicacion < ActiveRecord::Base
 
   private
 
+    # TODO Unificar funcionamiento, no convertir coordenadas si es nil
     def arreglar_coordenadas
-      if @srid.to_i.eql?(4326) || @srid.blank?
-        @x = Ubicacion.grados_a_decimal(@x)
-        @y = Ubicacion.grados_a_decimal(@y)
+      if srid.to_i.eql?(4326) || srid.blank?
+        self.x = Ubicacion.grados_a_decimal(x)
+        self.y = Ubicacion.grados_a_decimal(y)
       else
-        transformar_a_wgs84!(@srid, @x, @y)
+        transformar_a_wgs84!(srid, x, y)
       end
-      self.coordenadas = "POINT(#{@x} #{@y})"
+      self.coordenadas = "POINT(#{x} #{y})"
     end
 
     def cargar_x_y
-      @x = coordenadas.x if coordenadas
-      @y = coordenadas.y if coordenadas
-      @srid = 4326
+      self.x = coordenadas.x if coordenadas
+      self.y = coordenadas.y if coordenadas
+      self.srid = 4326
     end
 end

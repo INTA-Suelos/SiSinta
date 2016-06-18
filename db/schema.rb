@@ -295,14 +295,14 @@ ActiveRecord::Schema.define(version: 20160506002836) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "ubicaciones", force: :cascade do |t|
-    t.geography "coordenadas", limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.string    "descripcion"
-    t.integer   "perfil_id"
-    t.datetime  "created_at",                                                           null: false
-    t.datetime  "updated_at",                                                           null: false
-    t.string    "recorrido"
-    t.string    "mosaico"
-    t.integer   "aerofoto"
+    t.geometry "coordenadas", limit: {:srid=>4326, :type=>"point"}
+    t.string   "descripcion"
+    t.integer  "perfil_id"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "recorrido"
+    t.string   "mosaico"
+    t.integer  "aerofoto"
   end
 
   add_index "ubicaciones", ["coordenadas"], name: "index_ubicaciones_on_coordenadas", using: :gist

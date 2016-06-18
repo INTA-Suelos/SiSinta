@@ -1,4 +1,4 @@
-# encoding: utf-8
+# TODO Refactorizar como modelo y refactorizar los métodos
 class FormatoDeCoordenadas < Lookup
   # Lo declaro para que ActiveHash genere el finder
   field :srid
@@ -18,10 +18,8 @@ class FormatoDeCoordenadas < Lookup
   private
 
     def cargar_fabrica
-      @fabrica = RGeo::Geos.factory(
-        srs_database: RGeo::CoordSys::SRSDatabase::ActiveRecordTable.new,
-        srid:         self.srid
-      )
+      # TODO Ver cómo pasar la srs_database
+      @fabrica = RGeo::Geographic.spherical_factory(srid: srid)
     end
 
 end

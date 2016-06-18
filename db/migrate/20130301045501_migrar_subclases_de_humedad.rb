@@ -1,8 +1,6 @@
-# encoding: utf-8
 class MigrarSubclasesDeHumedad < ActiveRecord::Migration
 
   class Humedad < ActiveRecord::Base
-    attr_accessor :subclase_ids, :subclase_id
     serialize :subclase_ids, Array
     guardar_como_arreglo :subclase, SubclaseDeCapacidad
   end
