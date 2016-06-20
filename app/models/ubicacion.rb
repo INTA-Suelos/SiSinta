@@ -13,9 +13,9 @@ class Ubicacion < ActiveRecord::Base
 
   validates :perfil, presence: true
   validates :x, inclusion: {
-    in: config.rango_x, allow_blank: true, message: "No está dentro del rango permitido" }
+    in: config.rango_x, allow_blank: true, message: 'No está dentro del rango permitido' }
   validates :y, inclusion: {
-    in: config.rango_y, allow_blank: true, message: "No está dentro del rango permitido" }
+    in: config.rango_y, allow_blank: true, message: 'No está dentro del rango permitido' }
 
   before_validation :arreglar_coordenadas
   after_initialize :cargar_x_y
