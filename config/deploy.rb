@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, 'SiSINTA'
 set :repo_url, 'https://github.com/INTA-Suelos/SiSinta.git'
@@ -13,7 +13,7 @@ set :pty, false
 set :keep_releases, 5
 
 # rbenv
-set :rbenv_ruby, '2.1.2'
+set :rbenv_ruby, '2.3.1'
 set :rbenv_type, :user
 
 # rails
@@ -30,7 +30,6 @@ set :linked_files, %w{
   config/secrets.yml
   config/database.yml
   config/environments/production.rb
-  config/initializers/secret_token.rb
   config/initializers/devise.rb
 }
 
