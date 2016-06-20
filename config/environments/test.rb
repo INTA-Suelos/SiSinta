@@ -1,4 +1,3 @@
-# encoding: utf-8
 SiSINTA::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +13,7 @@ SiSINTA::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_files = true
   config.static_cache_control = 'public, max-age=3600'
 
   config.cache_store = :dalli_store
@@ -36,6 +35,9 @@ SiSINTA::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Random tests
+  config.active_support.test_order = :random
 
   # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
   # símbolo :url que está definido en el modelo Adjunto

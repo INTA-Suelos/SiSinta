@@ -27,6 +27,7 @@ set :linked_dirs, %w{
   public/system
 }
 set :linked_files, %w{
+  config/secrets.yml
   config/database.yml
   config/environments/production.rb
   config/initializers/secret_token.rb

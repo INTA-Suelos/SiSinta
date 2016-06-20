@@ -6,7 +6,7 @@ class CreateEstructuras < ActiveRecord::Migration
       t.string :grado
       t.references :horizonte
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

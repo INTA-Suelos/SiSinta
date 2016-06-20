@@ -11,8 +11,7 @@
  *= require ui.multiselect
  *= require jquery-multiselect
  *= require leaflet
- *= require leaflet.markercluster/dist/MarkerCluster.Default
- *= require leaflet.markercluster/dist/MarkerCluster
+ *= require leaflet.markercluster
  *
  * Explicitar qué cargamos
  *= require comunes/adjuntos

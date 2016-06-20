@@ -4,9 +4,9 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
   def self.up
     change_table(:usuarios) do |t|
       ## Database authenticatable
-      #t.database_authenticatable :null => false
-      t.string :email,              :null => false, :default => ""
-      t.string :encrypted_password, :null => false, :default => ""
+      #t.database_authenticatable :null: false
+      t.string :email,              null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
       #t.recoverable
@@ -19,7 +19,7 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
 
       ## Trackable
       #t.trackable
-      t.integer  :sign_in_count, :default => 0
+      t.integer  :sign_in_count, default: 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -27,18 +27,18 @@ class AddDeviseToUsuarios < ActiveRecord::Migration
 
       # t.encryptable
       # t.confirmable
-      # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
+      # t.lockable lock_strategy: :failed_attempts, unlock_strategy: :both
       # t.token_authenticatable
 
       # Uncomment below if timestamps were not included in your original model.
-      # t.timestamps
+      # t.timestamps null: false
     end
 
-    add_index :usuarios, :email,                :unique => true
-    add_index :usuarios, :reset_password_token, :unique => true
-    # add_index :usuarios, :confirmation_token,   :unique => true
-    # add_index :usuarios, :unlock_token,         :unique => true
-    # add_index :usuarios, :authentication_token, :unique => true
+    add_index :usuarios, :email,                unique: true
+    add_index :usuarios, :reset_password_token, unique: true
+    # add_index :usuarios, :confirmation_token,   unique: true
+    # add_index :usuarios, :unlock_token,         unique: true
+    # add_index :usuarios, :authentication_token, unique: true
   end
 
   def self.down

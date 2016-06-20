@@ -11,7 +11,7 @@ class CreateHorizontes < ActiveRecord::Migration
       t.float :ph
       t.string :textura
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

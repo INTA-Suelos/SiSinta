@@ -4,7 +4,7 @@ class CreateFichas < ActiveRecord::Migration
       t.string :nombre
       t.string :identificador
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

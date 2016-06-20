@@ -9,7 +9,7 @@ class DropTableObservaciones < ActiveRecord::Migration
       t.string :numero
       t.boolean :modal
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

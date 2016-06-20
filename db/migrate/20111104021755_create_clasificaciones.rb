@@ -4,7 +4,7 @@ class CreateClasificaciones < ActiveRecord::Migration
       t.string :simbolo
       t.string :limitaciones
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
