@@ -2,7 +2,7 @@ require './test/test_helper'
 
 describe Analitico do
   it 'usa precisión 000.00 en los porcentajes' do
-    a = create(:analitico, horizonte: build(:horizonte),
+    a = create(:horizonte, analitico_attributes: {
       humedad: 99.98,
       arcilla: 0.01,
       carbono_organico_c: 100,
@@ -18,7 +18,8 @@ describe Analitico do
       agua_util: 0.13,
       saturacion_t: 0.14,
       saturacion_s_h: 0.15,
-      agua_3_atm: 0.16 )
+      agua_3_atm: 0.16 }
+    ).analitico
 
     a.humedad.must_equal 99.98
     a.arcilla.must_equal 0.01
@@ -40,8 +41,7 @@ describe Analitico do
 
   describe '#carbono_organico_cn' do
     it 'usa precisión 000.000' do
-      a = create(:analitico, horizonte: build(:horizonte),
-        carbono_organico_n: 0.004 )
+      a = create(:horizonte, analitico_attributes: { carbono_organico_n: 0.004 }).analitico
 
       a.reload.carbono_organico_n.to_f.must_equal 0.004
     end
@@ -49,8 +49,7 @@ describe Analitico do
 
   describe '#carbono_organico_cn' do
     it 'usa precisión 000000000000000000.0' do
-      a = create(:analitico, horizonte: build(:horizonte),
-        carbono_organico_cn: 0.3)
+      a = create(:horizonte, analitico_attributes: { carbono_organico_cn: 0.3 }).analitico
 
       a.carbono_organico_cn.must_equal 0.3
 
@@ -68,7 +67,7 @@ describe Analitico do
     end
 
     it 'usa precisión 000.0' do
-      a = create(:analitico, horizonte: build(:horizonte), p_ppm: 0.41 )
+      a = create(:horizonte, analitico_attributes: { p_ppm: 0.41 }).analitico
 
       a.reload.p_ppm.to_f.must_equal 0.4
     end
