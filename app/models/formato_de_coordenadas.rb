@@ -19,7 +19,10 @@ class FormatoDeCoordenadas < Lookup
 
     def cargar_fabrica
       # TODO Ver cómo pasar la srs_database
-      @fabrica = RGeo::Geographic.spherical_factory(srid: srid)
+      @fabrica = RGeo::Geographic.spherical_factory(
+        srs_database: RGeo::CoordSys::SRSDatabase::ActiveRecordTable.new,
+        srid: srid
+      )
     end
 
 end
