@@ -14,6 +14,14 @@ Para contribuir a SiSINTA es importante leer la [Guía de contribución](CONTRIB
 Instalación
 -----------
 
+### Dependencias
+
+- postgresql
+- postgis
+- imagemagick
+- passenger
+- memcached
+
 ### Base de datos
 
 1. [PostgreSQL] 9.1 (o superior)

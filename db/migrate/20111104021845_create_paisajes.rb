@@ -5,7 +5,7 @@ class CreatePaisajes < ActiveRecord::Migration
       t.string :forma
       t.string :simbolo
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

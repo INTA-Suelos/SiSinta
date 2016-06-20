@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-describe Deserializador do
+class DeserializadorTest < ActiveSupport::TestCase
   describe 'Parser' do
     let(:archivo) { Rails.root.join('test', 'data', 'cosas.csv') }
     let(:perfiles) { Deserializador.parsear_csv(archivo, :llave) }

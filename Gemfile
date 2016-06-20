@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.12'
+gem 'rails', '4.2.6'
 
 ## DB
 gem 'pg'
@@ -80,6 +80,7 @@ group :test, :development do
 end
 
 group :development do
+  gem 'spring'
   gem 'bullet'
   gem 'better_errors'
   gem 'capistrano-rails'

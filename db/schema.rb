@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506002836) do
+ActiveRecord::Schema.define(version: 20160620055141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "adjuntos", force: true do |t|
+  create_table "adjuntos", force: :cascade do |t|
     t.integer  "perfil_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "usuario_id"
   end
 
-  add_index "adjuntos", ["usuario_id"], :name => "index_adjuntos_on_usuario_id"
+  add_index "adjuntos", ["perfil_id"], name: "index_adjuntos_on_perfil_id", using: :btree
+  add_index "adjuntos", ["usuario_id"], name: "index_adjuntos_on_usuario_id", using: :btree
 
-  create_table "analiticos", force: true do |t|
+  create_table "analiticos", force: :cascade do |t|
     t.integer  "registro"
     t.decimal  "humedad",             precision: 5,  scale: 2
     t.decimal  "s"
@@ -73,7 +74,9 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.decimal  "p_ppm",               precision: 4,  scale: 1
   end
 
-  create_table "busquedas", force: true do |t|
+  add_index "analiticos", ["horizonte_id"], name: "index_analiticos_on_horizonte_id", unique: true, using: :btree
+
+  create_table "busquedas", force: :cascade do |t|
     t.text     "consulta"
     t.integer  "usuario_id"
     t.string   "nombre"
@@ -82,21 +85,25 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.boolean  "publico",    default: false
   end
 
-  create_table "capacidades", force: true do |t|
+  add_index "busquedas", ["usuario_id"], name: "index_busquedas_on_usuario_id", using: :btree
+
+  create_table "capacidades", force: :cascade do |t|
     t.integer "perfil_id"
     t.integer "clase_id"
     t.text    "subclase_ids"
   end
 
-  create_table "colores", force: true do |t|
+  add_index "capacidades", ["perfil_id"], name: "index_capacidades_on_perfil_id", unique: true, using: :btree
+
+  create_table "colores", force: :cascade do |t|
     t.string "hvc", null: false
     t.string "rgb"
   end
 
-  add_index "colores", ["hvc"], :name => "index_colores_on_hvc", :unique => true
-  add_index "colores", ["rgb"], :name => "index_colores_on_rgb"
+  add_index "colores", ["hvc"], name: "index_colores_on_hvc", unique: true, using: :btree
+  add_index "colores", ["rgb"], name: "index_colores_on_rgb", using: :btree
 
-  create_table "consistencias", force: true do |t|
+  create_table "consistencias", force: :cascade do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -106,29 +113,34 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "plasticidad_id"
   end
 
-  create_table "equipos", force: true do |t|
+  add_index "consistencias", ["horizonte_id"], name: "index_consistencias_on_horizonte_id", unique: true, using: :btree
+
+  create_table "equipos", force: :cascade do |t|
     t.string   "nombre",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "usuario_id"
   end
 
-  add_index "equipos", ["nombre"], :name => "index_equipos_on_nombre", :unique => true
+  add_index "equipos", ["nombre"], name: "index_equipos_on_nombre", unique: true, using: :btree
+  add_index "equipos", ["usuario_id"], name: "index_equipos_on_usuario_id", using: :btree
 
-  create_table "equipos_usuarios", id: false, force: true do |t|
+  create_table "equipos_usuarios", id: false, force: :cascade do |t|
     t.integer "equipo_id"
     t.integer "usuario_id"
   end
 
-  add_index "equipos_usuarios", ["usuario_id", "equipo_id"], :name => "index_equipos_usuarios_on_usuario_id_and_equipo_id"
+  add_index "equipos_usuarios", ["usuario_id", "equipo_id"], name: "index_equipos_usuarios_on_usuario_id_and_equipo_id", using: :btree
 
-  create_table "erosiones", force: true do |t|
+  create_table "erosiones", force: :cascade do |t|
     t.integer "subclase_id"
     t.integer "clase_id"
     t.integer "perfil_id"
   end
 
-  create_table "estructuras", force: true do |t|
+  add_index "erosiones", ["perfil_id"], name: "index_erosiones_on_perfil_id", unique: true, using: :btree
+
+  create_table "estructuras", force: :cascade do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -137,31 +149,33 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "grado_id"
   end
 
-  create_table "fases", force: true do |t|
+  add_index "estructuras", ["horizonte_id"], name: "index_estructuras_on_horizonte_id", unique: true, using: :btree
+
+  create_table "fases", force: :cascade do |t|
     t.string "codigo", limit: 2
     t.string "nombre"
   end
 
-  add_index "fases", ["nombre"], :name => "index_fases_on_nombre", :unique => true
+  add_index "fases", ["nombre"], name: "index_fases_on_nombre", unique: true, using: :btree
 
-  create_table "fichas", force: true do |t|
+  create_table "fichas", force: :cascade do |t|
     t.string   "nombre",                        null: false
     t.string   "identificador",                 null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.boolean  "default",       default: false
   end
 
-  add_index "fichas", ["identificador"], :name => "index_fichas_on_identificador", :unique => true
+  add_index "fichas", ["identificador"], name: "index_fichas_on_identificador", unique: true, using: :btree
 
-  create_table "grupos", force: true do |t|
+  create_table "grupos", force: :cascade do |t|
     t.string "codigo"
     t.string "descripcion"
   end
 
-  add_index "grupos", ["descripcion"], :name => "index_grupos_on_descripcion", :unique => true
+  add_index "grupos", ["descripcion"], name: "index_grupos_on_descripcion", unique: true, using: :btree
 
-  create_table "horizontes", force: true do |t|
+  create_table "horizontes", force: :cascade do |t|
     t.integer  "profundidad_superior"
     t.float    "ph"
     t.datetime "created_at",             null: false
@@ -181,13 +195,17 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "textura_id"
   end
 
-  create_table "humedades", force: true do |t|
+  add_index "horizontes", ["perfil_id"], name: "index_horizontes_on_perfil_id", using: :btree
+
+  create_table "humedades", force: :cascade do |t|
     t.integer "clase_id"
     t.integer "perfil_id"
     t.text    "subclase_ids"
   end
 
-  create_table "limites", force: true do |t|
+  add_index "humedades", ["perfil_id"], name: "index_humedades_on_perfil_id", unique: true, using: :btree
+
+  create_table "limites", force: :cascade do |t|
     t.integer  "horizonte_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -195,7 +213,9 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "forma_id"
   end
 
-  create_table "paisajes", force: true do |t|
+  add_index "limites", ["horizonte_id"], name: "index_limites_on_horizonte_id", unique: true, using: :btree
+
+  create_table "paisajes", force: :cascade do |t|
     t.string   "tipo"
     t.string   "forma"
     t.string   "simbolo"
@@ -204,13 +224,17 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "perfil_id"
   end
 
-  create_table "pedregosidades", force: true do |t|
+  add_index "paisajes", ["perfil_id"], name: "index_paisajes_on_perfil_id", unique: true, using: :btree
+
+  create_table "pedregosidades", force: :cascade do |t|
     t.integer "subclase_id"
     t.integer "clase_id"
     t.integer "perfil_id"
   end
 
-  create_table "perfiles", force: true do |t|
+  add_index "pedregosidades", ["perfil_id"], name: "index_pedregosidades_on_perfil_id", unique: true, using: :btree
+
+  create_table "perfiles", force: :cascade do |t|
     t.string   "numero"
     t.integer  "drenaje_id"
     t.float    "profundidad_napa"
@@ -237,12 +261,17 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.text     "observaciones"
   end
 
-  create_table "perfiles_proyectos", id: false, force: true do |t|
+  add_index "perfiles", ["serie_id"], name: "index_perfiles_on_serie_id", using: :btree
+  add_index "perfiles", ["usuario_id"], name: "index_perfiles_on_usuario_id", using: :btree
+
+  create_table "perfiles_proyectos", id: false, force: :cascade do |t|
     t.integer "proyecto_id"
     t.integer "perfil_id"
   end
 
-  create_table "proyectos", force: true do |t|
+  add_index "perfiles_proyectos", ["proyecto_id", "perfil_id"], name: "index_perfiles_proyectos_on_proyecto_id_and_perfil_id", using: :btree
+
+  create_table "proyectos", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.text     "cita"
@@ -251,18 +280,18 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "usuario_id"
   end
 
-  add_index "proyectos", ["nombre"], :name => "index_proyectos_on_nombre", :unique => true
+  add_index "proyectos", ["nombre"], name: "index_proyectos_on_nombre", unique: true, using: :btree
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string  "name"
     t.integer "resource_id"
     t.string  "resource_type"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], :name => "index_roles_on_name"
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "series", force: true do |t|
+  create_table "series", force: :cascade do |t|
     t.string   "nombre"
     t.string   "simbolo"
     t.text     "descripcion"
@@ -273,9 +302,9 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "provincia_id"
   end
 
-  add_index "series", ["provincia_id"], :name => "index_series_on_provincia_id"
+  add_index "series", ["provincia_id"], name: "index_series_on_provincia_id", using: :btree
 
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
     t.string   "taggable_type"
@@ -285,16 +314,17 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
-  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "ubicaciones", force: true do |t|
+  create_table "ubicaciones", force: :cascade do |t|
+    t.geometry "coordenadas", limit: {:srid=>4326, :type=>"point"}
     t.string   "descripcion"
     t.integer  "perfil_id"
     t.datetime "created_at",                                        null: false
@@ -302,12 +332,12 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.string   "recorrido"
     t.string   "mosaico"
     t.integer  "aerofoto"
-    t.spatial  "coordenadas", limit: {:srid=>4326, :type=>"point"}
   end
 
-  add_index "ubicaciones", ["coordenadas"], :name => "index_ubicaciones_on_coordenadas", :spatial => true
+  add_index "ubicaciones", ["coordenadas"], name: "index_ubicaciones_on_coordenadas", using: :gist
+  add_index "ubicaciones", ["perfil_id"], name: "index_ubicaciones_on_perfil_id", unique: true, using: :btree
 
-  create_table "usuarios", force: true do |t|
+  create_table "usuarios", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -325,15 +355,15 @@ ActiveRecord::Schema.define(version: 20160506002836) do
     t.integer  "ficha_id",               default: 1
   end
 
-  add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
-  add_index "usuarios", ["ficha_id"], :name => "index_usuarios_on_ficha_id"
-  add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
+  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["ficha_id"], name: "index_usuarios_on_ficha_id", using: :btree
+  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
 
-  create_table "usuarios_roles", id: false, force: true do |t|
+  create_table "usuarios_roles", id: false, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "rol_id"
   end
 
-  add_index "usuarios_roles", ["usuario_id", "rol_id"], :name => "index_roles_usuarios_on_usuario_id_and_rol_id"
+  add_index "usuarios_roles", ["usuario_id", "rol_id"], name: "index_usuarios_roles_on_usuario_id_and_rol_id", using: :btree
 
 end

@@ -14,7 +14,7 @@ class CreateAnaliticos < ActiveRecord::Migration
       t.decimal :base_k
       t.decimal :base_na
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

@@ -5,7 +5,7 @@ class CreateColores < ActiveRecord::Migration
       t.string :humedo
       t.references :horizonte
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

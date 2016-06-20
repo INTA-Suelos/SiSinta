@@ -5,7 +5,7 @@ class CreateProyectos < ActiveRecord::Migration
       t.text :descripcion
       t.text :cita
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :proyectos, [:nombre], unique: true

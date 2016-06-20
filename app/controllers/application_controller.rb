@@ -16,11 +16,12 @@ class ApplicationController < ActionController::Base
 
   # CanCan necesita un método *current_user* y Devise genera la función
   # en base al nombre del modelo, que en nuestro caso es Usuario
-  def current_usuario
-    super.try(:decorate)
-  end
   def current_user
     self.current_usuario
+  end
+
+  def current_usuario
+    super.try(:decorate)
   end
 
   # Completa variables de instancia para usar en las vistas con información sobre el navegador de la
@@ -43,10 +44,8 @@ class ApplicationController < ActionController::Base
   protected
 
     def agregar_parametros_permitidos
-      devise_parameter_sanitizer.for(:account_update) << [
-        :nombre ]
-      devise_parameter_sanitizer.for(:sign_up) << [
-        :nombre ]
+      devise_parameter_sanitizer.permit :account_update, keys: [:nombre]
+      devise_parameter_sanitizer.permit :sign_up, keys: [:nombre]
     end
 
     def direccion_de_ordenamiento

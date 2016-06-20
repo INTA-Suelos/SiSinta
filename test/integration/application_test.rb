@@ -16,4 +16,14 @@ describe SiSINTA::Application do
       Rails.cache.must_be_instance_of ActiveSupport::Cache::DalliStore
     end
   end
+
+  describe 'rgeo' do
+    it 'soporta proj4' do
+      RGeo::CoordSys::Proj4.must_be :supported?
+    end
+
+    it 'soporta GEOS' do
+      RGeo::Geos.must_be :supported?
+    end
+  end
 end

@@ -5,7 +5,7 @@ class CreateSeries < ActiveRecord::Migration
       t.string :partido
       t.string :simbolo
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

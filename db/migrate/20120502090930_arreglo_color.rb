@@ -21,7 +21,7 @@ class ArregloColor < ActiveRecord::Migration
     change_table :colores do |t|
       t.remove :hvc, :rgb
       t.string :seco, :humedo
-      t.timestamps
+      t.timestamps null: false
       t.references :horizonte
     end
 
