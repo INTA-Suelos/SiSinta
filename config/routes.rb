@@ -1,11 +1,13 @@
-# encoding: utf-8
+# Rutas de la aplicación
 # TODO buscar en todos los modelos con un index agregador
 SiSINTA::Application.routes.draw do
   root to: 'inicio#index'
   get 'inicio/index'
 
   # Autenticación en rack
-  devise_for :usuarios
+  devise_for :usuarios,
+    # Customización del controlador de sesión para devolver JWTs
+    controllers: { sessions: 'usuarios/sessions' }
 
   # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
   masculinos  = { new: "nuevo", edit: "editar" }
