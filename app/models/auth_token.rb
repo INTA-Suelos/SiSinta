@@ -2,6 +2,26 @@
 require 'jwt'
 
 class AuthToken
+  attr_reader :valido, :claims, :headers
+
+  def initialize(token)
+    # Primero intentar decodificar
+    decoded_token = self.class.decodificar(token)
+    @valido = true
+    @claims = HashWithIndifferentAccess.new decoded_token.first
+    @headers = HashWithIndifferentAccess.new decoded_token.last
+  rescue JWT::DecodeError
+    # Si hay algún error de decodificación es inválido y no tiene claims ni
+    # headers
+    @valido = false
+    @claims = {}
+    @headers = {}
+  end
+
+  def valido?
+    valido
+  end
+
   # Genera un token con expiración y el payload. Especifica el algoritmo por
   # seguridad
   def self.generar(payload = {})
@@ -17,17 +37,6 @@ class AuthToken
         algorithm: algoritmo,
         verify_expiration: true
       }
-  end
-
-  # Si hay algún error de decodificación es inválido
-  def self.valido?(token)
-    decodificar(token).present?
-  rescue JWT::DecodeError
-    false
-  end
-
-  def self.invalido?(token)
-    !valido?(token)
   end
 
   private

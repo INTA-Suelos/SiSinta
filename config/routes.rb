@@ -1,5 +1,7 @@
 # Rutas de la aplicación
 # TODO buscar en todos los modelos con un index agregador
+require 'api_constraints'
+
 SiSINTA::Application.routes.draw do
   root to: 'inicio#index'
   get 'inicio/index'
@@ -90,6 +92,15 @@ SiSINTA::Application.routes.draw do
       collection do
         # Seleccionar una ficha específica para renderizar
         put 'seleccionar'
+      end
+    end
+  end
+
+  # Rutas para la API
+  namespace :api, defaults: { format: :json } do
+    scope module: :v1, constraints: ApiConstraints.new(v: 1, default: :true) do
+      with_options path_names: masculinos do |r|
+        resources :perfiles, only: [:index, :show]
       end
     end
   end

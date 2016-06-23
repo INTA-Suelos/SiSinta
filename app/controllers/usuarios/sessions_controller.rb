@@ -1,6 +1,4 @@
 # Autenticación por html y por token (JWT) para la API
-require 'auth_token'
-
 class Usuarios::SessionsController < Devise::SessionsController
   respond_to :html, :json
 
