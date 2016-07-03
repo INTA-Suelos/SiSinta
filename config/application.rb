@@ -48,5 +48,8 @@ module SiSINTA
 
     # Manejo de versiones en la aplicación
     is_versioned
+
+    # Servir clientes web y API
+    config.api_only = false
   end
 end

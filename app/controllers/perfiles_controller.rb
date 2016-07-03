@@ -14,7 +14,6 @@ class PerfilesController < AutorizadoController
 
   load_and_authorize_resource
 
-  respond_to :json, only: [:show]
   respond_to :geojson, only: [:index, :show]
   respond_to :csv, only: [:index, :procesar]
 

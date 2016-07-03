@@ -1,4 +1,4 @@
-# encoding: utf-8
+# Controlador base para todos los controladores que responden a clientes web.
 require 'csv'
 require 'application_responder'
 

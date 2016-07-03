@@ -13,6 +13,7 @@ gem 'devise-i18n'
 gem 'cancancan'
 gem 'rolify', '~> 3.4'
 gem 'rack-cors'
+gem 'jwt'
 
 ## Presentación
 gem 'dynamic_form'
@@ -42,6 +43,7 @@ gem 'responders'
 gem 'has_scope'
 # No funciona la inclusión automática, asique la copié a vendor
 gem 'browser_detect'
+gem 'rails-api'
 
 ## Assets
 gem 'tinymce-rails'
