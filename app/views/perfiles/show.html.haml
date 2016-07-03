@@ -15,6 +15,6 @@
   = render 'fichas/selector', origen: perfil_path(@perfil)
 
 -# TODO Hacer vista especial para el show (issue #41)
-= render @ficha.identificador, perfil: @perfil.decorate, bloqueado: true
+= render @ficha.identificador, perfil: @perfil.decorate, bloqueado: true, mapa: true
 
 = volver_arriba
