@@ -1,4 +1,5 @@
-# encoding: utf-8
+# Define filtros y manejo de errores para los controladores web con acciones
+# que requieren autenticación (devise) y autorización (cancancan).
 class AutorizadoController < ApplicationController
 
   ### Autenticación con Devise
@@ -13,7 +14,7 @@ class AutorizadoController < ApplicationController
   # Recupera las excepciones por tratar de acceder a un recurso sin
   # autorización
   rescue_from CanCan::AccessDenied do |e|
-    flash[:error] = I18n.t 'unauthorized.default'
+    flash[:error] = I18n.t 'unauthorized.detail'
     volver
   end
 end

@@ -63,4 +63,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   # Rails
   inflect.irregular 'schema_migration', 'schema_migrations'
+
+  # Mantener como sigla
+  inflect.acronym 'API'
 end

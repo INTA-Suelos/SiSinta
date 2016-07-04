@@ -14,7 +14,6 @@ class PerfilesController < AutorizadoController
 
   load_and_authorize_resource
 
-  respond_to :json, only: [:show]
   respond_to :geojson, only: [:index, :show]
   respond_to :csv, only: [:index, :procesar]
 
@@ -33,7 +32,9 @@ class PerfilesController < AutorizadoController
 
   # Carga la ficha con la que renderizar el perfil
   before_filter :seleccionar_ficha,
-    only: [:edit, :new, :show, :editar_analiticos, :update_analiticos, :update]
+    only: [
+      :edit, :new, :show, :editar_analiticos, :update_analiticos, :update, :create
+    ]
 
   before_filter :buscar_perfiles_o_exportar,    only: [:procesar]
   before_filter :cargar_perfiles_seleccionados, only: [:exportar, :procesar]

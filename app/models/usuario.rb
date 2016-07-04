@@ -14,14 +14,14 @@ class Usuario < ActiveRecord::Base
 
   before_create :asignar_valores_por_defecto
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # Módulos a incluir de devise
+  # TODO :confirmable cuando enviemos mails
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+    :trackable, :validatable
 
   validates_presence_of :ficha, :srid, on: :update
 
-  # FIXME Workarround para cierto problema con rolify y las inflecciones
+  # FIXME Workaround para cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
   alias_method :role_ids=, :rol_ids=
 

@@ -4,6 +4,9 @@
     = '|'
     = link_to 'Permisos', permisos_path(modelo: 'serie', id: @serie)
     = '|'
+  - if can?(:delete, @serie.object)
+    = link_to 'Eliminar', @serie, data: { confirm: t(:confirmar) }, method: :delete
+    = '|'
   = link_to 'Volver', series_path
 
 #serie.span-24.show

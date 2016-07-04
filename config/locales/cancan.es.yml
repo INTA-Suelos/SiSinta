@@ -1,3 +1,4 @@
 es:
   unauthorized:
-    default:  "No estás autorizado para realizar esta acción"
+    title: 'No autorizado'
+    detail:  'No estás autorizado para realizar esta acción'
