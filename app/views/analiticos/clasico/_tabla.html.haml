@@ -47,7 +47,7 @@
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :carbono_organico_cn, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 1, rowspan: 8}= label_tag nil, 'Textura'
+          %td.titulo{colspan: 1, rowspan: 10}= label_tag nil, 'Textura'
           %td.titulo.largo= label_tag nil, 'Arcilla < 2u'
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
@@ -94,6 +94,18 @@
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_muy_gruesa, disabled: bloqueado,
+              placeholder: '%'
+        %tr
+          %td.titulo.largo= label_tag nil, 'Arena total'
+          - @perfil.analiticos.each do |a|
+            = f.fields_for 'analiticos_attributes[]', a do |f_a|
+              %td.dato= f_a.text_field :arena_total, disabled: bloqueado,
+              placeholder: '%'
+        %tr
+          %td.titulo.largo= label_tag nil, 'Gravas'
+          - @perfil.analiticos.each do |a|
+            = f.fields_for 'analiticos_attributes[]', a do |f_a|
+              %td.dato= f_a.text_field :gravas, disabled: bloqueado,
               placeholder: '%'
         %tr
           %td.titulo{colspan: 2}= label_tag nil, ca_co_3_label

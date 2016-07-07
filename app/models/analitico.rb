@@ -12,8 +12,8 @@ class Analitico < ActiveRecord::Base
   validates_numericality_of :carbono_organico_c, :carbono_organico_n, :ca_co3,
                             :arcilla, :limo_2_20, :limo_2_50, :arena_muy_fina,
                             :arena_fina, :arena_media, :arena_gruesa,
-                            :arena_muy_gruesa, :humedad, :agua_3_atm,
-                            :agua_15_atm, :agua_util, :saturacion_t,
+                            :arena_muy_gruesa, :arena_total, :gravas, :humedad,
+                            :agua_3_atm, :agua_15_atm, :agua_util, :saturacion_t,
                             :saturacion_s_h, :p_ppm,
                             greater_than_or_equal_to: 0, less_than_or_equal_to: 100,
                             allow_nil: true

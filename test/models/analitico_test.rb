@@ -1,65 +1,71 @@
 require './test/test_helper'
 
 describe Analitico do
-  it 'usa precisión 000.00 en los porcentajes' do
-    a = create(:horizonte, analitico_attributes: {
-      humedad: 99.98,
-      arcilla: 0.01,
-      carbono_organico_c: 100,
-      limo_2_20: 0.04,
-      limo_2_50: '100',
-      arena_muy_fina: 0.06,
-      arena_fina: 100.000,
-      arena_media: 0.08,
-      arena_gruesa: 0.09,
-      arena_muy_gruesa: 0.10,
-      ca_co3: 0.11,
-      agua_15_atm: 0.12,
-      agua_util: 0.13,
-      saturacion_t: 0.14,
-      saturacion_s_h: 0.15,
-      agua_3_atm: 0.16 }
-    ).analitico
+  describe 'Campos con precision: 5, scale: 2' do
+    let(:campos) do
+      [
+        :humedad, :arcilla, :carbono_organico_c, :limo_2_20, :limo_2_50,
+        :arena_muy_fina, :arena_fina, :arena_media, :arena_gruesa,
+        :arena_muy_gruesa, :arena_total, :gravas, :ca_co3, :agua_15_atm,
+        :agua_util, :saturacion_t, :saturacion_s_h, :agua_3_atm
+      ]
+    end
 
-    a.humedad.must_equal 99.98
-    a.arcilla.must_equal 0.01
-    a.carbono_organico_c.must_equal 100
-    a.limo_2_20.must_equal 0.04
-    a.limo_2_50.must_equal 100
-    a.arena_muy_fina.must_equal 0.06
-    a.arena_fina.must_equal 100.00
-    a.arena_media.must_equal 0.08
-    a.arena_gruesa.must_equal 0.09
-    a.arena_muy_gruesa.must_equal 0.10
-    a.ca_co3.must_equal 0.11
-    a.agua_15_atm.must_equal 0.12
-    a.agua_util.must_equal 0.13
-    a.saturacion_t.must_equal 0.14
-    a.saturacion_s_h.must_equal 0.15
-    a.agua_3_atm.must_equal 0.16
-  end
+    it 'mantiene la precisión y usa BigDecimals' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 99.99 }).analitico
+        analitico.send(campo).must_equal BigDecimal('99.99'), "Falla para #{campo}"
+      end
+    end
 
-  describe '#carbono_organico_cn' do
-    it 'usa precisión 000.000' do
-      a = create(:horizonte, analitico_attributes: { carbono_organico_n: 0.004 }).analitico
-
-      a.reload.carbono_organico_n.to_f.must_equal 0.004
+    it 'redondea por fuera de la precisión' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 99.999 }).analitico
+        analitico.send(campo).must_equal BigDecimal('100.00'), "Falla para #{campo}"
+      end
     end
   end
 
-  describe '#carbono_organico_cn' do
-    it 'usa precisión 000000000000000000.0' do
-      a = create(:horizonte, analitico_attributes: { carbono_organico_cn: 0.3 }).analitico
+  describe 'Campos con precision: 6, scale: 3' do
+    let(:campos) { [:carbono_organico_n] }
 
-      a.carbono_organico_cn.must_equal 0.3
+    it 'mantiene la precisión y usa BigDecimals' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 0.004 }).analitico
+        analitico.send(campo).must_equal BigDecimal('0.004'), "Falla para #{campo}"
+      end
+    end
 
-      a.update_attribute :carbono_organico_cn, 999999999999999999.9
-
-      a.reload.carbono_organico_cn.to_f.must_equal 999999999999999999.9
+    it 'redondea por fuera de la precisión' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 0.004999 }).analitico
+        analitico.send(campo).must_equal BigDecimal('0.005'), "Falla para #{campo}"
+      end
     end
   end
 
-  describe '#p_ppm' do
+  describe 'Campos con precision: 20, scale: 1' do
+    let(:campos) { [:carbono_organico_cn] }
+
+    it 'mantiene la precisión y usa BigDecimals' do
+      campos.each do |campo|
+        # Crearlo con float falla para este número
+        analitico = create(:horizonte, analitico_attributes: { campo => BigDecimal('999999999999999999.9') }).analitico
+        analitico.send(campo).must_equal BigDecimal('999999999999999999.9'), "Falla para #{campo}"
+      end
+    end
+
+    it 'redondea por fuera de la precisión' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 999999999999999999.99 }).analitico
+        analitico.send(campo).must_equal BigDecimal('1000000000000000000.0'), "Falla para #{campo}"
+      end
+    end
+  end
+
+  describe 'Campos con precision: 4, scale: 1' do
+    let(:campos) { [:p_ppm] }
+
     it 'está entre 0 y 100' do
       build(:analitico, horizonte: build(:horizonte), p_ppm: 100.1).wont_be :valid?
       build(:analitico, horizonte: build(:horizonte), p_ppm: 50.1).must_be :valid?
@@ -70,6 +76,65 @@ describe Analitico do
       a = create(:horizonte, analitico_attributes: { p_ppm: 0.41 }).analitico
 
       a.reload.p_ppm.to_f.must_equal 0.4
+    end
+
+    it 'mantiene la precisión y usa BigDecimals' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 0.4 }).analitico
+        analitico.send(campo).must_equal BigDecimal('0.4'), "Falla para #{campo}"
+      end
+    end
+
+    it 'redondea por fuera de la precisión' do
+      campos.each do |campo|
+        analitico = create(:horizonte, analitico_attributes: { campo => 0.49 }).analitico
+        analitico.send(campo).must_equal BigDecimal('0.5'), "Falla para #{campo}"
+      end
+    end
+  end
+
+  describe 'porcentajes' do
+    let(:campos) do
+      [
+        :carbono_organico_c, :carbono_organico_n, :ca_co3, :arcilla, :limo_2_20,
+        :limo_2_50, :arena_muy_fina, :arena_fina, :arena_media, :arena_gruesa,
+        :arena_muy_gruesa, :arena_total, :gravas, :humedad, :agua_3_atm,
+        :agua_15_atm, :agua_util, :saturacion_t, :saturacion_s_h, :p_ppm,
+      ]
+    end
+
+    it 'están entre 0 y 100' do
+      campos.each do |campo|
+        build(:analitico, horizonte: build(:horizonte), campo => 100.1).wont_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => -0.1).wont_be :valid?, "Falla para #{campo}"
+
+        build(:analitico, horizonte: build(:horizonte), campo => 100).must_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => 50).must_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => 0).must_be :valid?, "Falla para #{campo}"
+      end
+    end
+  end
+
+  describe '#psi' do
+    it 'es nil si no hay base_na o t' do
+      build(:analitico, base_na: nil).psi.must_be :nil?
+      build(:analitico, t: nil).psi.must_be :nil?
+    end
+
+    it 'redondea a 1 decimal' do
+      build(:analitico, t: 25.4, base_na: 0.4).psi.must_equal BigDecimal('0.0')
+      build(:analitico, t: 0.05, base_na: 0.99).psi.must_equal BigDecimal('0.2')
+    end
+  end
+
+  describe '#porcentaje_mo' do
+    it 'es nil si no hay carbono_organico_c' do
+      build(:analitico, carbono_organico_c: nil).porcentaje_mo.must_be :nil?
+    end
+
+    it 'redondea a 2 decimales' do
+      build(:analitico, carbono_organico_c: 4.56).porcentaje_mo.must_equal BigDecimal('7.86')
+      build(:analitico, carbono_organico_c: 99.1).porcentaje_mo.must_equal BigDecimal('170.85')
     end
   end
 end
