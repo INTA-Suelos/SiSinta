@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620055141) do
+ActiveRecord::Schema.define(version: 20160706224105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160620055141) do
     t.decimal  "carbono_organico_cn", precision: 20, scale: 1
     t.decimal  "base_al"
     t.decimal  "p_ppm",               precision: 4,  scale: 1
+    t.decimal  "arena_total",         precision: 5,  scale: 2
   end
 
   add_index "analiticos", ["horizonte_id"], name: "index_analiticos_on_horizonte_id", unique: true, using: :btree
