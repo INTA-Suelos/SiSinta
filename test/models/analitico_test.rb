@@ -6,8 +6,8 @@ describe Analitico do
       [
         :humedad, :arcilla, :carbono_organico_c, :limo_2_20, :limo_2_50,
         :arena_muy_fina, :arena_fina, :arena_media, :arena_gruesa,
-        :arena_muy_gruesa, :arena_total, :ca_co3, :agua_15_atm, :agua_util,
-        :saturacion_t, :saturacion_s_h, :agua_3_atm
+        :arena_muy_gruesa, :arena_total, :gravas, :ca_co3, :agua_15_atm,
+        :agua_util, :saturacion_t, :saturacion_s_h, :agua_3_atm
       ]
     end
 
@@ -98,19 +98,19 @@ describe Analitico do
       [
         :carbono_organico_c, :carbono_organico_n, :ca_co3, :arcilla, :limo_2_20,
         :limo_2_50, :arena_muy_fina, :arena_fina, :arena_media, :arena_gruesa,
-        :arena_muy_gruesa, :arena_total, :humedad, :agua_3_atm, :agua_15_atm,
-        :agua_util, :saturacion_t, :saturacion_s_h, :p_ppm,
+        :arena_muy_gruesa, :arena_total, :gravas, :humedad, :agua_3_atm,
+        :agua_15_atm, :agua_util, :saturacion_t, :saturacion_s_h, :p_ppm,
       ]
     end
 
     it 'están entre 0 y 100' do
       campos.each do |campo|
-        build(:analitico, horizonte: build(:horizonte), campo => 100.1).wont_be :valid?
-        build(:analitico, horizonte: build(:horizonte), campo => -0.1).wont_be :valid?
+        build(:analitico, horizonte: build(:horizonte), campo => 100.1).wont_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => -0.1).wont_be :valid?, "Falla para #{campo}"
 
-        build(:analitico, horizonte: build(:horizonte), campo => 100).must_be :valid?
-        build(:analitico, horizonte: build(:horizonte), campo => 50).must_be :valid?
-        build(:analitico, horizonte: build(:horizonte), campo => 0).must_be :valid?
+        build(:analitico, horizonte: build(:horizonte), campo => 100).must_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => 50).must_be :valid?, "Falla para #{campo}"
+        build(:analitico, horizonte: build(:horizonte), campo => 0).must_be :valid?, "Falla para #{campo}"
       end
     end
   end
