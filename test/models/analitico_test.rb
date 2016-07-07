@@ -114,4 +114,27 @@ describe Analitico do
       end
     end
   end
+
+  describe '#psi' do
+    it 'es nil si no hay base_na o t' do
+      build(:analitico, base_na: nil).psi.must_be :nil?
+      build(:analitico, t: nil).psi.must_be :nil?
+    end
+
+    it 'redondea a 1 decimal' do
+      build(:analitico, t: 25.4, base_na: 0.4).psi.must_equal BigDecimal('0.0')
+      build(:analitico, t: 0.05, base_na: 0.99).psi.must_equal BigDecimal('0.2')
+    end
+  end
+
+  describe '#porcentaje_mo' do
+    it 'es nil si no hay carbono_organico_c' do
+      build(:analitico, carbono_organico_c: nil).porcentaje_mo.must_be :nil?
+    end
+
+    it 'redondea a 2 decimales' do
+      build(:analitico, carbono_organico_c: 4.56).porcentaje_mo.must_equal BigDecimal('7.86')
+      build(:analitico, carbono_organico_c: 99.1).porcentaje_mo.must_equal BigDecimal('170.85')
+    end
+  end
 end
