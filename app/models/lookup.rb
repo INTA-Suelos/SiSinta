@@ -1,4 +1,7 @@
 # encoding: utf-8
+# FIXME Reescribir todos los lookups como modelos/tablas normales, mantenidos
+# desde un administrador. Simplificaría la búsqueda de datos, las validaciones,
+# etc
 class Lookup < ActiveYaml::Base
   include ActiveHash::Associations
   include ActiveModel::Serializers::JSON
