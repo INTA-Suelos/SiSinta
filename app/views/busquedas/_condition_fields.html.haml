@@ -1,5 +1,5 @@
 = field_set_tag nil, class: 'fields condition', data: {'object-name' => f.object_name} do
-  %legend Condiciones #{button_to_remove_fields "Quitar", f}
+  %legend Condiciones #{button_to_remove_fields 'Quitar', f}
 
   = f.attribute_fields do |a|
     = render 'attribute_fields', f: a
@@ -9,4 +9,4 @@
   = f.value_fields do |v|
     = render 'value_fields', f: v
 
-  = button_to_add_fields "Agregar valor", f, :value
+  = button_to_add_fields 'Agregar valor', f, :value

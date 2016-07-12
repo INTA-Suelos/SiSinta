@@ -14,18 +14,18 @@
       .span-23.last.campo
         .span-2= fb.label :publico
         .span-21.last= fb.check_box :publico
-        = fb.object.ayuda :publico
+        = ayuda_para t('ayuda.busqueda.publico')
 
   = field_set_tag 'Consulta', class: 'consulta celeste' do
 
     = field_set_tag 'Ordenar por', class: 'celeste_oscuro', id: 'orden' do
       = f.sort_fields do |s|
         = render 'sort_fields', f: s
-      = button_to_add_fields "Agregar", f, :sort
+      = button_to_add_fields 'Agregar', f, :sort
 
     = field_set_tag 'Grupos de condiciones', class: 'celeste_oscuro' do
       = f.grouping_fields do |g|
         = render 'grouping_fields', f: g
-      = button_to_add_fields "Agregar grupo", f, :grouping
+      = button_to_add_fields 'Agregar grupo', f, :grouping
 
   .acciones.span-4.last= f.submit

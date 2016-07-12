@@ -14,19 +14,17 @@ module ApplicationHelper
   # descripción del campo.
   #
   # * *Args*    :
-  #   - +campo+ -> El campo del que devolver la descripción.
+  #   - +texto+ -> El texto que poner en la ayuda.
   #   - +html+ -> Hash de opciones para el div. Se usa +clases+ para determinar
   #   la/las clase/s del +div+, que por default es +ayuda+, e +id+ para
-  #   determinar el id, que por default es +ayuda_modelo_campo+
+  #   determinar el id, que por default es nil.
   # * *Returns* :
   #   - Un +div+ preparado con la clase 'ayuda'
-  #
-  def ayuda_para(campo, html = {})
-    texto = Ayuda.find_by_campo(campo).try(:ayuda)
-    id = html[:id] || "ayuda_#{campo.gsub('.', '_')}"
+  def ayuda_para(texto, html = {})
+    id = "id='#{html[:id]}'" if html[:id].present?
     clases = html[:clases] || 'ayuda'
 
-    "<div id='#{id}' class='#{clases}'>#{texto}</div>".html_safe if texto
+    "<div #{id} class='#{clases}'>#{texto}</div>".html_safe if texto
   end
 
   # Tomo prestado de http://asciicasts.com/episodes/228-sortable-table-columns
