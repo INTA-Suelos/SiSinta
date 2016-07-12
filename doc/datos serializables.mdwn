@@ -1,0 +1,120 @@
+# Contexto
+
+Esta descripción de los datos del sistema está hecha desde el lugar de cómo y
+qué datos serializar (para json, geojson y csv). No incluye los campos de datos
+de cada modelo, sino sus relaciones. Cada Serializer de modelo deberá definir
+qué datos serializar, según el contexto, pero cada Serializer raíz (o sea el
+que define en qué formato vamos a exportar) determina la estructura general, y
+llama a todos los demás Serializers, normalmente a través de un Perfil como
+punto de entrada, recorriendo todas sus relaciones recursivamente.
+
+# Perfil
+
+## `has`
+
+    0..n  Horizonte
+    0..n  Adjunto
+    0..n  Proyecto
+
+    0..1  Capacidad
+    0..1  Ubicacion
+    0..1  Paisaje
+    0..1  Humedad
+    0..1  Erosion
+    0..1  Pedregosidad
+
+## `belongs_to`
+
+    0..1  Usuario
+    0..1  Fase
+    0..1  Grupo
+    0..1  Serie
+
+## `lookups`
+
+    0..1  Escurrimiento
+    0..1  Pendiente
+    0..1  Permeabilidad
+    0..1  Relieve
+    0..1  Anegamiento
+    0..1  Posicion
+    0..1  Drenaje
+    0..1  Sal
+    0..1  UsoDeLaTierra
+
+# Horizonte
+
+## `has`
+
+    1     Analitico
+
+    0..1  Limite
+    0..1  Consistencia
+    0..1  Estructura
+
+## `belongs_to`
+
+    0..1  ColorSeco
+    0..1  ColorHumedo
+
+## `lookups`
+
+    0..1  TexturaDeHorizonte
+
+# Capacidad
+
+## `lookups`
+
+    0..1  ClaseDeCapacidad
+    0..n  SubclaseDeCapacidad
+
+# Humedad
+
+## `lookups`
+
+    0..1  ClaseDeHumedad
+    0..n  SubclaseDeCapacidad
+
+# Erosion
+
+## `lookups`
+
+    0..1  ClaseDeErosion
+    0..1  SubclaseDeErosion
+
+# Pedregosidad
+
+## `lookups`
+
+    0..1  ClaseDePedregosidad
+    0..1  SubclaseDePedregosidad
+
+# Serie
+
+## `lookups`
+
+    0..1  Provincia
+
+# Limite
+
+## `lookups`
+
+    0..1  FormaDeLimite
+    0..1  TipoDeLimite
+
+# Consistencia
+
+## `lookups`
+
+    0..1  ConsistenciaEnSeco
+    0..1  ConsistenciaEnHumedo
+    0..1  AdhesividadDeConsistencia
+    0..1  PlasticidadDeConsistencia
+
+# Estructura
+
+## `lookups`
+
+    0..1  TipoDeEstructura
+    0..1  ClaseDeEstructura
+    0..1  GradoDeEstructura
