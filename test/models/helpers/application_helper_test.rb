@@ -4,22 +4,18 @@ require 'application_helper'
 class ApplicationHelperTest < ActionView::TestCase
   include ApplicationHelper
 
-  setup do
-    @a = Ayuda.first
-  end
-
   test 'genera un div simple' do
-    render text: ayuda_para(@a.campo)
-    assert_select "div#ayuda_#{@a.campo.gsub('.', '_')}.ayuda", {count: 1, text: @a.ayuda}
+    render text: ayuda_para('este texto')
+    assert_select 'div.ayuda', { count: 1, text: 'este texto' }
   end
 
   test 'genera un div con las clases especificadas' do
-    render text: ayuda_para(@a.campo, { clases: 'uno dos'})
+    render text: ayuda_para('algo', { clases: 'uno dos' })
     assert_select 'div.uno.dos', 1
   end
 
   test 'genera un div con el id especificado' do
-    render text: ayuda_para(@a.campo, { id: 'algo'})
-    assert_select 'div#algo.ayuda', 1
+    render text: ayuda_para('algo', { id: 'especificado' })
+    assert_select 'div#especificado.ayuda', 1
   end
 end
