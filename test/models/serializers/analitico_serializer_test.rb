@@ -12,7 +12,7 @@ class AnaliticoSerializerTest < ActiveSupport::TestCase
         limo_2_20 limo_2_50 arena_muy_fina arena_fina arena_media arena_gruesa
         arena_muy_gruesa ca_co3 agua_15_atm agua_util conductividad h
         saturacion_t saturacion_s_h densidad_aparente profundidad_muestra agua_3_atm
-        carbono_organico_cn
+        carbono_organico_cn gravas arena_total
       }.each do |atributo|
         subject.serializable_hash[atributo].must_equal analitico.send(atributo)
       end

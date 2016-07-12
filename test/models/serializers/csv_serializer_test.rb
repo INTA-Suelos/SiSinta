@@ -26,9 +26,9 @@ class CSVSerializerTest < ActiveSupport::TestCase
         checks: ['perfil_id', 'perfil_observaciones', 'perfil_numero']
       )).first
 
-      assert_equal perfil.id.to_s,        csv[0]
-      assert_equal perfil.numero,         csv[1]
-      assert_equal '',                    csv[2]
+      csv[0].must_equal perfil.id.to_s
+      csv[1].must_equal perfil.numero
+      csv[2].must_equal ''
     end
   end
 end
