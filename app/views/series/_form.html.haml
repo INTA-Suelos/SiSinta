@@ -11,21 +11,17 @@
         .span-12.campo
           .span-2= f.label :nombre
           .span-10.last= f.text_field :nombre, autofocus: true, required: true
-          = ayuda_para('serie.nombre')
         .span-7.campo
           .span-2= f.label :provincia
           .span-5.last= f.collection_select :provincia_id, Provincia.all, :id, :nombre,
             { prompt: true }, required: true, disabled: defined?(bloqueado)
-          = ayuda_para 'serie.provincia'
         .span-3.campo.last
           .span-2= f.label :simbolo
           .span-1.last= f.text_field :simbolo, required: true
-          = ayuda_para('serie.simbolo')
 
         .span-22.campo
           .span-2= f.label :descripcion, 'Descripción'
           .span-20.last= f.text_area :descripcion
-          = ayuda_para('serie.descripcion')
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
 

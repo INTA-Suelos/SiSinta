@@ -8,7 +8,7 @@
       .span-4.campo
         .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
         = f.check_box :modal, class: 'span-1 last', disabled: bloqueado
-        = perfil.ayuda :modal
+        = ayuda_para t('ayuda.perfil.modal')
       #serie
         = f.fields_for :serie do |fs|
           .span-17.campo.last
@@ -17,18 +17,17 @@
               autocompletar_nombre_series_path,
               update_elements: { simbolo: '#perfil_serie_attributes_simbolo' },
               disabled: bloqueado
-            = perfil.ayuda :nombre
+            = ayuda_para t('ayuda.perfil.nombre')
 
           .span-13.prepend-4.campo.last
             .span-2= fs.label :provincia
             .span-11.last= fs.collection_select :provincia_id, Provincia.all, :id, :nombre,
               { prompt: true }, disabled: bloqueado, required: true
-            = perfil.ayuda :provincia
           .span-4.prepend-media.last.campo
             .span-2= fs.label :simbolo
             .span-2.last= fs.autocomplete_field :simbolo,
               autocompletar_simbolo_series_path, disabled: bloqueado
-            = perfil.ayuda :simbolo
+            = ayuda_para t('ayuda.perfil.simbolo')
 
     = render partial: 'perfiles/clasico/descripcion_del_sitio',
         locals: {f: f, bloqueado: bloqueado}

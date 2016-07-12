@@ -13,17 +13,14 @@
         .span-22.campo
           .span-2= f.label :nombre
           .span-20.last= f.text_field :nombre, autofocus: true, required: true
-          = ayuda_para('proyecto.nombre')
 
         #descripcion.span-22.campo
           .span-2= f.label :descripcion, 'Descripción'
           .span-20.last= f.text_area :descripcion, class: 'tinymce'
-          = ayuda_para('proyecto.descripcion')
 
         #cita.span-22.campo
           .span-2= f.label :cita, 'Cómo citar'
           .span-20.last= f.text_area :cita
-          = ayuda_para('proyecto.cita')
 
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-23 last' do
 
