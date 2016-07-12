@@ -163,53 +163,6 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal analitico[:p_ppm], perfil.analiticos.first.p_ppm
   end
 
-  test 'rutea a editar_analiticos' do
-    assert_routing({
-      path: '/perfiles/345/editar_analiticos',
-      method: :get
-    },{
-      controller: 'perfiles', action: 'editar_analiticos',
-      id: '345'
-    })
-  end
-
-  test 'rutea a update_analiticos' do
-    assert_routing({
-      path: '/perfiles/123/update_analiticos',
-      method: :put
-    },{
-      controller: 'perfiles', action: 'update_analiticos',
-      id: '123'
-    })
-  end
-
-  test 'rutea a exportar' do
-    assert_routing({
-      path: '/perfiles/exportar',
-      method: :get
-    },{
-      controller: 'perfiles', action: 'exportar'
-    })
-  end
-
-  test 'rutea a procesar' do
-    assert_routing({
-      path: '/perfiles/procesar',
-      method: :post
-    },{
-      controller: 'perfiles', action: 'procesar'
-    })
-  end
-
-  test 'rutea a almacenar' do
-    assert_routing({
-      path: '/perfiles/almacenar',
-      method: :put
-    },{
-      controller: 'perfiles', action: 'almacenar'
-    })
-  end
-
   test 'almacena una lista de perfiles temporalmente' do
     loguearse_como 'Autorizado'
     @request.env['HTTP_REFERER'] = '/perfiles/'
@@ -219,15 +172,6 @@ class PerfilesControllerTest < ActionController::TestCase
     assert_equal %w{1 2 3}, @controller.send(:perfiles_seleccionados),
       'Debe almacenar una lista de perfiles'
     assert_redirected_to exportar_perfiles_path
-  end
-
-  test 'rutea a seleccionar_perfiles' do
-    assert_routing({
-      path: '/perfiles/seleccionar',
-      method: :get
-    },{
-      controller: 'perfiles', action: 'seleccionar'
-    })
   end
 
   test 'el formulario incluye tags para autocompletar' do

@@ -5,3 +5,9 @@
 require File.expand_path('../config/application', __FILE__)
 
 SiSINTA::Application.load_tasks
+
+# Agrega test:routes al test suite default
+Rails::TestTask.new('test:routes' => 'test:prepare') do |t|
+  t.pattern = 'test/routes/**/*_test.rb'
+end
+Rake::Task['test:run'].enhance ['test:routes']
