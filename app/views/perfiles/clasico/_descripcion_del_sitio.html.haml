@@ -4,7 +4,7 @@
     .span-4.campo
       .span-2= fu.label :mosaico
       .span-2.last= fu.text_field :mosaico, disabled: bloqueado,
-        placeholder: fu.object.pista(:mosaico)
+        placeholder: '0000-00-0'
       = fu.object.ayuda(:mosaico)
     .span-4.campo
       .span-2= fu.label :recorrido
@@ -17,12 +17,12 @@
   .span-5.campo
     .span-2= f.label :fecha
     .span-3.last= f.text_field :fecha, value: f.object.fecha, class: 'fecha',
-      disabled: bloqueado, required: true, placeholder: f.object.pista(:fecha)
+      disabled: bloqueado, required: true, placeholder: 'dd/mm/aaaa'
     = f.object.ayuda(:fecha)
   .span-4.last.campo
     .span-2= f.label :numero, 'Número'
     .span-2.last= f.text_field :numero, disabled: bloqueado,
-      placeholder: f.object.pista(:numero)
+      placeholder: 'C 00/000'
     = f.object.ayuda(:numero)
 
   .span-11.campo

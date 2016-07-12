@@ -15,7 +15,6 @@
 - id:       4
   campo:    Ubicacion.mosaico
   ayuda:    Nomenclatura del mosaico IGN.
-  ejemplo:  '0000-00-0'
 - id:       5
   campo:    Ubicacion.recorrido
   ayuda:    Número de recorrido del vuelo aerofotográfico.
@@ -25,11 +24,9 @@
 - id:       7
   campo:    Perfil.fecha
   ayuda:    Fecha de toma de datos.
-  ejemplo:  'dd/mm/aaaa'
 - id:       8
   campo:    Perfil.numero
   ayuda:    Número/Nombre del perfil.
-  ejemplo:  'C 00/000'
 - id:       9
   campo:    Fase.nombre
   ayuda:    Fase respecto al perfil modal.
