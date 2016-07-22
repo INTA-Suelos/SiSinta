@@ -121,8 +121,8 @@ class Deserializador
       relieve_id: Relieve.find_by(valor: datos['perfil_relieve'].try(:downcase)).to_param,
       anegamiento_id: Anegamiento.find_by(valor: datos['perfil_anegamiento'].try(:downcase)).to_param,
       uso_de_la_tierra_id: UsoDeLaTierra.find_by(valor: datos['perfil_uso_de_la_tierra'].try(:downcase)).to_param,
-      sal_id: Sal.find_by_valor(datos['perfil_sales']).to_param,
-      posicion_id: Posicion.find_by_valor(datos['perfil_posicion'].try(:downcase)).to_param
+      posicion_id: Posicion.find_by(valor: datos['perfil_posicion'].try(:downcase)).to_param,
+      sal_id: Sal.find_by_valor(datos['perfil_sales']).to_param
     )
   end
 

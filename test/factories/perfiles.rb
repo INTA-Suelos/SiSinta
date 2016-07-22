@@ -36,9 +36,9 @@ FactoryGirl.define do
       relieve
       anegamiento
       uso_de_la_tierra
+      posicion
 
       # lookups
-      posicion_id         { rand(Posicion.count) + 1 }
       sal_id              { rand(Sal.count) + 1 }
 
       transient { con_horizontes 1 }
