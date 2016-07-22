@@ -43,7 +43,8 @@ class Perfil < ActiveRecord::Base
   belongs_to :pendiente
   belongs_to :permeabilidad
   belongs_to :relieve
-  has_lookups :anegamiento, :posicion, :sal, :uso_de_la_tierra
+  belongs_to :anegamiento
+  has_lookups :posicion, :sal, :uso_de_la_tierra
 
   has_and_belongs_to_many :proyectos
 

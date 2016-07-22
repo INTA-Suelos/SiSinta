@@ -34,10 +34,10 @@ FactoryGirl.define do
       pendiente
       permeabilidad
       relieve
+      anegamiento
 
       # lookups
       posicion_id         { rand(Posicion.count) + 1 }
-      anegamiento_id      { rand(Anegamiento.count) + 1 }
       sal_id              { rand(Sal.count) + 1 }
       uso_de_la_tierra_id { rand(UsoDeLaTierra.count) + 1 }
 

@@ -1,6 +1,5 @@
-# encoding: utf-8
-class Anegamiento < Lookup
-  has_many :perfiles, inverse_of: :anegamiento
+class Anegamiento < ActiveRecord::Base
+  has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722221120) do
+ActiveRecord::Schema.define(version: 20160722222101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(version: 20160722221120) do
   end
 
   add_index "analiticos", ["horizonte_id"], name: "index_analiticos_on_horizonte_id", unique: true, using: :btree
+
+  create_table "anegamientos", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "busquedas", force: :cascade do |t|
     t.text     "consulta"
