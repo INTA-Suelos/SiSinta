@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722222101) do
+ActiveRecord::Schema.define(version: 20160722222920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -373,6 +373,10 @@ ActiveRecord::Schema.define(version: 20160722222101) do
 
   add_index "ubicaciones", ["coordenadas"], name: "index_ubicaciones_on_coordenadas", using: :gist
   add_index "ubicaciones", ["perfil_id"], name: "index_ubicaciones_on_perfil_id", unique: true, using: :btree
+
+  create_table "usos_de_la_tierra", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "nombre"

@@ -3,8 +3,7 @@ require './test/test_helper'
 class HasLookupsTest < ActiveSupport::TestCase
 
   setup do
-    @lookups = {  perfil: %w{ posicion sal
-                              uso_de_la_tierra},
+    @lookups = {  perfil: %w{ posicion sal},
                   horizonte: %w{textura},
                   erosion: %w{clase subclase},
                   limite: %w{forma tipo},

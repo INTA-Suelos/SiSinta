@@ -1,6 +1,5 @@
-# encoding: utf-8
-class UsoDeLaTierra < Lookup
-  has_many :perfiles, inverse_of: :uso_de_la_tierra
+class UsoDeLaTierra < ActiveRecord::Base
+  has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end
