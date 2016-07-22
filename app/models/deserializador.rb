@@ -121,7 +121,7 @@ class Deserializador
       escurrimiento_id: Escurrimiento.find_by_valor(datos['perfil_escurrimiento'].try(:downcase)).to_param,
       pendiente_id: Pendiente.find_by_valor(datos['perfil_pendiente'].try(:downcase)).to_param,
       anegamiento_id: Anegamiento.find_by_valor(datos['perfil_anegamiento'].try(:downcase)).to_param,
-      drenaje_id: Drenaje.find_by_valor(datos['perfil_drenaje'].try(:downcase)).to_param,
+      drenaje_id: Drenaje.find_by(valor: datos['perfil_drenaje'].try(:downcase)).to_param,
       posicion_id: Posicion.find_by_valor(datos['perfil_posicion'].try(:downcase)).to_param
     )
   end

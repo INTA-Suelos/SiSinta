@@ -117,6 +117,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "consistencias", ["horizonte_id"], name: "index_consistencias_on_horizonte_id", unique: true, using: :btree
 
+  create_table "drenajes", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "equipos", force: :cascade do |t|
     t.string   "nombre",     null: false
     t.datetime "created_at", null: false

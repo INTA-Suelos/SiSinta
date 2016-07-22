@@ -4,7 +4,7 @@ class HasLookupsTest < ActiveSupport::TestCase
 
   setup do
     @lookups = {  perfil: %w{ escurrimiento pendiente permeabilidad relieve
-                              anegamiento posicion drenaje sal
+                              anegamiento posicion sal
                               uso_de_la_tierra},
                   horizonte: %w{textura},
                   erosion: %w{clase subclase},

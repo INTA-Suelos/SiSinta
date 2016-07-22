@@ -1,6 +1,5 @@
-# encoding: utf-8
-class Drenaje < Lookup
+class Drenaje < ActiveRecord::Base
   has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

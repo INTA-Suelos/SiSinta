@@ -29,8 +29,9 @@ FactoryGirl.define do
       vegetacion_o_cultivos 'sarasa'
       observaciones 'sarasa'
 
+      drenaje
+
       # lookups
-      drenaje_id          { rand(Drenaje.count) + 1 }
       relieve_id          { rand(Relieve.count) + 1 }
       posicion_id         { rand(Posicion.count) + 1 }
       pendiente_id        { rand(Pendiente.count) + 1 }
