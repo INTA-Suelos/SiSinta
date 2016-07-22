@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014224551) do
+ActiveRecord::Schema.define(version: 20160722212437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   end
 
   add_index "erosiones", ["perfil_id"], name: "index_erosiones_on_perfil_id", unique: true, using: :btree
+
+  create_table "escurrimientos", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "estructuras", force: :cascade do |t|
     t.integer  "horizonte_id"

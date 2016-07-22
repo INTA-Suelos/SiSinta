@@ -39,7 +39,8 @@ class Perfil < ActiveRecord::Base
   belongs_to :serie, counter_cache: :cantidad_de_perfiles
 
   belongs_to :drenaje
-  has_lookups :escurrimiento, :pendiente, :permeabilidad, :relieve,
+  belongs_to :escurrimiento
+  has_lookups :pendiente, :permeabilidad, :relieve,
               :anegamiento, :posicion, :sal, :uso_de_la_tierra
 
   has_and_belongs_to_many :proyectos
