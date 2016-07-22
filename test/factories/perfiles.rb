@@ -31,11 +31,11 @@ FactoryGirl.define do
 
       drenaje
       escurrimiento
+      pendiente
 
       # lookups
       relieve_id          { rand(Relieve.count) + 1 }
       posicion_id         { rand(Posicion.count) + 1 }
-      pendiente_id        { rand(Pendiente.count) + 1 }
       permeabilidad_id    { rand(Permeabilidad.count) + 1 }
       anegamiento_id      { rand(Anegamiento.count) + 1 }
       sal_id              { rand(Sal.count) + 1 }

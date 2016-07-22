@@ -12,7 +12,7 @@ escurrimientos = [
 
 escurrimientos.each do |escurrimiento|
   # Si algún valor fue cambiado durante el uso de la aplicación, no cambiarlo
-  unless Escurrimient.exists?(escurrimiento[:id])
+  unless Escurrimiento.exists?(escurrimiento[:id])
     Escurrimiento.find_or_create_by(escurrimiento).update_column(:id, escurrimiento[:id])
   end
 end
