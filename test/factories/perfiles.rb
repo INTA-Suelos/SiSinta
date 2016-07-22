@@ -33,9 +33,9 @@ FactoryGirl.define do
       escurrimiento
       pendiente
       permeabilidad
+      relieve
 
       # lookups
-      relieve_id          { rand(Relieve.count) + 1 }
       posicion_id         { rand(Posicion.count) + 1 }
       anegamiento_id      { rand(Anegamiento.count) + 1 }
       sal_id              { rand(Sal.count) + 1 }
