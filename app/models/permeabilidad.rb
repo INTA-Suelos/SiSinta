@@ -1,6 +1,5 @@
-# encoding: utf-8
-class Permeabilidad < Lookup
-  has_many :perfiles, inverse_of: :permeabilidad
+class Permeabilidad < ActiveRecord::Base
+  has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end
