@@ -94,7 +94,7 @@ module ApplicationHelper
   end
 
   def texturas
-    @texturas ||= TexturaDeHorizonte.all
+    @texturas ||= Textura.all
   end
 
   def formatos_de_coordenadas

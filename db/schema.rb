@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811200620) do
+ActiveRecord::Schema.define(version: 20160811202714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,6 +367,12 @@ ActiveRecord::Schema.define(version: 20160811200620) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "texturas", force: :cascade do |t|
+    t.string "clase",   null: false
+    t.string "textura"
+    t.string "suelo"
+  end
 
   create_table "ubicaciones", force: :cascade do |t|
     t.geometry "coordenadas", limit: {:srid=>4326, :type=>"point"}

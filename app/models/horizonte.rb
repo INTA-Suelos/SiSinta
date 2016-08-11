@@ -16,7 +16,7 @@ class Horizonte < ActiveRecord::Base
               inverse_of: :horizontes_en_seco, validate: false
   belongs_to :color_humedo, class_name: 'Color',
               inverse_of: :horizontes_en_humedo, validate: false
-  has_lookup :textura, inverse_of: :horizontes, class_name: 'TexturaDeHorizonte'
+  belongs_to :textura, inverse_of: :horizontes
 
   accepts_nested_attributes_for :analitico, :limite, :consistencia,
                                 :estructura, :textura,

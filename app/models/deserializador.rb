@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Procesa archivos CSV y los convierte en modelos del sistema.
 class Deserializador
   attr_accessor :horizontes, :usuario
@@ -147,7 +146,7 @@ class Deserializador
         concreciones: h['concreciones'],
         formaciones_especiales: h['formaciones_especiales'],
         humedad: h['humedad'],
-        textura_id: TexturaDeHorizonte.find_by_valor(h['textura']).to_param,
+        textura_id: Textura.find_by(clase: h['textura']).to_param,
         analitico_attributes: {
           registro: h['analitico_registro'],
           humedad: h['analitico_humedad'],

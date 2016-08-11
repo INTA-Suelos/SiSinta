@@ -1,4 +1,4 @@
-class TexturaDeHorizonteSerializer < ActiveModel::Serializer
+class TexturaSerializer < ActiveModel::Serializer
   attributes :clase, :textura, :suelo
 
   def serializable_hash
