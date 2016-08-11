@@ -46,7 +46,7 @@ class Perfil < ActiveRecord::Base
   belongs_to :anegamiento
   belongs_to :uso_de_la_tierra
   belongs_to :posicion
-  has_lookups :sal
+  belongs_to :sal
 
   has_and_belongs_to_many :proyectos
 

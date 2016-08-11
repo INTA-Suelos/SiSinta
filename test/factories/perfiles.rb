@@ -37,9 +37,7 @@ FactoryGirl.define do
       anegamiento
       uso_de_la_tierra
       posicion
-
-      # lookups
-      sal_id              { rand(Sal.count) + 1 }
+      sal
 
       transient { con_horizontes 1 }
 

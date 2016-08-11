@@ -3,8 +3,7 @@ require './test/test_helper'
 class HasLookupsTest < ActiveSupport::TestCase
 
   setup do
-    @lookups = {  perfil: %w{sal},
-                  horizonte: %w{textura},
+    @lookups = {  horizonte: %w{textura},
                   erosion: %w{clase subclase},
                   limite: %w{forma tipo},
                   estructura: %w{tipo clase grado},
