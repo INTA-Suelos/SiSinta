@@ -1,3 +1,4 @@
+# Mantiene los valores posibles para Relieve en la ficha de perfiles.
 class Relieve < ActiveRecord::Base
   has_many :perfiles
 
