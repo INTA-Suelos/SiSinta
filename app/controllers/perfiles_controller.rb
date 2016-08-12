@@ -233,6 +233,7 @@ class PerfilesController < AutorizadoController
     # texto, las normaliza a lowercase.
     def ordenar
       # Usar outer join con serie para que no excluya los perfiles sin serie
+      # FIXME Reescribir sin squeel
       @perfiles = @perfiles.joins{ubicacion}.joins{serie.outer}
 
       case (@metodo = metodo_de_ordenamiento)
