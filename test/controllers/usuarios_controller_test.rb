@@ -31,13 +31,4 @@ class UsuariosControllerTest < ActionController::TestCase
     assert json.first.include?('label'), 'debe devolver el label'
     assert json.first.include?('value'), 'debe devolver el nombre'
   end
-
-  test 'rutea a update_varios' do
-    assert_routing({
-      path: '/usuarios/update_varios',
-      method: :put
-    },{
-      controller: 'usuarios', action: 'update_varios'
-    })
-  end
 end

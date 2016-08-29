@@ -1,10 +1,10 @@
 = field_set_tag nil, class: 'fields grupo', data: {'object-name' => f.object_name} do
-  %legend Cumplir #{f.combinator_select} las condiciones. #{button_to_remove_fields "Quitar", f}
+  %legend Cumplir #{f.combinator_select} las condiciones. #{button_to_remove_fields 'Quitar', f}
 
   = f.condition_fields do |c|
     = render 'condition_fields', f: c
-  = button_to_add_fields "Agregar condiciones", f, :condition
+  = button_to_add_fields 'Agregar condiciones', f, :condition
 
   = f.grouping_fields do |g|
     = render 'grouping_fields', f: g
-  = button_to_nest_fields "Agregar subgrupo", :grouping
+  = button_to_nest_fields 'Agregar subgrupo', :grouping

@@ -67,3 +67,35 @@ es:
         edit: 'Actualizar %{model}'
         analiticos: 'Datos Analíticos'
         cambiar_ficha: 'Cambiar'
+  ayuda:
+    perfil:
+      modal: 'Indica si el perfil es modal o no.'
+      nombre: 'Nombre de la Serie a la que está referenciada.'
+      simbolo: 'Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.'
+      fecha: 'Fecha de toma de datos.'
+      numero: 'Número/Nombre del perfil.'
+      cobertura_vegetal: 'Porcentaje de la superficie cubierta por vegetación.'
+      etiquetas: 'Lista de etiquetas (separadas por coma) para esta perfil.'
+      usuario: 'Usuario que cargó este perfil'
+      reconocedores: 'Lista de reconocedores del perfil (separados por coma).'
+      publico: 'Los horizontes y sus datos analíticos asociados son accesibles
+                públicamente, sin necesidad de tener un usuario en el sitio.'
+      ubicacion:
+        mosaico: 'Nomenclatura del mosaico IGN.'
+        recorrido: 'Número de recorrido del vuelo aerofotográfico.'
+        aerofoto: 'Número de fotograma.'
+        descripcion: 'Ubicación relativa.'
+        y: 'Coordenada y/latitud.'
+        x: 'Coordenada x/longitud.'
+        formato: 'Sistema de coordenadas de referencia.'
+      fase:
+        nombre: 'Fase respecto al perfil modal.'
+      grupo:
+        descripcion: 'Taxonomía.'
+      capacidad:
+        clase: 'Capacidad de Uso: I a VIII.'
+        subclases: 'Subclase referida a la principal limitante.'
+    busqueda:
+      publico: 'La búsqueda es pública para todos los usuarios y los visitantes
+                sin usuario en el sitio. Aún así, los resultados están
+                limitados a los perfiles que pueden ver normalmente.'

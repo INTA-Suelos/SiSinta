@@ -37,10 +37,13 @@ class ActionController::TestCase
   end
 
   # FIXME rediseñar los tests usando esto
+  # Ejecuta el bloque pasado dentro de un contexto de cancancan donde se
+  # autoriza toda acción.
   def autorizar
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     @ability.can :manage, :all
+
     @controller.stub(:current_ability, @ability) do
       yield
     end

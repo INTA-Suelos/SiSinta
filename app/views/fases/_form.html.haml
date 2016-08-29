@@ -8,11 +8,9 @@
       .span-18.campo
         .span-2= f.label :nombre
         .span-16.last= f.text_field :nombre, disabled: bloqueado
-        = ayuda_para('fase.nombre')
       .span-4.last.campo
         .span-2= f.label :codigo, 'Código'
         .span-1.last= f.text_field :codigo, disabled: bloqueado
-        = ayuda_para('fase.codigo')
 
     - unless nueva
       = field_set_tag 'Perfiles asociados', class: 'celeste plegable span-22 last' do

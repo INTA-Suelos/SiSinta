@@ -1,37 +1,6 @@
-# encoding: utf-8
 require './test/test_helper'
 
 class AdjuntosControllerTest < ActionController::TestCase
-  test 'rutea a index' do
-    assert_routing({
-      path: '/perfiles/1/adjuntos',
-      method: :get
-    },{
-      controller: 'adjuntos', action: 'index',
-      perfil_id: '1'
-    })
-  end
-
-  test 'rutea a show' do
-    assert_routing({
-      path: '/perfiles/1/adjuntos/2',
-      method: :get
-    },{
-      controller: 'adjuntos', action: 'show',
-      perfil_id: '1', id: '2'
-    })
-  end
-
-  test 'rutea a descargar' do
-    assert_routing({
-      path: '/perfiles/1/adjuntos/2/descargar',
-      method: :get
-    },{
-      controller: 'adjuntos', action: 'descargar',
-      perfil_id: '1', id: '2'
-    })
-  end
-
   test 'muestra los adjuntos del perfil' do
     usuario = loguearse
     perfil = create(:perfil, usuario: usuario)

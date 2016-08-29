@@ -7,6 +7,8 @@ class AuthToken
   def initialize(token)
     # Primero intentar decodificar
     decoded_token = self.class.decodificar(token)
+
+    # Si se pudo decodificar el token es válido y extraemos los datos
     @valido = true
     @claims = HashWithIndifferentAccess.new decoded_token.first
     @headers = HashWithIndifferentAccess.new decoded_token.last
