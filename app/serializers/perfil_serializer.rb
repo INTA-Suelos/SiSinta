@@ -26,4 +26,8 @@ class PerfilSerializer < ActiveModel::Serializer
     l.has_one :drenaje
     l.has_one :posicion
   end
+
+  def modal
+    object.modal ? 'modal' : 'no modal'
+  end
 end
