@@ -73,6 +73,8 @@ SiSINTA::Application.routes.draw do
   end
 
   with_options path_names: femeninos do |r|
+    r.resource :seleccion
+
     r.resources :fases do
       collection do
         get 'autocompletar_nombre' => 'fases#autocomplete_fase_nombre'
