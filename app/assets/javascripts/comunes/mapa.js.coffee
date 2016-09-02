@@ -1,6 +1,5 @@
 jQuery ->
   if $('#mapa').length
-
     # Definir el path de los assets para las imágenes
     # FIXME Leaflet busca imágenes sin digest
     L.Icon.Default.imagePath = '/estaticos/leaflet'
@@ -41,6 +40,36 @@ jQuery ->
       'Google': g_hibrido
       'Google Terrain': g_terreno
     }, {}))
+
+    # Al seleccionar un rectángulo con shift + click, enviamos las coordenadas
+    # del rectángulo para seleccionar todos los perfiles internos
+    mapa.on 'boxzoomend', (e) ->
+      # TODO Revisar si _metodo son APIs internas
+      caja = e.boxZoomBounds
+
+      seleccion = new L.Rectangle(caja, {
+        color: 'red'
+        weight: 3
+        opacity: 0.5
+        smoothFactor: 1
+        className: 'mapa_seleccion'
+      })
+
+      # Dibuja la selección actual
+      $('.mapa_seleccion').remove()
+      seleccion.addTo(mapa)
+
+      coordenadas =
+        noreste:
+          latitud: caja._northEast.lat
+          longitud: caja._northEast.lng
+        sudoeste:
+          latitud: caja._southWest.lat
+          longitud: caja._southWest.lng
+
+      # Envia bounds al server y procesar la respuesta
+      $.post $(this._container).data('seleccion-url'), coordenadas, (res) ->
+        $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
 
     # Pide y agrega los puntos
     $.getJSON $('#mapa').data('geojson'), (data) ->

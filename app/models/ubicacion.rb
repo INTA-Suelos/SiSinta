@@ -20,6 +20,16 @@ class Ubicacion < ActiveRecord::Base
   before_validation :arreglar_coordenadas
   after_initialize :cargar_x_y
 
+  def self.en_caja(noreste: {}, sudoeste: {})
+    fabrica = RGeo::Geographic.spherical_factory
+
+    ne = fabrica.point noreste[:longitud], noreste[:latitud]
+    so = fabrica.point sudoeste[:longitud], sudoeste[:latitud]
+    caja = RGeo::Cartesian::BoundingBox.create_from_points(ne, so).to_geometry
+
+    where('coordenadas && ?', caja)
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
   end
