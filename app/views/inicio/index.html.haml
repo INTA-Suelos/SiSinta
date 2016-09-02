@@ -4,7 +4,14 @@
 
     %h3 Búsqueda de perfiles
 
-    %p Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count} públicos) cargados en #{Serie.count} series.
+    %p
+      Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count}
+      públicos) cargados en #{Serie.count} series.
+
+    %p
+      Para seleccionar perfiles
+      = link_to 'a exportar', exportar_perfiles_path
+      desde el mapa, mantener apretado shift y marcar un rectángulo.
 
     = search_form_for @busqueda do |b|
       .span-4=  b.label :serie_nombre_or_numero_cont, 'Por nombre o número'
