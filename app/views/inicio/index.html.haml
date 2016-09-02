@@ -4,7 +4,14 @@
 
     %h3 Búsqueda de perfiles
 
-    %p Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count} públicos) cargados en #{Serie.count} series.
+    %p
+      Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count}
+      públicos) cargados en #{Serie.count} series.
+
+    %p
+      Para seleccionar perfiles
+      = link_to 'a exportar', exportar_perfiles_path
+      desde el mapa, mantener apretado shift y marcar un rectángulo.
 
     = search_form_for @busqueda do |b|
       .span-4=  b.label :serie_nombre_or_numero_cont, 'Por nombre o número'
@@ -13,7 +20,7 @@
       .span-2= b.submit 'Buscar'
 
   .span-14.last
-    #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson) }}
+    #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }
 
 -# TODO Cargar dinámicamente desde un js
 = javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry'

@@ -231,4 +231,8 @@ module ApplicationHelper
 
     check_box_tag hash, valor, false, class: 'destroy'
   end
+
+  def notificacion(tipo, mensaje)
+    content_tag :div, mensaje, class: 'mensaje', id: "flash_#{tipo}" if mensaje.is_a?(String)
+  end
 end

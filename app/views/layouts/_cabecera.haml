@@ -8,8 +8,9 @@
       = '|'
       = render 'devise/menu/login_items'
       = '|'
+    #avisos
       - flash.each do |name, msg|
-        = content_tag :div, msg, class: 'mensaje', id: "flash_#{name}" if msg.is_a?(String)
+        = notificacion(name, msg)
     %h1.titulo= titulo_de_la_accion
     %p.subtitulo= subtitulo
   #logo_sisinta
