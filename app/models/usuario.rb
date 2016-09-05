@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
   rolify role_cname: 'Rol'
+  # TODO Extraer preferencias a un modelo aparte
   store :config, accessors: [:srid, :checks_csv_perfiles]
 
   # TODO cambiar relacion a 'creador'

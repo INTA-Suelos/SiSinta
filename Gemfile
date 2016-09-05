@@ -68,7 +68,6 @@ source 'https://rails-assets.org' do
 end
 
 ## Server
-gem 'thin'
 # TODO revisar configuración de compresión
 gem 'dalli'
 
@@ -90,6 +89,9 @@ group :development do
   gem 'better_errors'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
+  gem 'capistrano-passenger'
+  gem 'capistrano-config_provider',
+    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git'
   gem 'brakeman', require: false
 end
 
