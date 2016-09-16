@@ -17,4 +17,13 @@ class Provincia < Lookup
   def ign_provincia
     IgnProvincia.find_by gid: ign_provincia_id
   end
+
+  # Encuentra las ubicaciones dentro del área de esta provincia
+  def ubicaciones
+    poligonos = IgnProvincia.arel_table[:geog]
+
+    Ubicacion.en_poligonos(poligonos)
+      .where(ign_provincias: { gid: gid })
+      .from('ubicaciones, ign_provincias')
+  end
 end

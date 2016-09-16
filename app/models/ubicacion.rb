@@ -30,14 +30,11 @@ class Ubicacion < ActiveRecord::Base
     where('coordenadas && ?', caja)
   end
 
-  # Encuentra las ubicaciones dentro del área de la provincia que pasamos
-  def self.en_provincia(provincia)
+  # Encuentra las ubicaciones dentro del polígono o polígonos
+  def self.en_poligonos(poligonos)
     puntos = Ubicacion.arel_table[:coordenadas]
-    poligonos = IgnProvincia.arel_table[:geog]
 
     where(poligonos.st_intersects(puntos))
-      .where(ign_provincias: { gid: provincia.ign_provincia_id })
-      .from('ubicaciones, ign_provincias')
   end
 
   def self.ransackable_attributes(auth_object = nil)
