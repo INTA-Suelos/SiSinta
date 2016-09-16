@@ -2,10 +2,10 @@
 # Convertidos a geografías (-G, asume SRID: 4326) e indizados (-I) con
 #
 #    shp2pgsql -G -I PROVINCIAS ign_provincias > ign_provincias.sql
-# 
+#
 # y cargados en la tabla `ign_provincias`. El modelo de Provincia se relaciona
 # con esta tabla a través del gid
-# 
+#
 # Requiere el comando shp2pgsql
 require 'net/http'
 require 'fileutils'
@@ -18,10 +18,8 @@ class Ign
   # Tipo debería ser "provincias" o "departamentos"
   def initialize(tipo)
     @tipo = tipo
-    @url = "#{URL_BASE}/#{tipo.upcase}.zip"
-    @zip = "#{tipo}.zip"
-    @sql = "#{tipo}.sql"
-    @tabla = "ign_#{tipo}"
+    @zip = File.join Dir.tmpdir, "#{tipo}.zip"
+    @sql = File.join Dir.tmpdir, "#{tipo}.sql"
   end
 
   # Corre el proceso completo sin descargar el zip, si ya existe
@@ -34,11 +32,9 @@ class Ign
 
   # Importa shapefiles con información geográfica de provincias a la DB
   def importar
-    Dir.chdir @shapefiles do
-      ActiveRecord::Base.logger.silence do
-        ActiveRecord::Base.connection.execute("drop table if exists #{@tabla}")
-        ActiveRecord::Base.connection.execute(IO.read(@sql))
-      end
+    ActiveRecord::Base.logger.silence do
+      ActiveRecord::Base.connection.execute("drop table if exists #{table}")
+      ActiveRecord::Base.connection.execute(IO.read(@sql))
     end
   end
 
@@ -47,26 +43,27 @@ class Ign
   #   -G  Use geography type (requires lon/lat data or -s to reproject).
   #   -I  Create a spatial index on the geocolumn.
   def convertir
-    Dir.chdir @shapefiles do
+    # El comando necesita estar en el directorio donde se extrajeron los
+    # archivos
+    Dir.chdir Dir.tmpdir do
       File.open(@sql, 'w') do |sql|
-        salida, _ = Open3.capture2('shp2pgsql', '-G', '-I', @shapefiles, @tabla)
+        salida, _ = Open3.capture2('shp2pgsql', '-G', '-I', shapefile, table)
 
         sql.write salida
       end
     end
   end
 
-  # Extrae el zip descargado del IGN
+  # Extrae el zip descargado del IGN en /tmp
   def extraer
     # No frenar si existen los archivos a extraer
     Zip.on_exists_proc = true
 
     Zip::File.open(@zip) do |archivo_zip|
       archivo_zip.each do |archivo|
-        # Detecta el directorio donde se extraen los archivos
-        @shapefiles = File.dirname(archivo.name) unless archivo.directory?
-
-        archivo.extract
+        # Extrae los archivos sueltos en /tmp
+        next if archivo.directory?
+        archivo.extract File.join(Dir.tmpdir, File.basename(archivo.name))
       end
     end
   end
@@ -79,5 +76,21 @@ class Ign
     File.open(@zip, 'wb') do |archivo_zip|
       archivo_zip.write(zip_temporal)
     end
+  end
+
+  # El nombre del grupo de archivos de formas. Depende de cómo el IGN provee
+  # los datos
+  def shapefile
+    @tipo.upcase
+  end
+
+  # La url desde donde descargar los datos
+  def url
+    "#{URL_BASE}/#{@tipo.upcase}.zip"
+  end
+
+  # La tabla de la base de datos donde importar el shapefile
+  def table
+    "ign_#{@tipo}"
   end
 end
