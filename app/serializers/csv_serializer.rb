@@ -7,6 +7,9 @@ class CSVSerializer < ActiveModel::ArraySerializer
   def as_csv(*args)
     o = args.extract_options!
 
+    # Evitamos pasar nil a `encabezado`
+    o[:checks] ||= []
+
     CSV.generate(headers: o[:headers], force_quotes: true) do |csv|
       csv << encabezado(o[:checks], o[:base]) if csv.headers
       object.each do |perfil|
@@ -20,10 +23,14 @@ class CSVSerializer < ActiveModel::ArraySerializer
   end
 
   # TODO Reingeniería
-  def encabezado(columnas = nil, base = nil)
+  def encabezado(columnas = [], base = nil)
     lista = HashWithIndifferentAccess.new(stub(base).serializable_hash).sort.flatten_tree
-    if columnas.present?
-      lista.select {|i| columnas.include? i}
+
+    # Si hay alguna columna seleccionada, la usamos para filtrar la lista de
+    # atributos
+    if columnas.any?(&:present?)
+      lista.select { |i| columnas.include? i }
+    # Si no, usamos todos los atributos
     else
       lista
     end.keys

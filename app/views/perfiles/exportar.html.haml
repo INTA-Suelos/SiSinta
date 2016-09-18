@@ -25,12 +25,13 @@
 
     -# TODO usar fields_for?
     #perfiles.checks.span-22.last.atributos_perfiles
-      - atributos.each do |a|
+      = collection_check_boxes(:seleccion, :atributos, atributos, :to_s, :humanize) do |a|
         .span-21.last.campo{class: cycle('celeste_oscuro', 'celeste')}
-          = label_tag a do
-            = a.to_s.humanize
-            = check_box_tag('atributos[]', a, marcados.include?(a), name: a, id: a)
+          = a.label do
+            = a.text
+            = a.check_box
 
-  .acciones.span-4= submit_tag t('.submit')
+  .acciones
+    .span-4= submit_tag t('.submit')
 
 = volver_arriba

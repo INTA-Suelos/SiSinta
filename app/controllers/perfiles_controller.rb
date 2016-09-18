@@ -115,13 +115,13 @@ class PerfilesController < AutorizadoController
   end
 
   def procesar
+    # TODO Decidir si hay que limpiar la selección o es más útil retenerla
     self.perfiles_seleccionados = nil
 
     respond_with @perfiles, location: nil do |format|
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          # FIXME No permite exportar a usuarios anónimos
-          headers: true, checks: current_usuario.try(:checks_csv_perfiles),
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles) || seleccion_params[:atributos],
           base: Perfil
         ), filename: archivo_csv
       end
@@ -211,6 +211,10 @@ class PerfilesController < AutorizadoController
       )
     end
 
+    def seleccion_params
+      params.require(:seleccion).permit(atributos: [])
+    end
+
     # Prepara el scope para la lista de perfiles
     def preparar
       # Precargar las asociaciones que necesita el index
@@ -262,7 +266,7 @@ class PerfilesController < AutorizadoController
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
       if usuario_signed_in?
-        current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+        current_usuario.update_attribute :checks_csv_perfiles, seleccion_params[:atributos]
       end
 
       # TODO extraer a método propio
