@@ -134,6 +134,7 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
+  # TODO Mover a selecciones_controller
   def almacenar
     # Perfiles recién seleccionados y los ya viejos
     (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
@@ -284,6 +285,9 @@ class PerfilesController < AutorizadoController
       when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.exportar.seleccionar_por_provincia')
+        session[:despues_de_seleccionar] = almacenar_perfiles_path
+        redirect_to por_provincias_seleccion_path
       when t('perfiles.exportar.submit')
         # Nada, continuamos a procesar
       else

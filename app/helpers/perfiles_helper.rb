@@ -65,6 +65,7 @@ module PerfilesHelper
   end
 
   # Define el método a usar por el formulario de selección de perfiles
+  # FIXME Es peligroso usar params directamente
   def metodo_de_seleccion
     @metodo_de_seleccion ||= (params[:metodo] || :put)
   end

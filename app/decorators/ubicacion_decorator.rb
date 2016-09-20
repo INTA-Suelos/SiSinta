@@ -20,7 +20,7 @@ class UbicacionDecorator < ApplicationDecorator
   end
 
   def to_s
-    source.descripcion || transformar || ''
+    source.descripcion || "#{y}, #{x}" || ''
   end
 
   def mapa(zoom = 9)
