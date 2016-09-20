@@ -274,7 +274,7 @@ class PerfilesController < AutorizadoController
       # Perfiles con +_destroy+ marcado
       remover = if params[:csv].present?
         params[:csv][:perfiles_attributes].each_pair.collect do |id, atributos|
-          id if marcado_para_remover?(atributos)
+          id.to_i if marcado_para_remover?(atributos)
         end.reject { |elemento| elemento.nil? }
       end
       self.perfiles_seleccionados -= remover unless remover.nil?
