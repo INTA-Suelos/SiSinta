@@ -71,7 +71,7 @@ class Ign
   # Descarga y renombra el zip desde los servidores del IGN según el tipo
   # indicado al instanciar
   def descargar
-    zip_temporal = Net::HTTP.get URI(@url)
+    zip_temporal = Net::HTTP.get URI(url)
 
     File.open(@zip, 'wb') do |archivo_zip|
       archivo_zip.write(zip_temporal)
