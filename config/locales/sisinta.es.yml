@@ -44,6 +44,7 @@ es:
       exportar: 'Seleccionar'
     exportar:
       submit: 'Exportar'
+      seleccionar_por_provincia: 'Seleccionar por provincia'
   usuarios:
     update_varios:
       notice: 'Los usuarios se actualizaron correctamente.'
@@ -59,6 +60,7 @@ es:
       submit: 'Actualizar'
   comunes:
     perfiles_asociados:
+      como_buscar: 'Por ubicación, serie o número de perfil'
       submit: 'Buscar'
   helpers:
     submit:
@@ -104,3 +106,6 @@ es:
       perfiles_seleccionados:
         one: '1 perfil seleccionado'
         other: '%{count} perfiles seleccionados'
+    por_provincias:
+      volver: 'Cancelar'
+      seleccionar: 'Seleccionar'
