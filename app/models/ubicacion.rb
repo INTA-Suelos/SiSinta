@@ -37,6 +37,22 @@ class Ubicacion < ActiveRecord::Base
     where(poligonos.st_intersects(puntos))
   end
 
+  # Encuentra las ubicaciones dentro de una o más provincias
+  def self.en_provincias(provincia_ids)
+    poligonos = IgnProvincia.arel_table[:geog]
+
+    # FIXME Reemplazar por query cuando convierta Provincia a ActiveRecord
+    #
+    #   gids = Provincia.select(:gid).where(id: provincia_ids)
+    #
+    # Tal vez pueda unificarla con el otro where
+    gids = Provincia.find(Array.wrap(provincia_ids)).map(&:ign_provincia_id)
+
+    Ubicacion.en_poligonos(poligonos)
+      .where(ign_provincias: { gid: gids })
+      .from('ubicaciones, ign_provincias')
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']
   end
