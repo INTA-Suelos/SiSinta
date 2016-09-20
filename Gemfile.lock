@@ -399,6 +399,7 @@ DEPENDENCIES
   rgeo
   rgeo-geojson
   rolify (~> 3.4)
+  rubyzip
   sass-rails (= 4.0.2)
   select2-rails
   selenium-webdriver
@@ -412,4 +413,4 @@ DEPENDENCIES
   yaml_db!
 
 BUNDLED WITH
-   1.12.3
+   1.12.5

@@ -37,6 +37,8 @@ gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
 gem 'activerecord-postgis-adapter'
 gem 'rgeo'
 gem 'rgeo-geojson', require: 'rgeo/geo_json'
+# Para los datos del IGN
+gem 'rubyzip'
 
 ## Controladores
 gem 'responders'
