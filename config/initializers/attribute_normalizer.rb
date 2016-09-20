@@ -5,6 +5,7 @@ AttributeNormalizer.configure do |config|
   # You can change this if you would like as follows:
   # config.default_normalizers = :strip, :blank
 
+  # FIXME revisar los datos, nunca se aplicó esta configuración
   # You can enable the attribute normalizers automatically if the specified
   # attributes exist in your column_names. It will use
   # the default normalizers for each attribute (e.g.
