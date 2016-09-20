@@ -1,0 +1,27 @@
+#seleccion_por_provincia
+  = form_tag almacenar_por_provincias_seleccion_path, method: :put, class: 'span-24'
+
+  = field_set_tag 'Seleccionar perfiles', class: 'celeste_oscuro span-23 last' do
+    #controles.span-22.last
+      #marcar.span-4.opcion
+        #marcar_tag.span-3.campo
+          = label_tag 'check_marcar', 'De todas las provincias'
+        #desmarcar_tag.span-3.campo.desaparecer
+          = label_tag 'check_marcar', 'De todas las provincias'
+        .span-1.last.campo
+          = check_box_tag 'check_marcar', true, false, id: 'check_marcar'
+
+    = field_set_tag 'De las provincias', class: 'celeste span-22 last plegable' do
+
+      .checks.span-22.last.atributos_perfiles
+        = collection_check_boxes(:seleccion, :provincia_ids, Provincia.all, :id, :valor, include_hidden: false) do |provincia|
+          .span-21.last.campo{class: cycle('celeste_oscuro', 'celeste')}
+            = provincia.label do
+              = provincia.text
+              = provincia.check_box
+
+    .acciones
+      .span-4= submit_tag t('.volver')
+      .span-4= submit_tag t('.seleccionar')
+
+= volver_arriba
