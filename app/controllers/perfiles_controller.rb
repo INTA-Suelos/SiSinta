@@ -115,13 +115,13 @@ class PerfilesController < AutorizadoController
   end
 
   def procesar
+    # TODO Decidir si hay que limpiar la selección o es más útil retenerla
     self.perfiles_seleccionados = nil
 
     respond_with @perfiles, location: nil do |format|
       format.csv do
         send_data CSVSerializer.new(@perfiles).as_csv(
-          # FIXME No permite exportar a usuarios anónimos
-          headers: true, checks: current_usuario.try(:checks_csv_perfiles),
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles) || seleccion_params[:atributos],
           base: Perfil
         ), filename: archivo_csv
       end
@@ -134,6 +134,7 @@ class PerfilesController < AutorizadoController
     respond_with @perfiles = PaginadorDecorator.decorate(@perfiles)
   end
 
+  # TODO Mover a selecciones_controller
   def almacenar
     # Perfiles recién seleccionados y los ya viejos
     (self.perfiles_seleccionados += Array.wrap(params[:perfil_ids])).uniq!
@@ -211,6 +212,10 @@ class PerfilesController < AutorizadoController
       )
     end
 
+    def seleccion_params
+      params.require(:seleccion).permit(atributos: [])
+    end
+
     # Prepara el scope para la lista de perfiles
     def preparar
       # Precargar las asociaciones que necesita el index
@@ -262,7 +267,7 @@ class PerfilesController < AutorizadoController
     def buscar_perfiles_o_exportar
       # Guarda los checkboxes que estaban marcados
       if usuario_signed_in?
-        current_usuario.update_attribute :checks_csv_perfiles, params[:atributos]
+        current_usuario.update_attribute :checks_csv_perfiles, seleccion_params[:atributos]
       end
 
       # TODO extraer a método propio
@@ -280,6 +285,9 @@ class PerfilesController < AutorizadoController
       when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
+      when t('perfiles.exportar.seleccionar_por_provincia')
+        session[:despues_de_seleccionar] = almacenar_perfiles_path
+        redirect_to por_provincias_seleccion_path
       when t('perfiles.exportar.submit')
         # Nada, continuamos a procesar
       else

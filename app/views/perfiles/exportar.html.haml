@@ -1,13 +1,13 @@
 = form_tag procesar_perfiles_path(format: :csv), class: 'span-24 last', id: 'csv'
 
-= field_set_tag "Exportar a CSV", class: 'celeste_oscuro span-23 last' do
+= field_set_tag 'Exportar a CSV', class: 'celeste_oscuro span-23 last' do
 
   #controles.span-22.last
     #marcar.span-4.opcion
       #marcar_tag.span-3.campo
-        = label_tag 'check_marcar', 'Marcar todo'
+        = label_tag 'check_marcar', 'Todos los atributos'
       #desmarcar_tag.span-3.campo.desaparecer
-        = label_tag 'check_marcar', 'Desmarcar todo'
+        = label_tag 'check_marcar', 'Todos los atributos'
       .span-1.last.campo
         = check_box_tag 'check_marcar', true, false, id: 'check_marcar'
     #encabezado.span-4.opcion
@@ -16,20 +16,24 @@
       .span-1.last.campo
         = check_box_tag 'incluir_encabezado', true, true, id: 'incluir_encabezado'
 
-  = field_set_tag "Atributos de los perfiles", class: 'celeste span-22 last plegable' do
-
-    -# TODO usar fields_for?
-    #perfiles.checks.span-22.last
-      - atributos.each do |a|
-        .span-7.campo{class: cycle('celeste_oscuro', 'celeste')}
-          = label_tag do
-            = check_box_tag("atributos[]", a, marcados.include?(a)) + a.to_s.humanize
-
-  = field_set_tag "Agregar perfiles para exportar", class: 'celeste span-22 last plegable' do
+  = field_set_tag 'Agregar perfiles para exportar', class: 'celeste span-22 last plegable' do
 
     .span-21.campo= render partial: 'comunes/perfiles_asociados',
       locals: { perfiles: @perfiles, param: 'csv', bloqueado: false }
 
-  .acciones.span-4= submit_tag t('.submit')
+    .span-21.campo
+      .span-6= submit_tag t('.seleccionar_por_provincia')
+
+  = field_set_tag 'Atributos de los perfiles', class: 'celeste span-22 last plegable' do
+
+    #perfiles.checks.span-22.last.atributos_perfiles
+      = collection_check_boxes(:seleccion, :atributos, atributos, :to_s, :humanize) do |a|
+        .span-21.last.campo{class: cycle('celeste_oscuro', 'celeste')}
+          = a.label do
+            = a.text
+            = a.check_box
+
+  .acciones
+    .span-4= submit_tag t('.submit')
 
 = volver_arriba

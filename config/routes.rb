@@ -73,7 +73,10 @@ SiSINTA::Application.routes.draw do
   end
 
   with_options path_names: femeninos do |r|
-    r.resource :seleccion
+    r.resource :seleccion do
+      get 'por_provincias'
+      put 'almacenar_por_provincias'
+    end
 
     r.resources :fases do
       collection do
