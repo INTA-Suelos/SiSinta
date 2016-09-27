@@ -5,6 +5,9 @@ class EquiposController < AutorizadoController
 
   load_and_authorize_resource
 
+  # La lista de equipos es pública
+  skip_before_filter :authenticate_usuario!,  only: [:index]
+
   def index
     @equipos = PaginadorDecorator.decorate apply_scopes(@equipos)
     respond_with @equipos
