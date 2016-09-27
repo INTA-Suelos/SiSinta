@@ -15,7 +15,7 @@ class PerfilesController < AutorizadoController
   load_and_authorize_resource
 
   respond_to :geojson, only: [:index, :show]
-  respond_to :csv, only: [:index, :procesar]
+  respond_to :csv, only: [:index, :show, :procesar]
 
   # acciones que funcionan anónimamente
   skip_before_filter :authenticate_usuario!,  only: [ :index, :seleccionar,
@@ -66,6 +66,12 @@ class PerfilesController < AutorizadoController
         else
           render json: true, status: :no_content
         end
+      end
+
+      format.csv do
+        send_data CSVSerializer.new([@perfil]).as_csv(
+          headers: true, checks: current_usuario.try(:checks_csv_perfiles)
+        ), filename: archivo_csv(@perfil.decorate)
       end
     end
   end
@@ -311,8 +317,19 @@ class PerfilesController < AutorizadoController
       params[:publicos] == 'true'
     end
 
-    def archivo_csv
-      "perfiles_#{Date.today.strftime('%Y-%m-%d')}.csv"
+    def archivo_csv(perfil = nil)
+      nombre = []
+
+      if perfil
+        nombre << 'perfil'
+        nombre << perfil.to_s
+      else
+        nombre << 'perfiles'
+      end
+
+      nombre << Date.today.strftime('%Y-%m-%d')
+
+      return "#{nombre.join('_')}.csv"
     end
 
     def marcado_para_remover?(hash)

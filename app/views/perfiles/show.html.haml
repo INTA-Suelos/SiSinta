@@ -8,6 +8,8 @@
     = link_to 'Eliminar', @perfil, data: { confirm: t(:confirmar) }, method: :delete
     = '|'
   - if can? :read, @perfil
+    = link_to 'Exportar', perfil_path(@perfil, format: :csv)
+    = '|'
     = link_to 'Mostrar analíticos', perfil_analiticos_path(@perfil)
     = '|'
   - if can? :read, @perfil => Adjunto
