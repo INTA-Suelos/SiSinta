@@ -40,8 +40,10 @@ FactoryGirl.define do
       sal_id              { rand(Sal.count) + 1 }
       uso_de_la_tierra_id { rand(UsoDeLaTierra.count) + 1 }
 
-      after :create do |perfil|
-        perfil.horizontes << create(:horizonte)
+      transient { con_horizontes 1 }
+
+      after :create do |perfil, params|
+        params.con_horizontes.times { perfil.horizontes << create(:horizonte, perfil: perfil) }
       end
     end
 
