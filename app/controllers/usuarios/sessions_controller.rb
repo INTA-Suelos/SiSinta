@@ -18,8 +18,16 @@ class Usuarios::SessionsController < Devise::SessionsController
     token = AuthToken.generar sub: resource.id
 
     respond_with resource, location: after_sign_in_path_for(resource) do |format|
+      # Para JSON, se serializa el usuario agregando el token por fuera del hash
+      # de datos, como lo espera el cliente
+      #
+      #   {
+      #     usuario: { nombre: 'Juan Salvo', email: 'elena@martita.com' },
+      #     token: qwerty
+      #   }
+      #
       format.json do
-        render json: { usuario: { email: resource.email }, token: token }
+        render json: UsuarioSerializer.new(resource).as_json.merge(token: token)
       end
     end
   end

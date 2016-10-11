@@ -143,7 +143,7 @@ class Deserializador
         moteados: h['moteados'],
         ph: h['ph'],
         raices: h['raices'],
-        tipo: h['tipo'],
+        tipo: h['clase'],
         concreciones: h['concreciones'],
         formaciones_especiales: h['formaciones_especiales'],
         humedad: h['humedad'],

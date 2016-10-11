@@ -20,7 +20,7 @@ class Perfil < ActiveRecord::Base
                             greater_than_or_equal_to: 0, less_than: 101,
                             allow_nil: true
 
-  has_many :horizontes, -> { order('profundidad_inferior ASC') },
+  has_many :horizontes, -> { order('horizontes.profundidad_superior ASC, horizontes.id ASC') },
     dependent: :destroy, inverse_of: :perfil
   has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil
   has_one :capacidad,     dependent: :destroy, inverse_of: :perfil
@@ -30,9 +30,8 @@ class Perfil < ActiveRecord::Base
   has_one :erosion,       dependent: :destroy, inverse_of: :perfil
   has_one :pedregosidad,  dependent: :destroy, inverse_of: :perfil
 
-  has_many :analiticos,
-    -> { includes(:horizonte).order('profundidad_muestra ASC, horizonte_id ASC') },
-    through: :horizontes
+  # Incluye el ordenamiento de `has_many :horizontes`
+  has_many :analiticos, -> { includes(:horizonte) }, through: :horizontes
 
   belongs_to :usuario
   belongs_to :fase

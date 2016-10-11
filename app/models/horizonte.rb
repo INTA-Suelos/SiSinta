@@ -3,7 +3,7 @@ class Horizonte < ActiveRecord::Base
   after_create :create_analitico, unless: :analitico_present?
 
   # TODO sacar los defaults
-  default_scope { order('profundidad_superior ASC') }
+  default_scope { order('horizontes.profundidad_superior ASC, horizontes.id ASC') }
 
   has_one :analitico,     dependent: :destroy, inverse_of: :horizonte
   has_one :limite,        dependent: :destroy, inverse_of: :horizonte

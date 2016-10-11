@@ -72,15 +72,15 @@ gem 'thin'
 # TODO revisar configuración de compresión
 gem 'dalli'
 
-## Desarrollo
+## Desarrollo pero útiles en producción
 gem 'minitest-rails'
 gem 'version'
 gem 'awesome_print'
+gem 'pry-rails'
+gem 'hirb'
 
 group :test, :development do
   gem 'factory_girl_rails'
-  gem 'pry-rails'
-  gem 'hirb'
   gem 'binding_of_caller'
 end
 

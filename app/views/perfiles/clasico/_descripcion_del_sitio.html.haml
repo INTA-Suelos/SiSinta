@@ -48,7 +48,7 @@
     .span-11.last.campo
       .span-2= fc.label :subclase_ids, 'Limitaciones principales'
       .span-8.last= fc.collection_select :subclase_ids, subclases_de_capacidad,
-        :id, :codigo, {}, { multiple: true, disabled: bloqueado, class: 'compacto' }
+        :id, :codigo, { }, { multiple: true, disabled: bloqueado, class: 'compacto' }
       = ayuda_para t('ayuda.perfil.capacidad.subclases')
 
   .span-2= label_tag nil, 'Ubicación', class: 'subtitulo'
@@ -74,7 +74,7 @@
     .span-11.last.campo
       .span-2= fu.label :srid, 'Formato'
       .span-8.last= fu.collection_select :srid, formatos_de_coordenadas, :srid,
-        :descripcion, {}, disabled: bloqueado
+        :descripcion, { }, disabled: bloqueado
       = ayuda_para t('ayuda.perfil.ubicacion.formato')
 
   .span-2= label_tag nil, 'Paisaje', class: 'subtitulo'
@@ -120,7 +120,7 @@
       .span-3= fh.collection_select :clase_id, clases_de_humedad, :id, :valor,
       { include_blank: true }, { disabled: bloqueado }
       .span-5.last= fh.collection_select :subclase_ids, subclases_de_humedad,
-      :id, :valor, {}, { multiple: true, disabled: bloqueado, class: 'compacto' }
+      :id, :valor, { }, { multiple: true, disabled: bloqueado, class: 'compacto' }
 
   .span-11.campo
     .span-2= f.label :pendiente_id

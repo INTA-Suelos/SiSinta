@@ -142,4 +142,36 @@ class PerfilTest < ActiveSupport::TestCase
     assert build(:ubicacion, :con_perfil, :con_coordenadas).perfil.geolocalizado?
     refute build(:ubicacion, :con_perfil).perfil.geolocalizado?
   end
+
+  test '.horizontes ordenados por profundidad_superior ASC' do
+    perfil = create :perfil
+
+    perfil.horizontes.create profundidad_superior: 10, tipo: 'c'
+    perfil.horizontes.create profundidad_superior: 5, tipo: 'b'
+    perfil.horizontes.create profundidad_superior: 1, tipo: 'a'
+
+    assert_equal %w{a b c}, perfil.horizontes.pluck(:tipo)
+  end
+
+  test '.horizontes ordenados por id ASC si no hay profundidad_superior' do
+    perfil = create :perfil
+
+    perfil.horizontes.create profundidad_superior: nil, tipo: 'c'
+    perfil.horizontes.create profundidad_superior: nil, tipo: 'b'
+    perfil.horizontes.create profundidad_superior: nil, tipo: 'a'
+
+    assert_equal %w{c b a}, perfil.horizontes.pluck(:tipo)
+  end
+
+  test '.analiticos orden por la profundidad_superior ASC de los horizontes' do
+    perfil = create :perfil
+    perfil.horizontes.create profundidad_superior: 10,
+      analitico_attributes: { profundidad_muestra: 1 }
+    perfil.horizontes.create profundidad_superior: 5,
+      analitico_attributes: { profundidad_muestra: 2 }
+    perfil.horizontes.create profundidad_superior: 1,
+      analitico_attributes: { profundidad_muestra: 3 }
+
+    assert_equal %w{3 2 1}, perfil.reload.analiticos.pluck(:profundidad_muestra)
+  end
 end
