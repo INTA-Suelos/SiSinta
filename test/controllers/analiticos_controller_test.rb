@@ -32,12 +32,12 @@ describe AnaliticosController do
       end
 
       it 'asigna los analíticos en el mismo orden que los horizontes' do
-        perfil = create(:perfil_completo, con_horizontes: 0)
-        perfil.horizontes.create profundidad_inferior: 1,
+        perfil = create :perfil
+        perfil.horizontes.create profundidad_superior: 1,
           analitico_attributes: { profundidad_muestra: 3 }
-        perfil.horizontes.create profundidad_inferior: 2,
+        perfil.horizontes.create profundidad_superior: 2,
           analitico_attributes: { profundidad_muestra: 2 }
-        perfil.horizontes.create profundidad_inferior: 3,
+        perfil.horizontes.create profundidad_superior: 3,
           analitico_attributes: { profundidad_muestra: 1 }
 
         get :index, perfil_id: perfil.to_param
