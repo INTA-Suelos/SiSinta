@@ -22,7 +22,9 @@ class CSVSerializer < ActiveModel::ArraySerializer
     end
   end
 
-  # TODO Reingeniería
+  # TODO Reingeniería con `serializer`.schema.values.map(&:keys).flatten
+  # Incluso puede generarlizarse para todos los serializers, recursivamente, y
+  # reutilizarse en la GUI
   def encabezado(columnas = [], base = nil)
     lista = HashWithIndifferentAccess.new(stub(base).serializable_hash).sort.flatten_tree
 

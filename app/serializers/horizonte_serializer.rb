@@ -1,8 +1,11 @@
-# encoding: utf-8
+# Serializador para cada horizonte
 class HorizonteSerializer < ActiveModel::Serializer
-  attributes  :id, :profundidad_superior, :tipo, :profundidad_inferior, :ph,
+  attributes  :id, :profundidad_superior, :profundidad_inferior, :ph,
               :co3, :concreciones, :barnices, :moteados, :humedad, :raices,
               :formaciones_especiales
+
+  # Desde un Perfil se ve como "Clase Hz"
+  attribute :tipo, key: :clase
 
   has_one :analitico
   has_one :limite, serializer: LimiteDeHorizonteSerializer
