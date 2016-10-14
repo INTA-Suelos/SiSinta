@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707003735) do
+ActiveRecord::Schema.define(version: 20161014224551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,17 @@ ActiveRecord::Schema.define(version: 20160707003735) do
   end
 
   add_index "humedades", ["perfil_id"], name: "index_humedades_on_perfil_id", unique: true, using: :btree
+
+  create_table "ign_provincias", primary_key: "gid", force: :cascade do |t|
+    t.string    "objeto", limit: 50
+    t.string    "fna",    limit: 150
+    t.string    "gna",    limit: 50
+    t.string    "nam",    limit: 100
+    t.string    "sag",    limit: 50
+    t.geography "geog",   limit: {:srid=>4326, :type=>"multi_polygon", :has_z=>true, :has_m=>true, :geographic=>true}
+  end
+
+  add_index "ign_provincias", ["geog"], name: "ign_provincias_geog_idx", using: :gist
 
   create_table "limites", force: :cascade do |t|
     t.integer  "horizonte_id"
