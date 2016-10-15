@@ -179,4 +179,27 @@ class UbicacionTest < ActiveSupport::TestCase
       geojson['geometry']['coordinates'].must_equal [subject.x, subject.y]
     end
   end
+
+  describe '::en_provincias' do
+    it 'devuelve una lista de ubicaciones' do
+      resultado = Ubicacion.en_provincias create(:provincia).to_param, IgnProvincia
+
+      resultado.must_be_instance_of Ubicacion::ActiveRecord_Relation
+    end
+
+    it 'devuelve una relación vacía si data_oficial no tiene polígonos' do
+      resultado = Ubicacion.en_provincias create(:provincia).to_param, nil
+
+      resultado.must_be_instance_of Ubicacion::ActiveRecord_Relation
+      resultado.must_be :empty?
+    end
+  end
+
+  describe '::en_poligonos' do
+    it 'devuelve una lista de ubicaciones' do
+      Ubicacion.en_poligonos(
+        IgnProvincia.arel_table[:geom]
+      ).must_be_instance_of Ubicacion::ActiveRecord_Relation
+    end
+  end
 end

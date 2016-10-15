@@ -8,15 +8,16 @@ class Serie < ActiveRecord::Base
   has_many :perfiles
   has_one :perfil_modal, ->{ where(modal: true) }, class_name: 'Perfil'
   belongs_to :usuario
-
-  has_lookup :provincia
+  belongs_to :provincia
 
   accepts_nested_attributes_for :perfiles
 
-  validates_uniqueness_of :nombre, :simbolo, scope: :provincia_id,
-    allow_blank: true, allow_nil: true
-  # TODO validar que haya provincia_id cuando los datos estén sanos
-  validates_presence_of :nombre
+  # TODO validate :provincia, presence: true (cuando los datos estén sanos)
+  validates :nombre,
+    uniqueness: { scope: :provincia_id, allow_blank: true, allow_nil: true },
+    presence: true
+  validates :simbolo,
+    uniqueness: { scope: :provincia_id, allow_blank: true, allow_nil: true }
 
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['created_at', 'updated_at', 'perfil_id', 'id']

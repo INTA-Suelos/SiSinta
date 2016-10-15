@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014224551) do
+ActiveRecord::Schema.define(version: 20161014225836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,6 +307,15 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   create_table "posiciones", force: :cascade do |t|
     t.string "valor", null: false
   end
+
+  create_table "provincias", force: :cascade do |t|
+    t.string  "nombre",            null: false
+    t.string  "pais_alpha_3"
+    t.integer "data_oficial_id"
+    t.string  "data_oficial_type"
+  end
+
+  add_index "provincias", ["data_oficial_type", "data_oficial_id"], name: "index_provincias_on_data_oficial_type_and_data_oficial_id", using: :btree
 
   create_table "proyectos", force: :cascade do |t|
     t.string   "nombre"

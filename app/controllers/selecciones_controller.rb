@@ -15,7 +15,8 @@ class SeleccionesController < ApplicationController
   end
 
   def almacenar_por_provincias
-    ubicaciones = Ubicacion.en_provincias(seleccion_params[:provincia_ids])
+    # TODO Deshardcodear IgnProvincia
+    ubicaciones = Ubicacion.en_provincias(seleccion_params[:provincia_ids], IgnProvincia)
     perfiles = Perfil.accessible_by(current_ability).joins(:ubicacion).where(ubicacion: { id: ubicaciones.ids }).ids
 
     # TODO Tal vez abstraer la seleccion actual en un objeto

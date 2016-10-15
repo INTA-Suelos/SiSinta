@@ -106,7 +106,7 @@ class Deserializador
       serie_attributes: {
         nombre: datos['perfil_serie_nombre'],
         simbolo: datos['perfil_serie_simbolo'],
-        provincia_id: Provincia.find_by_valor(datos['perfil_serie_provincia']).to_param },
+        provincia_id: Provincia.find_by(nombre: datos['perfil_serie_provincia']).to_param },
       grupo_attributes: {
         codigo: datos['perfil_grupo_codigo'],
         descripcion: datos['perfil_grupo_descripcion'] },

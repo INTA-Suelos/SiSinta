@@ -14,7 +14,7 @@
     = field_set_tag 'De las provincias', class: 'celeste span-22 last plegable' do
 
       .checks.span-22.last.atributos_perfiles
-        = collection_check_boxes(:seleccion, :provincia_ids, Provincia.all, :id, :valor, include_hidden: false) do |provincia|
+        = collection_check_boxes(:seleccion, :provincia_ids, Provincia.all, :id, :nombre, include_hidden: false) do |provincia|
           .span-21.last.campo{class: cycle('celeste_oscuro', 'celeste')}
             = provincia.label do
               = provincia.text

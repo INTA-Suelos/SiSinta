@@ -1,11 +1,15 @@
 require './test/test_helper'
 
 class ProvinciaTest < ActiveSupport::TestCase
-  subject { Provincia.find(rand(Provincia.all.size)) }
+  subject { build :provincia }
 
   describe 'validaciones' do
     it 'es válida' do
       subject.must_be :valid?
+    end
+
+    it 'require nombre' do
+      build(:provincia, nombre: nil).wont_be :valid?
     end
   end
 
