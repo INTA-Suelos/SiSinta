@@ -1,4 +1,5 @@
 class SerieSerializer < ActiveModel::Serializer
-  # TODO provincia
   attributes :nombre, :simbolo, :descripcion
+
+  has_one :provincia
 end
