@@ -2,7 +2,7 @@ require './test/test_helper'
 
 class ErosionTest < ActiveSupport::TestCase
   describe 'validaciones' do
-    subject { build :erosion, :con_perfil }
+    subject { build :erosion }
 
     it 'es válido' do
       subject.must_be :valid?

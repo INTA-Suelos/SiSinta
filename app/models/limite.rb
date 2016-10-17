@@ -1,9 +1,11 @@
-# encoding: utf-8
+# Modelo asociativo (no tiene datos propios) para los valores (forma y
+# tipo) de Límite en la ficha de Perfiles para cada Horizonte
 class Limite < ActiveRecord::Base
   belongs_to :horizonte
-  has_lookup :forma, inverse_of: :limites, class_name: 'FormaDeLimite'
-  has_lookup :tipo, inverse_of: :limites, class_name: 'TipoDeLimite'
+  belongs_to :forma, inverse_of: :limites, class_name: 'FormaDeLimite'
+  belongs_to :tipo, inverse_of: :limites, class_name: 'TipoDeLimite'
 
-  validates_presence_of :horizonte
+  validates :horizonte, presence: true
+
   delegate :publico, :usuario, :usuario_id, to: :horizonte
 end

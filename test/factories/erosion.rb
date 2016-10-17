@@ -1,4 +1,6 @@
-# Factory vacía para un modelo asociativo sin requerimientos
+# Modelo asociativo sin requerimientos excepto el padre
 FactoryGirl.define do
-  factory :erosion
+  factory :erosion do
+    perfil
+  end
 end

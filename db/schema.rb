@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017183839) do
+ActiveRecord::Schema.define(version: 20161017203136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,10 @@ ActiveRecord::Schema.define(version: 20161017183839) do
   end
 
   add_index "fichas", ["identificador"], name: "index_fichas_on_identificador", unique: true, using: :btree
+
+  create_table "formas_de_limite", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "grupos", force: :cascade do |t|
     t.string "codigo"
@@ -389,6 +393,10 @@ ActiveRecord::Schema.define(version: 20161017183839) do
     t.string "clase",   null: false
     t.string "textura"
     t.string "suelo"
+  end
+
+  create_table "tipos_de_limite", force: :cascade do |t|
+    t.string "valor", null: false
   end
 
   create_table "ubicaciones", force: :cascade do |t|
