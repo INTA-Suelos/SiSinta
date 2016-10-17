@@ -54,6 +54,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'clase_de_capacidad', 'clases_de_capacidad'
   inflect.irregular 'clase_de_humedad', 'clases_de_humedad'
   inflect.irregular 'clase_de_erosion', 'clases_de_erosion'
+  inflect.irregular 'subclase_de_erosion', 'subclases_de_erosion'
   inflect.irregular 'clase_de_pedregosidad', 'clases_de_pedregosidad'
   inflect.irregular 'clase_de_estructura', 'clases_de_estructura'
 

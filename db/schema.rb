@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014225836) do
+ActiveRecord::Schema.define(version: 20161017183839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,10 @@ ActiveRecord::Schema.define(version: 20161014225836) do
   end
 
   add_index "capacidades", ["perfil_id"], name: "index_capacidades_on_perfil_id", unique: true, using: :btree
+
+  create_table "clases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "colores", force: :cascade do |t|
     t.string "hvc", null: false
@@ -357,6 +361,10 @@ ActiveRecord::Schema.define(version: 20161014225836) do
   end
 
   add_index "series", ["provincia_id"], name: "index_series_on_provincia_id", using: :btree
+
+  create_table "subclases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

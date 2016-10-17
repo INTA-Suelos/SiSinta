@@ -98,8 +98,8 @@ class Deserializador
       humedad_attributes: {
         clase_id: ClaseDeHumedad.find_by_valor(datos['perfil_humedad_clase']).to_param },
       erosion_attributes: {
-        clase_id: ClaseDeErosion.find_by_valor(datos['perfil_erosion_clase']).to_param,
-        subclase_id: SubclaseDeErosion.find_by_valor(datos['perfil_erosion_subclase']).to_param },
+        clase_id: ClaseDeErosion.find_by(valor: datos['perfil_erosion_clase']).to_param,
+        subclase_id: SubclaseDeErosion.find_by(valor: datos['perfil_erosion_subclase']).to_param },
       pedregosidad_attributes: {
         clase_id: ClaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_clase']).to_param,
         subclase_id: SubclaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_subclase']).to_param },

@@ -1,7 +1,4 @@
-# encoding: utf-8
+# Factory vacía para un modelo asociativo sin requerimientos
 FactoryGirl.define do
-  factory :erosion do
-    clase_id 1
-    subclase_id 1
-  end
+  factory :erosion
 end

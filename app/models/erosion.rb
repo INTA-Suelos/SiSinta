@@ -1,15 +1,18 @@
-# encoding: utf-8
+# Modelo asociativo (no tiene datos propios) para los valores (clase y
+# subclase) de Erosión en la ficha de Perfiles
 class Erosion < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :erosion
 
-  has_lookup :clase, inverse_of: :erosiones, class_name: 'ClaseDeErosion'
-  has_lookup :subclase, inverse_of: :erosiones, class_name: 'SubclaseDeErosion'
+  belongs_to :clase, inverse_of: :erosiones, class_name: 'ClaseDeErosion'
+  belongs_to :subclase, inverse_of: :erosiones, class_name: 'SubclaseDeErosion'
 
-  validates_presence_of :perfil
+  validates :perfil, presence: true
   validate :acumulacion_sin_clase
+
   delegate :publico, :usuario, :usuario_id, to: :perfil
 
   # TODO A un decorator
+  # FIXME Se usa? En ese caso, pasar a join
   def to_s
     "#{clase.try(:to_str)} #{subclase}"
   end
@@ -20,9 +23,9 @@ class Erosion < ActiveRecord::Base
 
   private
 
-    # Valida que si se selecciona 'acumulación' no se cargue una clase
+    # Si se selecciona 'acumulación' como Subclase no debe haber Clase
     def acumulacion_sin_clase
-      if subclase == SubclaseDeErosion.find_by_valor('acumulación') and clase.present?
+      if subclase.try(:acumulacion?) && clase.present?
         errors.add :clase, :debe_estar_en_blanco
       end
     end
