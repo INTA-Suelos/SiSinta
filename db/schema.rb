@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017203136) do
+ActiveRecord::Schema.define(version: 20161017214655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "adhesividades", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "adjuntos", force: :cascade do |t|
     t.integer  "perfil_id"
@@ -124,6 +128,14 @@ ActiveRecord::Schema.define(version: 20161017203136) do
   end
 
   add_index "consistencias", ["horizonte_id"], name: "index_consistencias_on_horizonte_id", unique: true, using: :btree
+
+  create_table "consistencias_en_humedo", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "consistencias_en_seco", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "drenajes", force: :cascade do |t|
     t.string "valor", null: false
@@ -309,6 +321,10 @@ ActiveRecord::Schema.define(version: 20161017203136) do
   add_index "perfiles_proyectos", ["proyecto_id", "perfil_id"], name: "index_perfiles_proyectos_on_proyecto_id_and_perfil_id", using: :btree
 
   create_table "permeabilidades", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "plasticidades", force: :cascade do |t|
     t.string "valor", null: false
   end
 

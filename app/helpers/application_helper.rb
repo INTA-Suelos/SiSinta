@@ -122,11 +122,11 @@ module ApplicationHelper
   end
 
   def plasticidades_de_consistencia
-    @plasticidades_de_consistencia ||= PlasticidadDeConsistencia.all
+    @plasticidades_de_consistencia ||= Plasticidad.all
   end
 
   def adhesividades_de_consistencia
-    @adhesividades_de_consistencia ||= AdhesividadDeConsistencia.all
+    @adhesividades_de_consistencia ||= Adhesividad.all
   end
 
   def clases_de_humedad

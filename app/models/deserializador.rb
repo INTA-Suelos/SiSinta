@@ -186,10 +186,10 @@ class Deserializador
         color_seco_attributes: {
           hvc: h['color_seco_hvc'] },
         consistencia_attributes: {
-          en_seco_id: ConsistenciaEnSeco.find_by_valor(h['consistencia_en_seco']).to_param,
-          en_humedo_id: ConsistenciaEnHumedo.find_by_valor(h['consistencia_en_humedo']).to_param,
-          adhesividad_id: AdhesividadDeConsistencia.find_by_valor(h['consistencia_adhesividad']).to_param,
-          plasticidad_id: PlasticidadDeConsistencia.find_by_valor(h['consistencia_plasticidad']).to_param },
+          en_seco_id: ConsistenciaEnSeco.find_by(valor: h['consistencia_en_seco']).to_param,
+          en_humedo_id: ConsistenciaEnHumedo.find_by(valor: h['consistencia_en_humedo']).to_param,
+          adhesividad_id: Adhesividad.find_by(valor: h['consistencia_adhesividad']).to_param,
+          plasticidad_id: Plasticidad.find_by(valor: h['consistencia_plasticidad']).to_param },
         estructura_attributes: {
           tipo_id: TipoDeEstructura.find_by_valor(h['estructura_tipo']).to_param,
           clase_id: ClaseDeEstructura.find_by_valor(h['estructura_clase']).to_param,
