@@ -19,6 +19,7 @@ describe SiSINTA::Application do
 
   describe 'rgeo' do
     it 'soporta proj4' do
+      # Hay que reinstalar rgeo después de actualizar proj
       RGeo::CoordSys::Proj4.must_be :supported?
     end
 
