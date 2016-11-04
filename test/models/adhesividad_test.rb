@@ -1,7 +1,7 @@
-require './test/test_helper'
+require 'test_helper'
 
 class AdhesividadTest < ActiveSupport::TestCase
-  subject { build_stubbed(:adhesividad) }
+  subject { build_stubbed :adhesividad }
 
   describe 'validaciones' do
     it 'es válida' do

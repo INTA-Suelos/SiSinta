@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017214655) do
+ActiveRecord::Schema.define(version: 20161104121225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,10 +100,22 @@ ActiveRecord::Schema.define(version: 20161017214655) do
   create_table "capacidades", force: :cascade do |t|
     t.integer "perfil_id"
     t.integer "clase_id"
-    t.text    "subclase_ids"
   end
 
   add_index "capacidades", ["perfil_id"], name: "index_capacidades_on_perfil_id", unique: true, using: :btree
+
+  create_table "capacidades_subclases_de_capacidad", id: false, force: :cascade do |t|
+    t.integer "capacidad_id",             null: false
+    t.integer "subclase_de_capacidad_id", null: false
+  end
+
+  add_index "capacidades_subclases_de_capacidad", ["subclase_de_capacidad_id", "capacidad_id"], name: "subclases_capacidades", unique: true, using: :btree
+
+  create_table "clases_de_capacidad", force: :cascade do |t|
+    t.string "codigo",      null: false
+    t.string "descripcion"
+    t.string "categoria"
+  end
 
   create_table "clases_de_erosion", force: :cascade do |t|
     t.string "valor", null: false
@@ -381,6 +393,11 @@ ActiveRecord::Schema.define(version: 20161017214655) do
   end
 
   add_index "series", ["provincia_id"], name: "index_series_on_provincia_id", using: :btree
+
+  create_table "subclases_de_capacidad", force: :cascade do |t|
+    t.string "codigo",      null: false
+    t.string "descripcion"
+  end
 
   create_table "subclases_de_erosion", force: :cascade do |t|
     t.string "valor", null: false

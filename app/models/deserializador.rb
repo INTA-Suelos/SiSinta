@@ -84,7 +84,7 @@ class Deserializador
       vegetacion_o_cultivos: datos['perfil_vegetacion_o_cultivos'],
       observaciones: datos['perfil_observaciones'],
       capacidad_attributes: {
-        clase_id: ClaseDeCapacidad.find_by_valor(datos['perfil_capacidad_clase']).to_param },
+        clase_id: ClaseDeCapacidad.find_by(codigo: datos['perfil_capacidad_clase']).to_param },
       ubicacion_attributes: {
         descripcion: datos['perfil_ubicacion_descripcion'],
         recorrido: datos['perfil_ubicacion_recorrido'],

@@ -1,4 +1,5 @@
-# encoding: utf-8
+# Creación de modelos para los tests. Sin argumentos ni traits debería crear
+# modelos que pasen la validación.
 FactoryGirl.define do
   factory :ubicacion do
     trait :vieja_escuela do

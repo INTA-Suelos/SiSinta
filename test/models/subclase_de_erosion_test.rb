@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 class SubclaseDeErosionTest < ActiveSupport::TestCase
   subject { build :subclase_de_erosion }
