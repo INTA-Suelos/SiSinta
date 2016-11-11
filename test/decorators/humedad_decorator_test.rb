@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class CapacidadDecoratorTest < ActiveSupport::TestCase
-  subject { CapacidadDecorator.new capacidad }
-  let(:capacidad) { build :capacidad }
+class HumedadDecoratorTest < ActiveSupport::TestCase
+  subject { HumedadDecorator.new humedad }
+  let(:humedad) { build :humedad }
 
   describe '#to_s' do
     it 'sin subclases es una cadena vacía' do
@@ -10,8 +10,8 @@ class CapacidadDecoratorTest < ActiveSupport::TestCase
     end
 
     it 'devuelve la lista de subclases' do
-      capacidad.subclases.build valor: 'a'
-      capacidad.subclases.build valor: 'b'
+      humedad.subclases.build valor: 'a'
+      humedad.subclases.build valor: 'b'
 
       subject.to_s.must_equal 'a b'
     end

@@ -4,7 +4,6 @@ class HasLookupsTest < ActiveSupport::TestCase
 
   setup do
     @lookups = {  estructura: %w{tipo clase grado},
-                  humedad: %w{clase},
                   pedregosidad: %w{clase subclase} }
   end
 

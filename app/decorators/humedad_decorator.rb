@@ -1,4 +1,3 @@
-# encoding: utf-8
 class HumedadDecorator < ApplicationDecorator
   def to_s
     source.subclases.map(&:valor).unshift(

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104121225) do
+ActiveRecord::Schema.define(version: 20161111220112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,10 @@ ActiveRecord::Schema.define(version: 20161104121225) do
   end
 
   create_table "clases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "clases_de_humedad", force: :cascade do |t|
     t.string "valor", null: false
   end
 
@@ -246,10 +250,16 @@ ActiveRecord::Schema.define(version: 20161104121225) do
   create_table "humedades", force: :cascade do |t|
     t.integer "clase_id"
     t.integer "perfil_id"
-    t.text    "subclase_ids"
   end
 
   add_index "humedades", ["perfil_id"], name: "index_humedades_on_perfil_id", unique: true, using: :btree
+
+  create_table "humedades_subclases_de_humedad", id: false, force: :cascade do |t|
+    t.integer "humedad_id",             null: false
+    t.integer "subclase_de_humedad_id", null: false
+  end
+
+  add_index "humedades_subclases_de_humedad", ["subclase_de_humedad_id", "humedad_id"], name: "subclases_humedades", unique: true, using: :btree
 
   create_table "ign_provincias", primary_key: "gid", force: :cascade do |t|
     t.string    "objeto", limit: 50
@@ -400,6 +410,10 @@ ActiveRecord::Schema.define(version: 20161104121225) do
   end
 
   create_table "subclases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "subclases_de_humedad", force: :cascade do |t|
     t.string "valor", null: false
   end
 
