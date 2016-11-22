@@ -3,8 +3,17 @@
 FactoryGirl.define do
   factory :estructura do
     horizonte
-    tipo_id   { rand(14) + 1 }
-    clase_id  { rand(4)  + 1 }
-    grado_id  { rand(2)  + 1 }
+  end
+
+  factory :tipo_de_estructura do
+    valor { generate :cadena_unica }
+  end
+
+  factory :clase_de_estructura do
+    valor { generate :cadena_unica }
+  end
+
+  factory :grado_de_estructura do
+    valor { generate :cadena_unica }
   end
 end

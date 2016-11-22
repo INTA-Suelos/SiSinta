@@ -191,12 +191,12 @@ class Deserializador
           adhesividad_id: Adhesividad.find_by(valor: h['consistencia_adhesividad']).to_param,
           plasticidad_id: Plasticidad.find_by(valor: h['consistencia_plasticidad']).to_param },
         estructura_attributes: {
-          tipo_id: TipoDeEstructura.find_by_valor(h['estructura_tipo']).to_param,
-          clase_id: ClaseDeEstructura.find_by_valor(h['estructura_clase']).to_param,
-          grado_id: GradoDeEstructura.find_by_valor(h['estructura_grado']).to_param },
+          tipo_id: TipoDeEstructura.find_by(valor: h['estructura_tipo']).to_param,
+          clase_id: ClaseDeEstructura.find_by(valor: h['estructura_clase']).to_param,
+          grado_id: GradoDeEstructura.find_by(valor: h['estructura_grado']).to_param },
         limite_attributes: {
-          tipo_id: TipoDeLimite.find_by_valor(h['limite_tipo']).to_param,
-          forma_id: FormaDeLimite.find_by_valor(h['limite_forma']).to_param }
+          tipo_id: TipoDeLimite.find_by(valor: h['limite_tipo']).to_param,
+          forma_id: FormaDeLimite.find_by(valor: h['limite_forma']).to_param }
       )
     end and return perfil
   end

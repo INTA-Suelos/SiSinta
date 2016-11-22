@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111220112) do
+ActiveRecord::Schema.define(version: 20161121224014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,10 @@ ActiveRecord::Schema.define(version: 20161111220112) do
     t.string "valor", null: false
   end
 
+  create_table "clases_de_estructura", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "clases_de_humedad", force: :cascade do |t|
     t.string "valor", null: false
   end
@@ -215,6 +219,10 @@ ActiveRecord::Schema.define(version: 20161111220112) do
   add_index "fichas", ["identificador"], name: "index_fichas_on_identificador", unique: true, using: :btree
 
   create_table "formas_de_limite", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "grados_de_estructura", force: :cascade do |t|
     t.string "valor", null: false
   end
 
@@ -440,6 +448,10 @@ ActiveRecord::Schema.define(version: 20161111220112) do
     t.string "clase",   null: false
     t.string "textura"
     t.string "suelo"
+  end
+
+  create_table "tipos_de_estructura", force: :cascade do |t|
+    t.string "valor", null: false
   end
 
   create_table "tipos_de_limite", force: :cascade do |t|

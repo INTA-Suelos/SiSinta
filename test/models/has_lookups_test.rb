@@ -3,8 +3,7 @@ require './test/test_helper'
 class HasLookupsTest < ActiveSupport::TestCase
 
   setup do
-    @lookups = {  estructura: %w{tipo clase grado},
-                  pedregosidad: %w{clase subclase} }
+    @lookups = { pedregosidad: %w{clase subclase} }
   end
 
   test "define asociaciones con lookups" do
