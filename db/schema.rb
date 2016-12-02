@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121224014) do
+ActiveRecord::Schema.define(version: 20161123083431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,11 @@ ActiveRecord::Schema.define(version: 20161121224014) do
 
   create_table "formas_de_limite", force: :cascade do |t|
     t.string "valor", null: false
+  end
+
+  create_table "formatos_de_coordenadas", force: :cascade do |t|
+    t.integer "srid",        null: false
+    t.string  "descripcion", null: false
   end
 
   create_table "grados_de_estructura", force: :cascade do |t|

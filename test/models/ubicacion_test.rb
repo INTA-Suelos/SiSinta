@@ -119,6 +119,11 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   describe '#transformar_a_wgs84!' do
+    before do
+      create :formato_de_coordenadas, srid: 4326
+      create :formato_de_coordenadas, srid: 22177
+    end
+
     it 'transforma a 4326' do
       coordenadas_previas = subject.coordenadas.dup
 
@@ -138,6 +143,11 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   describe '.transformar' do
+    before do
+      create :formato_de_coordenadas, srid: 4326
+      create :formato_de_coordenadas, srid: 22177
+    end
+
     let(:a_4326) { Ubicacion.transformar(22177, 4326, '7180428.8164', '7550269.2664') }
     let(:de_4326) { Ubicacion.transformar(4326, 22177, '-54', '-26') }
 
