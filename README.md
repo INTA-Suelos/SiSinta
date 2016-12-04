@@ -28,18 +28,12 @@ Instalación
 
 1. [PostgreSQL] 9.1 (o superior)
 
-    Nos conectamos como el usuario *postgres* y creamos al usuario (por ejemplo
-    *sisinta*), con password encriptado:
+    Nos conectamos como el usuario *postgres* y creamos al usuario, con
+    password encriptado:
 
-        $ createuser -P -E -d sisinta
+        $ createuser -P -E -d <usuario db>
 
-    No hace falta que sea superusuario ni cree otros roles. Ahora configuramos
-    los permisos de acceso para poder conectarse con este usuario en
-    `pg_hba.conf`, agregando esta línea:
-
-        local   all             sisinta                                 md5
-
-    Luego reiniciamos o recargamos la configuración.
+    No hace falta que sea superusuario ni cree otros roles.
 
 2. [PostGIS] 1.5 (o superior)
 
@@ -47,61 +41,21 @@ Instalación
     aplicación, con el que se crearán las bases de datos con postgis ya
     cargado:
 
-        $ createdb -O sisinta template_sisinta -E UTF-8
+        $ createdb -O <usuario db> template_postgis -E UTF-8
 
-    Instalamos el lenguaje plpgsql (si hace falta):
+    Y habilitamos las extensiones de [PostGIS]:
 
-        $ createlang plpgsql template_sisinta
-
-    Y las tablas de [PostGIS] (el path a los archivos depende del sistema):
-
-        $ psql -d template_sisinta -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
-        $ psql -d template_sisinta -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
-
-    Después, hay que cambiar el propietario de esas tablas a *sisinta*, dado
-    que un rol común no tiene permisos para crear las definiciones de funciones
-    que usa [PostGIS]:
-
-        $ psql -d template_sisinta -c "ALTER TABLE geography_columns OWNER TO sisinta;"
-        $ psql -d template_sisinta -c "ALTER TABLE geometry_columns OWNER TO sisinta;"
-        $ psql -d template_sisinta -c "ALTER TABLE spatial_ref_sys OWNER TO sisinta;"
+        $ psql -d template_postgis -c "CREATE EXTENSION postgis;"
 
     Finalmente, convertimos la base de datos en un template de verdad:
 
-        $ psql -c "UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_sisinta';"
+        $ psql -c "UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_postgis';"
 
 3.  [GEOS] 3.2 (o superior)
 
-4.  [Proj4]
+4.  [Proj] 4
 
 ### Producción
-
-Hay que configurar los archivos `.dist` y sacarles esa extensión:
-
-* `config/database.yml.dist`
-
-    username, password y template como los creamos antes antes. Explicitamos
-    port, si no está corriendo en el 5432.
-
-* `config/environments/production.rb.dist`
-* `config/initializers/devise.rb.dist`
-* `config/initializers/secret_token.rb.dist`
-
-Configuramos el entorno en *producción*
-
-    $ export RAILS_ENV=production
-
-Instalamos las dependencias
-
-    $ bundle install
-
-Creamos la base de datos
-
-    $ rake db:reset
-
-Precompilamos los archivos estáticos
-
-    $ rake assets:precompile
 
 El usuario default es **admin** global. Se loguea con *admin@cambiame.com* y el
 password *cambiame*
@@ -112,5 +66,5 @@ password *cambiame*
 [Rails]: http://rubyonrails.org/
 [Rgeo]: http://virtuoso.rubyforge.org/rgeo/
 [GEOS]: http://trac.osgeo.org/geos/
-[Proj4]: https://trac.osgeo.org/proj/
+[Proj]: https://trac.osgeo.org/proj/
 [INTA]: http://inta.gov.ar/

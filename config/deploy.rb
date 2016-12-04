@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.1'
 
 set :application, 'SiSINTA'
 set :repo_url, 'https://github.com/INTA-Suelos/SiSinta.git'
@@ -32,5 +32,3 @@ set :linked_files, %w{
   config/environments/production.rb
   config/initializers/devise.rb
 }
-
-after 'deploy:finished', 'deploy:restart'
