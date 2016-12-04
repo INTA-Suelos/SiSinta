@@ -1,8 +1,12 @@
 jQuery ->
   if $('#mapa').length
-    # Definir el path de los assets para las imágenes
-    # FIXME Leaflet busca imágenes sin digest
-    L.Icon.Default.imagePath = '/estaticos/leaflet'
+    # Define el path de los assets para las imágenes de los íconos. Las
+    # imágenes del control de capas ya están contempladas en el css
+    digested_icon = L.icon({
+      iconUrl: "<%= asset_path 'marker-icon.png' %>"
+      iconRetinaUrl: "<%= asset_path 'marker-icon-2x.png' %>"
+      shadowUrl: "<%= asset_path 'marker-shadow.png' %>"
+    })
 
     # Genera el markup para cada punto del geoJson
     preparar_punto = (punto, capa) ->
@@ -16,6 +20,10 @@ jQuery ->
         serie + "<a target='_blank' title='Perfil' href='#{punto.properties.url}'>#{
           punto.properties.numero || 'Perfil'}</a>"
       )
+
+    # Devuelve un marker con el ícono customizado para el punto que pasamos
+    marker_con_icono = (punto, latlng) ->
+      return L.marker(latlng, { icon: digested_icon })
 
     # Por default mostramos Argentina entera
     zoom = $('#mapa').data('zoom') || 4
@@ -78,6 +86,7 @@ jQuery ->
         # Agrega una capa de geoJson
         L.geoJson(data, {
           onEachFeature: preparar_punto
+          pointToLayer: marker_con_icono
         })
       ).addTo(mapa)
 

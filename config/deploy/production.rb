@@ -1,9 +1,12 @@
-set :deploy_user, 'sisinta'
-set :deploy_to, '/srv/sisinta/app'
+set :deploy_user, 'sisar'
+set :deploy_to, '/srv/http/sisar.inta.gob.ar'
 
-# Repositorio con la configuración de este server
-set :config_repo_url, 'gogs@code.mauriciopasquier.com.ar:inta/sisar-config.git'
+# Cómo subir la configuración de la app al server
+set :config_strategy, 'config:dir'
+
+# Cómo reiniciar el webserver
+set :passenger_restart_with_sudo, false
 
 set :branch, 'master'
 
-server 'sisinta.inta.gov.ar', user: fetch(:deploy_user), roles: %w{app web db}
+server 'sisar.inta.gob.ar', user: fetch(:deploy_user), roles: %w{app web db}
