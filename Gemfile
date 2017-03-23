@@ -91,7 +91,8 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-passenger'
   gem 'capistrano-config_provider',
-    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git'
+    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git',
+    require: false
   gem 'brakeman', require: false
 end
 
