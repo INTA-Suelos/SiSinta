@@ -69,10 +69,10 @@ class Ubicacion < ActiveRecord::Base
     self.transformar(4326, srid, x, y)
   end
 
-  def self.transformar(origen, destino, x, y, proyectar = true)
+  def self.transformar(srid_origen, srid_destino, x, y, proyectar = true)
     unless x.blank? || y.blank?
-      fabrica_origen  = FormatoDeCoordenadas.srid(origen).fabrica
-      fabrica_destino = FormatoDeCoordenadas.srid(destino).fabrica
+      fabrica_origen  = FormatoDeCoordenadas.fabrica(srid_origen)
+      fabrica_destino = FormatoDeCoordenadas.fabrica(srid_destino)
       RGeo::Feature.cast(
         fabrica_origen.point(x.to_f, y.to_f),
         factory: fabrica_destino,
