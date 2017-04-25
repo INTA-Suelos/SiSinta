@@ -18,12 +18,12 @@ class PerfilesController < AutorizadoController
   respond_to :csv, only: [:index, :show, :procesar]
 
   # acciones que funcionan anónimamente
-  skip_before_filter :authenticate_usuario!,  only: [ :index, :seleccionar,
-                                                      :derivar, :almacenar,
-                                                      :exportar, :show,
-                                                      :procesar ]
-  skip_load_and_authorize_resource            only: :index
-  skip_authorization_check                    only: :index
+  skip_before_filter :authenticate_usuario!, only: [
+    :index, :seleccionar, :derivar, :almacenar, :exportar, :show, :procesar
+  ]
+
+  skip_load_and_authorize_resource only: :index
+  skip_authorization_check only: :index
 
   with_options only: [:index, :seleccionar, :exportar, :procesar] do |o|
     o.before_filter :preparar
