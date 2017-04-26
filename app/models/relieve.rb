@@ -1,6 +1,6 @@
-# encoding: utf-8
-class Relieve < Lookup
+# Mantiene los valores posibles para Relieve en la ficha de perfiles.
+class Relieve < ActiveRecord::Base
   has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

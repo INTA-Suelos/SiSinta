@@ -59,7 +59,7 @@ punto de entrada, recorriendo todas sus relaciones recursivamente.
 
 ## `lookups`
 
-    0..1  TexturaDeHorizonte
+    0..1  Textura
 
 # Capacidad
 

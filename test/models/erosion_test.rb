@@ -1,32 +1,22 @@
 require './test/test_helper'
 
 class ErosionTest < ActiveSupport::TestCase
+  describe 'validaciones' do
+    subject { build :erosion }
 
-  test "carga la clase asociada" do
-    atributos = { clase_id: ClaseDeErosion.last.id }
-
-    assert_difference 'ClaseDeErosion.last.erosiones.count' do
-      assert create(:erosion, :con_perfil).update_attributes(atributos)
-    end
-  end
-
-  test "no carga erosion sin perfil" do
-    assert build_stubbed(:erosion, :sin_perfil).invalid?, "una erosion sin perfil es válida"
-  end
-
-  test "accede a sus asociaciones" do
-    erosion = build_stubbed(:erosion)
-    assert erosion.respond_to? :clase
-    assert erosion.respond_to? :subclase
-    assert erosion.respond_to? :perfil
-    assert_nothing_raised do
-      erosion.clase
-      erosion.subclase
+    it 'es válido' do
+      subject.must_be :valid?
     end
 
-    # Pruebo sus lookups
-    assert ClaseDeErosion.first.respond_to? :erosiones
-    assert SubclaseDeErosion.first.respond_to? :erosiones
-  end
+    it 'requiere el perfil' do
+      build_stubbed(:erosion, perfil: nil).wont_be :valid?
+    end
 
+    it 'si subclase es `acumulación` clase debe estar en blanco' do
+      subject.subclase = build :subclase_de_erosion, valor: 'acumulación'
+      subject.clase=  build :clase_de_erosion
+
+      subject.wont_be :valid?
+    end
+  end
 end

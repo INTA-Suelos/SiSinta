@@ -1,5 +1,6 @@
-# encoding: utf-8
-# Para falsear uploads en rack entre otras cosas
+# Traits y métodos generales para todas las factories
+
+# Falsear uploads en rack
 include ActionDispatch::TestProcess
 
 FactoryGirl.define do
@@ -21,6 +22,4 @@ FactoryGirl.define do
   trait :con_perfil do
     perfil
   end
-
-  # TODO agregar todos los campos en las fábricas
 end

@@ -1,6 +1,6 @@
-# encoding: utf-8
-class Sal < Lookup
+# Mantiene los valores posibles para Sales en la ficha de perfiles.
+class Sal < ActiveRecord::Base
   has_many :perfiles, inverse_of: :sal
 
-  field :valor
+  validates :valor, presence: true
 end

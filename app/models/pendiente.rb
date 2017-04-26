@@ -1,6 +1,6 @@
-# encoding: utf-8
-class Pendiente < Lookup
+# Mantiene los valores posibles para Pendiente en la ficha de perfiles.
+class Pendiente < ActiveRecord::Base
   has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

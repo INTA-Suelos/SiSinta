@@ -1,26 +1,15 @@
-require './test/test_helper'
+require 'test_helper'
 
 class EstructuraTest < ActiveSupport::TestCase
+  subject { build_stubbed :estructura }
 
-  setup do
-    @estructura = build_stubbed(:estructura)
-  end
-
-  test "accede a sus asociaciones" do
-    assert @estructura.respond_to? :tipo
-    assert @estructura.respond_to? :clase
-    assert @estructura.respond_to? :grado
-    assert_nothing_raised do
-      @estructura.tipo
-      @estructura.clase
-      @estructura.grado
+  describe 'validaciones' do
+    it 'es válida' do
+      subject.must_be :valid?
     end
-    assert @estructura.respond_to? :horizonte
 
-    # Pruebo sus lookups
-    assert TipoDeEstructura.first.respond_to? :estructuras
-    assert ClaseDeEstructura.first.respond_to? :estructuras
-    assert GradoDeEstructura.first.respond_to? :estructuras
+    it 'requiere horizonte' do
+      build_stubbed(:estructura, horizonte: nil).wont_be :valid?
+    end
   end
-
 end

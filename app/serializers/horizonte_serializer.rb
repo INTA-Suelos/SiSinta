@@ -11,7 +11,7 @@ class HorizonteSerializer < ActiveModel::Serializer
   has_one :limite, serializer: LimiteDeHorizonteSerializer
   has_one :consistencia
   has_one :estructura
-  has_one :textura, serializer: LookupSerializer
+  has_one :textura
   has_one :color_seco
   has_one :color_humedo
 end

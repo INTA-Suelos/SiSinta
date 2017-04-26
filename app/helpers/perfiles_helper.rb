@@ -3,12 +3,6 @@ module PerfilesHelper
   include PaginacionHelper
   include AnaliticosHelper
 
-  # Para checkear si debería estar marcado o no el checkbox de la subclase
-  # correspondiente
-  def tildada?(s)
-    @perfil.capacidad.try(:subclases).include?(s)
-  end
-
   # Para el +FormHelper+ necesito los objetos instanciados, aunque no tengan
   # asociaciones realizadas, asique acá les asignamos un objeto nuevo si no
   # tenían ya

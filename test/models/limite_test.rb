@@ -1,23 +1,15 @@
 require './test/test_helper'
 
 class LimiteTest < ActiveSupport::TestCase
+  subject { build_stubbed :limite }
 
-  setup do
-    @limite = build_stubbed(:limite)
-  end
-
-  test "debería poder acceder a sus asociaciones" do
-    assert @limite.respond_to? :tipo
-    assert @limite.respond_to? :forma
-    assert_nothing_raised do
-      @limite.forma
-      @limite.tipo
+  describe 'validaciones' do
+    it 'es válido' do
+      subject.must_be :valid?
     end
-    assert @limite.respond_to? :horizonte
 
-    # Pruebo sus lookups
-    assert TipoDeLimite.first.respond_to? :limites
-    assert FormaDeLimite.first.respond_to? :limites
+    it 'requiere horizonte' do
+      build(:limite, horizonte: nil).wont_be :valid?
+    end
   end
-
 end

@@ -1,21 +1,57 @@
 require './test/test_helper'
 
 class HorizonteTest < ActiveSupport::TestCase
-  test "crea los colores cuando no existen" do
-    assert_difference 'Color.count', 2, "No se crean los colores desde el horizonte" do
-      create :horizonte, color_seco_attributes: { hvc: "un color que valide" },
-                         color_humedo_attributes: { hvc: "otro color que valide" }
+  subject { build :horizonte }
+
+  describe 'validaciones' do
+    it 'es válido' do
+      subject.must_be :valid?
+    end
+
+    it 'requiere perfil' do
+      build(:horizonte, perfil: nil).wont_be :valid?
+    end
+
+    it 'profundidad_inferior debe estar entre 0 y 1000' do
+      build(:horizonte, profundidad_inferior: -1).wont_be :valid?
+
+      build(:horizonte, profundidad_inferior: 0).must_be :valid?
+      build(:horizonte, profundidad_inferior: 100).must_be :valid?
+      build(:horizonte, profundidad_inferior: 1000).must_be :valid?
+
+      build(:horizonte, profundidad_inferior: 1001).wont_be :valid?
+    end
+
+    it 'profundidad_superior debe estar entre 0 y 1000' do
+      build(:horizonte, profundidad_superior: -1).wont_be :valid?
+
+      build(:horizonte, profundidad_superior: 0).must_be :valid?
+      build(:horizonte, profundidad_superior: 100).must_be :valid?
+      build(:horizonte, profundidad_superior: 1000).must_be :valid?
+
+      build(:horizonte, profundidad_superior: 1001).wont_be :valid?
     end
   end
 
-  test "asocia los colores cuando existen previamente" do
-    color = create(:color)
-    assert_no_difference 'Color.count', "Se crean los colores en vez de asociarse" do
-      h = create :horizonte,
-        color_seco_attributes: color.serializable_hash.slice("hvc"),
-        color_humedo_attributes: color.serializable_hash.slice("hvc")
-      assert_equal color, h.color_seco, "El color no se asoció correctamente"
-      assert_equal color, h.color_humedo, "El color no se asoció correctamente"
+  describe 'colores' do
+    it 'los crea cuando no existen' do
+      lambda do
+        create :horizonte, color_seco_attributes: { hvc: 'un color que valide' },
+                           color_humedo_attributes: { hvc: 'otro color que valide' }
+      end.must_change 'Color.count', 2
+    end
+
+    it 'los asocia cuando existen previamente' do
+      existente = create(:color, hvc: 'sarasa')
+
+      lambda do
+        horizonte = create :horizonte,
+          color_seco_attributes: { hvc: 'sarasa' },
+          color_humedo_attributes: { hvc: 'sarasa' }
+
+        horizonte.color_seco.must_equal existente
+        horizonte.color_humedo.must_equal existente
+      end.wont_change 'Color.count'
     end
   end
 end

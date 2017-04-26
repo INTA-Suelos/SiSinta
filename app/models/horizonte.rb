@@ -16,7 +16,7 @@ class Horizonte < ActiveRecord::Base
               inverse_of: :horizontes_en_seco, validate: false
   belongs_to :color_humedo, class_name: 'Color',
               inverse_of: :horizontes_en_humedo, validate: false
-  has_lookup :textura, inverse_of: :horizontes, class_name: 'TexturaDeHorizonte'
+  belongs_to :textura, inverse_of: :horizontes
 
   accepts_nested_attributes_for :analitico, :limite, :consistencia,
                                 :estructura, :textura,
@@ -24,10 +24,10 @@ class Horizonte < ActiveRecord::Base
   accepts_nested_attributes_for :color_seco, :color_humedo,
                                 reject_if: :all_blank
 
-  validates_presence_of :perfil
-  validates_inclusion_of  :profundidad_superior, :profundidad_inferior,
-                          in: 0..1000, allow_nil: true,
-                          message: 'debe estar entre 0 y 1000 cm'
+  validates :perfil, presence: true
+  # TODO Extraer mensaje
+  validates :profundidad_superior, :profundidad_inferior,
+    inclusion: { in: 0..1000, allow_nil: true, message: 'debe estar entre 0 y 1000 cm' }
 
   delegate :publico, :usuario, :usuario_id, to: :perfil
   delegate :present?, to: :analitico, prefix: true
@@ -47,7 +47,7 @@ class Horizonte < ActiveRecord::Base
   end
 
   def rango_profundidad
-    if profundidad_superior? and profundidad_inferior?
+    if profundidad_superior? && profundidad_inferior?
       "#{profundidad_superior} - #{profundidad_inferior}"
     end
   end

@@ -38,11 +38,11 @@ module ApplicationHelper
 
   # Variables para acceder desde la vista y armar las tablas de lookup
   def subclases_de_capacidad
-    @subclases ||= SubclaseDeCapacidad.all
+    @subclases_de_capacidad ||= SubclaseDeCapacidad.all
   end
 
   def clases_de_capacidad
-    @clases ||= ClaseDeCapacidad.all
+    @clases_de_capacidad ||= ClaseDeCapacidad.all
   end
 
   def drenajes
@@ -94,7 +94,7 @@ module ApplicationHelper
   end
 
   def texturas
-    @texturas ||= TexturaDeHorizonte.all
+    @texturas ||= Textura.all
   end
 
   def formatos_de_coordenadas
@@ -122,11 +122,11 @@ module ApplicationHelper
   end
 
   def plasticidades_de_consistencia
-    @plasticidades_de_consistencia ||= PlasticidadDeConsistencia.all
+    @plasticidades_de_consistencia ||= Plasticidad.all
   end
 
   def adhesividades_de_consistencia
-    @adhesividades_de_consistencia ||= AdhesividadDeConsistencia.all
+    @adhesividades_de_consistencia ||= Adhesividad.all
   end
 
   def clases_de_humedad

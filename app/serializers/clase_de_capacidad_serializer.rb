@@ -1,6 +1,5 @@
 class ClaseDeCapacidadSerializer < ActiveModel::Serializer
-  attributes :codigo, :descripcion, :agrupamiento
-
+  # Sólo devolver el código al serializar
   def serializable_hash
     object.codigo
   end

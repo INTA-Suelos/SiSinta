@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014224551) do
+ActiveRecord::Schema.define(version: 20170426020641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "adhesividades", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "adjuntos", force: :cascade do |t|
     t.integer  "perfil_id"
@@ -78,6 +82,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "analiticos", ["horizonte_id"], name: "index_analiticos_on_horizonte_id", unique: true, using: :btree
 
+  create_table "anegamientos", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "busquedas", force: :cascade do |t|
     t.text     "consulta"
     t.integer  "usuario_id"
@@ -92,10 +100,38 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   create_table "capacidades", force: :cascade do |t|
     t.integer "perfil_id"
     t.integer "clase_id"
-    t.text    "subclase_ids"
   end
 
   add_index "capacidades", ["perfil_id"], name: "index_capacidades_on_perfil_id", unique: true, using: :btree
+
+  create_table "capacidades_subclases_de_capacidad", id: false, force: :cascade do |t|
+    t.integer "capacidad_id",             null: false
+    t.integer "subclase_de_capacidad_id", null: false
+  end
+
+  add_index "capacidades_subclases_de_capacidad", ["subclase_de_capacidad_id", "capacidad_id"], name: "subclases_capacidades", unique: true, using: :btree
+
+  create_table "clases_de_capacidad", force: :cascade do |t|
+    t.string "codigo",      null: false
+    t.string "descripcion"
+    t.string "categoria"
+  end
+
+  create_table "clases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "clases_de_estructura", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "clases_de_humedad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "clases_de_pedregosidad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "colores", force: :cascade do |t|
     t.string "hvc", null: false
@@ -116,6 +152,18 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   end
 
   add_index "consistencias", ["horizonte_id"], name: "index_consistencias_on_horizonte_id", unique: true, using: :btree
+
+  create_table "consistencias_en_humedo", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "consistencias_en_seco", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "drenajes", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "equipos", force: :cascade do |t|
     t.string   "nombre",     null: false
@@ -141,6 +189,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   end
 
   add_index "erosiones", ["perfil_id"], name: "index_erosiones_on_perfil_id", unique: true, using: :btree
+
+  create_table "escurrimientos", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "estructuras", force: :cascade do |t|
     t.integer  "horizonte_id"
@@ -169,6 +221,19 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   end
 
   add_index "fichas", ["identificador"], name: "index_fichas_on_identificador", unique: true, using: :btree
+
+  create_table "formas_de_limite", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "formatos_de_coordenadas", force: :cascade do |t|
+    t.integer "srid",        null: false
+    t.string  "descripcion", null: false
+  end
+
+  create_table "grados_de_estructura", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "grupos", force: :cascade do |t|
     t.string "codigo"
@@ -202,10 +267,16 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   create_table "humedades", force: :cascade do |t|
     t.integer "clase_id"
     t.integer "perfil_id"
-    t.text    "subclase_ids"
   end
 
   add_index "humedades", ["perfil_id"], name: "index_humedades_on_perfil_id", unique: true, using: :btree
+
+  create_table "humedades_subclases_de_humedad", id: false, force: :cascade do |t|
+    t.integer "humedad_id",             null: false
+    t.integer "subclase_de_humedad_id", null: false
+  end
+
+  add_index "humedades_subclases_de_humedad", ["subclase_de_humedad_id", "humedad_id"], name: "subclases_humedades", unique: true, using: :btree
 
   create_table "ign_provincias", primary_key: "gid", force: :cascade do |t|
     t.string    "objeto", limit: 50
@@ -247,6 +318,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "pedregosidades", ["perfil_id"], name: "index_pedregosidades_on_perfil_id", unique: true, using: :btree
 
+  create_table "pendientes", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "perfiles", force: :cascade do |t|
     t.string   "numero"
     t.integer  "drenaje_id"
@@ -284,6 +359,27 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "perfiles_proyectos", ["proyecto_id", "perfil_id"], name: "index_perfiles_proyectos_on_proyecto_id_and_perfil_id", using: :btree
 
+  create_table "permeabilidades", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "plasticidades", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "posiciones", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "provincias", force: :cascade do |t|
+    t.string  "nombre",            null: false
+    t.string  "pais_alpha_3"
+    t.integer "data_oficial_id"
+    t.string  "data_oficial_type"
+  end
+
+  add_index "provincias", ["data_oficial_type", "data_oficial_id"], name: "index_provincias_on_data_oficial_type_and_data_oficial_id", using: :btree
+
   create_table "proyectos", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
@@ -295,6 +391,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "proyectos", ["nombre"], name: "index_proyectos_on_nombre", unique: true, using: :btree
 
+  create_table "relieves", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string  "name"
     t.integer "resource_id"
@@ -303,6 +403,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sales", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "series", force: :cascade do |t|
     t.string   "nombre"
@@ -316,6 +420,23 @@ ActiveRecord::Schema.define(version: 20161014224551) do
   end
 
   add_index "series", ["provincia_id"], name: "index_series_on_provincia_id", using: :btree
+
+  create_table "subclases_de_capacidad", force: :cascade do |t|
+    t.string "codigo",      null: false
+    t.string "descripcion"
+  end
+
+  create_table "subclases_de_erosion", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "subclases_de_humedad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "subclases_de_pedregosidad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -336,6 +457,20 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "texturas", force: :cascade do |t|
+    t.string "clase",   null: false
+    t.string "textura"
+    t.string "suelo"
+  end
+
+  create_table "tipos_de_estructura", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "tipos_de_limite", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
   create_table "ubicaciones", force: :cascade do |t|
     t.geometry "coordenadas", limit: {:srid=>4326, :type=>"point"}
     t.string   "descripcion"
@@ -349,6 +484,10 @@ ActiveRecord::Schema.define(version: 20161014224551) do
 
   add_index "ubicaciones", ["coordenadas"], name: "index_ubicaciones_on_coordenadas", using: :gist
   add_index "ubicaciones", ["perfil_id"], name: "index_ubicaciones_on_perfil_id", unique: true, using: :btree
+
+  create_table "usos_de_la_tierra", force: :cascade do |t|
+    t.string "valor", null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "nombre"

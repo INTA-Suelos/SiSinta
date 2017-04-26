@@ -1,7 +1,15 @@
-# encoding: utf-8
+# Creación de modelos para los tests. Sin argumentos ni traits debería crear
+# modelos que pasen la validación.
 FactoryGirl.define do
   factory :humedad do
-    clase_id 1
-    subclase_ids { Array.wrap((rand(4) + 1).times.collect { rand(4) + 1 }).uniq }
+    perfil
+
+    transient { con_subclases 0 }
+
+    after(:create) do |humedad, params|
+      params.con_subclases.times do
+        humedad.subclases << build(:subclase_de_humedad)
+      end
+    end
   end
 end

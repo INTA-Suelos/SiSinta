@@ -26,7 +26,6 @@ gem 'rails-jquery-autocomplete'
 
 ## Modelos
 gem 'paperclip'
-gem 'active_hash'
 gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'

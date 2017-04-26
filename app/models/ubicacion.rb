@@ -37,20 +37,19 @@ class Ubicacion < ActiveRecord::Base
     where(poligonos.st_intersects(puntos))
   end
 
-  # Encuentra las ubicaciones dentro de una o más provincias
-  def self.en_provincias(provincia_ids)
-    poligonos = IgnProvincia.arel_table[:geog]
+  # Encuentra las ubicaciones dentro de una o más provincias del mismo país
+  def self.en_provincias(provincia_ids, data_oficial)
+    # Si no tenemos data oficial de polígonos, no podemos buscar ubicaciones
+    return Ubicacion.none unless data_oficial.respond_to?(:poligonos)
 
-    # FIXME Reemplazar por query cuando convierta Provincia a ActiveRecord
-    #
-    #   gids = Provincia.select(:gid).where(id: provincia_ids)
-    #
-    # Tal vez pueda unificarla con el otro where
-    gids = Provincia.find(Array.wrap(provincia_ids)).map(&:ign_provincia_id)
+    # TODO Ver si se puede unificar con el otro where
+    gids = Provincia.select(:data_oficial_id).where(id: provincia_ids)
 
-    Ubicacion.en_poligonos(poligonos)
-      .where(ign_provincias: { gid: gids })
-      .from('ubicaciones, ign_provincias')
+    # Se configura la consulta según la tabla que contiene los datos
+    # geográficos de estas provincias
+    Ubicacion.en_poligonos(data_oficial.poligonos)
+      .where(data_oficial.table_name => { data_oficial.primary_key => gids })
+      .from("ubicaciones, #{data_oficial.table_name}")
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -70,10 +69,10 @@ class Ubicacion < ActiveRecord::Base
     self.transformar(4326, srid, x, y)
   end
 
-  def self.transformar(origen, destino, x, y, proyectar = true)
+  def self.transformar(srid_origen, srid_destino, x, y, proyectar = true)
     unless x.blank? || y.blank?
-      fabrica_origen  = FormatoDeCoordenadas.srid(origen).fabrica
-      fabrica_destino = FormatoDeCoordenadas.srid(destino).fabrica
+      fabrica_origen  = FormatoDeCoordenadas.fabrica(srid_origen)
+      fabrica_destino = FormatoDeCoordenadas.fabrica(srid_destino)
       RGeo::Feature.cast(
         fabrica_origen.point(x.to_f, y.to_f),
         factory: fabrica_destino,
