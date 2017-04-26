@@ -131,6 +131,7 @@ class Ubicacion < ActiveRecord::Base
       self.coordenadas = "POINT(#{x} #{y})"
     end
 
+    # Carga las variables de instancia donde accedemos a x e y, desde las coordenadas.
     def cargar_x_y
       self.x = coordenadas.x if coordenadas
       self.y = coordenadas.y if coordenadas
