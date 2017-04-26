@@ -1,7 +1,7 @@
 # Creación de modelos para los tests. Sin argumentos ni traits debería crear
 # modelos que pasen la validación.
 FactoryGirl.define do
-  factory :pedregosidad do
-    perfil
+  factory :subclase_de_pedregosidad do
+    valor { generate :cadena_unica }
   end
 end

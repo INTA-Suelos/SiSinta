@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123083431) do
+ActiveRecord::Schema.define(version: 20170426020641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,10 @@ ActiveRecord::Schema.define(version: 20161123083431) do
   end
 
   create_table "clases_de_humedad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "clases_de_pedregosidad", force: :cascade do |t|
     t.string "valor", null: false
   end
 
@@ -427,6 +431,10 @@ ActiveRecord::Schema.define(version: 20161123083431) do
   end
 
   create_table "subclases_de_humedad", force: :cascade do |t|
+    t.string "valor", null: false
+  end
+
+  create_table "subclases_de_pedregosidad", force: :cascade do |t|
     t.string "valor", null: false
   end
 
