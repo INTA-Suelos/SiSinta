@@ -12,6 +12,7 @@ class FormatoDeCoordenadas < ActiveRecord::Base
   end
 
   # Busca e inicializa una fábrica de coordenadas según el srid requerido
+  # FIXME No debería ser spherical para los srids que son proyecciones
   def self.fabrica(srid)
     RGeo::Geographic.spherical_factory(
       srs_database: RGeo::CoordSys::SRSDatabase::ActiveRecordTable.new,
