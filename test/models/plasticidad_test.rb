@@ -12,4 +12,15 @@ class PlasticidadTest < ActiveSupport::TestCase
       build_stubbed(:plasticidad, valor: nil).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :plasticidad }
+    let(:consistencia) { create :consistencia, plasticidad: subject }
+
+    it 'se recorre en ambos sentidos' do
+      consistencia.plasticidad.must_equal subject
+
+      subject.consistencias.first.must_equal consistencia
+    end
+  end
 end

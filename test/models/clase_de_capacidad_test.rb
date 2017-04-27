@@ -12,4 +12,15 @@ class ClaseDeCapacidadTest < ActiveSupport::TestCase
       build_stubbed(:clase_de_capacidad, codigo: nil).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :clase_de_capacidad }
+    let(:capacidad) { create :capacidad, clase: subject }
+
+    it 'se recorre en ambos sentidos' do
+      capacidad.clase.must_equal subject
+
+      subject.capacidades.first.must_equal capacidad
+    end
+  end
 end

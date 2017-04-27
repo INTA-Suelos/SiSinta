@@ -12,4 +12,15 @@ class ClaseDeErosionTest < ActiveSupport::TestCase
       build(:clase_de_erosion, valor: nil).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :clase_de_erosion }
+    let(:erosion) { create :erosion, clase: subject }
+
+    it 'se recorre en ambos sentidos' do
+      erosion.clase.must_equal subject
+
+      subject.erosiones.first.must_equal erosion
+    end
+  end
 end

@@ -2,7 +2,6 @@
 # Perfil
 class Pedregosidad < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :pedregosidad
-
   belongs_to :clase, inverse_of: :pedregosidades, class_name: 'ClaseDePedregosidad'
   belongs_to :subclase, inverse_of: :pedregosidades, class_name: 'SubclaseDePedregosidad'
 

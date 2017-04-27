@@ -12,4 +12,15 @@ class FormaDeLimiteTest < ActiveSupport::TestCase
       build(:forma_de_limite, valor: nil).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :forma_de_limite }
+    let(:limite) { create :limite, forma: subject }
+
+    it 'se recorre en ambos sentidos' do
+      limite.forma.must_equal subject
+
+      subject.limites.first.must_equal limite
+    end
+  end
 end

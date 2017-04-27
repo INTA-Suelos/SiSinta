@@ -12,4 +12,15 @@ class ConsistenciaEnHumedoTest < ActiveSupport::TestCase
       build_stubbed(:consistencia_en_humedo, valor: nil).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :consistencia_en_humedo }
+    let(:consistencia) { create :consistencia, en_humedo: subject }
+
+    it 'se recorre en ambos sentidos' do
+      consistencia.en_humedo.must_equal subject
+
+      subject.consistencias.first.must_equal consistencia
+    end
+  end
 end

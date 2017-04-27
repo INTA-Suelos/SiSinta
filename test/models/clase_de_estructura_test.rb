@@ -14,4 +14,15 @@ class ClaseDeEstructuraTest < ActiveSupport::TestCase
       build(:clase_de_estructura, valor: subject.valor).wont_be :valid?
     end
   end
+
+  describe 'asociaciones' do
+    subject { create :clase_de_estructura }
+    let(:estructura) { create :estructura, clase: subject }
+
+    it 'se recorre en ambos sentidos' do
+      estructura.clase.must_equal subject
+
+      subject.estructuras.first.must_equal estructura
+    end
+  end
 end

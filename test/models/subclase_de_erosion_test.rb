@@ -17,4 +17,15 @@ class SubclaseDeErosionTest < ActiveSupport::TestCase
     subject.wont_be :acumulacion?
     build(:subclase_de_erosion, valor: 'acumulación').must_be :acumulacion?
   end
+
+  describe 'asociaciones' do
+    subject { create :subclase_de_erosion }
+    let(:erosion) { create :erosion, subclase: subject }
+
+    it 'se recorre en ambos sentidos' do
+      erosion.subclase.must_equal subject
+
+      subject.erosiones.first.must_equal erosion
+    end
+  end
 end
