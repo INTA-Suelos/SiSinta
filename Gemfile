@@ -72,7 +72,6 @@ gem 'dalli'
 
 ## Desarrollo pero útiles en producción
 gem 'minitest-rails'
-gem 'version'
 gem 'awesome_print'
 gem 'pry-rails'
 gem 'hirb'
