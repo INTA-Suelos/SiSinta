@@ -12,10 +12,12 @@ class Ability
   def initialize(usuario = nil)
     @usuario = usuario || Usuario.new
 
-    @perfiles = [ Perfil, Horizonte, Analitico, Adjunto, Erosion, Ubicacion,
-                  Humedad, Paisaje, Pedregosidad, Limite, Consistencia,
-                  Estructura, Busqueda ]
-    @basicos =  [ Grupo, Fase, Color, Proyecto, Serie, Equipo ]
+    @perfiles = [
+      Perfil, Horizonte, Analitico, Adjunto, Erosion, Ubicacion,
+      Humedad, Paisaje, Pedregosidad, Limite, Consistencia,
+      Estructura, Busqueda
+    ]
+    @basicos =  [Grupo, Fase, Color, Proyecto, Serie, Equipo]
     @recursos = @perfiles + @basicos
 
     alias_action  :autocomplete_usuario_nombre,
@@ -63,7 +65,7 @@ class Ability
       can :read, recursos
       can :create, recursos
       can :manage, perfiles, usuario_id: @usuario.id
-      can :manage, [ Equipo, Proyecto, Serie ], usuario_id: @usuario.id
+      can :manage, [Equipo, Proyecto, Serie], usuario_id: @usuario.id
       can :update, Equipo, miembros: { id: @usuario.id }
     end
 

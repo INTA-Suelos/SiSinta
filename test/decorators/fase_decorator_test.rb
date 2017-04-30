@@ -1,11 +1,12 @@
-require './test/test_helper'
+require 'test_helper'
 
-describe FaseDecorator do
-  subject { build(:fase) }
+class FaseDecoratorTest < ActiveSupport::TestCase
+  subject { FaseDecorator.new fase }
+  let(:fase) { build :fase }
 
   describe '#nombre' do
     it 'devuelve el nombre del objeto decorado' do
-      FaseDecorator.new(subject).nombre.must_equal subject.nombre
+      subject.nombre.must_equal fase.nombre
     end
 
     it 'devuelve una cadena vacía sin objeto decorado' do

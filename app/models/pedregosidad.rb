@@ -1,13 +1,12 @@
-# encoding: utf-8
+# Modelo asociativo para los valores (clase y subclase) de Pedregosidad de cada
+# Perfil
 class Pedregosidad < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :pedregosidad
+  belongs_to :clase, inverse_of: :pedregosidades, class_name: 'ClaseDePedregosidad'
+  belongs_to :subclase, inverse_of: :pedregosidades, class_name: 'SubclaseDePedregosidad'
 
-  has_lookup :clase, inverse_of: :pedregosidades,
-              class_name: 'ClaseDePedregosidad'
-  has_lookup :subclase, inverse_of: :pedregosidades,
-              class_name: 'SubclaseDePedregosidad'
+  validates :perfil, presence: true
 
-  validates_presence_of :perfil
   delegate :publico, :usuario, :usuario_id, to: :perfil
 
   # TODO A un decorator

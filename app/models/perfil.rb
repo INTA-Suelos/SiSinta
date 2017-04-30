@@ -1,4 +1,5 @@
-# encoding: utf-8
+# El Perfil (o calicata) es el modelo principal del sistema, unifica toda la
+# información relacionada con un punto en el terreno.
 class Perfil < ActiveRecord::Base
   normalize_attributes :observaciones, :numero
 
@@ -38,8 +39,15 @@ class Perfil < ActiveRecord::Base
   belongs_to :grupo
   belongs_to :serie, counter_cache: :cantidad_de_perfiles
 
-  has_lookups :escurrimiento, :pendiente, :permeabilidad, :relieve,
-              :anegamiento, :posicion, :drenaje, :sal, :uso_de_la_tierra
+  belongs_to :drenaje
+  belongs_to :escurrimiento
+  belongs_to :pendiente
+  belongs_to :permeabilidad
+  belongs_to :relieve
+  belongs_to :anegamiento
+  belongs_to :uso_de_la_tierra
+  belongs_to :posicion
+  belongs_to :sal
 
   has_and_belongs_to_many :proyectos
 

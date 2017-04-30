@@ -26,7 +26,6 @@ gem 'rails-jquery-autocomplete'
 
 ## Modelos
 gem 'paperclip'
-gem 'active_hash'
 gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
@@ -73,7 +72,6 @@ gem 'dalli'
 
 ## Desarrollo pero útiles en producción
 gem 'minitest-rails'
-gem 'version'
 gem 'awesome_print'
 gem 'pry-rails'
 gem 'hirb'
@@ -91,7 +89,8 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-passenger'
   gem 'capistrano-config_provider',
-    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git'
+    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git',
+    require: false
   gem 'brakeman', require: false
 end
 

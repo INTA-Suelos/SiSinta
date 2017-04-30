@@ -1,6 +1,7 @@
-# encoding: utf-8
-class TipoDeEstructura < Lookup
-  has_many :estructuras, inverse_of: :tipo, foreign_key: 'tipo_id'
+# Mantiene los valores posibles para el Tipo de Estructura en la ficha de
+# Perfiles
+class TipoDeEstructura < ActiveRecord::Base
+  has_many :estructuras, inverse_of: :tipo, foreign_key: :tipo_id
 
-  field :valor
+  validates :valor, uniqueness: true
 end

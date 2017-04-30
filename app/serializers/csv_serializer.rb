@@ -1,4 +1,3 @@
-# encoding: utf-8
 class CSVSerializer < ActiveModel::ArraySerializer
   # Opciones:
   # - headers: true o false para incluir headers o no

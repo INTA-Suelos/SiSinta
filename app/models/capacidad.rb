@@ -1,27 +1,13 @@
-# encoding: utf-8
+# Modelo asociativo para los valores (clase y subclases) de Capacidad de cada
+# Perfil en la ficha de Perfiles
 class Capacidad < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :capacidad
+  belongs_to :clase, class_name: 'ClaseDeCapacidad', inverse_of: :capacidades
+  has_and_belongs_to_many :subclases, class_name: 'SubclaseDeCapacidad', inverse_of: :capacidades
 
-  has_lookup :clase, inverse_of: :capacidades,
-              class_name: 'ClaseDeCapacidad'
+  validates :perfil, presence: true
 
-  # Pseudoasociación HABTM con SubclaseDeCapacidad. Permite modificarla
-  # mediante   # +subclase_ids+ o mediante +subclases+
-  serialize :subclase_ids, Array
-  guardar_como_arreglo :subclase, SubclaseDeCapacidad
-  attr_accessor :subclases
-
-  validates_presence_of :perfil
   delegate :publico, :usuario, :usuario_id, to: :perfil
-
-  # TODO reingeniería en +guardar_como_arreglo+
-  ransacker :subclase, formatter: proc { |v|
-      Capacidad.where(Capacidad.arel_table[:subclase_ids].matches(
-        "%#{SubclaseDeCapacidad.find_by_valor(v).id}%"
-      )).pluck(:id)
-    } do |parent|
-    parent.table[:id]
-  end
 
   def self.ransackable_attributes(auth_object = nil)
     super(auth_object) - ['perfil_id', 'id', 'subclase_ids']

@@ -1,43 +1,78 @@
 require './test/test_helper'
 
 class SerieTest < ActiveSupport::TestCase
-  test 'requiere el nombre' do
-    assert build_stubbed(:serie_anonima).invalid?, 'Valida sin nombre'
+  subject { build :serie }
+  let(:provincia) { create :provincia }
+
+  describe 'validaciones' do
+    it 'es válida' do
+      subject.must_be :valid?
+    end
+
+    it 'requiere el nombre' do
+      build_stubbed(:serie, nombre: nil).wont_be :valid?
+    end
+
+    it 'no permite nombres duplicados dentro de la misma provincia' do
+      create :serie, provincia: provincia, nombre: 'duplicado'
+
+      build_stubbed(:serie, provincia: provincia, nombre: 'duplicado').wont_be :valid?
+    end
+
+    it 'no permite símbolos duplicados dentro de la misma provincia' do
+      create :serie, provincia: provincia, simbolo: 'duplicado'
+
+      build_stubbed(:serie, provincia: provincia, simbolo: 'duplicado').wont_be :valid?
+    end
+
+    it 'permite nombres duplicados en diferentes provincias' do
+      create :serie, provincia: provincia, nombre: 'duplicado'
+
+      build_stubbed(:serie, provincia: create(:provincia), nombre: 'duplicado').must_be :valid?
+    end
+
+    it 'permite símbolos duplicados en diferentes provincias' do
+      create :serie, provincia: provincia, simbolo: 'duplicado'
+
+      build_stubbed(:serie, provincia: create(:provincia), simbolo: 'duplicado').must_be :valid?
+    end
   end
 
-  test 'no permite nombres duplicados dentro de la misma provincia' do
-    existente = create(:serie, provincia_id: 1).nombre
+  describe '.cantidad_de_perfiles' do
+    it 'el contador de perfiles inicia en 0' do
+      subject.cantidad_de_perfiles.must_equal 0
+      subject.save!
+      subject.cantidad_de_perfiles.must_equal 0
+    end
 
-    assert build_stubbed(:serie, provincia_id: 1, nombre: existente).invalid?, 'Permite nombres duplicados'
+    it 'actualiza el contador de perfiles' do
+      subject.update_attributes perfiles_attributes: [attributes_for(:perfil)]
+
+      subject.reload.cantidad_de_perfiles.must_equal 1
+    end
   end
 
-  test 'no permite símbolos duplicados dentro de la misma provincia' do
-    existente = create(:serie, provincia_id: 1).simbolo
+  describe '.perfil_modal' do
+    subject { create :serie }
+    let(:modal) { create :perfil, modal: true, serie: subject }
+    let(:no_modal) { create :perfil, modal: false, serie: subject }
 
-    assert build_stubbed(:serie, provincia_id: 1, simbolo: existente).invalid?, 'Permite símbolos duplicados'
-  end
+    it 'accede a su perfil modal y viceversa' do
+      modal.serie.must_equal subject
 
-  test 'permite nombres duplicados en diferentes provincias' do
-    existente = create(:serie, provincia_id: 1).nombre
+      subject.perfil_modal.must_equal modal
+    end
 
-    assert build_stubbed(:serie, provincia_id: 2, nombre: existente).valid?
-  end
+    # TODO Verificar que éste sea el comportamiento buscado
+    it 'un nuevo perfil modal reemplaza al anterior' do
+      modal.must_be :persisted?
+      subject.perfil_modal.must_equal modal
+      subject.perfiles.count.must_equal 1
 
-  test 'permite símbolos duplicados en diferentes provincias' do
-    existente = create(:serie, provincia_id: 1).simbolo
+      nuevo_modal = create :perfil, modal: true, serie: subject
 
-    assert build_stubbed(:serie, provincia_id: 2, simbolo: existente).valid?
-  end
-
-  test 'el contador de perfiles inicia en 0' do
-    serie = create(:serie)
-    assert_equal 0, serie.cantidad_de_perfiles, 'No tiene valor omisión igual a 0'
-  end
-
-  test 'actualiza el contador de perfiles' do
-    serie = create(:serie)
-    serie.perfiles.create attributes_for(:perfil).slice(:fecha)
-
-    assert_equal 1, serie.reload.cantidad_de_perfiles, 'No actualiza el contador'
+      subject.reload.perfil_modal.must_equal nuevo_modal
+      subject.perfiles.count.must_equal 2
+    end
   end
 end

@@ -1,6 +1,7 @@
-# encoding: utf-8
-class SubclaseDePedregosidad < Lookup
-  has_many :pedregosidades, inverse_of: :subclase, foreign_key: 'subclase_id'
+# Mantiene los valores posibles para la Subclase de Pedregosidad en la ficha de
+# Perfiles
+class SubclaseDePedregosidad < ActiveRecord::Base
+  has_many :pedregosidades, inverse_of: :subclase, foreign_key: :subclase_id
 
-  field :valor
+  validates :valor, presence: true
 end

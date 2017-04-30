@@ -1,9 +1,7 @@
-# encoding: utf-8
+# Creación de modelos para los tests. Sin argumentos ni traits debería crear
+# modelos que pasen la validación.
 FactoryGirl.define do
   factory :horizonte do
     perfil
-    sequence(:profundidad_superior) { |n| n + 4 }
-    profundidad_inferior { profundidad_superior + 2 }
-    ph 1.5
   end
 end

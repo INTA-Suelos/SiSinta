@@ -119,6 +119,11 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   describe '#transformar_a_wgs84!' do
+    before do
+      create :formato_de_coordenadas, srid: 4326
+      create :formato_de_coordenadas, srid: 22177
+    end
+
     it 'transforma a 4326' do
       coordenadas_previas = subject.coordenadas.dup
 
@@ -138,6 +143,11 @@ class UbicacionTest < ActiveSupport::TestCase
   end
 
   describe '.transformar' do
+    before do
+      create :formato_de_coordenadas, srid: 4326
+      create :formato_de_coordenadas, srid: 22177
+    end
+
     let(:a_4326) { Ubicacion.transformar(22177, 4326, '7180428.8164', '7550269.2664') }
     let(:de_4326) { Ubicacion.transformar(4326, 22177, '-54', '-26') }
 
@@ -177,6 +187,29 @@ class UbicacionTest < ActiveSupport::TestCase
       geojson['type'].must_equal 'Feature'
       geojson['geometry']['type'].must_equal 'Point'
       geojson['geometry']['coordinates'].must_equal [subject.x, subject.y]
+    end
+  end
+
+  describe '::en_provincias' do
+    it 'devuelve una lista de ubicaciones' do
+      resultado = Ubicacion.en_provincias create(:provincia).to_param, IgnProvincia
+
+      resultado.must_be_instance_of Ubicacion::ActiveRecord_Relation
+    end
+
+    it 'devuelve una relación vacía si data_oficial no tiene polígonos' do
+      resultado = Ubicacion.en_provincias create(:provincia).to_param, nil
+
+      resultado.must_be_instance_of Ubicacion::ActiveRecord_Relation
+      resultado.must_be :empty?
+    end
+  end
+
+  describe '::en_poligonos' do
+    it 'devuelve una lista de ubicaciones' do
+      Ubicacion.en_poligonos(
+        IgnProvincia.arel_table[:geom]
+      ).must_be_instance_of Ubicacion::ActiveRecord_Relation
     end
   end
 end

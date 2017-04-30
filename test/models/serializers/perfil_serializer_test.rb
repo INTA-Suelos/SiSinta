@@ -7,7 +7,7 @@ class PerfilSerializerTest < ActiveSupport::TestCase
 
   it 'serializa todos los lookups normales' do
     # Lookups
-    %i{ drenaje relieve posicion pendiente escurrimiento permeabilidad
+    %i{ drenaje escurrimiento relieve posicion pendiente permeabilidad
         anegamiento uso_de_la_tierra }.each do |lookup|
       datos[lookup].must_equal LookupSerializer.new(perfil.send(lookup)).serializable_hash, "Falló #{lookup}"
     end

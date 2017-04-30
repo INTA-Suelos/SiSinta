@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Procesa archivos CSV y los convierte en modelos del sistema.
 class Deserializador
   attr_accessor :horizontes, :usuario
@@ -85,7 +84,7 @@ class Deserializador
       vegetacion_o_cultivos: datos['perfil_vegetacion_o_cultivos'],
       observaciones: datos['perfil_observaciones'],
       capacidad_attributes: {
-        clase_id: ClaseDeCapacidad.find_by_valor(datos['perfil_capacidad_clase']).to_param },
+        clase_id: ClaseDeCapacidad.find_by(codigo: datos['perfil_capacidad_clase']).to_param },
       ubicacion_attributes: {
         descripcion: datos['perfil_ubicacion_descripcion'],
         recorrido: datos['perfil_ubicacion_recorrido'],
@@ -97,32 +96,32 @@ class Deserializador
         forma: datos['perfil_paisaje_forma'],
         simbolo: datos['perfil_paisaje_simbolo'] },
       humedad_attributes: {
-        clase_id: ClaseDeHumedad.find_by_valor(datos['perfil_humedad_clase']).to_param },
+        clase_id: ClaseDeHumedad.find_by(valor: datos['perfil_humedad_clase']).to_param },
       erosion_attributes: {
-        clase_id: ClaseDeErosion.find_by_valor(datos['perfil_erosion_clase']).to_param,
-        subclase_id: SubclaseDeErosion.find_by_valor(datos['perfil_erosion_subclase']).to_param },
+        clase_id: ClaseDeErosion.find_by(valor: datos['perfil_erosion_clase']).to_param,
+        subclase_id: SubclaseDeErosion.find_by(valor: datos['perfil_erosion_subclase']).to_param },
       pedregosidad_attributes: {
         clase_id: ClaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_clase']).to_param,
         subclase_id: SubclaseDePedregosidad.find_by_valor(datos['perfil_pedregosidad_subclase']).to_param },
       serie_attributes: {
         nombre: datos['perfil_serie_nombre'],
         simbolo: datos['perfil_serie_simbolo'],
-        provincia_id: Provincia.find_by_valor(datos['perfil_serie_provincia']).to_param },
+        provincia_id: Provincia.find_by(nombre: datos['perfil_serie_provincia']).to_param },
       grupo_attributes: {
         codigo: datos['perfil_grupo_codigo'],
         descripcion: datos['perfil_grupo_descripcion'] },
       fase_attributes: {
         codigo: datos['perfil_fase_codigo'],
         nombre: datos['perfil_fase_nombre'] },
-      sal_id: Sal.find_by_valor(datos['perfil_sales']).to_param,
-      uso_de_la_tierra_id: UsoDeLaTierra.find_by_valor(datos['perfil_uso_de_la_tierra'].try(:downcase)).to_param,
-      relieve_id: Relieve.find_by_valor(datos['perfil_relieve'].try(:downcase)).to_param,
-      permeabilidad_id: Permeabilidad.find_by_valor(datos['perfil_permeabilidad'].try(:downcase)).to_param,
-      escurrimiento_id: Escurrimiento.find_by_valor(datos['perfil_escurrimiento'].try(:downcase)).to_param,
-      pendiente_id: Pendiente.find_by_valor(datos['perfil_pendiente'].try(:downcase)).to_param,
-      anegamiento_id: Anegamiento.find_by_valor(datos['perfil_anegamiento'].try(:downcase)).to_param,
-      drenaje_id: Drenaje.find_by_valor(datos['perfil_drenaje'].try(:downcase)).to_param,
-      posicion_id: Posicion.find_by_valor(datos['perfil_posicion'].try(:downcase)).to_param
+      drenaje_id: Drenaje.find_by(valor: datos['perfil_drenaje'].try(:downcase)).to_param,
+      escurrimiento_id: Escurrimiento.find_by(valor: datos['perfil_escurrimiento'].try(:downcase)).to_param,
+      pendiente_id: Pendiente.find_by(valor: datos['perfil_pendiente'].try(:downcase)).to_param,
+      permeabilidad_id: Permeabilidad.find_by(valor: datos['perfil_permeabilidad'].try(:downcase)).to_param,
+      relieve_id: Relieve.find_by(valor: datos['perfil_relieve'].try(:downcase)).to_param,
+      anegamiento_id: Anegamiento.find_by(valor: datos['perfil_anegamiento'].try(:downcase)).to_param,
+      uso_de_la_tierra_id: UsoDeLaTierra.find_by(valor: datos['perfil_uso_de_la_tierra'].try(:downcase)).to_param,
+      posicion_id: Posicion.find_by(valor: datos['perfil_posicion'].try(:downcase)).to_param,
+      sal_id: Sal.find_by(valor: datos['perfil_sales']).to_param
     )
   end
 
@@ -147,7 +146,7 @@ class Deserializador
         concreciones: h['concreciones'],
         formaciones_especiales: h['formaciones_especiales'],
         humedad: h['humedad'],
-        textura_id: TexturaDeHorizonte.find_by_valor(h['textura']).to_param,
+        textura_id: Textura.find_by(clase: h['textura']).to_param,
         analitico_attributes: {
           registro: h['analitico_registro'],
           humedad: h['analitico_humedad'],
@@ -187,17 +186,17 @@ class Deserializador
         color_seco_attributes: {
           hvc: h['color_seco_hvc'] },
         consistencia_attributes: {
-          en_seco_id: ConsistenciaEnSeco.find_by_valor(h['consistencia_en_seco']).to_param,
-          en_humedo_id: ConsistenciaEnHumedo.find_by_valor(h['consistencia_en_humedo']).to_param,
-          adhesividad_id: AdhesividadDeConsistencia.find_by_valor(h['consistencia_adhesividad']).to_param,
-          plasticidad_id: PlasticidadDeConsistencia.find_by_valor(h['consistencia_plasticidad']).to_param },
+          en_seco_id: ConsistenciaEnSeco.find_by(valor: h['consistencia_en_seco']).to_param,
+          en_humedo_id: ConsistenciaEnHumedo.find_by(valor: h['consistencia_en_humedo']).to_param,
+          adhesividad_id: Adhesividad.find_by(valor: h['consistencia_adhesividad']).to_param,
+          plasticidad_id: Plasticidad.find_by(valor: h['consistencia_plasticidad']).to_param },
         estructura_attributes: {
-          tipo_id: TipoDeEstructura.find_by_valor(h['estructura_tipo']).to_param,
-          clase_id: ClaseDeEstructura.find_by_valor(h['estructura_clase']).to_param,
-          grado_id: GradoDeEstructura.find_by_valor(h['estructura_grado']).to_param },
+          tipo_id: TipoDeEstructura.find_by(valor: h['estructura_tipo']).to_param,
+          clase_id: ClaseDeEstructura.find_by(valor: h['estructura_clase']).to_param,
+          grado_id: GradoDeEstructura.find_by(valor: h['estructura_grado']).to_param },
         limite_attributes: {
-          tipo_id: TipoDeLimite.find_by_valor(h['limite_tipo']).to_param,
-          forma_id: FormaDeLimite.find_by_valor(h['limite_forma']).to_param }
+          tipo_id: TipoDeLimite.find_by(valor: h['limite_tipo']).to_param,
+          forma_id: FormaDeLimite.find_by(valor: h['limite_forma']).to_param }
       )
     end and return perfil
   end

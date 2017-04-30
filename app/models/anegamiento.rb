@@ -1,6 +1,6 @@
-# encoding: utf-8
-class Anegamiento < Lookup
-  has_many :perfiles, inverse_of: :anegamiento
+# Mantiene los valores posibles para Anegamiento en la ficha de perfiles.
+class Anegamiento < ActiveRecord::Base
+  has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

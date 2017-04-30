@@ -1,6 +1,6 @@
-# encoding: utf-8
-class Permeabilidad < Lookup
-  has_many :perfiles, inverse_of: :permeabilidad
+# Mantiene los valores posibles para Permeabilidad en la ficha de perfiles.
+class Permeabilidad < ActiveRecord::Base
+  has_many :perfiles
 
-  field :valor
+  validates :valor, presence: true
 end

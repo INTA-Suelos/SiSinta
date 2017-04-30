@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PerfilSerializer < ActiveModel::Serializer
   attributes  :id, :numero, :profundidad_napa, :cobertura_vegetal,
               :material_original, :modal, :fecha, :vegetacion_o_cultivos,
