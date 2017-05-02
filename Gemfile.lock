@@ -112,6 +112,8 @@ GEM
     capistrano-rails (1.1.7)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rails-collection (0.1.0)
+      capistrano-rails (~> 1.1)
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
@@ -368,6 +370,7 @@ DEPENDENCIES
   capistrano-config_provider!
   capistrano-passenger
   capistrano-rails
+  capistrano-rails-collection
   capistrano-rbenv
   coffee-rails
   dalli

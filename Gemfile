@@ -93,6 +93,7 @@ group :development do
   gem 'capistrano-config_provider',
     git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git',
     require: false
+  gem 'capistrano-rails-collection'
   gem 'brakeman', require: false
 end
 
