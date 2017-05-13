@@ -8,6 +8,20 @@ que define en qué formato vamos a exportar) determina la estructura general, y
 llama a todos los demás Serializers, normalmente a través de un Perfil como
 punto de entrada, recorriendo todas sus relaciones recursivamente.
 
+# Serializers Raíz
+
+## GeojsonSerializer
+
+Recibe una colección de perfiles.
+
+## CSVSerializer
+
+Recibe una colección de perfiles o sus horizontes.
+
+## JsonApiSerializer
+
+Recibe cualquier modelo del sistema.
+
 # Perfil
 
 ## `has`
