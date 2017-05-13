@@ -51,6 +51,8 @@ FactoryGirl.define do
     factory :perfil_para_geojson do
       publico true
       serie
+      grupo
+      fase
       association :ubicacion, :con_coordenadas, strategy: :build
     end
   end

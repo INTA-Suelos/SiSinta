@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 class AnaliticoSerializerTest < ActiveSupport::TestCase
   subject { AnaliticoSerializer.new(analitico) }

@@ -1,30 +1,31 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class ColoresControllerTest < ActionController::TestCase
-  test 'autocompleta hvc' do
-    termino = create(:color).hvc
+describe ColoresController do
+  subject { create :color }
+
+  it 'autocompleta hvc' do
+    termino = subject.hvc
 
     get :autocomplete_color_hvc, term: termino
-    assert_response :success
-    assert_equal  Color.where("hvc like '%#{termino}%'").size,
-                  json.size
 
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver el hvc'
+    must_respond_with :success
+    json.size.must_equal Color.where("hvc like '%#{termino}%'").size
+
+    json.first.include?('id').must_equal true
+    json.first.include?('label').must_equal true
+    json.first.include?('value').must_equal true
   end
 
-  test 'autocompleta rgb' do
-    termino = create(:color).rgb
+  it 'autocompleta rgb' do
+    termino = subject.rgb
 
     get :autocomplete_color_rgb, term: termino
-    assert_response :success
-    assert_equal  Color.where("rgb like '%#{termino}%'").size,
-                  json.size
 
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver el rgb'
+    must_respond_with :success
+    json.size.must_equal Color.where("rgb like '%#{termino}%'").size
+
+    json.first.include?('id').must_equal true
+    json.first.include?('label').must_equal true
+    json.first.include?('value').must_equal true
   end
 end

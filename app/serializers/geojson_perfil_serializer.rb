@@ -1,4 +1,5 @@
 class GeojsonPerfilSerializer < ActiveModel::Serializer
+  # `clase` es grupo + fase
   attributes :id, :numero, :fecha, :clase, :serie, :url
 
   def as_json(*args)
@@ -10,6 +11,7 @@ class GeojsonPerfilSerializer < ActiveModel::Serializer
     factory.feature(object.coordenadas, nil, attributes)
   end
 
+  # TODO Testear comportamiento cuando no hay serie
   def serie
     { 'nombre' => object.serie.nombre,
       'url' => serie_url(object.serie) } if object.serie.present?

@@ -1,13 +1,42 @@
 require './test/test_helper'
 
 describe AnaliticosController do
-  describe 'autorizado' do
-    let(:perfil) { create(:perfil) }
+  let(:perfil) { create(:perfil) }
 
-    before do
-      create :ficha, :default
-      loguearse_como 'Autorizado'
+  before { create :ficha, :default }
+
+  describe 'no logueado' do
+    it 'muestra los analíticos si el perfil es público' do
+      publico = create :perfil, publico: true, horizontes: [create(:horizonte)]
+
+      get :index, perfil_id: publico.to_param
+
+      must_respond_with :success
     end
+
+    it 'redirije al inicio si el perfil es privado' do
+      privado = create :perfil, horizontes: [create(:horizonte)]
+
+      get :index, perfil_id: privado.to_param
+
+      must_redirect_to root_path
+    end
+  end
+
+  describe 'no autorizado' do
+    before { loguearse }
+
+    it 'redirije al inicio si no hay permisos' do
+      privado = create :perfil, horizontes: [create(:horizonte)]
+
+      get :index, perfil_id: privado.to_param
+
+      must_redirect_to root_path
+    end
+  end
+
+  describe 'autorizado' do
+    before { loguearse_como 'Autorizado' }
 
     it 'redirije al perfil si no hay horizontes' do
       get :index, perfil_id: perfil.to_param

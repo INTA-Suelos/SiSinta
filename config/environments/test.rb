@@ -43,7 +43,5 @@ SiSINTA::Application.configure do
   # símbolo :url que está definido en el modelo Adjunto
   config.adjunto_path = '/var/tmp/sisinta-dev:url'
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = 'test.host'
 end

@@ -48,5 +48,9 @@ module SiSINTA
 
     # Servir clientes web y API
     config.api_only = false
+
+    config.generators do |g|
+      g.test_framework :minitest, spec: true, fixture: false
+    end
   end
 end

@@ -3,12 +3,13 @@ class Analitico < ActiveRecord::Base
   belongs_to :horizonte
   has_one :perfil, through: :horizonte
 
-  validates_presence_of :horizonte
+  validates :horizonte, presence: true
   validates_numericality_of :registro, :ph_pasta, :densidad_aparente, :ph_h2o,
                             :ph_kcl, :resistencia_pasta, :conductividad,
                             :base_ca, :base_mg, :base_k, :base_na, :base_al,
                             :s, :t, :h, :carbono_organico_cn,
                             allow_nil: true
+  # Porcentajes
   validates_numericality_of :carbono_organico_c, :carbono_organico_n, :ca_co3,
                             :arcilla, :limo_2_20, :limo_2_50, :arena_muy_fina,
                             :arena_fina, :arena_media, :arena_gruesa,

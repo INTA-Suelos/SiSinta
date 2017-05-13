@@ -65,6 +65,8 @@ class PerfilDecorator < ApplicationDecorator
 
   # En el GeoJSON le decimos `clase` a grupo + fase. Sólo se muestra si el
   # perfil es público o el usuario puede leerlo.
+  # TODO Testear comportamiento cuando no hay grupo o fase
+  # TODO Pasar al serializer?
   def clase
     if publico? || h.can?(:read, source)
       [grupo.descripcion, fase.nombre].join(' ').strip

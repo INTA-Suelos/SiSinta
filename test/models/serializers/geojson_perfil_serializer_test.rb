@@ -1,46 +1,49 @@
-require './test/test_helper'
+require 'test_helper'
 
-class GeojsonPerfilSerializerTest < ActiveSupport::TestCase
-  # Para testear que incluya links
+describe GeojsonPerfilSerializer do
   include Rails.application.routes.url_helpers
 
   subject { GeojsonPerfilSerializer.new perfil }
   let(:perfil) { create(:perfil_para_geojson).decorate }
   let(:geojson) { subject.as_json }
 
-  it 'incluye el id del perfil' do
-    assert_equal perfil.id, geojson.properties['id']
-  end
+  describe 'properties' do
+    it 'incluye el id del perfil' do
+      geojson.properties['id'].must_equal perfil.id
+    end
 
-  it 'incluye el número del perfil' do
-    assert_equal perfil.numero, geojson.properties['numero']
-  end
+    it 'incluye el número del perfil' do
+      geojson.properties['numero'].must_equal perfil.numero
+    end
 
-  it 'incluye la fecha del perfil' do
-    assert_equal perfil.fecha, geojson.properties['fecha']
-  end
+    it 'incluye la fecha del perfil' do
+      geojson.properties['fecha'].must_equal perfil.fecha
+    end
 
-  it 'incluye la clase del perfil' do
-    assert_equal perfil.clase, geojson.properties['clase']
-  end
+    it 'incluye la clase del perfil' do
+      geojson.properties['clase'].must_equal perfil.clase
+    end
 
-  it 'incluye un link al perfil' do
-    assert_equal perfil_url(perfil), geojson.properties['url']
-  end
+    it 'incluye un link al perfil' do
+      geojson.properties['url'].must_equal perfil_url(perfil)
+    end
 
-  it 'incluye el nombre anidado de la serie' do
-    assert_equal perfil.nombre, geojson.properties['serie']['nombre']
-  end
+    describe 'serie' do
+      it 'incluye el nombre de la serie' do
+        geojson.properties['serie']['nombre'].must_equal perfil.nombre
+      end
 
-  it 'incluye un link anidado a la serie' do
-    assert_equal serie_url(perfil.serie), geojson.properties['serie']['url']
-  end
+      it 'incluye un link a la serie' do
+        geojson.properties['serie']['url'].must_equal serie_url(perfil.serie)
+      end
 
-  it 'si el perfil no tiene serie el geojson no tiene serie' do
-    geojson = GeojsonPerfilSerializer.new(
-      create(:perfil_para_geojson, serie: nil).decorate
-    ).as_json
+      it 'si el perfil no tiene serie el geojson no tiene serie' do
+        geojson = GeojsonPerfilSerializer.new(
+          create(:perfil_para_geojson, serie: nil).decorate
+        ).as_json
 
-    assert_nil geojson.properties['serie']
+        geojson.properties['serie'].must_be :nil?
+      end
+    end
   end
 end

@@ -1,9 +1,9 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class InicioControllerTest < ActionController::TestCase
-  test 'va al inicio' do
+describe InicioController do
+  it 'va al inicio' do
     get :index
-    assert_response :success
+
+    must_respond_with :success
   end
 end
