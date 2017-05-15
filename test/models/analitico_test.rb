@@ -1,6 +1,19 @@
-require './test/test_helper'
+require 'test_helper'
 
 describe Analitico do
+  let(:horizonte) { build :horizonte }
+
+  describe 'validaciones' do
+    it 'requiere horizonte' do
+      build(:analitico, horizonte: nil).wont_be :valid?
+    end
+
+    it 'es válido' do
+      build(:analitico, horizonte: horizonte).must_be :valid?
+      build(:analitico, :completo, horizonte: horizonte).must_be :valid?
+    end
+  end
+
   describe 'Campos con precision: 5, scale: 2' do
     let(:campos) do
       [
@@ -66,12 +79,14 @@ describe Analitico do
   describe 'Campos con precision: 4, scale: 1' do
     let(:campos) { [:p_ppm] }
 
+    # FIXME Generalizar
     it 'está entre 0 y 100' do
       build(:analitico, horizonte: build(:horizonte), p_ppm: 100.1).wont_be :valid?
       build(:analitico, horizonte: build(:horizonte), p_ppm: 50.1).must_be :valid?
       build(:analitico, horizonte: build(:horizonte), p_ppm: -0.1).wont_be :valid?
     end
 
+    # FIXME Generalizar
     it 'usa precisión 000.0' do
       a = create(:horizonte, analitico_attributes: { p_ppm: 0.41 }).analitico
 

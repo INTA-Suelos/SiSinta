@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Analitico < ActiveRecord::Base
-  belongs_to :horizonte
+  belongs_to :horizonte, inverse_of: :analitico
   has_one :perfil, through: :horizonte
 
   validates :horizonte, presence: true

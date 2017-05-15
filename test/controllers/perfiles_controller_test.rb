@@ -67,7 +67,7 @@ describe PerfilesController do
     it 'actualiza todos los datos analíticos' do
       perfil = create(:perfil, usuario: usuario)
       perfil.horizontes.create(attributes_for(:horizonte))
-      analitico = attributes_for(:analitico, id: perfil.analiticos.first.id)
+      analitico = attributes_for(:analitico, :completo, id: perfil.analiticos.first.id)
 
       put :update_analiticos, id: perfil.to_param, perfil: {
         analiticos_attributes: { '0' => analitico }
