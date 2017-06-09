@@ -37,7 +37,6 @@ es:
     admin:      'Administrador'
     miembro:    'Miembro'
     autorizado: 'Autorizado'
-
   perfiles:
     seleccionar:
       volver: 'Cancelar'
