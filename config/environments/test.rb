@@ -1,5 +1,6 @@
 SiSINTA::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Tirar error si no se encuentra un keyword en los locales
+  config.action_view.raise_on_missing_translations = true
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
