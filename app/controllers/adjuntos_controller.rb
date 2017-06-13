@@ -1,6 +1,8 @@
-# encoding: utf-8
 class AdjuntosController < AutorizadoController
   responders :collection
+
+  # Se permite el acceso a los adjuntos públicos (o sea de perfiles públicos)
+  skip_before_filter :authenticate_usuario!, only: [:index, :show, :descargar]
 
   # Carga los adjuntos a través del perfil
   load_and_authorize_resource :perfil

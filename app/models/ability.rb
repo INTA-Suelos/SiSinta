@@ -34,8 +34,12 @@ class Ability
                   :derivar,
                   :almacenar,
                   :exportar,
-                  :procesar,                              to: :read
-    alias_action  :editar_analiticos, :update_analiticos, to: :update
+                  :procesar,
+                  :descargar,
+                  to: :read
+
+    alias_action  :editar_analiticos, :update_analiticos,
+                  to: :update
 
     if @usuario.admin?
       administrador
