@@ -66,6 +66,8 @@ class Capybara::Rails::TestCase
   include ApplicationHelper
   include Warden::Test::Helpers # login_as
 
+  Rails.application.routes.default_url_options[:locale] = :es
+
   # No podemos usar transacciones con selenium
   DatabaseCleaner.strategy = :truncation
   self.use_transactional_fixtures = false

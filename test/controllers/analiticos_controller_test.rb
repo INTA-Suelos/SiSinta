@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 describe AnaliticosController do
   let(:perfil) { create(:perfil) }

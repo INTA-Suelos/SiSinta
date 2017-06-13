@@ -25,7 +25,7 @@ describe GeojsonPerfilSerializer do
     end
 
     it 'incluye un link al perfil' do
-      geojson.properties['url'].must_equal perfil_url(perfil)
+      geojson.properties['url'].must_equal perfil_url(I18n.locale, perfil)
     end
 
     describe 'serie' do
@@ -34,7 +34,7 @@ describe GeojsonPerfilSerializer do
       end
 
       it 'incluye un link a la serie' do
-        geojson.properties['serie']['url'].must_equal serie_url(perfil.serie)
+        geojson.properties['serie']['url'].must_equal serie_url(I18n.locale, perfil.serie)
       end
 
       it 'si el perfil no tiene serie el geojson no tiene serie' do

@@ -31,7 +31,6 @@ es:
         ph_h2o: 'pH en H2O (1:2,5)'
       busqueda:
         publico:  'Pública'
-
   confirmar:  '¿En serio? Es irreversible.'
   roles:
     admin:      'Administrador'

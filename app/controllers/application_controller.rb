@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  # Antes que nada configurar el locale
+  before_action :configurar_locale_para_request
   before_filter :descubrir_browser
   before_filter :agregar_parametros_permitidos, if: :devise_controller?
 
@@ -24,9 +26,21 @@ class ApplicationController < ActionController::Base
     super.try(:decorate)
   end
 
+  def configurar_locale_para_request
+    I18n.locale = locale_sanitizado(params[:locale])
+  end
+
+  # Confirmar que el parámetro enviado es uno de los locales soportados
+  def locale_sanitizado(locale)
+    I18n.available_locales.map(&:to_s).include?(locale) ? locale : I18n.default_locale
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
+
   # Completa variables de instancia para usar en las vistas con información sobre el navegador de la
   # solicitud.
-  #
   def descubrir_browser
     @ie = browser_is?('ie')
     @mobile = browser_is_mobile?

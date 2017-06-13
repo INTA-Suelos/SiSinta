@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 describe 'Perfiles Route Integration Test' do
   it 'rutea a editar_analiticos' do

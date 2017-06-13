@@ -1,4 +1,4 @@
-es:
+en:
   errors:
     format: '%{attribute}: %{message}'
   activerecord:
@@ -31,7 +31,6 @@ es:
         ph_h2o: 'pH H2O (1:2,5)'
       busqueda:
         publico:  'Public access'
-
   confirmar:  'Really? This will be permanent.'
   roles:
     admin:      'Administrator'
