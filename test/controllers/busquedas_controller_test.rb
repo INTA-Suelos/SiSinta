@@ -1,119 +1,116 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class BusquedasControllerTest < ActionController::TestCase
-  test 'accede a la lista de búsquedas sin loguearse' do
-    get :index
-    assert_response :success
-  end
-
-  test 'sin loguearse sólo ve búsquedas públicas en la lista' do
-    create(:busqueda)
-    publica = create(:busqueda, :publica)
-
-    get :index
-
-    assert_response :success
-    assert assigns(:busquedas_publicas).include? publica
-    assert assigns(:busquedas).empty?
-  end
-
-  test 'logueado ve sus búsquedas privadas en la lista' do
-    usuario = loguearse
-    privada = create(:busqueda, usuario: usuario)
-
-    autorizar do
+describe BusquedasController do
+  describe 'no logueado' do
+    it 'accede a la lista de búsquedas' do
       get :index
+
+      must_respond_with :success
     end
 
-    assert_response :success
-    assert assigns(:busquedas_publicas).empty?
-    assert assigns(:busquedas).include? privada
-  end
+    it 'sólo ve búsquedas públicas en la lista' do
+      create(:busqueda)
+      publica = create(:busqueda, :publica)
 
-  test 'sus propias búsquedas públicas no aparecen con las demás' do
-    usuario = loguearse
-    publica = create(:busqueda, :publica, usuario: usuario)
-
-    autorizar do
       get :index
+
+      must_respond_with :success
+      assigns(:busquedas_publicas).include?(publica).must_equal true
+      assigns(:busquedas).must_be :empty?
     end
 
-    assert_response :success
-    refute assigns(:busquedas_publicas).include? publica
-    assert assigns(:busquedas).include? publica
-  end
+    it 'va a nuevo' do
+      get :new
 
-  test 'va a nuevo sin loguearse' do
-    get :new
-
-    assert_response :success
-  end
-
-  test 'hace una búsqueda sin loguearse' do
-    consulta = build(:busqueda, :primeros_perfiles).consulta
-
-    post :create, q: consulta
-
-    assert_redirected_to seleccionar_perfiles_path(q: consulta)
-  end
-
-  test 'hace una búsqueda y la guarda' do
-    usuario = loguearse
-    busqueda = attributes_for(:busqueda, :publica, usuario: usuario)
-    consulta = build(:busqueda, :primeros_perfiles).consulta
-
-    post :create, busqueda: busqueda, q: consulta
-
-    assert_redirected_to busqueda_path(assigns(:busqueda))
-
-    assert_equal busqueda[:nombre], assigns(:busqueda).nombre
-    assert_equal busqueda[:publico], assigns(:busqueda).publica
-    assert_equal usuario, assigns(:busqueda).usuario
-    assert_equal consulta, assigns(:busqueda).consulta
-  end
-
-  test 'muestra una búsqueda sin loguearse' do
-    busqueda = create(:busqueda, :publica)
-
-    get :show, id: busqueda
-
-    assert_redirected_to seleccionar_perfiles_path(busqueda: busqueda.nombre, q: busqueda.consulta)
-  end
-
-  test 'va a editar si está autorizado' do
-    usuario = loguearse
-
-    autorizar do
-      get :edit, id: create(:busqueda, usuario: usuario)
+      must_respond_with :success
     end
 
-    assert_response :success
-  end
+    it 'hace una búsqueda' do
+      consulta = build(:busqueda, :primeros_perfiles).consulta
 
-  test 'actualiza una búsqueda si está autorizado' do
-    usuario = loguearse
-    busqueda = create(:busqueda, usuario: usuario)
+      post :create, q: consulta
 
-    autorizar do
-      put :update, id: busqueda, busqueda: { nombre: 'uno nuevo' }
+      must_redirect_to seleccionar_perfiles_path(q: consulta)
     end
 
-    assert_redirected_to busqueda_path(assigns(:busqueda))
-    assert_equal busqueda.id, assigns(:busqueda).id
-    assert_equal 'uno nuevo', assigns(:busqueda).nombre
+    it 'muestra una búsqueda' do
+      busqueda = create(:busqueda, :publica)
+
+      get :show, id: busqueda
+
+      must_redirect_to seleccionar_perfiles_path(busqueda: busqueda.nombre, q: busqueda.consulta)
+    end
   end
 
-  test 'elimina una busqueda si está autorizado' do
-    usuario = loguearse
-    busqueda = create(:busqueda, usuario: usuario)
+  describe 'logueado' do
+    let(:usuario) { loguearse }
 
-    assert_difference('Busqueda.count', -1) do
+    it 've sus búsquedas privadas en la lista' do
+      privada = create(:busqueda, usuario: usuario)
+
       autorizar do
-        delete :destroy, id: busqueda
+        get :index
       end
+
+      must_respond_with :success
+      assigns(:busquedas_publicas).must_be :empty?
+      assigns(:busquedas).include?(privada).must_equal true
     end
 
-    assert_redirected_to busquedas_path
+    it 'sus propias búsquedas públicas no aparecen con las demás' do
+      publica = create(:busqueda, :publica, usuario: usuario)
+
+      autorizar do
+        get :index
+      end
+
+      must_respond_with :success
+      assigns(:busquedas_publicas).include?(publica).must_equal false
+      assigns(:busquedas).include?(publica).must_equal true
+    end
+
+    it 'hace una búsqueda y la guarda' do
+      busqueda = attributes_for(:busqueda, :publica, usuario: usuario)
+      consulta = build(:busqueda, :primeros_perfiles).consulta
+
+      post :create, busqueda: busqueda, q: consulta
+
+      must_redirect_to busqueda_path(assigns(:busqueda))
+
+      assigns(:busqueda).nombre.must_equal busqueda[:nombre]
+      assigns(:busqueda).publica.must_equal busqueda[:publico]
+      assigns(:busqueda).usuario.must_equal usuario
+      assigns(:busqueda).consulta.must_equal consulta
+    end
+
+    it 'va a editar si está autorizado' do
+      autorizar do
+        get :edit, id: create(:busqueda, usuario: usuario)
+      end
+
+      must_respond_with :success
+    end
+
+    it 'actualiza una búsqueda si está autorizado' do
+      busqueda = create(:busqueda, usuario: usuario)
+
+      autorizar do
+        put :update, id: busqueda, busqueda: { nombre: 'uno nuevo' }
+      end
+
+      must_redirect_to busqueda_path(assigns(:busqueda))
+      assigns(:busqueda).id.must_equal busqueda.id
+      assigns(:busqueda).nombre.must_equal 'uno nuevo'
+    end
+
+    it 'elimina una busqueda si está autorizado' do
+      busqueda = create(:busqueda, usuario: usuario)
+
+      lambda do
+        autorizar { delete :destroy, id: busqueda }
+      end.must_change 'Busqueda.count', -1
+
+      must_redirect_to busquedas_path
+    end
   end
 end

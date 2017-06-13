@@ -1,51 +1,48 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class EquiposControllerTest < ActionController::TestCase
-  test 'muestra la lista de equipos si está autorizado' do
+describe EquiposController do
+  it 'muestra la lista de equipos si está autorizado' do
     loguearse
 
     autorizar do
       get :index
     end
 
-    assert_response :success
-    assert_not_nil assigns(:equipos)
+    must_respond_with :success
+    assigns(:equipos).wont_be :nil?
   end
 
-  test 'va a nuevo si está autorizado' do
+  it 'va a nuevo si está autorizado' do
     loguearse
 
     autorizar do
       get :new
     end
 
-    assert_response :success
+    must_respond_with :success
   end
 
-  test 'crea un equipo si está autorizado' do
+  it 'crea un equipo si está autorizado' do
     loguearse
 
-    assert_difference('Equipo.count') do
-      autorizar do
-        post :create, equipo: attributes_for(:equipo)
-      end
-    end
+    lambda do
+      autorizar { post :create, equipo: attributes_for(:equipo) }
+    end.must_change 'Equipo.count'
 
-    assert_redirected_to equipo_path(assigns(:equipo))
+    must_redirect_to equipo_path(assigns(:equipo))
   end
 
-  test 'muestra un equipo si está autorizado' do
+  it 'muestra un equipo si está autorizado' do
     loguearse
 
     autorizar do
       get :show, id: create(:equipo)
     end
 
-    assert_response :success
+    must_respond_with :success
   end
 
-  test 'va a editar si está autorizado' do
+  it 'va a editar si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
@@ -53,10 +50,10 @@ class EquiposControllerTest < ActionController::TestCase
       get :edit, id: equipo
     end
 
-    assert_response :success
+    must_respond_with :success
   end
 
-  test 'actualiza un equipo si está autorizado' do
+  it 'actualiza un equipo si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
@@ -64,31 +61,29 @@ class EquiposControllerTest < ActionController::TestCase
       put :update, id: equipo, equipo: attributes_for(:equipo)
     end
 
-    assert_redirected_to equipo_path(assigns(:equipo))
+    must_redirect_to equipo_path(assigns(:equipo))
   end
 
-  test 'elimina un equipo si está autorizado' do
+  it 'elimina un equipo si está autorizado' do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
-    assert_difference('Equipo.count', -1) do
-      autorizar do
-        delete :destroy, id: equipo
-      end
-    end
+    lambda do
+      autorizar { delete :destroy, id: equipo }
+    end.must_change 'Equipo.count', -1
 
-    assert_redirected_to equipos_path
+    must_redirect_to equipos_path
   end
 
-  test 'editar incluye tags para autocompletar' do
+  it 'editar incluye tags para autocompletar' do
     usuario = loguearse
 
     autorizar do
       get :edit, id: create(:equipo, usuario: usuario)
     end
 
-    assert_select '#equipo_nuevo_miembro_id'
-    assert_select '#equipo_nuevo_miembro_email'
-    assert_select '#equipo_nuevo_miembro_nombre'
+    must_select '#equipo_nuevo_miembro_id'
+    must_select '#equipo_nuevo_miembro_email'
+    must_select '#equipo_nuevo_miembro_nombre'
   end
 end

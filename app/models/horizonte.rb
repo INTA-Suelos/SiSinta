@@ -1,5 +1,5 @@
-# encoding: utf-8
 class Horizonte < ActiveRecord::Base
+  # FIXME Mover esta lógica al controller o donde sea adecuado
   after_create :create_analitico, unless: :analitico_present?
 
   # TODO sacar los defaults

@@ -1,103 +1,100 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class SeriesControllerTest < ActionController::TestCase
-  test 'accede a la lista de series sin loguearse' do
-    assert_nil @controller.current_usuario
-    get :index
-    assert_response :success
+describe SeriesController do
+  subject { create :serie }
+
+  describe 'sin loguearse' do
+    it 'accede a la lista de series' do
+      get :index
+
+      must_respond_with :success
+    end
+
+    it 'muestra una serie sin loguearse' do
+      get :show, id: subject.to_param
+
+      must_respond_with :success
+    end
+
+    it 'devuelve nombre para términos parciales' do
+      termino = subject.nombre
+
+      get :autocomplete_serie_nombre, term: termino
+
+      must_respond_with :success
+      json.size.must_equal Serie.where("nombre like '%#{termino}%'").size
+
+      json.first.include?('id').must_equal true
+      json.first.include?('label').must_equal true
+      json.first.include?('value').must_equal true
+      json.first.include?('simbolo').must_equal true
+    end
+
+    it 'devuelve símbolo para términos parciales' do
+      termino = subject.simbolo
+
+      get :autocomplete_serie_simbolo, term: termino
+
+      must_respond_with :success
+      json.size.must_equal Serie.where("simbolo like '%#{termino}%'").size
+
+      json.first.include?('id').must_equal true
+      json.first.include?('label').must_equal true
+      json.first.include?('value').must_equal true
+      json.first.include?('nombre').must_equal true
+    end
   end
 
-  test 'va a nueva si está autorizado' do
-    loguearse
+  describe 'autorizado' do
+    let(:usuario) { loguearse }
 
-    autorizar { get :new }
+    before { usuario.must_be :persisted? }
 
-    assert_response :success
-  end
+    it 'va a nueva' do
+      autorizar { get :new }
 
-  test 'crea una serie si está autorizado' do
-    loguearse
+      must_respond_with :success
+    end
 
-    assert_difference('Serie.count') do
+    it 'crea una serie' do
+      lambda do
+        autorizar { post :create, serie: attributes_for(:serie) }
+      end.must_change 'Serie.count'
+
+      must_redirect_to serie_path(assigns(:serie))
+    end
+
+    it 'va a editar si está autorizado' do
       autorizar do
-        post :create, serie: attributes_for(:serie)
+        get :edit, id: create(:serie, usuario: usuario)
       end
+
+      must_respond_with :success
     end
 
-    assert_redirected_to serie_path(assigns(:serie))
-  end
-
-  test 'muestra una serie sin loguearse' do
-    get :show, id: create(:serie)
-    assert_response :success
-  end
-
-  test 'va a editar si está autorizado' do
-    usuario = loguearse
-
-    autorizar do
-      get :edit, id: create(:serie, usuario: usuario)
-    end
-
-    assert_response :success
-  end
-
-  test 'actualiza una serie si está autorizado' do
-    usuario = loguearse
-    serie = create(:serie, usuario: usuario)
-
-    autorizar do
-      put :update, id: serie, serie: {
-        nombre: 'de Fibonacci', simbolo: 'fi', descripcion: 'Larga'
-      }
-    end
-
-    assert_redirected_to serie_path(assigns(:serie))
-    assert_equal serie.id, assigns(:serie).id
-    assert_equal 'de Fibonacci', assigns(:serie).nombre
-    assert_equal 'fi', assigns(:serie).simbolo
-    assert_equal 'Larga', assigns(:serie).descripcion
-  end
-
-  test 'elimina una serie si está autorizado' do
-    usuario = loguearse
-    serie = create(:serie, usuario: usuario)
-
-    assert_difference('Serie.count', -1) do
+    it 'actualiza una serie si está autorizado' do
       autorizar do
-        delete :destroy, id: serie
+        put :update, id: subject.to_param, serie: {
+          nombre: 'de Fibonacci', simbolo: 'fi', descripcion: 'Larga'
+        }
       end
+
+      must_redirect_to serie_path(assigns(:serie))
+
+      assigns(:serie).id.must_equal subject.id
+      assigns(:serie).nombre.must_equal 'de Fibonacci'
+      assigns(:serie).simbolo.must_equal 'fi'
+      assigns(:serie).descripcion.must_equal 'Larga'
     end
 
-    assert_redirected_to series_path
-  end
+    it 'elimina una serie si está autorizado' do
+      subject.must_be :persisted?
 
-  test 'devuelve nombre para términos parciales' do
-    termino = create(:serie).nombre
+      lambda do
+        autorizar { delete :destroy, id: subject.to_param }
+      end.must_change 'Serie.count', -1
 
-    get :autocomplete_serie_nombre, term: termino
-    assert_response :success
-    assert_equal  Serie.where("nombre like '%#{termino}%'").size,
-                  json.size
-
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver el nombre'
-    assert json.first.include?('simbolo'), 'debe incluir el simbolo'
-  end
-
-  test 'devuelve símbolo para términos parciales' do
-    termino = create(:serie).simbolo
-
-    get :autocomplete_serie_simbolo, term: termino
-    assert_response :success
-    assert_equal  Serie.where("simbolo like '%#{termino}%'").size,
-                  json.size
-
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver el simbolo'
-    assert json.first.include?('nombre'), 'debe incluir el nombre'
+      must_redirect_to series_path
+    end
   end
 end

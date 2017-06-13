@@ -6,6 +6,7 @@ require 'capistrano/deploy'
 
 # Tareas de assets y migración
 require 'capistrano/rails'
+require 'capistrano/rails/collection'
 
 # Verifica que rbenv esté funcionando y lo agrega a los comandos
 require 'capistrano/rbenv'

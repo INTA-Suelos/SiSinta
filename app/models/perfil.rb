@@ -23,7 +23,7 @@ class Perfil < ActiveRecord::Base
 
   has_many :horizontes, -> { order('horizontes.profundidad_superior ASC, horizontes.id ASC') },
     dependent: :destroy, inverse_of: :perfil
-  has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil
+  has_many :adjuntos,     dependent: :destroy, inverse_of: :perfil, autosave: true
   has_one :capacidad,     dependent: :destroy, inverse_of: :perfil
   has_one :ubicacion,     dependent: :destroy, inverse_of: :perfil
   has_one :paisaje,       dependent: :destroy, inverse_of: :perfil

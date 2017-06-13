@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.8'
 
 ## DB
 gem 'pg'
-# Rama con un parche para que las join tables salgan ordenadas
+# FIXME Nuestra rama ya está mergeada en yaml_db 0.5, pero conflictúa con un
+# FIXME error en activerecord-postgis-adapter:
+# FIXME https://github.com/rgeo/activerecord-postgis-adapter/issues/183
 gem 'yaml_db', git: 'https://github.com/mauriciopasquier/yaml_db.git', branch: 'order-join-tables'
 
 ## Aut{enticación,orización}, seguridad en general
@@ -91,6 +93,7 @@ group :development do
   gem 'capistrano-config_provider',
     git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git',
     require: false
+  gem 'capistrano-rails-collection'
   gem 'brakeman', require: false
 end
 

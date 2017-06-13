@@ -23,9 +23,22 @@ describe Adjunto do
 
   describe '#publico' do
     it 'se sincroniza con su perfil al guardar' do
+      # Diferente visibilidad
       perfil.update_attribute :publico, !adjunto.publico
 
       adjunto.save && adjunto.publico.must_equal(perfil.publico)
+    end
+
+    # Test de regresión por #124
+    # https://github.com/INTA-Suelos/SiSinta/issues/124
+    it 'al guardarse el perfil se sincroniza su adjunto' do
+      # Misma visibilidad
+      perfil.update_attribute :publico, adjunto.publico
+
+      perfil.publico = perfil.reload.publico
+      perfil.save
+
+      adjunto.reload.publico.must_equal(perfil.publico)
     end
   end
 

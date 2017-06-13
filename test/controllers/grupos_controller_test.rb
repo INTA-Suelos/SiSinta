@@ -1,63 +1,61 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class GruposControllerTest < ActionController::TestCase
-  test 'autocompleta descripción' do
-    termino = create(:grupo).descripcion
+describe GruposController do
+  subject { create :grupo }
 
-    get :autocomplete_grupo_descripcion, term: termino
-    assert_response :success
-    assert_equal  Grupo.where("descripcion like '%#{termino}%'").size,
-                  json.size
+  describe 'sin loguearse' do
+    it 'autocompleta descripción' do
+      termino = create(:grupo).descripcion
 
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver la descripción'
+      get :autocomplete_grupo_descripcion, term: termino
+
+      must_respond_with :success
+      json.size.must_equal Grupo.where("descripcion like '%#{termino}%'").size
+
+      json.first.include?('id').must_equal true
+      json.first.include?('label').must_equal true
+      json.first.include?('value').must_equal true
+    end
   end
 
-  test 'va a nuevo si está autorizado' do
-    loguearse
+  describe 'logueado' do
+    before { loguearse }
 
-    autorizar { get :new }
+    it 'va a nuevo si está autorizado' do
+      autorizar { get :new }
 
-    assert_response :success
-  end
+      must_respond_with :success
+    end
 
-  test 'crea un grupo si está autorizado' do
-    loguearse
+    it 'crea un grupo si está autorizado' do
+      lambda do
+        autorizar do
+          post :create, grupo: attributes_for(:grupo)
+        end
+      end.must_change 'Grupo.count', 1
 
-    assert_difference('Grupo.count', 1) do
+      must_redirect_to grupo_path(assigns(:grupo))
+    end
+
+    it 'va a editar si está autorizado' do
       autorizar do
-        post :create, grupo: attributes_for(:grupo)
+        get :edit, id: subject.to_param
       end
+
+      must_respond_with :success
     end
 
-    assert_redirected_to grupo_path(assigns(:grupo))
-  end
+    it 'actualiza un grupo si está autorizado' do
+      params = attributes_for(:grupo)
 
-  test 'va a editar si está autorizado' do
-    loguearse
-    grupo = create(:grupo)
+      autorizar do
+        put :update, id: subject.to_param, grupo: params
+      end
 
-    autorizar do
-      get :edit, id: grupo.to_param
+      must_redirect_to grupo_path(assigns(:grupo))
+      assigns(:grupo).id.must_equal subject.id
+      assigns(:grupo).descripcion.must_equal params[:descripcion]
+      assigns(:grupo).codigo.must_equal params[:codigo]
     end
-
-    assert_response :success
-  end
-
-  test 'actualiza un grupo si está autorizado' do
-    loguearse
-    grupo = create(:grupo)
-    params = attributes_for(:grupo)
-
-    autorizar do
-      put :update, id: grupo.to_param, grupo: params
-    end
-
-    assert_redirected_to grupo_path(assigns(:grupo))
-    assert_equal grupo.id, assigns(:grupo).id
-    assert_equal params[:descripcion], assigns(:grupo).descripcion
-    assert_equal params[:codigo], assigns(:grupo).codigo
   end
 end

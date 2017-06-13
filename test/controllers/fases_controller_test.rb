@@ -1,61 +1,59 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class FasesControllerTest < ActionController::TestCase
-  test 'autocompleta nombre' do
-    termino = create(:fase).nombre
-    get :autocomplete_fase_nombre, term: termino
-    assert_response :success
-    assert_equal  Fase.where("nombre like '%#{termino}%'").size,
-                  json.size
+describe FasesController do
+  subject { create :fase }
 
-    assert json.first.include?('id'), 'debe devolver el id'
-    assert json.first.include?('label'), 'debe devolver el label'
-    assert json.first.include?('value'), 'debe devolver el nombre'
+  describe 'sin loguearse' do
+    it 'autocompleta nombre' do
+      termino = subject.nombre
+
+      get :autocomplete_fase_nombre, term: termino
+
+      must_respond_with :success
+      json.size.must_equal Fase.where("nombre like '%#{termino}%'").size
+
+      json.first.include?('id').must_equal true
+      json.first.include?('label').must_equal true
+      json.first.include?('value').must_equal true
+    end
   end
 
-  test 'va a nueva si está autorizado' do
-    loguearse
+  describe 'logueado' do
+    before { loguearse }
 
-    autorizar { get :new }
+    it 'va a nueva si está autorizado' do
+      autorizar { get :new }
 
-    assert_response :success
-  end
+      must_respond_with :success
+    end
 
-  test 'crea una fase si está autorizado' do
-    loguearse
+    it 'crea una fase si está autorizado' do
+      lambda do
+        autorizar { post :create, fase: attributes_for(:fase) }
+      end.must_change 'Fase.count', 1
 
-    assert_difference('Fase.count', 1) do
+      must_redirect_to fase_path(assigns(:fase))
+    end
+
+    it 'va a editar si está autorizado' do
       autorizar do
-        post :create, fase: attributes_for(:fase)
+        get :edit, id: subject.to_param
       end
+
+      must_respond_with :success
     end
 
-    assert_redirected_to fase_path(assigns(:fase))
-  end
+    it 'actualiza una fase si está autorizado' do
+      params = attributes_for(:fase)
 
-  test 'va a editar si está autorizado' do
-    loguearse
+      autorizar do
+        put :update, id: subject.to_param, fase: params
+      end
 
-    autorizar do
-      get :edit, id: create(:fase).to_param
+      must_redirect_to fase_path(assigns(:fase))
+      assigns(:fase).id.must_equal subject.id
+      assigns(:fase).nombre.must_equal params[:nombre]
+      assigns(:fase).codigo.must_equal params[:codigo]
     end
-
-    assert_response :success
-  end
-
-  test 'actualiza una fase si está autorizado' do
-    loguearse
-    fase = create(:fase)
-    params = attributes_for(:fase)
-
-    autorizar do
-      put :update, id: fase.to_param, fase: params
-    end
-
-    assert_redirected_to fase_path(assigns(:fase))
-    assert_equal fase.id, assigns(:fase).id
-    assert_equal params[:nombre], assigns(:fase).nombre
-    assert_equal params[:codigo], assigns(:fase).codigo
   end
 end

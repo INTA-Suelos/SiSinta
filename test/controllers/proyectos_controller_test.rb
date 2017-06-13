@@ -1,73 +1,73 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class ProyectosControllerTest < ActionController::TestCase
-  test 'accede a la lista de proyectos sin loguearse' do
-    assert_nil @controller.current_usuario
-    get :index
-    assert_response :success
+describe ProyectosController do
+  describe 'sin loguearse' do
+    it 'accede a la lista de proyectos' do
+      get :index
+
+      must_respond_with :success
+    end
+
+    it 'muestra un proyecto' do
+      get :show, id: create(:proyecto)
+
+      must_respond_with :success
+    end
   end
 
-  test 'va a nuevo si está autorizado' do
-    loguearse
+  describe 'autorizado' do
+    let(:usuario) { loguearse }
 
-    autorizar { get :new }
+    before { usuario.must_be :persisted? }
 
-    assert_response :success
-  end
+    it 'va a nuevo' do
+      autorizar { get :new }
 
-  test 'crea un proyecto si está autorizado' do
-    loguearse
+      must_respond_with :success
+    end
 
-    assert_difference('Proyecto.count') do
+    it 'crea un proyecto' do
+      lambda do
+        autorizar do
+          post :create, proyecto: attributes_for(:proyecto)
+        end
+      end.must_change 'Proyecto.count'
+
+      must_redirect_to proyecto_path(assigns(:proyecto))
+    end
+
+    it 'va a editar' do
       autorizar do
-        post :create, proyecto: attributes_for(:proyecto)
+        get :edit, id: create(:proyecto, usuario: usuario)
       end
+
+      must_respond_with :success
     end
 
-    assert_redirected_to proyecto_path(assigns(:proyecto))
-  end
+    it 'actualiza un proyecto' do
+      proyecto = create(:proyecto, usuario: usuario)
 
-  test 'muestra un proyecto sin loguearse' do
-    get :show, id: create(:proyecto)
-    assert_response :success
-  end
+      autorizar do
+        put :update, id: proyecto, proyecto: {
+          nombre: 'un proyecto', cita: 'una cita', descripcion: 'una descripción'
+        }
+      end
 
-  test 'va a editar si está autorizado' do
-    usuario = loguearse
-
-    autorizar do
-      get :edit, id: create(:proyecto, usuario: usuario)
+      must_redirect_to proyecto_path(assigns(:proyecto))
+      assigns(:proyecto).id.must_equal proyecto.id
+      assigns(:proyecto).nombre.must_equal 'un proyecto'
+      assigns(:proyecto).cita.must_equal 'una cita'
+      assigns(:proyecto).descripcion.must_equal 'una descripción'
     end
 
-    assert_response :success
-  end
+    it 'elimina un proyecto' do
+      proyecto = create(:proyecto, usuario: usuario)
 
-  test 'actualiza un proyecto si está autorizado' do
-    usuario = loguearse
-    proyecto = create(:proyecto, usuario: usuario)
+      lambda do
+        autorizar { delete :destroy, id: proyecto }
+      end.must_change 'Proyecto.count', -1
 
-    autorizar do
-      put :update, id: proyecto, proyecto: {
-        nombre: 'Flaco Pantera 3', cita: 'Con ruido', descripcion: 'Metálica'
-      }
+      must_redirect_to proyectos_path
     end
-
-    assert_redirected_to proyecto_path(assigns(:proyecto))
-    assert_equal proyecto.id, assigns(:proyecto).id
-    assert_equal 'Flaco Pantera 3', assigns(:proyecto).nombre
-    assert_equal 'Con ruido', assigns(:proyecto).cita
-    assert_equal 'Metálica', assigns(:proyecto).descripcion
-  end
-
-  test 'elimina un proyecto si está autorizado' do
-    usuario = loguearse_como 'Autorizado'
-    proyecto = create(:proyecto, usuario: usuario)
-
-    assert_difference('Proyecto.count', -1) do
-      delete :destroy, id: proyecto
-    end
-
-    assert_redirected_to proyectos_path
   end
 end

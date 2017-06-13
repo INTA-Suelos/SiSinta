@@ -1,4 +1,4 @@
-# encoding: utf-8
+# Recopila información sobre un archivo adjunto a un perfil
 class Adjunto < ActiveRecord::Base
   belongs_to :perfil, inverse_of: :adjuntos
   belongs_to :usuario, inverse_of: :adjuntos

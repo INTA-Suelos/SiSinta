@@ -1,8 +1,8 @@
-require './test/test_helper'
+require 'test_helper'
 
-class GeojsonCollectionSerializerTest < ActiveSupport::TestCase
-  subject { GeojsonCollectionSerializer.new [perfil] }
-  let(:perfil) { create(:perfil_para_geojson) }
+describe GeojsonCollectionSerializer do
+  subject { GeojsonCollectionSerializer.new perfiles }
+  let(:perfiles) { [create(:perfil_para_geojson)] }
 
   it 'es una colección de features' do
     geojson = subject.as_json
@@ -17,6 +17,7 @@ class GeojsonCollectionSerializerTest < ActiveSupport::TestCase
 
     subject.stub :object, [decorame] do
       subject.features
+
       decorame.verify
     end
   end

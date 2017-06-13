@@ -20,6 +20,13 @@ class ActiveSupport::TestCase
   teardown { DatabaseCleaner.clean }
 end
 
+class Minitest::Spec
+  include FactoryGirl::Syntax::Methods
+
+  before { DatabaseCleaner.start }
+  after { DatabaseCleaner.clean }
+end
+
 # Helpers para los controladores
 class ActionController::TestCase
   include Devise::TestHelpers

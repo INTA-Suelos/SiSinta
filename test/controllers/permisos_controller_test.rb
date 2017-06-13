@@ -1,13 +1,13 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
-class PermisosControllerTest < ActionController::TestCase
-  test 'filtra los modelos habilitados para permisos' do
-    usuario = loguearse_como 'Autorizado'
+describe PermisosController do
+  let(:usuario) { loguearse_como 'Autorizado' }
 
+  it 'filtra los modelos habilitados para permisos' do
     %w{perfil proyecto serie}.each do |modelo|
       recurso = create(modelo, usuario: usuario)
-      assert_equal recurso, @controller.send(:buscar_recurso_accesible, modelo, recurso.id)
+
+      @controller.send(:buscar_recurso_accesible, modelo, recurso.id).must_equal recurso
     end
 
     assert_raise ActionController::RoutingError do
