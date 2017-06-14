@@ -35,12 +35,16 @@ class ActionController::TestCase
     loguearse_como 'Cualquiera'
   end
 
-  # FIXME Con `autorizar` no debería hacer falta especificar un tipo de usuario
-  def loguearse_como(tipo_de_usuario)
-    @usuario = create :usuario, rol: tipo_de_usuario
+  def loguear(usuario)
+    @usuario = usuario
     @request.env['devise.mapping'] = Devise.mappings[:usuario]
     sign_in @usuario
     return @usuario
+  end
+
+  # FIXME Con `autorizar` no debería hacer falta especificar un tipo de usuario
+  def loguearse_como(tipo_de_usuario)
+    loguear create(:usuario, rol: tipo_de_usuario)
   end
 
   # FIXME rediseñar los tests usando esto

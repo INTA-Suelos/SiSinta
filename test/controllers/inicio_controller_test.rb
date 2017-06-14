@@ -10,16 +10,38 @@ describe InicioController do
   describe 'locales' do
     subject { @controller }
 
-    it 'usa :es por default' do
-      get :index
+    describe 'a través de params[:locale]' do
+      it 'usa :es por default' do
+        get :index
 
-      subject.locale.must_equal :es
+        subject.locale.must_equal :es
+      end
+
+      it 'cambia el locale desde la url' do
+        get :index, locale: 'en'
+
+        subject.locale.must_equal :en
+      end
     end
 
-    it 'cambia el locale desde la url' do
-      get :index, locale: 'en'
+    describe 'a través del usuario actual' do
+      let(:anglo) { create :usuario, idioma: 'en' }
 
-      subject.locale.must_equal :en
+      it 'usa el preferido del usuario por default' do
+        loguear anglo
+
+        get :index
+
+        subject.locale.must_equal :en
+      end
+
+      it 'se prioriza el locale desde la url' do
+        loguear anglo
+
+        get :index, locale: 'es'
+
+        subject.locale.must_equal :es
+      end
     end
   end
 end

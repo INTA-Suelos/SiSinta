@@ -27,12 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   def configurar_locale_para_request
-    I18n.locale = locale_sanitizado(params[:locale])
+    I18n.locale = elegir_locale(params[:locale])
   end
 
-  # Confirmar que el parámetro enviado es uno de los locales soportados
-  def locale_sanitizado(locale)
-    I18n.available_locales.map(&:to_s).include?(locale) ? locale : I18n.default_locale
+  # Define qué locale se va a usar en base al parámetro enviado si es uno de
+  # los locales soportados. En caso contrario, usar el preferido del usuario,
+  # si tiene.
+  def elegir_locale(locale)
+    locale_sanitizado = I18n.available_locales.map(&:to_s).include?(locale) ? locale : nil
+
+    locale_sanitizado || current_usuario.try(:idioma) || I18n.default_locale
   end
 
   def default_url_options

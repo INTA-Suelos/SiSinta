@@ -5,12 +5,20 @@ describe ApplicationController do
 
   describe 'locales' do
     it 'permite locales conocidos' do
-      subject.locale_sanitizado('es').must_equal 'es'
-      subject.locale_sanitizado('en').must_equal 'en'
+      subject.elegir_locale('es').must_equal 'es'
+      subject.elegir_locale('en').must_equal 'en'
     end
 
     it 'usa el default para locales desconocidos' do
-      subject.locale_sanitizado('danger!').must_equal I18n.default_locale
+      subject.elegir_locale('danger!').must_equal I18n.default_locale
+    end
+
+    it 'prefiere el locale del usuario antes que el default' do
+      anglo = create :usuario, idioma: 'en'
+
+      subject.stub :current_usuario, anglo do
+        subject.elegir_locale('danger!').must_equal 'en'
+      end
     end
   end
 end
