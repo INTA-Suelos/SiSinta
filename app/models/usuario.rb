@@ -21,7 +21,7 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
 
-  validates :idioma, presence: true
+  validates :idioma, presence: true, inclusion: { in: I18n.available_locales.map(&:to_s) }
   validates :nombre, presence: true
   validates :ficha, presence: { on: :update }
   validates :srid, presence: { on: :update }

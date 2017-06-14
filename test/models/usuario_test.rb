@@ -21,6 +21,14 @@ describe Usuario do
       build(:usuario, idioma: nil).wont_be :valid?
     end
 
+    it 'idioma debe estar entre los disponibles del sistema' do
+      I18n.available_locales.each do |locale|
+        build(:usuario, idioma: locale).must_be :valid?
+      end
+
+      build(:usuario, idioma: 'elfo').wont_be :valid?
+    end
+
     # TODO Revisar si es necesario validar sólo en update
     it 'requiere ficha al guardar' do
       subject.ficha = nil

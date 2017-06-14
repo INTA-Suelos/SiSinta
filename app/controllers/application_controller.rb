@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
     def agregar_parametros_permitidos
       devise_parameter_sanitizer.permit :account_update, keys: [:nombre]
-      devise_parameter_sanitizer.permit :sign_up, keys: [:nombre]
+      devise_parameter_sanitizer.permit :sign_up, keys: [:nombre, :idioma]
     end
 
     def direccion_de_ordenamiento

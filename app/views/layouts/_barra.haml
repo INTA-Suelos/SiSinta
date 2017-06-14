@@ -47,3 +47,9 @@
     .plegable Contacto
     %ul.submenu
       %li= link_to 'Mail', 'mailto:sisinta@inta.gob.ar'
+  %li
+    .plegable Idioma
+    %ul.submenu
+      - I18n.available_locales.each do |locale|
+        -# url_for devuelve el path actual
+        %li= link_to locale, url_for(locale: locale)
