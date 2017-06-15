@@ -11,16 +11,16 @@
       %li= link_to 'Ver', perfiles_path
       %li= link_to 'Exportar', exportar_perfiles_path
       %li
-        Búsquedas
+        %span.subtitulo Búsquedas
         %ul.submenu
           %li= link_to 'Nueva', new_busqueda_path
           %li= link_to 'Guardadas', busquedas_path
       %li
-        Subgrupos
+        %span.subtitulo Subgrupos
         %ul.submenu
           %li= link_to 'Ver', grupos_path
       %li
-        Fases
+        %span.subtitulo Fases
         %ul.submenu
           %li= link_to 'Ver', fases_path
 
@@ -50,6 +50,11 @@
   %li
     .plegable Idioma
     %ul.submenu
-      - I18n.available_locales.each do |locale|
-        -# url_for devuelve el path actual
-        %li= link_to locale, url_for(locale: locale)
+      - if can? :traducir, Tolk
+        %li= link_to 'Traducir', tolk_path
+      %li
+        %span.subtitulo Cambiar
+        %ul.submenu
+          - I18n.available_locales.each do |locale|
+            -# url_for devuelve el path actual
+            %li= link_to locale, url_for(locale: locale)

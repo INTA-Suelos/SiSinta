@@ -42,6 +42,8 @@ class Ability
                   to: :update
 
     if @usuario.admin?
+      # TODO Por ahora sólo los admins traducen. Redundante ya que los admins tienen todos los permisos
+      traductor
       administrador
     else
       if @usuario.autorizado?
@@ -87,6 +89,11 @@ class Ability
 
       # Todos los miembros tienen permisos de invitados
       invitado
+    end
+
+    def traductor
+      # Lo preguntamos desde la configuración de Tolk
+      can :traducir, Tolk
     end
 
     # usuario invitado, anónimo o no existente

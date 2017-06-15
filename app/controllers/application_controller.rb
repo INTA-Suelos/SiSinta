@@ -16,12 +16,6 @@ class ApplicationController < ActionController::Base
   before_filter :descubrir_browser
   before_filter :agregar_parametros_permitidos, if: :devise_controller?
 
-  # CanCan necesita un método *current_user* y Devise genera la función
-  # en base al nombre del modelo, que en nuestro caso es Usuario
-  def current_user
-    self.current_usuario
-  end
-
   def current_usuario
     super.try(:decorate)
   end
