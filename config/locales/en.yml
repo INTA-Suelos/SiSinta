@@ -1,0 +1,182 @@
+---
+en:
+  activerecord:
+    attributes:
+      analitico:
+        ph_h2o: pH H2O (1:2,5)
+        ph_kcl: pH KCL (1:2,5)
+      busqueda:
+        publico: Public access
+      perfil:
+        analiticos: Lab data
+        publico: Public access
+      serie:
+        simbolo: Symbol
+    errors:
+      models:
+        adjunto:
+          attributes:
+            archivo:
+              spoofed_media_type: the file format does not match the file extension
+        erosion:
+          attributes:
+            clase:
+              debe_estar_en_blanco: the class must be empty if the subclass is Cumulation
+        perfil:
+          attributes:
+            fecha:
+              es_del_futuro: is in the future
+            numero:
+              no_es_unico_en_la_serie: it must be unique for this serie
+    models:
+      analitico: Lab data
+  analiticos:
+    index:
+      sin_horizontes: This profile does not have horizons/layers
+  ayuda:
+    busqueda:
+      publico: Searching is public accessible for any user with or without user account.
+        However, the results are limited to the public profiles.
+    perfil:
+      capacidad:
+        clase: 'Soil capability class: I a VIII.'
+        subclases: Subclass regarding its main soil limitant.
+      cobertura_vegetal: Percentage of vegetation coverage.
+      etiquetas: Labels (separated by comma) for this profile.
+      fase:
+        nombre: Soil Serie phase.
+      fecha: Sampling date.
+      grupo:
+        descripcion: Taxonomy.
+      modal: Its inform whether this is a modal profile.
+      nombre: Soil Serie to which this profile is referred.
+      numero: Profile number/name.
+      publico: The profile horizons/layers description and their lab data are public
+        accesible, even though you do not have a user account.
+      reconocedores: Soil surveyors name list (use comma as separator).
+      simbolo: Soil Serie symbol. Match cases.
+      ubicacion:
+        aerofoto: Photogram number.
+        descripcion: Relative position.
+        formato: Reference coordinate system.
+        mosaico: Tile name.
+        recorrido: Photogram path.
+        x: Coordinate x/longitude.
+        y: Coordinate y/latitude.
+      usuario: User that uploaded the profile.
+  busquedas:
+    edit:
+      submit: Update
+  comunes:
+    perfiles_asociados:
+      como_buscar: By location, Serie or profile number
+      submit: Search
+  confirmar: Really? This will be permanent.
+  devise:
+    sessions:
+      usuario:
+        already_signed_out: You already signed out.
+  equipos:
+    form:
+      agregar_miembro: Add member
+  errors:
+    format: "%{attribute}: %{message}"
+  helpers:
+    submit:
+      perfil:
+        analiticos: Lab data
+        cambiar_ficha: Change
+        create: Create %{model}
+        edit: Update %{model}
+  perfiles:
+    exportar:
+      seleccionar_por_provincia: Select by administrative district
+      submit: Export
+    seleccionar:
+      exportar: Select
+      volver: Cancel
+  ransack:
+    all: all
+    and: and
+    any: any
+    asc: ascending
+    attribute: attribute
+    combinator: combinator
+    condition: condition
+    desc: descending
+    or: or
+    predicate: predicate
+    predicates:
+      blank: is blank
+      cont: contains
+      cont_all: contains all
+      cont_any: contains any
+      does_not_match: doesn't match
+      does_not_match_all: doesn't match all
+      does_not_match_any: doesn't match any
+      end: ends with
+      end_all: ends with all
+      end_any: ends with any
+      eq: equals
+      eq_all: equals all
+      eq_any: equals any
+      'false': is false
+      gt: greater than
+      gt_all: greater than all
+      gt_any: greater than any
+      gteq: greater than or equal to
+      gteq_all: greater than or equal to all
+      gteq_any: greater than or equal to any
+      in: in
+      in_all: in all
+      in_any: in any
+      lt: less than
+      lt_all: less than all
+      lt_any: less than any
+      lteq: less than or equal to
+      lteq_all: less than or equal to all
+      lteq_any: less than or equal to any
+      matches: matches
+      matches_all: matches all
+      matches_any: matches any
+      not_cont: doesn't contain
+      not_cont_all: doesn't contain all
+      not_cont_any: doesn't contain any
+      not_end: doesn't end with
+      not_end_all: doesn't end with all
+      not_end_any: doesn't end with any
+      not_eq: not equal to
+      not_eq_all: not equal to all
+      not_eq_any: not equal to any
+      not_in: not in
+      not_in_all: not in all
+      not_in_any: not in any
+      not_null: is not null
+      not_start: doesn't start with
+      not_start_all: doesn't start with all
+      not_start_any: doesn't start with any
+      'null': is null
+      present: is present
+      start: starts with
+      start_all: starts with all
+      start_any: starts with any
+      'true': is true
+    search: search
+    sort: sort
+    value: value
+  roles:
+    admin: Administrator
+    autorizado: Approved
+    miembro: Member
+  selecciones:
+    create:
+      perfiles_seleccionados:
+        one: 1 profile selected
+        other: "%{count} profiles selected"
+    por_provincias:
+      seleccionar: Select
+      volver: Cancel
+  usuarios:
+    update_varios:
+      alert: There was a problem for updating the users.
+      notice: The users were successfully updated.

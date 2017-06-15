@@ -14,6 +14,8 @@ SiSINTA::Application.routes.draw do
       # Customización del controlador de sesión para devolver JWTs
       controllers: { sessions: 'usuarios/sessions' }
 
+    mount Tolk::Engine => '/traduccion', :as => 'tolk'
+
     # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
     masculinos  = { new: "nuevo", edit: "editar" }
     femeninos   = { new: "nueva", edit: "editar" }

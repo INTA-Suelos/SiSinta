@@ -61,8 +61,13 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'forma_de_limite', 'formas_de_limite'
 
   # Se mantienen en inglés
+  # Act_as_taggable_on
   inflect.irregular 'tag', 'tags'
   inflect.irregular 'tagging', 'taggings'
+  # Tolk
+  inflect.irregular 'phrase', 'phrases'
+  inflect.irregular 'locale', 'locales'
+  inflect.irregular 'translation', 'translations'
 
   # Rails
   inflect.irregular 'schema_migration', 'schema_migrations'

@@ -194,6 +194,9 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-i18n (0.4.0)
+      kaminari
+      rails
     leaflet-rails (0.7.7)
     libv8 (3.16.14.15)
     loofah (2.0.3)
@@ -273,6 +276,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (4.0.9)
+      i18n (~> 0.7)
+      railties (~> 4.0)
     rails-jquery-autocomplete (1.0.3)
       rails (>= 3.2)
     railties (4.2.8)
@@ -301,6 +307,7 @@ GEM
     ruby_parser (3.8.2)
       sexp_processor (~> 4.1)
     rubyzip (1.2.0)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -336,6 +343,9 @@ GEM
     tilt (1.4.1)
     tinymce-rails (4.3.13)
       railties (>= 3.1.1)
+    tolk (2.0.0)
+      rails (>= 4.0)
+      safe_yaml (>= 0.8.6)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -384,6 +394,7 @@ DEPENDENCIES
   jquery-ui-rails
   jwt
   kaminari
+  kaminari-i18n
   leaflet-rails
   minitest-rails
   minitest-rails-capybara
@@ -396,6 +407,7 @@ DEPENDENCIES
   rails-api
   rails-assets-leaflet-plugins!
   rails-assets-leaflet.markercluster!
+  rails-i18n
   rails-jquery-autocomplete
   ransack
   responders
@@ -410,6 +422,7 @@ DEPENDENCIES
   squeel!
   therubyracer
   tinymce-rails
+  tolk
   uglifier
   yaml_db!
 

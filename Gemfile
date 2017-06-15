@@ -68,6 +68,12 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet-plugins'
 end
 
+# I18n
+gem 'tolk'
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'kaminari-i18n'
+
 ## Server
 # TODO revisar configuración de compresión
 gem 'dalli'
