@@ -1,15 +1,5 @@
-# encoding: utf-8
+# Helpers genéricos
 module ApplicationHelper
-
-  # Redirije hacia atrás o en caso de no exister, vuelve al inicio
-  def volver
-    begin
-      redirect_to :back
-    rescue ActionController::RedirectBackError
-      redirect_to :root
-    end
-  end
-
   # Crea los divs preparados para el tooltip de los formularios, con la
   # descripción del campo.
   #

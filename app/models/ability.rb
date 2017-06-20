@@ -67,6 +67,7 @@ class Ability
 
     # TODO Debería incluir llamar a `miembro`?
     def autorizado
+      # FIXME Revisar si permite acceso a ActiveAdmin
       can :manage, Usuario, id: @usuario.id
       can :read, recursos
       can :create, recursos

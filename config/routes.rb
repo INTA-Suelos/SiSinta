@@ -17,6 +17,9 @@ SiSINTA::Application.routes.draw do
     # Backend de traducción de strings estáticas
     mount Tolk::Engine => '/traduccion', :as => 'tolk'
 
+    # Backend de administración
+    ActiveAdmin.routes(self)
+
     # Rutas en castellano (i.e. perfiles/nuevo, perfiles/2/editar)
     masculinos  = { new: "nuevo", edit: "editar" }
     femeninos   = { new: "nueva", edit: "editar" }

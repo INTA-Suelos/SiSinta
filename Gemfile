@@ -68,6 +68,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet-plugins'
 end
 
+# Administración
+gem 'activeadmin'
+
 # I18n
 gem 'tolk'
 gem 'rails-i18n'

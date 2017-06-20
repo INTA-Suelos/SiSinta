@@ -44,16 +44,22 @@ class ApplicationController < ActionController::Base
     @mobile = browser_is_mobile?
   end
 
-  # Métodos de BrowserDetect
+  # Métodos que necesitamos en las vistas
+  helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento, :ayuda_para, :volver
+  # Los específicos de BrowserDetect
   helper_method :browser_is?, :browser_webkit_version, :ua, :browser_is_mobile?
 
-  # Ayuda para todos
-  helper_method :ayuda_para
-
-  # Para ordenar las columnas
-  helper_method :direccion_de_ordenamiento, :metodo_de_ordenamiento
-
   protected
+
+    # Redirije hacia atrás o en caso de no exister, vuelve al inicio.
+    # ActiveAdmin lo llama con el error apropiado
+    def volver(error = nil)
+      begin
+        redirect_to :back, alert: error.try(:message)
+      rescue ActionController::RedirectBackError
+        redirect_to :root, alert: error.try(:message)
+      end
+    end
 
     def agregar_parametros_permitidos
       devise_parameter_sanitizer.permit :account_update, keys: [:nombre]

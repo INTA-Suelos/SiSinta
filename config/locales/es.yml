@@ -11,6 +11,17 @@ es:
         publico:    'Público'
       serie:
         simbolo: 'Símbolo'
+      usuario:
+        created_at: 'Fecha de creación'
+        current_password: 'Contraseña actual'
+        current_sign_in_at: 'Último logueo'
+        email: 'Email'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación de la contraseña'
+        remember_me: 'Recordarme'
+        reset_password_token: 'Código para reestablecer la contraseña'
+        sign_in_count: 'Cantidad de logueos'
+        unlock_token: 'Código para desbloquear'
     errors:
       full_messages:
         format: "%{attribute} %{message}"
@@ -38,7 +49,13 @@ es:
           one: "%{model} no pudo guardarse debido a 1 error"
           other: "%{model} no pudo guardarse debido a %{count} errores"
     models:
+      active_admin/comment:
+        one: 'Comentario'
+        other: 'Comentarios'
       analitico: 'Datos analíticos'
+      comment:
+        one: 'Comentario'
+        other: 'Comentarios'
   analiticos:
     index:
       sin_horizontes: 'Este perfil no tiene horizontes cargados'
