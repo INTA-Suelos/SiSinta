@@ -1,6 +1,8 @@
 es:
   activerecord:
     attributes:
+      adhesividad:
+        valor: 'Valor'
       analitico:
         ph_h2o: 'pH en H2O (1:2,5)'
         ph_kcl: 'pH en KCL (1:2,5)'
@@ -52,6 +54,7 @@ es:
       active_admin/comment:
         one: 'Comentario'
         other: 'Comentarios'
+      adhesividad: 'Adhesividad'
       analitico: 'Datos analíticos'
       comment:
         one: 'Comentario'

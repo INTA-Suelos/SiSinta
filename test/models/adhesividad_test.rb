@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AdhesividadTest < ActiveSupport::TestCase
-  subject { build_stubbed :adhesividad }
+  subject { create :adhesividad }
 
   describe 'validaciones' do
     it 'es válida' do
@@ -11,10 +11,21 @@ class AdhesividadTest < ActiveSupport::TestCase
     it 'requiere valor' do
       build_stubbed(:adhesividad, valor: nil).wont_be :valid?
     end
+
+    it 'require valor único' do
+      build_stubbed(:adhesividad, valor: subject.valor).wont_be :valid?
+    end
+
+    it 'permite valores duplicados en diferentes locales' do
+      valor_es = subject.valor
+
+      Globalize.with_locale :en do
+        build_stubbed(:adhesividad, valor: valor_es).must_be :valid?
+      end
+    end
   end
 
   describe 'asociaciones' do
-    subject { create :adhesividad }
     let(:consistencia) { create :consistencia, adhesividad: subject }
 
     it 'se recorre en ambos sentidos' do

@@ -188,7 +188,8 @@ class Deserializador
         consistencia_attributes: {
           en_seco_id: ConsistenciaEnSeco.find_by(valor: h['consistencia_en_seco']).to_param,
           en_humedo_id: ConsistenciaEnHumedo.find_by(valor: h['consistencia_en_humedo']).to_param,
-          adhesividad_id: Adhesividad.find_by(valor: h['consistencia_adhesividad']).to_param,
+          # FIXME Usar find_by cuando globalize lo agregue a los query methods
+          adhesividad_id: Adhesividad.where(valor: h['consistencia_adhesividad']).take.to_param,
           plasticidad_id: Plasticidad.find_by(valor: h['consistencia_plasticidad']).to_param },
         estructura_attributes: {
           tipo_id: TipoDeEstructura.find_by(valor: h['estructura_tipo']).to_param,
