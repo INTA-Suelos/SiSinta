@@ -7,6 +7,8 @@ class Rol < ActiveRecord::Base
 
   scopify
 
+  scope :globales, ->{ where(resource: nil) }
+
   def to_param
     nombre
   end

@@ -36,6 +36,7 @@ class Usuario < ActiveRecord::Base
                         'roles.resource_id' => recurso.id,
                         'roles.name' => 'miembro')
   end
+  scope :admins, ->{ with_role('Administrador') }
 
   def usa_ficha?(tipo)
     ficha.identificador == tipo

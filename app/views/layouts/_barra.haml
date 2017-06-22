@@ -32,10 +32,10 @@
 %ul#administracion.menu
   - if current_usuario.try(:admin?)
     %li
-      .plegable Usuarios
+      .plegable Administración
       %ul.submenu
         %li
-          = link_to 'Ver', usuarios_path
+          = link_to 'Panel', admin_root_path
   %li
     .plegable Equipos
     %ul.submenu
@@ -50,11 +50,6 @@
   %li
     .plegable Idioma
     %ul.submenu
-      - if can? :traducir, Tolk
-        %li= link_to 'Traducir', tolk_path
-      %li
-        %span.subtitulo Cambiar
-        %ul.submenu
-          - I18n.available_locales.each do |locale|
-            -# url_for devuelve el path actual
-            %li= link_to locale, url_for(locale: locale)
+      - I18n.available_locales.each do |locale|
+        -# url_for devuelve el path actual
+        %li= link_to locale, url_for(locale: locale)

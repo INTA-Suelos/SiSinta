@@ -56,6 +56,10 @@ es:
       comment:
         one: 'Comentario'
         other: 'Comentarios'
+  admin:
+    dashboard:
+      administradores: 'Administradores'
+      traduccion: 'Traducción'
   analiticos:
     index:
       sin_horizontes: 'Este perfil no tiene horizontes cargados'

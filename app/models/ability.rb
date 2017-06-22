@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Definiciones de permisos para CanCanCan.
 #
 # Abilidades agregadas a las default:
