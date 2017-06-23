@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620205006) do
+ActiveRecord::Schema.define(version: 20170620205013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,8 +107,18 @@ ActiveRecord::Schema.define(version: 20170620205006) do
 
   add_index "analiticos", ["horizonte_id"], name: "index_analiticos_on_horizonte_id", unique: true, using: :btree
 
+  create_table "anegamiento_translations", force: :cascade do |t|
+    t.integer  "anegamiento_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "valor"
+  end
+
+  add_index "anegamiento_translations", ["anegamiento_id"], name: "index_anegamiento_translations_on_anegamiento_id", using: :btree
+  add_index "anegamiento_translations", ["locale"], name: "index_anegamiento_translations_on_locale", using: :btree
+
   create_table "anegamientos", force: :cascade do |t|
-    t.string "valor", null: false
   end
 
   create_table "busquedas", force: :cascade do |t|

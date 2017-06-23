@@ -6,6 +6,8 @@ es:
       analitico:
         ph_h2o: 'pH en H2O (1:2,5)'
         ph_kcl: 'pH en KCL (1:2,5)'
+      anegamiento:
+        valor: 'Valor'
       busqueda:
         publico:  'Pública'
       perfil:
@@ -56,6 +58,7 @@ es:
         other: 'Comentarios'
       adhesividad: 'Adhesividad'
       analitico: 'Datos analíticos'
+      anegamiento: 'Anegamiento'
       comment:
         one: 'Comentario'
         other: 'Comentarios'
