@@ -1,39 +1,39 @@
-= field_set_tag 'Descripción de los horizontes', id: 'horizontes', class: 'celeste plegable span-22 last' do
+= field_set_tag t('.descripcion_horizontes'), id: 'horizontes', class: 'celeste plegable span-22 last' do
 
   .contenedor-scroll.span-21.last
     #scrolleable_horizontes
       .span-1.centrado= link_to '+', '#horizontes', class: "agregar #{'add' unless bloqueado}"
-      .span-2= label_tag nil, 'Clase Hz'
-      .span-1= label_tag nil, 'Prof. sup.'
-      .span-1= label_tag nil, 'Prof. inf.'
+      .span-2= label_tag nil, t('.clase_hz')
+      .span-1= label_tag nil, t('.prof_sup')
+      .span-1= label_tag nil, t('.prof_inf')
       .span-4
-        .prepend-1.span-3.last= label_tag nil, 'Límite', class: 'subtitulo'
-        .span-2= label_tag nil, 'Tipo'
-        .span-2.last= label_tag nil, 'Forma'
+        .prepend-1.span-3.last= label_tag nil, t('.limite.tag'), class: 'subtitulo'
+        .span-2= label_tag nil, t('.limite.tipo')
+        .span-2.last= label_tag nil, t('.limite.forma')
       .span-4
-        .prepend-unaymedia.span-2.last= label_tag nil, 'Color', class: 'subtitulo'
-        .span-2= label_tag nil, 'Seco'
-        .span-2.last= label_tag nil, 'Húmedo'
-      .span-3= label_tag nil, 'Textura'
+        .prepend-unaymedia.span-2.last= label_tag nil, t('.color.tag'), class: 'subtitulo'
+        .span-2= label_tag nil, t('.color.seco')
+        .span-2.last= label_tag nil, t('.color.humedo')
+      .span-3= label_tag nil, t('.textura')
       .span-6
-        .prepend-2.span-4.last= label_tag nil, 'Estructura', class: 'subtitulo'
-        .span-2= label_tag nil, 'Tipo'
-        .span-2= label_tag nil, 'Clase'
-        .span-2.last= label_tag nil, 'Grado'
+        .prepend-2.span-4.last= label_tag nil, t('.estructura.tag'), class: 'subtitulo'
+        .span-2= label_tag nil, t('.estructura.tipo')
+        .span-2= label_tag nil, t('.estructura.clase')
+        .span-2.last= label_tag nil, t('.estructura.grado')
       .span-8
-        .prepend-3.span-4.last= label_tag nil, 'Consistencia', class: 'subtitulo'
-        .span-2= label_tag nil, 'Seco'
-        .span-2= label_tag nil, 'Hum.'
-        .span-2= label_tag nil, 'Plast.'
-        .span-2.last= label_tag nil, 'Adhes.'
-      .span-1= label_tag nil, 'pH'
+        .prepend-3.span-4.last= label_tag nil, t('.consistencia.tag'), class: 'subtitulo'
+        .span-2= label_tag nil, t('.consistencia.seco')
+        .span-2= label_tag nil, t('.consistencia.humedo')
+        .span-2= label_tag nil, t('.consistencia.plasticidad')
+        .span-2.last= label_tag nil, t('.consistencia.adhesividad')
+      .span-1= label_tag nil, t('.ph')
       .span-1!= "<label>CO<sub>3</sub></label>"
-      .span-2= label_tag nil, 'Concreciones.'
-      .span-2= label_tag nil, 'Barnices'
-      .span-2= label_tag nil, 'Moteados'
-      .span-unaymedia= label_tag nil, 'Humedad'
-      .span-1= label_tag nil, 'Raíces'
-      .span-3.last= label_tag nil, 'Formaciones especiales'
+      .span-2= label_tag nil, t('.concreciones')
+      .span-2= label_tag nil, t('.barnices')
+      .span-2= label_tag nil, t('.moteados')
+      .span-unaymedia= label_tag nil, t('.humedad')
+      .span-1= label_tag nil, t('.raices')
+      .span-3.last= label_tag nil, t('.formaciones_especiales')
 
       .items
         = f.nested_fields_for :horizontes, new_object: horizonte_preparado,
@@ -42,6 +42,6 @@
             -# FIXME Deshardcodear con to_partial_path
             .item= render partial: 'perfiles/clasico/horizonte', locals: { h: fh, bloqueado: bloqueado }
           - else
-            .prepend-8.span-5.empty No hay horizontes cargados
+            .prepend-8.span-5.empty= t('.no_hay_horizontes')
 
         = nested_fields_templates

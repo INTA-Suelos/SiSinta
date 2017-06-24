@@ -74,7 +74,47 @@ es:
       administradores: Administradores
       traduccion: Traducción
   analiticos:
+    clasico:
+      tabla:
+        actualizar_datos: Actualizar datos
+        bases:
+          label: Bases intercambiables
+        capacidad_de_agua:
+          agua_15_atm: 15 atm
+          agua_3_atm: 3 atm
+          agua_util: Agua útil
+          label: Capacidad de agua
+        carbono_organico: Carbono orgánico
+        conductividad: Conductividad
+        datos_analiticos: Datos analíticos
+        densidad_aparente: Densidad aparente
+        horizonte: Horizonte
+        humedad: Equiv. de humedad
+        ph_h2o: pH en H2O (1:2,5)
+        ph_kcl: pH en KCL (1:2,5)
+        ph_pasta: pH en pasta
+        profundidad: Profundidad
+        registro: N° registro
+        resistencia_pasta: Resistencia pasta
+        saturacion_s_h: "% Satur. (S + H)"
+        saturacion_t: Satur. (sobre T)
+        textura:
+          arcilla: Arcilla < 2u
+          arena_fina: Arena fina
+          arena_gruesa: Arena gruesa
+          arena_media: Arena media
+          arena_muy_fina: Arena muy fina
+          arena_muy_gruesa: Arena muy gruesa
+          arena_total: Arena total
+          gravas: Gravas
+          label: Textura
+          limo_2_20: Limo 2-20u
+          limo_2_50: Limo 2-50u
+        valor_s: Valor S
+        valor_t: Valor T
     index:
+      mostrar_adjuntos: Mostrar adjuntos
+      mostrar_perfil: Mostrar perfil
       sin_horizontes: Este perfil no tiene horizontes cargados
   ayuda:
     busqueda:
@@ -220,8 +260,76 @@ es:
   mostrar: Mostrar
   perfiles:
     clasico:
+      descripcion_de_los_horizontes:
+        barnices: Barnices
+        clase_hz: Clase Hz
+        color:
+          humedo: Húmedo
+          seco: Seco
+          tag: Color
+        concreciones: Concreciones.
+        consistencia:
+          adhesividad: Adhes.
+          humedo: Hum.
+          plasticidad: Plast.
+          seco: Seco
+          tag: Consistencia
+        descripcion_horizontes: Descripción de los horizontes
+        estructura:
+          clase: Clase
+          grado: Grado
+          tag: Estructura
+          tipo: Tipo
+        formaciones_especiales: Formaciones especiales
+        humedad: Humedad
+        limite:
+          forma: Forma
+          tag: Límite
+          tipo: Tipo
+        moteados: Moteados
+        no_hay_horizontes: No hay horizontes cargados
+        ph: pH
+        prof_inf: Prof. inf.
+        prof_sup: Prof. sup.
+        raices: Raíces
+        textura: Textura
+      descripcion_del_sitio:
+        capacidad:
+          label: Clasificación utilitaria
+          subclases: Limitaciones principales
+        cobertura_vegetal: Cobertura vegetal
+        descripcion: Descripción del sitio
+        erosion:
+          clase: Erosión
+        fase: Fase
+        humedad:
+          clase: Distrib. de la humedad
+        numero:
+          label: Número
+          placeholder: C 00/000
+        paisaje:
+          label: Paisaje
+          simbolo: Símbolo
+        pedregosidad:
+          clase: Pedreg. o rocosidad
+        posicion: Posición
+        profundidad_napa: Profundidad de la napa
+        sales: Sales
+        subgrupo: Subgrupo
+        ubicacion:
+          coordenadas: Coordenadas
+          label: Ubicación
+          srid: Formato
+          x: lon/x
+          y: lat/y
+        uso_de_la_tierra: Uso de la tierra
+        vegetacion_o_cultivos: Vegetación natural o cultivos
       es_modal: Es modal?
       ficha: Ficha de descripción edafológica
+      mapa:
+        ubicacion: Ubicación
+      notas:
+        notas: Notas
     corrientes:
       es_modal: Es modal?
       ficha: Ficha de descripción edafológica
