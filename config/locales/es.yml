@@ -109,8 +109,34 @@ es:
         y: Coordenada y/latitud.
       usuario: Usuario que cargó este perfil
   busquedas:
+    busquedas:
+      nombre: Nombre
+      publica: "¿Es pública?"
+      resultados: Resultados
+    condition_fields:
+      agregar_valor: Agregar valor
+      condiciones: Condiciones
+      quitar: Quitar
     edit:
       submit: Actualizar
+    form:
+      agregar: Agregar
+      agregar_grupo: Agregar grupo
+      consulta: Consulta
+      grupos_de_condiciones: Grupos de condiciones
+      ordenar_por: Ordenar por
+      si_queres_guardarla: "(si querés guardarla)"
+    grouping_fields:
+      agregar_condiciones: Agregar condiciones
+      agregar_subgrupo: Agregar subgrupo
+      cumplir_condiciones: Cumplir %{selector} las condiciones.
+      quitar: Quitar
+    index:
+      busquedas_publicas: Búsquedas públicas
+      nueva_busqueda: Nueva búsqueda
+      tus_busquedas: Tus búsquedas
+    sort_fields:
+      quitar: Quitar
   comunes:
     perfiles_asociados:
       como_buscar: Por ubicación, serie o número de perfil
@@ -120,6 +146,8 @@ es:
     sessions:
       usuario:
         already_signed_out: Ya cerraste tu sesión.
+  editar: Editar
+  eliminar: Eliminar
   equipos:
     form:
       agregar_miembro: Agregar
@@ -283,3 +311,4 @@ es:
     update_varios:
       alert: Hubo algún problema al actualizar los usuarios.
       notice: Los usuarios se actualizaron correctamente.
+  volver: Volver

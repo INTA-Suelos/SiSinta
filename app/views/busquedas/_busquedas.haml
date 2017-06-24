@@ -2,9 +2,9 @@
   %caption= caption
   %thead
     %tr
-      %th.nombre Nombre
+      %th.nombre= t('.nombre')
       - if columna_publicas
-        %th.publica ¿Es pública?
+        %th.publica= t('.publica')
       %th.acciones
 
   %tbody
@@ -14,10 +14,10 @@
         - if columna_publicas
           %td.publica= '✓' if busqueda.publica?
         %td.acciones
-          = link_to 'Resultados', busqueda
+          = link_to t('.resultados'), busqueda
           - if can? :manage, busqueda
             = '|'
-            = link_to 'Editar', edit_busqueda_path(busqueda)
+            = link_to t('editar'), edit_busqueda_path(busqueda)
           - if can? :manage, busqueda
             = '|'
-            = link_to 'Eliminar', busqueda, data: { confirm: t(:confirmar) }, method: :delete
+            = link_to t('eliminar'), busqueda, data: { confirm: t(:confirmar) }, method: :delete

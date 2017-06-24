@@ -1,12 +1,12 @@
 .botonera
   - if can? :create, Busqueda
-    = link_to 'Nueva búsqueda', new_busqueda_path
+    = link_to t('.nueva_busqueda'), new_busqueda_path
 
 - if usuario_signed_in?
   = render partial: 'busquedas', object: @busquedas,
-           locals: { caption: 'Tus búsquedas', columna_publicas: true }
+           locals: { caption: t('.tus_busquedas'), columna_publicas: true }
 
 = render partial: 'busquedas', object: @busquedas_publicas,
-         locals: { caption: 'Búsquedas públicas', columna_publicas: false }
+         locals: { caption: t('.busquedas_publicas'), columna_publicas: false }
 
 = volver_arriba

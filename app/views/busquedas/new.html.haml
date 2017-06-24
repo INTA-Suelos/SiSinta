@@ -1,5 +1,5 @@
 .botonera
-  = link_to 'Volver', busquedas_path
+  = link_to t('volver'), busquedas_path
 
 #busqueda
   = search_form_for @perfiles, url: busquedas_path, html: { method: :post } do |f|
