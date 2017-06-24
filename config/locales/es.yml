@@ -148,6 +148,12 @@ es:
         cambiar_ficha: Cambiar
         create: Crear %{model}
         edit: Actualizar %{model}
+  inicio:
+    index:
+      bienvenida: Bienvenido a SiSINTA
+      busqueda_de_perfiles: Búsqueda de perfiles
+      criterio_de_busqueda: Por nombre o número
+      submit: Buscar
   layouts:
     barra:
       administracion:
