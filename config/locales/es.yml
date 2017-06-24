@@ -153,6 +153,7 @@ es:
       agregar_miembro: Agregar
   errors:
     format: "%{attribute}: %{message}"
+  exportar: Exportar
   flash:
     actions:
       create:
@@ -216,13 +217,48 @@ es:
       series:
         menu: Series
         ver: Ver
+  mostrar: Mostrar
   perfiles:
+    clasico:
+      es_modal: Es modal?
+      ficha: Ficha de descripción edafológica
+    corrientes:
+      es_modal: Es modal?
+      ficha: Ficha de descripción edafológica
+    edit:
+      adjuntar_archivo: Adjuntar archivo
+      editar_analiticos: Editar analíticos
+    editar_analiticos:
+      editar_perfil: Editar perfil
     exportar:
+      agregar_perfiles: Agregar perfiles para exportar
+      atributos_de_perfiles: Atributos de los perfiles
+      exportar_csv: Exportar a CSV
+      incluir_encabezado: Incluye encabezado?
       seleccionar_por_provincia: Seleccionar por provincia
       submit: Exportar
+      todos_los_atributos: Todos los atributos
+    index:
+      es_modal: "¿Es modal?"
+      fecha: Fecha
+      nombre: Nombre
+      nuevo_perfil: Nuevo perfil
+      numero: Número
+      ubicacion: Ubicación
     seleccionar:
+      desmarcar_todo: Desmarcar todo
+      es_modal: "¿Es modal?"
       exportar: Seleccionar
+      fecha: Fecha
+      marcar_todo: Marcar todo
+      numero: Número
+      serie: Serie
+      ubicacion: Ubicación
       volver: Cancelar
+    show:
+      mostrar_adjuntos: Mostrar adjuntos
+      mostrar_analiticos: Mostrar analíticos
+  permisos: Permisos
   ransack:
     all: todas
     and: y
