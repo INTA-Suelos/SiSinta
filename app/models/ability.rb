@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Definiciones de permisos para CanCanCan.
 #
 # Abilidades agregadas a las default:
@@ -42,6 +41,8 @@ class Ability
                   to: :update
 
     if @usuario.admin?
+      # TODO Por ahora sólo los admins traducen. Redundante ya que los admins tienen todos los permisos
+      traductor
       administrador
     else
       if @usuario.autorizado?
@@ -65,6 +66,7 @@ class Ability
 
     # TODO Debería incluir llamar a `miembro`?
     def autorizado
+      # FIXME Revisar si permite acceso a ActiveAdmin
       can :manage, Usuario, id: @usuario.id
       can :read, recursos
       can :create, recursos
@@ -87,6 +89,11 @@ class Ability
 
       # Todos los miembros tienen permisos de invitados
       invitado
+    end
+
+    def traductor
+      # Lo preguntamos desde la configuración de Tolk
+      can :traducir, Tolk
     end
 
     # usuario invitado, anónimo o no existente

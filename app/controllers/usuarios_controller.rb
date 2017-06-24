@@ -12,11 +12,21 @@ class UsuariosController < AutorizadoController
 
   def index
     @usuarios = PaginadorDecorator.decorate apply_scopes(@usuarios)
+
     respond_with @usuarios
   end
 
   def update
-    current_usuario.update_attributes(usuario_params)
+    current_usuario.assign_attributes(usuario_params)
+
+    cambio_de_idioma = current_usuario.idioma_changed?
+
+    # Guardamos el usuario pero alteramos el locale para la respuesta si cambió
+    # su idioma preferido
+    if current_usuario.save && cambio_de_idioma
+      I18n.locale = current_usuario.idioma
+    end
+
     respond_with @usuario = current_usuario, location: :root
   end
 
@@ -29,7 +39,9 @@ class UsuariosController < AutorizadoController
       params[:usuarios].keys, params[:usuarios].values).reject do |u|
         u.errors.empty?
     end
+
     @usuarios = PaginadorDecorator.decorate apply_scopes(@usuarios)
+
     respond_with @usuarios, location: usuarios_path,
       notice: t('usuarios.update_varios.notice') do |format|
         if errores.any?
@@ -41,7 +53,7 @@ class UsuariosController < AutorizadoController
   private
 
     def usuario_params
-      params.require(:usuario).permit :srid, :ficha
+      params.require(:usuario).permit :srid, :ficha_id, :idioma
     end
 
     def evitar_escalada_de_privilegios

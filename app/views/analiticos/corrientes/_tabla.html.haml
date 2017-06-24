@@ -3,7 +3,7 @@
 
   = f.error_messages
 
-  = field_set_tag 'Datos analíticos', class: 'celeste_oscuro span-23 last' do
+  = field_set_tag t('analiticos.clasico.tabla.datos_analiticos'), class: 'celeste_oscuro span-23 last' do
 
     - @perfil.analiticos.each do |a|
       = f.fields_for 'analiticos_attributes[]', a do |fa|
@@ -15,21 +15,21 @@
         %colgroup#titulos{span: 2}
         %colgroup#datos{span: 8}
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'N° registro'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.registro')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :registro, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Horizonte'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.horizonte')
           - @perfil.analiticos.each do |a|
             %td.dato= text_field_tag nil, a.horizonte.tipo, disabled: true
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Profundidad'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.profundidad')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :profundidad_muestra, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 1, rowspan: 4}= label_tag nil, 'Carbono orgánico'
+          %td.titulo{colspan: 1, rowspan: 4}= label_tag nil, t('analiticos.clasico.tabla.carbono_organico')
           %td.titulo{colspan: 1}= label_tag nil, 'MO %'
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
@@ -53,62 +53,62 @@
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :carbono_organico_cn, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 1, rowspan: 10}= label_tag nil, 'Textura'
-          %td.titulo.largo= label_tag nil, 'Arcilla < 2u'
+          %td.titulo{colspan: 1, rowspan: 10}= label_tag nil, t('analiticos.clasico.tabla.textura.label')
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arcilla')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arcilla, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Limo 2-20u'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.limo_2_20')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :limo_2_20, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Limo 2-50u'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.limo_2_50')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :limo_2_50, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena muy fina'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_muy_fina')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_muy_fina, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena fina'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_fina')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_fina, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena media'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_media')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_media, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena gruesa'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_gruesa')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_gruesa, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena muy gruesa'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_muy_gruesa')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_muy_gruesa, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Arena total'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.arena_total')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :arena_total, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo.largo= label_tag nil, 'Gravas'
+          %td.titulo.largo= label_tag nil, t('analiticos.clasico.tabla.textura.gravas')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :gravas, disabled: bloqueado,
@@ -120,59 +120,59 @@
               %td.dato= f_a.text_field :ca_co3, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Equiv. de humedad'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.humedad')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :humedad, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, 'Capacidad de agua'
-          %td.titulo{colspan: 1}= label_tag nil, '3 atm'
+          %td.titulo{colspan: 1, rowspan: 3}= label_tag nil, t('analiticos.clasico.tabla.capacidad_de_agua.label')
+          %td.titulo{colspan: 1}= label_tag nil, t('analiticos.clasico.tabla.capacidad_de_agua.agua_3_atm')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :agua_3_atm, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 1}= label_tag nil, '15 atm'
+          %td.titulo{colspan: 1}= label_tag nil, t('analiticos.clasico.tabla.capacidad_de_agua.agua_15_atm')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :agua_15_atm, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 1}= label_tag nil, 'Agua útil'
+          %td.titulo{colspan: 1}= label_tag nil, t('analiticos.clasico.tabla.capacidad_de_agua.agua_util')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :agua_util, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'pH en pasta'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.ph_pasta')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :ph_pasta, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'pH en H2O (1:2,5)'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.ph_h2o')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :ph_h2o, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'pH en KCL (1:2,5)'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.ph_kcl')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :ph_kcl, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Resistencia pasta'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.resistencia_pasta')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :resistencia_pasta, disabled: bloqueado,
               placeholder: 'Ω'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Conductividad'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.conductividad')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :conductividad, disabled: bloqueado,
               placeholder: 'mmhos/cm'
         %tr
-          %td.titulo.largo{colspan: 1, rowspan: 5}= label_tag nil, 'Bases intercambiables'
+          %td.titulo.largo{colspan: 1, rowspan: 5}= label_tag nil, t('analiticos.clasico.tabla.bases.label')
           %td.titulo= label_tag nil, 'Ca++'
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
@@ -203,7 +203,7 @@
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :psi, disabled: true
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Valor S'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.valor_s')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :s, disabled: bloqueado
@@ -213,24 +213,24 @@
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :h, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Valor T'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.valor_t')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :t, disabled: bloqueado
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Satur. (sobre T)'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.saturacion_t')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :saturacion_t, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, '% Satur. (S + H)'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.saturacion_s_h')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :saturacion_s_h, disabled: bloqueado,
               placeholder: '%'
         %tr
-          %td.titulo{colspan: 2}= label_tag nil, 'Densidad aparente'
+          %td.titulo{colspan: 2}= label_tag nil, t('analiticos.clasico.tabla.densidad_aparente')
           - @perfil.analiticos.each do |a|
             = f.fields_for 'analiticos_attributes[]', a do |f_a|
               %td.dato= f_a.text_field :densidad_aparente, disabled: bloqueado
@@ -241,4 +241,4 @@
               %td.dato= f_a.text_field :p_ppm, disabled: bloqueado,
               placeholder: '%'
 
-    .acciones.span-4.last= f.submit 'Actualizar datos' unless bloqueado
+    .acciones.span-4.last= f.submit t('analiticos.clasico.tabla.actualizar_datos') unless bloqueado

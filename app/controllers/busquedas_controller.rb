@@ -76,11 +76,6 @@ class BusquedasController < ApplicationController
       end
     end
 
-    # Para los mensajes del flash de responders
-    def interpolation_options
-      { el_la: 'la' }
-    end
-
     def current_usuario_o_anonimo
       current_usuario || Usuario.new
     end

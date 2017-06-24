@@ -138,8 +138,11 @@ ul.menu_usuarios {
     .plegable {
       &:hover { cursor: pointer; }
     }
-  }
 
+    .subtitulo {
+      font-size: small;
+    }
+  }
 }
 
 .centrado {

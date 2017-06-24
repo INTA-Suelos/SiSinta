@@ -1,20 +1,20 @@
 .botonera
   - if can? :read, @perfil
-    = link_to 'Mostrar', @perfil
+    = link_to t('mostrar'), @perfil
     = '|'
   - if can?(:update, @perfil) || can?(:modificar, @perfil)
-    = link_to 'Permisos', permisos_path(modelo: 'perfil', id: @perfil)
+    = link_to t('permisos'), permisos_path(modelo: 'perfil', id: @perfil)
     = '|'
   - if can?(:delete, @perfil)
-    = link_to 'Eliminar', @perfil, data: { confirm: t(:confirmar) }, method: :delete
+    = link_to t('eliminar'), @perfil, data: { confirm: t(:confirmar) }, method: :delete
     = '|'
   - if can? :update, @perfil.analiticos
-    = link_to 'Editar analíticos', editar_analiticos_perfil_path(@perfil)
+    = link_to t('.editar_analiticos'), editar_analiticos_perfil_path(@perfil)
     = '|'
   - if can? :create, @perfil => Adjunto
-    = link_to 'Adjuntar archivo', new_perfil_adjunto_path(@perfil)
+    = link_to t('.adjuntar_archivo'), new_perfil_adjunto_path(@perfil)
     = '|'
-  = link_to 'Volver', perfiles_path
+  = link_to t('volver'), perfiles_path
 
   = render 'fichas/selector', origen: edit_perfil_path(@perfil)
 

@@ -8,6 +8,15 @@ GIT
       polyamorous (~> 1.1.0)
 
 GIT
+  remote: https://github.com/mauriciopasquier/activeadmin-globalize.git
+  revision: 49c219d740a5b4c34b2e6bf0a20e9994d95f1127
+  branch: sisar
+  specs:
+    activeadmin-globalize (1.0.0.pre)
+      activeadmin (~> 1.0.0.pre)
+      globalize (>= 3.1.0, < 6.0)
+
+GIT
   remote: https://github.com/mauriciopasquier/capistrano-config_provider.git
   revision: 34ff30ebdaa5798d002b33f0318efcc09bb84eae
   specs:
@@ -54,6 +63,20 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_model_serializers (0.8.3)
       activemodel (>= 3.0)
+    activeadmin (1.0.0)
+      arbre (>= 1.1.1)
+      bourbon
+      coffee-rails
+      formtastic (~> 3.1)
+      formtastic_i18n
+      inherited_resources (~> 1.7)
+      jquery-rails
+      jquery-ui-rails
+      kaminari (>= 0.15, < 2.0)
+      railties (>= 4.2, < 5.2)
+      ransack (~> 1.3)
+      sass-rails
+      sprockets (< 4.1)
     activejob (4.2.8)
       activesupport (= 4.2.8)
       globalid (>= 0.3.0)
@@ -77,6 +100,8 @@ GEM
     addressable (2.4.0)
     airbrussh (1.1.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    arbre (1.1.1)
+      activesupport (>= 3.0.0)
     arel (6.0.4)
     attribute_normalizer (1.2.0)
     awesome_nested_fields (0.6.4)
@@ -89,6 +114,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (3.2.4)
+      sass (~> 3.2)
+      thor
     brakeman (3.3.2)
     browser_detect (0.0.5)
     builder (3.2.3)
@@ -161,8 +189,14 @@ GEM
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
+    formtastic (3.1.5)
+      actionpack (>= 3.2.13)
+    formtastic_i18n (0.6.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -184,6 +218,11 @@ GEM
     i18n (0.8.4)
     inflections (0.0.5)
       activesupport (>= 2.2.1)
+    inherited_resources (1.7.2)
+      actionpack (>= 3.2, < 5.2.x)
+      has_scope (~> 0.6)
+      railties (>= 3.2, < 5.2.x)
+      responders
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -194,6 +233,9 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-i18n (0.4.0)
+      kaminari
+      rails
     leaflet-rails (0.7.7)
     libv8 (3.16.14.15)
     loofah (2.0.3)
@@ -273,6 +315,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (4.0.9)
+      i18n (~> 0.7)
+      railties (~> 4.0)
     rails-jquery-autocomplete (1.0.3)
       rails (>= 3.2)
     railties (4.2.8)
@@ -301,6 +346,7 @@ GEM
     ruby_parser (3.8.2)
       sexp_processor (~> 4.1)
     rubyzip (1.2.0)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -336,6 +382,9 @@ GEM
     tilt (1.4.1)
     tinymce-rails (4.3.13)
       railties (>= 3.1.1)
+    tolk (2.0.0)
+      rails (>= 4.0)
+      safe_yaml (>= 0.8.6)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -352,6 +401,8 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.8.0)
+  activeadmin
+  activeadmin-globalize!
   activerecord-postgis-adapter
   acts-as-taggable-on
   attribute_normalizer
@@ -384,6 +435,7 @@ DEPENDENCIES
   jquery-ui-rails
   jwt
   kaminari
+  kaminari-i18n
   leaflet-rails
   minitest-rails
   minitest-rails-capybara
@@ -396,6 +448,7 @@ DEPENDENCIES
   rails-api
   rails-assets-leaflet-plugins!
   rails-assets-leaflet.markercluster!
+  rails-i18n
   rails-jquery-autocomplete
   ransack
   responders
@@ -410,6 +463,7 @@ DEPENDENCIES
   squeel!
   therubyracer
   tinymce-rails
+  tolk
   uglifier
   yaml_db!
 

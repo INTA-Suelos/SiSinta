@@ -7,11 +7,12 @@ gem 'pg'
 # FIXME Nuestra rama ya está mergeada en yaml_db 0.5, pero conflictúa con un
 # FIXME error en activerecord-postgis-adapter:
 # FIXME https://github.com/rgeo/activerecord-postgis-adapter/issues/183
-gem 'yaml_db', git: 'https://github.com/mauriciopasquier/yaml_db.git', branch: 'order-join-tables'
+gem 'yaml_db',
+  git: 'https://github.com/mauriciopasquier/yaml_db.git',
+  branch: 'order-join-tables'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
-gem 'devise-i18n'
 gem 'cancancan'
 gem 'rolify', '~> 3.4'
 gem 'rack-cors'
@@ -32,7 +33,8 @@ gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
 gem 'active_model_serializers', '~> 0.8.0'
-gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel.git'
+gem 'squeel',
+  git: 'https://github.com/activerecord-hackery/squeel.git'
 
 ## GIS
 gem 'activerecord-postgis-adapter'
@@ -56,7 +58,8 @@ gem 'coffee-rails'
 gem 'therubyracer'
 gem 'uglifier'
 # FIXME Todavía no hay release compatible con rails4
-gem 'multiselectjs_rails', git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
+gem 'multiselectjs_rails',
+  git: 'https://github.com/mauriciopasquier/multiselectjs_rails.git'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
@@ -67,6 +70,19 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet.markercluster'
   gem 'rails-assets-leaflet-plugins'
 end
+
+# Administración
+gem 'activeadmin'
+
+# I18n
+gem 'tolk'
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'kaminari-i18n'
+# No está publicada la versión compatible con ActiveAdmin 1.0.0
+gem 'activeadmin-globalize',
+  git: 'https://github.com/mauriciopasquier/activeadmin-globalize.git',
+  branch: 'sisar'
 
 ## Server
 # TODO revisar configuración de compresión

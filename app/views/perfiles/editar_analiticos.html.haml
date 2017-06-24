@@ -1,11 +1,11 @@
 .botonera
   - if can? :read, @perfil
-    = link_to 'Mostrar', perfil_analiticos_path(@perfil)
+    = link_to t('mostrar'), perfil_analiticos_path(@perfil)
     = '|'
   - if can? :update, @perfil
-    = link_to 'Editar perfil', edit_perfil_path(@perfil)
+    = link_to t('.editar_perfil'), edit_perfil_path(@perfil)
     = '|'
-  = link_to 'Volver', perfiles_path
+  = link_to t('volver'), perfiles_path
 
   = render 'fichas/selector', origen: editar_analiticos_perfil_path(@perfil)
 

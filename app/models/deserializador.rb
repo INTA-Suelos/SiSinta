@@ -84,7 +84,7 @@ class Deserializador
       vegetacion_o_cultivos: datos['perfil_vegetacion_o_cultivos'],
       observaciones: datos['perfil_observaciones'],
       capacidad_attributes: {
-        clase_id: ClaseDeCapacidad.find_by(codigo: datos['perfil_capacidad_clase']).to_param },
+        clase_id: ClaseDeCapacidad.where(codigo: datos['perfil_capacidad_clase']).take.to_param },
       ubicacion_attributes: {
         descripcion: datos['perfil_ubicacion_descripcion'],
         recorrido: datos['perfil_ubicacion_recorrido'],
@@ -118,7 +118,8 @@ class Deserializador
       pendiente_id: Pendiente.find_by(valor: datos['perfil_pendiente'].try(:downcase)).to_param,
       permeabilidad_id: Permeabilidad.find_by(valor: datos['perfil_permeabilidad'].try(:downcase)).to_param,
       relieve_id: Relieve.find_by(valor: datos['perfil_relieve'].try(:downcase)).to_param,
-      anegamiento_id: Anegamiento.find_by(valor: datos['perfil_anegamiento'].try(:downcase)).to_param,
+      # FIXME Usar find_by cuando globalize lo agregue a los query methods
+      anegamiento_id: Anegamiento.where(valor: datos['perfil_anegamiento'].try(:downcase)).take.to_param,
       uso_de_la_tierra_id: UsoDeLaTierra.find_by(valor: datos['perfil_uso_de_la_tierra'].try(:downcase)).to_param,
       posicion_id: Posicion.find_by(valor: datos['perfil_posicion'].try(:downcase)).to_param,
       sal_id: Sal.find_by(valor: datos['perfil_sales']).to_param
@@ -188,7 +189,8 @@ class Deserializador
         consistencia_attributes: {
           en_seco_id: ConsistenciaEnSeco.find_by(valor: h['consistencia_en_seco']).to_param,
           en_humedo_id: ConsistenciaEnHumedo.find_by(valor: h['consistencia_en_humedo']).to_param,
-          adhesividad_id: Adhesividad.find_by(valor: h['consistencia_adhesividad']).to_param,
+          # FIXME Usar find_by cuando globalize lo agregue a los query methods
+          adhesividad_id: Adhesividad.where(valor: h['consistencia_adhesividad']).take.to_param,
           plasticidad_id: Plasticidad.find_by(valor: h['consistencia_plasticidad']).to_param },
         estructura_attributes: {
           tipo_id: TipoDeEstructura.find_by(valor: h['estructura_tipo']).to_param,

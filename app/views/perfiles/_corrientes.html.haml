@@ -2,11 +2,11 @@
 
   = f.error_messages
 
-  = field_set_tag 'Ficha de descripción edafológica', class: 'celeste_oscuro span-23 last' do
+  = field_set_tag t('.ficha'), class: 'celeste_oscuro span-23 last' do
 
     .span-23.last
       .span-4.campo
-        .span-2.prepend-media= f.label :modal, 'Es modal?', class: 'subtitulo'
+        .span-2.prepend-media= f.label :modal, t('.es_modal'), class: 'subtitulo'
         = f.check_box :modal, class: 'span-1 last', disabled: bloqueado
         = ayuda_para t('ayuda.perfil.modal')
       #serie

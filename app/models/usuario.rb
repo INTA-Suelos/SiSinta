@@ -2,6 +2,7 @@
 class Usuario < ActiveRecord::Base
   rolify role_cname: 'Rol'
   # TODO Extraer preferencias a un modelo aparte
+  # TODO Incluir idioma
   store :config, accessors: [:srid, :checks_csv_perfiles]
 
   # TODO cambiar relacion a 'creador'
@@ -20,7 +21,10 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
 
-  validates_presence_of :ficha, :srid, on: :update
+  validates :idioma, presence: true, inclusion: { in: I18n.available_locales.map(&:to_s) }
+  validates :nombre, presence: true
+  validates :ficha, presence: { on: :update }
+  validates :srid, presence: { on: :update }
 
   # FIXME Workaround para cierto problema con rolify y las inflecciones
   alias_method :role_ids, :rol_ids
@@ -32,6 +36,7 @@ class Usuario < ActiveRecord::Base
                         'roles.resource_id' => recurso.id,
                         'roles.name' => 'miembro')
   end
+  scope :admins, ->{ with_role('Administrador') }
 
   def usa_ficha?(tipo)
     ficha.identificador == tipo

@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 describe 'Usuarios Route Integration Test' do
   it 'rutea a update_varios' do

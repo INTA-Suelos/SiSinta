@@ -128,9 +128,4 @@ class SeriesController < AutorizadoController
       %w[ nombre simbolo provincia_id cantidad_de_perfiles
         ].include?(params[:por]) ? params[:por] : 'nombre'
     end
-
-    # Para los mensajes del flash de responders
-    def interpolation_options
-      { el_la: 'la' }
-    end
 end

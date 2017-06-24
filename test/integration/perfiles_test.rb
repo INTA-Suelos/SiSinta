@@ -1,5 +1,4 @@
-# encoding: utf-8
-require './test/test_helper'
+require 'test_helper'
 
 feature 'Carga de perfiles' do
   describe 'Formulario clásico' do

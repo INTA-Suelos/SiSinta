@@ -48,6 +48,8 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   inflect.singular(/^(.*)s(_del?_.*)$/i, '\1\2')
   inflect.singular(/^(.*)es(_del?_.*)$/i, '\1\2')
+  # No modificar si la palabra es exactamente 'es'
+  inflect.singular(/^es$/i, 'es')
 
   inflect.irregular 'consistencia_en_seco', 'consistencias_en_seco'
   inflect.irregular 'consistencia_en_humedo', 'consistencias_en_humedo'
@@ -61,8 +63,15 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'forma_de_limite', 'formas_de_limite'
 
   # Se mantienen en inglés
+  # Act_as_taggable_on
   inflect.irregular 'tag', 'tags'
   inflect.irregular 'tagging', 'taggings'
+  # Tolk
+  inflect.irregular 'phrase', 'phrases'
+  inflect.irregular 'locale', 'locales'
+  inflect.irregular 'translation', 'translations'
+  # Active Admin
+  inflect.irregular 'comment', 'comments'
 
   # Rails
   inflect.irregular 'schema_migration', 'schema_migrations'

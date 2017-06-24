@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 describe 'Adjuntos Route Integration Test' do
   it 'rutea a index' do
