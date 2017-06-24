@@ -35,7 +35,7 @@ es:
       full_messages:
         format: "%{attribute} %{message}"
       messages:
-        record_invalid: "La validación falló: %{errors}"
+        record_invalid: 'La validación falló: %{errors}'
         taken: ya ha sido tomado
       models:
         adjunto:
@@ -115,7 +115,7 @@ es:
     perfiles_asociados:
       como_buscar: Por ubicación, serie o número de perfil
       submit: Buscar
-  confirmar: '¿En serio? Es irreversible.'
+  confirmar: "¿En serio? Es irreversible."
   devise:
     sessions:
       usuario:
@@ -148,6 +148,40 @@ es:
         cambiar_ficha: Cambiar
         create: Crear %{model}
         edit: Actualizar %{model}
+  layouts:
+    barra:
+      administracion:
+        menu: Administración
+        panel: Panel
+      contacto:
+        mail: Mail
+        menu: Contacto
+      equipos:
+        menu: Equipos
+        ver: Ver
+      idioma:
+        menu: Idioma
+      perfiles:
+        busquedas:
+          guardadas: Guardadas
+          menu: Búsquedas
+          nueva: Nueva
+        cargar: Cargar
+        exportar: Exportar
+        fases:
+          menu: Fases
+          ver: Ver
+        menu: Perfiles
+        subgrupos:
+          menu: Subgrupos
+          ver: Ver
+        ver: Ver
+      proyectos:
+        menu: Proyectos
+        ver: Ver
+      series:
+        menu: Series
+        ver: Ver
   perfiles:
     exportar:
       seleccionar_por_provincia: Seleccionar por provincia
