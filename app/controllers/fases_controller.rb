@@ -49,9 +49,4 @@ class FasesController < AutorizadoController
     def fase_params
       params.require(:fase).permit :nombre, :codigo
     end
-
-    # Para los mensajes del flash de responders
-    def interpolation_options
-      { el_la: 'la' }
-    end
 end

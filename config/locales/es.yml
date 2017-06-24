@@ -204,12 +204,12 @@ es:
   flash:
     actions:
       create:
-        notice: Se creó %{el_la} %{resource_name} correctamente.
+        notice: Se creó %{resource_name} correctamente.
       destroy:
-        alert: No se pudo destruir %{el_la} %{resource_name}.
-        notice: Se destruyó %{el_la} %{resource_name} correctamente.
+        alert: No se pudo destruir %{resource_name}. %{resource_errors}
+        notice: Se destruyó %{resource_name} correctamente.
       update:
-        notice: Se actualizó %{el_la} %{resource_name} correctamente.
+        notice: Se actualizó %{resource_name} correctamente.
     perfiles:
       update_analiticos:
         alert: No pudieron modificarse todos los datos analíticos.

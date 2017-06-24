@@ -2,7 +2,8 @@
 class Adhesividad < ActiveRecord::Base
   include Mostrable
 
-  has_many :consistencias, inverse_of: :adhesividad, foreign_key: :adhesividad_id
+  has_many :consistencias, inverse_of: :adhesividad,
+    foreign_key: :adhesividad_id, dependent: :restrict_with_error
 
   # Globalize recomienda sacar las columnas originales, pero validamos los setters
   validates :valor, presence: true, uniqueness: true

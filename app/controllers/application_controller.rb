@@ -70,11 +70,6 @@ class ApplicationController < ActionController::Base
       %w[asc desc].include?(params[:direccion]) ? params[:direccion] : 'asc'
     end
 
-    # Para los mensajes del flash de responders
-    def interpolation_options
-      { el_la: 'el' }
-    end
-
     # La ficha o plantilla de carga que seleccionó el usuario en la acción
     # anterior. Si no hay, se usa la que definió en su perfil de usuario. Si no
     # hay usuario, usamos la default

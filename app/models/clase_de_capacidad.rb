@@ -4,7 +4,8 @@ class ClaseDeCapacidad < ActiveRecord::Base
   include Mostrable
   alias_attribute :valor, :codigo
 
-  has_many :capacidades, inverse_of: :clase, foreign_key: :clase_id
+  has_many :capacidades, inverse_of: :clase,
+    foreign_key: :clase_id, dependent: :restrict_with_error
 
   # Globalize recomienda sacar las columnas originales, pero validamos los setters
   validates :codigo, presence: true, uniqueness: true

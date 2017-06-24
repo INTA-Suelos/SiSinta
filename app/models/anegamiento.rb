@@ -2,7 +2,7 @@
 class Anegamiento < ActiveRecord::Base
   include Mostrable
 
-  has_many :perfiles
+  has_many :perfiles, dependent: :restrict_with_error
 
   # Globalize recomienda sacar las columnas originales, pero validamos los setters
   validates :valor, presence: true, uniqueness: true
