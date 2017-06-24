@@ -12,4 +12,8 @@
       .span-3= f.label :ficha, 'Ficha para perfiles'
       .span-9.last= f.collection_select :ficha_id, Ficha.all, :id, :nombre
 
-    .span-4= f.submit "Actualizar preferencias"
+    .span-24
+      .span-3= f.label :idioma, 'Idioma preferido'
+      .span-9.last= f.select :idioma, I18n.available_locales.map(&:to_s)
+
+    .span-4= f.submit 'Actualizar preferencias'

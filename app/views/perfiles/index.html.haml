@@ -1,7 +1,7 @@
 #lista
   .botonera
     - if can? :create, Perfil
-      = link_to "Nuevo perfil", new_perfil_path
+      = link_to t('.nuevo_perfil'), new_perfil_path
 
     #paginacion
       = paginate @perfiles
@@ -10,11 +10,11 @@
   %table
     %thead
       %tr
-        %th#fecha=      link_para_ordenar :fecha,     'Fecha'
-        %th#nombre=     link_para_ordenar :nombre,    'Nombre'
-        %th#ubicacion=  link_para_ordenar :ubicacion, 'Ubicación'
-        %th#numero=     link_para_ordenar :numero,    'Número'
-        %th#modal=      link_para_ordenar :modal,     '¿Es modal?'
+        %th#fecha=      link_para_ordenar :fecha,     t('.fecha')
+        %th#nombre=     link_para_ordenar :nombre,    t('.nombre')
+        %th#ubicacion=  link_para_ordenar :ubicacion, t('.ubicacion')
+        %th#numero=     link_para_ordenar :numero,    t('.numero')
+        %th#modal=      link_para_ordenar :modal,     t('.es_modal')
         %th.acciones
 
     %tbody

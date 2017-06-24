@@ -1,5 +1,0 @@
-es:
-  devise:
-    sessions:
-      usuario:
-        already_signed_out: 'Ya cerraste tu sesión.'

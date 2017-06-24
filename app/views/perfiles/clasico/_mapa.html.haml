@@ -1,5 +1,5 @@
 - if f.object.persisted? && f.object.geolocalizado?
-  = field_set_tag 'Ubicación', id: 'ubicacion', class: 'celeste plegable span-22 last' do
+  = field_set_tag t('.ubicacion'), id: 'ubicacion', class: 'celeste plegable span-22 last' do
     .span-21.last.campo
       .centrado= f.object.ubicacion.mapa
 

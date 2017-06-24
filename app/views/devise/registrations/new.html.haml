@@ -13,6 +13,10 @@
       .span-9.last= f.email_field :email
 
     .span-24
+      .span-3= f.label :idioma, 'Idioma preferido'
+      .span-9.last= f.select :idioma, options_for_select(I18n.available_locales.map(&:to_s), I18n.locale.to_s)
+
+    .span-24
       .span-3= f.label :password
       .span-9= f.password_field :password
 
@@ -20,6 +24,6 @@
       .span-3= f.label :password_confirmation, 'Confirmación del password'
       .span-9.last= f.password_field :password_confirmation
 
-  .span-4= f.submit "Registrarse"
+  .span-4= f.submit 'Registrarse'
 
-= render partial: "devise/shared/links"
+= render partial: 'devise/shared/links'

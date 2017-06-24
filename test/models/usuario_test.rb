@@ -1,6 +1,49 @@
 require './test/test_helper'
 
 describe Usuario do
+  subject { create :usuario }
+
+  describe 'validaciones' do
+    it 'es válido' do
+      subject.must_be :valid?
+      build(:usuario).must_be :valid?
+    end
+
+    it 'requiere nombre' do
+      build(:usuario, nombre: nil).wont_be :valid?
+    end
+
+    it 'tiene idioma por default' do
+      build(:usuario).idioma.must_equal 'es'
+    end
+
+    it 'requiere idioma' do
+      build(:usuario, idioma: nil).wont_be :valid?
+    end
+
+    it 'idioma debe estar entre los disponibles del sistema' do
+      I18n.available_locales.each do |locale|
+        build(:usuario, idioma: locale).must_be :valid?
+      end
+
+      build(:usuario, idioma: 'elfo').wont_be :valid?
+    end
+
+    # TODO Revisar si es necesario validar sólo en update
+    it 'requiere ficha al guardar' do
+      subject.ficha = nil
+
+      subject.wont_be :valid?
+    end
+
+    # TODO Revisar si es necesario validar sólo en update
+    it 'requiere srid al guardar' do
+      subject.srid = nil
+
+      subject.wont_be :valid?
+    end
+  end
+
   it 'sabe qué ficha usa' do
     simple = create(:usuario, ficha: create(:ficha, identificador: 'especial'))
 
@@ -9,38 +52,36 @@ describe Usuario do
 
   describe '#config' do
     it 'un usuario nuevo tiene config por defecto' do
-      usuario = create(:usuario)
-      assert_kind_of Hash, usuario.config
-      assert_equal '4326', usuario.srid
+      subject.config.must_be_kind_of Hash
+      subject.srid.must_equal '4326'
     end
   end
 
   describe 'roles' do
     it 'sabe si es admin' do
       admin = create(:usuario, rol: 'Administrador')
-      refute admin.roles.blank?, 'No carga los roles de la DB'
-      assert admin.admin?, 'Debería ser admin'
+      admin.roles.wont_be :blank?
+      admin.must_be :admin?
 
       otro = create(:usuario)
-      refute otro.admin?, 'No debería ser admin'
+      otro.wont_be :admin?
     end
 
     it 'sabe si es autorizado' do
-      assert build(:usuario, rol: 'Autorizado').autorizado?, 'Debe ser autorizado'
+      build(:usuario, rol: 'Autorizado').must_be :autorizado?
     end
 
     it 'tiene o puede tener solo un rol global' do
-      usuario = create(:usuario)
-      assert usuario.rol_global.blank?
+      subject.rol_global.must_be :blank?
 
-      usuario.grant 'rey'
-      assert_equal 'rey', usuario.rol_global
-      assert usuario.has_role? 'rey'
+      subject.grant 'rey'
+      subject.rol_global.must_equal 'rey'
+      subject.has_role?('rey').must_equal true
 
-      usuario.rol_global = 'plebeyo'
-      assert_equal 'plebeyo', usuario.rol_global
-      assert usuario.has_role? 'plebeyo'
-      refute usuario.has_role? 'rey'
+      subject.rol_global = 'plebeyo'
+      subject.rol_global.must_equal 'plebeyo'
+      subject.has_role?('plebeyo').must_equal true
+      subject.has_role?('rey').wont_equal true
     end
   end
 end

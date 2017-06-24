@@ -1,0 +1,465 @@
+---
+es:
+  active_admin:
+    filters:
+      predicates:
+        from: Desde
+        gteq_datetime: Mayor o igual que
+        lteq_datetime: Menor o igual que
+        to: Hasta
+  activerecord:
+    attributes:
+      adhesividad:
+        valor: Valor
+      analitico:
+        ph_h2o: pH en H2O (1:2,5)
+        ph_kcl: pH en KCL (1:2,5)
+      anegamiento:
+        valor: Valor
+      busqueda:
+        publico: Pública
+      clase_de_capacidad:
+        categoria: Categoría
+        codigo: Código
+        descripcion: Descripción
+      perfil:
+        analiticos: Datos analíticos
+        publico: Público
+      serie:
+        simbolo: Símbolo
+      usuario:
+        created_at: Fecha de creación
+        current_password: Contraseña actual
+        current_sign_in_at: Último logueo
+        email: Email
+        password: Contraseña
+        password_confirmation: Confirmación de la contraseña
+        remember_me: Recordarme
+        reset_password_token: Código para reestablecer la contraseña
+        sign_in_count: Cantidad de logueos
+        unlock_token: Código para desbloquear
+    errors:
+      full_messages:
+        format: "%{attribute} %{message}"
+      messages:
+        record_invalid: 'La validación falló: %{errors}'
+        taken: ya ha sido tomado
+      models:
+        adjunto:
+          attributes:
+            archivo:
+              spoofed_media_type: el tipo no coincide con su extensión
+        erosion:
+          attributes:
+            clase:
+              debe_estar_en_blanco: la clase debe estar en blanco si la subclase es
+                Acumulación
+        perfil:
+          attributes:
+            fecha:
+              es_del_futuro: todavía no llega
+            numero:
+              no_es_unico_en_la_serie: debe ser único dentro de una misma serie
+      template:
+        body: 'Revise que los siguientes campos sean válidos:'
+        header:
+          one: "%{model} no pudo guardarse debido a 1 error"
+          other: "%{model} no pudo guardarse debido a %{count} errores"
+    models:
+      active_admin/comment:
+        one: Comentario
+        other: Comentarios
+      adhesividad: Adhesividad
+      analitico: Datos analíticos
+      anegamiento: Anegamiento
+      clase_de_capacidad: Clase de Capacidad
+      comment:
+        one: Comentario
+        other: Comentarios
+  admin:
+    dashboard:
+      administradores: Administradores
+      traduccion: Traducción
+  analiticos:
+    clasico:
+      tabla:
+        actualizar_datos: Actualizar datos
+        bases:
+          label: Bases intercambiables
+        capacidad_de_agua:
+          agua_15_atm: 15 atm
+          agua_3_atm: 3 atm
+          agua_util: Agua útil
+          label: Capacidad de agua
+        carbono_organico: Carbono orgánico
+        conductividad: Conductividad
+        datos_analiticos: Datos analíticos
+        densidad_aparente: Densidad aparente
+        horizonte: Horizonte
+        humedad: Equiv. de humedad
+        ph_h2o: pH en H2O (1:2,5)
+        ph_kcl: pH en KCL (1:2,5)
+        ph_pasta: pH en pasta
+        profundidad: Profundidad
+        registro: N° registro
+        resistencia_pasta: Resistencia pasta
+        saturacion_s_h: "% Satur. (S + H)"
+        saturacion_t: Satur. (sobre T)
+        textura:
+          arcilla: Arcilla < 2u
+          arena_fina: Arena fina
+          arena_gruesa: Arena gruesa
+          arena_media: Arena media
+          arena_muy_fina: Arena muy fina
+          arena_muy_gruesa: Arena muy gruesa
+          arena_total: Arena total
+          gravas: Gravas
+          label: Textura
+          limo_2_20: Limo 2-20u
+          limo_2_50: Limo 2-50u
+        valor_s: Valor S
+        valor_t: Valor T
+    index:
+      mostrar_adjuntos: Mostrar adjuntos
+      mostrar_perfil: Mostrar perfil
+      sin_horizontes: Este perfil no tiene horizontes cargados
+  ayuda:
+    busqueda:
+      publico: La búsqueda es pública para todos los usuarios y los visitantes sin
+        usuario en el sitio. Aún así, los resultados están limitados a los perfiles
+        que pueden ver normalmente.
+    perfil:
+      capacidad:
+        clase: 'Capacidad de Uso: I a VIII.'
+        subclases: Subclase referida a la principal limitante.
+      cobertura_vegetal: Porcentaje de la superficie cubierta por vegetación.
+      etiquetas: Lista de etiquetas (separadas por coma) para esta perfil.
+      fase:
+        nombre: Fase respecto al perfil modal.
+      fecha: Fecha de toma de datos.
+      grupo:
+        descripcion: Taxonomía.
+      modal: Indica si el perfil es modal o no.
+      nombre: Nombre de la Serie a la que está referenciada.
+      numero: Número/Nombre del perfil.
+      publico: Los horizontes y sus datos analíticos asociados son accesibles públicamente,
+        sin necesidad de tener un usuario en el sitio.
+      reconocedores: Lista de reconocedores del perfil (separados por coma).
+      simbolo: Símbolo de la Serie. Respetar Mayúsculas y Minúsculas.
+      ubicacion:
+        aerofoto: Número de fotograma.
+        descripcion: Ubicación relativa.
+        formato: Sistema de coordenadas de referencia.
+        mosaico: Nomenclatura del mosaico IGN.
+        recorrido: Número de recorrido del vuelo aerofotográfico.
+        x: Coordenada x/longitud.
+        y: Coordenada y/latitud.
+      usuario: Usuario que cargó este perfil
+  busquedas:
+    busquedas:
+      nombre: Nombre
+      publica: "¿Es pública?"
+      resultados: Resultados
+    condition_fields:
+      agregar_valor: Agregar valor
+      condiciones: Condiciones
+      quitar: Quitar
+    edit:
+      submit: Actualizar
+    form:
+      agregar: Agregar
+      agregar_grupo: Agregar grupo
+      consulta: Consulta
+      grupos_de_condiciones: Grupos de condiciones
+      ordenar_por: Ordenar por
+      si_queres_guardarla: "(si querés guardarla)"
+    grouping_fields:
+      agregar_condiciones: Agregar condiciones
+      agregar_subgrupo: Agregar subgrupo
+      cumplir_condiciones: Cumplir %{selector} las condiciones.
+      quitar: Quitar
+    index:
+      busquedas_publicas: Búsquedas públicas
+      nueva_busqueda: Nueva búsqueda
+      tus_busquedas: Tus búsquedas
+    sort_fields:
+      quitar: Quitar
+  comunes:
+    perfiles_asociados:
+      como_buscar: Por ubicación, serie o número de perfil
+      submit: Buscar
+  confirmar: "¿En serio? Es irreversible."
+  devise:
+    sessions:
+      usuario:
+        already_signed_out: Ya cerraste tu sesión.
+  editar: Editar
+  eliminar: Eliminar
+  equipos:
+    form:
+      agregar_miembro: Agregar
+  errors:
+    format: "%{attribute}: %{message}"
+  exportar: Exportar
+  flash:
+    actions:
+      create:
+        notice: Se creó %{resource_name} correctamente.
+      destroy:
+        alert: No se pudo destruir %{resource_name}. %{resource_errors}
+        notice: Se destruyó %{resource_name} correctamente.
+      update:
+        notice: Se actualizó %{resource_name} correctamente.
+    perfiles:
+      update_analiticos:
+        alert: No pudieron modificarse todos los datos analíticos.
+        notice: Se actualizaron los datos analíticos correctamente.
+    usuarios:
+      update:
+        notice: Tu cuenta fue actualizada
+  helpers:
+    submit:
+      perfil:
+        analiticos: Datos Analíticos
+        cambiar_ficha: Cambiar
+        create: Crear %{model}
+        edit: Actualizar %{model}
+  inicio:
+    index:
+      bienvenida: Bienvenido a SiSINTA
+      busqueda_de_perfiles: Búsqueda de perfiles
+      criterio_de_busqueda: Por nombre o número
+      submit: Buscar
+  layouts:
+    barra:
+      administracion:
+        menu: Administración
+        panel: Panel
+      contacto:
+        mail: Mail
+        menu: Contacto
+      equipos:
+        menu: Equipos
+        ver: Ver
+      idioma:
+        menu: Idioma
+      perfiles:
+        busquedas:
+          guardadas: Guardadas
+          menu: Búsquedas
+          nueva: Nueva
+        cargar: Cargar
+        exportar: Exportar
+        fases:
+          menu: Fases
+          ver: Ver
+        menu: Perfiles
+        subgrupos:
+          menu: Subgrupos
+          ver: Ver
+        ver: Ver
+      proyectos:
+        menu: Proyectos
+        ver: Ver
+      series:
+        menu: Series
+        ver: Ver
+  mostrar: Mostrar
+  perfiles:
+    clasico:
+      descripcion_de_los_horizontes:
+        barnices: Barnices
+        clase_hz: Clase Hz
+        color:
+          humedo: Húmedo
+          seco: Seco
+          tag: Color
+        concreciones: Concreciones.
+        consistencia:
+          adhesividad: Adhes.
+          humedo: Hum.
+          plasticidad: Plast.
+          seco: Seco
+          tag: Consistencia
+        descripcion_horizontes: Descripción de los horizontes
+        estructura:
+          clase: Clase
+          grado: Grado
+          tag: Estructura
+          tipo: Tipo
+        formaciones_especiales: Formaciones especiales
+        humedad: Humedad
+        limite:
+          forma: Forma
+          tag: Límite
+          tipo: Tipo
+        moteados: Moteados
+        no_hay_horizontes: No hay horizontes cargados
+        ph: pH
+        prof_inf: Prof. inf.
+        prof_sup: Prof. sup.
+        raices: Raíces
+        textura: Textura
+      descripcion_del_sitio:
+        capacidad:
+          label: Clasificación utilitaria
+          subclases: Limitaciones principales
+        cobertura_vegetal: Cobertura vegetal
+        descripcion: Descripción del sitio
+        erosion:
+          clase: Erosión
+        fase: Fase
+        humedad:
+          clase: Distrib. de la humedad
+        numero:
+          label: Número
+          placeholder: C 00/000
+        paisaje:
+          label: Paisaje
+          simbolo: Símbolo
+        pedregosidad:
+          clase: Pedreg. o rocosidad
+        posicion: Posición
+        profundidad_napa: Profundidad de la napa
+        sales: Sales
+        subgrupo: Subgrupo
+        ubicacion:
+          coordenadas: Coordenadas
+          label: Ubicación
+          srid: Formato
+          x: lon/x
+          y: lat/y
+        uso_de_la_tierra: Uso de la tierra
+        vegetacion_o_cultivos: Vegetación natural o cultivos
+      es_modal: Es modal?
+      ficha: Ficha de descripción edafológica
+      mapa:
+        ubicacion: Ubicación
+      notas:
+        notas: Notas
+    corrientes:
+      es_modal: Es modal?
+      ficha: Ficha de descripción edafológica
+    edit:
+      adjuntar_archivo: Adjuntar archivo
+      editar_analiticos: Editar analíticos
+    editar_analiticos:
+      editar_perfil: Editar perfil
+    exportar:
+      agregar_perfiles: Agregar perfiles para exportar
+      atributos_de_perfiles: Atributos de los perfiles
+      exportar_csv: Exportar a CSV
+      incluir_encabezado: Incluye encabezado?
+      seleccionar_por_provincia: Seleccionar por provincia
+      submit: Exportar
+      todos_los_atributos: Todos los atributos
+    index:
+      es_modal: "¿Es modal?"
+      fecha: Fecha
+      nombre: Nombre
+      nuevo_perfil: Nuevo perfil
+      numero: Número
+      ubicacion: Ubicación
+    seleccionar:
+      desmarcar_todo: Desmarcar todo
+      es_modal: "¿Es modal?"
+      exportar: Seleccionar
+      fecha: Fecha
+      marcar_todo: Marcar todo
+      numero: Número
+      serie: Serie
+      ubicacion: Ubicación
+      volver: Cancelar
+    show:
+      mostrar_adjuntos: Mostrar adjuntos
+      mostrar_analiticos: Mostrar analíticos
+  permisos: Permisos
+  ransack:
+    all: todas
+    and: y
+    any: cualquiera de
+    asc: ascendente
+    attribute: atributo
+    combinator: combinado
+    condition: condición
+    desc: descendente
+    or: o
+    predicate: predicado
+    predicates:
+      blank: está en blanco
+      cont: contiene
+      cont_all: contiene todos
+      cont_any: contiene cualquier
+      does_not_match: no coincide
+      does_not_match_all: no coincide con todos
+      does_not_match_any: no coincide con ninguno
+      end: termina con
+      end_all: termina con todo
+      end_any: termina con cualquier
+      eq: es igual a
+      eq_all: es igual a todos
+      eq_any: es igual a cualquier
+      'false': es falso
+      gt: mayor que
+      gt_all: mayor que todos
+      gt_any: mayor que cualquier
+      gteq: mayor que o igual a
+      gteq_all: mayor que o igual a todos
+      gteq_any: mayor que o igual a cualquier
+      in: en
+      in_all: en todos
+      in_any: en cualquier
+      lt: menor que
+      lt_all: menor que todos
+      lt_any: menor que cualquier
+      lteq: menor que o igual a
+      lteq_all: menor que o igual a todos
+      lteq_any: menor que o igual a cualquier
+      matches: coincide
+      matches_all: coincide con todos
+      matches_any: coincide con cualquier
+      not_cont: no contiene
+      not_cont_all: no contiene todo
+      not_cont_any: no contiene ninguno
+      not_end: no termina con
+      not_end_all: no termina con todo
+      not_end_any: no termina con cualquier
+      not_eq: no es igual a
+      not_eq_all: no es igual a todos
+      not_eq_any: no es igual a cualquier
+      not_in: no en
+      not_in_all: no en todos
+      not_in_any: no en cualquier
+      not_null: no es nulo
+      not_start: no empieza con
+      not_start_all: no empieza con todo
+      not_start_any: no empieza con cualquier
+      'null': es nulo
+      present: está presente
+      start: empieza con
+      start_all: empieza con todo
+      start_any: empieza con cualquier
+      'true': es verdadero
+    search: buscar
+    sort: ordernar
+    value: valor
+  roles:
+    admin: Administrador
+    autorizado: Autorizado
+    miembro: Miembro
+  selecciones:
+    create:
+      perfiles_seleccionados:
+        one: 1 perfil seleccionado
+        other: "%{count} perfiles seleccionados"
+    por_provincias:
+      seleccionar: Seleccionar
+      volver: Cancelar
+  unauthorized:
+    detail: No estás autorizado para realizar esta acción
+    title: No autorizado
+  usuarios:
+    update_varios:
+      alert: Hubo algún problema al actualizar los usuarios.
+      notice: Los usuarios se actualizaron correctamente.
+  volver: Volver

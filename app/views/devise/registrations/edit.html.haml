@@ -28,15 +28,15 @@
       .span-9= f.password_field :password_confirmation
       .span-12.consejo.last (exactamente igual que arriba)
 
-    .span-4= f.submit "Actualizar"
+    .span-4= f.submit 'Actualizar'
 
   = field_set_tag 'Cancelá tu cuenta', class: 'celeste_oscuro span-24' do
     = '¿Querés eliminar tu cuenta? Hacé click'
-    = link_to "acá", registration_path(resource_name),
-              data: { confirm: "¿Definitivamente? No hay vuelta atrás" }, method: :delete
+    = link_to 'acá', registration_path(resource_name),
+              data: { confirm: '¿Definitivamente? No hay vuelta atrás' }, method: :delete
     = '.'
 
 
 = render partial: 'usuarios/preferencias'
 
-= link_to "Volver", :back
+= link_to 'Volver', :back

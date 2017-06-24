@@ -1,8 +1,8 @@
 #bienvenida
   .span-10
-    %h2 Bienvenido a SiSINTA
+    %h2= t('.bienvenida')
 
-    %h3 Búsqueda de perfiles
+    %h3= t('.busqueda_de_perfiles')
 
     %p
       Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count}
@@ -14,10 +14,10 @@
       desde el mapa, mantener apretado shift y marcar un rectángulo.
 
     = search_form_for @busqueda do |b|
-      .span-4=  b.label :serie_nombre_or_numero_cont, 'Por nombre o número'
+      .span-4=  b.label :serie_nombre_or_numero_cont, t('.criterio_de_busqueda')
       .span-6.last= b.text_field :serie_nombre_or_numero_cont
 
-      .span-2= b.submit 'Buscar'
+      .span-2= b.submit t('.submit')
 
   .span-14.last
     #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }

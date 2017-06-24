@@ -1,6 +1,11 @@
 # Mantiene los valores posibles para Anegamiento en la ficha de perfiles.
 class Anegamiento < ActiveRecord::Base
-  has_many :perfiles
+  include Mostrable
 
-  validates :valor, presence: true
+  has_many :perfiles, dependent: :restrict_with_error
+
+  # Globalize recomienda sacar las columnas originales, pero validamos los setters
+  validates :valor, presence: true, uniqueness: true
+
+  active_admin_translates :valor, touch: true
 end
