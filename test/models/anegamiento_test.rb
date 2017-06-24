@@ -6,6 +6,7 @@ class AnegamientoTest < ActiveSupport::TestCase
   describe 'validaciones' do
     it 'es válido' do
       subject.must_be :valid?
+      build_stubbed(:anegamiento).must_be :valid?
     end
 
     it 'require valor' do

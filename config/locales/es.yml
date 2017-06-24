@@ -10,6 +10,10 @@ es:
         valor: 'Valor'
       busqueda:
         publico:  'Pública'
+      clase_de_capacidad:
+        codigo: 'Código'
+        descripcion: 'Descripción'
+        categoria: 'Categoría'
       perfil:
         analiticos: 'Datos analíticos'
         publico:    'Público'
@@ -59,6 +63,7 @@ es:
       adhesividad: 'Adhesividad'
       analitico: 'Datos analíticos'
       anegamiento: 'Anegamiento'
+      clase_de_capacidad: 'Clase de Capacidad'
       comment:
         one: 'Comentario'
         other: 'Comentarios'

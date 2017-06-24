@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620205013) do
+ActiveRecord::Schema.define(version: 20170620205019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,10 +146,20 @@ ActiveRecord::Schema.define(version: 20170620205013) do
 
   add_index "capacidades_subclases_de_capacidad", ["subclase_de_capacidad_id", "capacidad_id"], name: "subclases_capacidades", unique: true, using: :btree
 
+  create_table "clase_de_capacidad_translations", force: :cascade do |t|
+    t.integer  "clase_de_capacidad_id", null: false
+    t.string   "locale",                null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "codigo"
+    t.string   "descripcion"
+    t.string   "categoria"
+  end
+
+  add_index "clase_de_capacidad_translations", ["clase_de_capacidad_id"], name: "index_clase_de_capacidad_translations_on_clase_de_capacidad_id", using: :btree
+  add_index "clase_de_capacidad_translations", ["locale"], name: "index_clase_de_capacidad_translations_on_locale", using: :btree
+
   create_table "clases_de_capacidad", force: :cascade do |t|
-    t.string "codigo",      null: false
-    t.string "descripcion"
-    t.string "categoria"
   end
 
   create_table "clases_de_erosion", force: :cascade do |t|

@@ -6,6 +6,7 @@ class AdhesividadTest < ActiveSupport::TestCase
   describe 'validaciones' do
     it 'es válida' do
       subject.must_be :valid?
+      build_stubbed(:adhesividad).must_be :valid?
     end
 
     it 'requiere valor' do
