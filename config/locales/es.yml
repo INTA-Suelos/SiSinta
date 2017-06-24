@@ -1,5 +1,12 @@
 ---
 es:
+  active_admin:
+    filters:
+      predicates:
+        from: Desde
+        gteq_datetime: Mayor o igual que
+        lteq_datetime: Menor o igual que
+        to: Hasta
   activerecord:
     attributes:
       adhesividad:
