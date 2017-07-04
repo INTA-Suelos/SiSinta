@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620205019) do
+ActiveRecord::Schema.define(version: 20170702003537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,6 +397,13 @@ ActiveRecord::Schema.define(version: 20170620205019) do
   add_index "perfiles", ["serie_id"], name: "index_perfiles_on_serie_id", using: :btree
   add_index "perfiles", ["usuario_id"], name: "index_perfiles_on_usuario_id", using: :btree
 
+  create_table "perfiles_procesamientos", id: false, force: :cascade do |t|
+    t.integer "procesamiento_id", null: false
+    t.integer "perfil_id",        null: false
+  end
+
+  add_index "perfiles_procesamientos", ["perfil_id", "procesamiento_id"], name: "index_perfiles_procesamientos_on_perfil_id_and_procesamiento_id", unique: true, using: :btree
+
   create_table "perfiles_proyectos", id: false, force: :cascade do |t|
     t.integer "proyecto_id"
     t.integer "perfil_id"
@@ -415,6 +422,20 @@ ActiveRecord::Schema.define(version: 20170620205019) do
   create_table "posiciones", force: :cascade do |t|
     t.string "valor", null: false
   end
+
+  create_table "procesamientos", force: :cascade do |t|
+    t.string   "metodologia",                         null: false
+    t.integer  "usuario_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "imagen_file_name"
+    t.string   "imagen_content_type"
+    t.integer  "imagen_file_size"
+    t.datetime "imagen_updated_at"
+    t.boolean  "terminado",           default: false
+  end
+
+  add_index "procesamientos", ["usuario_id"], name: "index_procesamientos_on_usuario_id", using: :btree
 
   create_table "provincias", force: :cascade do |t|
     t.string  "nombre",            null: false
@@ -590,4 +611,5 @@ ActiveRecord::Schema.define(version: 20170620205019) do
 
   add_index "usuarios_roles", ["usuario_id", "rol_id"], name: "index_usuarios_roles_on_usuario_id_and_rol_id", using: :btree
 
+  add_foreign_key "procesamientos", "usuarios"
 end

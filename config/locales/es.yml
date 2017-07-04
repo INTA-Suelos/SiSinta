@@ -363,7 +363,8 @@ es:
     seleccionar:
       desmarcar_todo: Desmarcar todo
       es_modal: "¿Es modal?"
-      exportar: Seleccionar
+      exportar: Exportar
+      procesar: Procesar con R
       fecha: Fecha
       marcar_todo: Marcar todo
       numero: Número
@@ -374,6 +375,10 @@ es:
       mostrar_adjuntos: Mostrar adjuntos
       mostrar_analiticos: Mostrar analíticos
   permisos: Permisos
+  procesamientos:
+    new:
+      perfiles_seleccionados: Perfiles seleccionados
+      perfiles_rechazados: Perfiles rechazados
   ransack:
     all: todas
     and: y

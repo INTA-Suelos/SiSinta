@@ -146,7 +146,7 @@ class PerfilesController < AutorizadoController
 
     # TODO redirigir según el botón apretado en +seleccionar+ (e.g. puede
     # dirigir a exportar, a eliminar, a rrrear)
-    redirect_to exportar_perfiles_path
+    redirect_to session.delete(:despues_de_almacenar)
   end
 
   def derivar
@@ -156,8 +156,13 @@ class PerfilesController < AutorizadoController
     when t('perfiles.seleccionar.volver')
       redirect_to URI.parse(session[:volver_a]).path
     when t('perfiles.seleccionar.exportar')
+      # Decidimos a dónde va a redirigir `almacenar`
+      session[:despues_de_almacenar] = exportar_perfiles_path
       # Usa la acción directamente ya que hace su propia redirección y
       # redirect_to no puede enviar PUTs
+      almacenar
+    when t('perfiles.seleccionar.procesar')
+      session[:despues_de_almacenar] = new_procesamiento_path
       almacenar
     else
       redirect_to perfiles_path # Default amigable
@@ -290,6 +295,7 @@ class PerfilesController < AutorizadoController
       case params[:commit]
       when t('comunes.perfiles_asociados.submit')
         session[:despues_de_seleccionar] = almacenar_perfiles_path
+        session[:despues_de_almacenar] = exportar_perfiles_path
         redirect_to seleccionar_perfiles_path(q: params[:q])
       when t('perfiles.exportar.seleccionar_por_provincia')
         session[:despues_de_seleccionar] = almacenar_perfiles_path

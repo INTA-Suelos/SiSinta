@@ -31,6 +31,8 @@ SiSINTA::Application.routes.draw do
 
     with_options path_names: masculinos do |r|
 
+      r.resources :procesamientos
+
       r.resources :perfiles do
 
         r.resources :analiticos, only: :index

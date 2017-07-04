@@ -34,6 +34,8 @@ class Perfil < ActiveRecord::Base
   # Incluye el ordenamiento de `has_many :horizontes`
   has_many :analiticos, -> { includes(:horizonte) }, through: :horizontes
 
+  has_and_belongs_to_many :procesamientos
+
   belongs_to :usuario
   belongs_to :fase
   belongs_to :grupo

@@ -1,0 +1,24 @@
+.botonera
+  = link_to 'Volver', busquedas_path 
+
+#procesamiento.span-24.new
+  = form_for @procesamiento, html: { class: 'span-24' } do |f|
+
+    = field_set_tag titulo_de_la_accion, class: 'celeste_oscuro span-24 last' do
+
+      .span-12.campo
+        .span-4= f.label :metodologia
+        .span-8.last= f.select :metodologia, Procesamiento::METODOLOGIAS
+
+      = field_set_tag t('.perfiles_seleccionados'), class: 'celeste span-22 last plegable' do
+
+        .span-22.campo= render partial: 'comunes/perfiles_asociados',
+          locals: { perfiles: @perfiles.decorate, param: 'seleccionados', bloqueado: defined?(bloqueado) }
+
+      - if @perfiles_rechazados.any?
+        = field_set_tag t('.perfiles_rechazados'), class: 'celeste span-22 last plegable' do
+
+          .span-22.campo= render partial: 'comunes/perfiles_asociados',
+            locals: { perfiles: @perfiles_rechazados.decorate, param: 'rechazados', bloqueado: defined?(bloqueado) }
+
+      .acciones.span-4.last= f.submit
