@@ -1,4 +1,9 @@
 class SeleccionesController < ApplicationController
+  # En create/almacenar_por_provincias hay un botón de cancelar, redirigimos a
+  # exportar en ese caso
+  before_action :redirigir, only: [:almacenar_por_provincias]
+
+  # Usado para las selecciones de boxes desde el mapa
   def create
     ubicaciones = Ubicacion.en_caja(noreste: params[:noreste], sudoeste: params[:sudoeste])
 
@@ -37,12 +42,12 @@ class SeleccionesController < ApplicationController
     )
   end
 
-  # TODO Tal vez abstraer la seleccion actual en un objeto
-  def perfiles_seleccionados=(perfiles)
-    session[:perfiles_seleccionados] = perfiles
-  end
-
-  def perfiles_seleccionados
-    Array.wrap session[:perfiles_seleccionados]
+  def redirigir
+    case params[:commit]
+    when t('perfiles.seleccionar.volver')
+      redirect_to exportar_perfiles_path
+    else
+      # Nada, continuamos a `almacenar_por_provincias`
+    end
   end
 end

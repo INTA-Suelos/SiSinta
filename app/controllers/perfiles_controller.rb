@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PerfilesController < AutorizadoController
   autocomplete :reconocedores, :name, full: true,
     class_name: 'Tag',
@@ -300,14 +299,6 @@ class PerfilesController < AutorizadoController
       else
         # Nada, continuamos a procesar
       end
-    end
-
-    def perfiles_seleccionados
-      Array.wrap session[:perfiles_seleccionados]
-    end
-
-    def perfiles_seleccionados=(perfiles)
-      session[:perfiles_seleccionados] = perfiles
     end
 
     def geojson?

@@ -80,4 +80,14 @@ class ApplicationController < ActionController::Base
         current_usuario.try(:ficha) || Ficha.default
       end
     end
+
+    # Recuperar de la sesión los ids seleccionados previamente
+    def perfiles_seleccionados
+      Array.wrap session[:perfiles_seleccionados]
+    end
+
+    # Guardar en la sesión los ids de perfiles seleccionados en un formulario
+    def perfiles_seleccionados=(perfiles)
+      session[:perfiles_seleccionados] = perfiles
+    end
 end

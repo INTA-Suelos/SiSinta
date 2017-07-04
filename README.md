@@ -24,6 +24,10 @@ Instalación
 - passenger
 - memcached
 
+#### Para los scripts en R
+
+- gcc-fortran
+
 ### Base de datos
 
 1. [PostgreSQL] 9.1 (o superior)
