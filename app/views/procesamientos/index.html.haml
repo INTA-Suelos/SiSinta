@@ -1,0 +1,16 @@
+#procesamientos
+  .botonera
+    = link_to 'Nueva búsqueda', new_busqueda_path
+
+  %table
+    %thead
+      %tr
+        %th#fecha=link_para_ordenar :created_at, 'Fecha de creación'
+        %th#metodologia= link_para_ordenar :metodologia, 'Metodología'
+        %th#perfiles Cantidad de perfiles
+        %th.acciones
+
+    %tbody
+      = render @procesamientos.decorate
+
+  = volver_arriba

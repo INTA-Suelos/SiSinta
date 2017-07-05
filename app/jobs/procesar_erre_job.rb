@@ -1,26 +1,20 @@
 class ProcesarErreJob < ActiveJob::Base
   queue_as :default
 
-  def perform(seleccion, perfil_ids)
-    perfil_ids.each do |perfil|
-      seleccion.perfiles << Perfil.find(perfil)
+  def perform(procesamiento)
+    opciones = { encoding: Encoding::UTF_8 }
+
+    csv = Tempfile.new(["csv_#{procesamiento.id}", '.csv'], '/tmp', opciones).tap do |file|
+      file.write CSVSerializer.new(procesamiento.perfiles.dup).as_csv(headers: true, base: Perfil)
+      file.close
     end
 
-    if seleccion.perfiles.any?
+    png = Tempfile.new(["procesamiento_#{procesamiento.id}", '.png'], '/tmp')
 
-      csv = Tempfile.new(["csv_#{seleccion.id}", '.csv'], '/tmp').tap do |file|
-        file.write CSVSerializer.new(seleccion.perfiles).as_csv(headers: true)
-        file.close
-      end
-
-      png = Tempfile.new(["seleccion_#{seleccion.id}", '.png'], '/tmp')
-
-      binding.pry
-      if system Rails.root.join('bin', 'slabs.R').to_s, csv.path, png.path
-        seleccion.imagen = png
-      binding.pry
-        seleccion.save
-      end
+    if system Rails.root.join('bin', procesamiento.metodologia).to_s, csv.path, png.path
+      procesamiento.imagen = png
     end
+
+    procesamiento.save
   end
 end

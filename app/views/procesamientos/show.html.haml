@@ -1,9 +1,8 @@
 .botonera
-  = link_to 'Volver', busquedas_path 
+  = link_to 'Volver', procesamientos_path
 
 %p
-  Resultado para
-  = link_to "#{@procesamiento.perfiles.size} perfiles", '#'
-  !.
+  Resultado de #{@procesamiento.metodologia} para
+  != "#{link_to "#{@procesamiento.perfiles.size} perfiles", edit_procesamiento_path(@procesamiento)}."
 
 = image_tag @procesamiento.imagen.url

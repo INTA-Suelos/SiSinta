@@ -1,8 +1,6 @@
 class Procesamiento < ActiveRecord::Base
   METODOLOGIAS = [
-    'slabs.R',
-    'test.R',
-    'plotsoilprofile.R'
+    'slabs.R'
   ]
 
   belongs_to :usuario

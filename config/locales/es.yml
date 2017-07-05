@@ -376,7 +376,7 @@ es:
       mostrar_analiticos: Mostrar analíticos
   permisos: Permisos
   procesamientos:
-    new:
+    form:
       perfiles_seleccionados: Perfiles seleccionados
       perfiles_rechazados: Perfiles rechazados
   ransack:

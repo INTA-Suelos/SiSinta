@@ -1,0 +1,13 @@
+%tr
+  %td.fecha= procesamiento.created_at
+  %td.metodologia= procesamiento.metodologia
+  %td.perfiles= procesamiento.perfiles.count
+  %td.acciones
+    - if can? :update, procesamiento.object
+      = link_to t('editar'), edit_procesamiento_path(procesamiento)
+    - if can? :delete, procesamiento.object
+      = '|'
+      = link_to t('eliminar'), procesamiento,
+          data: { confirm: t(:confirmar) }, method: :delete
+  %td.checks
+    = check_box_tag 'procesamiento_ids[]', procesamiento.id
