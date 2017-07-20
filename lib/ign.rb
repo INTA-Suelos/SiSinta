@@ -28,6 +28,16 @@ class Ign
     extraer
     convertir
     importar
+    analizar
+  end
+
+  # Recalcula la información para la planificación de consultas
+  def analizar
+    # `cluster` compacta el espacio dentro de la bd y rehace los índices
+    ActiveRecord::Base.connection.execute('cluster')
+    # `analyze` regenera las estadísticas para el query planner según los
+    # índices actualizados
+    ActiveRecord::Base.connection.execute('vacuum analyze')
   end
 
   # Importa shapefiles con información geográfica de provincias a la DB
