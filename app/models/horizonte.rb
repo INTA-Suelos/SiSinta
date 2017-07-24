@@ -27,7 +27,11 @@ class Horizonte < ActiveRecord::Base
   validates :perfil, presence: true
   # TODO Extraer mensaje
   validates :profundidad_superior, :profundidad_inferior,
-    inclusion: { in: 0..1000, allow_nil: true, message: 'debe estar entre 0 y 1000 cm' }
+    numericality: {
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 2000,
+      allow_nil: true
+    }
 
   delegate :publico, :usuario, :usuario_id, to: :perfil
   delegate :present?, to: :analitico, prefix: true
