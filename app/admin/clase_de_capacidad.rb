@@ -29,7 +29,7 @@ ActiveAdmin.register ClaseDeCapacidad do
   form do |f|
     f.inputs I18n.t 'active_admin.globalize.translations' do
       f.translated_inputs do |t|
-        t.input :valor
+        t.input :codigo
         t.input :descripcion
         t.input :categoria
       end
@@ -39,6 +39,6 @@ ActiveAdmin.register ClaseDeCapacidad do
   end
 
   permit_params translations_attributes: [
-    :id, :locale, :title, :description, :_destroy
+    :id, :locale, :codigo, :descripcion, :categoria, :_destroy
   ]
 end
