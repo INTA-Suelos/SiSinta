@@ -1,7 +1,7 @@
 # encoding: utf-8
 class SeriesController < AutorizadoController
-  autocomplete :serie, :nombre, full: true, extra_data: [:simbolo]
-  autocomplete :serie, :simbolo, full: true, extra_data: [:nombre]
+  autocomplete :serie, :nombre, full: true, extra_data: [:simbolo, :provincia_id]
+  autocomplete :serie, :simbolo, full: true, extra_data: [:nombre, :provincia_id]
 
   has_scope :pagina, default: 1
   has_scope :per, as: :filas
