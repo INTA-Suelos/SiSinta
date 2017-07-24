@@ -1,15 +1,28 @@
-require './test/test_helper'
+require 'test_helper'
 
 class ClaseDeErosionTest < ActiveSupport::TestCase
-  subject { build :clase_de_erosion }
+  subject { create :clase_de_erosion }
 
   describe 'validaciones' do
     it 'es válida' do
       subject.must_be :valid?
+      build_stubbed(:clase_de_erosion).must_be :valid?
     end
 
     it 'requiere valor' do
-      build(:clase_de_erosion, valor: nil).wont_be :valid?
+      build_stubbed(:clase_de_erosion, valor: nil).wont_be :valid?
+    end
+
+    it 'requiere valor único' do
+      build_stubbed(:clase_de_erosion, valor: subject.valor).wont_be :valid?
+    end
+
+    it 'permite valores duplicados en diferentes locales' do
+      valor_es = subject.valor
+
+      Globalize.with_locale :en do
+        build_stubbed(:clase_de_erosion, valor: valor_es).must_be :valid?
+      end
     end
   end
 

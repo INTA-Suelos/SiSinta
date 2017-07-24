@@ -22,6 +22,8 @@ es:
         categoria: Categoría
         codigo: Código
         descripcion: Descripción
+      clase_de_erosion:
+        valor: Valor
       perfil:
         analiticos: Datos analíticos
         publico: Público
@@ -73,6 +75,7 @@ es:
       analitico: Datos analíticos
       anegamiento: Anegamiento
       clase_de_capacidad: Clase de Capacidad
+      clase_de_erosion: Clase de Erosión
       comment:
         one: Comentario
         other: Comentarios
