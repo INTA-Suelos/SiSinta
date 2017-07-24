@@ -15,7 +15,7 @@
             .span-2= fs.label :nombre
             .span-15.last= fs.autocomplete_field :nombre,
               autocompletar_nombre_series_path,
-              update_elements: { simbolo: '#perfil_serie_attributes_simbolo' },
+              update_elements: { simbolo: '#perfil_serie_attributes_simbolo', provincia_id: '#perfil_serie_attributes_provincia_id' },
               disabled: bloqueado
             = ayuda_para t('ayuda.perfil.nombre')
 
