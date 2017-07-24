@@ -1,13 +1,11 @@
-ActiveAdmin.register ClaseDeCapacidad do
+ActiveAdmin.register ClaseDeErosion do
   menu parent: 'Perfiles'
 
   # Vista general
   index do
     selectable_column
     id_column
-    column :codigo
-    column :descripcion
-    column :categoria
+    column :valor
     translation_status
     actions
   end
@@ -17,9 +15,7 @@ ActiveAdmin.register ClaseDeCapacidad do
   # Vista individual
   show do
     attributes_table do
-      translated_row :codigo, inline: false
-      translated_row :descripcion, inline: false
-      translated_row :categoria, inline: false
+      translated_row :valor, inline: false
     end
 
     active_admin_comments
@@ -29,9 +25,7 @@ ActiveAdmin.register ClaseDeCapacidad do
   form do |f|
     f.inputs I18n.t 'active_admin.globalize.translations' do
       f.translated_inputs do |t|
-        t.input :codigo
-        t.input :descripcion
-        t.input :categoria
+        t.input :valor
       end
     end
 
@@ -39,6 +33,6 @@ ActiveAdmin.register ClaseDeCapacidad do
   end
 
   permit_params translations_attributes: [
-    :id, :locale, :codigo, :descripcion, :categoria, :_destroy
+    :id, :locale, :valor, :_destroy
   ]
 end

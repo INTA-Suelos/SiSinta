@@ -33,6 +33,6 @@ ActiveAdmin.register Anegamiento do
   end
 
   permit_params translations_attributes: [
-    :id, :locale, :title, :description, :_destroy
+    :id, :locale, :valor, :_destroy
   ]
 end
