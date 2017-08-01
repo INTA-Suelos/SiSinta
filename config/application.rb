@@ -33,15 +33,6 @@ module SiSINTA
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = 'utf-8'
 
-    # Enable the asset pipeline
-    config.assets.enabled = true
-
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '0.4.6'
-
-    # Traduzco el path
-    config.assets.prefix = '/estaticos'
-
     # Servir clientes web y API
     config.api_only = false
 
