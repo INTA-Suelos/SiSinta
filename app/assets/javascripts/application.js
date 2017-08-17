@@ -1,17 +1,21 @@
 // Gemas y vendored
+//
 //= require jquery
-// TODO revisar qué componentes necesito específicamente
-//= require jquery-ui
+// Para tooltips y popovers de bootstrap
+// Bootstrap sin precompilar
+//= require bootstrap-sprockets
+//
 //= require jquery_ujs
 //= require jquery.nested-fields
 //= require tinymce-jquery
 //= require select2
 //= require ui.multiselect
 //= require locale/ui-multiselect-es
-//= require jquery-multiselect
+//
 // TODO I18nalizar autocomplete-rails
 //= require autocomplete-rails
-//= require ransack-search
+//
+// Mapas
 //= require leaflet
 //= require leaflet.markercluster
 //= require leaflet-plugins

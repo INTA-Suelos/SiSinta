@@ -58,11 +58,13 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
 gem 'leaflet-rails'
+gem 'bootstrap', '~> 4.0.0.beta'
 
 # Paquetes de bower
 source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet.markercluster'
   gem 'rails-assets-leaflet-plugins'
+  gem 'rails-assets-fontawesome'
 end
 
 # Administración

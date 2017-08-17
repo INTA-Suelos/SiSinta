@@ -34,6 +34,7 @@ module PerfilesHelper
     end
   end
 
+  # FIXME Integrar en el contenido
   def subtitulo
     case params[:action]
     when 'seleccionar'

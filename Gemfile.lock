@@ -95,6 +95,8 @@ GEM
       activesupport (>= 3.0.0)
     arel (6.0.4)
     attribute_normalizer (1.2.0)
+    autoprefixer-rails (7.1.2.6)
+      execjs
     awesome_nested_fields (0.6.4)
       rails (>= 3.0.0)
     awesome_print (1.7.0)
@@ -105,6 +107,10 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
+    bootstrap (4.0.0.beta)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (~> 1.11.1)
+      sass (>= 3.4.19)
     bourbon (3.2.4)
       sass (~> 3.2)
       thor
@@ -270,6 +276,7 @@ GEM
     pg (0.18.4)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
+    popper_js (1.11.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -294,6 +301,7 @@ GEM
     rails-api (0.4.1)
       actionpack (>= 3.2.11)
       railties (>= 3.2.11)
+    rails-assets-fontawesome (4.7.0)
     rails-assets-leaflet (0.7.7)
     rails-assets-leaflet-plugins (1.6.1)
     rails-assets-leaflet.markercluster (0.5.0)
@@ -411,6 +419,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bootstrap (~> 4.0.0.beta)
   brakeman
   browser_detect
   bullet
@@ -447,6 +456,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.10)
   rails-api
+  rails-assets-fontawesome!
   rails-assets-leaflet-plugins!
   rails-assets-leaflet.markercluster!
   rails-i18n

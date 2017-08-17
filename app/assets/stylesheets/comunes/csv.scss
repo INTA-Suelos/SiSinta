@@ -1,7 +1,4 @@
-@import "constantes";
-
 form#csv {
-
   label {
     font-size: x-small;
   }
@@ -10,13 +7,14 @@ form#csv {
     .campo {
       margin-left: 2%;
       margin-right: 2%;
+
       label {
         padding-left: 10px;
       }
+
       input[type='checkbox'] {
         margin-left: 4px;
       }
     }
   }
-
 }

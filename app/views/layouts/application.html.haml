@@ -1,10 +1,11 @@
 !!! 5
-%html{'xml:lang' => 'es_AR', 'xmlns' => 'http://www.w3.org/1999/xhtml'}
+%html{ lang: 'es_AR' }
   %head
+    %meta{ charset: 'utf-8' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
+
     %title= titulo_de_la_aplicacion
     = stylesheet_link_tag 'application', media: 'all'
-    = stylesheet_link_tag 'print', media: 'print'
-    = stylesheet_link_tag 'ie' if @ie
 
     = javascript_include_tag 'application'
 
@@ -12,9 +13,12 @@
 
     = favicon_link_tag image_path('favicon.png'), type: 'image/png'
     = favicon_link_tag image_path('favicon144.png'), type: 'image/png', rel: 'apple-touch-icon'
-  %body.celeste
-    #cabecera= render 'layouts/cabecera'
-    #arbol_de_contenidos.barra= render 'layouts/barra'
-    .container
-      #principal.span-24
-        = yield
+  %body
+    = render 'layouts/cabecera'
+
+    #avisos
+      - flash.each do |name, msg|
+        = notificacion(name, msg)
+
+    .container-fluid
+      = yield
