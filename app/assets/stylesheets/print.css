@@ -1,6 +1,0 @@
-/*
- * Archivo de manifiesto para reunir todas las hojas de estilo específicas
- * para media="print"
- *= require blueprint/print
- *= require_self
-*/

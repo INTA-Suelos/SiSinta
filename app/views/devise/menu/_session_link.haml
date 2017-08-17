@@ -1,0 +1,10 @@
+// Mostrar íconos para entrar o salir de la sesión para viewports medium (md),
+// mostrar íconos con texto para viewports más chicos
+- if usuario_signed_in?
+  = link_to destroy_usuario_session_path, method: :delete, class: 'logout nav-item nav-link', title: t('.salir') do
+    %span.fa.fa-sign-out.fa-fw
+    %span.d-md-none= t('.salir')
+- else
+  = link_to new_usuario_session_path, class: 'nav-item nav-link', title: t('.entrar') do
+    %span.fa.fa-sign-in.fa-fw
+    %span.d-md-none= t('.entrar')

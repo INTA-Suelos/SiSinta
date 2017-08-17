@@ -15,7 +15,6 @@ set :keep_releases, 5
 set :rbenv_type, :user
 
 # rails
-set :assets_prefix, 'estaticos'
 set :linked_dirs, %w{
   log
   tmp/pids

@@ -1,0 +1,22 @@
+#adjuntos {
+  .nombre {
+    text-align: justify;
+  }
+
+  .notas {
+    text-align: justify;
+  }
+}
+
+#adjunto_notas {
+  width: 100%;
+  height: $altura_linea * 4;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.icono {
+  max-width: 25px;
+  width: 25px;
+  font-family: monospace;
+}

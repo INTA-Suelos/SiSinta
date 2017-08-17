@@ -30,10 +30,6 @@ SiSINTA::Application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  # Defaults to Rails.root.join('public/assets')
-  # TODO Todavía necesario?
-  config.assets.manifest = Rails.root.join('public/estaticos')
-
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx

@@ -1,0 +1,97 @@
+form.completa {
+  .campo-suelto {
+    padding-top: 0;
+    padding-left: 659px;
+  }
+
+  #perfil_observaciones {
+    height: $altura_linea * 4;
+  }
+
+  #serie {
+    label, input {
+      margin-left: -6px;
+    }
+  }
+
+  // Alrededor de 40px por columna
+  #scrolleable_horizontes {
+    width: 1740px;
+  }
+
+  .coordenada-y { @include coordenada(10px);  }
+  .coordenada-x { @include coordenada(0px);
+                  padding-right: 0; }
+
+  #mapa {
+    height: 300px;
+    width: inherit;
+  }
+}
+
+// TODO acotar a la vista específica
+#lista {
+  .fecha      { width: 5%; }
+  .serie      { width: 15%; }
+  .ubicacion  { width: 45%; }
+  .numero     { width: 5%; }
+  .modal      { width: 5%; }
+  .acciones   { width: 25%; }
+  .checks     { display: none }
+}
+
+#busqueda_perfiles {
+  td.acciones { display: none; }
+  .checks     { display: table-cell; }
+  .serie      { width: 20%; }
+  .ubicacion  { width: 50%; }
+  th.marcar, .checks {  width: 15%;
+                        text-align: center; }
+}
+
+// Cuando hay una lista de perfiles asociados al modelo en cuestión, se usa
+// este id, con este estilo por default
+#perfiles_asociados {
+  label {
+    font-weight: normal;
+    font-size: small;
+  }
+
+  .borrar     { width: 1%;
+                color: $rojo_inta;
+    // Si hay javascript lo muestro y oculto el checkbox
+    a {         display: none; } }
+  .serie      { width: 15%; }
+  .numero     { width: 10%;
+                text-align: center; }
+  .ubicacion  { width: 52%; }
+  .fecha      { width: 10%; }
+  .modal      { width: 10%; }
+  .acciones   { width: 2%; }
+}
+
+.show {
+  #perfiles_asociados {
+    .borrar { display: none; }
+    .acciones { display: 3%; }
+  }
+}
+
+.seleccionar-ficha {
+  float: right;
+  width: 50%;
+
+  select, input {
+    display: inline;
+    float: right;
+  }
+
+  select {
+    margin-right: 2em;
+    width: 70%;
+  }
+
+  input {
+    width: 20%;
+  }
+}

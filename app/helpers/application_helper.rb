@@ -189,6 +189,7 @@ module ApplicationHelper
     end
   end
 
+  # FIXME Integrar en el contenido
   # Por defecto, no se usa nada. Esto va en la cabecera, debajo de +titulo+
   def subtitulo
     nil

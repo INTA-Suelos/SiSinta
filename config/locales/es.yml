@@ -126,6 +126,7 @@ es:
       mostrar_adjuntos: Mostrar adjuntos
       mostrar_perfil: Mostrar perfil
       sin_horizontes: Este perfil no tiene horizontes cargados
+  app: SiSINTA
   ayuda:
     busqueda:
       publico: La búsqueda es pública para todos los usuarios y los visitantes sin
@@ -193,6 +194,13 @@ es:
       submit: Buscar
   confirmar: "¿En serio? Es irreversible."
   devise:
+    menu:
+      registration_link:
+        cuenta: Cuenta
+        registrarse: Registrarse
+      session_link:
+        entrar: Entrar
+        salir: Salir
     sessions:
       usuario:
         already_signed_out: Ya cerraste tu sesión.

@@ -17,6 +17,7 @@ module BusquedasHelper
     end
   end
 
+  # FIXME Integrar en el contenido
   def subtitulo
     case params[:action]
     when 'show', 'edit'

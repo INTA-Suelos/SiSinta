@@ -1,0 +1,20 @@
+form#csv {
+  label {
+    font-size: x-small;
+  }
+
+  .atributos {
+    .campo {
+      margin-left: 2%;
+      margin-right: 2%;
+
+      label {
+        padding-left: 10px;
+      }
+
+      input[type='checkbox'] {
+        margin-left: 4px;
+      }
+    }
+  }
+}

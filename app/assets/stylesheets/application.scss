@@ -1,0 +1,15 @@
+// Manifest en scss requerido por bootstrap. Hay que usar imports en vez de
+// requires.
+
+// Las variables de bootstrap se redefinen antes de importarlo. Lista de
+// variables:
+//   https://github.com/twbs/bootstrap-rubygem/blob/d12646e808a250b1130d1ddad3e82546d83c4b55/assets/stylesheets/bootstrap/_variables.scss
+$brand-primary: lighten(#639eba, 5%);
+//$brand-inverse: #0b7baf;
+$azul_oscuro: #25495b;
+
+@import 'bootstrap';
+@import 'fontawesome_fix';
+
+// Por problemas con google maps:
+//   https://v4-alpha.getbootstrap.com/getting-started/introduction/#box-sizing

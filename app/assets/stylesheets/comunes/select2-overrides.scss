@@ -1,0 +1,35 @@
+// select2 overrides
+.select2-container-multi .select2-choices {
+  min-height: $altura-linea;
+  margin: 0.5em 0 0 0;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+  line-height: $altura-linea / 2;
+  margin: 1px;
+}
+
+.select2-search-choice-close {
+  top: 1px;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+  padding: 0;
+}
+
+.select2-results .select2-result-label {
+  //padding: 3px 7px 4px;
+  padding: 0 2px;
+}
+
+.select2-container-multi .select2-choices {
+  border: 1px solid #bbb;
+}
+
+.select2-container-multi.select2-container-active .select2-choices {
+  border-color: $gris-claro;
+}
+
+.select2-results .select2-highlighted {
+  background: $azul_medio;
+}

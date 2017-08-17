@@ -1,7 +1,0 @@
-/*
- * Manifiesto para los estilos de jQuery.
- * Si se actualiza el archivo hay que modificar las url(images/...) a
- * url(/estaticos/jquery/images/...) para que encuentren los assets.
- *= require jquery/jquery-ui
- *= require_self
-*/

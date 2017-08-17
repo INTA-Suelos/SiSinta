@@ -1,0 +1,33 @@
+#tabla_analiticos {
+  border-spacing: 1px;
+
+  th, td, caption {
+    padding: 0;
+    background: inherit;
+  }
+
+  td * {
+    margin: 0;
+  }
+
+  .dato {
+    border: 1px solid transparent;
+    input {
+      width: 100%;
+      text-align: right;
+    }
+  }
+
+  .largo {
+    min-width: 82px;
+
+    label {
+      font-size: xx-small;
+    }
+  }
+
+  .titulo {
+    border: 1px solid $gris;
+    padding: 0 5px;
+  }
+}
