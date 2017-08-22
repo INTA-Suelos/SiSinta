@@ -18,6 +18,19 @@
     %span.navbar-toggler-icon
 
   .collapse.navbar-collapse
-    .navbar-nav.ml-auto
+    .navbar-nav.justify-content-end.ml-auto
+      = render 'layouts/barra'
+
+    .dropdown-divider
+
+    .navbar-nav
+      // Crear/editar cuenta
       = render 'devise/menu/registration_link'
+      // Administración
+      = render 'layouts/admin_link'
+      // Entrar/salir de la sesión
       = render 'devise/menu/session_link'
+      // Contacto
+      = link_to 'mailto:sisinta@inta.gob.ar', class: 'nav-item nav-link', title: t('layouts.barra.contacto.menu') do
+        %span.fa.fa-envelope.fa-fw
+        %span.d-md-none= t('layouts.barra.contacto.menu')

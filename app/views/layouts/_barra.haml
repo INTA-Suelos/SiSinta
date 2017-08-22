@@ -1,55 +1,33 @@
-%ul.menu
-  %li
-    .plegable= t('.series.menu')
-    %ul.submenu
-      %li= link_to t('.series.ver'), series_path
-  %li
-    .plegable= t('.perfiles.menu')
-    %ul.submenu
-      - if can? :create, Perfil
-        %li= link_to t('.perfiles.cargar'), new_perfil_path
-      %li= link_to t('.perfiles.ver'), perfiles_path
-      %li= link_to t('.perfiles.exportar'), exportar_perfiles_path
-      %li
-        %span.subtitulo= t('.perfiles.busquedas.menu')
-        %ul.submenu
-          %li= link_to t('.perfiles.busquedas.nueva'), new_busqueda_path
-          %li= link_to t('.perfiles.busquedas.guardadas'), busquedas_path
-      %li
-        %span.subtitulo= t('.perfiles.subgrupos.menu')
-        %ul.submenu
-          %li= link_to t('.perfiles.subgrupos.ver'), grupos_path
-      %li
-        %span.subtitulo= t('.perfiles.fases.menu')
-        %ul.submenu
-          %li= link_to t('.perfiles.fases.ver'), fases_path
+.dropdown
+  = link_to t('.perfiles.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  .dropdown-menu
+    - if can? :create, Perfil
+      = link_to t('.perfiles.cargar'), new_perfil_path, class: 'dropdown-item'
+    = link_to t('.perfiles.ver'), perfiles_path, class: 'dropdown-item'
+    = link_to t('.perfiles.exportar'), exportar_perfiles_path, class: 'dropdown-item'
+    .dropdown-divider
+    %h6.dropdown-header= t('.perfiles.busquedas.menu')
+    = link_to t('.perfiles.busquedas.nueva'), new_busqueda_path, class: 'dropdown-item'
+    = link_to t('.perfiles.busquedas.guardadas'), busquedas_path, class: 'dropdown-item'
 
-  %li
-    .plegable= t('.proyectos.menu')
-    %ul.submenu
-      %li= link_to t('.proyectos.ver'), proyectos_path
+.dropdown
+  = link_to t('.series.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  .dropdown-menu
+    = link_to t('.series.ver'), series_path, class: 'dropdown-item'
 
-%ul#administracion.menu
-  - if current_usuario.try(:admin?)
-    %li
-      .plegable= t('.administracion.menu')
-      %ul.submenu
-        %li
-          = link_to t('.administracion.panel'), admin_root_path
-  %li
-    .plegable= t('.equipos.menu')
-    %ul.submenu
-      %li
-        = link_to t('.equipos.ver'), equipos_path
+.dropdown
+  = link_to t('.proyectos.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  .dropdown-menu
+    = link_to t('.proyectos.ver'), proyectos_path, class: 'dropdown-item'
 
-%ul#otros.menu
-  %li
-    .plegable= t('.contacto.menu')
-    %ul.submenu
-      %li= link_to t('.contacto.mail'), 'mailto:sisinta@inta.gob.ar'
-  %li
-    .plegable= t('.idioma.menu')
-    %ul.submenu
-      - I18n.available_locales.each do |locale|
-        -# url_for devuelve el path actual
-        %li= link_to locale, url_for(locale: locale)
+.dropdown
+  = link_to t('.equipos.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  .dropdown-menu
+    = link_to t('.equipos.ver'), equipos_path, class: 'dropdown-item'
+
+.dropdown
+  = link_to t('.idioma.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  .dropdown-menu
+    - I18n.available_locales.each do |locale|
+      -# url_for devuelve el path actual
+      = link_to locale, url_for(locale: locale), class: 'dropdown-item'

@@ -1,7 +1,8 @@
 // Gemas y vendored
 //
 //= require jquery
-// Para tooltips y popovers de bootstrap
+// Para tooltips, dropdowns y popovers de bootstrap
+//= require popper
 // Bootstrap sin precompilar
 //= require bootstrap-sprockets
 //
