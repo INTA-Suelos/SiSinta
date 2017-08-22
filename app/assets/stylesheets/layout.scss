@@ -1,0 +1,11 @@
+// Estilos para las secciones generales, layout, barras de navegación, etc
+
+// Desde sm hacia abajo colapsamos la barra de navegación
+@include media-breakpoint-down(sm) {
+  .navbar {
+    // Al colapsar, esconder los bordes de los dropdowns en la barra de navegación
+    .dropdown-menu {
+      border: none;
+    }
+  }
+}

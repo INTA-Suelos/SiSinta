@@ -1,5 +1,6 @@
 // Mostrar íconos para crear o editar la cuenta de usuario para viewports
-// medium (md), mostrar íconos con texto para viewports más chicos
+// medium (md), mostrar íconos con texto para viewports más chicos, donde se
+// colapsan
 - if usuario_signed_in?
   = link_to edit_usuario_registration_path, class: 'nav-item nav-link', title: t('.cuenta') do
     %span.fa.fa-cog.fa-fw

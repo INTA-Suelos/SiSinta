@@ -1,0 +1,4 @@
+- if current_usuario.try(:admin?)
+  = link_to admin_root_path, class: 'nav-item nav-link', title: t('layouts.barra.administracion.menu') do
+    %span.fa.fa-user-plus.fa-fw
+    %span.d-md-none= t('layouts.barra.administracion.menu')

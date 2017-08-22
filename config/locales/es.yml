@@ -245,9 +245,7 @@ es:
     barra:
       administracion:
         menu: Administración
-        panel: Panel
       contacto:
-        mail: Mail
         menu: Contacto
       equipos:
         menu: Equipos
