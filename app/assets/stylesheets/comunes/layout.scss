@@ -23,14 +23,6 @@ body {
       color: $rojo_inta;
     }
   }
-
-  #flash_alert, #flash_error {
-    @include mensaje($rojo_inta);
-  }
-
-  #flash_notice, #flash_success {
-    @include mensaje($verde);
-  }
 }
 
 a {

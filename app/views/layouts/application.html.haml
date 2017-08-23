@@ -16,9 +16,9 @@
   %body
     = render 'layouts/cabecera'
 
-    #avisos
-      - flash.each do |name, msg|
-        = notificacion(name, msg)
-
     .container-fluid
+      #avisos
+        - flash.each do |name, msg|
+          = notificacion(name, msg)
+
       = yield

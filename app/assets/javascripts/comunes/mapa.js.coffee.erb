@@ -76,6 +76,7 @@ jQuery ->
           longitud: caja._southWest.lng
 
       # Envia bounds al server y procesar la respuesta
+      # FIXME Arreglar flash
       $.post $(this._container).data('seleccion-url'), coordenadas, (res) ->
         $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
 
