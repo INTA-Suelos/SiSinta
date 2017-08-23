@@ -23,7 +23,7 @@ feature 'Sesión de usuario' do
     end
 
     current_path.must_equal root_path
-    page.must_have_selector '.mensaje', text: I18n.t('devise.sessions.signed_in')
+    page.must_have_selector '.alert.alert-success', text: I18n.t('devise.sessions.signed_in')
   end
 
   feature 'Estando logueado' do
@@ -36,7 +36,7 @@ feature 'Sesión de usuario' do
       click_link 'Salir'
 
       current_path.must_equal root_path
-      page.must_have_selector '#flash_notice.mensaje', text: I18n.t('devise.sessions.signed_out')
+      page.must_have_selector '.alert.alert-success', text: I18n.t('devise.sessions.signed_out')
     end
   end
 end

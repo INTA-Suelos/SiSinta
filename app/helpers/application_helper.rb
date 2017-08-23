@@ -223,7 +223,35 @@ module ApplicationHelper
     check_box_tag hash, valor, false, class: 'destroy'
   end
 
+  # Construye el tag de notificación de acuerdo al tipo de mensaje, con botón
+  # de dismiss
   def notificacion(tipo, mensaje)
-    content_tag :div, mensaje, class: 'mensaje', id: "flash_#{tipo}" if mensaje.is_a?(String)
+    # A veces guardamos otras cosas en el flash
+    if mensaje.is_a?(String)
+      content_tag :div, class: notificacion_clases(tipo) do
+        concat(
+          content_tag(:button, class: 'close', data: { dismiss: 'alert'}) do
+            content_tag :span, '&times;'.html_safe
+          end
+        )
+
+        concat mensaje
+      end
+    end
+  end
+
+  # Convertir nuestros tipos de alertas en los de la interfaz de usuario
+  def notificacion_clases(tipo)
+    tipo_ui =
+      case tipo.to_sym
+      when :notice, :success
+        :success
+      when :alert, :error
+        :danger
+      else
+        :info
+      end
+
+    "alert alert-#{tipo_ui} alert-dismissible fade show"
   end
 end
