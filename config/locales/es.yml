@@ -245,34 +245,27 @@ es:
     barra:
       administracion:
         menu: Administración
+      busquedas:
+        guardadas: Guardadas
+        titulo: Búsquedas
+        nueva: Nueva
       contacto:
         menu: Contacto
       equipos:
-        menu: Equipos
-        ver: Ver
+        lista: Equipos
       idioma:
         menu: Idioma
+      otros:
+        titulo: Otros
       perfiles:
-        busquedas:
-          guardadas: Guardadas
-          menu: Búsquedas
-          nueva: Nueva
         cargar: Cargar
         exportar: Exportar
-        fases:
-          menu: Fases
-          ver: Ver
-        menu: Perfiles
-        subgrupos:
-          menu: Subgrupos
-          ver: Ver
-        ver: Ver
+        titulo: Perfiles
+        lista: Ver
       proyectos:
-        menu: Proyectos
-        ver: Ver
+        lista: Proyectos
       series:
-        menu: Series
-        ver: Ver
+        lista: Series
   mostrar: Mostrar
   perfiles:
     clasico:
