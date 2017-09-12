@@ -1,29 +1,23 @@
 .dropdown
-  = link_to t('.perfiles.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  = link_to t('.perfiles.titulo'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
   .dropdown-menu
     - if can? :create, Perfil
       = link_to t('.perfiles.cargar'), new_perfil_path, class: 'dropdown-item'
-    = link_to t('.perfiles.ver'), perfiles_path, class: 'dropdown-item'
+    = link_to t('.perfiles.lista'), perfiles_path, class: 'dropdown-item'
     = link_to t('.perfiles.exportar'), exportar_perfiles_path, class: 'dropdown-item'
     .dropdown-divider
-    %h6.dropdown-header= t('.perfiles.busquedas.menu')
-    = link_to t('.perfiles.busquedas.nueva'), new_busqueda_path, class: 'dropdown-item'
-    = link_to t('.perfiles.busquedas.guardadas'), busquedas_path, class: 'dropdown-item'
+    = link_to t('.series.lista'), series_path, class: 'dropdown-item'
+    .dropdown-divider
+    %h6.dropdown-header= t('.busquedas.titulo')
+    = link_to t('.busquedas.nueva'), new_busqueda_path, class: 'dropdown-item'
+    = link_to t('.busquedas.guardadas'), busquedas_path, class: 'dropdown-item'
 
 .dropdown
-  = link_to t('.series.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+  = link_to t('.otros.titulo'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
   .dropdown-menu
-    = link_to t('.series.ver'), series_path, class: 'dropdown-item'
-
-.dropdown
-  = link_to t('.proyectos.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
-  .dropdown-menu
-    = link_to t('.proyectos.ver'), proyectos_path, class: 'dropdown-item'
-
-.dropdown
-  = link_to t('.equipos.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
-  .dropdown-menu
-    = link_to t('.equipos.ver'), equipos_path, class: 'dropdown-item'
+    = link_to t('.proyectos.lista'), proyectos_path, class: 'dropdown-item'
+    .dropdown-divider
+    = link_to t('.equipos.lista'), equipos_path, class: 'dropdown-item'
 
 .dropdown
   = link_to t('.idioma.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
