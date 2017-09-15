@@ -237,18 +237,16 @@ es:
         edit: Actualizar %{model}
   inicio:
     index:
-      bienvenida: Bienvenido a SiSINTA
-      busqueda_de_perfiles: Búsqueda de perfiles
-      criterio_de_busqueda: Por nombre o número
-      submit: Buscar
+      bienvenida: Sistema de Información de Suelos del INTA
+      datos_actuales: "%{perfiles} perfiles (%{publicos} públicos) en %{series} series."
   layouts:
     barra:
       administracion:
         menu: Administración
       busquedas:
         guardadas: Guardadas
-        titulo: Búsquedas
         nueva: Nueva
+        titulo: Búsquedas
       contacto:
         menu: Contacto
       equipos:
@@ -260,8 +258,8 @@ es:
       perfiles:
         cargar: Cargar
         exportar: Exportar
-        titulo: Perfiles
         lista: Ver
+        titulo: Perfiles
       proyectos:
         lista: Proyectos
       series:

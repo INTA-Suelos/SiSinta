@@ -56,13 +56,13 @@ gem 'multiselectjs_rails',
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
-gem 'leaflet-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
 
 # Paquetes de bower
 source 'https://rails-assets.org' do
-  gem 'rails-assets-leaflet.markercluster'
-  gem 'rails-assets-leaflet-plugins'
+  # Congelados hasta incluir Leaflet.GoogleMutant acá
+  gem 'rails-assets-leaflet', '1.2.0'
+  gem 'rails-assets-leaflet-plugins', '3.0.1'
   gem 'rails-assets-fontawesome'
 end
 

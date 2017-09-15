@@ -1,26 +1,11 @@
-#bienvenida
-  .span-10
-    %h2= t('.bienvenida')
+#container-mapa.d-flex.flex-column
+  #bienvenida.d-none.d-md-block
+    %h1
+      = t('.bienvenida')
 
-    %h3= t('.busqueda_de_perfiles')
+    %p= t('.datos_actuales', perfiles: Perfil.count, publicos: Perfil.publicos.count, series: Serie.count)
 
-    %p
-      Actualmente hay #{Perfil.count} perfiles (#{Perfil.publicos.count}
-      públicos) cargados en #{Serie.count} series.
-
-    %p
-      Para seleccionar perfiles
-      = link_to 'a exportar', exportar_perfiles_path
-      desde el mapa, mantener apretado shift y marcar un rectángulo.
-
-    = search_form_for @busqueda do |b|
-      .span-4=  b.label :serie_nombre_or_numero_cont, t('.criterio_de_busqueda')
-      .span-6.last= b.text_field :serie_nombre_or_numero_cont
-
-      .span-2= b.submit t('.submit')
-
-  .span-14.last
-    #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }
+  #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }
 
 -# TODO Cargar dinámicamente desde un js
-= javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry'
+= javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.29&libraries=geometry'

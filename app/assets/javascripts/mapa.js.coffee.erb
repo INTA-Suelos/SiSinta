@@ -1,11 +1,15 @@
 jQuery ->
+  # Si hay un mapa en la página
   if $('#mapa').length
-    # Define el path de los assets para las imágenes de los íconos. Las
-    # imágenes del control de capas ya están contempladas en el css
-    digested_icon = L.icon({
-      iconUrl: "<%= asset_path 'marker-icon.png' %>"
-      iconRetinaUrl: "<%= asset_path 'marker-icon-2x.png' %>"
-      shadowUrl: "<%= asset_path 'marker-shadow.png' %>"
+    # Configura el path base para evitar que leaflet intente calcular la url de
+    # las imágenes, porque no entiende los helpers de sass.
+    L.Icon.Default.imagePath = '/assets/'
+    # Configura las imágenes de los íconos con digests, sacando el path base de
+    # las url de las imágenes, para que no quede duplicado.
+    L.Icon.Default.mergeOptions({
+      iconUrl: "<%= image_path('leaflet/dist/images/marker-icon.png').sub('/assets/', '') %>"
+      iconRetinaUrl: "<%= image_path('leaflet/dist/images/marker-icon-2x.png').sub('/assets/', '') %>"
+      shadowUrl: "<%= image_path('leaflet/dist/images/marker-shadow.png').sub('/assets/', '') %>"
     })
 
     # Genera el markup para cada punto del geoJson
@@ -21,10 +25,6 @@ jQuery ->
           punto.properties.numero || 'Perfil'}</a>"
       )
 
-    # Devuelve un marker con el ícono customizado para el punto que pasamos
-    marker_con_icono = (punto, latlng) ->
-      return L.marker(latlng, { icon: digested_icon })
-
     # Por default mostramos Argentina entera
     zoom = $('#mapa').data('zoom') || 4
     centro = $('#mapa').data('centro') || [-40, -65]
@@ -36,8 +36,9 @@ jQuery ->
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors (' +
         '<a href="http://opendatacommons.org/licenses/odbl/">ODbL</a>)'
     })
-    g_hibrido = new L.Google('HYBRID')
-    g_terreno = new L.Google('TERRAIN')
+
+    g_terreno = L.gridLayer.googleMutant({ type: 'terrain' })
+    g_hibrido = L.gridLayer.googleMutant({ type: 'hybrid' })
 
     # Capa inicial
     mapa.addLayer(g_hibrido)
@@ -80,17 +81,11 @@ jQuery ->
       $.post $(this._container).data('seleccion-url'), coordenadas, (res) ->
         $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
 
+    # Agrega una capa de geoJson
+    geojson = L.geoJson().addTo(mapa)
+
     # Pide y agrega los puntos
     $.getJSON $('#mapa').data('geojson'), (data) ->
-      puntos = new L.MarkerClusterGroup()
-      puntos.addLayer(
-        # Agrega una capa de geoJson
-        L.geoJson(data, {
-          onEachFeature: preparar_punto
-          pointToLayer: marker_con_icono
-        })
-      ).addTo(mapa)
-
-      # Encuadra todos los puntos en el mapa a menos que definamos un centro
-      unless $('#mapa').data('centro')
-        mapa.fitBounds puntos.getBounds()
+      geojson.addData(data, {
+        onEachFeature: preparar_punto
+      })
