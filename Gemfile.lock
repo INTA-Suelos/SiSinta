@@ -302,10 +302,8 @@ GEM
       actionpack (>= 3.2.11)
       railties (>= 3.2.11)
     rails-assets-fontawesome (4.7.0)
-    rails-assets-leaflet (0.7.7)
-    rails-assets-leaflet-plugins (1.6.1)
-    rails-assets-leaflet.markercluster (0.5.0)
-      rails-assets-leaflet (>= 0.7.0)
+    rails-assets-leaflet (1.2.0)
+    rails-assets-leaflet-plugins (3.0.1)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.9)
@@ -446,7 +444,6 @@ DEPENDENCIES
   jwt
   kaminari
   kaminari-i18n
-  leaflet-rails
   minitest-rails
   minitest-rails-capybara
   multiselectjs_rails!
@@ -457,8 +454,8 @@ DEPENDENCIES
   rails (= 4.2.10)
   rails-api
   rails-assets-fontawesome!
-  rails-assets-leaflet-plugins!
-  rails-assets-leaflet.markercluster!
+  rails-assets-leaflet (= 1.2.0)!
+  rails-assets-leaflet-plugins (= 3.0.1)!
   rails-i18n
   rails-jquery-autocomplete
   ransack

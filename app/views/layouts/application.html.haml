@@ -5,6 +5,7 @@
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
 
     %title= titulo_de_la_aplicacion
+
     = stylesheet_link_tag 'application', media: 'all'
 
     = javascript_include_tag 'application'
@@ -16,7 +17,7 @@
   %body
     = render 'layouts/cabecera'
 
-    .container-fluid
+    #container-principal.container-fluid
       #avisos
         - flash.each do |name, msg|
           = notificacion(name, msg)

@@ -1,0 +1,20 @@
+// Para que el mapa de Leaflet se ajuste a la altura automáticamente
+// necesitamos definir una altura para todos los contenedores del mapa.
+html { height: 100%; }
+body { height: 100%; }
+#container-principal { height: 100%; }
+#container-mapa { height: 100%; }
+
+#bienvenida {
+  // No ocupar más que el necesario por el contenido
+  flex-grow: 0;
+}
+
+#mapa {
+  // Ocupar el resto del espacio disponible
+  flex-grow: 1;
+
+  // Redefinir el box-sizing que aplica Bootstrap. Ver
+  // https://getbootstrap.com/docs/4.0/getting-started/introduction/#box-sizing
+  box-sizing: content-box;
+}
