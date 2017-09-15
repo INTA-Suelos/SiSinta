@@ -147,7 +147,8 @@ module ApplicationHelper
   # helper de cada controlador, dependiendo de la acción
   def titulo_de_la_aplicacion(extra = nil)
     extra ||= titulo_de_la_accion
-    "#{extra.nil? ? nil : "#{extra} | "}SiSINTA"
+
+    [extra, t('app')].reject(&:nil?).join(' | ')
   end
 
   # Por defecto, no se usa nada. Esto va en la cabecera.
