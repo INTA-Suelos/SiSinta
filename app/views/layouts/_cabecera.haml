@@ -1,8 +1,8 @@
-%nav.navbar.navbar-light.bg-faded.sticky-top.navbar-expand-md
+%nav.navbar.navbar-dark.bg-dark.fixed-top.navbar-expand-md
   // Logo, título y botón tienen que ir en orden
   // Logo de la app
   .navbar-brand
-    = link_to '/' do
+    = link_to '/', class: 'text-light' do
       = image_tag 'logo-30x35', alt: t('app')
       // FIXME Sacar el on-hover
       .d-none.d-md-inline= t('app')
