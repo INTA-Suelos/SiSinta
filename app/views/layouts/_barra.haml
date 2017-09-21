@@ -18,10 +18,8 @@
     = link_to t('.proyectos.lista'), proyectos_path, class: 'dropdown-item'
     .dropdown-divider
     = link_to t('.equipos.lista'), equipos_path, class: 'dropdown-item'
-
-.dropdown
-  = link_to t('.idioma.menu'), '#', class: 'nav-item nav-link dropdown-toggle', data: { toggle: 'dropdown' }
-  .dropdown-menu
+    .dropdown-divider
+    %h6.dropdown-header= t('.idioma.menu')
     - I18n.available_locales.each do |locale|
       -# url_for devuelve el path actual
       = link_to locale, url_for(locale: locale), class: 'dropdown-item'
