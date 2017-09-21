@@ -18,9 +18,9 @@
     %span.navbar-toggler-icon
 
   .collapse.navbar-collapse
+    // Menú de navegación
     .navbar-nav.justify-content-end.ml-auto
-      = render 'layouts/barra'
-
+      = render 'layouts/menu'
     .dropdown-divider
 
     .navbar-nav
@@ -31,6 +31,6 @@
       // Entrar/salir de la sesión
       = render 'devise/menu/session_link'
       // Contacto
-      = link_to 'mailto:sisinta@inta.gob.ar', class: 'nav-item nav-link', title: t('layouts.barra.contacto.menu') do
+      = link_to 'mailto:sisinta@inta.gob.ar', class: 'nav-item nav-link', title: t('.contacto') do
         %span.fa.fa-envelope.fa-fw
-        %span.d-md-none= t('layouts.barra.contacto.menu')
+        %span.d-md-none= t('.contacto')

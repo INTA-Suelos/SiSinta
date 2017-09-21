@@ -240,15 +240,15 @@ es:
       bienvenida: Sistema de Información de Suelos del INTA
       datos_actuales: "%{perfiles} perfiles (%{publicos} públicos) en %{series} series."
   layouts:
-    barra:
-      administracion:
-        menu: Administración
+    admin_link:
+      administracion: Administración
+    cabecera:
+      contacto: Contacto
+    menu:
       busquedas:
         guardadas: Guardadas
         nueva: Nueva
         titulo: Búsquedas
-      contacto:
-        menu: Contacto
       equipos:
         lista: Equipos
       idioma:
