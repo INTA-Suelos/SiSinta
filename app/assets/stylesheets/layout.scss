@@ -1,11 +1,27 @@
 // Estilos para las secciones generales, layout, barras de navegación, etc
 
+// Desde md hacia arriba el título y la búsqueda tienen que ocupar más espacio
+@include media-breakpoint-up(md) {
+  .navbar {
+    .titulo {
+      // Distribuir el espacio ocupado entre .titulo y .navbar-collapse
+      display: flex;
+      flex-basis: 100%;
+    }
+  }
+}
+
 // Desde sm hacia abajo colapsamos la barra de navegación
 @include media-breakpoint-down(sm) {
   .navbar {
     // Al colapsar, esconder los bordes de los dropdowns en la barra de navegación
     .dropdown-menu {
       border: none;
+    }
+
+    // Volvemos titulo a tamaño fluído
+    .titulo {
+      width: inherit;
     }
   }
 }

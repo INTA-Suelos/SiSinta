@@ -22,4 +22,5 @@
 //
 // Aplicación
 //
+//= require layout
 //= require mapa

@@ -1,36 +1,56 @@
+-# Barra de navegación general
 %nav.navbar.navbar-dark.bg-dark.fixed-top.navbar-expand-md
-  // Logo, título y botón tienen que ir en orden
-  // Logo de la app
+  -# Logo, título y botón tienen que ir en orden
+  -# Logo de la app
   .navbar-brand
     = link_to '/', class: 'text-light' do
       = image_tag 'logo-30x35', alt: t('app')
-      // FIXME Sacar el on-hover
+      -# FIXME Sacar el on-hover
       .d-none.d-md-inline= t('app')
 
-  // TODO Buscar cómo decirle que ocupe el espacio que pueda sin descentrarse en
-  // TODO viewports chicos. El navbar-collapse está ocupando todo el espacio que
-  // TODO queda, limitarle el width funciona
-  // Título de la página
-  %span.navbar-text.titulo= titulo_de_la_accion
+  -# Título de la página o formulario de búsqueda
+  %span.titulo
+    .mostrar-busqueda.show-on-resize.w-100.show.collapse.fade
+      .navbar-text= titulo_de_la_accion
+    .mostrar-busqueda.hide-on-resize.w-100.collapse.fade
+      = render 'layouts/busqueda'
 
-  // Botón para colapsar el menú
+  -# Botón para colapsar el menú
   %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: ".navbar-collapse" } }
     %span.navbar-toggler-icon
 
   .collapse.navbar-collapse
-    // Menú de navegación
+    -# Búsqueda global
     .navbar-nav.justify-content-end.ml-auto
+      .d-md-none= render 'layouts/busqueda'
+    .dropdown-divider
+
+    -# Menú de navegación
+    -# FIXME https:-#github.com/twbs/bootstrap/pull/22758
+    -# FIXME Hay que poner `.d-flex` porque el plugin de collapse genera `display:
+    -# FIXME block`, pero esto hace que el elemento no desaparezca por completo,
+    -# FIXME cuando mergeen lo de arriba estaría resuelto
+    .navbar-nav.mostrar-busqueda.show-on-resize.show.collapse.fade.d-flex
       = render 'layouts/menu'
     .dropdown-divider
 
+    -# Menú de íconos
     .navbar-nav
-      // Crear/editar cuenta
+      -# Crear/editar cuenta
       = render 'devise/menu/registration_link'
-      // Administración
+
+      -# Administración
       = render 'layouts/admin_link'
-      // Entrar/salir de la sesión
+
+      -# Entrar/salir de la sesión
       = render 'devise/menu/session_link'
-      // Contacto
+
+      -# Contacto
       = link_to 'mailto:sisinta@inta.gob.ar', class: 'nav-item nav-link', title: t('.contacto') do
         %span.fa.fa-envelope.fa-fw
         %span.d-md-none= t('.contacto')
+
+      -# Mostrar/ocultar formulario de búsqueda
+      = link_to '.mostrar-busqueda', class: 'd-none d-md-inline nav-item nav-link', title: 'sarasa',
+        data: { toggle: "collapse" }, aria: { expanded: "false" } do
+        %span.fa.fa-search.fa-fw

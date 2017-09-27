@@ -242,6 +242,8 @@ es:
   layouts:
     admin_link:
       administracion: Administración
+    busqueda:
+      criterio_de_busqueda: Buscar por nombre o nº de Perfil
     cabecera:
       contacto: Contacto
     menu:

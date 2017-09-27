@@ -1,9 +1,12 @@
+-# Landing page del sitio con mapa de perfiles
+
+-# Container con altura definida para el mapa
 #container-mapa.d-flex.flex-column
   #bienvenida.d-none.d-md-block
     %h1
       = t('.bienvenida')
 
-    %p= t('.datos_actuales', perfiles: Perfil.count, publicos: Perfil.publicos.count, series: Serie.count)
+    %p= t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series)
 
   #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }
 

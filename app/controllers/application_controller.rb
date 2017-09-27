@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
 
   # Antes que nada configurar el locale
   before_action :configurar_locale_para_request
-  before_filter :descubrir_browser
-  before_filter :agregar_parametros_permitidos, if: :devise_controller?
+  before_action :descubrir_browser
+  before_action :agregar_parametros_permitidos, if: :devise_controller?
+  before_action :preparar_busqueda_global
 
   def current_usuario
     super.try(:decorate)
@@ -79,5 +80,10 @@ class ApplicationController < ActionController::Base
       rescue ActiveRecord::RecordNotFound
         current_usuario.try(:ficha) || Ficha.default
       end
+    end
+
+    # Inicializa el objeto a usar en la búsqueda de la barra de navegación
+    def preparar_busqueda_global
+      @busqueda_global = Perfil.search
     end
 end
