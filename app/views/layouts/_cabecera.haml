@@ -46,11 +46,11 @@
       = render 'devise/menu/session_link'
 
       -# Contacto
-      = link_to 'mailto:sisinta@inta.gob.ar', class: 'nav-item nav-link', title: t('.contacto') do
+      = mail_to mail_de_contacto, class: 'nav-item nav-link', title: t('.contacto') do
         %span.fa.fa-envelope.fa-fw
         %span.d-md-none= t('.contacto')
 
       -# Mostrar/ocultar formulario de búsqueda
-      = link_to '.mostrar-busqueda', class: 'd-none d-md-inline nav-item nav-link', title: 'sarasa',
-        data: { toggle: "collapse" }, aria: { expanded: "false" } do
+      = link_to '#', class: 'd-none d-md-inline nav-item nav-link', title: 'sarasa',
+        data: { target: '.mostrar-busqueda', toggle: "collapse" }, aria: { expanded: "false" } do
         %span.fa.fa-search.fa-fw
