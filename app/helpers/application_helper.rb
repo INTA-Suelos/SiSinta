@@ -255,4 +255,8 @@ module ApplicationHelper
 
     "alert alert-#{tipo_ui} alert-dismissible fade show"
   end
+
+  def mail_de_contacto
+    Rails.application.secrets.mail_de_contacto
+  end
 end
