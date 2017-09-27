@@ -1,0 +1,9 @@
+-# Formulario de búsqueda para la barra de navegación, reutilizado para
+-# diferentes viewports
+= search_form_for @busqueda_global, class: 'form-inline' do |b|
+  -# Siempre width 100% del container para el input-group
+  .input-group.w-100
+    = b.text_field :serie_nombre_or_numero_cont, class: 'form-control border-light', placeholder: t('.criterio_de_busqueda')
+    %span.input-group-btn
+      = b.button class: 'btn btn-light' do
+        %span.fa.fa-search.fa-fw

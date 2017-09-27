@@ -1,6 +1,8 @@
-# encoding: utf-8
+# Prepara la página de inicio con el mapa de perfiles cargados
 class InicioController < ApplicationController
   def index
-    @busqueda = Perfil.search
+    @perfiles = Perfil.count
+    @publicos = Perfil.publicos.count
+    @series = Serie.count
   end
 end
