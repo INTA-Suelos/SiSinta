@@ -196,11 +196,6 @@ module ApplicationHelper
     nil
   end
 
-  # Un simple link para volver al tope de la página
-  def volver_arriba(id = nil)
-    link_to 'Volver arriba', id || '#', class: 'volver-arriba'
-  end
-
   # Genera un checkbox construido para modificar la asociación anidada,
   # determinando si hay que anularla o destruirla
   def destruir_o_anular(recursos, asociacion, id, opciones = {})

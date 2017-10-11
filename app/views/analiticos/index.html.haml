@@ -15,5 +15,3 @@
 -# FIXME Inicializar un Model @ficha que responda a to_partial_path correctamente, o usar un Resolver
 = render "analiticos/#{@ficha.identificador}/tabla",
     perfil: @perfil.decorate, analiticos: @perfil.analiticos.decorate, bloqueado: true
-
-= volver_arriba
