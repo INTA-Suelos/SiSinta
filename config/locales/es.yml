@@ -246,6 +246,7 @@ es:
       criterio_de_busqueda: Buscar por nombre o nº de Perfil
     cabecera:
       contacto: Contacto
+      busqueda: Búsqueda
     menu:
       busquedas:
         guardadas: Guardadas

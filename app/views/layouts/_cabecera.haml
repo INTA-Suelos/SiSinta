@@ -16,7 +16,7 @@
       = render 'layouts/busqueda'
 
   -# Botón para colapsar el menú
-  %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: ".navbar-collapse" } }
+  %button.navbar-toggler.navbar-toggler-right{ type: 'button', data: { toggle: 'collapse', target: '.navbar-collapse' } }
     %span.navbar-toggler-icon
 
   .collapse.navbar-collapse
@@ -51,6 +51,6 @@
         %span.d-md-none= t('.contacto')
 
       -# Mostrar/ocultar formulario de búsqueda
-      = link_to '#', class: 'd-none d-md-inline nav-item nav-link', title: 'sarasa',
-        data: { target: '.mostrar-busqueda', toggle: "collapse" }, aria: { expanded: "false" } do
+      = link_to '#', class: 'd-none d-md-inline nav-item nav-link', title: t('.busqueda'),
+        data: { target: '.mostrar-busqueda', toggle: 'collapse' }, aria: { expanded: 'false' } do
         %span.fa.fa-search.fa-fw
