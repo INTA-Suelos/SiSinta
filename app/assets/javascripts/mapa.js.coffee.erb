@@ -43,12 +43,25 @@ jQuery ->
     # Capa inicial
     mapa.addLayer(g_hibrido)
 
+    # Capa de geoJson
+    geojson = L.geoJson().addTo(mapa)
+
+    # Pide y agrega los puntos
+    $.getJSON $('#mapa').data('geojson'), (data) ->
+      geojson.addData(data, {
+        onEachFeature: preparar_punto
+      })
+
     # Control para cambiar de capas
-    mapa.addControl(new L.Control.Layers({
-      'OpenStreetMap': osm
-      'Google': g_hibrido
-      'Google Terrain': g_terreno
-    }, {}))
+    mapa.addControl(
+      new L.Control.Layers({
+        'OpenStreetMap': osm
+        'Google': g_hibrido
+        'Google Terrain': g_terreno
+      }, {
+        'Perfiles públicos': geojson
+      })
+    )
 
     # Al seleccionar un rectángulo con shift + click, enviamos las coordenadas
     # del rectángulo para seleccionar todos los perfiles internos
@@ -80,12 +93,3 @@ jQuery ->
       # FIXME Arreglar flash
       $.post $(this._container).data('seleccion-url'), coordenadas, (res) ->
         $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
-
-    # Agrega una capa de geoJson
-    geojson = L.geoJson().addTo(mapa)
-
-    # Pide y agrega los puntos
-    $.getJSON $('#mapa').data('geojson'), (data) ->
-      geojson.addData(data, {
-        onEachFeature: preparar_punto
-      })
