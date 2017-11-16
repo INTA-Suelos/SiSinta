@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.10'
+# FIXME Sacar con rails 5
+gem 'thor', '0.19.1'
 
 ## DB
 gem 'pg'
