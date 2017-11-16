@@ -357,7 +357,7 @@ es:
       submit: Exportar
       todos_los_atributos: Todos los atributos
     index:
-      es_modal: "¿Es modal?"
+      modal: Modal
       fecha: Fecha
       nombre: Nombre
       nuevo_perfil: Nuevo perfil
@@ -465,4 +465,20 @@ es:
     update_varios:
       alert: Hubo algún problema al actualizar los usuarios.
       notice: Los usuarios se actualizaron correctamente.
+  views:
+    pagination:
+      first:
+        icon: "«"
+        text: Primera
+      last:
+        icon: "»"
+        text: Última
+      next:
+        icon: "›"
+        text: Siguiente
+      previous:
+        icon: "‹"
+        text: Anterior
+      truncate:
+        icon: "…"
   volver: Volver
