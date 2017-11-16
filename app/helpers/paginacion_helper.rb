@@ -17,4 +17,17 @@ module PaginacionHelper
     activo = @cantidades.include?(params[:filas]) ? params[:filas] : '20'
     elemento == activo ? 'activo' : nil
   end
+
+  # Markup para esconder el texto en tamaños de pantalla menores que md
+  def texto_e_icono(key, icono_ultimo: false)
+    elementos = [
+      t("views.pagination.#{key}.icon"),
+      content_tag(:span, t("views.pagination.#{key}.text"), class: 'd-none d-md-inline')
+    ]
+
+    # Siguiente y última usan el ícono al final
+    elementos.reverse! if icono_ultimo
+
+    elementos.join(' ').html_safe
+  end
 end
