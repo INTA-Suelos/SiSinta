@@ -1,6 +1,6 @@
 = paginator.render do
   %nav
-    %ul.pagination.pagination-sm.justify-content-center
+    %ul.pagination.pagination-sm.justify-content-end
       = first_page_tag
       = prev_page_tag
       - each_page do |page|
@@ -10,3 +10,7 @@
           = gap_tag
       = next_page_tag
       = last_page_tag
+
+    %ul.pagination.pagination-sm.justify-content-end
+      -# Botones para elegir filas según controller
+      = elegir_filas params[:controller]
