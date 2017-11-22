@@ -2,22 +2,24 @@
 module PaginacionHelper
   # Control para elegir la cantidad de filas a mostrar
   def elegir_filas(ruta, cantidades = %w{10 20 50})
-    @cantidades = cantidades
-
-    content_tag(:div, class: 'elegir_filas') do
-      ('Mostrar ' +
-      cantidades.collect do |cantidad|
-        link_to cantidad, self.send("#{ruta}_path", filas: cantidad), class: activo?(cantidad)
-      end.join +
-      ' filas').html_safe
-    end
+    cantidades.collect do |cantidad|
+      content_tag(:li, class: 'page-item') do
+        link_to cantidad,
+          self.send("#{ruta}_path", filas: cantidad),
+          class: clases_filas(cantidad, cantidades)
+      end
+    end.join.html_safe
   end
 
-  # Devuelve la clase para link de elegir filas dependiendo de si el elemento
-  # está activo o no
-  def activo?(elemento)
-    activo = @cantidades.include?(params[:filas]) ? params[:filas] : '20'
+  # Devuelve las clases para los botones de elegir filas, marcando si el
+  # elemento está activo o no
+  def clases_filas(elemento, cantidades)
+    clases = %w{page-link}
 
-    elemento == activo ? 'activo' : nil
+    filtro_activo = cantidades.include?(params[:filas]) ? params[:filas] : '20'
+
+    clases.push 'activo' if elemento == filtro_activo
+
+    clases.join ' '
   end
 end
