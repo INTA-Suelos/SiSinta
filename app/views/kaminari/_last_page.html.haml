@@ -1,2 +1,6 @@
-%li.page-item
-  = link_to_unless current_page.last?, texto_e_icono(:last, icono_ultimo: true), url, remote: remote, class: 'page-link'
+%li.page-item{ class: current_page.last? ? 'disabled' : '' }
+  = link_to t('views.pagination.last.icon'), url,
+    remote: remote,
+    class: 'page-link',
+    title: t('views.pagination.last.text'),
+    disabled: current_page.last?

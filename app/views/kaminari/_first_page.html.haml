@@ -1,2 +1,6 @@
-%li.page-item
-  = link_to_unless current_page.first?, texto_e_icono(:first), url, remote: remote, class: 'page-link'
+%li.page-item{ class: current_page.first? ? 'disabled' : '' }
+  = link_to t('views.pagination.first.icon'), url,
+    remote: remote,
+    class: 'page-link',
+    title: t('views.pagination.first.text'),
+    disabled: current_page.first?
