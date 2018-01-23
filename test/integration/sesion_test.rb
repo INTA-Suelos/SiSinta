@@ -15,7 +15,7 @@ feature 'Sesión de usuario' do
     page.must_have_selector '#usuario_email'
     page.must_have_selector '#usuario_password'
 
-    within 'form' do
+    within 'form.login' do
       fill_in Usuario.human_attribute_name('email'),    with: @usuario.email
       fill_in Usuario.human_attribute_name('password'), with: @usuario.password
 
