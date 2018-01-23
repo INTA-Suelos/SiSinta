@@ -1,4 +1,4 @@
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'login' }) do |f|
 
   = field_set_tag 'Completá tus datos', class: 'celeste_oscuro span-24' do
 
@@ -15,6 +15,6 @@
         .span-3= f.label :remember_me, 'Recordarme'
         .span-9= f.check_box :remember_me
 
-  .span-4= f.submit "Entrar"
+  .span-4= f.submit 'Entrar'
 
-= render partial: "devise/shared/links"
+= render partial: 'devise/shared/links'

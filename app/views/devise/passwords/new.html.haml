@@ -1,5 +1,5 @@
 = form_for(resource, as: resource_name, url: password_path(resource_name),
-  html: { method: :post }) do |f|
+  html: { method: :post, class: 'reset-password' }) do |f|
 
   = field_set_tag 'Resetear el password', class: 'celeste_oscuro span-24' do
 
@@ -9,6 +9,6 @@
       .span-3= f.label :email
       .span-9.last= f.email_field :email
 
-    .span-5= f.submit "Enviarme instrucciones"
+    .span-5= f.submit 'Enviarme instrucciones'
 
-= render partial: "devise/shared/links"
+= render partial: 'devise/shared/links'
