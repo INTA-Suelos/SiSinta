@@ -61,9 +61,8 @@ SiSINTA::Application.routes.draw do
         end
       end
 
-      r.resources :usuarios, only: [:index, :destroy, :update] do
+      r.resources :usuarios, only: [:update] do
         collection do
-          put 'update_varios'
           get 'autocompletar_nombre'  => 'usuarios#autocomplete_usuario_nombre'
           get 'autocompletar_email'   => 'usuarios#autocomplete_usuario_email'
         end

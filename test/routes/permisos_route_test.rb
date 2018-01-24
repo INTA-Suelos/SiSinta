@@ -1,3 +1,4 @@
+# Tests para las rutas custom de permisos
 require 'test_helper'
 
 describe 'Permisos Route Integration Test' do

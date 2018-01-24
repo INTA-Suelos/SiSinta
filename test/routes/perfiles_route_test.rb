@@ -1,3 +1,4 @@
+# Tests para las rutas custom de perfiles
 require 'test_helper'
 
 describe 'Perfiles Route Integration Test' do
