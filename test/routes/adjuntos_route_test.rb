@@ -1,3 +1,4 @@
+# Tests para las rutas custom de adjuntos
 require 'test_helper'
 
 describe 'Adjuntos Route Integration Test' do

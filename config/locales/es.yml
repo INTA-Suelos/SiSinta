@@ -461,10 +461,6 @@ es:
   unauthorized:
     detail: No estás autorizado para realizar esta acción
     title: No autorizado
-  usuarios:
-    update_varios:
-      alert: Hubo algún problema al actualizar los usuarios.
-      notice: Los usuarios se actualizaron correctamente.
   views:
     pagination:
       first:

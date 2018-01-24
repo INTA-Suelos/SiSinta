@@ -1,3 +1,4 @@
+# Tests para las rutas con locales
 require 'test_helper'
 
 describe 'Locales Route Integration Test' do

@@ -204,7 +204,3 @@ en:
     por_provincias:
       seleccionar: Select
       volver: Cancel
-  usuarios:
-    update_varios:
-      alert: There was a problem for updating the users.
-      notice: The users were successfully updated.
