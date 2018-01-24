@@ -28,7 +28,7 @@ gem 'ransack'
 gem 'rails-jquery-autocomplete'
 
 ## Modelos
-gem 'paperclip'
+gem 'paperclip', '~> 5.2'
 gem 'acts-as-taggable-on'
 gem 'attribute_normalizer'
 gem 'inflections', '0.0.5', require: 'inflections/es'
