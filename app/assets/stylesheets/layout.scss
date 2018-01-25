@@ -11,8 +11,9 @@
   }
 }
 
-// Desde sm hacia abajo colapsamos la barra de navegación
+// Desde sm hacia abajo
 @include media-breakpoint-down(sm) {
+  // Colapsamos la barra de navegación
   .navbar {
     // Al colapsar, esconder los bordes de los dropdowns en la barra de navegación
     .dropdown-menu {
@@ -24,10 +25,34 @@
       width: inherit;
     }
   }
+
+  // Esconder la selección de filas
+  .pagination {
+    &.elegir-filas {
+      display: none;
+    }
+
+    &.elegir-paginas {
+      margin-right: ($grid-gutter-width / 2);
+    }
+  }
 }
 
 body {
   // Separa la barra de navegación del contenido
   padding-top: 5rem;
   padding-bottom: 1rem;
+
+  .botonera {
+    // Estandarizar el espacio entre contenido real y barra de navegación
+    min-height: 3rem;
+  }
+
+  .pagination {
+    // Separar el bloque de acciones de las páginas
+    &.elegir-filas {
+      margin-left: ($grid-gutter-width / 2);
+      margin-right: ($grid-gutter-width / 2);
+    }
+  }
 }
