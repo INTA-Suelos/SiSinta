@@ -1,4 +1,5 @@
-# encoding: utf-8
+# Mantiene la tabla de datos analíticos o de laboratorio para cada perfil
+# FIXME Corregir agua_3_atm por agua_un_tercio_atm
 class Analitico < ActiveRecord::Base
   belongs_to :horizonte, inverse_of: :analitico
   has_one :perfil, through: :horizonte
