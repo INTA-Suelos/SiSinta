@@ -20,8 +20,8 @@
       - @proyectos.each do |proyecto|
         %tr
           %td= proyecto.nombre
-          %td!= proyecto.descripcion.try(:truncate, 35)
-          %td!= proyecto.cita.try(:truncate, 35)
+          %td!= proyecto.fragmento_descripcion
+          %td!= proyecto.fragmento_cita
           %td.numero= proyecto.perfiles.length
           %td.acciones
             = link_to 'Mostrar', proyecto
