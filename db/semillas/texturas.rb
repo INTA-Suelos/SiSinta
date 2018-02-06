@@ -13,7 +13,7 @@ texturas = [
   { id: 8, clase: 'franco arcilloso', textura: 'textura moderadamente fina', suelo: 'suelos francos' },
   { id: 9, clase: 'franco arcillo limoso', textura: 'textura moderadamente fina', suelo: 'suelos francos' },
   { id: 10, clase: 'arcillo arenoso', textura: 'textura fina', suelo: 'suelos arcillosos' },
-  { id: 11, clase: 'arcilloso limoso', textura: 'textura fina', suelo: 'suelos arcillosos' },
+  { id: 11, clase: 'arcillo limoso', textura: 'textura fina', suelo: 'suelos arcillosos' },
   { id: 12, clase: 'arcilloso', textura: 'textura fina', suelo: 'suelos arcillosos' }
 ]
 
