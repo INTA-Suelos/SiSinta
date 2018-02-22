@@ -29,7 +29,7 @@ end
 
 # Helpers para los controladores
 class ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   def loguearse
     loguearse_como 'Cualquiera'

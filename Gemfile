@@ -7,9 +7,7 @@ gem 'pg'
 # FIXME Nuestra rama ya está mergeada en yaml_db 0.5, pero conflictúa con un
 # FIXME error en activerecord-postgis-adapter:
 # FIXME https://github.com/rgeo/activerecord-postgis-adapter/issues/183
-gem 'yaml_db',
-  git: 'https://github.com/mauriciopasquier/yaml_db.git',
-  branch: 'order-join-tables'
+gem 'yaml_db'
 
 ## Aut{enticación,orización}, seguridad en general
 gem 'devise'
@@ -52,8 +50,7 @@ gem 'rails-api'
 
 ## Assets
 gem 'tinymce-rails'
-# FIXME descongelar versión con rails 4.1.x (https://github.com/rails/sass-rails/issues/191#issuecomment-39155285)
-gem 'sass-rails', '4.0.2'
+gem 'sass-rails'
 gem 'coffee-rails'
 gem 'therubyracer'
 gem 'uglifier'
