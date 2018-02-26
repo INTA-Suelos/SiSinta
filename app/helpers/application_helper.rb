@@ -18,12 +18,12 @@ module ApplicationHelper
   end
 
   # Tomo prestado de http://asciicasts.com/episodes/228-sortable-table-columns
-  def link_para_ordenar(columna, titulo = nil)
+  def link_para_ordenar(columna, titulo = nil, opciones = {})
     columna = columna.to_s  # para permitir símbolos
     titulo ||= columna.titleize
     direccion = (columna == metodo_de_ordenamiento && direccion_de_ordenamiento == "asc") ? "desc" : "asc"
     # TODO ver cómo agregar los `request.query_parameters` actuales sin perder el join
-    link_to titulo, por: columna, direccion: direccion
+    link_to titulo, { por: columna, direccion: direccion }, opciones
   end
 
   # Variables para acceder desde la vista y armar las tablas de lookup

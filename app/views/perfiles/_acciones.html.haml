@@ -1,0 +1,10 @@
+-# FIXME Mover a acciones globales y dejar sólo el checkbox
+- if can? :update, perfil.object
+  .btn-group.btn-group-sm
+    = link_to t('editar'), edit_perfil_path(perfil)
+    |
+    = link_to t('permisos'), permisos_path(modelo: 'perfil', id: perfil)
+    - if can? :delete, perfil.object
+      |
+      = link_to t('eliminar'), perfil,
+          data: { confirm: t(:confirmar) }, method: :delete

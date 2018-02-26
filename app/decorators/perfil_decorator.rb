@@ -10,10 +10,16 @@ class PerfilDecorator < ApplicationDecorator
   decorates_association :capacidad
   decorates_association :horizontes
 
-  def fecha
+  # Por default mostramos el año entero
+  def fecha(formato = :dma)
     if source.fecha?
-      source.fecha.to_date.to_s :dma
+      source.fecha.to_date.to_s formato
     end
+  end
+
+  # Para displays chicos mostramos sólo las decenas
+  def fecha_corta
+    fecha :dma_corta
   end
 
   def etiquetas
@@ -53,6 +59,18 @@ class PerfilDecorator < ApplicationDecorator
 
   def link_a_serie
     h.link_to nombre, serie, class: 'perfil_nombre' if serie.present?
+  end
+
+  def descripcion_ubicacion
+    ubicacion.try(:descripcion).try(:truncate, 70).try(:strip)
+  end
+
+  def link_a_self
+    h.link_to numero, source, class: 'perfil_numero'
+  end
+
+  def clase_modal
+    'perfil-modal' if source.modal?
   end
 
   def grupo

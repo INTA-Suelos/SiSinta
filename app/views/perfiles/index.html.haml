@@ -1,23 +1,18 @@
-#lista
-  .botonera
+.row.botonera
+  .col
     - if can? :create, Perfil
       = link_to t('.nuevo_perfil'), new_perfil_path
+  .paginacion.col
+    = paginate @perfiles
 
-    #paginacion
-      = paginate @perfiles
-      = elegir_filas 'perfiles'
+.row.encabezado
+  .col-2.text-right= link_para_ordenar :fecha, t('.fecha'), class: 'mr-3'
+  .col= link_para_ordenar :nombre, t('.nombre')
+  -# FIXME Botón de ordenar por ubicación no ordena por el contenido de la celda
+  .col-4
+    = link_para_ordenar :ubicacion, t('.ubicacion')
+  .col-2.text-left= link_para_ordenar :numero, t('.numero')
+  .col-2
+  -#.checks.col.d-none
 
-  %table
-    %thead
-      %tr
-        %th#fecha=      link_para_ordenar :fecha,     t('.fecha')
-        %th#nombre=     link_para_ordenar :nombre,    t('.nombre')
-        %th#ubicacion=  link_para_ordenar :ubicacion, t('.ubicacion')
-        %th#numero=     link_para_ordenar :numero,    t('.numero')
-        %th#modal=      link_para_ordenar :modal,     t('.es_modal')
-        %th.acciones
-
-    %tbody
-      = render @perfiles
-
-  = volver_arriba
+= render @perfiles
