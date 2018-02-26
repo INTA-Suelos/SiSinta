@@ -1,4 +1,4 @@
-# encoding: utf-8
+# Métodos de presentación para la landing page
 module InicioHelper
   def titulo_de_la_accion
     case params[:action]

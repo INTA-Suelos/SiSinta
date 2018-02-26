@@ -1,14 +1,12 @@
 -# Landing page del sitio con mapa de perfiles
 
-#bienvenida.d-none.d-md-block
-  .botonera.row
-    %h4.col= t('.bienvenida')
-    %p.col= t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series)
-
 -# Container con altura definida para el mapa
 #container-mapa.d-flex.flex-column
 
-  #mapa{ data: { geojson: perfiles_path(publicos: true, format: :geojson), seleccion_url: seleccion_path } }
+  #mapa{ data: {  geojson: perfiles_path(publicos: true, format: :geojson),
+                  seleccion_url: seleccion_path,
+                  info_title: t('.bienvenida'),
+                  info_text: t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series) } }
 
 -# TODO Cargar dinámicamente desde un js
 = javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.29&libraries=geometry'

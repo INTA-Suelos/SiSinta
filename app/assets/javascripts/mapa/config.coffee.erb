@@ -9,8 +9,35 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "<%= image_path('leaflet/dist/images/marker-shadow.png').sub('/assets/', '') %>"
 })
 
+# Cuadro de información con título y texto
+L.Control.Info = L.Control.extend({
+  options:
+    position: 'topleft'
+
+  onAdd: (map) ->
+    wrapper = L.DomUtil.create('div', 'info')
+    title = L.DomUtil.create('h4', 'col', wrapper)
+    text = L.DomUtil.create('p', 'col', wrapper)
+
+    title.innerHTML = this.options.title
+    text.innerHTML = this.options.text
+
+    return wrapper
+
+  onRemove: (map) ->
+    # Nada que hacer
+})
+
+# Factory function named after the class of the control plugin to allow chaining
+L.control.info = (opts) ->
+  return new L.Control.Info(opts)
+
+# exports
+# https://robots.thoughtbot.com/module-pattern-in-javascript-and-coffeescript
+window.Mapa = {}
+
 # Genera el markup para cada punto del geoJson
-preparar_punto = (punto, capa) ->
+Mapa.preparar_punto = (punto, capa) ->
   serie = if punto.properties.serie
     "<a target='_blank' title='Serie' href='#{punto.properties.serie.url}'>#{
       punto.properties.serie.nombre || 'Serie'}</a> - "
@@ -22,7 +49,3 @@ preparar_punto = (punto, capa) ->
       punto.properties.numero || 'Perfil'}</a>"
   )
 
-
-# exports
-# https://stackoverflow.com/questions/6150455/structuring-coffeescript-code
-window.preparar_punto = preparar_punto
