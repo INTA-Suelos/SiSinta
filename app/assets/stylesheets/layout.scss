@@ -9,6 +9,13 @@
       flex-basis: 100%;
     }
   }
+
+ .navbar-expand-md {
+   .navbar-collapse {
+     // Hace espacio para el ícono en los dropdown links
+     flex-basis: 100%;
+   }
+ }
 }
 
 // Desde sm hacia abajo
