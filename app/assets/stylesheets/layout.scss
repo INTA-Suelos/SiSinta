@@ -49,10 +49,13 @@
   }
 }
 
+// Separa la barra de navegación del contenido
 body {
-  // Separa la barra de navegación del contenido
-  padding-top: 5rem;
-  padding-bottom: 1rem;
+  padding-top: $navbar-height;
+
+  nav.navbar {
+    height: $navbar-height;
+  }
 }
 
 .botonera {

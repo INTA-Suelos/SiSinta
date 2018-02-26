@@ -16,8 +16,8 @@ L.Control.Info = L.Control.extend({
 
   onAdd: (map) ->
     wrapper = L.DomUtil.create('div', 'info')
-    title = L.DomUtil.create('h4', 'col', wrapper)
-    text = L.DomUtil.create('p', 'col', wrapper)
+    title = L.DomUtil.create('h6', 'col title', wrapper)
+    text = L.DomUtil.create('p', 'col text', wrapper)
 
     title.innerHTML = this.options.title
     text.innerHTML = this.options.text
