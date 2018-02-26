@@ -12,3 +12,6 @@ public/estaticos
 
 # Backup de los datos
 db/datos
+
+# Archivos de development
+.envrc
