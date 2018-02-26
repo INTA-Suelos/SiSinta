@@ -5,6 +5,13 @@ body { height: 100%; }
 #container-principal { height: 100%; }
 #container-mapa { height: 100%; }
 
+#container-mapa {
+  // Márgenes negativos para que el mapa ocupe el viewport entero, compensando
+  // el padding de container-fluid
+  margin-left: ($grid-gutter-width / -2);
+  margin-right: ($grid-gutter-width / -2);
+}
+
 #bienvenida {
   // No ocupar más que el necesario por el contenido
   flex-grow: 0;
@@ -29,6 +36,20 @@ body { height: 100%; }
   background-color: rgba(255, 255, 255, 0.7);
   // Alinear horizontalmente con los demás controles
   clear: none;
-  // Misma altura que la del control de zoom
-  height: 64px;
+
+  .title { margin: 0; }
+  .text { margin: 0; }
+}
+
+@include media-breakpoint-down(sm) {
+  .leaflet-control.info {
+    .title {
+      font-weight: $font-weight-bold;
+      font-size: small;
+    }
+
+    .text {
+      font-size: x-small;
+    }
+  }
 }
