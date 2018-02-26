@@ -61,6 +61,8 @@ body {
 .botonera {
   // Estandarizar el espacio entre contenido real y barra de navegación
   min-height: 3rem;
+  // Dejar el mismo margen que tienen los controles del mapa con la navbar
+  margin-top: 10px;
 }
 
 .pagination {
