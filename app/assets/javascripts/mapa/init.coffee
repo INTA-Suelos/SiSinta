@@ -1,30 +1,6 @@
 jQuery ->
   # Si hay un mapa en la página
   if $('#mapa').length
-    # Configura el path base para evitar que leaflet intente calcular la url de
-    # las imágenes, porque no entiende los helpers de sass.
-    L.Icon.Default.imagePath = '/assets/'
-    # Configura las imágenes de los íconos con digests, sacando el path base de
-    # las url de las imágenes, para que no quede duplicado.
-    L.Icon.Default.mergeOptions({
-      iconUrl: "<%= image_path('leaflet/dist/images/marker-icon.png').sub('/assets/', '') %>"
-      iconRetinaUrl: "<%= image_path('leaflet/dist/images/marker-icon-2x.png').sub('/assets/', '') %>"
-      shadowUrl: "<%= image_path('leaflet/dist/images/marker-shadow.png').sub('/assets/', '') %>"
-    })
-
-    # Genera el markup para cada punto del geoJson
-    preparar_punto = (punto, capa) ->
-      serie = if punto.properties.serie
-        "<a target='_blank' title='Serie' href='#{punto.properties.serie.url}'>#{
-          punto.properties.serie.nombre || 'Serie'}</a> - "
-      else
-        ''
-
-      capa.bindPopup(
-        serie + "<a target='_blank' title='Perfil' href='#{punto.properties.url}'>#{
-          punto.properties.numero || 'Perfil'}</a>"
-      )
-
     # Por default mostramos Argentina entera
     zoom = $('#mapa').data('zoom') || 4
     centro = $('#mapa').data('centro') || [-40, -65]

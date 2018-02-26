@@ -23,4 +23,5 @@
 // Aplicación
 //
 //= require layout
-//= require mapa
+//= require mapa/config
+//= require mapa/init
