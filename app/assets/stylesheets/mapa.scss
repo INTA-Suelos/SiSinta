@@ -18,3 +18,17 @@ body { height: 100%; }
   // https://getbootstrap.com/docs/4.0/getting-started/introduction/#box-sizing
   box-sizing: content-box;
 }
+
+// Caja con título y subtítulo para el mapa
+.leaflet-control.info {
+  // Usar el mismo estilo que los demás controles de Leaflet
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+  border-radius: 5px;
+  // Pero con un fondo semitransparente porque es una caja grande
+  background-color: rgba(255, 255, 255, 0.7);
+  // Alinear horizontalmente con los demás controles
+  clear: none;
+  // Misma altura que la del control de zoom
+  height: 64px;
+}
