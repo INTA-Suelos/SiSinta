@@ -36,23 +36,38 @@
       margin-right: ($grid-gutter-width / 2);
     }
   }
+
+  .encabezado {
+    display: none;
+  }
 }
 
 body {
   // Separa la barra de navegación del contenido
   padding-top: 5rem;
   padding-bottom: 1rem;
+}
 
-  .botonera {
-    // Estandarizar el espacio entre contenido real y barra de navegación
-    min-height: 3rem;
-  }
+.botonera {
+  // Estandarizar el espacio entre contenido real y barra de navegación
+  min-height: 3rem;
+}
 
-  .pagination {
-    // Separar el bloque de acciones de las páginas
-    &.elegir-filas {
-      margin-left: ($grid-gutter-width / 2);
-      margin-right: ($grid-gutter-width / 2);
-    }
+.pagination {
+  // Separar el bloque de acciones de las páginas
+  &.elegir-filas {
+    margin-left: ($grid-gutter-width / 2);
+    margin-right: ($grid-gutter-width / 2);
   }
+}
+
+// Además de la clase, al elemento hay que agregarle un < para que haml saque
+// el formato y quede vacío de verdad
+.ocultar-vacios:empty {
+  display: none;
+}
+
+.columna-con-icono {
+  display: flex;
+  justify-content: space-around;
 }
