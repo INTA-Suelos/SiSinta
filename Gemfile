@@ -59,7 +59,7 @@ gem 'multiselectjs_rails',
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'select2-rails'
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.0'
 
 # Paquetes de bower
 source 'https://rails-assets.org' do
