@@ -1,19 +1,17 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.10.1'
 
 set :application, 'SiSINTA'
 set :repo_url, 'https://github.com/INTA-Suelos/SiSinta.git'
 
 # Defaults de capistrano
 set :branch, :master
-set :scm, :git
 set :format, :pretty
 set :log_level, :debug
 set :pty, false
 set :keep_releases, 5
 
 # rbenv
-set :rbenv_ruby, '2.3.1'
 set :rbenv_type, :user
 
 # rails

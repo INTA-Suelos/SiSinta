@@ -4,9 +4,6 @@ gem 'rails', '4.2.10'
 
 ## DB
 gem 'pg'
-# FIXME Nuestra rama ya está mergeada en yaml_db 0.5, pero conflictúa con un
-# FIXME error en activerecord-postgis-adapter:
-# FIXME https://github.com/rgeo/activerecord-postgis-adapter/issues/183
 gem 'yaml_db'
 
 ## Aut{enticación,orización}, seguridad en general
