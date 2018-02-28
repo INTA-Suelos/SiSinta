@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SiSINTA::Application.load_tasks
+Rails.application.load_tasks
 
 # Agrega test:routes al test suite default
 Rails::TestTask.new('test:routes' => 'test:prepare') do |t|

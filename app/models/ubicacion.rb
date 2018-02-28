@@ -1,6 +1,6 @@
 class Ubicacion < ActiveRecord::Base
   class_attribute :config
-  self.config = SiSINTA::Application.config
+  self.config = Rails.application.config
 
   attr_accessor :x, :y, :srid
 
