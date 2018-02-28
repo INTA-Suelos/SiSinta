@@ -12,8 +12,17 @@
 
     = csrf_meta_tags
 
-    = favicon_link_tag image_path('favicon.png'), type: 'image/png'
-    = favicon_link_tag image_path('favicon144.png'), type: 'image/png', rel: 'apple-touch-icon'
+    = favicon_link_tag 'apple-touch-icon.png', sizes: '76x76', rel: 'apple-touch-icon'
+    = favicon_link_tag 'favicon-32x32.png', sizes: '32x32', type: 'image/png', rel: 'icon'
+    = favicon_link_tag 'favicon-16x16.png', sizes: '16x16', type: 'image/png', rel: 'icon'
+    = tag :link, href: asset_path('site.webmanifest'), rel: 'manifest'
+    = tag :link, href: asset_path('safari-pinned-tab.svg'), color: '#5bbad5', rel: 'mask-icon'
+    = tag :link, href: asset_path('favicon.ico'), rel: 'shortcut icon'
+    = tag :meta, name: 'apple-mobile-web-app-title', content: t('app')
+    = tag :meta, name: 'application-name', content: t('app')
+    = tag :meta, name: 'msapplication-TileColor', content: '#2d89ef'
+    = tag :meta, name: 'msapplication-config', content: asset_path('browserconfig.xml')
+    = tag :meta, name: 'theme-color', content: '#ffffff'
   %body
     = render 'layouts/cabecera'
 
