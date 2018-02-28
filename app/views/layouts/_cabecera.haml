@@ -3,7 +3,7 @@
   -# Logo, título y botón tienen que ir en orden
   -# Logo de la app
   .navbar-brand
-    = link_to '/', class: 'text-light' do
+    = link_to root_path, class: 'text-light' do
       = image_tag 'app', alt: t('app')
       -# FIXME Sacar el on-hover
       .d-none.d-md-inline= t('app')
