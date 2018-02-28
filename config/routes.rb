@@ -2,7 +2,7 @@
 # TODO buscar en todos los modelos con un index agregador
 require 'api_constraints'
 
-SiSINTA::Application.routes.draw do
+Rails.application.routes.draw do
   # Rutear toda la app con local opcional. Sólo permitir los locales
   # configurados, los demás devuelven 404
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
