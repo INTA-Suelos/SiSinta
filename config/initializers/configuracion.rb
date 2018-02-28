@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.app_name = 'SiSINTA'
+
   # Configuración default para la validación de las coordenadas (WGS 84).
   # Latitud es y, longitud es x.
   config.rango_y = -90..90
