@@ -1,4 +1,4 @@
-SiSINTA::Application.configure do
+Rails.application.configure do
   # Tirar error si no se encuentra un keyword en los locales
   config.action_view.raise_on_missing_translations = true
 
