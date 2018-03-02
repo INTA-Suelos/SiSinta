@@ -11,7 +11,7 @@ class CSVSerializer < ActiveModel::ArraySerializer
 
     CSV.generate(headers: o[:headers], force_quotes: true) do |csv|
       csv << encabezado(o[:checks], o[:base]) if csv.headers
-      object.each do |perfil|
+      object.send(iterate) do |perfil|
         if perfil.horizontes.empty? then perfil.horizontes.build end
         perfil.decorate.preparar
         perfil.horizontes.each do |horizonte|
@@ -57,5 +57,9 @@ class CSVSerializer < ActiveModel::ArraySerializer
       s.horizontes.build
       s.decorate.preparar
       CSVHorizonteSerializer.new HorizonteDecorator.decorate(s.horizontes.first)
+    end
+
+    def iterate
+      object.respond_to?(:find_each) ? :find_each : :each
     end
 end

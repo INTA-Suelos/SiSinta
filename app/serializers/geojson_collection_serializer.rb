@@ -6,8 +6,15 @@ class GeojsonCollectionSerializer < ActiveModel::ArraySerializer
   end
 
   def features
-    object.map do |perfil|
-      GeojsonPerfilSerializer.new(perfil.decorate).as_json
+    perfiles = []
+
+    # Fetch in batches if possible
+    iterate = object.respond_to?(:find_each) ? :find_each : :each
+
+    object.send(iterate) do |perfil|
+      perfiles << GeojsonPerfilSerializer.new(perfil.decorate).as_json
     end
+
+    perfiles
   end
 end
