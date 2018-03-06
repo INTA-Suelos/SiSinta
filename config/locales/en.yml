@@ -116,6 +116,9 @@ en:
         cambiar_ficha: Change
         create: Create %{model}
         edit: Update %{model}
+  inicio:
+    index:
+      bienvenida: Welcome to SiSINTA
   perfiles:
     exportar:
       seleccionar_por_provincia: Select by administrative district

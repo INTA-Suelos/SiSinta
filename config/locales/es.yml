@@ -54,8 +54,7 @@ es:
         erosion:
           attributes:
             clase:
-              debe_estar_en_blanco: la clase debe estar en blanco si la subclase es
-                Acumulación
+              debe_estar_en_blanco: la clase debe estar en blanco si la subclase es Acumulación
         perfil:
           attributes:
             fecha:
@@ -88,14 +87,14 @@ es:
       tabla:
         actualizar_datos: Actualizar datos
         bases:
-          label: Bases intercambiables
+          label: Bases intercambiables, m.e./100g
         capacidad_de_agua:
           agua_15_atm: 15 atm
           agua_3_atm: 1/3 atm
           agua_util: Agua útil
           label: Capacidad de agua
         carbono_organico: Carbono orgánico
-        conductividad: Conductividad
+        conductividad: Conductividad eléctrica, mmhos/cm
         datos_analiticos: Datos analíticos
         densidad_aparente: Densidad aparente
         horizonte: Horizonte
@@ -106,7 +105,7 @@ es:
         profundidad: Profundidad
         registro: N° registro
         resistencia_pasta: Resistencia pasta
-        saturacion_s_h: "% Satur. (S + H)"
+        saturacion_s_h: Saturación con bases, % (S/T)
         saturacion_t: Satur. (sobre T)
         textura:
           arcilla: Arcilla < 2 µ
@@ -120,8 +119,8 @@ es:
           label: Textura
           limo_2_20: Limo 2-20 µ, %
           limo_2_50: Limo 2-50 µ, %
-        valor_s: Valor S
-        valor_t: Valor T
+        valor_s: Suma de bases, m.e./100g (Valor S)
+        valor_t: Capacidad de intercambio catiónico, m.e./100g (Valor T)
     index:
       mostrar_adjuntos: Mostrar adjuntos
       mostrar_perfil: Mostrar perfil
