@@ -5,7 +5,7 @@ class HorizonteSerializer < ActiveModel::Serializer
               :formaciones_especiales
 
   # Desde un Perfil se ve como "Clase Hz"
-  attribute :tipo, key: :clase
+  attribute :tipo, key: :horizonte
 
   has_one :analitico
   has_one :limite, serializer: LimiteDeHorizonteSerializer
