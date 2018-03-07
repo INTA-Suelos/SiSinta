@@ -7,5 +7,14 @@ Rails.application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( ie.css print.css )
+  config.assets.precompile += %w(
+    ie.css
+    print.css
+    fontawesome/fonts/FontAwesome.otf
+    fontawesome/fonts/fontawesome-webfont.eot
+    fontawesome/fonts/fontawesome-webfont.svg
+    fontawesome/fonts/fontawesome-webfont.ttf
+    fontawesome/fonts/fontawesome-webfont.woff
+    fontawesome/fonts/fontawesome-webfont.woff2
+  )
 end
