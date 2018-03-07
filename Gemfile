@@ -49,6 +49,7 @@ gem 'rails-api'
 gem 'tinymce-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
+gem 'therubyracer'
 gem 'uglifier'
 # FIXME Todavía no hay release compatible con rails4
 gem 'multiselectjs_rails',
