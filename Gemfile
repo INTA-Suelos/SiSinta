@@ -66,7 +66,7 @@ source 'https://rails-assets.org' do
   # Congelados hasta incluir Leaflet.GoogleMutant acá
   gem 'rails-assets-leaflet', '1.2.0'
   gem 'rails-assets-leaflet-plugins', '3.0.1'
-  gem 'rails-assets-fontawesome'
+  gem 'rails-assets-fontawesome', '4.7.0'
 end
 
 # Administración
