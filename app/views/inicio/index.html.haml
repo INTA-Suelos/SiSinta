@@ -3,7 +3,7 @@
 -# Container con altura definida para el mapa
 #container-mapa.d-flex.flex-column
 
-  #mapa{ data: {  geojson: perfiles_path(publicos: true, format: :geojson),
+  #mapa{ data: {  geojson: perfiles_path(format: :geojson),
                   seleccion_url: seleccion_path,
                   info_title: t('.bienvenida'),
                   info_text: t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series) } }
