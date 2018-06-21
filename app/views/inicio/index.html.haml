@@ -9,4 +9,4 @@
                   info_text: t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series) } }
 
 -# TODO Cargar dinámicamente desde un js
-= javascript_include_tag 'http://maps.google.com/maps/api/js?v=3.29&libraries=geometry'
+= javascript_include_tag "http://maps.google.com/maps/api/js?v=3&key=#{Rails.application.secrets.google_api_key}&libraries=geometry"
