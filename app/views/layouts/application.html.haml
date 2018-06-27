@@ -7,6 +7,8 @@
     %title= titulo_de_la_aplicacion
 
     = stylesheet_link_tag 'application', media: 'all'
+    -# font-awesome gems do not work with relative urls
+    = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
 
     = javascript_include_tag 'application'
 
