@@ -1,3 +1,4 @@
+# Every asset related configuration
 Rails.application.configure do
   # Enable the asset pipeline
   config.assets.enabled = true
@@ -7,5 +8,8 @@ Rails.application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( ie.css print.css )
+  config.assets.precompile += %w(
+    ie.css
+    print.css
+  )
 end

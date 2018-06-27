@@ -23,8 +23,10 @@ jQuery ->
     # Capa inicial
     mapa.addLayer(g_hibrido)
 
-    # Capa de geoJson
-    geojson = L.geoJson().addTo(mapa)
+    # Setup GeoJSON layer
+    geojson = L.geoJson(null, {
+      onEachFeature: Mapa.prepare_popup
+    }).addTo(mapa)
 
     # Controles de zoom, capas e info
     L.control.zoom({
@@ -77,8 +79,6 @@ jQuery ->
       $.post $(this._container).data('seleccion-url'), coordenadas, (res) ->
         $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
 
-    # Pide y agrega los puntos
+    # Retrieve our dataset and add it to the layer
     $.getJSON $('#mapa').data('geojson'), (data) ->
-      geojson.addData(data, {
-        onEachFeature: Mapa.preparar_punto
-      })
+      geojson.addData(data)
