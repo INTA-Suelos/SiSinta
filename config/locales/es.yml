@@ -237,8 +237,8 @@ es:
         edit: Actualizar %{model}
   inicio:
     index:
-      bienvenida: Sistema de Información de Suelos del INTA
-      datos_actuales: "%{perfiles} perfiles (%{publicos} públicos) en %{series} series."
+      title: Sistema de Información de Suelos del INTA
+      text: "%{perfiles} perfiles (%{publicos} públicos) en %{series} series."
   layouts:
     admin_link:
       administracion: Administración

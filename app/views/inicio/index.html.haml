@@ -1,12 +1,14 @@
--# Landing page del sitio con mapa de perfiles
+-# Landing page
 
--# Container con altura definida para el mapa
+-# Map container with css defined height (needed for full screen map)
 #container-mapa.d-flex.flex-column
 
   #mapa{ data: {  geojson: perfiles_path(format: :geojson),
                   seleccion_url: seleccion_path,
-                  info_title: t('.bienvenida'),
-                  info_text: t('.datos_actuales', perfiles: @perfiles, publicos: @publicos, series: @series) } }
+                  info_title: t('.title'),
+                  info_text: t('.text', perfiles: @perfiles, publicos: @publicos, series: @series),
+                  center: @map[:center],
+                  zoom: @map[:zoom] } }
 
--# TODO Cargar dinámicamente desde un js
+-# FIXME Load conditionally and from its own js
 = javascript_include_tag "http://maps.google.com/maps/api/js?v=3&key=#{Rails.application.secrets.google_api_key}&libraries=geometry"

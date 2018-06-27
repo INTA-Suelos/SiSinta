@@ -1,3 +1,4 @@
+# Custom application configuration
 Rails.application.configure do
   config.app_name = 'SiSINTA'
 
@@ -8,4 +9,8 @@ Rails.application.configure do
 
   # Precisión a mostrar para las coordenadas
   config.precision = 6
+
+  # Default map view
+  config.zoom = 4
+  config.center = [-40, -65]
 end
