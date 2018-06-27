@@ -1,14 +1,3 @@
-# Configura el path base para evitar que leaflet intente calcular la url de
-# las imágenes, porque no entiende los helpers de sass.
-L.Icon.Default.imagePath = '/assets/'
-# Configura las imágenes de los íconos con digests, sacando el path base de
-# las url de las imágenes, para que no quede duplicado.
-L.Icon.Default.mergeOptions({
-  iconUrl: "<%= image_path('leaflet/dist/images/marker-icon.png').sub('/assets/', '') %>"
-  iconRetinaUrl: "<%= image_path('leaflet/dist/images/marker-icon-2x.png').sub('/assets/', '') %>"
-  shadowUrl: "<%= image_path('leaflet/dist/images/marker-shadow.png').sub('/assets/', '') %>"
-})
-
 # Cuadro de información con título y texto
 L.Control.Info = L.Control.extend({
   options:
@@ -36,15 +25,37 @@ L.control.info = (opts) ->
 # https://robots.thoughtbot.com/module-pattern-in-javascript-and-coffeescript
 window.Mapa = {}
 
-# Generates a popup box for each feature
+# Binds a popup box for each feature
 Mapa.prepare_popup = (feature, layer) ->
-  serie = if feature.properties.serie
-    "<a target='_blank' title='Serie' href='#{feature.properties.serie.url}'>#{
-      feature.properties.serie.nombre || 'Serie'}</a> - "
-  else
-    ''
+  layer.bindPopup Mapa.popup_markup(feature.properties)
 
-  layer.bindPopup(
-    serie + "<a target='_blank' title='Perfil' href='#{feature.properties.url}'>#{
-      feature.properties.numero || 'Perfil'}</a>"
-  )
+# Generates the markup for each popup
+Mapa.popup_markup = (feature) ->
+  serie = feature.serie
+
+  serie_html =
+    if serie
+      "<a target='_blank' title='Serie' href='#{serie.url}'>#{serie.nombre || serie.id}</a> - "
+    else
+      ''
+
+  [
+    serie_html,
+    "<a target='_blank' title='feature' href='#{feature.url}'>",
+    "#{feature.numero || feature.id}",
+    '</a>'
+  ].join('')
+
+# Generates a colored circle marker for each feature
+Mapa.prepare_marker = (point, latlng) ->
+  # https://clrs.cc
+  olive = '#3D9970'
+  orange = '#FF851B'
+
+  style =
+    radius: 5
+    weight: 2
+    fillOpacity: 0.5
+    color: if point.properties.publico then olive else orange
+
+  return L.circleMarker(latlng, style)

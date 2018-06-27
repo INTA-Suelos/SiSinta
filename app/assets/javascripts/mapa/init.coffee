@@ -1,12 +1,14 @@
 jQuery ->
-  # Si hay un mapa en la página
-  if $('#mapa').length
-    # Por default mostramos Argentina entera
-    zoom = $('#mapa').data('zoom') || 4
-    centro = $('#mapa').data('centro') || [-40, -65]
+  map_container = $('#mapa')
+
+  # If there is a map in this page
+  if map_container.length
+    # Show the world by default but use configured values if present
+    zoom = map_container.data('zoom') || 2
+    center = map_container.data('center') || [0, 0]
 
     mapa = L.map('mapa', {
-      center: centro
+      center: center
       zoom: zoom
       zoomControl: false
     })
@@ -20,20 +22,21 @@ jQuery ->
     g_terreno = L.gridLayer.googleMutant({ type: 'terrain' })
     g_hibrido = L.gridLayer.googleMutant({ type: 'hybrid' })
 
-    # Capa inicial
+    # Initial layer
     mapa.addLayer(g_hibrido)
 
     # Setup GeoJSON layer
     geojson = L.geoJson(null, {
+      pointToLayer: Mapa.prepare_marker
       onEachFeature: Mapa.prepare_popup
     }).addTo(mapa)
 
-    # Controles de zoom, capas e info
+    # Add zoom control
     L.control.zoom({
       position: 'topright'
     }).addTo(mapa)
 
-    # Control para cambiar de capas
+    # Add layer control
     L.control.layers({
       'OpenStreetMap': osm
       'Google': g_hibrido
@@ -42,9 +45,10 @@ jQuery ->
       'Perfiles públicos': geojson
     }).addTo(mapa)
 
+    # Add info box
     L.control.info({
-      title: $('#mapa').data('infoTitle')
-      text: $('#mapa').data('infoText')
+      title: map_container.data('infoTitle')
+      text: map_container.data('infoText')
     }).addTo(mapa)
 
     # Al seleccionar un rectángulo con shift + click, enviamos las coordenadas
@@ -80,5 +84,5 @@ jQuery ->
         $('#avisos').html $('<div />', { id: "flash_#{res.tipo}", text: res.mensaje })
 
     # Retrieve our dataset and add it to the layer
-    $.getJSON $('#mapa').data('geojson'), (data) ->
+    $.getJSON map_container.data('geojson'), (data) ->
       geojson.addData(data)
