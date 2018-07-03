@@ -1,7 +1,7 @@
 ActiveAdmin.register Usuario do
   menu priority: 2
 
-  permit_params :email, :password, :password_confirmation, :rol_global
+  permit_params :nombre, :email, :password, :password_confirmation, :rol_global
 
   index do
     selectable_column
@@ -39,7 +39,7 @@ ActiveAdmin.register Usuario do
       f.input :password unless usuario.persisted?
       f.input :password_confirmation unless usuario.persisted?
       f.input :rol_global, as: :select,
-        collection: Rol.globales.collect(&:name).sort, include_blank: false
+        collection: Rol.globales.collect(&:name).sort, include_blank: true
     end
     f.actions
   end

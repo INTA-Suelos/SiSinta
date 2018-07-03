@@ -7,6 +7,8 @@ class Rol < ActiveRecord::Base
 
   scopify
 
+  validates :name, presence: true
+
   scope :globales, ->{ where(resource: nil) }
 
   def to_param
