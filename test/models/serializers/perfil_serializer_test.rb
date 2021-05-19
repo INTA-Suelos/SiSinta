@@ -26,11 +26,11 @@ class PerfilSerializerTest < ActiveSupport::TestCase
     datos[:material_original].must_equal perfil.material_original
     datos[:vegetacion_o_cultivos].must_equal perfil.vegetacion_o_cultivos
     datos[:observaciones].must_equal perfil.observaciones
+    datos[:publico].must_equal perfil.publico
   end
 
   it 'no serializa algunos campos' do
     datos[:usuario].blank?.must_equal true
-    datos[:publico].blank?.must_equal true
     datos[:created_at].blank?.must_equal true
     datos[:updated_at].blank?.must_equal true
   end
