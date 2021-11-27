@@ -5,11 +5,11 @@ describe Consistencia do
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere Horizonte' do
-      build_stubbed(:consistencia, horizonte: nil).wont_be :valid?
+      _(build_stubbed(:consistencia, horizonte: nil)).wont_be :valid?
     end
   end
 end

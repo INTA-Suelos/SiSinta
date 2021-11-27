@@ -7,9 +7,9 @@ describe GeojsonCollectionSerializer do
   it 'es una colección de features' do
     geojson = subject.as_json
 
-    geojson['type'].must_equal 'FeatureCollection'
-    geojson['features'].size.must_equal 1
-    geojson['features'].first['type'].must_equal 'Feature'
+    _(geojson['type']).must_equal 'FeatureCollection'
+    _(geojson['features'].size).must_equal 1
+    _(geojson['features'].first['type']).must_equal 'Feature'
   end
 
   it 'decora los perfiles antes de serializar' do

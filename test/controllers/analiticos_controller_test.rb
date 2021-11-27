@@ -56,8 +56,8 @@ describe AnaliticosController do
       it 'asigna los objetos necesarios' do
         get :index, perfil_id: perfil.to_param
 
-        assigns(:perfil).wont_be :nil?
-        assigns(:analiticos).wont_be :empty?
+        _(assigns(:perfil)).wont_be :nil?
+        _(assigns(:analiticos)).wont_be :empty?
       end
 
       it 'asigna los analíticos en el mismo orden que los horizontes' do
@@ -71,8 +71,8 @@ describe AnaliticosController do
 
         get :index, perfil_id: perfil.to_param
 
-        assigns(:analiticos).must_equal perfil.analiticos
-        assigns(:analiticos).collect(&:horizonte_id).must_equal perfil.horizontes.ids
+        _(assigns(:analiticos)).must_equal perfil.analiticos
+        _(assigns(:analiticos).collect(&:horizonte_id)).must_equal perfil.horizontes.ids
       end
     end
   end

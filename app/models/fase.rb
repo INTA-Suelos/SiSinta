@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Fase < ActiveRecord::Base
+class Fase < ApplicationRecord
   has_many :perfiles
 
   validates_uniqueness_of :codigo, allow_blank: true, allow_nil: true

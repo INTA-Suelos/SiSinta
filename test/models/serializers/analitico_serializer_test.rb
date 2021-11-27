@@ -14,7 +14,7 @@ class AnaliticoSerializerTest < ActiveSupport::TestCase
         saturacion_t saturacion_s_h densidad_aparente profundidad_muestra agua_3_atm
         carbono_organico_cn gravas arena_total
       }.each do |atributo|
-        subject.serializable_hash[atributo].must_equal analitico.send(atributo)
+        _(subject.serializable_hash[atributo]).must_equal analitico.send(atributo)
       end
     end
   end
@@ -22,7 +22,7 @@ class AnaliticoSerializerTest < ActiveSupport::TestCase
   describe 'Ficha corrientes' do
     it 'serializa los atributos específicos' do
       %i{ base_al p_ppm }.each do |atributo|
-        subject.serializable_hash[atributo].must_equal analitico.send(atributo)
+        _(subject.serializable_hash[atributo]).must_equal analitico.send(atributo)
       end
     end
   end

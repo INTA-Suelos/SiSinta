@@ -6,7 +6,7 @@ describe PerfilesController do
   describe 'autorizado' do
     let(:usuario) { loguearse_como 'Autorizado' }
 
-    before { usuario.must_be :persisted? }
+    before { _(usuario).must_be :persisted? }
 
     it 'va a nuevo' do
       get :new
@@ -15,9 +15,9 @@ describe PerfilesController do
     end
 
     it 'crea un perfil' do
-      lambda do
+      _(lambda do
         post :create, perfil: attributes_for(:perfil)
-      end.must_change 'Perfil.count', 1
+      end).must_change 'Perfil.count', 1
 
       must_redirect_to perfil_path(assigns(:perfil))
     end
@@ -42,15 +42,15 @@ describe PerfilesController do
       put :update, id: perfil.to_param, perfil: { observaciones: 'agudas' }
 
       must_redirect_to perfil_path(assigns(:perfil))
-      assigns(:perfil).observaciones.must_equal 'agudas'
+      _(assigns(:perfil).observaciones).must_equal 'agudas'
     end
 
     it 'elimina un perfil' do
       perfil = create(:perfil, usuario: usuario)
 
-      lambda do
+      _(lambda do
         delete :destroy, id: perfil.to_param
-      end.must_change 'Perfil.count', -1
+      end).must_change 'Perfil.count', -1
 
       must_redirect_to perfiles_path
     end
@@ -61,7 +61,7 @@ describe PerfilesController do
       get :editar_analiticos, id: perfil.to_param
 
       must_respond_with :success
-      assigns(:perfil).wont_be :nil?
+      _(assigns(:perfil)).wont_be :nil?
     end
 
     it 'actualiza todos los datos analíticos' do
@@ -76,27 +76,27 @@ describe PerfilesController do
 
       must_redirect_to perfil_analiticos_path(perfil)
 
-      perfil.analiticos.first.registro.must_equal analitico[:registro]
-      perfil.analiticos.first.humedad.to_f.must_equal analitico[:humedad]
-      perfil.analiticos.first.s.to_f.must_equal analitico[:s]
-      perfil.analiticos.first.t.to_f.must_equal analitico[:t]
-      perfil.analiticos.first.ph_pasta.to_f.must_equal analitico[:ph_pasta]
-      perfil.analiticos.first.ph_h2o.to_f.must_equal analitico[:ph_h2o]
-      perfil.analiticos.first.ph_kcl.to_f.must_equal analitico[:ph_kcl]
-      perfil.analiticos.first.resistencia_pasta.to_f.must_equal analitico[:resistencia_pasta]
-      perfil.analiticos.first.base_ca.to_f.must_equal analitico[:base_ca]
-      perfil.analiticos.first.base_mg.to_f.must_equal analitico[:base_mg]
-      perfil.analiticos.first.base_k.to_f.must_equal analitico[:base_k]
-      perfil.analiticos.first.base_na.to_f.must_equal analitico[:base_na]
-      perfil.analiticos.first.base_al.to_f.must_equal analitico[:base_al]
-      perfil.analiticos.first.profundidad_muestra.must_equal analitico[:profundidad_muestra]
-      perfil.analiticos.first.p_ppm.must_equal analitico[:p_ppm]
+      _(perfil.analiticos.first.registro).must_equal analitico[:registro]
+      _(perfil.analiticos.first.humedad.to_f).must_equal analitico[:humedad]
+      _(perfil.analiticos.first.s.to_f).must_equal analitico[:s]
+      _(perfil.analiticos.first.t.to_f).must_equal analitico[:t]
+      _(perfil.analiticos.first.ph_pasta.to_f).must_equal analitico[:ph_pasta]
+      _(perfil.analiticos.first.ph_h2o.to_f).must_equal analitico[:ph_h2o]
+      _(perfil.analiticos.first.ph_kcl.to_f).must_equal analitico[:ph_kcl]
+      _(perfil.analiticos.first.resistencia_pasta.to_f).must_equal analitico[:resistencia_pasta]
+      _(perfil.analiticos.first.base_ca.to_f).must_equal analitico[:base_ca]
+      _(perfil.analiticos.first.base_mg.to_f).must_equal analitico[:base_mg]
+      _(perfil.analiticos.first.base_k.to_f).must_equal analitico[:base_k]
+      _(perfil.analiticos.first.base_na.to_f).must_equal analitico[:base_na]
+      _(perfil.analiticos.first.base_al.to_f).must_equal analitico[:base_al]
+      _(perfil.analiticos.first.profundidad_muestra).must_equal analitico[:profundidad_muestra]
+      _(perfil.analiticos.first.p_ppm).must_equal analitico[:p_ppm]
     end
 
     it 'almacena una lista de perfiles temporalmente' do
       put :almacenar, perfil_ids: [1, 2, 3]
 
-      @controller.send(:perfiles_seleccionados).must_equal %w{1 2 3}
+      _(@controller.send(:perfiles_seleccionados)).must_equal %w{1 2 3}
       must_redirect_to exportar_perfiles_path
     end
 
@@ -118,7 +118,7 @@ describe PerfilesController do
 
   describe 'sin loguearse' do
     it 'accede a la lista de perfiles' do
-      @controller.current_usuario.must_be :nil?
+      _(@controller.current_usuario).must_be :nil?
 
       get :index
 
@@ -126,26 +126,26 @@ describe PerfilesController do
     end
 
     it 'accede a los datos en geoJSON' do
-      @controller.current_usuario.must_be :nil?
+      _(@controller.current_usuario).must_be :nil?
       create(:ubicacion, :con_perfil, :con_coordenadas)
 
       get :index, format: 'geojson'
 
       must_respond_with :success
-      json['type'].must_equal 'FeatureCollection'
-      json['features'].size.must_equal Perfil.geolocalizados.count
+      _(json['type']).must_equal 'FeatureCollection'
+      _(json['features'].size).must_equal Perfil.geolocalizados.count
     end
 
     it 'devuelve sólo perfiles públicos' do
-      @controller.current_usuario.must_be :nil?
+      _(@controller.current_usuario).must_be :nil?
       create(:ubicacion, :con_perfil, :con_coordenadas)
       publico = create(:ubicacion, :con_perfil, :con_coordenadas)
       publico.perfil.update_attribute :publico, true
 
       get :index, publicos: 'true', format: 'geojson'
 
-      Perfil.count.wont_equal Perfil.publicos.count
-      json['features'].size.must_equal Perfil.publicos.count
+      _(Perfil.count).wont_equal Perfil.publicos.count
+      _(json['features'].size).must_equal Perfil.publicos.count
     end
   end
 
@@ -162,19 +162,19 @@ describe PerfilesController do
       get :show, id: subject.to_param, format: :geojson
 
       must_respond_with :success
-      json['type'].must_equal 'FeatureCollection'
-      json['features'].size.must_equal 1
+      _(json['type']).must_equal 'FeatureCollection'
+      _(json['features'].size).must_equal 1
     end
 
     it 'serializa la ubicación en geoJSON' do
       get :show, id: subject.to_param, format: :geojson
 
-      json['features'].first['type'].must_equal 'Feature'
+      _(json['features'].first['type']).must_equal 'Feature'
       geometria = json['features'].first['geometry']
 
-      geometria['type'].must_equal 'Point'
-      geometria['coordinates'].first.must_equal subject.ubicacion.x
-      geometria['coordinates'].last.must_equal subject.ubicacion.y
+      _(geometria['type']).must_equal 'Point'
+      _(geometria['coordinates'].first).must_equal subject.ubicacion.x
+      _(geometria['coordinates'].last).must_equal subject.ubicacion.y
     end
 
     it 'serializa todos los atributos' do
@@ -182,14 +182,14 @@ describe PerfilesController do
 
       serializado = json['features'].first['properties']
 
-      serializado['id'].must_equal subject.id
-      serializado['numero'].must_equal subject.numero
-      serializado['fecha'].must_equal subject.decorate.fecha
-      serializado['clase'].must_equal subject.decorate.clase
-      serializado['url'].must_equal perfil_url(subject)
+      _(serializado['id']).must_equal subject.id
+      _(serializado['numero']).must_equal subject.numero
+      _(serializado['fecha']).must_equal subject.decorate.fecha
+      _(serializado['clase']).must_equal subject.decorate.clase
+      _(serializado['url']).must_equal perfil_url(subject)
 
       # Todas las llaves testeadas más la serie
-      serializado.count.must_equal 6
+      _(serializado.count).must_equal 6
     end
 
     it 'serializa la serie con nombre y url' do
@@ -197,11 +197,11 @@ describe PerfilesController do
 
       serie_serializada = json['features'].first['properties']['serie']
 
-      serie_serializada['nombre'].must_equal subject.serie.nombre
-      serie_serializada['url'].must_equal serie_url(subject.serie)
+      _(serie_serializada['nombre']).must_equal subject.serie.nombre
+      _(serie_serializada['url']).must_equal serie_url(subject.serie)
 
       # Todas las llaves testeadas
-      serie_serializada.count.must_equal 2
+      _(serie_serializada.count).must_equal 2
     end
   end
 end

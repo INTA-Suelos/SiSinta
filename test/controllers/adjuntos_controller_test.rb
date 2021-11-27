@@ -15,9 +15,9 @@ describe AdjuntosController do
       end
 
       must_respond_with :success
-      assigns(:perfil).wont_be :nil?
-      assigns(:adjuntos).wont_be :nil?
-      assigns(:adjuntos).count.must_equal perfil.adjuntos.count
+      _(assigns(:perfil)).wont_be :nil?
+      _(assigns(:adjuntos)).wont_be :nil?
+      _(assigns(:adjuntos).count).must_equal perfil.adjuntos.count
     end
 
     it 'sólo muestra los adjuntos del perfil solicitado' do
@@ -27,8 +27,8 @@ describe AdjuntosController do
         get :index, perfil_id: create(:perfil).id
       end
 
-      assigns(:perfil).wont_be :nil?
-      assigns(:adjuntos).must_be :empty?
+      _(assigns(:perfil)).wont_be :nil?
+      _(assigns(:adjuntos)).must_be :empty?
     end
 
     it 'va a editar si está autorizado' do
@@ -40,8 +40,8 @@ describe AdjuntosController do
       end
 
       must_respond_with :success
-      assigns(:perfil).wont_be :nil?
-      assigns(:adjunto).wont_be :nil?
+      _(assigns(:perfil)).wont_be :nil?
+      _(assigns(:adjunto)).wont_be :nil?
     end
 
     it 'actualizar un adjunto si está autorizado' do
@@ -53,7 +53,7 @@ describe AdjuntosController do
       end
 
       must_redirect_to perfil_adjuntos_path(perfil)
-      adjunto.reload.notas.must_equal 'lo que se anotó'
+      _(adjunto.reload.notas).must_equal 'lo que se anotó'
     end
 
     it 'crea un adjunto con el usuario actual' do
@@ -63,7 +63,7 @@ describe AdjuntosController do
         put :create, adjunto: attributes_for(:adjunto), perfil_id: perfil.id
       end
 
-      assigns(:perfil).usuario.must_equal usuario
+      _(assigns(:perfil).usuario).must_equal usuario
     end
   end
 
@@ -71,27 +71,27 @@ describe AdjuntosController do
     subject { perfil.adjuntos.create attributes_for(:adjunto) }
     let(:perfil) { create :perfil, publico: true }
 
-    before { @controller.current_usuario.must_be :nil? }
+    before { _(@controller.current_usuario).must_be :nil? }
 
     it 'accede a la lista de adjuntos de un perfil público' do
       get :index, perfil_id: perfil.to_param
 
       must_respond_with :success
-      assigns(:perfil).wont_be :nil?
+      _(assigns(:perfil)).wont_be :nil?
     end
 
     it 'accede a un adjunto' do
-      subject.must_be :persisted?
+      _(subject).must_be :persisted?
 
       get :show, perfil_id: perfil.to_param, id: subject.to_param
 
       must_respond_with :success
-      assigns(:adjunto).wont_be :nil?
-      assigns(:adjunto).must_equal subject
+      _(assigns(:adjunto)).wont_be :nil?
+      _(assigns(:adjunto)).must_equal subject
     end
 
     it 'descarga a un adjunto' do
-      subject.must_be :persisted?
+      _(subject).must_be :persisted?
 
       get :descargar, perfil_id: perfil.to_param, id: subject.to_param
 

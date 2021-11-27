@@ -14,8 +14,8 @@ feature 'Carga de perfiles' do
     feature 'La fecha está en formato dd/mm/aaaa' do
       scenario 'Decora la fecha existente' do
         within 'form.completa' do
-          has_selector?('#perfil_fecha').must_equal true
-          find_field('Fecha').value.must_equal @perfil.fecha
+          _(has_selector?('#perfil_fecha')).must_equal true
+          _(find_field('Fecha').value).must_equal @perfil.fecha
         end
       end
 
@@ -25,15 +25,15 @@ feature 'Carga de perfiles' do
           click_button 'Actualizar Perfil'
         end
 
-        current_path.must_equal perfil_path(@perfil)
+        _(current_path).must_equal perfil_path(@perfil)
         # TODO usar la GUI para verificarlo
-        @perfil.reload.decorate.fecha.must_equal '23/03/1987'
+        _(@perfil.reload.decorate.fecha).must_equal '23/03/1987'
       end
     end
 
     feature 'Datos de series a través del perfil' do
       scenario 'Crea una serie' do
-        Serie.count.must_equal 0
+        _(Serie.count).must_equal 0
 
         within 'form.completa' do
           within '#serie' do
@@ -44,16 +44,16 @@ feature 'Carga de perfiles' do
           click_button 'Actualizar Perfil'
         end
 
-        current_path.must_equal perfil_path(@perfil)
+        _(current_path).must_equal perfil_path(@perfil)
 
-        Serie.count.must_equal 1
-        Serie.first.nombre.must_equal 'Sarasa'
-        Serie.first.simbolo.must_equal 'Sa'
+        _(Serie.count).must_equal 1
+        _(Serie.first.nombre).must_equal 'Sarasa'
+        _(Serie.first.simbolo).must_equal 'Sa'
       end
 
       scenario 'Asocia una serie existente' do
         serie = create(:serie)
-        serie.perfiles.count.must_equal 0
+        _(serie.perfiles.count).must_equal 0
 
         within 'form.completa' do
           within '#serie' do
@@ -64,15 +64,15 @@ feature 'Carga de perfiles' do
           click_button 'Actualizar Perfil'
         end
 
-        current_path.must_equal perfil_path(@perfil)
+        _(current_path).must_equal perfil_path(@perfil)
 
-        Serie.count.must_equal 1
-        serie.perfiles.count.must_equal 1
+        _(Serie.count).must_equal 1
+        _(serie.perfiles.count).must_equal 1
       end
 
       scenario 'Asigna el símbolo a una serie existente' do
         serie = create(:serie, simbolo: nil)
-        serie.simbolo.must_be_nil
+        _(serie.simbolo).must_be_nil
 
         within 'form.completa' do
           within '#serie' do
@@ -83,10 +83,10 @@ feature 'Carga de perfiles' do
           click_button 'Actualizar Perfil'
         end
 
-        current_path.must_equal perfil_path(@perfil)
+        _(current_path).must_equal perfil_path(@perfil)
 
-        serie.reload.simbolo.wont_be_nil
-        serie.simbolo.must_equal 'Fa'
+        _(serie.reload.simbolo).wont_be_nil
+        _(serie.simbolo).must_equal 'Fa'
       end
     end
   end

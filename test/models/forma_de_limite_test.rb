@@ -5,11 +5,11 @@ class FormaDeLimiteTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere valor' do
-      build(:forma_de_limite, valor: nil).wont_be :valid?
+      _(build(:forma_de_limite, valor: nil)).wont_be :valid?
     end
   end
 
@@ -18,9 +18,9 @@ class FormaDeLimiteTest < ActiveSupport::TestCase
     let(:limite) { create :limite, forma: subject }
 
     it 'se recorre en ambos sentidos' do
-      limite.forma.must_equal subject
+      _(limite.forma).must_equal subject
 
-      subject.limites.first.must_equal limite
+      _(subject.limites.first).must_equal limite
     end
   end
 end

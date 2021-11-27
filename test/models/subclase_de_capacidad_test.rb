@@ -5,11 +5,11 @@ class SubclaseDeCapacidadTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere codigo' do
-      build_stubbed(:subclase_de_capacidad, codigo: nil).wont_be :valid?
+      _(build_stubbed(:subclase_de_capacidad, codigo: nil)).wont_be :valid?
     end
   end
 
@@ -18,9 +18,9 @@ class SubclaseDeCapacidadTest < ActiveSupport::TestCase
     let(:capacidad) { create :capacidad, con_subclases: 1 }
 
     it 'se recorre en ambos sentidos' do
-      capacidad.subclases.first.must_equal subject
+      _(capacidad.subclases.first).must_equal subject
 
-      subject.capacidades.first.must_equal capacidad
+      _(subject.capacidades.first).must_equal capacidad
     end
   end
 end

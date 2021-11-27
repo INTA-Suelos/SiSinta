@@ -8,16 +8,16 @@ describe Adjunto do
   end
 
   it 'está configurado' do
-    Rails.configuration.adjunto_path.wont_be_nil
+    _(Rails.configuration.adjunto_path).wont_be_nil
   end
 
   it 'no valida el media type' do
-    build(:adjunto, perfil: perfil, archivo: danger).must_be :valid?
+    _(build(:adjunto, perfil: perfil, archivo: danger)).must_be :valid?
   end
 
   describe '#extension' do
     it 'devuelve la extensión del archivo' do
-      adjunto.extension.wont_be_nil
+      _(adjunto.extension).wont_be_nil
     end
   end
 
@@ -26,7 +26,7 @@ describe Adjunto do
       # Diferente visibilidad
       perfil.update_attribute :publico, !adjunto.publico
 
-      adjunto.save && adjunto.publico.must_equal(perfil.publico)
+      _(adjunto.save && adjunto.publico).must_equal(perfil.publico)
     end
 
     # Test de regresión por #124
@@ -38,7 +38,7 @@ describe Adjunto do
       perfil.publico = perfil.reload.publico
       perfil.save
 
-      adjunto.reload.publico.must_equal(perfil.publico)
+      _(adjunto.reload.publico).must_equal(perfil.publico)
     end
   end
 
@@ -48,7 +48,7 @@ describe Adjunto do
 
       adjunto.sincronizar_visibilidad_perfil
 
-      adjunto.publico.must_equal perfil.publico
+      _(adjunto.publico).must_equal perfil.publico
     end
   end
 end

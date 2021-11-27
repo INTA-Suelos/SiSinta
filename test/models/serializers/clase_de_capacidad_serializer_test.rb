@@ -5,6 +5,6 @@ class ClaseDeCapacidadSerializerTest < ActiveSupport::TestCase
   let(:clase) { build_stubbed :clase_de_capacidad }
 
   it 'al serializar devuelve el código' do
-    subject.serializable_hash.must_equal clase.codigo
+    _(subject.serializable_hash).must_equal clase.codigo
   end
 end

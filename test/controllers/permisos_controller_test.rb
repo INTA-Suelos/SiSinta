@@ -7,7 +7,7 @@ describe PermisosController do
     %w{perfil proyecto serie}.each do |modelo|
       recurso = create(modelo, usuario: usuario)
 
-      @controller.send(:buscar_recurso_accesible, modelo, recurso.id).must_equal recurso
+      _(@controller.send(:buscar_recurso_accesible, modelo, recurso.id)).must_equal recurso
     end
 
     assert_raise ActionController::RoutingError do

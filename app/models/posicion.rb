@@ -1,5 +1,5 @@
 # Mantiene los valores posibles para Posición en la ficha de perfiles.
-class Posicion < ActiveRecord::Base
+class Posicion < ApplicationRecord
   has_many :perfiles
 
   validates :valor, presence: true

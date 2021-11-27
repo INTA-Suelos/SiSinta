@@ -15,8 +15,8 @@ describe BusquedasController do
       get :index
 
       must_respond_with :success
-      assigns(:busquedas_publicas).include?(publica).must_equal true
-      assigns(:busquedas).must_be :empty?
+      _(assigns(:busquedas_publicas).include?(publica)).must_equal true
+      _(assigns(:busquedas)).must_be :empty?
     end
 
     it 'va a nuevo' do
@@ -53,8 +53,8 @@ describe BusquedasController do
       end
 
       must_respond_with :success
-      assigns(:busquedas_publicas).must_be :empty?
-      assigns(:busquedas).include?(privada).must_equal true
+      _(assigns(:busquedas_publicas)).must_be :empty?
+      _(assigns(:busquedas).include?(privada)).must_equal true
     end
 
     it 'sus propias búsquedas públicas no aparecen con las demás' do
@@ -65,8 +65,8 @@ describe BusquedasController do
       end
 
       must_respond_with :success
-      assigns(:busquedas_publicas).include?(publica).must_equal false
-      assigns(:busquedas).include?(publica).must_equal true
+      _(assigns(:busquedas_publicas).include?(publica)).must_equal false
+      _(assigns(:busquedas).include?(publica)).must_equal true
     end
 
     it 'hace una búsqueda y la guarda' do
@@ -77,10 +77,10 @@ describe BusquedasController do
 
       must_redirect_to busqueda_path(assigns(:busqueda))
 
-      assigns(:busqueda).nombre.must_equal busqueda[:nombre]
-      assigns(:busqueda).publica.must_equal busqueda[:publico]
-      assigns(:busqueda).usuario.must_equal usuario
-      assigns(:busqueda).consulta.must_equal consulta
+      _(assigns(:busqueda).nombre).must_equal busqueda[:nombre]
+      _(assigns(:busqueda).publica).must_equal busqueda[:publico]
+      _(assigns(:busqueda).usuario).must_equal usuario
+      _(assigns(:busqueda).consulta).must_equal consulta
     end
 
     it 'va a editar si está autorizado' do
@@ -99,16 +99,16 @@ describe BusquedasController do
       end
 
       must_redirect_to busqueda_path(assigns(:busqueda))
-      assigns(:busqueda).id.must_equal busqueda.id
-      assigns(:busqueda).nombre.must_equal 'uno nuevo'
+      _(assigns(:busqueda).id).must_equal busqueda.id
+      _(assigns(:busqueda).nombre).must_equal 'uno nuevo'
     end
 
     it 'elimina una busqueda si está autorizado' do
       busqueda = create(:busqueda, usuario: usuario)
 
-      lambda do
+      _(lambda do
         autorizar { delete :destroy, id: busqueda }
-      end.must_change 'Busqueda.count', -1
+      end).must_change 'Busqueda.count', -1
 
       must_redirect_to busquedas_path
     end

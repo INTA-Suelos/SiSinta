@@ -6,15 +6,15 @@ class ColorTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válido' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere hvc' do
-      build_stubbed(:color, hvc: nil).wont_be :valid?
+      _(build_stubbed(:color, hvc: nil)).wont_be :valid?
     end
 
     it 'hvc debe ser único' do
-      build_stubbed(:color, hvc: existente.hvc).wont_be :valid?
+      _(build_stubbed(:color, hvc: existente.hvc)).wont_be :valid?
     end
   end
 
@@ -24,11 +24,11 @@ class ColorTest < ActiveSupport::TestCase
     let(:horizonte_humedo) { create :horizonte, color_humedo: subject }
 
     it 'se recorre en ambos sentidos' do
-      horizonte_seco.color_seco.must_equal subject
-      subject.horizontes_en_seco.first.must_equal horizonte_seco
+      _(horizonte_seco.color_seco).must_equal subject
+      _(subject.horizontes_en_seco.first).must_equal horizonte_seco
 
-      horizonte_humedo.color_humedo.must_equal subject
-      subject.horizontes_en_humedo.first.must_equal horizonte_humedo
+      _(horizonte_humedo.color_humedo).must_equal subject
+      _(subject.horizontes_en_humedo.first).must_equal horizonte_humedo
     end
   end
 end

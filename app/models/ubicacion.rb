@@ -1,4 +1,4 @@
-class Ubicacion < ActiveRecord::Base
+class Ubicacion < ApplicationRecord
   class_attribute :config
   self.config = SiSINTA::Application.config
 

@@ -1,4 +1,4 @@
-class Equipo < ActiveRecord::Base
+class Equipo < ApplicationRecord
   belongs_to :usuario
   has_and_belongs_to_many :miembros, class_name: 'Usuario'
 

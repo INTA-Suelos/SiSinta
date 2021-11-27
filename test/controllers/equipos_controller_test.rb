@@ -9,7 +9,7 @@ describe EquiposController do
     end
 
     must_respond_with :success
-    assigns(:equipos).wont_be :nil?
+    _(assigns(:equipos)).wont_be :nil?
   end
 
   it 'va a nuevo si está autorizado' do
@@ -25,9 +25,9 @@ describe EquiposController do
   it 'crea un equipo si está autorizado' do
     loguearse
 
-    lambda do
+    _(lambda do
       autorizar { post :create, equipo: attributes_for(:equipo) }
-    end.must_change 'Equipo.count'
+    end).must_change 'Equipo.count'
 
     must_redirect_to equipo_path(assigns(:equipo))
   end
@@ -68,9 +68,9 @@ describe EquiposController do
     usuario = loguearse
     equipo = create(:equipo, usuario: usuario)
 
-    lambda do
+    _(lambda do
       autorizar { delete :destroy, id: equipo }
-    end.must_change 'Equipo.count', -1
+    end).must_change 'Equipo.count', -1
 
     must_redirect_to equipos_path
   end

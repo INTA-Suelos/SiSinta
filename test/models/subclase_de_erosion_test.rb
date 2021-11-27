@@ -5,17 +5,17 @@ class SubclaseDeErosionTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere valor' do
-      build(:subclase_de_erosion, valor: nil).wont_be :valid?
+      _(build(:subclase_de_erosion, valor: nil)).wont_be :valid?
     end
   end
 
   it 'sabe si es una acumulación' do
-    subject.wont_be :acumulacion?
-    build(:subclase_de_erosion, valor: 'acumulación').must_be :acumulacion?
+    _(subject).wont_be :acumulacion?
+    _(build(:subclase_de_erosion, valor: 'acumulación')).must_be :acumulacion?
   end
 
   describe 'asociaciones' do
@@ -23,9 +23,9 @@ class SubclaseDeErosionTest < ActiveSupport::TestCase
     let(:erosion) { create :erosion, subclase: subject }
 
     it 'se recorre en ambos sentidos' do
-      erosion.subclase.must_equal subject
+      _(erosion.subclase).must_equal subject
 
-      subject.erosiones.first.must_equal erosion
+      _(subject.erosiones.first).must_equal erosion
     end
   end
 end

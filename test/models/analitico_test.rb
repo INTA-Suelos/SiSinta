@@ -5,12 +5,12 @@ describe Analitico do
 
   describe 'validaciones' do
     it 'requiere horizonte' do
-      build(:analitico, horizonte: nil).wont_be :valid?
+      _(build(:analitico, horizonte: nil)).wont_be :valid?
     end
 
     it 'es válido' do
-      build(:analitico, horizonte: horizonte).must_be :valid?
-      build(:analitico, :completo, horizonte: horizonte).must_be :valid?
+      _(build(:analitico, horizonte: horizonte)).must_be :valid?
+      _(build(:analitico, :completo, horizonte: horizonte)).must_be :valid?
     end
   end
 
@@ -27,14 +27,14 @@ describe Analitico do
     it 'mantiene la precisión y usa BigDecimals' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 99.99 }).analitico
-        analitico.send(campo).must_equal BigDecimal('99.99'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('99.99'), "Falla para #{campo}"
       end
     end
 
     it 'redondea por fuera de la precisión' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 99.999 }).analitico
-        analitico.send(campo).must_equal BigDecimal('100.00'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('100.00'), "Falla para #{campo}"
       end
     end
   end
@@ -45,14 +45,14 @@ describe Analitico do
     it 'mantiene la precisión y usa BigDecimals' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 0.004 }).analitico
-        analitico.send(campo).must_equal BigDecimal('0.004'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('0.004'), "Falla para #{campo}"
       end
     end
 
     it 'redondea por fuera de la precisión' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 0.004999 }).analitico
-        analitico.send(campo).must_equal BigDecimal('0.005'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('0.005'), "Falla para #{campo}"
       end
     end
   end
@@ -64,14 +64,14 @@ describe Analitico do
       campos.each do |campo|
         # Crearlo con float falla para este número
         analitico = create(:horizonte, analitico_attributes: { campo => BigDecimal('999999999999999999.9') }).analitico
-        analitico.send(campo).must_equal BigDecimal('999999999999999999.9'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('999999999999999999.9'), "Falla para #{campo}"
       end
     end
 
     it 'redondea por fuera de la precisión' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 999999999999999999.99 }).analitico
-        analitico.send(campo).must_equal BigDecimal('1000000000000000000.0'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('1000000000000000000.0'), "Falla para #{campo}"
       end
     end
   end
@@ -81,29 +81,29 @@ describe Analitico do
 
     # FIXME Generalizar
     it 'está entre 0 y 100' do
-      build(:analitico, horizonte: build(:horizonte), p_ppm: 100.1).wont_be :valid?
-      build(:analitico, horizonte: build(:horizonte), p_ppm: 50.1).must_be :valid?
-      build(:analitico, horizonte: build(:horizonte), p_ppm: -0.1).wont_be :valid?
+      _(build(:analitico, horizonte: build(:horizonte), p_ppm: 100.1)).wont_be :valid?
+      _(build(:analitico, horizonte: build(:horizonte), p_ppm: 50.1)).must_be :valid?
+      _(build(:analitico, horizonte: build(:horizonte), p_ppm: -0.1)).wont_be :valid?
     end
 
     # FIXME Generalizar
     it 'usa precisión 000.0' do
       a = create(:horizonte, analitico_attributes: { p_ppm: 0.41 }).analitico
 
-      a.reload.p_ppm.to_f.must_equal 0.4
+      _(a.reload.p_ppm.to_f).must_equal 0.4
     end
 
     it 'mantiene la precisión y usa BigDecimals' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 0.4 }).analitico
-        analitico.send(campo).must_equal BigDecimal('0.4'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('0.4'), "Falla para #{campo}"
       end
     end
 
     it 'redondea por fuera de la precisión' do
       campos.each do |campo|
         analitico = create(:horizonte, analitico_attributes: { campo => 0.49 }).analitico
-        analitico.send(campo).must_equal BigDecimal('0.5'), "Falla para #{campo}"
+        _(analitico.send(campo)).must_equal BigDecimal('0.5'), "Falla para #{campo}"
       end
     end
   end
@@ -120,36 +120,36 @@ describe Analitico do
 
     it 'están entre 0 y 100' do
       campos.each do |campo|
-        build(:analitico, horizonte: build(:horizonte), campo => 100.1).wont_be :valid?, "Falla para #{campo}"
-        build(:analitico, horizonte: build(:horizonte), campo => -0.1).wont_be :valid?, "Falla para #{campo}"
+        _(build(:analitico, horizonte: build(:horizonte), campo => 100.1)).wont_be :valid?, "Falla para #{campo}"
+        _(build(:analitico, horizonte: build(:horizonte), campo => -0.1)).wont_be :valid?, "Falla para #{campo}"
 
-        build(:analitico, horizonte: build(:horizonte), campo => 100).must_be :valid?, "Falla para #{campo}"
-        build(:analitico, horizonte: build(:horizonte), campo => 50).must_be :valid?, "Falla para #{campo}"
-        build(:analitico, horizonte: build(:horizonte), campo => 0).must_be :valid?, "Falla para #{campo}"
+        _(build(:analitico, horizonte: build(:horizonte), campo => 100)).must_be :valid?, "Falla para #{campo}"
+        _(build(:analitico, horizonte: build(:horizonte), campo => 50)).must_be :valid?, "Falla para #{campo}"
+        _(build(:analitico, horizonte: build(:horizonte), campo => 0)).must_be :valid?, "Falla para #{campo}"
       end
     end
   end
 
   describe '#psi' do
     it 'es nil si no hay base_na o t' do
-      build(:analitico, base_na: nil).psi.must_be :nil?
-      build(:analitico, t: nil).psi.must_be :nil?
+      _(build(:analitico, base_na: nil).psi).must_be :nil?
+      _(build(:analitico, t: nil).psi).must_be :nil?
     end
 
     it 'redondea a 1 decimal' do
-      build(:analitico, t: 25.4, base_na: 0.4).psi.must_equal BigDecimal('0.0')
-      build(:analitico, t: 0.05, base_na: 0.99).psi.must_equal BigDecimal('0.2')
+      _(build(:analitico, t: 25.4, base_na: 0.4).psi).must_equal BigDecimal('0.0')
+      _(build(:analitico, t: 0.05, base_na: 0.99).psi).must_equal BigDecimal('0.2')
     end
   end
 
   describe '#porcentaje_mo' do
     it 'es nil si no hay carbono_organico_c' do
-      build(:analitico, carbono_organico_c: nil).porcentaje_mo.must_be :nil?
+      _(build(:analitico, carbono_organico_c: nil).porcentaje_mo).must_be :nil?
     end
 
     it 'redondea a 2 decimales' do
-      build(:analitico, carbono_organico_c: 4.56).porcentaje_mo.must_equal BigDecimal('7.86')
-      build(:analitico, carbono_organico_c: 99.1).porcentaje_mo.must_equal BigDecimal('170.85')
+      _(build(:analitico, carbono_organico_c: 4.56).porcentaje_mo).must_equal BigDecimal('7.86')
+      _(build(:analitico, carbono_organico_c: 99.1).porcentaje_mo).must_equal BigDecimal('170.85')
     end
   end
 end

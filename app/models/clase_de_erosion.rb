@@ -1,6 +1,6 @@
 # Mantiene los valores posibles para la Clase de Erosión en la ficha de
 # Perfiles
-class ClaseDeErosion < ActiveRecord::Base
+class ClaseDeErosion < ApplicationRecord
   include Mostrable
 
   has_many :erosiones, inverse_of: :clase, foreign_key: :clase_id

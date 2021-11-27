@@ -22,12 +22,12 @@ describe SeriesController do
       get :autocomplete_serie_nombre, term: termino
 
       must_respond_with :success
-      json.size.must_equal Serie.where("nombre like '%#{termino}%'").size
+      _(json.size).must_equal Serie.where("nombre like '%#{termino}%'").size
 
-      json.first.include?('id').must_equal true
-      json.first.include?('label').must_equal true
-      json.first.include?('value').must_equal true
-      json.first.include?('simbolo').must_equal true
+      _(json.first.include?('id')).must_equal true
+      _(json.first.include?('label')).must_equal true
+      _(json.first.include?('value')).must_equal true
+      _(json.first.include?('simbolo')).must_equal true
     end
 
     it 'devuelve símbolo para términos parciales' do
@@ -36,19 +36,19 @@ describe SeriesController do
       get :autocomplete_serie_simbolo, term: termino
 
       must_respond_with :success
-      json.size.must_equal Serie.where("simbolo like '%#{termino}%'").size
+      _(json.size).must_equal Serie.where("simbolo like '%#{termino}%'").size
 
-      json.first.include?('id').must_equal true
-      json.first.include?('label').must_equal true
-      json.first.include?('value').must_equal true
-      json.first.include?('nombre').must_equal true
+      _(json.first.include?('id')).must_equal true
+      _(json.first.include?('label')).must_equal true
+      _(json.first.include?('value')).must_equal true
+      _(json.first.include?('nombre')).must_equal true
     end
   end
 
   describe 'autorizado' do
     let(:usuario) { loguearse }
 
-    before { usuario.must_be :persisted? }
+    before { _(usuario).must_be :persisted? }
 
     it 'va a nueva' do
       autorizar { get :new }
@@ -57,9 +57,9 @@ describe SeriesController do
     end
 
     it 'crea una serie' do
-      lambda do
+      _(lambda do
         autorizar { post :create, serie: attributes_for(:serie) }
-      end.must_change 'Serie.count'
+      end).must_change 'Serie.count'
 
       must_redirect_to serie_path(assigns(:serie))
     end
@@ -81,18 +81,18 @@ describe SeriesController do
 
       must_redirect_to serie_path(assigns(:serie))
 
-      assigns(:serie).id.must_equal subject.id
-      assigns(:serie).nombre.must_equal 'de Fibonacci'
-      assigns(:serie).simbolo.must_equal 'fi'
-      assigns(:serie).descripcion.must_equal 'Larga'
+      _(assigns(:serie).id).must_equal subject.id
+      _(assigns(:serie).nombre).must_equal 'de Fibonacci'
+      _(assigns(:serie).simbolo).must_equal 'fi'
+      _(assigns(:serie).descripcion).must_equal 'Larga'
     end
 
     it 'elimina una serie si está autorizado' do
-      subject.must_be :persisted?
+      _(subject).must_be :persisted?
 
-      lambda do
+      _(lambda do
         autorizar { delete :destroy, id: subject.to_param }
-      end.must_change 'Serie.count', -1
+      end).must_change 'Serie.count', -1
 
       must_redirect_to series_path
     end

@@ -2,7 +2,7 @@
 # más, siempre y cuando estén en la base de datos SRSDatabase.
 # Agregar un formato permite que el sistema lo manipule sin que sean necesarios
 # más cambios.
-class FormatoDeCoordenadas < ActiveRecord::Base
+class FormatoDeCoordenadas < ApplicationRecord
   validates :srid, presence: true
   validates :descripcion, presence: true
 

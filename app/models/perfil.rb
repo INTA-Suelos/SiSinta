@@ -1,6 +1,6 @@
 # El Perfil (o calicata) es el modelo principal del sistema, unifica toda la
 # información relacionada con un punto en el terreno.
-class Perfil < ActiveRecord::Base
+class Perfil < ApplicationRecord
   normalize_attributes :observaciones, :numero
 
   acts_as_taggable_on :etiquetas, :reconocedores

@@ -18,7 +18,7 @@ describe ProyectosController do
   describe 'autorizado' do
     let(:usuario) { loguearse }
 
-    before { usuario.must_be :persisted? }
+    before { _(usuario).must_be :persisted? }
 
     it 'va a nuevo' do
       autorizar { get :new }
@@ -27,11 +27,11 @@ describe ProyectosController do
     end
 
     it 'crea un proyecto' do
-      lambda do
+      _(lambda do
         autorizar do
           post :create, proyecto: attributes_for(:proyecto)
         end
-      end.must_change 'Proyecto.count'
+      end).must_change 'Proyecto.count'
 
       must_redirect_to proyecto_path(assigns(:proyecto))
     end
@@ -54,18 +54,18 @@ describe ProyectosController do
       end
 
       must_redirect_to proyecto_path(assigns(:proyecto))
-      assigns(:proyecto).id.must_equal proyecto.id
-      assigns(:proyecto).nombre.must_equal 'un proyecto'
-      assigns(:proyecto).cita.must_equal 'una cita'
-      assigns(:proyecto).descripcion.must_equal 'una descripción'
+      _(assigns(:proyecto).id).must_equal proyecto.id
+      _(assigns(:proyecto).nombre).must_equal 'un proyecto'
+      _(assigns(:proyecto).cita).must_equal 'una cita'
+      _(assigns(:proyecto).descripcion).must_equal 'una descripción'
     end
 
     it 'elimina un proyecto' do
       proyecto = create(:proyecto, usuario: usuario)
 
-      lambda do
+      _(lambda do
         autorizar { delete :destroy, id: proyecto }
-      end.must_change 'Proyecto.count', -1
+      end).must_change 'Proyecto.count', -1
 
       must_redirect_to proyectos_path
     end

@@ -1,5 +1,5 @@
 # Mantiene los valores posibles de adhesividad de consistencia para cada Horizonte
-class Adhesividad < ActiveRecord::Base
+class Adhesividad < ApplicationRecord
   include Mostrable
 
   has_many :consistencias, inverse_of: :adhesividad,

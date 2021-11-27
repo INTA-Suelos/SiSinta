@@ -14,13 +14,13 @@ describe InicioController do
       it 'usa :es por default' do
         get :index
 
-        subject.locale.must_equal :es
+        _(subject.locale).must_equal :es
       end
 
       it 'cambia el locale desde la url' do
         get :index, locale: 'en'
 
-        subject.locale.must_equal :en
+        _(subject.locale).must_equal :en
       end
     end
 
@@ -32,7 +32,7 @@ describe InicioController do
 
         get :index
 
-        subject.locale.must_equal :en
+        _(subject.locale).must_equal :en
       end
 
       it 'se prioriza el locale desde la url' do
@@ -40,7 +40,7 @@ describe InicioController do
 
         get :index, locale: 'es'
 
-        subject.locale.must_equal :es
+        _(subject.locale).must_equal :es
       end
     end
   end

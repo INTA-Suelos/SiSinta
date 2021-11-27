@@ -9,11 +9,11 @@ describe ColoresController do
     get :autocomplete_color_hvc, term: termino
 
     must_respond_with :success
-    json.size.must_equal Color.where("hvc like '%#{termino}%'").size
+    _(json.size).must_equal Color.where("hvc like '%#{termino}%'").size
 
-    json.first.include?('id').must_equal true
-    json.first.include?('label').must_equal true
-    json.first.include?('value').must_equal true
+    _(json.first.include?('id')).must_equal true
+    _(json.first.include?('label')).must_equal true
+    _(json.first.include?('value')).must_equal true
   end
 
   it 'autocompleta rgb' do
@@ -22,10 +22,10 @@ describe ColoresController do
     get :autocomplete_color_rgb, term: termino
 
     must_respond_with :success
-    json.size.must_equal Color.where("rgb like '%#{termino}%'").size
+    _(json.size).must_equal Color.where("rgb like '%#{termino}%'").size
 
-    json.first.include?('id').must_equal true
-    json.first.include?('label').must_equal true
-    json.first.include?('value').must_equal true
+    _(json.first.include?('id')).must_equal true
+    _(json.first.include?('label')).must_equal true
+    _(json.first.include?('value')).must_equal true
   end
 end

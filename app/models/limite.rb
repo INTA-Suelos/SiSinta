@@ -1,6 +1,6 @@
 # Modelo asociativo (no tiene datos propios) para los valores (forma y
 # tipo) de Límite en la ficha de Perfiles para cada Horizonte
-class Limite < ActiveRecord::Base
+class Limite < ApplicationRecord
   belongs_to :horizonte
   belongs_to :forma, inverse_of: :limites, class_name: 'FormaDeLimite'
   belongs_to :tipo, inverse_of: :limites, class_name: 'TipoDeLimite'

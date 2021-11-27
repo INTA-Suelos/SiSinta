@@ -5,11 +5,11 @@ class TipoDeLimiteTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válido' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere valor' do
-      build(:tipo_de_limite, valor: nil).wont_be :valid?
+      _(build(:tipo_de_limite, valor: nil)).wont_be :valid?
     end
   end
 
@@ -18,9 +18,9 @@ class TipoDeLimiteTest < ActiveSupport::TestCase
     let(:limite) { create :limite, tipo: subject }
 
     it 'se recorre en ambos sentidos' do
-      limite.tipo.must_equal subject
+      _(limite.tipo).must_equal subject
 
-      subject.limites.first.must_equal limite
+      _(subject.limites.first).must_equal limite
     end
   end
 end
