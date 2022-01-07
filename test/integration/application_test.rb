@@ -12,8 +12,8 @@ describe SiSINTA::Application do
 
   describe 'cache_store' do
     it 'usa memcached' do
-      _(subject.cache_store).must_equal :dalli_store
-      _(Rails.cache).must_be_instance_of ActiveSupport::Cache::DalliStore
+      _(subject.cache_store).must_equal :mem_cache_store
+      _(Rails.cache).must_be_instance_of ActiveSupport::Cache::MemCacheStore
     end
   end
 end

@@ -3,11 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2'
 
 ## DB
-gem 'pg'
-gem 'yaml_db'
+gem 'pg', '~> 0.15'
 
 ## Aut{enticación,orización}, seguridad en general
-gem 'devise'
+gem 'devise', '4.4.1'
 gem 'cancancan'
 gem 'rolify', '~> 3.4'
 gem 'rack-cors'
@@ -46,6 +45,7 @@ gem 'browser_detect'
 gem 'rails-api'
 
 ## Assets
+gem 'sprockets', '~> 3.7'
 gem 'tinymce-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -71,7 +71,7 @@ gem 'activeadmin'
 # I18n
 gem 'tolk'
 gem 'rails-i18n'
-gem 'devise-i18n'
+gem 'devise-i18n', '1.1.0'
 gem 'kaminari-i18n'
 # No está publicada la versión compatible con ActiveAdmin 1.0.0
 gem 'activeadmin-globalize',
@@ -79,13 +79,12 @@ gem 'activeadmin-globalize',
   branch: 'sisar'
 
 ## Server
+gem 'puma'
 # TODO revisar configuración de compresión
 gem 'dalli'
 
 ## Desarrollo pero útiles en producción
 gem 'minitest-rails'
-gem 'awesome_print'
-gem 'pry-rails'
 gem 'hirb'
 
 group :test, :development do
@@ -97,13 +96,10 @@ group :development do
   gem 'spring'
   gem 'bullet'
   gem 'better_errors'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-passenger'
-  gem 'capistrano-config_provider',
-    git: 'https://github.com/mauriciopasquier/capistrano-config_provider.git',
-    require: false
-  gem 'capistrano-rails-collection'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', require: false
+  gem 'capistrano-rails-collection', require: false
+  gem 'capistrano3-puma', require: false
   gem 'brakeman', require: false
 end
 
