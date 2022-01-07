@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Usuario < ActiveRecord::Base
+class Usuario < ApplicationRecord
   rolify role_cname: 'Rol'
   # TODO Extraer preferencias a un modelo aparte
   # TODO Incluir idioma

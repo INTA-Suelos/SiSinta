@@ -10,11 +10,11 @@ describe FasesController do
       get :autocomplete_fase_nombre, term: termino
 
       must_respond_with :success
-      json.size.must_equal Fase.where("nombre like '%#{termino}%'").size
+      _(json.size).must_equal Fase.where("nombre like '%#{termino}%'").size
 
-      json.first.include?('id').must_equal true
-      json.first.include?('label').must_equal true
-      json.first.include?('value').must_equal true
+      _(json.first.include?('id')).must_equal true
+      _(json.first.include?('label')).must_equal true
+      _(json.first.include?('value')).must_equal true
     end
   end
 
@@ -28,9 +28,9 @@ describe FasesController do
     end
 
     it 'crea una fase si está autorizado' do
-      lambda do
+      _(lambda do
         autorizar { post :create, fase: attributes_for(:fase) }
-      end.must_change 'Fase.count', 1
+      end).must_change 'Fase.count', 1
 
       must_redirect_to fase_path(assigns(:fase))
     end
@@ -51,9 +51,9 @@ describe FasesController do
       end
 
       must_redirect_to fase_path(assigns(:fase))
-      assigns(:fase).id.must_equal subject.id
-      assigns(:fase).nombre.must_equal params[:nombre]
-      assigns(:fase).codigo.must_equal params[:codigo]
+      _(assigns(:fase).id).must_equal subject.id
+      _(assigns(:fase).nombre).must_equal params[:nombre]
+      _(assigns(:fase).codigo).must_equal params[:codigo]
     end
   end
 end

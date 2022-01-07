@@ -1,5 +1,5 @@
 # Recopila información sobre un archivo adjunto a un perfil
-class Adjunto < ActiveRecord::Base
+class Adjunto < ApplicationRecord
   belongs_to :perfil, inverse_of: :adjuntos
   belongs_to :usuario, inverse_of: :adjuntos
 

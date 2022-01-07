@@ -7,20 +7,20 @@ class SerieSerializerTest < ActiveSupport::TestCase
   it 'serializa el nombre de Provincia' do
     serie.provincia =  build :provincia, nombre: 'Alguna'
 
-    subject.serializable_hash[:provincia].must_equal 'Alguna'
+    _(subject.serializable_hash[:provincia]).must_equal 'Alguna'
   end
 
   it 'serializa su nombre' do
-    subject.serializable_hash[:nombre].must_equal serie.nombre
+    _(subject.serializable_hash[:nombre]).must_equal serie.nombre
   end
 
   it 'serializa su símbolo' do
-    subject.serializable_hash[:simbolo].must_equal serie.simbolo
+    _(subject.serializable_hash[:simbolo]).must_equal serie.simbolo
   end
 
   it 'serializa su descripción' do
     serie.descripcion = 'algo'
 
-    subject.serializable_hash[:descripcion].must_equal 'algo'
+    _(subject.serializable_hash[:descripcion]).must_equal 'algo'
   end
 end

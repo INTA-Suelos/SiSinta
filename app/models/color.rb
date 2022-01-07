@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Color < ActiveRecord::Base
+class Color < ApplicationRecord
   has_many :horizontes_en_seco,
     class_name: 'Horizonte', inverse_of: :color_seco, foreign_key: :color_seco_id
   has_many :horizontes_en_humedo,

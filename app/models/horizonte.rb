@@ -1,4 +1,4 @@
-class Horizonte < ActiveRecord::Base
+class Horizonte < ApplicationRecord
   # FIXME Mover esta lógica al controller o donde sea adecuado
   after_create :create_analitico, unless: :analitico_present?
 

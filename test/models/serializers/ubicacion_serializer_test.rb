@@ -5,19 +5,19 @@ class UbicacionSerializerTest < ActiveSupport::TestCase
   let(:ubicacion) { create(:ubicacion, :con_perfil, :con_coordenadas) }
 
   it 'no serializa coordenadas juntas' do
-    subject.serializable_hash.keys.include?(:coordenadas).wont_equal true
+    _(subject.serializable_hash.keys.include?(:coordenadas)).wont_equal true
   end
 
   it 'serializa latitud y longitud por separado' do
     hash = subject.serializable_hash
 
-    hash.keys.include?(:latitud).must_equal true
-    hash.keys.include?(:longitud).must_equal true
+    _(hash.keys.include?(:latitud)).must_equal true
+    _(hash.keys.include?(:longitud)).must_equal true
 
-    hash[:latitud].wont_be :nil?
-    hash[:longitud].wont_be :nil?
+    _(hash[:latitud]).wont_be :nil?
+    _(hash[:longitud]).wont_be :nil?
 
-    hash[:latitud].must_equal ubicacion.latitud
-    hash[:longitud].must_equal ubicacion.longitud
+    _(hash[:latitud]).must_equal ubicacion.latitud
+    _(hash[:longitud]).must_equal ubicacion.longitud
   end
 end

@@ -5,6 +5,6 @@ class TexturaSerializerTest < ActiveSupport::TestCase
   let(:textura) { create(:textura) }
 
   it 'al serializar devuelve la clase' do
-    subject.serializable_hash.must_equal textura.clase
+    _(subject.serializable_hash).must_equal textura.clase
   end
 end

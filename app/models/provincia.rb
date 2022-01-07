@@ -1,7 +1,7 @@
 # Una Provincia es una entidad de la primer subdivisión administrativa de un
 # Pais. Están relacionadas con datos oficiales de diferentes institutos
 # estatales
-class Provincia < ActiveRecord::Base
+class Provincia < ApplicationRecord
   # Las series por lo general se ubican geográficamente dentro de provincias
   has_many :series
 

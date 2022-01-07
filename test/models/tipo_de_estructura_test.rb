@@ -5,13 +5,13 @@ class TipoDeEstructuraTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válido' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'no permite valores duplicados' do
       subject.save
 
-      build(:tipo_de_estructura, valor: subject.valor).wont_be :valid?
+      _(build(:tipo_de_estructura, valor: subject.valor)).wont_be :valid?
     end
   end
 
@@ -20,9 +20,9 @@ class TipoDeEstructuraTest < ActiveSupport::TestCase
     let(:estructura) { create :estructura, tipo: subject }
 
     it 'se recorre en ambos sentidos' do
-      estructura.tipo.must_equal subject
+      _(estructura.tipo).must_equal subject
 
-      subject.estructuras.first.must_equal estructura
+      _(subject.estructuras.first).must_equal estructura
     end
   end
 end

@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Busqueda < ActiveRecord::Base
+class Busqueda < ApplicationRecord
   store :consulta
 
   belongs_to :usuario

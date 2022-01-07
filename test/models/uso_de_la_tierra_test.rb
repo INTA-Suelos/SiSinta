@@ -5,11 +5,11 @@ class UsoDeLaTierraTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válido' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'require valor' do
-      build(:uso_de_la_tierra, valor: nil).wont_be :valid?
+      _(build(:uso_de_la_tierra, valor: nil)).wont_be :valid?
     end
   end
 
@@ -18,9 +18,9 @@ class UsoDeLaTierraTest < ActiveSupport::TestCase
     let(:perfil) { create :perfil, uso_de_la_tierra: subject }
 
     it 'se recorre en ambos sentidos' do
-      perfil.uso_de_la_tierra.must_equal subject
+      _(perfil.uso_de_la_tierra).must_equal subject
 
-      subject.perfiles.first.must_equal perfil
+      _(subject.perfiles.first).must_equal perfil
     end
   end
 end

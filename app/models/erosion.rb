@@ -1,6 +1,6 @@
 # Modelo asociativo (no tiene datos propios) para los valores (clase y
 # subclase) de Erosión en la ficha de Perfiles
-class Erosion < ActiveRecord::Base
+class Erosion < ApplicationRecord
   belongs_to :perfil, inverse_of: :erosion
 
   belongs_to :clase, inverse_of: :erosiones, class_name: 'ClaseDeErosion'

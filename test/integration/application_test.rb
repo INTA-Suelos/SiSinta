@@ -6,14 +6,14 @@ describe SiSINTA::Application do
 
   describe 'session_store' do
     it 'usa el cache general' do
-      subject.session_store.must_equal ActionDispatch::Session::CacheStore
+      _(subject.session_store).must_equal ActionDispatch::Session::CacheStore
     end
   end
 
   describe 'cache_store' do
     it 'usa memcached' do
-      subject.cache_store.must_equal :dalli_store
-      Rails.cache.must_be_instance_of ActiveSupport::Cache::DalliStore
+      _(subject.cache_store).must_equal :mem_cache_store
+      _(Rails.cache).must_be_instance_of ActiveSupport::Cache::MemCacheStore
     end
   end
 end

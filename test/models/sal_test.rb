@@ -5,11 +5,11 @@ class SalTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válido' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'require valor' do
-      build(:sal, valor: nil).wont_be :valid?
+      _(build(:sal, valor: nil)).wont_be :valid?
     end
   end
 end

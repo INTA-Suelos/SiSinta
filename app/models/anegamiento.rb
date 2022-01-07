@@ -1,5 +1,5 @@
 # Mantiene los valores posibles para Anegamiento en la ficha de perfiles.
-class Anegamiento < ActiveRecord::Base
+class Anegamiento < ApplicationRecord
   include Mostrable
 
   has_many :perfiles, dependent: :restrict_with_error

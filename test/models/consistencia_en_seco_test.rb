@@ -5,11 +5,11 @@ class ConsistenciaEnSecoTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere valor' do
-      build_stubbed(:consistencia_en_seco, valor: nil).wont_be :valid?
+      _(build_stubbed(:consistencia_en_seco, valor: nil)).wont_be :valid?
     end
   end
 
@@ -18,9 +18,9 @@ class ConsistenciaEnSecoTest < ActiveSupport::TestCase
     let(:consistencia) { create :consistencia, en_seco: subject }
 
     it 'se recorre en ambos sentidos' do
-      consistencia.en_seco.must_equal subject
+      _(consistencia.en_seco).must_equal subject
 
-      subject.consistencias.first.must_equal consistencia
+      _(subject.consistencias.first).must_equal consistencia
     end
   end
 end

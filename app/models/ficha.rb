@@ -1,4 +1,4 @@
-class Ficha < ActiveRecord::Base
+class Ficha < ApplicationRecord
   validates :nombre, presence: true, uniqueness: true
   validates :identificador, presence: true, uniqueness: true
 

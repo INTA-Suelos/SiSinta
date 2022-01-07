@@ -6,7 +6,7 @@ describe ApplicationDecorator do
     subject { PerfilDecorator.decorate(build(:perfil)) }
 
     it 'convierte el modelo a Array' do
-      subject.to_array.must_be_instance_of Array
+      _(subject.to_array).must_be_instance_of Array
     end
   end
 end

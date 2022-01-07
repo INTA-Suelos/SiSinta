@@ -14,7 +14,7 @@ describe UbicacionDecorator do
         nil
       end
 
-      UbicacionDecorator.decorate(lugar).srid.must_equal 4326
+      _(UbicacionDecorator.decorate(lugar).srid).must_equal 4326
     end
   end
 
@@ -25,14 +25,14 @@ describe UbicacionDecorator do
     end
 
     it 'devuelve las coordenadas proyectadas según las preferencias' do
-      subject.srid.must_equal usuario.srid
+      _(subject.srid).must_equal usuario.srid
     end
 
     it 'proyecta x e y de acuerdo al srid preferido' do
       proyeccion = Ubicacion.transformar(lugar.srid, usuario.srid, lugar.x, lugar.y)
 
-      subject.x.must_equal Ubicacion.redondear(proyeccion.x)
-      subject.y.must_equal Ubicacion.redondear(proyeccion.y)
+      _(subject.x).must_equal Ubicacion.redondear(proyeccion.x)
+      _(subject.y).must_equal Ubicacion.redondear(proyeccion.y)
     end
   end
 end

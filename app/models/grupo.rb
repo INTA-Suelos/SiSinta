@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Grupo < ActiveRecord::Base
+class Grupo < ApplicationRecord
   has_many :perfiles
 
   validates_uniqueness_of :codigo, allow_blank: true

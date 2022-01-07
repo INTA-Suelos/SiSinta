@@ -10,10 +10,10 @@ feature 'Sesión de usuario' do
     visit root_path
     click_link 'Entrar'
 
-    current_path.must_equal new_usuario_session_path
+    _(current_path).must_equal new_usuario_session_path
 
-    page.must_have_selector '#usuario_email'
-    page.must_have_selector '#usuario_password'
+    _(page).must_have_selector '#usuario_email'
+    _(page).must_have_selector '#usuario_password'
 
     within 'form' do
       fill_in Usuario.human_attribute_name('email'),    with: @usuario.email
@@ -22,8 +22,8 @@ feature 'Sesión de usuario' do
       click_button 'Entrar'
     end
 
-    current_path.must_equal root_path
-    page.must_have_selector '.mensaje', text: I18n.t('devise.sessions.signed_in')
+    _(current_path).must_equal root_path
+    _(page).must_have_selector '.mensaje', text: I18n.t('devise.sessions.signed_in')
   end
 
   feature 'Estando logueado' do
@@ -35,8 +35,8 @@ feature 'Sesión de usuario' do
       visit root_path
       click_link 'Salir'
 
-      current_path.must_equal root_path
-      page.must_have_selector '#flash_notice.mensaje', text: I18n.t('devise.sessions.signed_out')
+      _(current_path).must_equal root_path
+      _(page).must_have_selector '#flash_notice.mensaje', text: I18n.t('devise.sessions.signed_out')
     end
   end
 end

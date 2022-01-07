@@ -6,11 +6,11 @@ class FaseDecoratorTest < ActiveSupport::TestCase
 
   describe '#nombre' do
     it 'devuelve el nombre del objeto decorado' do
-      subject.nombre.must_equal fase.nombre
+      _(subject.nombre).must_equal fase.nombre
     end
 
     it 'devuelve una cadena vacía sin objeto decorado' do
-      FaseDecorator.new(nil).nombre.must_equal ''
+      _(FaseDecorator.new(nil).nombre).must_equal ''
     end
   end
 end

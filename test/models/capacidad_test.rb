@@ -5,11 +5,11 @@ class CapacidadTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
+      _(subject).must_be :valid?
     end
 
     it 'requiere perfil' do
-      build_stubbed(:capacidad, perfil: nil).wont_be :valid?
+      _(build_stubbed(:capacidad, perfil: nil)).wont_be :valid?
     end
   end
 end

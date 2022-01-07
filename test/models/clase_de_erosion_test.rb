@@ -5,23 +5,23 @@ class ClaseDeErosionTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
-      build_stubbed(:clase_de_erosion).must_be :valid?
+      _(subject).must_be :valid?
+      _(build_stubbed(:clase_de_erosion)).must_be :valid?
     end
 
     it 'requiere valor' do
-      build_stubbed(:clase_de_erosion, valor: nil).wont_be :valid?
+      _(build_stubbed(:clase_de_erosion, valor: nil)).wont_be :valid?
     end
 
     it 'requiere valor único' do
-      build_stubbed(:clase_de_erosion, valor: subject.valor).wont_be :valid?
+      _(build_stubbed(:clase_de_erosion, valor: subject.valor)).wont_be :valid?
     end
 
     it 'permite valores duplicados en diferentes locales' do
       valor_es = subject.valor
 
       Globalize.with_locale :en do
-        build_stubbed(:clase_de_erosion, valor: valor_es).must_be :valid?
+        _(build_stubbed(:clase_de_erosion, valor: valor_es)).must_be :valid?
       end
     end
   end
@@ -31,9 +31,9 @@ class ClaseDeErosionTest < ActiveSupport::TestCase
     let(:erosion) { create :erosion, clase: subject }
 
     it 'se recorre en ambos sentidos' do
-      erosion.clase.must_equal subject
+      _(erosion.clase).must_equal subject
 
-      subject.erosiones.first.must_equal erosion
+      _(subject.erosiones.first).must_equal erosion
     end
   end
 end

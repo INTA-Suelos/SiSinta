@@ -5,6 +5,6 @@ class HorizonteSerializerTest < ActiveSupport::TestCase
   let(:horizonte_con_tipo) { create :horizonte, tipo: 'algún tipo' }
 
   it 'serializa tipo como :horizonte' do
-    subject.serializable_hash[:horizonte].must_equal 'algún tipo'
+    _(subject.serializable_hash[:horizonte]).must_equal 'algún tipo'
   end
 end

@@ -1,6 +1,6 @@
 # Modelo asociativo para los valores de Consistencia de cada Horizonte en la
 # ficha de Perfiles
-class Consistencia < ActiveRecord::Base
+class Consistencia < ApplicationRecord
   belongs_to :horizonte, inverse_of: :consistencia
   belongs_to :en_seco, class_name: 'ConsistenciaEnSeco', inverse_of: :consistencias
   belongs_to :en_humedo, class_name: 'ConsistenciaEnHumedo', inverse_of: :consistencias

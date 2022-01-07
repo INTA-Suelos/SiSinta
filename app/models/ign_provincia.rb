@@ -1,6 +1,6 @@
 # Modelo de consulta de la información geográfica de las provincias de
 # Argentina, según el IGN.
-class IgnProvincia < ActiveRecord::Base
+class IgnProvincia < ApplicationRecord
   # Relacionado 1 a 1 con una Provincia
   has_one :provincia, as: :data_oficial
 

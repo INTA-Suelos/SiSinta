@@ -5,23 +5,23 @@ class ClaseDeCapacidadTest < ActiveSupport::TestCase
 
   describe 'validaciones' do
     it 'es válida' do
-      subject.must_be :valid?
-      build_stubbed(:clase_de_capacidad).must_be :valid?
+      _(subject).must_be :valid?
+        _(build_stubbed(:clase_de_capacidad)).must_be :valid?
     end
 
     it 'requiere codigo' do
-      build_stubbed(:clase_de_capacidad, codigo: nil).wont_be :valid?
+      _(build_stubbed(:clase_de_capacidad, codigo: nil)).wont_be :valid?
     end
 
     it 'require codigo único' do
-      build_stubbed(:clase_de_capacidad, codigo: subject.codigo).wont_be :valid?
+      _(build_stubbed(:clase_de_capacidad, codigo: subject.codigo)).wont_be :valid?
     end
 
     it 'permite códigos duplicados en diferentes locales' do
       codigo_es = subject.codigo
 
       Globalize.with_locale :en do
-        build_stubbed(:clase_de_capacidad, codigo: codigo_es).must_be :valid?
+        _(build_stubbed(:clase_de_capacidad, codigo: codigo_es)).must_be :valid?
       end
     end
   end
@@ -31,9 +31,9 @@ class ClaseDeCapacidadTest < ActiveSupport::TestCase
     let(:capacidad) { create :capacidad, clase: subject }
 
     it 'se recorre en ambos sentidos' do
-      capacidad.clase.must_equal subject
+      _(capacidad.clase).must_equal subject
 
-      subject.capacidades.first.must_equal capacidad
+      _(subject.capacidades.first).must_equal capacidad
     end
   end
 end

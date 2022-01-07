@@ -1,7 +1,7 @@
 # Una serie agrupa lógicamente un conjunto de perfiles. Tiene un perfil modal
 # (que puede no ser una calicata existente), que representa el perfil más común
 # de la serie
-class Serie < ActiveRecord::Base
+class Serie < ApplicationRecord
   # Permite utilizar roles sobre este modelo
   resourcify :roles, role_cname: 'Rol'
 

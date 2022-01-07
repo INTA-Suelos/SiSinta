@@ -1,6 +1,6 @@
 # Modelo asociativo para los valores (clase y subclases) de Humedad de cada
 # Perfil en la ficha de Perfiles
-class Humedad < ActiveRecord::Base
+class Humedad < ApplicationRecord
   belongs_to :perfil, inverse_of: :humedad
   belongs_to :clase, inverse_of: :humedades, class_name: 'ClaseDeHumedad'
   has_and_belongs_to_many :subclases, class_name: 'SubclaseDeHumedad', inverse_of: :capacidades
