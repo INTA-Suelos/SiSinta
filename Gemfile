@@ -96,11 +96,17 @@ group :development do
   gem 'spring'
   gem 'bullet'
   gem 'better_errors'
+  gem 'brakeman', require: false
+
+  # Deploy.
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails-collection', require: false
   gem 'capistrano3-puma', require: false
-  gem 'brakeman', require: false
+  # Requeridas por net-ssh?
+  # https://github.com/net-ssh/net-ssh/issues/565
+  gem 'rbnacl', '< 5.0', require: false
+  gem 'bcrypt_pbkdf', require: false
 end
 
 group :test do

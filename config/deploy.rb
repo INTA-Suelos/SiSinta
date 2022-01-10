@@ -33,3 +33,10 @@ set :linked_files, %w{
   config/environments/production.rb
   config/initializers/devise.rb
 }
+
+# Puma.
+set :puma_preload_app, true
+set :puma_init_active_record, true
+set :systemd_service_name, 'sisinta.service'
+
+after 'deploy', 'deploy:restart'

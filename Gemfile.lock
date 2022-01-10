@@ -93,6 +93,7 @@ GEM
     awesome_nested_fields (0.6.4)
       rails (>= 3.0.0)
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -327,6 +328,8 @@ GEM
       activerecord (>= 3.0, < 5.2)
       activesupport (>= 3.0, < 5.2)
       i18n
+    rbnacl (4.0.2)
+      ffi
     ref (2.0.0)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -408,6 +411,7 @@ DEPENDENCIES
   acts-as-taggable-on
   attribute_normalizer
   awesome_nested_fields
+  bcrypt_pbkdf
   better_errors
   binding_of_caller
   brakeman
@@ -450,6 +454,7 @@ DEPENDENCIES
   rails-i18n
   rails-jquery-autocomplete
   ransack
+  rbnacl (< 5.0)
   responders
   rgeo
   rgeo-geojson
