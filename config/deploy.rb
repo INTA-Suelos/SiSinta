@@ -3,9 +3,9 @@ lock '3.10.1'
 
 set :application, 'SiSINTA'
 set :repo_url, 'https://github.com/INTA-Suelos/SiSinta.git'
+set :branch, ENV['DEPLOY_BRANCH'] || :master
 
 # Capistrano defaults
-set :branch, :master
 set :format, :pretty
 set :log_level, :debug
 set :pty, false
@@ -13,6 +13,7 @@ set :keep_releases, 5
 
 # rbenv
 set :rbenv_type, :user
+set :rbenv_ruby, File.read('.ruby-version').strip
 
 # rails
 set :linked_dirs, %w{
