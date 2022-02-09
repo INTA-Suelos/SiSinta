@@ -3,5 +3,9 @@
 FactoryGirl.define do
   factory :subclase_de_capacidad do
     codigo { generate :cadena_unica }
+
+    trait :completa do
+      descripcion { generate :cadena_unica }
+    end
   end
 end
