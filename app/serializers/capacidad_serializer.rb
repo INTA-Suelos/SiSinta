@@ -1,5 +1,14 @@
 class CapacidadSerializer < ActiveModel::Serializer
+  attributes :subclases
+
   has_one  :clase, serializer: ClaseDeCapacidadSerializer
-  # FIXME Devolver las subclases como lista de códigos
-  has_many :subclases, serializer: SubclaseDeCapacidadSerializer
+
+  # Devolver la lista de códigos de subclases en su propia columna.
+  def subclases
+    resultado = []
+    object.subclases.each do |subclase|
+      resultado << subclase.codigo
+    end
+    resultado.join(' ')
+  end
 end
