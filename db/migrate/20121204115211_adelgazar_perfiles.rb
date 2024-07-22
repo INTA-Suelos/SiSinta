@@ -1,10 +1,10 @@
 class AdelgazarPerfiles < ActiveRecord::Migration
 
-  class Perfil < ActiveRecord::Base
+  class Perfil < ApplicationRecord
     belongs_to :serie
   end
 
-  class Serie < ActiveRecord::Base
+  class Serie < ApplicationRecord
     has_many :perfiles
   end
 

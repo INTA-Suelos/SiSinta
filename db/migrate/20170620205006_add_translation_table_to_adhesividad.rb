@@ -1,4 +1,4 @@
-class Adhesividad < ActiveRecord::Base
+class Adhesividad < ApplicationRecord
   translates :valor
 end
 
