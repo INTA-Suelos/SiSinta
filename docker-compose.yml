@@ -1,21 +1,35 @@
 name: sisinta
 
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    env_file:
-      - .env
-    depends_on:
-      - db
-    restart: always
   db:
-    # image: postgres:9.1.24
     image: mdillon/postgis:9.1
     ports:
       - 5432:5432
     env_file:
       - .env
+  app:
+    build:
+      context: .
+    ports:
+      - 9292:9292
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always
+  web:
+    build:
+      context: nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    restart: always
+    read_only: true
+    volumes:
+      # Habilitar estos volúmenes permite montar el container como read_only
+      - ${PWD}/tmp/nginx/cache:/var/cache/nginx
+      - ${PWD}/tmp/nginx/pid:/var/run
+    volumes_from:
+      # Dar acceso a los volúmenes que define 'app'.
+      - app:ro

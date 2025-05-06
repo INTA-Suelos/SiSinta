@@ -12,18 +12,34 @@ RUN apt-get update && \
       libsodium-dev \
       nodejs
 
+# Configurar el usuario "app".
 RUN useradd --user-group --system --create-home -G sudo app
 USER app:app
-WORKDIR /home/app/sisinta
+WORKDIR /home/app/
 
 # Instalar gemas.
 COPY --chown=app:app Gemfile Gemfile.lock .
-RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
-RUN gem install bundler:1.17.3
-RUN bundle config set without 'development test'
-RUN bundle install
+# Ignorar documentación.
+# Ignorar entornos no de producción.
+RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc && \
+    gem install bundler:1.17.3 && \
+    bundle config set without 'development test' && \
+    bundle install
 
+# Copiar todo el build context a la imagen.
 COPY --chown=app:app . .
+
+# Precompilar assets.
+RUN RAILS_ENV=production SECRET_KEY_BASE=assets bundle exec rake assets:precompile
+
+# Exponer este directorio para que sea accesible desde afuera (e.g. desde nginx).
+USER root
+# Copiamos a un volumen que pueda acceder nginx. Si movemos en vez de copiar,
+# sprockets deja de usar el manifest.
+RUN mkdir -p /usr/share/nginx && \
+    cp -r public /usr/share/nginx/html && \
+    chown -R root:root /usr/share/nginx/html
+VOLUME /usr/share/nginx/html
 
 EXPOSE 3000
 CMD ["bin/start"]

@@ -1,3 +1,6 @@
+# Ignorar otros build contexts.
+nginx/
+
 # Ignorar cosas de git.
 .git
 .gitignore
