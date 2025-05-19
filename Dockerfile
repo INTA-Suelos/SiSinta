@@ -30,7 +30,9 @@ RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc && \
 COPY --chown=app:app . .
 
 # Precompilar assets.
-RUN RAILS_ENV=production SECRET_KEY_BASE=assets bundle exec rake assets:precompile
+ARG RAILS_ENV SECRET_KEY_BASE MEMCACHE_SERVERS
+ENV RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=$SECRET_KEY_BASE MEMCACHE_SERVERS=$MEMCACHE_SERVERS
+RUN bundle exec rake assets:precompile
 
 # Exponer este directorio para que sea accesible desde afuera (e.g. desde nginx).
 USER root
@@ -41,5 +43,4 @@ RUN mkdir -p /usr/share/nginx && \
     chown -R root:root /usr/share/nginx/html
 VOLUME /usr/share/nginx/html
 
-EXPOSE 3000
 CMD ["bin/start"]

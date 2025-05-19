@@ -10,11 +10,17 @@ services:
   app:
     build:
       context: .
+      args:
+        # Necesario porque la configuración de precompilado de assets usa 'production'.
+        - RAILS_ENV=${RAILS_ENV}
+        - MEMCACHE_SERVERS=${MEMCACHE_SERVERS}
+        - SECRET_KEY_BASE=${SECRET_KEY_BASE}
     ports:
       - 9292:9292
     env_file:
       - .env
     depends_on:
+      - memcached
       - db
     restart: always
   web:
@@ -33,3 +39,11 @@ services:
     volumes_from:
       # Dar acceso a los volúmenes que define 'app'.
       - app:ro
+  memcached:
+    image: memcached
+    command:
+      - --conn-limit=${MEMCACHED_CONN_LIMIT}
+      - --memory-limit=${MEMCACHED_MEMORY_LIMIT}
+      - --threads=${MEMCACHED_THREADS}
+    ports:
+      - 11211:11211

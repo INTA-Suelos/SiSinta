@@ -46,8 +46,8 @@ SiSINTA::Application.configure do
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
-  # Use a different cache store in production.
-  config.cache_store = :mem_cache_store
+  # Explicitar el container para memcached
+  config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS']
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -81,9 +81,10 @@ SiSINTA::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
-  # símbolo :url que está definido en el modelo Adjunto
-  config.adjunto_path = '/srv/sisinta/app/shared/public:url'
+  # cómo guardar los archivos adjuntos. usa la interpolación de paperclip y el
+  # símbolo :url que está definido en el modelo adjunto.
+  # ejemplo: /path/para/nginx/public:url
+  config.adjunto_path = ENV['ADJUNTO_PATH']
 end
 
 # TODO Documentar
