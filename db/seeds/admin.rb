@@ -1,8 +1,8 @@
 # Creates an admin if there are none
 unless Usuario.admins.any?
-  email = ENV['admin_email']
-  password = ENV['admin_password']
-  name = ENV['admin_name']
+  email = ENV['ADMIN_EMAIL']
+  password = ENV['ADMIN_PASSWORD']
+  name = ENV['ADMIN_NAME']
 
   Rails.logger.info 'Creating initial admin user'
 

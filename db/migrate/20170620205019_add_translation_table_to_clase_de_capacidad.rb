@@ -1,4 +1,4 @@
-class ClaseDeCapacidad < ActiveRecord::Base
+class ClaseDeCapacidad < ApplicationRecord
   translates :codigo, :descripcion, :categoria, foreign_key: :clase_de_capacidad_id
 end
 

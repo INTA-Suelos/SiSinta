@@ -32,7 +32,7 @@ SiSINTA::Application.configure do
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -46,15 +46,27 @@ SiSINTA::Application.configure do
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
-  # Use a different cache store in production.
-  config.cache_store = :mem_cache_store
+  # Explicitar el container para memcached
+  config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS']
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  # Precompile additional assets.
+  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+  config.assets.precompile += %w( ie.css print.css )
+
+  # ActionMailer Config
+  # Setup for production - deliveries, no errors raised
+  config.action_mailer.default_url_options = { host: 'sisinta.inta.gob.ar' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  # Disable delivery errors, bad email addresses will be ignored
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default charset: 'utf-8'
+
+  # Enable threaded mode
+  # config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -64,15 +76,16 @@ SiSINTA::Application.configure do
   config.active_support.deprecation = :notify
 
   # Disable automatic flushing of the log to improve performance.
-  # config.autoflush_log = false
+  config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Cómo guardar los archivos adjuntos. Usa la interpolación de Paperclip y el
-  # símbolo :url que está definido en el modelo Adjunto
-  config.adjunto_path = '/var/tmp/sisinta-prod:url'
-
-  # TODO Documentar
-  Rails.application.routes.default_url_options[:host] = 'cambiame'
+  # cómo guardar los archivos adjuntos. usa la interpolación de paperclip y el
+  # símbolo :url que está definido en el modelo adjunto.
+  # ejemplo: /path/para/nginx/public:url
+  config.adjunto_path = ENV['ADJUNTO_PATH']
 end
+
+# TODO Documentar
+Rails.application.routes.default_url_options[:host] = 'sisinta.inta.gob.ar'

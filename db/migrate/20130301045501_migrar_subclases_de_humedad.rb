@@ -1,6 +1,6 @@
 class MigrarSubclasesDeHumedad < ActiveRecord::Migration
 
-  class Humedad < ActiveRecord::Base
+  class Humedad < ApplicationRecord
     serialize :subclase_ids, Array
     guardar_como_arreglo :subclase, SubclaseDeCapacidad
   end

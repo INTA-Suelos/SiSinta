@@ -1,0 +1,22 @@
+# Ignorar otros build contexts.
+nginx/
+
+# Ignorar cosas de git.
+.git
+.gitignore
+
+# Ignorar log y tmp pero no los directorios.
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+
+# TODO
+# .envrc
+
+# Específicos del entorno.
+.bundle/
+.capistrano/
+Dockerfile*
+.env
+db-data

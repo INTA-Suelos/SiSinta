@@ -1,4 +1,4 @@
-class Usuario < ActiveRecord::Base
+class Usuario < ApplicationRecord
   store :config, accessors: [:ficha]
 end
 

@@ -1,7 +1,7 @@
 # Cargar las subclases para poder generar las entradas en la join table
 load 'db/semillas/subclases_de_humedad.rb'
 
-class Humedad < ActiveRecord::Base
+class Humedad < ApplicationRecord
   has_and_belongs_to_many :subclases, class_name: 'SubclaseDeHumedad', inverse_of: :humedades
   serialize :subs_ids, Array
 end

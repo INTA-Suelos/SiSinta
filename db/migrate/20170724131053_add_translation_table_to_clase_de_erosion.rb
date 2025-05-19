@@ -1,4 +1,4 @@
-class ClaseDeErosion < ActiveRecord::Base
+class ClaseDeErosion < ApplicationRecord
   translates :valor, foreign_key: :clase_de_erosion_id
 end
 

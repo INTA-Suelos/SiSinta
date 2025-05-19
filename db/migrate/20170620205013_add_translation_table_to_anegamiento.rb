@@ -1,4 +1,4 @@
-class Anegamiento < ActiveRecord::Base
+class Anegamiento < ApplicationRecord
   translates :valor
 end
 
