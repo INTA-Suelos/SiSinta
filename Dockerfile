@@ -41,6 +41,7 @@ USER root
 RUN mkdir -p /usr/share/nginx && \
     cp -r public /usr/share/nginx/html && \
     chown -R root:root /usr/share/nginx/html
+# Define un "anonymous volume" con este mountpoint.
 VOLUME /usr/share/nginx/html
 
 CMD ["bin/start"]

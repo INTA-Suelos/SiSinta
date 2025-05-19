@@ -1,0 +1,17 @@
+[Unit]
+Description=SiSINTA
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+User=root
+Group=docker
+TimeoutStopSec=15
+WorkingDirectory=/srv/sisinta
+ExecStartPre=$(which docker-compose) -f docker-compose.yml down
+ExecStart=$(which docker-compose) -f docker-compose.yml up --remove-orphans
+ExecStop=$(which docker-compose) -f docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target

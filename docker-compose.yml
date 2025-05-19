@@ -7,6 +7,8 @@ services:
       - 5432:5432
     env_file:
       - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
   app:
     build:
       context: .
@@ -37,7 +39,7 @@ services:
       - ${PWD}/tmp/nginx/cache:/var/cache/nginx
       - ${PWD}/tmp/nginx/pid:/var/run
     volumes_from:
-      # Dar acceso a los volúmenes que define 'app'.
+      # Dar acceso a los volúmenes que define 'app', para servir los assets.
       - app:ro
   memcached:
     image: memcached
@@ -47,3 +49,5 @@ services:
       - --threads=${MEMCACHED_THREADS}
     ports:
       - 11211:11211
+volumes:
+  db-data:
