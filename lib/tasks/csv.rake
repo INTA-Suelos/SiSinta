@@ -1,3 +1,6 @@
+# Con docker:
+# docker compose cp archivo.csv app:/home/app/perfiles.csv
+# docker compose exec app rake sisinta:importar:csv archivo=perfiles.csv
 require 'csv'
 
 namespace :sisinta do
@@ -11,7 +14,7 @@ namespace :sisinta do
         Deserializador.construir_perfiles(perfiles, ENV['usuario']).each do |perfil|
           unless perfil.save
             puts "Ocurrió un error con estos horizontes:"
-            ap perfil.horizontes
+            pp perfil.horizontes
           end
         end
       else
