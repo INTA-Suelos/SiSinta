@@ -46,7 +46,7 @@ gem 'rails-api'
 
 ## Assets
 gem 'sprockets', '~> 3.7'
-gem 'tinymce-rails'
+gem 'tinymce-rails', '~> 5.10'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'therubyracer'
