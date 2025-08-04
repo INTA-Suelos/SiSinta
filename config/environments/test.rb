@@ -17,7 +17,8 @@ SiSINTA::Application.configure do
   config.serve_static_files = true
   config.static_cache_control = 'public, max-age=3600'
 
-  config.cache_store = :mem_cache_store
+  # Explicitar el container para memcached
+  config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS']
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

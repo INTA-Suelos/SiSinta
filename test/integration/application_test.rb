@@ -12,7 +12,7 @@ describe SiSINTA::Application do
 
   describe 'cache_store' do
     it 'usa memcached' do
-      _(subject.cache_store).must_equal :mem_cache_store
+      _(subject.cache_store).must_equal [:mem_cache_store, ENV['MEMCACHE_SERVERS']]
       _(Rails.cache).must_be_instance_of ActiveSupport::Cache::MemCacheStore
     end
   end
