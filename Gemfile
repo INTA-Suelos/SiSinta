@@ -94,6 +94,7 @@ group :test, :development do
 end
 
 group :development do
+  gem 'spring', '1.7.1'
   gem 'bullet'
   gem 'better_errors'
   gem 'brakeman', require: false

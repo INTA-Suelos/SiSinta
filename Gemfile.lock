@@ -366,6 +366,7 @@ GEM
       websocket (~> 1.0)
     sexp_processor (4.16.0)
     slop (3.6.0)
+    spring (1.7.1)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -461,6 +462,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   selenium-webdriver
+  spring (= 1.7.1)
   sprockets (~> 3.7)
   squeel!
   therubyracer
