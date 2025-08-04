@@ -31,7 +31,7 @@ module Deserializador
         profundidad_napa: datos['perfil_profundidad_napa'],
         cobertura_vegetal: datos['perfil_cobertura_vegetal'],
         material_original: datos['perfil_material_original'],
-        modal: datos['perfil_modal'],
+        modal: modal_booleano(datos['perfil_modal']),
         fecha: datos['perfil_fecha'],
         vegetacion_o_cultivos: datos['perfil_vegetacion_o_cultivos'],
         observaciones: datos['perfil_observaciones'],
@@ -191,5 +191,11 @@ module Deserializador
       horizontes.first
     end
     alias_method :datos, :datos_del_perfil
+
+    def modal_booleano(string)
+      return nil unless string.present?
+
+      string == 'modal'
+    end
   end
 end

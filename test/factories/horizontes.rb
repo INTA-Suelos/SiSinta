@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :horizonte do
     perfil
 
-    sequence(:profundidad_superior) { |n| n + 4 }
+    sequence(:profundidad_superior) { |n| n + 1 }
     profundidad_inferior { profundidad_superior + 2 }
     ph 1.5
 
@@ -25,7 +25,7 @@ FactoryGirl.define do
       co3 { generate :cadena_unica }
       tipo { generate :cadena_unica }
 
-      textura_id { rand(TexturaDeHorizonte.count) + 1 }
+      textura_id { rand(Textura.count) + 1 }
     end
   end
 end

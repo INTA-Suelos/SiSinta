@@ -77,7 +77,7 @@ class DeserializadorTest < ActiveSupport::TestCase
 
       it 'instancia perfiles nuevos por omisión' do
         subject.each do |p|
-          p.wont_be :persisted?
+          _(p).wont_be :persisted?
         end
       end
     end

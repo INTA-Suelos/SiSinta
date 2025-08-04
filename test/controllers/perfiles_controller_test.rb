@@ -169,16 +169,8 @@ describe PerfilesController do
     it 'serializa la ubicación en geoJSON' do
       get :show, id: subject.to_param, format: :geojson
 
-<<<<<<< HEAD
       _(json['features'].first['type']).must_equal 'Feature'
       geometria = json['features'].first['geometry']
-=======
-  test 'actualiza todos los datos analíticos' do
-    usuario = loguearse_como 'Autorizado'
-    perfil = create(:perfil, usuario: usuario)
-    perfil.horizontes.create(attributes_for(:horizonte))
-    analitico = attributes_for(:analitico, :con_datos, id: perfil.analiticos.first.id)
->>>>>>> d568cf4 (Probar que se genere la cantidad de objetos correcta)
 
       _(geometria['type']).must_equal 'Point'
       _(geometria['coordinates'].first).must_equal subject.ubicacion.x

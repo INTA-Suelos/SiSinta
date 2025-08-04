@@ -39,7 +39,6 @@ FactoryGirl.define do
       saturacion_s_h { generate(:porcentaje).round 2 }
       densidad_aparente { rand 100 }
       profundidad_muestra '2 - 10'
-      agua_3_atm { generate :porcentaje }
       carbono_organico_cn { rand }
       gravas { generate :porcentaje }
       arena_total { generate :porcentaje }
