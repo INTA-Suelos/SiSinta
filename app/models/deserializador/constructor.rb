@@ -26,6 +26,7 @@ module Deserializador
     # Devuelve el Perfil con los datos cargados
     def construir_perfil
       perfil.assign_attributes(
+        id: datos['perfil_id'],
         usuario_id: usuario.to_param,
         numero: datos['perfil_numero'],
         profundidad_napa: datos['perfil_profundidad_napa'],
@@ -100,6 +101,7 @@ module Deserializador
         horizonte = actualizar? ? perfil.horizontes.find(h['id']) : perfil.horizontes.build
 
         horizonte.assign_attributes(
+          id: h['id'],
           profundidad_inferior: h['profundidad_inferior'],
           profundidad_superior: h['profundidad_superior'],
           barnices: h['barnices'],
