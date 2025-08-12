@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AnaliticoSerializerTest < ActiveSupport::TestCase
   subject { AnaliticoSerializer.new(analitico) }
-  let(:analitico) { build :analitico, :completo }
+  let(:analitico) { build :analitico, :con_datos}
 
   describe 'Ficha clasico' do
     it 'serializa cada atributo persistente' do

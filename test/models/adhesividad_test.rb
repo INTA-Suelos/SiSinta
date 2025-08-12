@@ -21,7 +21,7 @@ class AdhesividadTest < ActiveSupport::TestCase
       valor_es = subject.valor
 
       Globalize.with_locale :en do
-        _(build_stubbed(:adhesividad, valor: valor_es)).must_be :valid?
+        _(build(:adhesividad, valor: valor_es)).must_be :valid?
       end
     end
   end

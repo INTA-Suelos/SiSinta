@@ -10,7 +10,7 @@ describe Analitico do
 
     it 'es válido' do
       _(build(:analitico, horizonte: horizonte)).must_be :valid?
-      _(build(:analitico, :completo, horizonte: horizonte)).must_be :valid?
+      _(build(:analitico, :con_datos, horizonte: horizonte)).must_be :valid?
     end
   end
 

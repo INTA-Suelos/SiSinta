@@ -24,11 +24,11 @@ FactoryGirl.define do
 
       modal true
       publico true
-      profundidad_napa { rand }
+      profundidad_napa { rand.round(15) }
       cobertura_vegetal { rand }
-      material_original 'sarasa'
-      vegetacion_o_cultivos 'sarasa'
-      observaciones 'sarasa'
+      material_original { generate :cadena_unica }
+      vegetacion_o_cultivos { generate :cadena_unica }
+      observaciones { generate :cadena_unica }
 
       drenaje
       escurrimiento
@@ -43,7 +43,7 @@ FactoryGirl.define do
       transient { con_horizontes 1 }
 
       after :create do |perfil, params|
-        params.con_horizontes.times { perfil.horizontes << create(:horizonte, perfil: perfil) }
+        params.con_horizontes.times { FactoryGirl.create_list :horizonte_completo, 1, perfil: perfil }
       end
     end
 

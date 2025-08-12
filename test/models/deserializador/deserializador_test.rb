@@ -41,21 +41,23 @@ class DeserializadorTest < ActiveSupport::TestCase
     describe '.deserializar_perfiles' do
       subject { Deserializador.deserializar_perfiles(perfiles) }
 
-      it 'instancia un Deserializador por Perfil' do
+      it 'instancia un Constructor por Perfil' do
         _(subject.size).must_equal perfiles.size
       end
 
-      it 'devuelve una colección de Deserializador' do
+      it 'devuelve una colección de Constructores' do
         subject.each do |d|
-          _(d).must_be_instance_of Deserializador
+          _(d).must_be_instance_of Deserializador::Constructor
         end
       end
 
       it 'pasa el usuario a los deserializadores' do
-        spec = lambda { |perfiles, usuario| _(usuario).must_equal 'juan@salvo.com.ar' }
+        spec = lambda do |perfiles, opciones|
+          _(opciones[:usuario]).must_equal 'juan@salvo.com.ar'
+        end
 
-        Deserializador.stub :new, spec do
-          Deserializador.deserializar_perfiles(perfiles, 'juan@salvo.com.ar')
+        Deserializador::Constructor.stub :new, spec do
+          Deserializador.deserializar_perfiles(perfiles, usuario: 'juan@salvo.com.ar')
         end
       end
     end
@@ -72,16 +74,12 @@ class DeserializadorTest < ActiveSupport::TestCase
           _(p).must_be_instance_of Perfil
         end
       end
-    end
-  end
 
-  describe 'Builder' do
-    let(:usuario) { create(:usuario) }
-    let(:csv) { CSVSerializer.new([build(:perfil)]).as_csv headers: true }
-    subject { Deserializador.new(csv.parse_csv, usuario.email).construir }
-
-    it 'construye al usuario por el email' do
-      _(subject.usuario_id).must_equal usuario.id
+      it 'instancia perfiles nuevos por omisión' do
+        subject.each do |p|
+          _(p).wont_be :persisted?
+        end
+      end
     end
   end
 end

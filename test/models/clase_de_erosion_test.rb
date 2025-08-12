@@ -21,7 +21,7 @@ class ClaseDeErosionTest < ActiveSupport::TestCase
       valor_es = subject.valor
 
       Globalize.with_locale :en do
-        _(build_stubbed(:clase_de_erosion, valor: valor_es)).must_be :valid?
+        _(build(:clase_de_erosion, valor: valor_es)).must_be :valid?
       end
     end
   end
