@@ -119,6 +119,8 @@ describe Deserializador::Constructor do
       _(perfil).must_be :changed?
       atributos_de_perfil.each do |atributo|
         _(perfil.send(atributo)).must_equal perfil_cambiado.send(atributo), "Falla #{atributo}"
+        _(perfil.send(atributo)).wont_be_nil
+        _(perfil_cambiado.send(atributo)).wont_be_nil
       end
     end
 
@@ -132,6 +134,8 @@ describe Deserializador::Constructor do
       perfil_existente.reload
       atributos_de_perfil.each do |atributo|
         _(perfil_existente.send(atributo)).must_equal perfil_cambiado.send(atributo), "Falla #{atributo}"
+        _(perfil_existente.send(atributo)).wont_be_nil
+        _(perfil_cambiado.send(atributo)).wont_be_nil
       end
     end
 
@@ -178,6 +182,8 @@ describe Deserializador::Constructor do
       perfil.horizontes.each do |h|
         atributos_de_horizonte.each do |atributo|
           _(h.send(atributo)).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
+          _(h.send(atributo)).wont_be_nil
+          _(perfil_cambiado.horizontes.find(h.id).send(atributo)).wont_be_nil
         end
       end
     end
@@ -192,6 +198,8 @@ describe Deserializador::Constructor do
       perfil_existente.reload.horizontes.each do |h|
         atributos_de_horizonte.each do |atributo|
           _(h.send(atributo)).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
+          _(h.send(atributo)).wont_be_nil
+          _(perfil_cambiado.horizontes.find(h.id).send(atributo)).wont_be_nil
         end
       end
     end
@@ -212,6 +220,8 @@ describe Deserializador::Constructor do
       perfil.analiticos.each do |a|
         atributos_de_analitico.each do |atributo|
           _(a.send(atributo)).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
+          _(a.send(atributo)).wont_be_nil
+          _(perfil_cambiado.analiticos.find(a.id).send(atributo)).wont_be_nil
         end
       end
     end
@@ -226,6 +236,8 @@ describe Deserializador::Constructor do
       perfil_existente.reload.analiticos.each do |a|
         atributos_de_analitico.each do |atributo|
           _(a.send(atributo)).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
+          _(a.send(atributo)).wont_be_nil
+          _(perfil_cambiado.analiticos.find(a.id).send(atributo)).wont_be_nil
         end
       end
     end
