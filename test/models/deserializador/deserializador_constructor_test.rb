@@ -99,8 +99,10 @@ describe Deserializador::Constructor do
     end
 
     it 'crea el perfil' do
+      nuevo = constructor_creador.construir_perfil
+
       _(lambda do
-        constructor_creador.construir_perfil.save.must_equal true
+        _(nuevo.save).must_equal true
       end).must_change 'Perfil.count'
     end
 
@@ -124,7 +126,7 @@ describe Deserializador::Constructor do
       perfil = constructor_actualizador.construir
 
       _(lambda do
-        perfil.save.must_equal true
+        _(perfil.save).must_equal true
       end).must_change 'Perfil.count', 0
 
       perfil_existente.reload
@@ -145,7 +147,7 @@ describe Deserializador::Constructor do
     it 'son nuevos si el perfil es nuevo' do
       perfil = constructor_creador.construir
 
-      perfil.horizontes.any?.must_equal true
+      _(perfil.horizontes.any?).must_equal true
       perfil.horizontes.each do |horizonte|
         _(horizonte).wont_be :persisted?
       end
@@ -155,27 +157,27 @@ describe Deserializador::Constructor do
       perfil = constructor_creador.construir
 
       _(lambda do
-        perfil.save.must_equal true
+        _(perfil.save).must_equal true
       end).must_change 'Horizonte.count'
     end
 
     it 'son existentes si estamos actualizando' do
       perfil = constructor_actualizador.construir
 
-      perfil.horizontes.any?.must_equal true
+      _(perfil.horizontes.any?).must_equal true
       perfil.horizontes.each do |horizonte|
-        horizonte.must_be :persisted?
+        _(horizonte).must_be :persisted?
       end
     end
 
     it 'carga horizontes con datos actualizados' do
       perfil = constructor_actualizador.construir
 
-      perfil.must_be :changed?
-      perfil.horizontes.size.must_equal perfil_existente.horizontes.size
+      _(perfil).must_be :changed?
+      _(perfil.horizontes.size).must_equal perfil_existente.horizontes.size
       perfil.horizontes.each do |h|
         atributos_de_horizonte.each do |atributo|
-          h.send(atributo).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
+          _(h.send(atributo)).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
         end
       end
     end
@@ -183,13 +185,13 @@ describe Deserializador::Constructor do
     it 'actualiza los horizontes' do
       perfil = constructor_actualizador.construir
 
-      lambda do
-        perfil.save.must_equal true
-      end.must_change 'Horizonte.count', 0
+      _(lambda do
+        _(perfil.save).must_equal true
+      end).must_change 'Horizonte.count', 0
 
       perfil_existente.reload.horizontes.each do |h|
         atributos_de_horizonte.each do |atributo|
-          h.send(atributo).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
+          _(h.send(atributo)).must_equal perfil_cambiado.horizontes.find(h.id).send(atributo), "Falla #{atributo}"
         end
       end
     end
@@ -197,19 +199,19 @@ describe Deserializador::Constructor do
     it 'crea los analíticos' do
       perfil = constructor_creador.construir
 
-      lambda do
-        perfil.save.must_equal true
-      end.must_change 'Analitico.count'
+      _(lambda do
+        _(perfil.save).must_equal true
+      end).must_change 'Analitico.count'
     end
 
     it 'carga analíticos con datos actualizados' do
       perfil = constructor_actualizador.construir
 
-      perfil.must_be :changed?
-      perfil.analiticos.size.must_equal perfil_existente.horizontes.size
+      _(perfil).must_be :changed?
+      _(perfil.analiticos.size).must_equal perfil_existente.horizontes.size
       perfil.analiticos.each do |a|
         atributos_de_analitico.each do |atributo|
-          a.send(atributo).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
+          _(a.send(atributo)).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
         end
       end
     end
@@ -217,13 +219,13 @@ describe Deserializador::Constructor do
     it 'actualiza los analíticos' do
       perfil = constructor_actualizador.construir
 
-      lambda do
-        perfil.save.must_equal true
-      end.must_change 'Analitico.count', 0
+      _(lambda do
+        _(perfil.save).must_equal true
+      end).must_change 'Analitico.count', 0
 
       perfil_existente.reload.analiticos.each do |a|
         atributos_de_analitico.each do |atributo|
-          a.send(atributo).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
+          _(a.send(atributo)).must_equal perfil_cambiado.analiticos.find(a.id).send(atributo), "Falla #{atributo}"
         end
       end
     end

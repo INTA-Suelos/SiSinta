@@ -21,7 +21,7 @@ class ClaseDeCapacidadTest < ActiveSupport::TestCase
       codigo_es = subject.codigo
 
       Globalize.with_locale :en do
-        _(build_stubbed(:clase_de_capacidad, codigo: codigo_es)).must_be :valid?
+        _(build(:clase_de_capacidad, codigo: codigo_es)).must_be :valid?
       end
     end
   end

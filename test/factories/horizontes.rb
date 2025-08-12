@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :horizonte do
     perfil
 
-    sequence(:profundidad_superior) { |n| n + 1 }
-    profundidad_inferior { profundidad_superior + 2 }
+    profundidad_superior { rand(1500) }
+    profundidad_inferior { rand(1500) }
     ph 1.5
 
     factory :horizonte_completo do

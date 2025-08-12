@@ -1,0 +1,37 @@
+name: sisinta-dev
+
+services:
+  db:
+    image: mdillon/postgis:9.1
+    ports:
+      - 5433:5432
+    env_file:
+      - .env.dev
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      # Montamos el directorio de desarrollo como volume así los cambios se
+      # toman automáticamente.
+      - .:/home/app
+    ports:
+      - 3000:9292
+    env_file:
+      - .env.dev
+    depends_on:
+      - memcached
+      - db
+    restart: always
+  memcached:
+    image: memcached
+    command:
+      - --conn-limit=${MEMCACHED_CONN_LIMIT}
+      - --memory-limit=${MEMCACHED_MEMORY_LIMIT}
+      - --threads=${MEMCACHED_THREADS}
+    ports:
+      - 11212:11211
+volumes:
+  db-data:

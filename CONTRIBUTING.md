@@ -1,7 +1,7 @@
 # Como contribuir a SiSINTA
 
 Para contribuir a SiSINTA es importante conocer el funcionamiento de GIT y en particular de [GitHub](github.com).
-Pueden empezar leyendo la [guía de como contribuir a un proyecto en github](https://help.github.com/articles/fork-a-repo), 
+Pueden empezar leyendo la [guía de como contribuir a un proyecto en github](https://help.github.com/articles/fork-a-repo),
 y tambien es interesante profundizar más leyendo [Git Reference](http://gitref.org/).
 
 De todas maneras el flujo de trabajo se puede resumir en:
@@ -11,3 +11,12 @@ De todas maneras el flujo de trabajo se puede resumir en:
 3. Enviar los datos al repositorio INTA-suelos/sisinta haciendo un *pull request* a la rama (*branch*) *desarrollo*
 4. El equipo revisa los cambios y cuando todo esta bien, lo une (*merge*) a la rama principal (*master*)
 5. Ser feliz habiendo contribuido a SiSINTA
+
+# Desarrollo
+
+Hay un docker compose específico para test y development. Por ejemplo, se
+pueden correr los tests con:
+
+    docker compose -f docker-compose-dev.yml run app spring rake test:db
+
+Este comando (re)crea la base de datos de testing si hiciera falta.
