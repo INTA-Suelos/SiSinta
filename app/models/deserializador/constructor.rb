@@ -42,7 +42,9 @@ module Deserializador
           recorrido: datos['perfil_ubicacion_recorrido'],
           mosaico: datos['perfil_ubicacion_mosaico'],
           aerofoto: datos['perfil_ubicacion_aerofoto'],
-          coordenadas: datos['perfil_ubicacion_coordenadas'] },
+          latitud: datos['perfil_ubicacion_latitud'],
+          longitud: datos['perfil_ubicacion_longitud'],
+        },
         paisaje_attributes: {
           tipo: datos['perfil_paisaje_tipo'],
           forma: datos['perfil_paisaje_forma'],
@@ -77,6 +79,7 @@ module Deserializador
         sal_id: Sal.find_by(valor: datos['perfil_sales']).to_param
       )
 
+      perfil.ubicacion.try(:arreglar_coordenadas)
       return perfil
     end
 
@@ -104,7 +107,7 @@ module Deserializador
           moteados: h['moteados'],
           ph: h['ph'],
           raices: h['raices'],
-          tipo: h['clase'],
+          tipo: h['horizonte'],
           concreciones: h['concreciones'],
           formaciones_especiales: h['formaciones_especiales'],
           humedad: h['humedad'],

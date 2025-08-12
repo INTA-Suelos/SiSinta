@@ -117,18 +117,18 @@ class Ubicacion < ApplicationRecord
   end
   alias_method :geolocalizada?, :geolocalizado?
 
-  private
-
-    # TODO Unificar funcionamiento, no convertir coordenadas si es nil
-    def arreglar_coordenadas
-      if srid.to_i.eql?(4326) || srid.blank?
-        self.x = Ubicacion.grados_a_decimal(x)
-        self.y = Ubicacion.grados_a_decimal(y)
-      else
-        transformar_a_wgs84!(srid, x, y)
-      end
-      self.coordenadas = "POINT(#{x} #{y})"
+  # TODO Unificar funcionamiento, no convertir coordenadas si es nil
+  def arreglar_coordenadas
+    if srid.to_i.eql?(4326) || srid.blank?
+      self.x = Ubicacion.grados_a_decimal(x)
+      self.y = Ubicacion.grados_a_decimal(y)
+    else
+      transformar_a_wgs84!(srid, x, y)
     end
+    self.coordenadas = "POINT(#{x} #{y})"
+  end
+
+  private
 
     # Carga las variables de instancia donde accedemos a x e y, desde las coordenadas.
     def cargar_x_y
