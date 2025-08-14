@@ -1,3 +1,7 @@
+# Roles base.
+Rol.create(name: 'Autorizado') unless Rol.find_by(name: 'Autorizado').present?
+Rol.create(name: 'Administrador') unless Rol.find_by(name: 'Administrador').present?
+
 # Creates an admin if there are none
 unless Usuario.admins.any?
   email = ENV['ADMIN_EMAIL']
